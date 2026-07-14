@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: 平坦哈希表</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___flat_hash_table.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">平坦哈希表 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>基于开放寻址法的平坦哈希表实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:flat_5Fhashtable_3C_20Value_2C_20Key_2C_20HashFcn_2C_20ExtractKey_2C_20EqualKey_2C_20Alloc_20_3E" id="r_flat_5Fhashtable_3C_20Value_2C_20Key_2C_20HashFcn_2C_20ExtractKey_2C_20EqualKey_2C_20Alloc_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classflat__hashtable.html">flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">平坦哈希表容器  <a href="classflat__hashtable.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:flat_5Fhashtable_5Fiterator_3C_20IsConst_2C_20FlatHT_20_3E" id="r_flat_5Fhashtable_5Fiterator_3C_20IsConst_2C_20FlatHT_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structflat__hashtable__iterator.html">flat_hashtable_iterator&lt; IsConst, FlatHT &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">平坦哈希表迭代器  <a href="structflat__hashtable__iterator.html#details">更多...</a><br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>基于开放寻址法的平坦哈希表实现 </p>
+<p>平坦哈希表采用开放寻址法（Open Addressing）处理冲突， 使用元数据控制块实现 H2 预过滤，大幅减少对数据数组的内存访问。</p>
+<h1 class="doxsection"><a class="anchor" id="flat_hash_metadata"></a>
+元数据控制块</h1>
+<p>每个 slot 对应 1 字节元数据，独立于数据数组存储：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">状态  </th><th class="markdownTableHeadNone">值  </th><th class="markdownTableHeadNone">含义  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">EMPTY  </td><td class="markdownTableBodyNone">0x80  </td><td class="markdownTableBodyNone">从未使用  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DELETED (tombstone)  </td><td class="markdownTableBodyNone">0xFE  </td><td class="markdownTableBodyNone">已删除，可复用  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">H2 tag  </td><td class="markdownTableBodyNone">[0,127]  </td><td class="markdownTableBodyNone">7-bit 哈希标签  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="flat_hash_probe"></a>
+探测策略</h1>
+<p>使用线性探测：idx = (idx + 1) &amp; (capacity - 1)。 通过元数据字节的 H2 标签预过滤，仅当 H2 匹配时才访问数据数组进行完整键比较。 支持 SSE2 批量探测：一次加载 16 字节元数据，单指令比较 16 个 slot。</p>
+<h1 class="doxsection"><a class="anchor" id="flat_hash_complexity"></a>
+时间复杂度</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">操作  </th><th class="markdownTableHeadNone">平均情况  </th><th class="markdownTableHeadNone">最坏情况  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">insert  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">O(n)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">erase  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">O(n)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">O(n)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">rehash  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">O(n)  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="flat_hash_iterator"></a>
+迭代器失效规则</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">操作  </th><th class="markdownTableHeadNone">失效范围  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">insert  </td><td class="markdownTableBodyNone">rehash 时全部失效  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">erase  </td><td class="markdownTableBodyNone">仅失效指向被删除元素的迭代器  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">rehash  </td><td class="markdownTableBodyNone">全部迭代器失效  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">clear  </td><td class="markdownTableBodyNone">全部迭代器失效  </td></tr>
+</table>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

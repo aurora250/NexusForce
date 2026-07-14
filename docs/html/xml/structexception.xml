@@ -5,9 +5,9 @@
     <derivedcompoundref refid="structexpected__exception" prot="public" virt="non-virtual">expected_exception</derivedcompoundref>
     <derivedcompoundref refid="structfuture__exception" prot="public" virt="non-virtual">future_exception</derivedcompoundref>
     <derivedcompoundref refid="structmemory__exception" prot="public" virt="non-virtual">memory_exception</derivedcompoundref>
-    <derivedcompoundref refid="structnetwork__exception" prot="public" virt="non-virtual">network_exception</derivedcompoundref>
     <derivedcompoundref refid="structsystem__exception" prot="public" virt="non-virtual">system_exception</derivedcompoundref>
     <derivedcompoundref refid="structthirdparty__exception" prot="public" virt="non-virtual">thirdparty_exception</derivedcompoundref>
+    <derivedcompoundref refid="structthread__exception" prot="public" virt="non-virtual">thread_exception</derivedcompoundref>
     <derivedcompoundref refid="structvalue__exception" prot="public" virt="non-virtual">value_exception</derivedcompoundref>
     <includes refid="exception_8hpp" local="no">exception.hpp</includes>
     <sectiondef kind="private-static-attrib">
@@ -18,21 +18,6 @@
         <name>INFO_SIZE</name>
         <qualifiedname>exception::INFO_SIZE</qualifiedname>
         <initializer>= 256</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="78" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="78" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structexception_1a817fa483399f31f469c66c7c2dd0a6ae" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t exception::TYPE_SIZE</definition>
-        <argsstring></argsstring>
-        <name>TYPE_SIZE</name>
-        <qualifiedname>exception::TYPE_SIZE</qualifiedname>
-        <initializer>= 48</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -57,76 +42,18 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="81" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="81" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structexception_1a66412c7820113a6a8a6eed69be98dd1f" prot="private" static="no" mutable="no">
-        <type>char</type>
-        <definition>char exception::type_[TYPE_SIZE]</definition>
-        <argsstring>[TYPE_SIZE]</argsstring>
-        <name>type_</name>
-        <qualifiedname>exception::type_</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="82" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="82" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structexception_1a2d4ab88ce2827fcf4f6a7d89a6759858" prot="private" static="no" mutable="no">
-        <type>int</type>
-        <definition>int exception::code_</definition>
-        <argsstring></argsstring>
-        <name>code_</name>
-        <qualifiedname>exception::code_</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="83" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="83" bodyend="83"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="structexception_1ade1d02c50895124bd90aa63d569a91ed" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>auto</type>
-        <definition>auto exception::static_type</definition>
-        <argsstring></argsstring>
-        <name>static_type</name>
-        <qualifiedname>exception::static_type</qualifiedname>
-        <initializer>= &quot;exception&quot;</initializer>
-        <briefdescription>
-<para>静态类型字符串 </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="191" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="191" bodyend="-1"/>
-        <referencedby refid="structexception_1a33710bd2e564614575128e2c3de94883" compoundref="exception_8hpp" startline="92" endline="100">exception</referencedby>
-      </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structexception_1a33710bd2e564614575128e2c3de94883" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
         <definition>exception::exception</definition>
-        <argsstring>(const char *info=static_type, const char *type=static_type, const int code=0)</argsstring>
+        <argsstring>(const char *info=&quot;&quot;)</argsstring>
         <name>exception</name>
         <qualifiedname>exception::exception</qualifiedname>
         <param>
           <type>const char *</type>
           <declname>info</declname>
-          <defval><ref refid="structexception_1ade1d02c50895124bd90aa63d569a91ed" kindref="member">static_type</ref></defval>
-        </param>
-        <param>
-          <type>const char *</type>
-          <declname>type</declname>
-          <defval><ref refid="structexception_1ade1d02c50895124bd90aa63d569a91ed" kindref="member">static_type</ref></defval>
-        </param>
-        <param>
-          <type>const int</type>
-          <declname>code</declname>
-          <defval>0</defval>
+          <defval>&quot;&quot;</defval>
         </param>
         <briefdescription>
 <para>构造函数 </para>
@@ -140,37 +67,21 @@
 <para>异常信息 </para>
 </parameterdescription>
 </parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>type</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>异常类型 </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>code</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>异常码 </para>
-</parameterdescription>
-</parameteritem>
 </parameterlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="92" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="92" bodyend="100"/>
-        <references refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" compoundref="exception_8hpp" startline="189" endline="189">code</references>
-        <references refid="structexception_1ade1d02c50895124bd90aa63d569a91ed" compoundref="exception_8hpp" startline="191">static_type</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="88" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="88" bodyend="92"/>
         <references refid="group___string_operations_1ga32e3d14580f551b5516d7dc5693ed649" compoundref="memory_8hpp" startline="392" endline="404">string_copy</references>
-        <references refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" compoundref="exception_8hpp" startline="183" endline="183">type</references>
-        <referencedby refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" compoundref="exception_8hpp" startline="165" endline="166">exception</referencedby>
-        <referencedby refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" compoundref="exception_8hpp" startline="105" endline="109">exception</referencedby>
-        <referencedby refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" compoundref="exception_8hpp" startline="129" endline="136">exception</referencedby>
-        <referencedby refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" compoundref="exception_8hpp" startline="114" endline="124">operator=</referencedby>
-        <referencedby refid="structexception_1a709d705f97cbad7d531dfb5023107536" compoundref="exception_8hpp" startline="141" endline="155">operator=</referencedby>
+        <referencedby refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" compoundref="exception_8hpp" startline="143" endline="144">exception</referencedby>
+        <referencedby refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" compoundref="exception_8hpp" startline="97" endline="97">exception</referencedby>
+        <referencedby refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" compoundref="exception_8hpp" startline="115" endline="118">exception</referencedby>
+        <referencedby refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" compoundref="exception_8hpp" startline="102" endline="110">operator=</referencedby>
+        <referencedby refid="structexception_1a709d705f97cbad7d531dfb5023107536" compoundref="exception_8hpp" startline="123" endline="133">operator=</referencedby>
+        <referencedby refid="structmemory__exception_1aa037c36915112a83b2540cee91b428ca" compoundref="exception_8hpp" startline="168" endline="168">memory_exception::type</referencedby>
+        <referencedby refid="structthirdparty__exception_1a0458ccbae979bf561a95292267b7365c" compoundref="exception_8hpp" startline="204" endline="204">thirdparty_exception::type</referencedby>
+        <referencedby refid="structvalue__exception_1aa97aa270e8ae90ff12f120d74f68e17b" compoundref="exception_8hpp" startline="192" endline="192">value_exception::type</referencedby>
       </memberdef>
       <memberdef kind="function" id="structexception_1ad53654133be61ac0d671b96eea49a2c3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -189,8 +100,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="105" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="105" bodyend="109"/>
-        <references refid="structexception_1a33710bd2e564614575128e2c3de94883" compoundref="exception_8hpp" startline="92" endline="100">exception</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="97" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="97" bodyend="97"/>
+        <references refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" compoundref="exception_8hpp" startline="88" endline="92">exception</references>
         <references refid="group___memory_functions_1ga916bc1850129b8df023250fe45a2ef42" compoundref="memory_8hpp" startline="29" endline="48">memory_copy</references>
       </memberdef>
       <memberdef kind="function" id="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -210,9 +121,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="114" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="114" bodyend="124"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="102" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="102" bodyend="110"/>
         <references refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" compoundref="type__traits_8hpp" startline="3084" endline="3086">addressof</references>
-        <references refid="structexception_1a33710bd2e564614575128e2c3de94883" compoundref="exception_8hpp" startline="92" endline="100">exception</references>
+        <references refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" compoundref="exception_8hpp" startline="88" endline="92">exception</references>
         <references refid="group___memory_functions_1ga916bc1850129b8df023250fe45a2ef42" compoundref="memory_8hpp" startline="29" endline="48">memory_copy</references>
       </memberdef>
       <memberdef kind="function" id="structexception_1af7e2ec88aedbf1ac46326caa556ce434" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -232,8 +143,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="129" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="129" bodyend="136"/>
-        <references refid="structexception_1a33710bd2e564614575128e2c3de94883" compoundref="exception_8hpp" startline="92" endline="100">exception</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="115" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="115" bodyend="118"/>
+        <references refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" compoundref="exception_8hpp" startline="88" endline="92">exception</references>
         <references refid="group___memory_functions_1ga916bc1850129b8df023250fe45a2ef42" compoundref="memory_8hpp" startline="29" endline="48">memory_copy</references>
       </memberdef>
       <memberdef kind="function" id="structexception_1a709d705f97cbad7d531dfb5023107536" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -253,9 +164,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="141" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="141" bodyend="155"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="123" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="123" bodyend="133"/>
         <references refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" compoundref="type__traits_8hpp" startline="3084" endline="3086">addressof</references>
-        <references refid="structexception_1a33710bd2e564614575128e2c3de94883" compoundref="exception_8hpp" startline="92" endline="100">exception</references>
+        <references refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" compoundref="exception_8hpp" startline="88" endline="92">exception</references>
         <references refid="group___memory_functions_1ga916bc1850129b8df023250fe45a2ef42" compoundref="memory_8hpp" startline="29" endline="48">memory_copy</references>
       </memberdef>
       <memberdef kind="function" id="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
@@ -303,11 +214,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="165" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="165" bodyend="166"/>
-        <references refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" compoundref="exception_8hpp" startline="189" endline="189">code</references>
-        <references refid="structexception_1a33710bd2e564614575128e2c3de94883" compoundref="exception_8hpp" startline="92" endline="100">exception</references>
-        <references refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" compoundref="exception_8hpp" startline="183" endline="183">type</references>
-        <references refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" compoundref="exception_8hpp" startline="177" endline="177">what</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="143" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="143" bodyend="144"/>
+        <references refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" compoundref="exception_8hpp" startline="88" endline="92">exception</references>
+        <references refid="structexception_1a2f7dcc6349b3ef905ebb76859aa8abe6" compoundref="exception_8hpp" startline="161" endline="161">type</references>
+        <references refid="structexception_1ae5dc04391190559c19adcf269cab48e2" compoundref="exception_8hpp" startline="155" endline="155">what</references>
       </memberdef>
       <memberdef kind="function" id="structexception_1a80249b2b108c9b913dc7144839092a2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -322,11 +232,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="171" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="149" column="13"/>
       </memberdef>
-      <memberdef kind="function" id="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structexception_1ae5dc04391190559c19adcf269cab48e2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>const char *</type>
-        <definition>const char * exception::what</definition>
+        <definition>virtual const char * exception::what</definition>
         <argsstring>() const noexcept</argsstring>
         <name>what</name>
         <qualifiedname>exception::what</qualifiedname>
@@ -340,16 +250,56 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="177" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="177" bodyend="177"/>
-        <referencedby refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" compoundref="exception_8hpp" startline="165" endline="166">exception</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="155" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="155" bodyend="155"/>
+        <referencedby refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" compoundref="exception_8hpp" startline="143" endline="144">exception</referencedby>
         <referencedby refid="group___thread_pool_1gab0dfe2ffce57ef2437c2bc1060febc71">get_current_task_group</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structexception_1a726d6793aa2121f2a48f502d690f1a11" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structexception_1a2f7dcc6349b3ef905ebb76859aa8abe6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>const char *</type>
-        <definition>const char * exception::type</definition>
+        <definition>virtual const char * exception::type</definition>
         <argsstring>() const noexcept</argsstring>
         <name>type</name>
         <qualifiedname>exception::type</qualifiedname>
+        <reimplementedby refid="structallocate__exception_1abf8e86731f53b98421d81f6f94969c82">type</reimplementedby>
+        <reimplementedby refid="structanycast__exception_1a5f74a479bdce692a632f69a529b8351f">type</reimplementedby>
+        <reimplementedby refid="structcmdline__exception_1ae9ec859d862577fbf7c0d04dd3cd7027">type</reimplementedby>
+        <reimplementedby refid="structconsole__exception_1aac596bcb7adec80bf0c934b8dd72c604">type</reimplementedby>
+        <reimplementedby refid="structdaemon__exception_1a0315ee4c46d0d0ce3ac8ef88dd1c915a">type</reimplementedby>
+        <reimplementedby refid="structdatabase__exception_1a689be1c6b17f7e0d8c8e741356dc1a41">type</reimplementedby>
+        <reimplementedby refid="structdatabase__stmt__exception_1ae53547cfe9c1129b28dda6c1e22357e7">type</reimplementedby>
+        <reimplementedby refid="structdatabase__typecast__exception_1a9021de15f405c07c1c5cd86b346d0b69">type</reimplementedby>
+        <reimplementedby refid="structdevice__exception_1a56a290435c7425f75a70b1035645df40">type</reimplementedby>
+        <reimplementedby refid="classdns__exception_1a82eb54a6507dec17950eaf3e7331caa3">type</reimplementedby>
+        <reimplementedby refid="structdynamic__library__exception_1ac70669cad727ee43835b7d1d673a796e">type</reimplementedby>
+        <reimplementedby refid="structenv__exception_1a1462bb39c61d483d0bdc2ff72ecd2ad1">type</reimplementedby>
+        <reimplementedby refid="structfile__exception_1a95c5be84d0797d5a179aa4fb5bc4b908">type</reimplementedby>
+        <reimplementedby refid="structftp__exception_1a27348679b58eedc656b13e6fe060ef84">type</reimplementedby>
+        <reimplementedby refid="structfuture__exception_1ab43042d159f92178c97c16ee69f7ac87">type</reimplementedby>
+        <reimplementedby refid="structini__exception_1a81c0bcf92aa3b437bb451f3018433f26">type</reimplementedby>
+        <reimplementedby refid="structiterator__exception_1a52211201a2280f4c0a71713be4cd5587">type</reimplementedby>
+        <reimplementedby refid="structjson__exception_1a00ccb2930258360803e78bc9c6abc2f3">type</reimplementedby>
+        <reimplementedby refid="structlocale__exception_1abae4bf0abac3c011345cad09a0e5496f">type</reimplementedby>
+        <reimplementedby refid="structmath__exception_1a58093be54a613fdd4333c8e7226151e7">type</reimplementedby>
+        <reimplementedby refid="structmemory__exception_1aa037c36915112a83b2540cee91b428ca">type</reimplementedby>
+        <reimplementedby refid="structneforce_1_1lz4__exception_1a87d8b65f33ad19e48892adab64ce8042">type</reimplementedby>
+        <reimplementedby refid="structnetwork__exception_1adcb36910c235605c7ce30cad58c95273">type</reimplementedby>
+        <reimplementedby refid="structoptional__exception_1af2de44ea28d357393e6d70478af1aa75">type</reimplementedby>
+        <reimplementedby refid="structpipe__exception_1a1c5d0df9216eed7305bcc6bb140d67dd">type</reimplementedby>
+        <reimplementedby refid="structprocess__exception_1ab97152cb5925ea75ba37ac42107fc9ca">type</reimplementedby>
+        <reimplementedby refid="structregex__exception_1a92054745beddba9f7357506864431d13">type</reimplementedby>
+        <reimplementedby refid="structregistry__key__exception_1acec3960be55dd7fb3cf35dfecd504fb8">type</reimplementedby>
+        <reimplementedby refid="structshare__memory__exception_1afc12da4bd5a1734273573feb6553656e">type</reimplementedby>
+        <reimplementedby refid="structsmtp__exception_1a2247e9b2588afe7d536199697991aa06">type</reimplementedby>
+        <reimplementedby refid="structsocket__exception_1a4137dcf65ec2693eb5ce8db6a74d0e4b">type</reimplementedby>
+        <reimplementedby refid="structssl__exception_1a650b12d2bf3408d5e38c9c4bcb6bf86c">type</reimplementedby>
+        <reimplementedby refid="structsystem__exception_1a046b81a819459477aef3e3e542127983">type</reimplementedby>
+        <reimplementedby refid="structthirdparty__exception_1a0458ccbae979bf561a95292267b7365c">type</reimplementedby>
+        <reimplementedby refid="structthread__exception_1aaa02669950a541044b86ccf30416eae2">type</reimplementedby>
+        <reimplementedby refid="structtoml__exception_1ac1aef277596c54fe06166e99f6315644">type</reimplementedby>
+        <reimplementedby refid="structtypecast__exception_1a5be57daae0b20efdada4b761552882dd">type</reimplementedby>
+        <reimplementedby refid="structvalue__exception_1aa97aa270e8ae90ff12f120d74f68e17b">type</reimplementedby>
+        <reimplementedby refid="structyaml__exception_1a926bd4ceb835ddcc020c89261e99c4a1">type</reimplementedby>
+        <reimplementedby refid="structzlib__exception_1a25b7a83f28dfbf81e3ad6b891c10b52d">type</reimplementedby>
         <briefdescription>
 <para>获取异常类型 </para>
         </briefdescription>
@@ -360,33 +310,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="183" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="183" bodyend="183"/>
-        <referencedby refid="structexception_1a33710bd2e564614575128e2c3de94883" compoundref="exception_8hpp" startline="92" endline="100">exception</referencedby>
-        <referencedby refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" compoundref="exception_8hpp" startline="165" endline="166">exception</referencedby>
-        <referencedby refid="structsocket__exception_1ac120faa4a48b9c05bb4e0632ce707a38">socket_exception::is_would_block</referencedby>
-        <referencedby refid="structregistry__key__exception_1afd26cee9d334eaf6dc1eb2c1cd8e6e9d" compoundref="system_2registry_8hpp" startline="36" endline="38">registry_key_exception::registry_key_exception</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="structexception_1ab8a744225b6ddc8976987ba16a0fd046" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>int</type>
-        <definition>int exception::code</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>code</name>
-        <qualifiedname>exception::code</qualifiedname>
-        <briefdescription>
-<para>获取异常码 </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>异常类型码 </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="189" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="189" bodyend="189"/>
-        <referencedby refid="structexception_1a33710bd2e564614575128e2c3de94883" compoundref="exception_8hpp" startline="92" endline="100">exception</referencedby>
-        <referencedby refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" compoundref="exception_8hpp" startline="165" endline="166">exception</referencedby>
-        <referencedby refid="structsocket__exception_1ac120faa4a48b9c05bb4e0632ce707a38">socket_exception::is_would_block</referencedby>
-        <referencedby refid="structregistry__key__exception_1afd26cee9d334eaf6dc1eb2c1cd8e6e9d" compoundref="system_2registry_8hpp" startline="36" endline="38">registry_key_exception::registry_key_exception</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="161" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="161" bodyend="161"/>
+        <referencedby refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" compoundref="exception_8hpp" startline="143" endline="144">exception</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -407,86 +332,86 @@
         <childnode refid="7" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
+      <node id="35">
         <label>cmdline_exception</label>
         <link refid="structcmdline__exception"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="12">
         <label>console_exception</label>
         <link refid="structconsole__exception"/>
-        <childnode refid="18" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
+      <node id="10">
         <label>daemon_exception</label>
         <link refid="structdaemon__exception"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>database_exception</label>
+        <link refid="structdatabase__exception"/>
+        <childnode refid="26" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>database_stmt_exception</label>
+        <link refid="structdatabase__stmt__exception"/>
+        <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
       <node id="29">
-        <label>database_exception</label>
-        <link refid="structdatabase__exception"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="30">
-        <label>database_stmt_exception</label>
-        <link refid="structdatabase__stmt__exception"/>
-        <childnode refid="29" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="31">
         <label>database_typecast_exception</label>
         <link refid="structdatabase__typecast__exception"/>
-        <childnode refid="29" relation="public-inheritance">
+        <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
       <node id="36">
         <label>deserialize_exception</label>
         <link refid="structdeserialize__exception"/>
-        <childnode refid="35" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="11">
         <label>device_exception</label>
         <link refid="structdevice__exception"/>
-        <childnode refid="15" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>dns_exception</label>
-        <link refid="classdns__exception"/>
         <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="17">
+        <label>dns_exception</label>
+        <link refid="classdns__exception"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
         <label>dynamic_library_exception</label>
         <link refid="structdynamic__library__exception"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="39">
         <label>env_exception</label>
         <link refid="structenv__exception"/>
-        <childnode refid="35" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
         <label>exception</label>
         <link refid="structexception"/>
       </node>
-      <node id="21">
+      <node id="14">
         <label>file_exception</label>
         <link refid="structfile__exception"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="18">
         <label>ftp_exception</label>
         <link refid="structftp__exception"/>
-        <childnode refid="9" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -495,16 +420,16 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="19">
         <label>http_exception</label>
         <link refid="structhttp__exception"/>
-        <childnode refid="9" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="40">
         <label>ini_exception</label>
         <link refid="structini__exception"/>
-        <childnode refid="35" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
@@ -516,19 +441,19 @@
       <node id="41">
         <label>json_exception</label>
         <link refid="structjson__exception"/>
-        <childnode refid="35" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="22">
+      <node id="15">
         <label>locale_exception</label>
         <link refid="structlocale__exception"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="42">
         <label>math_exception</label>
         <link refid="structmath__exception"/>
-        <childnode refid="35" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
@@ -543,16 +468,16 @@
         <childnode refid="36" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="32">
+      <node id="30">
         <label>neforce::lz4_exception</label>
         <link refid="structneforce_1_1lz4__exception"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="26" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="9">
+      <node id="16">
         <label>network_exception</label>
         <link refid="structnetwork__exception"/>
-        <childnode refid="1" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="6">
@@ -561,82 +486,82 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="23">
+      <node id="22">
         <label>pipe_exception</label>
         <link refid="structpipe__exception"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="24">
+      <node id="23">
         <label>process_exception</label>
         <link refid="structprocess__exception"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="43">
         <label>regex_exception</label>
         <link refid="structregex__exception"/>
-        <childnode refid="35" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="25">
+      <node id="24">
         <label>registry_key_exception</label>
         <link refid="structregistry__key__exception"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="44">
         <label>serialize_exception</label>
         <link refid="structserialize__exception"/>
-        <childnode refid="35" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
+      <node id="25">
         <label>share_memory_exception</label>
         <link refid="structshare__memory__exception"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="20">
         <label>smtp_exception</label>
         <link refid="structsmtp__exception"/>
-        <childnode refid="9" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="21">
         <label>socket_exception</label>
         <link refid="structsocket__exception"/>
-        <childnode refid="9" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="33">
+      <node id="31">
         <label>ssl_exception</label>
         <link refid="structssl__exception"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="26" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="9">
         <label>system_exception</label>
         <link refid="structsystem__exception"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="28">
+      <node id="26">
         <label>thirdparty_exception</label>
         <link refid="structthirdparty__exception"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="27">
+      <node id="33">
         <label>thread_exception</label>
         <link refid="structthread__exception"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="45">
         <label>toml_exception</label>
         <link refid="structtoml__exception"/>
-        <childnode refid="35" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
       <node id="38">
@@ -651,7 +576,7 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="35">
+      <node id="34">
         <label>value_exception</label>
         <link refid="structvalue__exception"/>
         <childnode refid="1" relation="public-inheritance">
@@ -660,21 +585,19 @@
       <node id="46">
         <label>yaml_exception</label>
         <link refid="structyaml__exception"/>
-        <childnode refid="35" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="34">
+      <node id="32">
         <label>zlib_exception</label>
         <link refid="structzlib__exception"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="26" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="76" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="76" bodyend="192"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="77" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="77" bodyend="162"/>
     <listofallmembers>
-      <member refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" prot="public" virt="non-virtual"><scope>exception</scope><name>code</name></member>
-      <member refid="structexception_1a2d4ab88ce2827fcf4f6a7d89a6759858" prot="private" virt="non-virtual"><scope>exception</scope><name>code_</name></member>
-      <member refid="structexception_1a33710bd2e564614575128e2c3de94883" prot="public" virt="non-virtual"><scope>exception</scope><name>exception</name></member>
+      <member refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" prot="public" virt="non-virtual"><scope>exception</scope><name>exception</name></member>
       <member refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" prot="public" virt="non-virtual"><scope>exception</scope><name>exception</name></member>
       <member refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" prot="public" virt="non-virtual"><scope>exception</scope><name>exception</name></member>
       <member refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" prot="public" virt="non-virtual"><scope>exception</scope><name>exception</name></member>
@@ -682,11 +605,8 @@
       <member refid="structexception_1ac9e6a530d2530d24ec7024c81af79f1e" prot="private" virt="non-virtual"><scope>exception</scope><name>INFO_SIZE</name></member>
       <member refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" prot="public" virt="non-virtual"><scope>exception</scope><name>operator=</name></member>
       <member refid="structexception_1a709d705f97cbad7d531dfb5023107536" prot="public" virt="non-virtual"><scope>exception</scope><name>operator=</name></member>
-      <member refid="structexception_1ade1d02c50895124bd90aa63d569a91ed" prot="public" virt="non-virtual"><scope>exception</scope><name>static_type</name></member>
-      <member refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" prot="public" virt="non-virtual"><scope>exception</scope><name>type</name></member>
-      <member refid="structexception_1a66412c7820113a6a8a6eed69be98dd1f" prot="private" virt="non-virtual"><scope>exception</scope><name>type_</name></member>
-      <member refid="structexception_1a817fa483399f31f469c66c7c2dd0a6ae" prot="private" virt="non-virtual"><scope>exception</scope><name>TYPE_SIZE</name></member>
-      <member refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" prot="public" virt="non-virtual"><scope>exception</scope><name>what</name></member>
+      <member refid="structexception_1a2f7dcc6349b3ef905ebb76859aa8abe6" prot="public" virt="virtual"><scope>exception</scope><name>type</name></member>
+      <member refid="structexception_1ae5dc04391190559c19adcf269cab48e2" prot="public" virt="virtual"><scope>exception</scope><name>what</name></member>
       <member refid="structexception_1a80249b2b108c9b913dc7144839092a2b" prot="public" virt="virtual"><scope>exception</scope><name>~exception</name></member>
     </listofallmembers>
   </compounddef>

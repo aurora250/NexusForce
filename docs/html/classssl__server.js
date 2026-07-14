@@ -1,6 +1,6 @@
 var classssl__server =
 [
-    [ "ssl_server", "classssl__server.html#ae975999b59c678bdf7e16867ecdd1d31", null ],
+    [ "ssl_server", "classssl__server.html#ab626ef1e654653245dd259bb125bf771", null ],
     [ "get_ssl_context", "classssl__server.html#ae509d4d594e01df0cd2a0b442ffc0811", null ],
     [ "get_ssl_context", "classssl__server.html#aacbb3906ee50d75b62223e20a62cb754", null ],
     [ "load_certificate", "classssl__server.html#adc241568c950d70a1a0e4d2e5d7c899a", null ],

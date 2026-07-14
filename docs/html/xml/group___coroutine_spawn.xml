@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___coroutine_spawn" kind="group">
+    <compoundname>CoroutineSpawn</compoundname>
+    <title>协程启动</title>
+    <innerclass refid="structco__spawn__task" prot="public">co_spawn_task</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___coroutine_spawn_1ga10a82702bdd477d3f11837b52b06a127" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Executor</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void co_spawn</definition>
+        <argsstring>(Executor &amp;&amp;exec, Func func)</argsstring>
+        <name>co_spawn</name>
+        <param>
+          <type>Executor &amp;&amp;</type>
+          <declname>exec</declname>
+        </param>
+        <param>
+          <type>Func</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>在 executor 上启动协程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Executor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>执行器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回 awaitable 的可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>exec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>执行器（如 <ref refid="classio__context_1_1executor" kindref="compound">io_context::executor</ref> 或 strand） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协程工厂函数，返回 awaitable</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<programlisting><codeline><highlight class="normal">co_spawn(ctx.get_executor(),<sp/>[&amp;]()<sp/>-&gt;<sp/>awaitable&lt;void&gt;<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>n<sp/>=<sp/>co_await<sp/>sock.async_receive(buf,<sp/>use_awaitable);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>println(&quot;read<sp/>&quot;,<sp/>n,<sp/>&quot;<sp/>bytes&quot;);</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/co_spawn.hpp" line="73" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/co_spawn.hpp" bodystart="73" bodyend="77"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>在 executor 上启动协程 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

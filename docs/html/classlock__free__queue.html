@@ -176,7 +176,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <p>预分配指定容量的 block 池，减少运行时堆分配。 容量按 BLOCK_SIZE 向上取整。 </p>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00718">718</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00719">719</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00076">BLOCK_SIZE</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a>.</p>
 
@@ -211,7 +211,7 @@ template&lt;typename T&gt; </div>
 <p>销毁所有生产者、哈希表、回收池中的 block 和初始 block 池。</p>
 <dl class="section warning"><dt>警告</dt><dd>析构时不能有并发操作 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00731">731</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00732">732</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a>, <a class="el" href="iterator_8hpp_source.html#l00157">next()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00141">prev()</a>.</p>
 
@@ -246,9 +246,9 @@ template&lt;typename T&gt; </div>
 <p>清空队列 </p>
 <dl class="section warning"><dt>警告</dt><dd>此方法不是线程安全的，调用者需保证无并发操作 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00866">866</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00867">867</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00789">try_pop()</a>.</p>
+<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00790">try_pop()</a>.</p>
 
 </div>
 </div>
@@ -281,7 +281,7 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>队列为空返回 true </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>由于并发特性，返回值可能瞬间失效 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00840">840</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00841">841</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
 
@@ -315,9 +315,9 @@ template&lt;typename T&gt; </div>
 <p>阻塞出队操作 </p>
 <dl class="section return"><dt>返回</dt><dd>出队元素的 <a class="el" href="classunique__ptr.html" title="独占智能指针">unique_ptr</a> </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00825">825</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00826">826</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00789">try_pop()</a>.</p>
+<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00790">try_pop()</a>.</p>
 
 </div>
 </div>
@@ -356,7 +356,7 @@ template&lt;typename T&gt; </div>
 <p>为当前线程自动创建隐式生产者。</p>
 <dl class="section note"><dt>注解</dt><dd>如果内存分配失败，入队操作会静默失败 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00775">775</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00776">776</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -391,7 +391,7 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>元素数量的近似值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>由于并发特性，返回值可能瞬间失效 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00854">854</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00855">855</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
 
@@ -426,11 +426,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>出队元素的 unique_ptr，队列为空则返回空指针</dd></dl>
 <p>使用启发式扫描生产者链表，选择元素最多的生产者优先出队。 最多扫描 3 个非空生产者。 </p>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00789">789</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00790">790</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="lock__free__queue_8hpp_source.html#l00866">clear()</a> , 以及 <a class="el" href="lock__free__queue_8hpp_source.html#l00825">pop()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="lock__free__queue_8hpp_source.html#l00867">clear()</a> , 以及 <a class="el" href="lock__free__queue_8hpp_source.html#l00826">pop()</a>.</p>
 
 </div>
 </div>

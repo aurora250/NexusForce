@@ -105,10 +105,10 @@ $(function(){initNavTree('classdns__client.html','','classdns__client-members');
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a8c20c9dde44af13993769f4422981684" id="r_a8c20c9dde44af13993769f4422981684"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8c20c9dde44af13993769f4422981684">dns_client</a> ()</td></tr>
-<tr class="memdesc:a8c20c9dde44af13993769f4422981684"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
-<tr class="memitem:a370b7017afd3cb7057169a0a57ec055b" id="r_a370b7017afd3cb7057169a0a57ec055b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a370b7017afd3cb7057169a0a57ec055b">dns_client</a> (<a class="el" href="structdns__client_1_1config.html">config</a> cfg, bool use_tcp=false)</td></tr>
-<tr class="memdesc:a370b7017afd3cb7057169a0a57ec055b"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:aa6e8e29444e46be3bbea3b541b6cbff7" id="r_aa6e8e29444e46be3bbea3b541b6cbff7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa6e8e29444e46be3bbea3b541b6cbff7">dns_client</a> ()=default</td></tr>
+<tr class="memdesc:aa6e8e29444e46be3bbea3b541b6cbff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:a8aa4b707d08846a888fba0dbd43d3424" id="r_a8aa4b707d08846a888fba0dbd43d3424"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8aa4b707d08846a888fba0dbd43d3424">dns_client</a> (<a class="el" href="structdns__client_1_1config.html">config</a> cfg, <a class="el" href="classio__context.html">io_context</a> &amp;ctx, bool use_tcp=false)</td></tr>
+<tr class="memdesc:a8aa4b707d08846a888fba0dbd43d3424"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
 <tr class="memitem:a537280a1846c09630af1c534a83a2ce2" id="r_a537280a1846c09630af1c534a83a2ce2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a537280a1846c09630af1c534a83a2ce2">set_config</a> (<a class="el" href="structdns__client_1_1config.html">config</a> cfg) noexcept</td></tr>
 <tr class="memdesc:a537280a1846c09630af1c534a83a2ce2"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置客户端配置  <br /></td></tr>
 <tr class="memitem:a5f1384cf1bb9a17c6c1ed57592785513" id="r_a5f1384cf1bb9a17c6c1ed57592785513"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5f1384cf1bb9a17c6c1ed57592785513">set_timeout</a> (const <a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> timeout) noexcept</td></tr>
@@ -129,7 +129,20 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
 <tr class="memitem:ae8f3ba97e2a5c2a3260f8eea9a174525" id="r_ae8f3ba97e2a5c2a3260f8eea9a174525"><td class="memItemLeft"><a class="el" href="structdns__query__result.html">dns_query_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae8f3ba97e2a5c2a3260f8eea9a174525">query</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> domain, <a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a> type=<a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9">dns_record::A</a>, <a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a> qclass=<a class="el" href="group___d_n_s.html#gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2">dns_class::INTERNET</a>)</td></tr>
 <tr class="memdesc:ae8f3ba97e2a5c2a3260f8eea9a174525"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行DNS查询  <br /></td></tr>
 <tr class="memitem:a12c1a550173e9a600c4ecaa27ef98d8e" id="r_a12c1a550173e9a600c4ecaa27ef98d8e"><td class="memItemLeft"><a class="el" href="classfuture.html">future</a>&lt; <a class="el" href="structdns__query__result.html">dns_query_result</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a12c1a550173e9a600c4ecaa27ef98d8e">query_async</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;domain, <a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a> type=<a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9">dns_record::A</a>, <a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a> qclass=<a class="el" href="group___d_n_s.html#gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2">dns_class::INTERNET</a>)</td></tr>
-<tr class="memdesc:a12c1a550173e9a600c4ecaa27ef98d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步DNS查询  <br /></td></tr>
+<tr class="memdesc:a12c1a550173e9a600c4ecaa27ef98d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步DNS查询（遗留 API——返回 future）  <br /></td></tr>
+<tr class="memitem:ab570f7754861ea04184a63d13fb9fd51" id="r_ab570f7754861ea04184a63d13fb9fd51"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab570f7754861ea04184a63d13fb9fd51">async_query</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> domain, <a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a> type, <a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a> qclass, <a class="el" href="classfunction.html">function</a>&lt; void(error_code, <a class="el" href="structdns__query__result.html">dns_query_result</a>)&gt; handler)</td></tr>
+<tr class="memdesc:ab570f7754861ea04184a63d13fb9fd51"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步DNS查询——回调完成  <br /></td></tr>
+<tr class="memitem:aaacf77241c9096f915b997ee5a53c12e" id="r_aaacf77241c9096f915b997ee5a53c12e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aaacf77241c9096f915b997ee5a53c12e">async_query</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> domain, <a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a> type, <a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a> qclass, <a class="el" href="classcancellation__slot.html">cancellation_slot</a> &amp;slot, <a class="el" href="classfunction.html">function</a>&lt; void(error_code, <a class="el" href="structdns__query__result.html">dns_query_result</a>)&gt; handler)</td></tr>
+<tr class="memdesc:aaacf77241c9096f915b997ee5a53c12e"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步DNS查询——回调完成 + 取消槽  <br /></td></tr>
+<tr class="memitem:a07a3b7a688402f2407969172af8d6c80" id="r_a07a3b7a688402f2407969172af8d6c80"><td class="memTemplParams" colspan="2">template&lt;typename Token, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="group___type_traits_utilities.html#gaa6c6bde5fd020a928e6d7b5fe8db7bb0">is_same_v</a>&lt; <a class="el" href="group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8">decay_t</a>&lt; Token &gt;, <a class="el" href="classfunction.html">function</a>&lt; void(error_code, <a class="el" href="structdns__query__result.html">dns_query_result</a>)&gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a07a3b7a688402f2407969172af8d6c80 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a07a3b7a688402f2407969172af8d6c80">async_query</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> domain, <a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a> type, <a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a> qclass, Token &amp;&amp;token)</td></tr>
+<tr class="memdesc:a07a3b7a688402f2407969172af8d6c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步DNS查询——任意完成令牌  <br /></td></tr>
+<tr class="memitem:a49375f4c02c1f7702c90ca8071114f35" id="r_a49375f4c02c1f7702c90ca8071114f35"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a49375f4c02c1f7702c90ca8071114f35">async_query</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> domain, <a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a> type, <a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a> qclass, <a class="el" href="structuse__future__t.html">use_future_t</a>)</td></tr>
+<tr class="memdesc:a49375f4c02c1f7702c90ca8071114f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步DNS查询——use_future  <br /></td></tr>
+<tr class="memitem:a11168e4296fb4f410ae7a48ebcda814d" id="r_a11168e4296fb4f410ae7a48ebcda814d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a11168e4296fb4f410ae7a48ebcda814d">async_query</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> domain, <a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a> type, <a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a> qclass, <a class="el" href="structdetached__t.html">detached_t</a>)</td></tr>
+<tr class="memdesc:a11168e4296fb4f410ae7a48ebcda814d"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步DNS查询——detached（即发即忘）  <br /></td></tr>
+<tr class="memitem:aa13be3e169b8c20441a72683ae44b88d" id="r_aa13be3e169b8c20441a72683ae44b88d"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aa13be3e169b8c20441a72683ae44b88d">async_query</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> domain, <a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a> type, <a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a> qclass, <a class="el" href="structuse__awaitable__t.html">use_awaitable_t</a>)</td></tr>
+<tr class="memdesc:aa13be3e169b8c20441a72683ae44b88d"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步DNS查询——use_awaitable  <br /></td></tr>
 <tr class="memitem:ab1ffb7132c5521d8fc2d63325a3556a2" id="r_ab1ffb7132c5521d8fc2d63325a3556a2"><td class="memItemLeft"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab1ffb7132c5521d8fc2d63325a3556a2">resolve_a</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> domain)</td></tr>
 <tr class="memdesc:ab1ffb7132c5521d8fc2d63325a3556a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析A记录（IPv4地址）  <br /></td></tr>
 <tr class="memitem:a0aec8dde61805ee2efcf1d7662dc7bd9" id="r_a0aec8dde61805ee2efcf1d7662dc7bd9"><td class="memItemLeft"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0aec8dde61805ee2efcf1d7662dc7bd9">resolve_aaaa</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> domain)</td></tr>
@@ -170,8 +183,8 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
 
 <p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00046">46</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
-<a id="a8c20c9dde44af13993769f4422981684" name="a8c20c9dde44af13993769f4422981684"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c20c9dde44af13993769f4422981684">&#9670;&#160;</a></span>dns_client() <span class="overload">[1/2]</span></h2>
+<a id="aa6e8e29444e46be3bbea3b541b6cbff7" name="aa6e8e29444e46be3bbea3b541b6cbff7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6e8e29444e46be3bbea3b541b6cbff7">&#9670;&#160;</a></span>dns_client() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -188,7 +201,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -196,16 +209,12 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
 <p>默认构造函数 </p>
 <p>使用默认配置创建DNS客户端。 </p>
 
-<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00102">102</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="dns__client_8hpp_source.html#l00102">dns_client()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="dns__client_8hpp_source.html#l00102">dns_client()</a> , 以及 <a class="el" href="#a370b7017afd3cb7057169a0a57ec055b">dns_client()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a8aa4b707d08846a888fba0dbd43d3424">dns_client()</a>.</p>
 
 </div>
 </div>
-<a id="a370b7017afd3cb7057169a0a57ec055b" name="a370b7017afd3cb7057169a0a57ec055b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a370b7017afd3cb7057169a0a57ec055b">&#9670;&#160;</a></span>dns_client() <span class="overload">[2/2]</span></h2>
+<a id="a8aa4b707d08846a888fba0dbd43d3424" name="a8aa4b707d08846a888fba0dbd43d3424"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aa4b707d08846a888fba0dbd43d3424">&#9670;&#160;</a></span>dns_client() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -217,6 +226,11 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
           <td class="memname">dns_client::dns_client </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structdns__client_1_1config.html">config</a></td>          <td class="paramname"><span class="paramname"><em>cfg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classio__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -235,6 +249,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
     <tr><td class="paramname">cfg</td><td>客户端配置 </td></tr>
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
     <tr><td class="paramname">use_tcp</td><td>是否强制使用TCP </td></tr>
   </table>
   </dd>
@@ -246,11 +261,290 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="dns__client_8hpp_source.html#l00102">dns_client()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#aa6e8e29444e46be3bbea3b541b6cbff7">dns_client()</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="aaacf77241c9096f915b997ee5a53c12e" name="aaacf77241c9096f915b997ee5a53c12e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaacf77241c9096f915b997ee5a53c12e">&#9670;&#160;</a></span>async_query() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void dns_client::async_query </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>domain</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a></td>          <td class="paramname"><span class="paramname"><em>qclass</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcancellation__slot.html">cancellation_slot</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>slot</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfunction.html">function</a>&lt; void(error_code, <a class="el" href="structdns__query__result.html">dns_query_result</a>)&gt;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步DNS查询——回调完成 + 取消槽 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">domain</td><td>域名 </td></tr>
+    <tr><td class="paramname">type</td><td>记录类型 </td></tr>
+    <tr><td class="paramname">qclass</td><td>查询类 </td></tr>
+    <tr><td class="paramname">slot</td><td>取消槽 </td></tr>
+    <tr><td class="paramname">handler</td><td>完成回调 void(error_code, dns_query_result) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a11168e4296fb4f410ae7a48ebcda814d" name="a11168e4296fb4f410ae7a48ebcda814d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11168e4296fb4f410ae7a48ebcda814d">&#9670;&#160;</a></span>async_query() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void dns_client::async_query </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>domain</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a></td>          <td class="paramname"><span class="paramname"><em>qclass</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdetached__t.html">detached_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步DNS查询——detached（即发即忘） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">domain</td><td>域名 </td></tr>
+    <tr><td class="paramname">type</td><td>记录类型 </td></tr>
+    <tr><td class="paramname">qclass</td><td>查询类 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab570f7754861ea04184a63d13fb9fd51" name="ab570f7754861ea04184a63d13fb9fd51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab570f7754861ea04184a63d13fb9fd51">&#9670;&#160;</a></span>async_query() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void dns_client::async_query </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>domain</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a></td>          <td class="paramname"><span class="paramname"><em>qclass</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfunction.html">function</a>&lt; void(error_code, <a class="el" href="structdns__query__result.html">dns_query_result</a>)&gt;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步DNS查询——回调完成 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">domain</td><td>域名 </td></tr>
+    <tr><td class="paramname">type</td><td>记录类型 </td></tr>
+    <tr><td class="paramname">qclass</td><td>查询类 </td></tr>
+    <tr><td class="paramname">handler</td><td>完成回调 void(error_code, dns_query_result) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">被这些函数引用 <a class="el" href="dns__client_8hpp_source.html#l00247">async_query()</a>.</p>
+
+</div>
+</div>
+<a id="a07a3b7a688402f2407969172af8d6c80" name="a07a3b7a688402f2407969172af8d6c80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07a3b7a688402f2407969172af8d6c80">&#9670;&#160;</a></span>async_query() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Token, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="group___type_traits_utilities.html#gaa6c6bde5fd020a928e6d7b5fe8db7bb0">is_same_v</a>&lt; <a class="el" href="group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8">decay_t</a>&lt; Token &gt;, <a class="el" href="classfunction.html">function</a>&lt; void(error_code, <a class="el" href="structdns__query__result.html">dns_query_result</a>)&gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void dns_client::async_query </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>domain</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a></td>          <td class="paramname"><span class="paramname"><em>qclass</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Token &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步DNS查询——任意完成令牌 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Token</td><td>完成令牌类型（use_future / detached / use_awaitable / 任意可调用对象） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">domain</td><td>域名 </td></tr>
+    <tr><td class="paramname">type</td><td>记录类型 </td></tr>
+    <tr><td class="paramname">qclass</td><td>查询类 </td></tr>
+    <tr><td class="paramname">token</td><td>完成令牌 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00247">247</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#ab570f7754861ea04184a63d13fb9fd51">async_query()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03028">forward()</a>.</p>
+
+</div>
+</div>
+<a id="aa13be3e169b8c20441a72683ae44b88d" name="aa13be3e169b8c20441a72683ae44b88d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa13be3e169b8c20441a72683ae44b88d">&#9670;&#160;</a></span>async_query() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto dns_client::async_query </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>domain</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a></td>          <td class="paramname"><span class="paramname"><em>qclass</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structuse__awaitable__t.html">use_awaitable_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步DNS查询——use_awaitable </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">domain</td><td>域名 </td></tr>
+    <tr><td class="paramname">type</td><td>记录类型 </td></tr>
+    <tr><td class="paramname">qclass</td><td>查询类 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="classawaitable.html" title="可被 co_await 的异步操作结果">awaitable&lt;dns_query_result&gt;</a> 可协程等待的结果 </dd></dl>
+
+</div>
+</div>
+<a id="a49375f4c02c1f7702c90ca8071114f35" name="a49375f4c02c1f7702c90ca8071114f35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49375f4c02c1f7702c90ca8071114f35">&#9670;&#160;</a></span>async_query() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto dns_client::async_query </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>domain</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdns__record.html#ace803844a79fd551cc236ca97f8425e8">dns_record::raw</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a></td>          <td class="paramname"><span class="paramname"><em>qclass</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structuse__future__t.html">use_future_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步DNS查询——use_future </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">domain</td><td>域名 </td></tr>
+    <tr><td class="paramname">type</td><td>记录类型 </td></tr>
+    <tr><td class="paramname">qclass</td><td>查询类 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="classfuture.html">future&lt;dns_query_result&gt;</a> 异步查询结果 </dd></dl>
+
+</div>
+</div>
 <a id="a8916c88780f4fff4097d783d17f428a8" name="a8916c88780f4fff4097d783d17f428a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8916c88780f4fff4097d783d17f428a8">&#9670;&#160;</a></span>batch_query()</h2>
 
@@ -281,7 +575,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
 <dl class="section return"><dt>返回</dt><dd>查询结果列表</dd></dl>
 <p>并发执行多个DNS查询，提高批量查询效率。 </p>
 
-<p class="reference">引用了 <a class="el" href="dns__message_8hpp_source.html#l00293">dns_record::A</a>.</p>
+<p class="reference">引用了 <a class="el" href="dns__message_8hpp_source.html#l00294">dns_record::A</a>.</p>
 
 </div>
 </div>
@@ -352,7 +646,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>编码后的DNS查询消息 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="dns__message_8hpp_source.html#l00293">dns_record::A</a>, <a class="el" href="dns__message_8hpp_source.html#l00390">edns::DEFAULT_UDP_PAYLOAD</a> , 以及 <a class="el" href="dns__message_8hpp_source.html#l00191">INTERNET</a>.</p>
+<p class="reference">引用了 <a class="el" href="dns__message_8hpp_source.html#l00294">dns_record::A</a>, <a class="el" href="dns__message_8hpp_source.html#l00391">edns::DEFAULT_UDP_PAYLOAD</a> , 以及 <a class="el" href="dns__message_8hpp_source.html#l00192">INTERNET</a>.</p>
 
 </div>
 </div>
@@ -442,7 +736,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="dns__message_8hpp_source.html#l00293">dns_record::A</a> , 以及 <a class="el" href="dns__message_8hpp_source.html#l00191">INTERNET</a>.</p>
+<p class="reference">引用了 <a class="el" href="dns__message_8hpp_source.html#l00294">dns_record::A</a> , 以及 <a class="el" href="dns__message_8hpp_source.html#l00192">INTERNET</a>.</p>
 
 </div>
 </div>
@@ -470,7 +764,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>异步DNS查询 </p>
+<p>异步DNS查询（遗留 API——返回 future） </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
     <tr><td class="paramname">domain</td><td>域名 </td></tr>
@@ -481,7 +775,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>future对象，可等待查询结果 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="dns__message_8hpp_source.html#l00293">dns_record::A</a> , 以及 <a class="el" href="dns__message_8hpp_source.html#l00191">INTERNET</a>.</p>
+<p class="reference">引用了 <a class="el" href="dns__message_8hpp_source.html#l00294">dns_record::A</a> , 以及 <a class="el" href="dns__message_8hpp_source.html#l00192">INTERNET</a>.</p>
 
 </div>
 </div>
@@ -731,7 +1025,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00142">142</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00170">170</a> 行定义.</p>
 
 </div>
 </div>
@@ -766,7 +1060,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00124">124</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00152">152</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -803,7 +1097,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00160">160</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00188">188</a> 行定义.</p>
 
 </div>
 </div>
@@ -838,7 +1132,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00154">154</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00182">182</a> 行定义.</p>
 
 </div>
 </div>
@@ -873,7 +1167,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00148">148</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00176">176</a> 行定义.</p>
 
 </div>
 </div>
@@ -908,7 +1202,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00130">130</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00158">158</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00035">timeout</a>.</p>
 
@@ -945,7 +1239,7 @@ void&#160;</td><td class="memItemRight"><b>clear_cache</b> () noexcept</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00136">136</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__client_8hpp_source.html">dns_client.hpp</a> 第 <a class="el" href="dns__client_8hpp_source.html#l00164">164</a> 行定义.</p>
 
 </div>
 </div>

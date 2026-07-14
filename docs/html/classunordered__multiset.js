@@ -48,7 +48,7 @@ var classunordered__multiset =
     [ "erase", "classunordered__multiset.html#ac61a14b631b6e473408e5d171f21ffdf", null ],
     [ "find", "classunordered__multiset.html#afb895b36ab217c8cade29f7ca5a32fe8", null ],
     [ "find", "classunordered__multiset.html#a9f6ff2c02e6608b9ee5b98d0c5cf4c60", null ],
-    [ "hash_func", "classunordered__multiset.html#a983d9e870c0b1dc0af434ca6baa6101c", null ],
+    [ "hash_function", "classunordered__multiset.html#ab5ea0066ed53cbef81ebba06633416aa", null ],
     [ "insert", "classunordered__multiset.html#afcf8d8e89195388978ff2d6d69246c2d", null ],
     [ "insert", "classunordered__multiset.html#acddae9d16c2b74c68c6249deb54604a1", null ],
     [ "insert", "classunordered__multiset.html#a4d56e2347e46f541363335a5b5250ee0", null ],

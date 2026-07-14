@@ -7,5 +7,5 @@ var classwebsocket__server =
     [ "remove_session", "classwebsocket__server.html#ab2e671190c316c10a67c9811d5db759e", null ],
     [ "route", "classwebsocket__server.html#a1ef3d7d2914ea79ef7826d1c7bb2769b", null ],
     [ "session_count", "classwebsocket__server.html#a324f35e43f1597de143ce170512841f4", null ],
-    [ "set_event_loop", "classwebsocket__server.html#a8d7a63ae0103ab0c48c987638f9f276f", null ]
+    [ "set_io_context", "classwebsocket__server.html#a86174e8e2894c87d3fa216b15c6e1cee", null ]
 ];

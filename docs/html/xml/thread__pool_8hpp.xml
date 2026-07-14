@@ -12,9 +12,7 @@
     <includes refid="sysinfo_8hpp" local="yes">NeForce/core/system/sysinfo.hpp</includes>
     <includes refid="datetime_8hpp" local="yes">NeForce/core/time/datetime.hpp</includes>
     <includes refid="optional_8hpp" local="yes">NeForce/core/utility/optional.hpp</includes>
-    <includedby refid="dns__client_8hpp" local="yes">dns_client.hpp</includedby>
     <includedby refid="logger_8hpp" local="yes">logger.hpp</includedby>
-    <includedby refid="tcp__server_8hpp" local="yes">tcp_server.hpp</includedby>
     <incdepgraph>
       <node id="72">
         <label>NeForce/core/algorithm/compare.hpp</label>
@@ -75,7 +73,7 @@
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
       <node id="95">
@@ -123,7 +121,7 @@
         <link refid="atomic__futex_8hpp"/>
         <childnode refid="34" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
       </node>
       <node id="36">
@@ -144,12 +142,12 @@
         <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="46">
         <label>NeForce/core/async/condition_variable.hpp</label>
         <link refid="condition__variable_8hpp"/>
         <childnode refid="42" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
       </node>
       <node id="37">
@@ -158,10 +156,10 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="57">
+      <node id="58">
         <label>NeForce/core/async/future.hpp</label>
         <link refid="future_8hpp"/>
-        <childnode refid="58" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
         <childnode refid="59" relation="include">
         </childnode>
@@ -222,18 +220,18 @@
         <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="55">
+      <node id="56">
         <label>NeForce/core/async/packaged_task.hpp</label>
         <link refid="packaged__task_8hpp"/>
-        <childnode refid="56" relation="include">
+        <childnode refid="57" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="56">
+      <node id="57">
         <label>NeForce/core/async/promise.hpp</label>
         <link refid="promise_8hpp"/>
-        <childnode refid="57" relation="include">
+        <childnode refid="58" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -269,10 +267,10 @@
       <node id="43">
         <label>NeForce/core/async/thread_exit_notifier.hpp</label>
         <link refid="thread__exit__notifier_8hpp_source"/>
-        <childnode refid="42" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
       </node>
-      <node id="58">
+      <node id="44">
         <label>NeForce/core/async/thread_exit_register.hpp</label>
         <link refid="thread__exit__register_8hpp"/>
         <childnode refid="7" relation="include">
@@ -285,7 +283,7 @@
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
         <childnode refid="83" relation="include">
         </childnode>
@@ -299,17 +297,17 @@
         </childnode>
         <childnode refid="106" relation="include">
         </childnode>
-        <childnode refid="120" relation="include">
+        <childnode refid="127" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>NeForce/core/async/timer.hpp</label>
         <link refid="timer_8hpp"/>
         <childnode refid="34" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="55" relation="include">
+        <childnode refid="56" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -446,6 +444,34 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
+      <node id="124">
+        <label>NeForce/core/exception/errc.hpp</label>
+        <link refid="errc_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="125" relation="include">
+        </childnode>
+      </node>
+      <node id="123">
+        <label>NeForce/core/exception/error_category.hpp</label>
+        <link refid="error__category_8hpp_source"/>
+        <childnode refid="124" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="121">
+        <label>NeForce/core/exception/error_code.hpp</label>
+        <link refid="error__code_8hpp_source"/>
+        <childnode refid="122" relation="include">
+        </childnode>
+      </node>
+      <node id="122">
+        <label>NeForce/core/exception/error_condition.hpp</label>
+        <link refid="error__condition_8hpp_source"/>
+        <childnode refid="123" relation="include">
+        </childnode>
+      </node>
       <node id="15">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
@@ -460,6 +486,14 @@
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="120">
+        <label>NeForce/core/exception/system_exception.hpp</label>
+        <link refid="system__exception_8hpp_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
         </childnode>
       </node>
       <node id="17">
@@ -543,7 +577,7 @@
         </childnode>
         <childnode refid="116" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
       <node id="109">
@@ -587,10 +621,10 @@
         <link refid="allocator__traits_8hpp"/>
         <childnode refid="65" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="54">
+      <node id="55">
         <label>NeForce/core/memory/bit.hpp</label>
         <link refid="bit_8hpp"/>
         <childnode refid="6" relation="include">
@@ -625,7 +659,7 @@
         </childnode>
         <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
@@ -665,7 +699,7 @@
         </childnode>
         <childnode refid="90" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
       <node id="90">
@@ -694,40 +728,40 @@
         <childnode refid="71" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="50">
         <label>NeForce/core/numeric/math.hpp</label>
         <link refid="math_8hpp"/>
         <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="50" relation="include">
-        </childnode>
-      </node>
-      <node id="51">
-        <label>NeForce/core/numeric/numeric_traits.hpp</label>
-        <link refid="numeric__traits_8hpp"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-      </node>
-      <node id="50">
-        <label>NeForce/core/numeric/numeric_types.hpp</label>
-        <link refid="numeric__types_8hpp"/>
-        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="51" relation="include">
         </childnode>
       </node>
       <node id="52">
-        <label>NeForce/core/numeric/ratio.hpp</label>
-        <link refid="ratio_8hpp"/>
-        <childnode refid="53" relation="include">
+        <label>NeForce/core/numeric/numeric_traits.hpp</label>
+        <link refid="numeric__traits_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>NeForce/core/numeric/numeric_types.hpp</label>
+        <link refid="numeric__types_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
       <node id="53">
-        <label>NeForce/core/numeric/static_numeric.hpp</label>
-        <link refid="static__numeric_8hpp"/>
+        <label>NeForce/core/numeric/ratio.hpp</label>
+        <link refid="ratio_8hpp"/>
         <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+      </node>
+      <node id="54">
+        <label>NeForce/core/numeric/static_numeric.hpp</label>
+        <link refid="static__numeric_8hpp"/>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
@@ -761,7 +795,7 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="72" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
       <node id="105">
@@ -783,6 +817,8 @@
         <link refid="format_8hpp"/>
         <childnode refid="111" relation="include">
         </childnode>
+        <childnode refid="119" relation="include">
+        </childnode>
         <childnode refid="20" relation="include">
         </childnode>
       </node>
@@ -798,10 +834,10 @@
         <childnode refid="103" relation="include">
         </childnode>
       </node>
-      <node id="119">
+      <node id="126">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="49" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
         <childnode refid="102" relation="include">
         </childnode>
@@ -815,9 +851,9 @@
         </childnode>
         <childnode refid="109" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
-        </childnode>
         <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
         </childnode>
         <childnode refid="113" relation="include">
         </childnode>
@@ -830,6 +866,14 @@
         <childnode refid="117" relation="include">
         </childnode>
       </node>
+      <node id="119">
+        <label>NeForce/core/system/locale.hpp</label>
+        <link refid="locale_8hpp"/>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="120" relation="include">
+        </childnode>
+      </node>
       <node id="99">
         <label>NeForce/core/system/sysinfo.hpp</label>
         <link refid="sysinfo_8hpp"/>
@@ -838,10 +882,10 @@
         <childnode refid="100" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="47">
         <label>NeForce/core/time/clocks.hpp</label>
         <link refid="clocks_8hpp"/>
-        <childnode refid="47" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
       <node id="106">
@@ -850,18 +894,18 @@
         <childnode refid="107" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="49">
         <label>NeForce/core/time/duration.hpp</label>
         <link refid="duration_8hpp"/>
-        <childnode refid="49" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
+        <childnode refid="53" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="48">
         <label>NeForce/core/time/time_point.hpp</label>
         <link refid="time__point_8hpp"/>
-        <childnode refid="48" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
       </node>
       <node id="66">
@@ -906,7 +950,7 @@
         <childnode refid="22" relation="include">
         </childnode>
       </node>
-      <node id="120">
+      <node id="127">
         <label>NeForce/core/utility/optional.hpp</label>
         <link refid="optional_8hpp"/>
         <childnode refid="73" relation="include">
@@ -929,7 +973,7 @@
         </childnode>
         <childnode refid="110" relation="include">
         </childnode>
-        <childnode refid="119" relation="include">
+        <childnode refid="126" relation="include">
         </childnode>
       </node>
       <node id="21">
@@ -958,6 +1002,9 @@
       </node>
       <node id="8">
         <label>cassert</label>
+      </node>
+      <node id="125">
+        <label>cerrno</label>
       </node>
       <node id="14">
         <label>ctime</label>
@@ -999,58 +1046,10 @@
         <link refid="thread__pool_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>logger.hpp</label>
-        <link refid="logger_8hpp"/>
       </node>
       <node id="2">
-        <label>dns_client.hpp</label>
-        <link refid="dns__client_8hpp"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>ftp_client.hpp</label>
-        <link refid="ftp__client_8hpp_source"/>
-      </node>
-      <node id="6">
-        <label>http_client.hpp</label>
-        <link refid="http__client_8hpp"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>http_server.hpp</label>
-        <link refid="http__server_8hpp"/>
-      </node>
-      <node id="7">
-        <label>reverse_proxy.hpp</label>
-        <link refid="reverse__proxy_8hpp"/>
-      </node>
-      <node id="4">
-        <label>smtp_socket.hpp</label>
-        <link refid="smtp__socket_8hpp"/>
-      </node>
-      <node id="5">
-        <label>tcp_client.hpp</label>
-        <link refid="tcp__client_8hpp"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>tcp_server.hpp</label>
-        <link refid="tcp__server_8hpp"/>
-        <childnode refid="10" relation="include">
-        </childnode>
+        <label>logger.hpp</label>
+        <link refid="logger_8hpp"/>
       </node>
     </invincdepgraph>
     <innerclass refid="structtask__group" prot="public">task_group</innerclass>
@@ -1063,6 +1062,7 @@
     <innerclass refid="structthread__pool_1_1pool__statistics" prot="public">thread_pool::pool_statistics</innerclass>
     <innerclass refid="structthread__pool_1_1priority__task" prot="private">thread_pool::priority_task</innerclass>
     <innerclass refid="structthread__pool_1_1thread__pool__id__generator" prot="private">thread_pool::thread_pool_id_generator</innerclass>
+    <innerclass refid="structthread__pool__executor" prot="public">thread_pool_executor</innerclass>
     <sectiondef kind="func">
       <member refid="group___thread_pool_1gaa4ff4ed8124d662595c374cb03d44d0d" kind="function"><name>get_worker_context</name></member>
       <member refid="group___thread_pool_1gab0dfe2ffce57ef2437c2bc1060febc71" kind="function"><name>get_current_task_group</name></member>
@@ -1248,10 +1248,10 @@
 <codeline lineno="281"><highlight class="normal"></highlight></codeline>
 <codeline lineno="289"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
 <codeline lineno="290" refid="structsubmit__result" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structsubmit__result" kindref="compound">submit_result</ref><sp/>{</highlight></codeline>
-<codeline lineno="291" refid="structsubmit__result_1a802be06dd5f31e5337cafb5a9726d894" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structsubmit__result_1a802be06dd5f31e5337cafb5a9726d894" kindref="member">future&lt;T&gt;</ref><sp/><ref refid="structsubmit__result_1a802be06dd5f31e5337cafb5a9726d894" kindref="member">future</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="292" refid="structsubmit__result_1a113da1092501b385ab3f10c5c0bbc778" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;task_info&gt;</ref><sp/><ref refid="structsubmit__result_1a113da1092501b385ab3f10c5c0bbc778" kindref="member">task_info</ref>;<sp/></highlight></codeline>
+<codeline lineno="291" refid="structsubmit__result_1a2aec5dabd1e7c8f5aa51c4aa01faaf09" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="structsubmit__result_1a2aec5dabd1e7c8f5aa51c4aa01faaf09" kindref="member">future&lt;T&gt;</ref><sp/><ref refid="structsubmit__result_1a2aec5dabd1e7c8f5aa51c4aa01faaf09" kindref="member">future</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="292" refid="structsubmit__result_1a936d7685d45adfd0eb8b2b820766047b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;_NEFORCE task_info&gt;</ref><sp/><ref refid="structsubmit__result_1a936d7685d45adfd0eb8b2b820766047b" kindref="member">task_info</ref>;<sp/></highlight></codeline>
 <codeline lineno="293"><highlight class="normal"></highlight></codeline>
-<codeline lineno="298" refid="structsubmit__result_1a292d3f6d8dda2c225701f925233df75e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structsubmit__result_1a802be06dd5f31e5337cafb5a9726d894" kindref="member">future</ref>.valid()<sp/>&amp;&amp;<sp/><ref refid="structsubmit__result_1a113da1092501b385ab3f10c5c0bbc778" kindref="member">task_info</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="298" refid="structsubmit__result_1a292d3f6d8dda2c225701f925233df75e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structsubmit__result_1a2aec5dabd1e7c8f5aa51c4aa01faaf09" kindref="member">future</ref>.valid()<sp/>&amp;&amp;<sp/><ref refid="structsubmit__result_1a936d7685d45adfd0eb8b2b820766047b" kindref="member">task_info</ref>;<sp/>}</highlight></codeline>
 <codeline lineno="299"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="300"><highlight class="normal"></highlight></codeline>
 <codeline lineno="301"><highlight class="normal"></highlight></codeline>
@@ -1484,7 +1484,7 @@
 <codeline lineno="681"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___tuple_1gaf1f69e67ec55772495eca5813b38070a" kindref="member">apply</ref>(func,<sp/>args);</highlight></codeline>
 <codeline lineno="682"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structexception" kindref="compound">exception</ref>&amp;<sp/>e)<sp/>{</highlight></codeline>
 <codeline lineno="683"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>info-&gt;status.store(<ref refid="structtask__info_1a82e511d7d330d103ad92f8acf75682eca26934eb377001f66e37289a5c93fe284" kindref="member">task_info::status::failed</ref>,<sp/><ref refid="group___memory_order_1ga1872f4bd7e5e4170b898e1dcab55bbec" kindref="member">memory_order_release</ref>);</highlight></codeline>
-<codeline lineno="684"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>info-&gt;error<sp/>=<sp/>e.<ref refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" kindref="member">what</ref>();</highlight></codeline>
+<codeline lineno="684"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>info-&gt;error<sp/>=<sp/>e.<ref refid="structexception_1ae5dc04391190559c19adcf269cab48e2" kindref="member">what</ref>();</highlight></codeline>
 <codeline lineno="685"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="686"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
 <codeline lineno="687"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>info-&gt;status.store(<ref refid="structtask__info_1a82e511d7d330d103ad92f8acf75682eca26934eb377001f66e37289a5c93fe284" kindref="member">task_info::status::failed</ref>,<sp/><ref refid="group___memory_order_1ga1872f4bd7e5e4170b898e1dcab55bbec" kindref="member">memory_order_release</ref>);</highlight></codeline>
@@ -1593,7 +1593,7 @@
 <codeline lineno="790"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___tuple_1gaf1f69e67ec55772495eca5813b38070a" kindref="member">apply</ref>(func,<sp/>tup);</highlight></codeline>
 <codeline lineno="791"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception&amp;<sp/>e)<sp/>{</highlight></codeline>
 <codeline lineno="792"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>info-&gt;status.store(<ref refid="structtask__info_1a82e511d7d330d103ad92f8acf75682eca26934eb377001f66e37289a5c93fe284" kindref="member">task_info::status::failed</ref>,<sp/><ref refid="group___memory_order_1ga1872f4bd7e5e4170b898e1dcab55bbec" kindref="member">memory_order_release</ref>);</highlight></codeline>
-<codeline lineno="793"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>info-&gt;error<sp/>=<sp/>e.<ref refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" kindref="member">what</ref>();</highlight></codeline>
+<codeline lineno="793"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>info-&gt;error<sp/>=<sp/>e.<ref refid="structexception_1ae5dc04391190559c19adcf269cab48e2" kindref="member">what</ref>();</highlight></codeline>
 <codeline lineno="794"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="795"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="796"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
@@ -1639,10 +1639,20 @@
 <codeline lineno="836"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="837"><highlight class="normal"></highlight></codeline>
 <codeline lineno="839"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>ThreadPool</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="841"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="843"><highlight class="normal"></highlight></codeline>
-<codeline lineno="844"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="845"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_THREAD_POOL_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="841"><highlight class="normal"></highlight></codeline>
+<codeline lineno="846"><highlight class="normal"></highlight></codeline>
+<codeline lineno="853" refid="structthread__pool__executor" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structthread__pool__executor" kindref="compound">thread_pool_executor</ref><sp/>{</highlight></codeline>
+<codeline lineno="854"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classthread__pool" kindref="compound">thread_pool</ref>*<sp/>pool;</highlight></codeline>
+<codeline lineno="855"><highlight class="normal"></highlight></codeline>
+<codeline lineno="860" refid="structthread__pool__executor_1ae07a0b4ec3c2c23c11e8e76c260b53d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structthread__pool__executor_1ae07a0b4ec3c2c23c11e8e76c260b53d6" kindref="member">execute</ref>(<ref refid="classfunction" kindref="compound">function</ref>&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">()&gt;<sp/>handler)<sp/>{<sp/>pool-&gt;submit_task(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(handler));<sp/>}</highlight></codeline>
+<codeline lineno="861"><highlight class="normal"></highlight></codeline>
+<codeline lineno="866" refid="structthread__pool__executor_1a2ca3a653b7232810e44346e7e1e71ef1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structthread__pool__executor_1a2ca3a653b7232810e44346e7e1e71ef1" kindref="member">running_in_this_thread</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___thread_pool_1gaa4ff4ed8124d662595c374cb03d44d0d" kindref="member">get_worker_context</ref>()<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="867"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="868"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Executor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="870"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="872"><highlight class="normal"></highlight></codeline>
+<codeline lineno="873"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="874"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_THREAD_POOL_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp"/>
   </compounddef>

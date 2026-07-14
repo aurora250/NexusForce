@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['复杂度保证_0',['复杂度保证',['../group___r_b_tree.html#complexity_guarantees',1,'复杂度保证'],['../group___sparse_vector.html#sparse_vector_complexity',1,'复杂度保证']]]
+  ['堆性质定义_0',['堆性质定义',['../group___heap_algorithms.html#heap_properties',1,'']]],
+  ['堆调整优化_1',['Floyd 堆调整优化',['../group___heap_algorithms.html#floyd_optimization',1,'']]]
 ];

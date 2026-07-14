@@ -158,21 +158,21 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="244" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="244" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classwebsocket__session_1a94fee8b1f11eda6b2b059016020b8cd4" prot="private" static="no" mutable="no">
-        <type><ref refid="classevent__loop" kindref="compound">event_loop</ref> *</type>
-        <definition>event_loop* websocket_session::loop_</definition>
+      <memberdef kind="variable" id="classwebsocket__session_1acb27ad7e37f6cff798987722ce58de53" prot="private" static="no" mutable="no">
+        <type><ref refid="classio__context" kindref="compound">io_context</ref> *</type>
+        <definition>io_context* websocket_session::ctx_</definition>
         <argsstring></argsstring>
-        <name>loop_</name>
-        <qualifiedname>websocket_session::loop_</qualifiedname>
-        <initializer>= nullptr</initializer>
+        <name>ctx_</name>
+        <qualifiedname>websocket_session::ctx_</qualifiedname>
+        <initializer>{nullptr}</initializer>
         <briefdescription>
-<para>事件循环指针 </para>
+<para>异步 I/O 执行上下文 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="246" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="246" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="246" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="246" bodyend="246"/>
       </memberdef>
       <memberdef kind="variable" id="classwebsocket__session_1a64a0aaffa596708e414b586ecf50cbb3" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -182,7 +182,7 @@
         <qualifiedname>websocket_session::event_driven_</qualifiedname>
         <initializer>= false</initializer>
         <briefdescription>
-<para>是否使用事件驱动模式 </para>
+<para>是否使用 <ref refid="classio__context" kindref="compound">io_context</ref> 事件驱动模式 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -691,10 +691,10 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="288" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classwebsocket__session_1ae9de9c829bb2f7d52862973c654a28b8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classwebsocket__session_1ae75adb68fb7e8b77429b696799326ae5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void websocket_session::on_readable</definition>
-        <argsstring>(int fd, uint32_t events)</argsstring>
+        <argsstring>(int fd, uint32_t events, error_code ec)</argsstring>
         <name>on_readable</name>
         <qualifiedname>websocket_session::on_readable</qualifiedname>
         <param>
@@ -705,6 +705,10 @@
           <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
           <declname>events</declname>
         </param>
+        <param>
+          <type>error_code</type>
+          <declname>ec</declname>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -713,10 +717,10 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="290" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classwebsocket__session_1ad340ce9bbbe799f7926f19aba4c26aa9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classwebsocket__session_1a8cc52fc823cf79fbf64508a423cf3b12" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void websocket_session::on_writable</definition>
-        <argsstring>(int fd, uint32_t events)</argsstring>
+        <argsstring>(int fd, uint32_t events, error_code ec)</argsstring>
         <name>on_writable</name>
         <qualifiedname>websocket_session::on_writable</qualifiedname>
         <param>
@@ -726,6 +730,10 @@
         <param>
           <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
           <declname>events</declname>
+        </param>
+        <param>
+          <type>error_code</type>
+          <declname>ec</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -1201,30 +1209,30 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="390" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="390" bodyend="390"/>
       </memberdef>
-      <memberdef kind="function" id="classwebsocket__session_1ab4118af153f998bb2ea260b03542cee7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classwebsocket__session_1a3e75cc22aefd0261c07b0a6da9242028" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void websocket_session::set_event_loop</definition>
-        <argsstring>(event_loop *loop) noexcept</argsstring>
-        <name>set_event_loop</name>
-        <qualifiedname>websocket_session::set_event_loop</qualifiedname>
+        <definition>void websocket_session::set_io_context</definition>
+        <argsstring>(io_context &amp;ctx) noexcept</argsstring>
+        <name>set_io_context</name>
+        <qualifiedname>websocket_session::set_io_context</qualifiedname>
         <param>
-          <type><ref refid="classevent__loop" kindref="compound">event_loop</ref> *</type>
-          <declname>loop</declname>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
         </param>
         <briefdescription>
-<para>设置事件循环（启用事件驱动模式） </para>
+<para>设置 io_context（启用事件驱动模式） </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>loop</parametername>
+<parametername>ctx</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>事件循环指针</para>
+<para><ref refid="classio__context" kindref="compound">io_context</ref> 引用</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-必须在 <ref refid="classwebsocket__session_1a191ca2f118812d4c03f30fc1076c2ff8" kindref="member">start()</ref> 之前调用。设置后会话将以事件驱动模式运行， 使用 <ref refid="classevent__loop" kindref="compound">event_loop</ref> 回调替代 3 个专用线程。 </para>
+必须在 <ref refid="classwebsocket__session_1a191ca2f118812d4c03f30fc1076c2ff8" kindref="member">start()</ref> 之前调用。设置后会话将以事件驱动模式运行， 使用 <ref refid="classio__context_1ac408f8abdf19b28a5440687229a56afc" kindref="member">io_context::add_fd</ref> / schedule_timer 替代 3 个专用线程。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -1352,6 +1360,7 @@
       <member refid="classwebsocket__session_1a3046e7a8e4c7d218190d5dd0267f3dd8" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>close_handler</name></member>
       <member refid="classwebsocket__session_1a714736cb9d1cd1390d3d28e572159dc8" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>closed_once_</name></member>
       <member refid="classwebsocket__session_1ab86d258e8231524726b2ef22a9666afe" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>ctrl_queue_</name></member>
+      <member refid="classwebsocket__session_1acb27ad7e37f6cff798987722ce58de53" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>ctx_</name></member>
       <member refid="classwebsocket__session_1a442d358c4d1f073c444ecd7c418c51ed" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>deflate_compressor_</name></member>
       <member refid="classwebsocket__session_1a9d5031322e89b2856de67e77e4d0f656" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>deflate_config</name></member>
       <member refid="classwebsocket__session_1a2f6563064669196f8f27ee98f96cd0c2" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>deflate_config_</name></member>
@@ -1374,14 +1383,13 @@
       <member refid="classwebsocket__session_1a8fa3fc8c9a1963655cf950d4a0d5165f" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>in_fragment_</name></member>
       <member refid="classwebsocket__session_1a518747318c8d053b64accbab5c2753ca" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>is_open</name></member>
       <member refid="classwebsocket__session_1ab42617172fc4dd68133c72b04b64d63a" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>last_pong_ms_</name></member>
-      <member refid="classwebsocket__session_1a94fee8b1f11eda6b2b059016020b8cd4" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>loop_</name></member>
       <member refid="classwebsocket__session_1a4abaa8761a35b3f6cbd39301a6710bcf" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>message_handler</name></member>
       <member refid="classwebsocket__session_1ae40707e97246190e9e0a32cfe4227f27" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>on_close_</name></member>
       <member refid="classwebsocket__session_1ac626d816038e8fa8889e4f321c8ddd17" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>on_error_</name></member>
       <member refid="classwebsocket__session_1acf2392aa574ed27202bfea68e29d4214" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>on_heartbeat_timer</name></member>
       <member refid="classwebsocket__session_1afe819a08db45c2a2501d49e795f9d5e1" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>on_message_</name></member>
-      <member refid="classwebsocket__session_1ae9de9c829bb2f7d52862973c654a28b8" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>on_readable</name></member>
-      <member refid="classwebsocket__session_1ad340ce9bbbe799f7926f19aba4c26aa9" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>on_writable</name></member>
+      <member refid="classwebsocket__session_1ae75adb68fb7e8b77429b696799326ae5" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>on_readable</name></member>
+      <member refid="classwebsocket__session_1a8cc52fc823cf79fbf64508a423cf3b12" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>on_writable</name></member>
       <member refid="classwebsocket__session_1aac0a837464b96c9b9473d5103d85c035" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>operator=</name></member>
       <member refid="classwebsocket__session_1aa899c3cc689db9ecc16a7a2a59b1c495" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>ping_pending_</name></member>
       <member refid="classwebsocket__session_1a6529af2056ecbe3cbe76303ca75c4ac1" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>queue_frame</name></member>
@@ -1397,7 +1405,7 @@
       <member refid="classwebsocket__session_1af77e313e481b77c5a125ef3c9819dcd6" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>set_close_handler</name></member>
       <member refid="classwebsocket__session_1a578830e009dcb82f49a1dedd6909ea79" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>set_deflate_config</name></member>
       <member refid="classwebsocket__session_1a40df249d0e94b96b4a736c8ff752f5ea" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>set_error_handler</name></member>
-      <member refid="classwebsocket__session_1ab4118af153f998bb2ea260b03542cee7" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>set_event_loop</name></member>
+      <member refid="classwebsocket__session_1a3e75cc22aefd0261c07b0a6da9242028" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>set_io_context</name></member>
       <member refid="classwebsocket__session_1aaebbcc5d2e0a943226e6d53d95066cca" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>set_message_handler</name></member>
       <member refid="structenable__shared__from__this_1ad048382df1fdf3e976e6e443d6bb61c6" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>shared_from_this</name></member>
       <member refid="classwebsocket__session_1ab75d9beacbd176cff4c40fe06af47e19" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>socket</name></member>

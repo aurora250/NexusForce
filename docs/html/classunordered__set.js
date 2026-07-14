@@ -47,7 +47,7 @@ var classunordered__set =
     [ "erase", "classunordered__set.html#a72d1c15f7f83fdf624dc79f117c604fb", null ],
     [ "find", "classunordered__set.html#ac5d5891207dcdcf099c3def6f4d26b75", null ],
     [ "find", "classunordered__set.html#aa8287ee43c8d9f0cff16e33500564cc1", null ],
-    [ "hash_funct", "classunordered__set.html#a75542fc6c1b5f205b70b9cf0295df3b5", null ],
+    [ "hash_function", "classunordered__set.html#a71aacb0ccba721a97acaccae96a8f24b", null ],
     [ "insert", "classunordered__set.html#a31f77e73c9462b2a4d5b862d4121bc7f", null ],
     [ "insert", "classunordered__set.html#a9e47075cf88130a075ef5fcd669f67d4", null ],
     [ "insert", "classunordered__set.html#ae82f27e897e64369272e38af75388214", null ],

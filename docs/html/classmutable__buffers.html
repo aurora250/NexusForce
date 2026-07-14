@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: mutable_buffers类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classmutable__buffers.html','','classmutable__buffers-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">mutable_buffers类 参考<div class="ingroups"><a class="el" href="group___async_buffers.html">缓冲区</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>可变缓冲区序列（scatter-gather 读）  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a216a36e2b9ee1a8a875ffebdd545fcd3" id="r_a216a36e2b9ee1a8a875ffebdd545fcd3"><td class="memItemLeft"><a id="a216a36e2b9ee1a8a875ffebdd545fcd3" name="a216a36e2b9ee1a8a875ffebdd545fcd3"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = <a class="el" href="group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354">mutable_buffer</a></td></tr>
+<tr class="memdesc:a216a36e2b9ee1a8a875ffebdd545fcd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">元素类型 <br /></td></tr>
+<tr class="memitem:aaf191654f4b529df0841df99ddf69773" id="r_aaf191654f4b529df0841df99ddf69773"><td class="memItemLeft"><a id="aaf191654f4b529df0841df99ddf69773" name="aaf191654f4b529df0841df99ddf69773"></a>
+using&#160;</td><td class="memItemRight"><b>iterator</b> = <a class="el" href="classvector.html">vector</a>&lt;<a class="el" href="group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354">mutable_buffer</a>&gt;::iterator</td></tr>
+<tr class="memdesc:aaf191654f4b529df0841df99ddf69773"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类型 <br /></td></tr>
+<tr class="memitem:aa5a9a83ba9c4656b5b2eeb14f044cd9b" id="r_aa5a9a83ba9c4656b5b2eeb14f044cd9b"><td class="memItemLeft"><a id="aa5a9a83ba9c4656b5b2eeb14f044cd9b" name="aa5a9a83ba9c4656b5b2eeb14f044cd9b"></a>
+using&#160;</td><td class="memItemRight"><b>const_iterator</b> = <a class="el" href="classvector.html">vector</a>&lt;<a class="el" href="group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354">mutable_buffer</a>&gt;::const_iterator</td></tr>
+<tr class="memdesc:aa5a9a83ba9c4656b5b2eeb14f044cd9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量迭代器类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ae495edb68478bddf15d86c96e5ea1a9c" id="r_ae495edb68478bddf15d86c96e5ea1a9c"><td class="memItemLeft"><a id="ae495edb68478bddf15d86c96e5ea1a9c" name="ae495edb68478bddf15d86c96e5ea1a9c"></a>
+&#160;</td><td class="memItemRight"><b>mutable_buffers</b> ()=default</td></tr>
+<tr class="memdesc:ae495edb68478bddf15d86c96e5ea1a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
+<tr class="memitem:a4d89d7097e5e93c749b749b869a0f69f" id="r_a4d89d7097e5e93c749b749b869a0f69f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a4d89d7097e5e93c749b749b869a0f69f">mutable_buffers</a> (<a class="el" href="group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354">mutable_buffer</a> b)</td></tr>
+<tr class="memdesc:a4d89d7097e5e93c749b749b869a0f69f"><td class="mdescLeft">&#160;</td><td class="mdescRight">从单个 buffer 构造  <br /></td></tr>
+<tr class="memitem:ab515f91a7fef6e2ec226614b43d00122" id="r_ab515f91a7fef6e2ec226614b43d00122"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab515f91a7fef6e2ec226614b43d00122">push_back</a> (<a class="el" href="group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354">mutable_buffer</a> b)</td></tr>
+<tr class="memdesc:ab515f91a7fef6e2ec226614b43d00122"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加缓冲区到序列末尾  <br /></td></tr>
+<tr class="memitem:a108908c34b0a72c72c258ced8ba590f2" id="r_a108908c34b0a72c72c258ced8ba590f2"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a108908c34b0a72c72c258ced8ba590f2">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a108908c34b0a72c72c258ced8ba590f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取缓冲区的数量  <br /></td></tr>
+<tr class="memitem:a68f593d4f060751125e7dce2d4e74199" id="r_a68f593d4f060751125e7dce2d4e74199"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a68f593d4f060751125e7dce2d4e74199">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a68f593d4f060751125e7dce2d4e74199"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查序列是否为空  <br /></td></tr>
+<tr class="memitem:a6ffb51fdce4a72302f44750afc3a956c" id="r_a6ffb51fdce4a72302f44750afc3a956c"><td class="memItemLeft">const <a class="el" href="group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354">mutable_buffer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6ffb51fdce4a72302f44750afc3a956c">operator[]</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> i) const</td></tr>
+<tr class="memdesc:a6ffb51fdce4a72302f44750afc3a956c"><td class="mdescLeft">&#160;</td><td class="mdescRight">访问指定索引的缓冲区  <br /></td></tr>
+<tr class="memitem:a69b77404fe3f8bcb1ef66640756eb1b1" id="r_a69b77404fe3f8bcb1ef66640756eb1b1"><td class="memItemLeft"><a class="el" href="group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354">mutable_buffer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a69b77404fe3f8bcb1ef66640756eb1b1">operator[]</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> i)</td></tr>
+<tr class="memdesc:a69b77404fe3f8bcb1ef66640756eb1b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">访问指定索引的缓冲区（可修改）  <br /></td></tr>
+<tr class="memitem:a83fa722f1b8b075565df454d24930313" id="r_a83fa722f1b8b075565df454d24930313"><td class="memItemLeft"><a class="el" href="#aaf191654f4b529df0841df99ddf69773">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a83fa722f1b8b075565df454d24930313">begin</a> () noexcept</td></tr>
+<tr class="memdesc:a83fa722f1b8b075565df454d24930313"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取起始迭代器  <br /></td></tr>
+<tr class="memitem:a8bda2e9fcf53d6a92eb4c10ecca0f915" id="r_a8bda2e9fcf53d6a92eb4c10ecca0f915"><td class="memItemLeft"><a class="el" href="#aaf191654f4b529df0841df99ddf69773">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8bda2e9fcf53d6a92eb4c10ecca0f915">end</a> () noexcept</td></tr>
+<tr class="memdesc:a8bda2e9fcf53d6a92eb4c10ecca0f915"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结束迭代器  <br /></td></tr>
+<tr class="memitem:a49638fca36601a436abd57aa07eaaca1" id="r_a49638fca36601a436abd57aa07eaaca1"><td class="memItemLeft"><a class="el" href="#aa5a9a83ba9c4656b5b2eeb14f044cd9b">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a49638fca36601a436abd57aa07eaaca1">begin</a> () const noexcept</td></tr>
+<tr class="memdesc:a49638fca36601a436abd57aa07eaaca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取起始常量迭代器  <br /></td></tr>
+<tr class="memitem:add6f4c8194e31cdd0d77b852ef8d7476" id="r_add6f4c8194e31cdd0d77b852ef8d7476"><td class="memItemLeft"><a class="el" href="#aa5a9a83ba9c4656b5b2eeb14f044cd9b">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#add6f4c8194e31cdd0d77b852ef8d7476">end</a> () const noexcept</td></tr>
+<tr class="memdesc:add6f4c8194e31cdd0d77b852ef8d7476"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结束常量迭代器  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>可变缓冲区序列（scatter-gather 读） </p>
+<p>包含多个内存区域的视图，用于一次 scatter-gather 读操作。 异步读取时数据依次填入每个缓冲区。</p>
+<dl class="section note"><dt>注解</dt><dd>缓冲区序列不拥有底层内存，调用者需确保内存在操作期间有效。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00044">44</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a4d89d7097e5e93c749b749b869a0f69f" name="a4d89d7097e5e93c749b749b869a0f69f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d89d7097e5e93c749b749b869a0f69f">&#9670;&#160;</a></span>mutable_buffers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">mutable_buffers::mutable_buffers </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354">mutable_buffer</a></td>          <td class="paramname"><span class="paramname"><em>b</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从单个 buffer 构造 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>初始缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00063">63</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a49638fca36601a436abd57aa07eaaca1" name="a49638fca36601a436abd57aa07eaaca1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49638fca36601a436abd57aa07eaaca1">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa5a9a83ba9c4656b5b2eeb14f044cd9b">const_iterator</a> mutable_buffers::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取起始常量迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个缓冲区的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00113">113</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a83fa722f1b8b075565df454d24930313" name="a83fa722f1b8b075565df454d24930313"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83fa722f1b8b075565df454d24930313">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aaf191654f4b529df0841df99ddf69773">iterator</a> mutable_buffers::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个缓冲区的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00101">101</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a68f593d4f060751125e7dce2d4e74199" name="a68f593d4f060751125e7dce2d4e74199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68f593d4f060751125e7dce2d4e74199">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool mutable_buffers::empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查序列是否为空 </p>
+<dl class="section return"><dt>返回</dt><dd>为空返回 true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00081">81</a> 行定义.</p>
+
+</div>
+</div>
+<a id="add6f4c8194e31cdd0d77b852ef8d7476" name="add6f4c8194e31cdd0d77b852ef8d7476"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add6f4c8194e31cdd0d77b852ef8d7476">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa5a9a83ba9c4656b5b2eeb14f044cd9b">const_iterator</a> mutable_buffers::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取结束常量迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向末尾的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00119">119</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8bda2e9fcf53d6a92eb4c10ecca0f915" name="a8bda2e9fcf53d6a92eb4c10ecca0f915"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bda2e9fcf53d6a92eb4c10ecca0f915">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aaf191654f4b529df0841df99ddf69773">iterator</a> mutable_buffers::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向末尾的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00107">107</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a69b77404fe3f8bcb1ef66640756eb1b1" name="a69b77404fe3f8bcb1ef66640756eb1b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69b77404fe3f8bcb1ef66640756eb1b1">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354">mutable_buffer</a> &amp; mutable_buffers::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>访问指定索引的缓冲区（可修改） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>缓冲区引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00095">95</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6ffb51fdce4a72302f44750afc3a956c" name="a6ffb51fdce4a72302f44750afc3a956c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ffb51fdce4a72302f44750afc3a956c">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354">mutable_buffer</a> &amp; mutable_buffers::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>访问指定索引的缓冲区 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>缓冲区引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00088">88</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab515f91a7fef6e2ec226614b43d00122" name="ab515f91a7fef6e2ec226614b43d00122"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab515f91a7fef6e2ec226614b43d00122">&#9670;&#160;</a></span>push_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mutable_buffers::push_back </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354">mutable_buffer</a></td>          <td class="paramname"><span class="paramname"><em>b</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>添加缓冲区到序列末尾 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>要添加的缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00069">69</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a108908c34b0a72c72c258ced8ba590f2" name="a108908c34b0a72c72c258ced8ba590f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a108908c34b0a72c72c258ced8ba590f2">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> mutable_buffers::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取缓冲区的数量 </p>
+<dl class="section return"><dt>返回</dt><dd>缓冲区数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00075">75</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="buffer_8hpp_source.html">buffer.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classmutable__buffers.html">mutable_buffers</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

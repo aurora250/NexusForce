@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['算术运算仿函数_0',['算术运算仿函数',['../group___arithmetic_functors.html',1,'']]]
+  ['符号操作_0',['符号操作',['../group___sign_manipulation.html',1,'']]]
 ];

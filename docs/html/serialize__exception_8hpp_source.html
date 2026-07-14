@@ -102,8 +102,8 @@ $(function(){initNavTree('serialize__exception_8hpp_source.html','',''); });
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
 <div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structserialize__exception.html">   23</a></span><span class="keyword">struct </span>serialize_exception final : value_exception {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">explicit</span> serialize_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = <span class="stringliteral">&quot;Serialization failed.&quot;</span>, <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">code</a> = 0) noexcept :</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    value_exception(info, <span class="stringliteral">&quot;serialize_exception&quot;</span>, <a class="code hl_function" href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">code</a>) {}</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">explicit</span> serialize_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = <span class="stringliteral">&quot;Serialization failed.&quot;</span>) noexcept :</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    value_exception(info) {}</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
 </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
@@ -111,35 +111,33 @@ $(function(){initNavTree('serialize__exception_8hpp_source.html','',''); });
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structdeserialize__exception.html">   32</a></span><span class="keyword">struct </span>deserialize_exception : value_exception {</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structdeserialize__exception.html#a381d739e55c8acdd9f9da39caea73c30">   33</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="structdeserialize__exception.html#a381d739e55c8acdd9f9da39caea73c30">property_path</a>; </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">explicit</span> deserialize_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = <span class="stringliteral">&quot;Deserialization failed.&quot;</span>, <span class="keywordtype">string</span> <a class="code hl_class" href="classpath.html">path</a> = <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                                   <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">code</a> = 0) noexcept :</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    value_exception(info, <span class="stringliteral">&quot;deserialize_exception&quot;</span>, <a class="code hl_function" href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">code</a>),</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_variable" href="structdeserialize__exception.html#a381d739e55c8acdd9f9da39caea73c30">property_path</a>(<a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(<a class="code hl_class" href="classpath.html">path</a>)) {}</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>};</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">explicit</span> deserialize_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = <span class="stringliteral">&quot;Deserialization failed.&quot;</span>, <span class="keywordtype">string</span> <a class="code hl_class" href="classpath.html">path</a> = <span class="stringliteral">&quot;&quot;</span>) noexcept :</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    value_exception(info),</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_variable" href="structdeserialize__exception.html#a381d739e55c8acdd9f9da39caea73c30">property_path</a>(<a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(<a class="code hl_class" href="classpath.html">path</a>)) {}</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>};</div>
 </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span></div>
-<div class="foldopen" id="foldopen00045" data-start="{" data-end="};">
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structmissing__required__exception.html">   45</a></span><span class="keyword">struct </span>missing_required_exception final : deserialize_exception {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">explicit</span> missing_required_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* property_name, <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">code</a> = 0) :</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    deserialize_exception(<span class="stringliteral">&quot;Missing required property.&quot;</span>, property_name, <a class="code hl_function" href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">code</a>) {}</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="};">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structmissing__required__exception.html">   44</a></span><span class="keyword">struct </span>missing_required_exception final : deserialize_exception {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">explicit</span> missing_required_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* property_name) :</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    deserialize_exception(<span class="stringliteral">&quot;Missing required property.&quot;</span>, property_name) {}</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
 </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
-<div class="foldopen" id="foldopen00054" data-start="{" data-end="};">
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structtype__mismatch__exception.html">   54</a></span><span class="keyword">struct </span>type_mismatch_exception final : deserialize_exception {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">explicit</span> type_mismatch_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* expected_type, <span class="keyword">const</span> <span class="keywordtype">char</span>* actual_type, <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">code</a> = 0) :</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    deserialize_exception(<span class="stringliteral">&quot;Type mismatch.&quot;</span>, expected_type, <a class="code hl_function" href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">code</a>) {}</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>};</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="};">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structtype__mismatch__exception.html">   53</a></span><span class="keyword">struct </span>type_mismatch_exception final : deserialize_exception {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">explicit</span> type_mismatch_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* expected_type) :</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    deserialize_exception(<span class="stringliteral">&quot;Type mismatch.&quot;</span>, expected_type) {}</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
 </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> <span class="comment">// Exceptions</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_SERIALIZE_SERIALIZE_EXCEPTION_HPP__</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> <span class="comment">// Exceptions</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_SERIALIZE_SERIALIZE_EXCEPTION_HPP__</span></div>
 <div class="ttc" id="aclasspath_html"><div class="ttname"><a href="classpath.html">path</a></div><div class="ttdoc">文件路径类</div><div class="ttdef"><b>定义</b> <a href="path_8hpp_source.html#l00036">path.hpp:36</a></div></div>
 <div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
 <div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
 <div class="ttc" id="astructdeserialize__exception_html_a381d739e55c8acdd9f9da39caea73c30"><div class="ttname"><a href="structdeserialize__exception.html#a381d739e55c8acdd9f9da39caea73c30">deserialize_exception::property_path</a></div><div class="ttdeci">string property_path</div><div class="ttdoc">失败的属性路径</div><div class="ttdef"><b>定义</b> <a href="#l00033">serialize_exception.hpp:33</a></div></div>
-<div class="ttc" id="astructexception_html_ab8a744225b6ddc8976987ba16a0fd046"><div class="ttname"><a href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">exception::code</a></div><div class="ttdeci">int code() const noexcept</div><div class="ttdoc">获取异常码</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00189">exception.hpp:189</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

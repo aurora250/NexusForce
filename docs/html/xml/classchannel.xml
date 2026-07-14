@@ -1,0 +1,416 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classchannel" kind="class" language="C++" prot="public">
+    <compoundname>channel</compoundname>
+    <includes refid="channel_8hpp" local="no">channel.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classchannel_1ae61bfef96443f74f1a01483da3cc18e6" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t channel&lt; T &gt;::capacity_</definition>
+        <argsstring></argsstring>
+        <name>capacity_</name>
+        <qualifiedname>channel::capacity_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="36" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classchannel_1a3bd32dcd286e6352237e2f55c2149dea" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool channel&lt; T &gt;::closed_</definition>
+        <argsstring></argsstring>
+        <name>closed_</name>
+        <qualifiedname>channel::closed_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="37" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="variable" id="classchannel_1a83d791de789de8a2ce01c48a237de99f" prot="private" static="no" mutable="yes">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex channel&lt; T &gt;::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>channel::mutex_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="38" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classchannel_1ae7c0b8b305c8953b3afc768f282ecdfe" prot="private" static="no" mutable="no">
+        <type><ref refid="classcondition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable channel&lt; T &gt;::cv_</definition>
+        <argsstring></argsstring>
+        <name>cv_</name>
+        <qualifiedname>channel::cv_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="39" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classchannel_1af295ef2a530003fd321bcefe59255481" prot="private" static="no" mutable="no">
+        <type><ref refid="classdeque" kindref="compound">deque</ref>&lt; T &gt;</type>
+        <definition>deque&lt;T&gt; channel&lt; T &gt;::buffer_</definition>
+        <argsstring></argsstring>
+        <name>buffer_</name>
+        <qualifiedname>channel::buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="40" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classchannel_1a8e48ce46104b610852dea60d6e3e908e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t channel&lt; T &gt;::capacity_max</definition>
+        <argsstring></argsstring>
+        <name>capacity_max</name>
+        <qualifiedname>channel::capacity_max</qualifiedname>
+        <initializer>= <ref refid="classnumeric__traits" kindref="compound">numeric_traits</ref>&lt;<ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>&gt;<ref refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" kindref="member">::max</ref>()</initializer>
+        <briefdescription>
+<para>最大容量常量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="57" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="57" bodyend="-1"/>
+        <referencedby refid="classchannel_1adb5b7f3bb996bc69a5ae2e58d4ca6e70" compoundref="channel_8hpp" startline="48" endline="49">channel&lt; T &gt;::channel</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classchannel_1adb5b7f3bb996bc69a5ae2e58d4ca6e70" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>channel&lt; T &gt;::channel</definition>
+        <argsstring>(size_t capacity=capacity_max)</argsstring>
+        <name>channel</name>
+        <qualifiedname>channel::channel</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>capacity</declname>
+          <defval><ref refid="classchannel_1a8e48ce46104b610852dea60d6e3e908e" kindref="member">capacity_max</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>通道容量，0 表示无缓冲，capacity_max 表示无上限 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classchannel_1a8e48ce46104b610852dea60d6e3e908e" kindref="member">capacity_max</ref> 容量不合法时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="48" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="48" bodyend="49"/>
+        <references refid="classchannel_1a8e48ce46104b610852dea60d6e3e908e" compoundref="channel_8hpp" startline="57">channel&lt; T &gt;::capacity_max</references>
+      </memberdef>
+      <memberdef kind="function" id="classchannel_1a12998f0e824e0ffabeccad462e5eecce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>channel&lt; T &gt;::channel</definition>
+        <argsstring>(const channel &amp;)=delete</argsstring>
+        <name>channel</name>
+        <qualifiedname>channel::channel</qualifiedname>
+        <param>
+          <type>const <ref refid="classchannel" kindref="compound">channel</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="51" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classchannel_1af8451090102ceface6653b0c195c341e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classchannel" kindref="compound">channel</ref> &amp;</type>
+        <definition>channel &amp; channel&lt; T &gt;::operator=</definition>
+        <argsstring>(const channel &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>channel::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classchannel" kindref="compound">channel</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="52" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classchannel_1a463a8a394d62add8f038774283ed61b8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool channel&lt; T &gt;::try_write</definition>
+        <argsstring>(T value)</argsstring>
+        <name>try_write</name>
+        <qualifiedname>channel::try_write</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>尝试发送消息（非阻塞） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的消息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>发送成功返回 true，通道已满或已关闭返回 false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="64" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="64" bodyend="75"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classchannel_1a57978eeb34d19f1f475eb6aecabac435" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool channel&lt; T &gt;::write</definition>
+        <argsstring>(T value)</argsstring>
+        <name>write</name>
+        <qualifiedname>channel::write</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>发送消息（阻塞直到空间可用或通道关闭） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的消息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>发送成功返回 true，通道关闭返回 false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="82" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="82" bodyend="93"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classchannel_1abf50e25fc91a073500d958af7c906cbe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool channel&lt; T &gt;::try_read</definition>
+        <argsstring>(T &amp;out)</argsstring>
+        <name>try_read</name>
+        <qualifiedname>channel::try_read</qualifiedname>
+        <param>
+          <type>T &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>尝试读取消息（非阻塞） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出消息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>读取成功返回 true，通道空或关闭且无数据返回 false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="100" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="100" bodyend="109"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classchannel_1a6c20eb8b50e7d4d6445b06483e9f6b83" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool channel&lt; T &gt;::read</definition>
+        <argsstring>(T &amp;out)</argsstring>
+        <name>read</name>
+        <qualifiedname>channel::read</qualifiedname>
+        <param>
+          <type>T &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>读取消息（阻塞直到有数据或通道关闭） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出消息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>读取成功返回 true，通道关闭且无数据返回 false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="116" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="116" bodyend="126"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classchannel_1a3edf2203b498691a931b92546d15cb05" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void channel&lt; T &gt;::close</definition>
+        <argsstring>()</argsstring>
+        <name>close</name>
+        <qualifiedname>channel::close</qualifiedname>
+        <briefdescription>
+<para>关闭通道 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>关闭后不再接受新消息，唤醒所有等待的读写线程。 已缓冲的数据仍可读取。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="134" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="134" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classchannel_1a5dd6e65bc0b3a2c0c2ee8ec43df7555a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool channel&lt; T &gt;::is_closed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_closed</name>
+        <qualifiedname>channel::is_closed</qualifiedname>
+        <briefdescription>
+<para>检查通道是否已关闭 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已关闭返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="144" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="144" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classchannel_1afd47c417028666c9ee1d42e38db3e6c0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t channel&lt; T &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>channel::size</qualifiedname>
+        <briefdescription>
+<para>当前缓冲消息数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>消息数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="153" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="153" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classchannel_1ac79d74439bd8d77b1ff4c41bd03bcb9d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool channel&lt; T &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>channel::empty</qualifiedname>
+        <briefdescription>
+<para>检查缓冲区是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>为空返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="162" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="162" bodyend="165"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>有限容量的 CSP 消息通道 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>消息类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+支持多生产者/多消费者的线程安全消息通道。 容量为 0 表示无缓冲（同步握手），capacity_max 表示无上限。</para>
+<para><simplesect kind="note"><para>容量耗尽时写入阻塞，无数据时读取阻塞。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" line="34" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/channel.hpp" bodystart="34" bodyend="166"/>
+    <listofallmembers>
+      <member refid="classchannel_1af295ef2a530003fd321bcefe59255481" prot="private" virt="non-virtual"><scope>channel</scope><name>buffer_</name></member>
+      <member refid="classchannel_1ae61bfef96443f74f1a01483da3cc18e6" prot="private" virt="non-virtual"><scope>channel</scope><name>capacity_</name></member>
+      <member refid="classchannel_1a8e48ce46104b610852dea60d6e3e908e" prot="public" virt="non-virtual"><scope>channel</scope><name>capacity_max</name></member>
+      <member refid="classchannel_1adb5b7f3bb996bc69a5ae2e58d4ca6e70" prot="public" virt="non-virtual"><scope>channel</scope><name>channel</name></member>
+      <member refid="classchannel_1a12998f0e824e0ffabeccad462e5eecce" prot="public" virt="non-virtual"><scope>channel</scope><name>channel</name></member>
+      <member refid="classchannel_1a3edf2203b498691a931b92546d15cb05" prot="public" virt="non-virtual"><scope>channel</scope><name>close</name></member>
+      <member refid="classchannel_1a3bd32dcd286e6352237e2f55c2149dea" prot="private" virt="non-virtual"><scope>channel</scope><name>closed_</name></member>
+      <member refid="classchannel_1ae7c0b8b305c8953b3afc768f282ecdfe" prot="private" virt="non-virtual"><scope>channel</scope><name>cv_</name></member>
+      <member refid="classchannel_1ac79d74439bd8d77b1ff4c41bd03bcb9d" prot="public" virt="non-virtual"><scope>channel</scope><name>empty</name></member>
+      <member refid="classchannel_1a5dd6e65bc0b3a2c0c2ee8ec43df7555a" prot="public" virt="non-virtual"><scope>channel</scope><name>is_closed</name></member>
+      <member refid="classchannel_1a83d791de789de8a2ce01c48a237de99f" prot="private" virt="non-virtual"><scope>channel</scope><name>mutex_</name></member>
+      <member refid="classchannel_1af8451090102ceface6653b0c195c341e" prot="public" virt="non-virtual"><scope>channel</scope><name>operator=</name></member>
+      <member refid="classchannel_1a6c20eb8b50e7d4d6445b06483e9f6b83" prot="public" virt="non-virtual"><scope>channel</scope><name>read</name></member>
+      <member refid="classchannel_1afd47c417028666c9ee1d42e38db3e6c0" prot="public" virt="non-virtual"><scope>channel</scope><name>size</name></member>
+      <member refid="classchannel_1abf50e25fc91a073500d958af7c906cbe" prot="public" virt="non-virtual"><scope>channel</scope><name>try_read</name></member>
+      <member refid="classchannel_1a463a8a394d62add8f038774283ed61b8" prot="public" virt="non-virtual"><scope>channel</scope><name>try_write</name></member>
+      <member refid="classchannel_1a57978eeb34d19f1f475eb6aecabac435" prot="public" virt="non-virtual"><scope>channel</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

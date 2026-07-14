@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="42" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="46" column="5"/>
         <references refid="classudp__socket_1a328c2c1a4f87834a2f7648274d9eb77c">udp_socket</references>
         <referencedby refid="classudp__socket_1a328c2c1a4f87834a2f7648274d9eb77c">udp_socket</referencedby>
       </memberdef>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="44" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="48" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classudp__socket_1a0927dc1f70a754e70eb3f0f68a9bf1bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classudp__socket" kindref="compound">udp_socket</ref> &amp;</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="45" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="49" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classudp__socket_1a7ca045fda3399c34667f31de840e7683" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="54" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="58" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classudp__socket_1a1c4454c1ec0b9d3038cce20e6f308c2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref></type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="67" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="71" column="13"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
       </memberdef>
       <memberdef kind="function" id="classudp__socket_1ab322f003a3a5ffaa2bf3e07fcbf8e79c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -228,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="80" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="84" column="13"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
       </memberdef>
       <memberdef kind="function" id="classudp__socket_1a37b55826566b881ef590f3e80c24bcb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -290,7 +290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="93" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="97" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classudp__socket_1a4410530e9e9c734eff53bc64617eeefb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref></type>
@@ -351,7 +351,757 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="106" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="110" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a2de912b8dad9a9fdec8fc95dd4cd3287" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, function&lt; void(error_code, size_t, ip_address)&gt; handler)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, <ref refid="classip__address" kindref="compound">ip_address</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步接收数据报 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes, ip_address sender)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+异步等待接收UDP数据报，返回发送方地址。 handler 在 <ref refid="classio__context_1a495e72fb34e3758f161fbedf6a805c76" kindref="member">io_context::run()</ref> 线程中执行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="121" column="10"/>
+        <referencedby refid="classudp__socket_1a0d69e463cee5e01d5ac25b84c21329de" compoundref="udp__socket_8hpp" startline="188" endline="191">async_receive_from</referencedby>
+        <referencedby refid="classudp__socket_1aa520745638351e780427127552d018b0" compoundref="udp__socket_8hpp" startline="167" endline="169">async_receive_from</referencedby>
+        <referencedby refid="classudp__socket_1a781b25265c38c777ae04f3b3a4c192e0" compoundref="udp__socket_8hpp" startline="200" endline="204">async_receive_from</referencedby>
+        <referencedby refid="classudp__socket_1a6990a71f2fcecde502aff1faf7ae3a1c" compoundref="udp__socket_8hpp" startline="177" endline="181">async_receive_from</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a5466ba6d4305728307bdf42dae6780e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, cancellation_slot &amp;slot, function&lt; void(error_code, size_t, ip_address)&gt; handler)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, <ref refid="classip__address" kindref="compound">ip_address</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步接收数据报（带取消槽） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes, ip_address sender) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="131" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a955290882ddd4236d5519bae69d4b98f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步发送数据报 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_sent)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+异步向指定端点发送UDP数据报。 handler 在 <ref refid="classio__context_1a495e72fb34e3758f161fbedf6a805c76" kindref="member">io_context::run()</ref> 线程中执行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="144" column="10"/>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <referencedby refid="classudp__socket_1a235b1e02496976cb4f2b1383f6f337f8" compoundref="udp__socket_8hpp" startline="240" endline="243">async_send_to</referencedby>
+        <referencedby refid="classudp__socket_1a4696eb096705c2b1216423dd5dfa27c6" compoundref="udp__socket_8hpp" startline="216" endline="218">async_send_to</referencedby>
+        <referencedby refid="classudp__socket_1a94c9fb8ae49b882ce0ee11e314e38a03" compoundref="udp__socket_8hpp" startline="253" endline="258">async_send_to</referencedby>
+        <referencedby refid="classudp__socket_1a2fd7988d72f98bcbf7ab4a48a8b8001a" compoundref="udp__socket_8hpp" startline="227" endline="232">async_send_to</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1abb09735e5d50f6856336905a83abf9f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, cancellation_slot &amp;slot, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步发送数据报（带取消槽） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_sent) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="155" column="10"/>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1aa520745638351e780427127552d018b0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Token</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Token &gt;, <ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, <ref refid="classip__address" kindref="compound">ip_address</ref>)&gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, Token &amp;&amp;token)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>Token &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>异步接收数据报—任意可调用对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型，需满足 void(error_code, size_t, ip_address) 签名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="167" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="167" bodyend="169"/>
+        <references refid="classudp__socket_1a2de912b8dad9a9fdec8fc95dd4cd3287">async_receive_from</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a6990a71f2fcecde502aff1faf7ae3a1c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, use_future_t)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__future__t" kindref="compound">use_future_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步接收数据报—use_future </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classfuture" kindref="compound">future&lt;pair&lt;size_t, ip_address&gt;&gt;</ref> 接收字节数和发送方地址 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="177" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="177" bodyend="181"/>
+        <references refid="classudp__socket_1a2de912b8dad9a9fdec8fc95dd4cd3287">async_receive_from</references>
+        <references refid="group___completion_tokens_1ga1e645f41f2c2ddff978c87c8c91b18c6" compoundref="async__result_8hpp" startline="37" endline="37">use_future</references>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a0d69e463cee5e01d5ac25b84c21329de" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, detached_t)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structdetached__t" kindref="compound">detached_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步接收数据报—detached（即发即忘） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="188" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="188" bodyend="191"/>
+        <references refid="classudp__socket_1a2de912b8dad9a9fdec8fc95dd4cd3287">async_receive_from</references>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a781b25265c38c777ae04f3b3a4c192e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, use_awaitable_t)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__awaitable__t" kindref="compound">use_awaitable_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步接收数据报—use_awaitable </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classawaitable" kindref="compound">awaitable&lt;pair&lt;size_t, ip_address&gt;&gt;</ref> 可协程等待的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="200" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="200" bodyend="204"/>
+        <references refid="classudp__socket_1a2de912b8dad9a9fdec8fc95dd4cd3287">async_receive_from</references>
+        <references refid="group___completion_tokens_1ga9fe3f0a59b8db368024b61ce6215b3b4" compoundref="use__awaitable_8hpp" startline="27" endline="27">use_awaitable</references>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a4696eb096705c2b1216423dd5dfa27c6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Token</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Token &gt;, <ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, Token &amp;&amp;token)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type>Token &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>异步发送数据报—任意可调用对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型，需满足 void(error_code, size_t) 签名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="216" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="216" bodyend="218"/>
+        <references refid="classudp__socket_1a955290882ddd4236d5519bae69d4b98f">async_send_to</references>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a2fd7988d72f98bcbf7ab4a48a8b8001a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, use_future_t)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__future__t" kindref="compound">use_future_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步发送数据报—use_future </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classfuture" kindref="compound">future&lt;size_t&gt;</ref> 发送字节数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="227" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="227" bodyend="232"/>
+        <references refid="classudp__socket_1a955290882ddd4236d5519bae69d4b98f">async_send_to</references>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___completion_tokens_1ga1e645f41f2c2ddff978c87c8c91b18c6" compoundref="async__result_8hpp" startline="37" endline="37">use_future</references>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a235b1e02496976cb4f2b1383f6f337f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, detached_t)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="structdetached__t" kindref="compound">detached_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步发送数据报—detached（即发即忘） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="240" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="240" bodyend="243"/>
+        <references refid="classudp__socket_1a955290882ddd4236d5519bae69d4b98f">async_send_to</references>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a94c9fb8ae49b882ce0ee11e314e38a03" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, use_awaitable_t)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__awaitable__t" kindref="compound">use_awaitable_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步发送数据报—use_awaitable </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classawaitable" kindref="compound">awaitable&lt;size_t&gt;</ref> 可协程等待的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="253" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="253" bodyend="258"/>
+        <references refid="classudp__socket_1a955290882ddd4236d5519bae69d4b98f">async_send_to</references>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___completion_tokens_1ga9fe3f0a59b8db368024b61ce6215b3b4" compoundref="use__awaitable_8hpp" startline="27" endline="27">use_awaitable</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -407,9 +1157,21 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="37" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="37" bodyend="107"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="41" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="41" bodyend="260"/>
     <listofallmembers>
       <member refid="classip__socket_1ad0d10499d585a7074c06152831e3dd88" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>address_family</name></member>
+      <member refid="classudp__socket_1a2de912b8dad9a9fdec8fc95dd4cd3287" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classudp__socket_1a5466ba6d4305728307bdf42dae6780e1" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classudp__socket_1aa520745638351e780427127552d018b0" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classudp__socket_1a6990a71f2fcecde502aff1faf7ae3a1c" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classudp__socket_1a0d69e463cee5e01d5ac25b84c21329de" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classudp__socket_1a781b25265c38c777ae04f3b3a4c192e0" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classudp__socket_1a955290882ddd4236d5519bae69d4b98f" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_send_to</name></member>
+      <member refid="classudp__socket_1abb09735e5d50f6856336905a83abf9f7" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_send_to</name></member>
+      <member refid="classudp__socket_1a4696eb096705c2b1216423dd5dfa27c6" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_send_to</name></member>
+      <member refid="classudp__socket_1a2fd7988d72f98bcbf7ab4a48a8b8001a" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_send_to</name></member>
+      <member refid="classudp__socket_1a235b1e02496976cb4f2b1383f6f337f8" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_send_to</name></member>
+      <member refid="classudp__socket_1a94c9fb8ae49b882ce0ee11e314e38a03" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>async_send_to</name></member>
       <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>bind</name></member>
       <member refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" prot="public" virt="virtual"><scope>udp_socket</scope><name>close</name></member>
       <member refid="classip__socket_1a50186a110e9b4e5c67aac5a23e021ace" prot="public" virt="virtual"><scope>udp_socket</scope><name>connect</name></member>
@@ -437,7 +1199,7 @@
       <member refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>listen</name></member>
       <member refid="classsocket__base_1a1d9ff8b37d502077065ad505098f1c10" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>local_endpoint</name></member>
       <member refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>native_handle</name></member>
-      <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>native_handle_type</name></member>
+      <member refid="classsocket__base_1ab609d0c1ee77f66e90cb73c57baf343f" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>native_handle_type</name></member>
       <member refid="classsocket__base_1a3b85c967d07f91b5e45349495e2a1481" prot="protected" virt="non-virtual"><scope>udp_socket</scope><name>nonblocking_</name></member>
       <member refid="classudp__socket_1a7ca045fda3399c34667f31de840e7683" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>open</name></member>
       <member refid="classsocket__base_1a27acf9f7219de7e4462af8744e44137a" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>udp_socket</scope><name>open</name></member>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['项目简介_0',['📖 项目简介',['../md__m_a_i_n_p_a_g_e.html#autotoc_md2',1,'']]]
+  ['集合样式_0',['集合样式',['../group___yaml_config.html#collection_styles',1,'']]],
+  ['集合算法_1',['集合算法',['../group___set_algorithms.html',1,'']]]
 ];

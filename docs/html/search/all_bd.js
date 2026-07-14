@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['边界查找算法_0',['边界查找算法',['../group___bound_algorithms.html',1,'']]]
+  ['请求方法_0',['HTTP 请求方法',['../group___h_t_t_p.html#http_methods',1,'']]]
 ];

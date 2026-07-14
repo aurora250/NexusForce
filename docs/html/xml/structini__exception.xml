@@ -4,28 +4,11 @@
     <compoundname>ini_exception</compoundname>
     <basecompoundref refid="structvalue__exception" prot="public" virt="non-virtual">value_exception</basecompoundref>
     <includes refid="ini__value_8hpp" local="no">ini_value.hpp</includes>
-    <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="structini__exception_1a7c13de6832767db3f04b348a80bc6cc0" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>auto</type>
-        <definition>auto ini_exception::static_type</definition>
-        <argsstring></argsstring>
-        <name>static_type</name>
-        <qualifiedname>ini_exception::static_type</qualifiedname>
-        <initializer>= &quot;ini_exception&quot;</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="35" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="35" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structini__exception_1afead2ea1d41e2535005864fb6dfddfd5" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structini__exception_1a90535d92393137d0626bffaca00a1904" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>ini_exception::ini_exception</definition>
-        <argsstring>(const char *info=&quot;INI Operation Failed.&quot;, const char *type=static_type, const int code=0) noexcept</argsstring>
+        <argsstring>(const char *info=&quot;INI Operation Failed.&quot;) noexcept</argsstring>
         <name>ini_exception</name>
         <qualifiedname>ini_exception::ini_exception</qualifiedname>
         <param>
@@ -33,23 +16,13 @@
           <declname>info</declname>
           <defval>&quot;INI Operation Failed.&quot;</defval>
         </param>
-        <param>
-          <type>const char *</type>
-          <declname>type</declname>
-          <defval>static_type</defval>
-        </param>
-        <param>
-          <type>const int</type>
-          <declname>code</declname>
-          <defval>0</defval>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="27" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="27" bodyend="29"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="27" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="27" bodyend="28"/>
       </memberdef>
       <memberdef kind="function" id="structini__exception_1a70364825a7a4acbb8eba5cbe9d29c650" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -67,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="31" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="31" bodyend="32"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="30" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="30" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="structini__exception_1a863c93773c92c21bda6d4e064ebbe5e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -81,7 +54,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="34" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="33" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structini__exception_1a81c0bcf92aa3b437bb451f3018433f26" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const char *</type>
+        <definition>const char * ini_exception::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>ini_exception::type</qualifiedname>
+        <reimplements refid="structexception_1a2f7dcc6349b3ef905ebb76859aa8abe6">type</reimplements>
+        <briefdescription>
+<para>获取异常类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="35" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="35" bodyend="35"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -127,23 +119,21 @@
     </collaborationgraph>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="26" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="26" bodyend="36"/>
     <listofallmembers>
-      <member refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>code</name></member>
-      <member refid="structexception_1a33710bd2e564614575128e2c3de94883" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>exception</name></member>
+      <member refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>exception</name></member>
       <member refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>exception</name></member>
       <member refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>exception</name></member>
       <member refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>exception</name></member>
-      <member refid="structini__exception_1afead2ea1d41e2535005864fb6dfddfd5" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>ini_exception</name></member>
+      <member refid="structini__exception_1a90535d92393137d0626bffaca00a1904" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>ini_exception</name></member>
       <member refid="structini__exception_1a70364825a7a4acbb8eba5cbe9d29c650" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>ini_exception</name></member>
       <member refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>operator=</name></member>
       <member refid="structexception_1a709d705f97cbad7d531dfb5023107536" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>operator=</name></member>
-      <member refid="structini__exception_1a7c13de6832767db3f04b348a80bc6cc0" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>static_type</name></member>
-      <member refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>type</name></member>
-      <member refid="structvalue__exception_1a93d98834875dddd76676f984d49dbc8e" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>value_exception</name></member>
+      <member refid="structini__exception_1a81c0bcf92aa3b437bb451f3018433f26" prot="public" virt="virtual"><scope>ini_exception</scope><name>type</name></member>
+      <member refid="structvalue__exception_1aae3013235b2ce148581a0134a056b2db" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>value_exception</name></member>
       <member refid="structvalue__exception_1a62e42e4366446f308bddac122dc685ca" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>value_exception</name></member>
-      <member refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>what</name></member>
+      <member refid="structexception_1ae5dc04391190559c19adcf269cab48e2" prot="public" virt="virtual"><scope>ini_exception</scope><name>what</name></member>
       <member refid="structexception_1a80249b2b108c9b913dc7144839092a2b" prot="public" virt="virtual"><scope>ini_exception</scope><name>~exception</name></member>
       <member refid="structini__exception_1a863c93773c92c21bda6d4e064ebbe5e1" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>~ini_exception</name></member>
-      <member refid="structvalue__exception_1a7ed7431697b28ae8f8a7bfdd919c4795" prot="public" virt="virtual"><scope>ini_exception</scope><name>~value_exception</name></member>
+      <member refid="structvalue__exception_1a23c6772857ea279952af98d207fb115b" prot="public" virt="non-virtual"><scope>ini_exception</scope><name>~value_exception</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

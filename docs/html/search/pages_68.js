@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['稳定性说明_0',['稳定性说明',['../group___sort_algorithms.html#stability_notes',1,'']]]
+  ['码点范围定义_0',['Unicode 码点范围定义',['../group___code_point.html#unicode_ranges',1,'']]],
+  ['码点验证规则_1',['码点验证规则',['../group___code_point.html#validation_rules',1,'']]]
 ];

@@ -15,7 +15,7 @@ var searchData=
   ['line_12',['line',['../structsource__loc.html#a9a3bc6bf75bbfd9c053ab31ea161e209',1,'source_loc']]],
   ['link_5f_13',['link_',['../structmysql__connect.html#a42d08327b676836ebdcb608eb1877245',1,'mysql_connect::link_'],['../classpgsql__connect.html#a302469e924ae30db8d91181b635d164b',1,'pgsql_connect::link_'],['../structsqlite__connect.html#acd145309c79e48c14d43b42788f2d459',1,'sqlite_connect::link_']]],
   ['lo_14',['lo',['../structuint128__t.html#ac14cbc19a3001f6d2e2908170b0efb87',1,'uint128_t::lo'],['../structint128__t.html#a20243839dd2e777d901f9cfe26ae9397',1,'int128_t::lo']]],
-  ['loc_15',['loc',['../structlog__event.html#a7b77dc31e7b2c9c695e2b60aebcd6e2d',1,'log_event']]],
+  ['loc_15',['loc',['../structformat__options.html#a5d433db61de76282b49f9e634e6730b5',1,'format_options::loc'],['../structlog__event.html#a7b77dc31e7b2c9c695e2b60aebcd6e2d',1,'log_event::loc']]],
   ['lock_5fdefer_16',['lock_defer',['../group___mutex.html#ga54c094aed39e16aa8bf98fa19773aacb',1,'mutex.hpp']]],
   ['lock_5fquiet_17',['lock_quiet',['../group___mutex.html#gaba8f17a5bb1a7563d832996c01af66ea',1,'mutex.hpp']]],
   ['log_5fbody_18',['log_body',['../classlogging__filter.html#a30150d6079684333ad4cd31d1f900646',1,'logging_filter']]],

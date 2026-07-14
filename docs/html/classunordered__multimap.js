@@ -50,7 +50,7 @@ var classunordered__multimap =
     [ "erase", "classunordered__multimap.html#a2d1c1c33fe12e7511598e27b710402d0", null ],
     [ "find", "classunordered__multimap.html#a5140e23cb7cfa2d77ca13ebcc7fe3c8e", null ],
     [ "find", "classunordered__multimap.html#ac0fbc687027f8c4e5f3c3013e8f7cf66", null ],
-    [ "hash_func", "classunordered__multimap.html#a63aa6fdb0b1d0bf374e3ccbfe3dce70f", null ],
+    [ "hash_function", "classunordered__multimap.html#a540849ba1e4d4fd6bfe008ce5f8ff0d7", null ],
     [ "insert", "classunordered__multimap.html#a35f66d7afc952e4e482d42f618f2f418", null ],
     [ "insert", "classunordered__multimap.html#a34fb5dd50003d3704904cd3e0a6b726d", null ],
     [ "insert", "classunordered__multimap.html#a5377c211e163e4839921694fb7ec4697", null ],

@@ -118,361 +118,360 @@ $(function(){initNavTree('utility_2any_8hpp_source.html','',''); });
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span></div>
 <div class="foldopen" id="foldopen00049" data-start="{" data-end="};">
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structanycast__exception.html">   49</a></span><span class="keyword">struct </span>anycast_exception final : typecast_exception {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">explicit</span> anycast_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = <span class="stringliteral">&quot;Cast From any Type Failed.&quot;</span>, <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="structexception.html#a726d6793aa2121f2a48f502d690f1a11">type</a> = static_type,</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                               <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">code</a> = 0) noexcept :</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    typecast_exception(info, <a class="code hl_function" href="structexception.html#a726d6793aa2121f2a48f502d690f1a11">type</a>, <a class="code hl_function" href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">code</a>) {}</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">explicit</span> anycast_exception(<span class="keyword">const</span> <a class="code hl_function" href="structexception.html#a33710bd2e564614575128e2c3de94883">exception</a>&amp; e) :</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    typecast_exception(e) {}</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    ~anycast_exception() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> static_type = <span class="stringliteral">&quot;anycast_exception&quot;</span>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>};</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">explicit</span> anycast_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = <span class="stringliteral">&quot;Cast From any Type Failed.&quot;</span>) noexcept :</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    typecast_exception(info) {}</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">explicit</span> anycast_exception(<span class="keyword">const</span> <a class="code hl_function" href="structexception.html#ab5edb0e5cd38ed6c450413eb52d95fed">exception</a>&amp; e) :</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    typecast_exception(e) {}</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    ~anycast_exception() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="structanycast__exception.html#a5f74a479bdce692a632f69a529b8351f">   58</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="structanycast__exception.html#a5f74a479bdce692a632f69a529b8351f">type</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;anycast_exception&quot;</span>; }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>};</div>
 </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> <span class="comment">// Exceptions</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span></div>
-<div class="foldopen" id="foldopen00077" data-start="{" data-end="};">
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classany.html">   77</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a> {</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">union </span>storage_internal {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        storage_internal() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        storage_internal(<span class="keyword">const</span> storage_internal&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        storage_internal&amp; <a class="code hl_function" href="classany.html#a63ad8674eef8435b4e3a13cb065f4c79">operator=</a>(<span class="keyword">const</span> storage_internal&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordtype">void</span>* ptr_ = <span class="keyword">nullptr</span>;                                    </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <a class="code hl_typedef" href="group___alignment.html#gae1bfcd9586bbb9936d7eb2d2ea32bc8e">aligned_storage_t</a>&lt;<span class="keyword">sizeof</span>(ptr_), <span class="keyword">alignof</span>(<span class="keywordtype">void</span>*)&gt; buffer_; </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    };</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keyword">enum</span> any_operation {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        ACCESS,        </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        GET_TYPE_INFO, </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        COPY,          </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        DESTROY,       </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        SWAP           </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    };</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">union </span>ArgT {</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordtype">void</span>* obj_ptr_;                  </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keyword">const</span> std::type_info* type_ptr_; </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>* any_ptr_;                   </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    };</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span></div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keyword">struct </span>internal_manage {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> manage(any_operation op, <span class="keyword">const</span> <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>* value, ArgT* arg);</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> create(storage_internal&amp; storage, Args&amp;&amp;... args) {</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <span class="keywordtype">void</span>* ptr = &amp;storage.buffer_;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <span class="keyword">new</span> (ptr) T(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        }</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span></div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="keyword">static</span> T* access(<span class="keyword">const</span> storage_internal&amp; storage) {</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <span class="keyword">const</span> <span class="keywordtype">void</span>* ptr = &amp;storage.buffer_;</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<span class="keyword">const_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr));</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        }</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    };</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span></div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keyword">struct </span>external_manage {</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> manage(any_operation op, <span class="keyword">const</span> <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>* value, ArgT* arg);</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span></div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> create(storage_internal&amp; storage, Args&amp;&amp;... args) {</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            storage.ptr_ = <span class="keyword">new</span> T(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        }</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span></div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keyword">static</span> T* access(<span class="keyword">const</span> storage_internal&amp; storage) { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(storage.ptr_); }</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    };</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span></div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keyword">using </span>manage_t = <a class="code hl_typedef" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t&lt;is_nothrow_move_constructible_v&lt;T&gt;</a> &amp;&amp; <span class="keyword">sizeof</span>(T) &lt;= <span class="keyword">sizeof</span>(storage_internal) &amp;&amp;</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>                                           <span class="keyword">alignof</span>(T) &lt;= <span class="keyword">alignof</span>(storage_internal),</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>                                   internal_manage&lt;T&gt;, external_manage&lt;T&gt;&gt;;</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keyword">using </span>manage_func = void (*)(any_operation, <span class="keyword">const</span> <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>*, ArgT*); </div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    manage_func manage_ = <span class="keyword">nullptr</span>; </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    storage_internal storage_;     </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keyword">friend</span> <span class="keyword">const</span> T* inner::__any_cast_aux_dispatch_impl(<span class="keyword">const</span> <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>* value, inner::any_cast_true_tag <span class="comment">/*unused*/</span>) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span></div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> Manager = manage_t&lt;T&gt;&gt;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordtype">void</span> try_emplace(Args&amp;&amp;... args) {</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <a class="code hl_function" href="classany.html#a6c4a11253f803d135685e115cf7054d8">any::reset</a>();</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        Manager::create(storage_, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        manage_ = &amp;Manager::manage;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    }</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span></div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> Manager = manage_t&lt;T&gt;&gt;</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keywordtype">void</span> try_emplace(std::initializer_list&lt;U&gt; ilist, Args&amp;&amp;... args) {</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <a class="code hl_function" href="classany.html#a6c4a11253f803d135685e115cf7054d8">any::reset</a>();</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        Manager::create(storage_, ilist, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        manage_ = &amp;Manager::manage;</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    }</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno"><a class="line" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">  248</a></span>    <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>() noexcept = default;</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span></div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="classany.html#a34a926505ba320df0e4ae2f001ed858f">  254</a></span>    <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>(const <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; other);</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span></div>
-<div class="foldopen" id="foldopen00262" data-start="{" data-end="}">
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno"><a class="line" href="classany.html#a63ad8674eef8435b4e3a13cb065f4c79">  262</a></span>    <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; operator=(const <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; other) {</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        *<span class="keyword">this</span> = <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>(other);</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> <span class="comment">// Exceptions</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span></div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="};">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classany.html">   76</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a> {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">union </span>storage_internal {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        storage_internal() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        storage_internal(<span class="keyword">const</span> storage_internal&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        storage_internal&amp; <a class="code hl_function" href="classany.html#a63ad8674eef8435b4e3a13cb065f4c79">operator=</a>(<span class="keyword">const</span> storage_internal&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordtype">void</span>* ptr_ = <span class="keyword">nullptr</span>;                                    </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <a class="code hl_typedef" href="group___alignment.html#gae1bfcd9586bbb9936d7eb2d2ea32bc8e">aligned_storage_t</a>&lt;<span class="keyword">sizeof</span>(ptr_), <span class="keyword">alignof</span>(<span class="keywordtype">void</span>*)&gt; buffer_; </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    };</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">enum</span> any_operation {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        ACCESS,        </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        GET_TYPE_INFO, </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        COPY,          </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        DESTROY,       </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        SWAP           </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    };</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keyword">union </span>ArgT {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordtype">void</span>* obj_ptr_;                  </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keyword">const</span> std::type_info* type_ptr_; </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>* any_ptr_;                   </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    };</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keyword">struct </span>internal_manage {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> manage(any_operation op, <span class="keyword">const</span> <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>* value, ArgT* arg);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> create(storage_internal&amp; storage, Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="keywordtype">void</span>* ptr = &amp;storage.buffer_;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <span class="keyword">new</span> (ptr) T(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        }</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keyword">static</span> T* access(<span class="keyword">const</span> storage_internal&amp; storage) {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            <span class="keyword">const</span> <span class="keywordtype">void</span>* ptr = &amp;storage.buffer_;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<span class="keyword">const_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr));</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    };</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keyword">struct </span>external_manage {</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> manage(any_operation op, <span class="keyword">const</span> <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>* value, ArgT* arg);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> create(storage_internal&amp; storage, Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            storage.ptr_ = <span class="keyword">new</span> T(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        }</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keyword">static</span> T* access(<span class="keyword">const</span> storage_internal&amp; storage) { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(storage.ptr_); }</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    };</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keyword">using </span>manage_t = <a class="code hl_typedef" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t&lt;is_nothrow_move_constructible_v&lt;T&gt;</a> &amp;&amp; <span class="keyword">sizeof</span>(T) &lt;= <span class="keyword">sizeof</span>(storage_internal) &amp;&amp;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>                                           <span class="keyword">alignof</span>(T) &lt;= <span class="keyword">alignof</span>(storage_internal),</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>                                   internal_manage&lt;T&gt;, external_manage&lt;T&gt;&gt;;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keyword">using </span>manage_func = void (*)(any_operation, <span class="keyword">const</span> <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>*, ArgT*); </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    manage_func manage_ = <span class="keyword">nullptr</span>; </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    storage_internal storage_;     </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keyword">friend</span> <span class="keyword">const</span> T* inner::__any_cast_aux_dispatch_impl(<span class="keyword">const</span> <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>* value, inner::any_cast_true_tag <span class="comment">/*unused*/</span>) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> Manager = manage_t&lt;T&gt;&gt;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordtype">void</span> try_emplace(Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        <a class="code hl_function" href="classany.html#a6c4a11253f803d135685e115cf7054d8">any::reset</a>();</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        Manager::create(storage_, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        manage_ = &amp;Manager::manage;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    }</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> Manager = manage_t&lt;T&gt;&gt;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordtype">void</span> try_emplace(std::initializer_list&lt;U&gt; ilist, Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <a class="code hl_function" href="classany.html#a6c4a11253f803d135685e115cf7054d8">any::reset</a>();</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        Manager::create(storage_, ilist, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        manage_ = &amp;Manager::manage;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    }</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno"><a class="line" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">  247</a></span>    <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>() noexcept = default;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="classany.html#a34a926505ba320df0e4ae2f001ed858f">  253</a></span>    <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>(const <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; other);</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span></div>
+<div class="foldopen" id="foldopen00261" data-start="{" data-end="}">
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno"><a class="line" href="classany.html#a63ad8674eef8435b4e3a13cb065f4c79">  261</a></span>    <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; operator=(const <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; other) {</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        *<span class="keyword">this</span> = <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>(other);</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    }</div>
 </div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span></div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno"><a class="line" href="classany.html#a901fcf91bdb368a4b722f87193d60661">  271</a></span>    <a class="code hl_function" href="classany.html#a901fcf91bdb368a4b722f87193d60661">any</a>(<a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span></div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno"><a class="line" href="classany.html#a3fbaed230373554a33d116ab11b15dc9">  278</a></span>    <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; <a class="code hl_function" href="classany.html#a3fbaed230373554a33d116ab11b15dc9">operator=</a>(<a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span></div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> VT = decay_t&lt;T&gt;, <span class="keyword">typename</span> Manager = manage_t&lt;VT&gt;,</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>              enable_if_t&lt;is_copy_constructible_v&lt;VT&gt; &amp;&amp; !is_same_v&lt;inplace_construct_tag, VT&gt; &amp;&amp; !is_same_v&lt;VT, any&gt;,</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>                          <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="foldopen" id="foldopen00288" data-start="{" data-end="}">
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="classany.html#a3b2824e36b53a37792fc67315c866273">  288</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classany.html#a3b2824e36b53a37792fc67315c866273">any</a>(T&amp;&amp; value) :</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    manage_(&amp;Manager::manage) {</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        Manager::create(storage_, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;T&gt;</a>(value));</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    }</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno"><a class="line" href="classany.html#a901fcf91bdb368a4b722f87193d60661">  270</a></span>    <a class="code hl_function" href="classany.html#a901fcf91bdb368a4b722f87193d60661">any</a>(<a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="classany.html#a3fbaed230373554a33d116ab11b15dc9">  277</a></span>    <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; <a class="code hl_function" href="classany.html#a3fbaed230373554a33d116ab11b15dc9">operator=</a>(<a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span></div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> VT = decay_t&lt;T&gt;, <span class="keyword">typename</span> Manager = manage_t&lt;VT&gt;,</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>              enable_if_t&lt;is_copy_constructible_v&lt;VT&gt; &amp;&amp; !is_same_v&lt;inplace_construct_tag, VT&gt; &amp;&amp; !is_same_v&lt;VT, any&gt;,</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>                          <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00287" data-start="{" data-end="}">
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno"><a class="line" href="classany.html#a3b2824e36b53a37792fc67315c866273">  287</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classany.html#a3b2824e36b53a37792fc67315c866273">any</a>(T&amp;&amp; value) :</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    manage_(&amp;Manager::manage) {</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        Manager::create(storage_, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;T&gt;</a>(value));</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    }</div>
 </div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span></div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> VT = decay_t&lt;T&gt;,</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>              enable_if_t&lt;!is_same_v&lt;VT, any&gt; &amp;&amp; is_copy_constructible_v&lt;VT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="foldopen" id="foldopen00301" data-start="{" data-end="}">
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno"><a class="line" href="classany.html#ad804fa85a2aa3246403e58906a8c0e63">  301</a></span>    <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; <a class="code hl_function" href="classany.html#ad804fa85a2aa3246403e58906a8c0e63">operator=</a>(T&amp;&amp; value) {</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        *<span class="keyword">this</span> = <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;T&gt;</a>(value));</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    }</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span></div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> VT = decay_t&lt;T&gt;,</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>              enable_if_t&lt;!is_same_v&lt;VT, any&gt; &amp;&amp; is_copy_constructible_v&lt;VT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00300" data-start="{" data-end="}">
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno"><a class="line" href="classany.html#ad804fa85a2aa3246403e58906a8c0e63">  300</a></span>    <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; <a class="code hl_function" href="classany.html#ad804fa85a2aa3246403e58906a8c0e63">operator=</a>(T&amp;&amp; value) {</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        *<span class="keyword">this</span> = <a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;T&gt;</a>(value));</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    }</div>
 </div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span></div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> VT = <a class="code hl_typedef" href="group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8">decay_t&lt;T&gt;</a>, <span class="keyword">typename</span> Manager = manage_t&lt;VT&gt;,</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>              <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;conjunction_v&lt;is_copy_constructible&lt;VT&gt;</a>, <a class="code hl_struct" href="structis__constructible.html">is_constructible</a>&lt;VT, Args&amp;&amp;...&gt;&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="foldopen" id="foldopen00314" data-start="{" data-end="}">
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="classany.html#af419c43ef848b665f2a381cdfa41e93a">  314</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classany.html#af419c43ef848b665f2a381cdfa41e93a">any</a>(<a class="code hl_struct" href="structpass__template__construct__tag.html">pass_template_construct_tag&lt;T&gt;</a> <span class="comment">/*unused*/</span>, Args&amp;&amp;... args) :</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    manage_(&amp;Manager::manage) {</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        Manager::create(storage_, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    }</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> VT = <a class="code hl_typedef" href="group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8">decay_t&lt;T&gt;</a>, <span class="keyword">typename</span> Manager = manage_t&lt;VT&gt;,</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>              <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;conjunction_v&lt;is_copy_constructible&lt;VT&gt;</a>, <a class="code hl_struct" href="structis__constructible.html">is_constructible</a>&lt;VT, Args&amp;&amp;...&gt;&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00313" data-start="{" data-end="}">
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno"><a class="line" href="classany.html#af419c43ef848b665f2a381cdfa41e93a">  313</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classany.html#af419c43ef848b665f2a381cdfa41e93a">any</a>(<a class="code hl_struct" href="structpass__template__construct__tag.html">pass_template_construct_tag&lt;T&gt;</a> <span class="comment">/*unused*/</span>, Args&amp;&amp;... args) :</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    manage_(&amp;Manager::manage) {</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        Manager::create(storage_, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    }</div>
 </div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> VT = <a class="code hl_typedef" href="group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8">decay_t&lt;T&gt;</a>, <span class="keyword">typename</span> Manager = manage_t&lt;VT&gt;,</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>              <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;conjunction_v&lt;is_copy_constructible&lt;VT&gt;</a>,</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>                                        <a class="code hl_struct" href="structis__constructible.html">is_constructible&lt;VT, std::initializer_list&lt;U&gt;</a>&amp;, Args&amp;&amp;...&gt;&gt;,</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>                          <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classany.html">any</a>(<a class="code hl_struct" href="structpass__template__construct__tag.html">pass_template_construct_tag&lt;T&gt;</a> <span class="comment">/*unused*/</span>, std::initializer_list&lt;U&gt; ilist, Args&amp;&amp;... args) :</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    manage_(&amp;Manager::manage) {</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        Manager::create(storage_, ilist, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    }</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span></div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno"><a class="line" href="classany.html#a2984bd733b273daa0a9ad72df9af4b21">  331</a></span>    <a class="code hl_function" href="classany.html#a2984bd733b273daa0a9ad72df9af4b21">~any</a>() { <a class="code hl_enumvalue" href="group___s_q_lite3.html#ggaec2418c4d34710f16a33f7e4aba24ad1a86266ee937d97f812a8e57d22b62ee29">reset</a>(); }</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span></div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> DT = <a class="code hl_typedef" href="group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8">decay_t&lt;T&gt;</a>,</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>              <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;conjunction_v&lt;is_copy_constructible&lt;DT&gt;</a>, <a class="code hl_struct" href="structis__constructible.html">is_constructible</a>&lt;DT, Args&amp;&amp;...&gt;&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="foldopen" id="foldopen00342" data-start="{" data-end="}">
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno"><a class="line" href="classany.html#a18e5610d000fc424d1a3f83dd2bd619c">  342</a></span>    DT&amp; <a class="code hl_function" href="classany.html#a18e5610d000fc424d1a3f83dd2bd619c">emplace</a>(Args&amp;&amp;... args) {</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        any::try_emplace&lt;DT&gt;(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        <span class="keywordflow">return</span> *manage_t&lt;DT&gt;::access(storage_);</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    }</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> VT = <a class="code hl_typedef" href="group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8">decay_t&lt;T&gt;</a>, <span class="keyword">typename</span> Manager = manage_t&lt;VT&gt;,</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>              <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;conjunction_v&lt;is_copy_constructible&lt;VT&gt;</a>,</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>                                        <a class="code hl_struct" href="structis__constructible.html">is_constructible&lt;VT, std::initializer_list&lt;U&gt;</a>&amp;, Args&amp;&amp;...&gt;&gt;,</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>                          <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classany.html">any</a>(<a class="code hl_struct" href="structpass__template__construct__tag.html">pass_template_construct_tag&lt;T&gt;</a> <span class="comment">/*unused*/</span>, std::initializer_list&lt;U&gt; ilist, Args&amp;&amp;... args) :</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    manage_(&amp;Manager::manage) {</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        Manager::create(storage_, ilist, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    }</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span></div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="classany.html#a2984bd733b273daa0a9ad72df9af4b21">  330</a></span>    <a class="code hl_function" href="classany.html#a2984bd733b273daa0a9ad72df9af4b21">~any</a>() { <a class="code hl_enumvalue" href="group___s_q_lite3.html#ggaec2418c4d34710f16a33f7e4aba24ad1a86266ee937d97f812a8e57d22b62ee29">reset</a>(); }</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span></div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> DT = <a class="code hl_typedef" href="group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8">decay_t&lt;T&gt;</a>,</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>              <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;conjunction_v&lt;is_copy_constructible&lt;DT&gt;</a>, <a class="code hl_struct" href="structis__constructible.html">is_constructible</a>&lt;DT, Args&amp;&amp;...&gt;&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00341" data-start="{" data-end="}">
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno"><a class="line" href="classany.html#a18e5610d000fc424d1a3f83dd2bd619c">  341</a></span>    DT&amp; <a class="code hl_function" href="classany.html#a18e5610d000fc424d1a3f83dd2bd619c">emplace</a>(Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        any::try_emplace&lt;DT&gt;(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        <span class="keywordflow">return</span> *manage_t&lt;DT&gt;::access(storage_);</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    }</div>
 </div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span></div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> DT = <a class="code hl_typedef" href="group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8">decay_t&lt;T&gt;</a>,</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>              <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;conjunction_v&lt;is_copy_constructible&lt;DT&gt;</a>,</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                                        <a class="code hl_struct" href="structis__constructible.html">is_constructible&lt;DT, std::initializer_list&lt;U&gt;</a>&amp;, Args&amp;&amp;...&gt;&gt;,</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>                          <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="foldopen" id="foldopen00360" data-start="{" data-end="}">
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno"><a class="line" href="classany.html#aea9b89f1c3bc553cfd72245f42b9cf39">  360</a></span>    DT&amp; <a class="code hl_function" href="classany.html#aea9b89f1c3bc553cfd72245f42b9cf39">emplace</a>(std::initializer_list&lt;U&gt; ilist, Args&amp;&amp;... args) {</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        any::try_emplace&lt;DT, U&gt;(ilist, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        <span class="keywordflow">return</span> *manage_t&lt;DT&gt;::access(storage_);</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    }</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span></div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U, <span class="keyword">typename</span>... Args, <span class="keyword">typename</span> DT = <a class="code hl_typedef" href="group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8">decay_t&lt;T&gt;</a>,</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>              <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;conjunction_v&lt;is_copy_constructible&lt;DT&gt;</a>,</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>                                        <a class="code hl_struct" href="structis__constructible.html">is_constructible&lt;DT, std::initializer_list&lt;U&gt;</a>&amp;, Args&amp;&amp;...&gt;&gt;,</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                          <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00359" data-start="{" data-end="}">
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno"><a class="line" href="classany.html#aea9b89f1c3bc553cfd72245f42b9cf39">  359</a></span>    DT&amp; <a class="code hl_function" href="classany.html#aea9b89f1c3bc553cfd72245f42b9cf39">emplace</a>(std::initializer_list&lt;U&gt; ilist, Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        any::try_emplace&lt;DT, U&gt;(ilist, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        <span class="keywordflow">return</span> *manage_t&lt;DT&gt;::access(storage_);</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    }</div>
 </div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span></div>
-<div class="foldopen" id="foldopen00368" data-start="{" data-end="}">
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno"><a class="line" href="classany.html#a6c4a11253f803d135685e115cf7054d8">  368</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classany.html#a6c4a11253f803d135685e115cf7054d8">reset</a>() noexcept {</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classany.html#aee1aabbbe7c8e3197605c0f8055e5e5a">has_value</a>()) {</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>            manage_(DESTROY, <span class="keyword">this</span>, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>            manage_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        }</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    }</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span></div>
+<div class="foldopen" id="foldopen00367" data-start="{" data-end="}">
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno"><a class="line" href="classany.html#a6c4a11253f803d135685e115cf7054d8">  367</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classany.html#a6c4a11253f803d135685e115cf7054d8">reset</a>() noexcept {</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classany.html#aee1aabbbe7c8e3197605c0f8055e5e5a">has_value</a>()) {</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>            manage_(DESTROY, <span class="keyword">this</span>, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>            manage_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        }</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    }</div>
 </div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span></div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno"><a class="line" href="classany.html#aee1aabbbe7c8e3197605c0f8055e5e5a">  379</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classany.html#aee1aabbbe7c8e3197605c0f8055e5e5a">has_value</a>() const noexcept { <span class="keywordflow">return</span> manage_ != <span class="keyword">nullptr</span>; }</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span></div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno"><a class="line" href="classany.html#aa2ae58660b9ac895e1dfff84b0c417ea">  385</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> std::type_info&amp; <a class="code hl_function" href="classany.html#aa2ae58660b9ac895e1dfff84b0c417ea">type</a>() const noexcept;</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span></div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno"><a class="line" href="classany.html#a7b22cb0a30ac185ccc24bdc819497088">  391</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classany.html#a7b22cb0a30ac185ccc24bdc819497088">swap</a>(<a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; rhs) noexcept;</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>};</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span></div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno"><a class="line" href="classany.html#aee1aabbbe7c8e3197605c0f8055e5e5a">  378</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classany.html#aee1aabbbe7c8e3197605c0f8055e5e5a">has_value</a>() const noexcept { <span class="keywordflow">return</span> manage_ != <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span></div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno"><a class="line" href="classany.html#aa2ae58660b9ac895e1dfff84b0c417ea">  384</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> std::type_info&amp; <a class="code hl_function" href="classany.html#aa2ae58660b9ac895e1dfff84b0c417ea">type</a>() const noexcept;</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span></div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno"><a class="line" href="classany.html#a7b22cb0a30ac185ccc24bdc819497088">  390</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classany.html#a7b22cb0a30ac185ccc24bdc819497088">swap</a>(<a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>&amp; rhs) noexcept;</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>};</div>
 </div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span></div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>template &lt;typename T, typename... Args,</div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>          <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;<a class="code hl_variable" href="group___type_special_member_function_checks.html#ga123009e89543c37bab698abc5f4221a0">is_constructible_v</a>&lt;<a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>, <a class="code hl_struct" href="structpass__template__construct__tag.html">pass_template_construct_tag</a>&lt;T&gt;, Args...&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="foldopen" id="foldopen00403" data-start="{" data-end="}">
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno"><a class="line" href="group___any.html#gaa10dc2f937bfc4efbd98234e71af0860">  403</a></span><a class="code hl_class" href="classany.html">any</a> <a class="code hl_function" href="group___any.html#gaa10dc2f937bfc4efbd98234e71af0860">make_any</a>(Args&amp;&amp;... args) {</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classany.html">any</a>(<a class="code hl_struct" href="structpass__template__construct__tag.html">pass_template_construct_tag&lt;T&gt;</a>{}, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>}</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span></div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>template &lt;typename T, typename... Args,</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>          <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;<a class="code hl_variable" href="group___type_special_member_function_checks.html#ga123009e89543c37bab698abc5f4221a0">is_constructible_v</a>&lt;<a class="code hl_function" href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any</a>, <a class="code hl_struct" href="structpass__template__construct__tag.html">pass_template_construct_tag</a>&lt;T&gt;, Args...&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00402" data-start="{" data-end="}">
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno"><a class="line" href="group___any.html#gaa10dc2f937bfc4efbd98234e71af0860">  402</a></span><a class="code hl_class" href="classany.html">any</a> <a class="code hl_function" href="group___any.html#gaa10dc2f937bfc4efbd98234e71af0860">make_any</a>(Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classany.html">any</a>(<a class="code hl_struct" href="structpass__template__construct__tag.html">pass_template_construct_tag&lt;T&gt;</a>{}, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>}</div>
 </div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span></div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>NEFORCE_BEGIN_INNER__</div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span> </div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span><span class="keyword">const</span> T* __any_cast_aux_dispatch_impl(<span class="keyword">const</span> any* value, any_cast_true_tag <span class="comment">/*unused*/</span>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>    <span class="keywordflow">if</span> (value-&gt;manage_ == &amp;any::manage_t&lt;U&gt;::manage) {</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(any::manage_t&lt;U&gt;::access(value-&gt;storage_));</div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    }</div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>}</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span> </div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span><span class="keyword">const</span> T* __any_cast_aux_dispatch_impl(<span class="keyword">const</span> any* <span class="comment">/*unused*/</span>, any_cast_false_tag <span class="comment">/*unused*/</span>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>}</div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span> </div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span><span class="keyword">const</span> T* __any_cast_aux_dispatch(<span class="keyword">const</span> any* value) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>    <span class="keyword">using </span>tag = <a class="code hl_typedef" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t</a>&lt;(<a class="code hl_variable" href="group___type_traits_utilities.html#gaa6c6bde5fd020a928e6d7b5fe8db7bb0">is_same_v&lt;decay_t&lt;U&gt;</a>, U&gt; || <a class="code hl_variable" href="group___type_special_member_function_checks.html#ga03f5da2852be4424089f4235ef44dec2">is_copy_constructible_v&lt;U&gt;</a>), any_cast_true_tag,</div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>                              any_cast_false_tag&gt;;</div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>    <span class="keywordflow">return</span> inner::__any_cast_aux_dispatch_impl&lt;T, U&gt;(value, tag{});</div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>}</div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span> </div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, enable_if_t&lt;is_<span class="keywordtype">object</span>_v&lt;T&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span><span class="keyword">const</span> T* __any_cast_aux(<span class="keyword">const</span> any* value) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>    <span class="keywordflow">if</span> (value) {</div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>        <span class="keywordflow">return</span> __any_cast_aux_dispatch&lt;T, remove_cv_t&lt;T&gt;&gt;(value);</div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    }</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>}</div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span> </div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, enable_if_t&lt;!is_<span class="keywordtype">object</span>_v&lt;T&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span><span class="keyword">const</span> T* __any_cast_aux(<span class="keyword">const</span> any* <span class="comment">/*unused*/</span>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>}</div>
-<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span> </div>
-<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>NEFORCE_END_INNER__</div>
-<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span></div>
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00453" data-start="{" data-end="}">
-<div class="line"><a id="l00453" name="l00453"></a><span class="lineno"><a class="line" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">  453</a></span><span class="keyword">const</span> T* <a class="code hl_function" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast</a>(<span class="keyword">const</span> <a class="code hl_class" href="classany.html">any</a>* value) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>    <span class="keywordflow">return</span> inner::__any_cast_aux&lt;T&gt;(value);</div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>}</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span></div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>NEFORCE_BEGIN_INNER__</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span> </div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span><span class="keyword">const</span> T* __any_cast_aux_dispatch_impl(<span class="keyword">const</span> any* value, any_cast_true_tag <span class="comment">/*unused*/</span>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>    <span class="keywordflow">if</span> (value-&gt;manage_ == &amp;any::manage_t&lt;U&gt;::manage) {</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(any::manage_t&lt;U&gt;::access(value-&gt;storage_));</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    }</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>}</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span> </div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span><span class="keyword">const</span> T* __any_cast_aux_dispatch_impl(<span class="keyword">const</span> any* <span class="comment">/*unused*/</span>, any_cast_false_tag <span class="comment">/*unused*/</span>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>}</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span> </div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span><span class="keyword">const</span> T* __any_cast_aux_dispatch(<span class="keyword">const</span> any* value) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>    <span class="keyword">using </span>tag = <a class="code hl_typedef" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t</a>&lt;(<a class="code hl_variable" href="group___type_traits_utilities.html#gaa6c6bde5fd020a928e6d7b5fe8db7bb0">is_same_v&lt;decay_t&lt;U&gt;</a>, U&gt; || <a class="code hl_variable" href="group___type_special_member_function_checks.html#ga03f5da2852be4424089f4235ef44dec2">is_copy_constructible_v&lt;U&gt;</a>), any_cast_true_tag,</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>                              any_cast_false_tag&gt;;</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>    <span class="keywordflow">return</span> inner::__any_cast_aux_dispatch_impl&lt;T, U&gt;(value, tag{});</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>}</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span> </div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, enable_if_t&lt;is_<span class="keywordtype">object</span>_v&lt;T&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span><span class="keyword">const</span> T* __any_cast_aux(<span class="keyword">const</span> any* value) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>    <span class="keywordflow">if</span> (value) {</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>        <span class="keywordflow">return</span> __any_cast_aux_dispatch&lt;T, remove_cv_t&lt;T&gt;&gt;(value);</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>    }</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>}</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span> </div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, enable_if_t&lt;!is_<span class="keywordtype">object</span>_v&lt;T&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span><span class="keyword">const</span> T* __any_cast_aux(<span class="keyword">const</span> any* <span class="comment">/*unused*/</span>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>}</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span> </div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>NEFORCE_END_INNER__</div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span></div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00452" data-start="{" data-end="}">
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno"><a class="line" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">  452</a></span><span class="keyword">const</span> T* <a class="code hl_function" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast</a>(<span class="keyword">const</span> <a class="code hl_class" href="classany.html">any</a>* value) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>    <span class="keywordflow">return</span> inner::__any_cast_aux&lt;T&gt;(value);</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>}</div>
 </div>
-<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span></div>
-<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00464" data-start="{" data-end="}">
-<div class="line"><a id="l00464" name="l00464"></a><span class="lineno"><a class="line" href="group___any.html#ga5183df05b029494e00a3a6cfedeaeefc">  464</a></span>T* <a class="code hl_function" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast</a>(<a class="code hl_class" href="classany.html">any</a>* value) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>    <span class="keywordflow">return</span> <span class="keyword">const_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code hl_function" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast&lt;T&gt;</a>(<span class="keyword">const_cast&lt;</span><span class="keyword">const </span><a class="code hl_class" href="classany.html">any</a>*<span class="keyword">&gt;</span>(value)));</div>
-<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>}</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span></div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00463" data-start="{" data-end="}">
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno"><a class="line" href="group___any.html#ga5183df05b029494e00a3a6cfedeaeefc">  463</a></span>T* <a class="code hl_function" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast</a>(<a class="code hl_class" href="classany.html">any</a>* value) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>    <span class="keywordflow">return</span> <span class="keyword">const_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code hl_function" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast&lt;T&gt;</a>(<span class="keyword">const_cast&lt;</span><span class="keyword">const </span><a class="code hl_class" href="classany.html">any</a>*<span class="keyword">&gt;</span>(value)));</div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>}</div>
 </div>
-<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span></div>
-<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00476" data-start="{" data-end="}">
-<div class="line"><a id="l00476" name="l00476"></a><span class="lineno"><a class="line" href="group___any.html#gac77841c2785c6a7c7cf788160ffa9afb">  476</a></span>T <a class="code hl_function" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast</a>(<span class="keyword">const</span> <a class="code hl_class" href="classany.html">any</a>&amp; value) {</div>
-<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>    <span class="keyword">using </span>U = <a class="code hl_typedef" href="group___remove_qualifiers.html#ga3c0600da43d6867a247432fcc43ce84f">remove_cvref_t&lt;T&gt;</a>;</div>
-<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___type_traits_utilities.html#gabb3abcd15bf9ea4a0629b7e03498e1e1">disjunction_v&lt;is_reference&lt;T&gt;</a>, <a class="code hl_struct" href="structis__copy__constructible.html">is_copy_constructible&lt;T&gt;</a>, <a class="code hl_struct" href="structis__constructible.html">is_constructible&lt;T, const U&amp;&gt;</a>&gt;,</div>
-<div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span>                  <span class="stringliteral">&quot;type T must be valid to cast from any.&quot;</span>);</div>
-<div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span> </div>
-<div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span>    <span class="keyword">auto</span> ptr = <a class="code hl_function" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast&lt;U&gt;</a>(&amp;value);</div>
-<div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span>    <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(*ptr);</div>
-<div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span>    }</div>
-<div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>    NEFORCE_THROW_EXCEPTION(<a class="code hl_struct" href="structanycast__exception.html">anycast_exception</a>());</div>
-<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>    <a class="code hl_function" href="group___debug_breakpoints_and_assertions.html#gac03521c2bfd10af260ef787c2f05308d">unreachable</a>();</div>
-<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>}</div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span></div>
+<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00475" data-start="{" data-end="}">
+<div class="line"><a id="l00475" name="l00475"></a><span class="lineno"><a class="line" href="group___any.html#gac77841c2785c6a7c7cf788160ffa9afb">  475</a></span>T <a class="code hl_function" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast</a>(<span class="keyword">const</span> <a class="code hl_class" href="classany.html">any</a>&amp; value) {</div>
+<div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span>    <span class="keyword">using </span>U = <a class="code hl_typedef" href="group___remove_qualifiers.html#ga3c0600da43d6867a247432fcc43ce84f">remove_cvref_t&lt;T&gt;</a>;</div>
+<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___type_traits_utilities.html#gabb3abcd15bf9ea4a0629b7e03498e1e1">disjunction_v&lt;is_reference&lt;T&gt;</a>, <a class="code hl_struct" href="structis__copy__constructible.html">is_copy_constructible&lt;T&gt;</a>, <a class="code hl_struct" href="structis__constructible.html">is_constructible&lt;T, const U&amp;&gt;</a>&gt;,</div>
+<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span>                  <span class="stringliteral">&quot;type T must be valid to cast from any.&quot;</span>);</div>
+<div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span> </div>
+<div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span>    <span class="keyword">auto</span> ptr = <a class="code hl_function" href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast&lt;U&gt;</a>(&amp;value);</div>
+<div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span>    <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(*ptr);</div>
+<div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span>    }</div>
+<div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span>    NEFORCE_THROW_EXCEPTION(<a class="code hl_struct" href="structanycast__exception.html">anycast_exception</a>());</div>
+<div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>    <a class="code hl_function" href="group___debug_breakpoints_and_assertions.html#gac03521c2bfd10af260ef787c2f05308d">unreachable</a>();</div>
+<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>}</div>
 </div>
-<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span> </div>
-<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span></div>
-<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span> </div>
-<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span><span class="keywordtype">void</span> any::internal_manage&lt;T&gt;::manage(<span class="keyword">const</span> any_operation op, <span class="keyword">const</span> any* value, ArgT* arg) {</div>
-<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>    <span class="keyword">auto</span> ptr = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(&amp;value-&gt;storage_.buffer_);</div>
-<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>    <span class="keywordflow">switch</span> (op) {</div>
-<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>        <span class="keywordflow">case</span> ACCESS: {</div>
-<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>            arg-&gt;obj_ptr_ = <span class="keyword">const_cast&lt;</span>T*<span class="keyword">&gt;</span>(ptr);</div>
-<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>        }</div>
-<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>        <span class="keywordflow">case</span> GET_TYPE_INFO: {</div>
-<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>            arg-&gt;type_ptr_ = &amp;<span class="keyword">typeid</span>(T);</div>
-<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>        }</div>
-<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>        <span class="keywordflow">case</span> COPY: {</div>
-<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>            ::new (&amp;arg-&gt;any_ptr_-&gt;storage_.buffer_) T(*ptr);</div>
-<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>            arg-&gt;any_ptr_-&gt;manage_ = value-&gt;manage_;</div>
-<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>            break;</div>
-<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>        }</div>
-<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        case DESTROY: {</div>
-<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>            ptr-&gt;~T();</div>
-<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>        }</div>
-<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>        <span class="keywordflow">case</span> SWAP: {</div>
-<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>            ::new (&amp;arg-&gt;any_ptr_-&gt;storage_.buffer_) T(_NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(*const_cast&lt;T*&gt;(ptr)));</div>
-<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>            ptr-&gt;~T();</div>
-<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>            arg-&gt;any_ptr_-&gt;manage_ = value-&gt;manage_;</div>
-<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>            const_cast&lt;any*&gt;(value)-&gt;manage_ = <span class="keywordtype">nullptr</span>;</div>
-<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>            break;</div>
-<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>        }</div>
-<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>        default: {</div>
-<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>            <a class="code hl_function" href="group___debug_breakpoints_and_assertions.html#gac03521c2bfd10af260ef787c2f05308d">unreachable</a>();</div>
-<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>        }</div>
-<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>    }</div>
-<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>}</div>
-<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span> </div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span><span class="keywordtype">void</span> any::external_manage&lt;T&gt;::manage(<span class="keyword">const</span> any_operation op, <span class="keyword">const</span> any* value, ArgT* arg) {</div>
-<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>    <span class="keyword">auto</span> ptr = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(value-&gt;storage_.ptr_);</div>
-<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>    <span class="keywordflow">switch</span> (op) {</div>
-<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>        <span class="keywordflow">case</span> ACCESS: {</div>
-<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>            arg-&gt;obj_ptr_ = <span class="keyword">const_cast&lt;</span>T*<span class="keyword">&gt;</span>(ptr);</div>
-<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>        }</div>
-<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>        <span class="keywordflow">case</span> GET_TYPE_INFO: {</div>
-<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>            arg-&gt;type_ptr_ = &amp;<span class="keyword">typeid</span>(T);</div>
-<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>        }</div>
-<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>        <span class="keywordflow">case</span> COPY: {</div>
-<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>            arg-&gt;any_ptr_-&gt;storage_.ptr_ = ::new T(*ptr);</div>
-<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>            arg-&gt;any_ptr_-&gt;manage_ = value-&gt;manage_;</div>
-<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>        }</div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>        <span class="keywordflow">case</span> DESTROY: {</div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>            <span class="keyword">delete</span> ptr;</div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>        }</div>
-<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>        <span class="keywordflow">case</span> SWAP: {</div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>            arg-&gt;any_ptr_-&gt;storage_.ptr_ = value-&gt;storage_.ptr_;</div>
-<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>            arg-&gt;any_ptr_-&gt;manage_ = value-&gt;manage_;</div>
-<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>            <span class="keyword">const_cast&lt;</span>any*<span class="keyword">&gt;</span>(value)-&gt;manage_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>        }</div>
-<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>        <span class="keywordflow">default</span>: {</div>
-<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>            <a class="code hl_function" href="group___debug_breakpoints_and_assertions.html#gac03521c2bfd10af260ef787c2f05308d">unreachable</a>();</div>
-<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>        }</div>
-<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>    }</div>
-<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>}</div>
-<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span></div>
-<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span> <span class="comment">// Any</span></div>
-<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span> </div>
-<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_UTILITY_ANY_HPP__</span></div>
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span> </div>
+<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span></div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span> </div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span><span class="keywordtype">void</span> any::internal_manage&lt;T&gt;::manage(<span class="keyword">const</span> any_operation op, <span class="keyword">const</span> any* value, ArgT* arg) {</div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>    <span class="keyword">auto</span> ptr = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(&amp;value-&gt;storage_.buffer_);</div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>    <span class="keywordflow">switch</span> (op) {</div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>        <span class="keywordflow">case</span> ACCESS: {</div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>            arg-&gt;obj_ptr_ = <span class="keyword">const_cast&lt;</span>T*<span class="keyword">&gt;</span>(ptr);</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>        }</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>        <span class="keywordflow">case</span> GET_TYPE_INFO: {</div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>            arg-&gt;type_ptr_ = &amp;<span class="keyword">typeid</span>(T);</div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>        }</div>
+<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>        <span class="keywordflow">case</span> COPY: {</div>
+<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>            ::new (&amp;arg-&gt;any_ptr_-&gt;storage_.buffer_) T(*ptr);</div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>            arg-&gt;any_ptr_-&gt;manage_ = value-&gt;manage_;</div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>            break;</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>        }</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>        case DESTROY: {</div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>            ptr-&gt;~T();</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>        }</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>        <span class="keywordflow">case</span> SWAP: {</div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>            ::new (&amp;arg-&gt;any_ptr_-&gt;storage_.buffer_) T(_NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(*const_cast&lt;T*&gt;(ptr)));</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>            ptr-&gt;~T();</div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>            arg-&gt;any_ptr_-&gt;manage_ = value-&gt;manage_;</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>            const_cast&lt;any*&gt;(value)-&gt;manage_ = <span class="keywordtype">nullptr</span>;</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>            break;</div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>        }</div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>        default: {</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>            <a class="code hl_function" href="group___debug_breakpoints_and_assertions.html#gac03521c2bfd10af260ef787c2f05308d">unreachable</a>();</div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>        }</div>
+<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>    }</div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>}</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span> </div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span><span class="keywordtype">void</span> any::external_manage&lt;T&gt;::manage(<span class="keyword">const</span> any_operation op, <span class="keyword">const</span> any* value, ArgT* arg) {</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>    <span class="keyword">auto</span> ptr = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(value-&gt;storage_.ptr_);</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>    <span class="keywordflow">switch</span> (op) {</div>
+<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>        <span class="keywordflow">case</span> ACCESS: {</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>            arg-&gt;obj_ptr_ = <span class="keyword">const_cast&lt;</span>T*<span class="keyword">&gt;</span>(ptr);</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>        }</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>        <span class="keywordflow">case</span> GET_TYPE_INFO: {</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>            arg-&gt;type_ptr_ = &amp;<span class="keyword">typeid</span>(T);</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>        }</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>        <span class="keywordflow">case</span> COPY: {</div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>            arg-&gt;any_ptr_-&gt;storage_.ptr_ = ::new T(*ptr);</div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>            arg-&gt;any_ptr_-&gt;manage_ = value-&gt;manage_;</div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>        }</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>        <span class="keywordflow">case</span> DESTROY: {</div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>            <span class="keyword">delete</span> ptr;</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>        }</div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>        <span class="keywordflow">case</span> SWAP: {</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>            arg-&gt;any_ptr_-&gt;storage_.ptr_ = value-&gt;storage_.ptr_;</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>            arg-&gt;any_ptr_-&gt;manage_ = value-&gt;manage_;</div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>            <span class="keyword">const_cast&lt;</span>any*<span class="keyword">&gt;</span>(value)-&gt;manage_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>        }</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>        <span class="keywordflow">default</span>: {</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>            <a class="code hl_function" href="group___debug_breakpoints_and_assertions.html#gac03521c2bfd10af260ef787c2f05308d">unreachable</a>();</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>        }</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>    }</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>}</div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span></div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span> <span class="comment">// Any</span></div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span> </div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_UTILITY_ANY_HPP__</span></div>
 <div class="ttc" id="abreakpoint_8hpp_html"><div class="ttname"><a href="breakpoint_8hpp.html">breakpoint.hpp</a></div><div class="ttdoc">调试断点和断言工具</div></div>
-<div class="ttc" id="aclassany_html"><div class="ttname"><a href="classany.html">any</a></div><div class="ttdoc">任意类型容器</div><div class="ttdef"><b>定义</b> <a href="#l00077">utility/any.hpp:77</a></div></div>
-<div class="ttc" id="aclassany_html_a18e5610d000fc424d1a3f83dd2bd619c"><div class="ttname"><a href="classany.html#a18e5610d000fc424d1a3f83dd2bd619c">any::emplace</a></div><div class="ttdeci">DT &amp; emplace(Args &amp;&amp;... args)</div><div class="ttdoc">就地构造值</div><div class="ttdef"><b>定义</b> <a href="#l00342">utility/any.hpp:342</a></div></div>
-<div class="ttc" id="aclassany_html_a2984bd733b273daa0a9ad72df9af4b21"><div class="ttname"><a href="classany.html#a2984bd733b273daa0a9ad72df9af4b21">any::~any</a></div><div class="ttdeci">~any()</div><div class="ttdoc">析构函数</div><div class="ttdef"><b>定义</b> <a href="#l00331">utility/any.hpp:331</a></div></div>
-<div class="ttc" id="aclassany_html_a3b2824e36b53a37792fc67315c866273"><div class="ttname"><a href="classany.html#a3b2824e36b53a37792fc67315c866273">any::any</a></div><div class="ttdeci">any(T &amp;&amp;value)</div><div class="ttdoc">从值构造</div><div class="ttdef"><b>定义</b> <a href="#l00288">utility/any.hpp:288</a></div></div>
+<div class="ttc" id="aclassany_html"><div class="ttname"><a href="classany.html">any</a></div><div class="ttdoc">任意类型容器</div><div class="ttdef"><b>定义</b> <a href="#l00076">utility/any.hpp:76</a></div></div>
+<div class="ttc" id="aclassany_html_a18e5610d000fc424d1a3f83dd2bd619c"><div class="ttname"><a href="classany.html#a18e5610d000fc424d1a3f83dd2bd619c">any::emplace</a></div><div class="ttdeci">DT &amp; emplace(Args &amp;&amp;... args)</div><div class="ttdoc">就地构造值</div><div class="ttdef"><b>定义</b> <a href="#l00341">utility/any.hpp:341</a></div></div>
+<div class="ttc" id="aclassany_html_a2984bd733b273daa0a9ad72df9af4b21"><div class="ttname"><a href="classany.html#a2984bd733b273daa0a9ad72df9af4b21">any::~any</a></div><div class="ttdeci">~any()</div><div class="ttdoc">析构函数</div><div class="ttdef"><b>定义</b> <a href="#l00330">utility/any.hpp:330</a></div></div>
+<div class="ttc" id="aclassany_html_a3b2824e36b53a37792fc67315c866273"><div class="ttname"><a href="classany.html#a3b2824e36b53a37792fc67315c866273">any::any</a></div><div class="ttdeci">any(T &amp;&amp;value)</div><div class="ttdoc">从值构造</div><div class="ttdef"><b>定义</b> <a href="#l00287">utility/any.hpp:287</a></div></div>
 <div class="ttc" id="aclassany_html_a3fbaed230373554a33d116ab11b15dc9"><div class="ttname"><a href="classany.html#a3fbaed230373554a33d116ab11b15dc9">any::operator=</a></div><div class="ttdeci">any &amp; operator=(any &amp;&amp;other) noexcept</div><div class="ttdoc">移动赋值运算符</div></div>
-<div class="ttc" id="aclassany_html_a63ad8674eef8435b4e3a13cb065f4c79"><div class="ttname"><a href="classany.html#a63ad8674eef8435b4e3a13cb065f4c79">any::operator=</a></div><div class="ttdeci">any &amp; operator=(const any &amp;other)</div><div class="ttdoc">复制赋值运算符</div><div class="ttdef"><b>定义</b> <a href="#l00262">utility/any.hpp:262</a></div></div>
-<div class="ttc" id="aclassany_html_a6c4a11253f803d135685e115cf7054d8"><div class="ttname"><a href="classany.html#a6c4a11253f803d135685e115cf7054d8">any::reset</a></div><div class="ttdeci">void reset() noexcept</div><div class="ttdoc">重置any对象为空</div><div class="ttdef"><b>定义</b> <a href="#l00368">utility/any.hpp:368</a></div></div>
+<div class="ttc" id="aclassany_html_a63ad8674eef8435b4e3a13cb065f4c79"><div class="ttname"><a href="classany.html#a63ad8674eef8435b4e3a13cb065f4c79">any::operator=</a></div><div class="ttdeci">any &amp; operator=(const any &amp;other)</div><div class="ttdoc">复制赋值运算符</div><div class="ttdef"><b>定义</b> <a href="#l00261">utility/any.hpp:261</a></div></div>
+<div class="ttc" id="aclassany_html_a6c4a11253f803d135685e115cf7054d8"><div class="ttname"><a href="classany.html#a6c4a11253f803d135685e115cf7054d8">any::reset</a></div><div class="ttdeci">void reset() noexcept</div><div class="ttdoc">重置any对象为空</div><div class="ttdef"><b>定义</b> <a href="#l00367">utility/any.hpp:367</a></div></div>
 <div class="ttc" id="aclassany_html_a718d15823be6e8590a24d12d981ab6fe"><div class="ttname"><a href="classany.html#a718d15823be6e8590a24d12d981ab6fe">any::any</a></div><div class="ttdeci">any() noexcept=default</div><div class="ttdoc">默认构造函数</div></div>
 <div class="ttc" id="aclassany_html_a7b22cb0a30ac185ccc24bdc819497088"><div class="ttname"><a href="classany.html#a7b22cb0a30ac185ccc24bdc819497088">any::swap</a></div><div class="ttdeci">void swap(any &amp;rhs) noexcept</div><div class="ttdoc">交换两个any对象</div></div>
 <div class="ttc" id="aclassany_html_a901fcf91bdb368a4b722f87193d60661"><div class="ttname"><a href="classany.html#a901fcf91bdb368a4b722f87193d60661">any::any</a></div><div class="ttdeci">any(any &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div></div>
 <div class="ttc" id="aclassany_html_aa2ae58660b9ac895e1dfff84b0c417ea"><div class="ttname"><a href="classany.html#aa2ae58660b9ac895e1dfff84b0c417ea">any::type</a></div><div class="ttdeci">const std::type_info &amp; type() const noexcept</div><div class="ttdoc">获取存储值的类型信息</div></div>
-<div class="ttc" id="aclassany_html_ad804fa85a2aa3246403e58906a8c0e63"><div class="ttname"><a href="classany.html#ad804fa85a2aa3246403e58906a8c0e63">any::operator=</a></div><div class="ttdeci">any &amp; operator=(T &amp;&amp;value)</div><div class="ttdoc">从值赋值</div><div class="ttdef"><b>定义</b> <a href="#l00301">utility/any.hpp:301</a></div></div>
-<div class="ttc" id="aclassany_html_aea9b89f1c3bc553cfd72245f42b9cf39"><div class="ttname"><a href="classany.html#aea9b89f1c3bc553cfd72245f42b9cf39">any::emplace</a></div><div class="ttdeci">DT &amp; emplace(std::initializer_list&lt; U &gt; ilist, Args &amp;&amp;... args)</div><div class="ttdoc">使用初始化列表就地构造</div><div class="ttdef"><b>定义</b> <a href="#l00360">utility/any.hpp:360</a></div></div>
-<div class="ttc" id="aclassany_html_aee1aabbbe7c8e3197605c0f8055e5e5a"><div class="ttname"><a href="classany.html#aee1aabbbe7c8e3197605c0f8055e5e5a">any::has_value</a></div><div class="ttdeci">bool has_value() const noexcept</div><div class="ttdoc">检查是否包含值</div><div class="ttdef"><b>定义</b> <a href="#l00379">utility/any.hpp:379</a></div></div>
-<div class="ttc" id="aclassany_html_af419c43ef848b665f2a381cdfa41e93a"><div class="ttname"><a href="classany.html#af419c43ef848b665f2a381cdfa41e93a">any::any</a></div><div class="ttdeci">any(pass_template_construct_tag&lt; T &gt;, Args &amp;&amp;... args)</div><div class="ttdoc">就地构造</div><div class="ttdef"><b>定义</b> <a href="#l00314">utility/any.hpp:314</a></div></div>
+<div class="ttc" id="aclassany_html_ad804fa85a2aa3246403e58906a8c0e63"><div class="ttname"><a href="classany.html#ad804fa85a2aa3246403e58906a8c0e63">any::operator=</a></div><div class="ttdeci">any &amp; operator=(T &amp;&amp;value)</div><div class="ttdoc">从值赋值</div><div class="ttdef"><b>定义</b> <a href="#l00300">utility/any.hpp:300</a></div></div>
+<div class="ttc" id="aclassany_html_aea9b89f1c3bc553cfd72245f42b9cf39"><div class="ttname"><a href="classany.html#aea9b89f1c3bc553cfd72245f42b9cf39">any::emplace</a></div><div class="ttdeci">DT &amp; emplace(std::initializer_list&lt; U &gt; ilist, Args &amp;&amp;... args)</div><div class="ttdoc">使用初始化列表就地构造</div><div class="ttdef"><b>定义</b> <a href="#l00359">utility/any.hpp:359</a></div></div>
+<div class="ttc" id="aclassany_html_aee1aabbbe7c8e3197605c0f8055e5e5a"><div class="ttname"><a href="classany.html#aee1aabbbe7c8e3197605c0f8055e5e5a">any::has_value</a></div><div class="ttdeci">bool has_value() const noexcept</div><div class="ttdoc">检查是否包含值</div><div class="ttdef"><b>定义</b> <a href="#l00378">utility/any.hpp:378</a></div></div>
+<div class="ttc" id="aclassany_html_af419c43ef848b665f2a381cdfa41e93a"><div class="ttname"><a href="classany.html#af419c43ef848b665f2a381cdfa41e93a">any::any</a></div><div class="ttdeci">any(pass_template_construct_tag&lt; T &gt;, Args &amp;&amp;... args)</div><div class="ttdoc">就地构造</div><div class="ttdef"><b>定义</b> <a href="#l00313">utility/any.hpp:313</a></div></div>
 <div class="ttc" id="aexception_8hpp_html"><div class="ttname"><a href="exception_8hpp.html">exception.hpp</a></div><div class="ttdoc">异常处理框架</div></div>
 <div class="ttc" id="agroup___alignment_html_gae1bfcd9586bbb9936d7eb2d2ea32bc8e"><div class="ttname"><a href="group___alignment.html#gae1bfcd9586bbb9936d7eb2d2ea32bc8e">aligned_storage_t</a></div><div class="ttdeci">typename aligned_storage&lt; Len, Align &gt;::type aligned_storage_t</div><div class="ttdoc">aligned_storage的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03469">type_traits.hpp:3469</a></div></div>
-<div class="ttc" id="agroup___any_html_ga435372af463e628eb7e40e293d87c1da"><div class="ttname"><a href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast</a></div><div class="ttdeci">const T * any_cast(const any *value) noexcept</div><div class="ttdoc">从any对象转换常量值</div><div class="ttdef"><b>定义</b> <a href="#l00453">utility/any.hpp:453</a></div></div>
-<div class="ttc" id="agroup___any_html_gaa10dc2f937bfc4efbd98234e71af0860"><div class="ttname"><a href="group___any.html#gaa10dc2f937bfc4efbd98234e71af0860">make_any</a></div><div class="ttdeci">any make_any(Args &amp;&amp;... args)</div><div class="ttdoc">创建any对象</div><div class="ttdef"><b>定义</b> <a href="#l00403">utility/any.hpp:403</a></div></div>
+<div class="ttc" id="agroup___any_html_ga435372af463e628eb7e40e293d87c1da"><div class="ttname"><a href="group___any.html#ga435372af463e628eb7e40e293d87c1da">any_cast</a></div><div class="ttdeci">const T * any_cast(const any *value) noexcept</div><div class="ttdoc">从any对象转换常量值</div><div class="ttdef"><b>定义</b> <a href="#l00452">utility/any.hpp:452</a></div></div>
+<div class="ttc" id="agroup___any_html_gaa10dc2f937bfc4efbd98234e71af0860"><div class="ttname"><a href="group___any.html#gaa10dc2f937bfc4efbd98234e71af0860">make_any</a></div><div class="ttdeci">any make_any(Args &amp;&amp;... args)</div><div class="ttdoc">创建any对象</div><div class="ttdef"><b>定义</b> <a href="#l00402">utility/any.hpp:402</a></div></div>
 <div class="ttc" id="agroup___args_forward_functions_html_gadbaa877478c57b027d5be364ca1585be"><div class="ttname"><a href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward</a></div><div class="ttdeci">constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03028">type_traits.hpp:3028</a></div></div>
 <div class="ttc" id="agroup___debug_breakpoints_and_assertions_html_gac03521c2bfd10af260ef787c2f05308d"><div class="ttname"><a href="group___debug_breakpoints_and_assertions.html#gac03521c2bfd10af260ef787c2f05308d">unreachable</a></div><div class="ttdeci">NEFORCE_NORETURN void unreachable() noexcept</div><div class="ttdoc">标记不可达代码路径</div><div class="ttdef"><b>定义</b> <a href="breakpoint_8hpp_source.html#l00068">breakpoint.hpp:68</a></div></div>
 <div class="ttc" id="agroup___remove_qualifiers_html_ga3c0600da43d6867a247432fcc43ce84f"><div class="ttname"><a href="group___remove_qualifiers.html#ga3c0600da43d6867a247432fcc43ce84f">remove_cvref_t</a></div><div class="ttdeci">typename remove_cvref&lt; T &gt;::type remove_cvref_t</div><div class="ttdoc">remove_cvref的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00522">type_traits.hpp:522</a></div></div>
@@ -486,12 +485,11 @@ $(function(){initNavTree('utility_2any_8hpp_source.html','',''); });
 <div class="ttc" id="agroup___type_traits_utilities_html_gabb3abcd15bf9ea4a0629b7e03498e1e1"><div class="ttname"><a href="group___type_traits_utilities.html#gabb3abcd15bf9ea4a0629b7e03498e1e1">disjunction_v</a></div><div class="ttdeci">constexpr bool disjunction_v</div><div class="ttdoc">disjunction的便捷变量模板</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00282">type_traits.hpp:282</a></div></div>
 <div class="ttc" id="agroup___type_traits_utilities_html_gafd80b775b0bd95747206fc628ad065f0"><div class="ttname"><a href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00118">type_traits.hpp:118</a></div></div>
 <div class="ttc" id="astructanycast__exception_html"><div class="ttname"><a href="structanycast__exception.html">anycast_exception</a></div><div class="ttdoc">any转换异常</div><div class="ttdef"><b>定义</b> <a href="#l00049">utility/any.hpp:49</a></div></div>
-<div class="ttc" id="astructexception_html_a33710bd2e564614575128e2c3de94883"><div class="ttname"><a href="structexception.html#a33710bd2e564614575128e2c3de94883">exception::exception</a></div><div class="ttdeci">exception(const char *info=static_type, const char *type=static_type, const int code=0)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00092">exception.hpp:92</a></div></div>
-<div class="ttc" id="astructexception_html_a726d6793aa2121f2a48f502d690f1a11"><div class="ttname"><a href="structexception.html#a726d6793aa2121f2a48f502d690f1a11">exception::type</a></div><div class="ttdeci">const char * type() const noexcept</div><div class="ttdoc">获取异常类型</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00183">exception.hpp:183</a></div></div>
-<div class="ttc" id="astructexception_html_ab8a744225b6ddc8976987ba16a0fd046"><div class="ttname"><a href="structexception.html#ab8a744225b6ddc8976987ba16a0fd046">exception::code</a></div><div class="ttdeci">int code() const noexcept</div><div class="ttdoc">获取异常码</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00189">exception.hpp:189</a></div></div>
+<div class="ttc" id="astructanycast__exception_html_a5f74a479bdce692a632f69a529b8351f"><div class="ttname"><a href="structanycast__exception.html#a5f74a479bdce692a632f69a529b8351f">anycast_exception::type</a></div><div class="ttdeci">const char * type() const noexcept override</div><div class="ttdoc">获取异常类型</div><div class="ttdef"><b>定义</b> <a href="#l00058">utility/any.hpp:58</a></div></div>
+<div class="ttc" id="astructexception_html_ab5edb0e5cd38ed6c450413eb52d95fed"><div class="ttname"><a href="structexception.html#ab5edb0e5cd38ed6c450413eb52d95fed">exception::exception</a></div><div class="ttdeci">exception(const char *info=&quot;&quot;)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00088">exception.hpp:88</a></div></div>
 <div class="ttc" id="astructis__constructible_html"><div class="ttname"><a href="structis__constructible.html">is_constructible</a></div><div class="ttdoc">判断类型是否可以使用指定参数构造</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l02366">type_traits.hpp:2366</a></div></div>
 <div class="ttc" id="astructis__copy__constructible_html"><div class="ttname"><a href="structis__copy__constructible.html">is_copy_constructible</a></div><div class="ttdoc">判断类型是否可复制构造</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l02384">type_traits.hpp:2384</a></div></div>
-<div class="ttc" id="astructpass__template__construct__tag_html"><div class="ttname"><a href="structpass__template__construct__tag.html">pass_template_construct_tag</a></div><div class="ttdoc">传递模板参数构造标签</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00506">types.hpp:506</a></div></div>
+<div class="ttc" id="astructpass__template__construct__tag_html"><div class="ttname"><a href="structpass__template__construct__tag.html">pass_template_construct_tag</a></div><div class="ttdoc">传递模板参数构造标签</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00505">types.hpp:505</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

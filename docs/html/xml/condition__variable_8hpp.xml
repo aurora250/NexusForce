@@ -4,6 +4,7 @@
     <compoundname>condition_variable.hpp</compoundname>
     <includes refid="mutex_8hpp" local="yes">NeForce/core/async/mutex.hpp</includes>
     <includes refid="clocks_8hpp" local="yes">NeForce/core/time/clocks.hpp</includes>
+    <includedby refid="channel_8hpp" local="yes">channel.hpp</includedby>
     <includedby refid="database__pool_8hpp" local="yes">database_pool.hpp</includedby>
     <includedby refid="http__server_8hpp" local="yes">http_server.hpp</includedby>
     <includedby refid="signal_8hpp" local="yes">signal.hpp</includedby>
@@ -149,6 +150,10 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="2">
+        <label>channel.hpp</label>
+        <link refid="channel_8hpp"/>
+      </node>
       <node id="1">
         <label>condition_variable.hpp</label>
         <link refid="condition__variable_8hpp"/>
@@ -158,105 +163,63 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>thread_pool.hpp</label>
-        <link refid="thread__pool_8hpp"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>timer.hpp</label>
-        <link refid="timer_8hpp"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>virtual_thread.hpp</label>
-        <link refid="virtual__thread_8hpp"/>
-      </node>
-      <node id="16">
-        <label>ttl_cache.hpp</label>
-        <link refid="ttl__cache_8hpp"/>
-      </node>
-      <node id="5">
-        <label>daemon.hpp</label>
-        <link refid="daemon_8hpp"/>
-      </node>
-      <node id="4">
-        <label>signal.hpp</label>
-        <link refid="signal_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
-      </node>
-      <node id="2">
-        <label>database_pool.hpp</label>
-        <link refid="database__pool_8hpp"/>
-      </node>
-      <node id="14">
-        <label>logger.hpp</label>
-        <link refid="logger_8hpp"/>
-      </node>
-      <node id="8">
-        <label>dns_client.hpp</label>
-        <link refid="dns__client_8hpp"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-      </node>
-      <node id="9">
-        <label>ftp_client.hpp</label>
-        <link refid="ftp__client_8hpp_source"/>
-      </node>
-      <node id="12">
-        <label>http_client.hpp</label>
-        <link refid="http__client_8hpp"/>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>http_server.hpp</label>
-        <link refid="http__server_8hpp"/>
-      </node>
-      <node id="13">
-        <label>reverse_proxy.hpp</label>
-        <link refid="reverse__proxy_8hpp"/>
-      </node>
-      <node id="18">
-        <label>websocket.hpp</label>
-        <link refid="websocket_8hpp"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>smtp_socket.hpp</label>
-        <link refid="smtp__socket_8hpp"/>
-      </node>
-      <node id="11">
-        <label>tcp_client.hpp</label>
-        <link refid="tcp__client_8hpp"/>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="15">
-        <label>tcp_server.hpp</label>
-        <link refid="tcp__server_8hpp"/>
-        <childnode refid="3" relation="include">
+      <node id="8">
+        <label>thread_pool.hpp</label>
+        <link refid="thread__pool_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>timer.hpp</label>
+        <link refid="timer_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>virtual_thread.hpp</label>
+        <link refid="virtual__thread_8hpp"/>
+      </node>
+      <node id="10">
+        <label>ttl_cache.hpp</label>
+        <link refid="ttl__cache_8hpp"/>
+      </node>
+      <node id="6">
+        <label>daemon.hpp</label>
+        <link refid="daemon_8hpp"/>
+      </node>
+      <node id="5">
+        <label>signal.hpp</label>
+        <link refid="signal_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>database_pool.hpp</label>
+        <link refid="database__pool_8hpp"/>
+      </node>
+      <node id="9">
+        <label>logger.hpp</label>
+        <link refid="logger_8hpp"/>
+      </node>
+      <node id="4">
+        <label>http_server.hpp</label>
+        <link refid="http__server_8hpp"/>
+      </node>
+      <node id="12">
+        <label>websocket.hpp</label>
+        <link refid="websocket_8hpp"/>
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

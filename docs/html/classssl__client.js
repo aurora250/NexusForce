@@ -1,7 +1,7 @@
 var classssl__client =
 [
-    [ "ssl_client", "classssl__client.html#a0a92947bec6a11a871d0ef09365dd2ce", null ],
-    [ "ssl_client", "classssl__client.html#a5c5233c0a6e5a94cf4739d774f258296", null ],
+    [ "ssl_client", "classssl__client.html#afd5fd575d98820cfa01aaaab1fceaacc", null ],
+    [ "ssl_client", "classssl__client.html#a40d6ea02b9b6a3ea276e4f6face54a2d", null ],
     [ "cipher_name", "classssl__client.html#a332a96dfd3d5575a3f55baff027c0eda", null ],
     [ "create_socket", "classssl__client.html#a8eb86cc4819094bb2f562bf63e871cc2", null ],
     [ "has_ssl_context", "classssl__client.html#aad1ef465d608d0d3da503c032614f7c4", null ],

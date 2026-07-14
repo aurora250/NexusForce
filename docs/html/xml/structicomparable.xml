@@ -9,6 +9,7 @@
     <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; queue&lt; T, deque&lt; T &gt; &gt; &gt;</derivedcompoundref>
     <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; stack&lt; T, deque&lt; T &gt; &gt; &gt;</derivedcompoundref>
     <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; vector&lt; T, allocator&lt; T &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; flat_hashtable&lt; pair&lt; Key, T &gt;, Key, hash&lt; Key &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, equal_to&lt; Key &gt;, allocator&lt; pair&lt; Key, T &gt; &gt; &gt; &gt;</derivedcompoundref>
     <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, less&lt; Key &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt; &gt;</derivedcompoundref>
     <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; sparse_vector&lt; Key, pair&lt; Key, T &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, less&lt; Key &gt;, allocator&lt; pair&lt; Key, T &gt; &gt; &gt; &gt;</derivedcompoundref>
     <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; vector&lt; T, allocator&lt; pair&lt; Key, T &gt; &gt; &gt; &gt;</derivedcompoundref>
@@ -260,243 +261,273 @@
         <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="136">
+      <node id="145">
         <label>basic_string&lt; CharT, Traits, Alloc &gt;</label>
         <link refid="classbasic__string"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="91">
-        <label>basic_string&lt; char &gt;</label>
-        <link refid="classbasic__string"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="94">
-        <label>basic_string&lt; char16_t &gt;</label>
-        <link refid="classbasic__string"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="95">
-        <label>basic_string&lt; char32_t &gt;</label>
-        <link refid="classbasic__string"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="93">
-        <label>basic_string&lt; char8_t &gt;</label>
-        <link refid="classbasic__string"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="92">
-        <label>basic_string&lt; wchar_t &gt;</label>
-        <link refid="classbasic__string"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="97">
-        <label>basic_string_view&lt; char &gt;</label>
-        <link refid="classbasic__string__view"/>
-        <childnode refid="90" relation="public-inheritance">
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
       <node id="100">
-        <label>basic_string_view&lt; char16_t &gt;</label>
-        <link refid="classbasic__string__view"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="101">
-        <label>basic_string_view&lt; char32_t &gt;</label>
-        <link refid="classbasic__string__view"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="99">
-        <label>basic_string_view&lt; char8_t &gt;</label>
-        <link refid="classbasic__string__view"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="96">
-        <label>basic_string_view&lt; typename Traits::char_type, Traits &gt;</label>
-        <link refid="classbasic__string__view"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="98">
-        <label>basic_string_view&lt; wchar_t &gt;</label>
-        <link refid="classbasic__string__view"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="140">
-        <label>character</label>
-        <link refid="structcharacter"/>
-        <childnode refid="139" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="108">
-        <label>compressed_pair&lt; Func, bool &gt;</label>
-        <link refid="structcompressed__pair"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="109">
-        <label>compressed_pair&lt; Func, int &gt;</label>
-        <link refid="structcompressed__pair"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="23">
-        <label>compressed_pair&lt; IfEmpty, T, false &gt;</label>
-        <link refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4"/>
-        <childnode refid="22" relation="public-inheritance">
-        </childnode>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="105">
-        <label>compressed_pair&lt; allocator_type, float &gt;</label>
-        <link refid="structcompressed__pair"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="102">
-        <label>compressed_pair&lt; allocator_type, pointer &gt;</label>
-        <link refid="structcompressed__pair"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="107">
-        <label>compressed_pair&lt; allocator_type, size_t &gt;</label>
-        <link refid="structcompressed__pair"/>
-        <childnode refid="90" relation="public-inheritance">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
       <node id="103">
-        <label>compressed_pair&lt; allocator_type, size_type &gt;</label>
-        <link refid="structcompressed__pair"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="137">
-        <label>compressed_pair&lt; IfEmpty, T, Compressed &gt;</label>
-        <link refid="structcompressed__pair"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="106">
-        <label>compressed_pair&lt; map_allocator, map_pointer &gt;</label>
-        <link refid="structcompressed__pair"/>
-        <childnode refid="90" relation="public-inheritance">
+        <label>basic_string&lt; char16_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
       <node id="104">
+        <label>basic_string&lt; char32_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>basic_string&lt; char8_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="101">
+        <label>basic_string&lt; wchar_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="106">
+        <label>basic_string_view&lt; char &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="109">
+        <label>basic_string_view&lt; char16_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="110">
+        <label>basic_string_view&lt; char32_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="108">
+        <label>basic_string_view&lt; char8_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="105">
+        <label>basic_string_view&lt; typename Traits::char_type, Traits &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>basic_string_view&lt; wchar_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="149">
+        <label>character</label>
+        <link refid="structcharacter"/>
+        <childnode refid="148" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="117">
+        <label>compressed_pair&lt; Func, bool &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="118">
+        <label>compressed_pair&lt; Func, int &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>compressed_pair&lt; IfEmpty, T, false &gt;</label>
+        <link refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="114">
+        <label>compressed_pair&lt; allocator_type, float &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="111">
+        <label>compressed_pair&lt; allocator_type, pointer &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="116">
+        <label>compressed_pair&lt; allocator_type, size_t &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="112">
+        <label>compressed_pair&lt; allocator_type, size_type &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="146">
+        <label>compressed_pair&lt; IfEmpty, T, Compressed &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="115">
+        <label>compressed_pair&lt; map_allocator, map_pointer &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="113">
         <label>compressed_pair&lt; standard_allocator, size_t &gt;</label>
         <link refid="structcompressed__pair"/>
-        <childnode refid="90" relation="public-inheritance">
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="131">
+      <node id="140">
         <label>decimal</label>
         <link refid="structdecimal"/>
-        <childnode refid="130" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="29">
-        <label>deque&lt; connection_entry &gt;</label>
-        <link refid="classdeque"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="82">
-        <label>deque&lt; T, Alloc, BufSize &gt;</label>
-        <link refid="classdeque"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="30">
-        <label>deque&lt; frame &gt;</label>
-        <link refid="classdeque"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="127">
-        <label>float32</label>
-        <link refid="structfloat32"/>
-        <childnode refid="126" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="129">
-        <label>float64</label>
-        <link refid="structfloat64"/>
-        <childnode refid="128" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="32">
-        <label>hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;</label>
-        <link refid="classhashtable"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="139" relation="public-inheritance">
         </childnode>
       </node>
       <node id="31">
+        <label>deque&lt; connection_entry &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>deque&lt; T, Alloc, BufSize &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>deque&lt; frame &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>flat_hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;</label>
+        <link refid="classflat__hashtable"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;</label>
+        <link refid="classflat__hashtable"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>flat_hashtable&lt; pair&lt; Key, T &gt;, Key, hash&lt; Key &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, equal_to&lt; Key &gt;, allocator&lt; pair&lt; Key, T &gt; &gt; &gt;</label>
+        <link refid="classflat__hashtable"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;</label>
+        <link refid="classflat__unordered__multiset"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>flat_unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;</label>
+        <link refid="classflat__unordered__set"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="136">
+        <label>float32</label>
+        <link refid="structfloat32"/>
+        <childnode refid="135" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="138">
+        <label>float64</label>
+        <link refid="structfloat64"/>
+        <childnode refid="137" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;</label>
+        <link refid="classhashtable"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
         <label>hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;</label>
         <link refid="classhashtable"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>hashtable&lt; pair&lt; const Key, T &gt;, Key, hash&lt; Key &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, equal_to&lt; Key &gt;, allocator&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt;</label>
+        <link refid="classhashtable"/>
+        <childnode refid="21" relation="public-inheritance">
         </childnode>
       </node>
       <node id="20">
-        <label>hashtable&lt; pair&lt; const Key, T &gt;, Key, hash&lt; Key &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, equal_to&lt; Key &gt;, allocator&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt;</label>
+        <label>hashtable&lt; pair&lt; const T *, stacktrace &gt;, T *, hash&lt; T * &gt;, select1st&lt; pair&lt; const T *, stacktrace &gt; &gt;, equal_to&lt; T * &gt;, allocator&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt; &gt;</label>
         <link refid="classhashtable"/>
         <childnode refid="19" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
-        <label>hashtable&lt; pair&lt; const T *, stacktrace &gt;, T *, hash&lt; T * &gt;, select1st&lt; pair&lt; const T *, stacktrace &gt; &gt;, equal_to&lt; T * &gt;, allocator&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt; &gt;</label>
-        <link refid="classhashtable"/>
-        <childnode refid="17" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="133">
+      <node id="142">
         <label>icharacter&lt; T, CharT &gt;</label>
         <link refid="structicharacter"/>
-        <childnode refid="132" relation="public-inheritance">
+        <childnode refid="141" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="139">
+      <node id="148">
         <label>icharacter&lt; character, char &gt;</label>
         <link refid="structicharacter"/>
-        <childnode refid="138" relation="public-inheritance">
+        <childnode refid="147" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="145">
+      <node id="154">
         <label>icharacter&lt; u16character, char16_t &gt;</label>
         <link refid="structicharacter"/>
-        <childnode refid="138" relation="public-inheritance">
+        <childnode refid="147" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="147">
+      <node id="156">
         <label>icharacter&lt; u32character, char32_t &gt;</label>
         <link refid="structicharacter"/>
-        <childnode refid="138" relation="public-inheritance">
+        <childnode refid="147" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="143">
+      <node id="152">
         <label>icharacter&lt; u8character, char8_t &gt;</label>
         <link refid="structicharacter"/>
-        <childnode refid="138" relation="public-inheritance">
+        <childnode refid="147" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="141">
+      <node id="150">
         <label>icharacter&lt; wcharacter, wchar_t &gt;</label>
         <link refid="structicharacter"/>
-        <childnode refid="138" relation="public-inheritance">
+        <childnode refid="147" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="28">
+      <node id="30">
         <label>icollector&lt; T &gt;</label>
         <link refid="structicollector"/>
         <childnode refid="1" relation="public-inheritance">
@@ -520,13 +551,19 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="11">
+        <label>icollector&lt; flat_hashtable&lt; pair&lt; Key, T &gt;, Key, hash&lt; Key &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, equal_to&lt; Key &gt;, allocator&lt; pair&lt; Key, T &gt; &gt; &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
         <label>icollector&lt; hashtable&lt; pair&lt; const Key, T &gt;, Key, hash&lt; Key &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, equal_to&lt; Key &gt;, allocator&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt; &gt;</label>
         <link refid="structicollector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
+      <node id="19">
         <label>icollector&lt; hashtable&lt; pair&lt; const T *, stacktrace &gt;, T *, hash&lt; T * &gt;, select1st&lt; pair&lt; const T *, stacktrace &gt; &gt;, equal_to&lt; T * &gt;, allocator&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt; &gt; &gt;</label>
         <link refid="structicollector"/>
         <childnode refid="1" relation="public-inheritance">
@@ -544,13 +581,13 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="13">
         <label>icollector&lt; rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, less&lt; Key &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt; &gt;</label>
         <link refid="structicollector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="15">
         <label>icollector&lt; sparse_vector&lt; Key, pair&lt; Key, T &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, less&lt; Key &gt;, allocator&lt; pair&lt; Key, T &gt; &gt; &gt; &gt;</label>
         <link refid="structicollector"/>
         <childnode refid="1" relation="public-inheritance">
@@ -568,37 +605,37 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="17">
         <label>icollector&lt; vector&lt; T, allocator&lt; pair&lt; Key, T &gt; &gt; &gt; &gt;</label>
         <link refid="structicollector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="90">
+      <node id="99">
         <label>icommon&lt; T &gt;</label>
         <link refid="structicommon"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="22">
+      <node id="24">
         <label>icommon&lt; compressed_pair&lt; IfEmpty, T, false &gt; &gt;</label>
         <link refid="structicommon"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="21">
+      <node id="23">
         <label>icommon&lt; compressed_pair&lt; IfEmpty, T, is_empty_v&lt; IfEmpty &gt; &amp;&amp;!is_final_v&lt; IfEmpty &gt; &gt; &gt;</label>
         <link refid="structicommon"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="27">
+      <node id="29">
         <label>icommon&lt; optional&lt; T &amp; &gt; &gt;</label>
         <link refid="structicommon"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="24">
+      <node id="26">
         <label>icommon&lt; optional&lt; T &gt; &gt;</label>
         <link refid="structicommon"/>
         <childnode refid="1" relation="public-inheritance">
@@ -608,534 +645,552 @@
         <label>icomparable&lt; T &gt;</label>
         <link refid="structicomparable"/>
       </node>
-      <node id="113">
+      <node id="122">
         <label>integer16</label>
         <link refid="structinteger16"/>
-        <childnode refid="112" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="115">
-        <label>integer32</label>
-        <link refid="structinteger32"/>
-        <childnode refid="114" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="117">
-        <label>integer64</label>
-        <link refid="structinteger64"/>
-        <childnode refid="116" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="111">
-        <label>integer8</label>
-        <link refid="structinteger8"/>
-        <childnode refid="110" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="138">
-        <label>ipackage&lt; T, PackageT &gt;</label>
-        <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="132">
-        <label>ipackage&lt; T, CharT &gt;</label>
-        <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="130">
-        <label>ipackage&lt; decimal, decimal_t &gt;</label>
-        <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="126">
-        <label>ipackage&lt; float32, float32_t &gt;</label>
-        <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="128">
-        <label>ipackage&lt; float64, float64_t &gt;</label>
-        <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="112">
-        <label>ipackage&lt; integer16, int16_t &gt;</label>
-        <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="114">
-        <label>ipackage&lt; integer32, int32_t &gt;</label>
-        <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="116">
-        <label>ipackage&lt; integer64, int64_t &gt;</label>
-        <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="110">
-        <label>ipackage&lt; integer8, int8_t &gt;</label>
-        <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="120">
-        <label>ipackage&lt; uinteger16, uint16_t &gt;</label>
-        <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="122">
-        <label>ipackage&lt; uinteger32, uint32_t &gt;</label>
-        <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
+        <childnode refid="121" relation="public-inheritance">
         </childnode>
       </node>
       <node id="124">
-        <label>ipackage&lt; uinteger64, uint64_t &gt;</label>
+        <label>integer32</label>
+        <link refid="structinteger32"/>
+        <childnode refid="123" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="126">
+        <label>integer64</label>
+        <link refid="structinteger64"/>
+        <childnode refid="125" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="120">
+        <label>integer8</label>
+        <link refid="structinteger8"/>
+        <childnode refid="119" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="147">
+        <label>ipackage&lt; T, PackageT &gt;</label>
         <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="118">
-        <label>ipackage&lt; uinteger8, uint8_t &gt;</label>
+      <node id="141">
+        <label>ipackage&lt; T, CharT &gt;</label>
         <link refid="structipackage"/>
-        <childnode refid="90" relation="public-inheritance">
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
-        <label>optional&lt; T &gt;</label>
-        <link refid="classoptional"/>
-        <childnode refid="24" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="25">
-        <label>optional&lt; T &amp; &gt;</label>
-        <link refid="classoptional_3_01_t_01_6_01_4"/>
-        <childnode refid="24" relation="public-inheritance">
-        </childnode>
-        <childnode refid="27" relation="public-inheritance">
+      <node id="139">
+        <label>ipackage&lt; decimal, decimal_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
       <node id="135">
-        <label>pair&lt; Key, T &gt;</label>
-        <link refid="structpair"/>
-        <childnode refid="90" relation="public-inheritance">
+        <label>ipackage&lt; float32, float32_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="134">
-        <label>pair&lt; const Key, T &gt;</label>
-        <link refid="structpair"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="83">
-        <label>priority_queue&lt; T, Sequence, Compare &gt;</label>
-        <link refid="classpriority__queue"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="33">
-        <label>priority_queue&lt; priority_task &gt;</label>
-        <link refid="classpriority__queue"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="34">
-        <label>queue&lt; connection_entry &gt;</label>
-        <link refid="classqueue"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="84">
-        <label>queue&lt; T, Sequence &gt;</label>
-        <link refid="classqueue"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="36">
-        <label>rb_tree&lt; Key, Key, identity&lt; Key &gt;, Compare, Alloc &gt;</label>
-        <link refid="classrb__tree"/>
-        <childnode refid="28" relation="private-inheritance">
-        </childnode>
-      </node>
-      <node id="35">
-        <label>rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;</label>
-        <link refid="classrb__tree"/>
-        <childnode refid="28" relation="private-inheritance">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, less&lt; Key &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt;</label>
-        <link refid="classrb__tree"/>
-        <childnode refid="11" relation="private-inheritance">
-        </childnode>
-      </node>
-      <node id="85">
-        <label>sparse_multiset&lt; Key, Compare, Alloc &gt;</label>
-        <link refid="classsparse__multiset"/>
-        <childnode refid="28" relation="private-inheritance">
-        </childnode>
-      </node>
-      <node id="86">
-        <label>sparse_set&lt; Key, Compare, Alloc &gt;</label>
-        <link refid="classsparse__set"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="38">
-        <label>sparse_vector&lt; Key, Key, identity&lt; Key &gt;, Compare, Alloc &gt;</label>
-        <link refid="classsparse__vector"/>
-        <childnode refid="28" relation="private-inheritance">
-        </childnode>
-      </node>
-      <node id="37">
-        <label>sparse_vector&lt; Key, pair&lt; Key, T &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, Compare, Alloc &gt;</label>
-        <link refid="classsparse__vector"/>
-        <childnode refid="28" relation="private-inheritance">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>sparse_vector&lt; Key, pair&lt; Key, T &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, less&lt; Key &gt;, allocator&lt; pair&lt; Key, T &gt; &gt; &gt;</label>
-        <link refid="classsparse__vector"/>
-        <childnode refid="13" relation="private-inheritance">
-        </childnode>
-      </node>
-      <node id="87">
-        <label>sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;</label>
-        <link refid="classsparse__vector"/>
-        <childnode refid="28" relation="private-inheritance">
-        </childnode>
-      </node>
-      <node id="39">
-        <label>stack&lt; frame &gt;</label>
-        <link refid="classstack"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="88">
-        <label>stack&lt; T, Sequence &gt;</label>
-        <link refid="classstack"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="146">
-        <label>u16character</label>
-        <link refid="structu16character"/>
-        <childnode refid="145" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="148">
-        <label>u32character</label>
-        <link refid="structu32character"/>
-        <childnode refid="147" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="144">
-        <label>u8character</label>
-        <link refid="structu8character"/>
-        <childnode refid="143" relation="public-inheritance">
+      <node id="137">
+        <label>ipackage&lt; float64, float64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
       <node id="121">
-        <label>uinteger16</label>
-        <link refid="structuinteger16"/>
-        <childnode refid="120" relation="public-inheritance">
+        <label>ipackage&lt; integer16, int16_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
       <node id="123">
-        <label>uinteger32</label>
-        <link refid="structuinteger32"/>
-        <childnode refid="122" relation="public-inheritance">
+        <label>ipackage&lt; integer32, int32_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
       <node id="125">
-        <label>uinteger64</label>
-        <link refid="structuinteger64"/>
-        <childnode refid="124" relation="public-inheritance">
+        <label>ipackage&lt; integer64, int64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="99" relation="public-inheritance">
         </childnode>
       </node>
       <node id="119">
-        <label>uinteger8</label>
-        <link refid="structuinteger8"/>
-        <childnode refid="118" relation="public-inheritance">
+        <label>ipackage&lt; integer8, int8_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="129">
+        <label>ipackage&lt; uinteger16, uint16_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="131">
+        <label>ipackage&lt; uinteger32, uint32_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="133">
+        <label>ipackage&lt; uinteger64, uint64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="127">
+        <label>ipackage&lt; uinteger8, uint8_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>optional&lt; T &gt;</label>
+        <link refid="classoptional"/>
+        <childnode refid="26" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>optional&lt; T &amp; &gt;</label>
+        <link refid="classoptional_3_01_t_01_6_01_4"/>
+        <childnode refid="26" relation="public-inheritance">
+        </childnode>
+        <childnode refid="29" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="143">
+        <label>pair&lt; Key, T &gt;</label>
+        <link refid="structpair"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="144">
+        <label>pair&lt; const Key, T &gt;</label>
+        <link refid="structpair"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>priority_queue&lt; T, Sequence, Compare &gt;</label>
+        <link refid="classpriority__queue"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>priority_queue&lt; priority_task &gt;</label>
+        <link refid="classpriority__queue"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>queue&lt; connection_entry &gt;</label>
+        <link refid="classqueue"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>queue&lt; T, Sequence &gt;</label>
+        <link refid="classqueue"/>
+        <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
       <node id="40">
-        <label>vector&lt; Value, Alloc &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+        <label>rb_tree&lt; Key, Key, identity&lt; Key &gt;, Compare, Alloc &gt;</label>
+        <link refid="classrb__tree"/>
+        <childnode refid="30" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="50">
-        <label>vector&lt; aiocb_type * &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+      <node id="39">
+        <label>rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;</label>
+        <link refid="classrb__tree"/>
+        <childnode refid="30" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="41">
-        <label>vector&lt; byte_t &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+      <node id="14">
+        <label>rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, less&lt; Key &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt;</label>
+        <link refid="classrb__tree"/>
+        <childnode refid="13" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="51">
-        <label>vector&lt; char &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+      <node id="94">
+        <label>sparse_multiset&lt; Key, Compare, Alloc &gt;</label>
+        <link refid="classsparse__multiset"/>
+        <childnode refid="30" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="45">
-        <label>vector&lt; cmdline::option &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="47">
-        <label>vector&lt; cmdline::option_conflict &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="46">
-        <label>vector&lt; cmdline::option_dependency &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="65">
-        <label>vector&lt; const char * &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="78">
-        <label>vector&lt; context &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="48">
-        <label>vector&lt; dns_record &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="62">
-        <label>vector&lt; enum_entry &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="56">
-        <label>vector&lt; filter_entry &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="80">
-        <label>vector&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="79">
-        <label>vector&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="53">
-        <label>vector&lt; hpack_header_field &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="54">
-        <label>vector&lt; http2_settings_entry &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="55">
-        <label>vector&lt; http_cookie &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="81">
-        <label>vector&lt; indent_context &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="66">
-        <label>vector&lt; int &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="59">
-        <label>vector&lt; lb_backend &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="61">
-        <label>vector&lt; log_event &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="63">
-        <label>vector&lt; meta_type * &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="68">
-        <label>vector&lt; node &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>vector&lt; pair&lt; Key, T &gt;, allocator&lt; pair&lt; Key, T &gt; &gt; &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="15" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="60">
-        <label>vector&lt; part &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="76">
-        <label>vector&lt; pending_signal &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="77">
-        <label>vector&lt; priority_task &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="67">
-        <label>vector&lt; proxy_backend &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+      <node id="95">
+        <label>sparse_set&lt; Key, Compare, Alloc &gt;</label>
+        <link refid="classsparse__set"/>
+        <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
       <node id="42">
-        <label>vector&lt; ptr &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+        <label>sparse_vector&lt; Key, Key, identity&lt; Key &gt;, Compare, Alloc &gt;</label>
+        <link refid="classsparse__vector"/>
+        <childnode refid="30" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="57">
-        <label>vector&lt; route_entry &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+      <node id="41">
+        <label>sparse_vector&lt; Key, pair&lt; Key, T &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, Compare, Alloc &gt;</label>
+        <link refid="classsparse__vector"/>
+        <childnode refid="30" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="44">
-        <label>vector&lt; segment &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+      <node id="16">
+        <label>sparse_vector&lt; Key, pair&lt; Key, T &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, less&lt; Key &gt;, allocator&lt; pair&lt; Key, T &gt; &gt; &gt;</label>
+        <link refid="classsparse__vector"/>
+        <childnode refid="15" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="69">
-        <label>vector&lt; slot_entry &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="72">
-        <label>vector&lt; sql_builder::column_definition &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="71">
-        <label>vector&lt; sql_builder::cte_entry &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="70">
-        <label>vector&lt; sql_builder::set_op_entry &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="73">
-        <label>vector&lt; stacktrace::frame &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+      <node id="96">
+        <label>sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;</label>
+        <link refid="classsparse__vector"/>
+        <childnode refid="30" relation="private-inheritance">
         </childnode>
       </node>
       <node id="43">
-        <label>const_iterator&lt; string &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+        <label>stack&lt; frame &gt;</label>
+        <link refid="classstack"/>
+        <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="74">
-        <label>vector&lt; sysinfo::numa_node_info &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+      <node id="97">
+        <label>stack&lt; T, Sequence &gt;</label>
+        <link refid="classstack"/>
+        <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="52">
-        <label>vector&lt; table_entry &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+      <node id="155">
+        <label>u16character</label>
+        <link refid="structu16character"/>
+        <childnode refid="154" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="58">
-        <label>vector&lt; thread &gt;</label>
+      <node id="157">
+        <label>u32character</label>
+        <link refid="structu32character"/>
+        <childnode refid="156" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="153">
+        <label>u8character</label>
+        <link refid="structu8character"/>
+        <childnode refid="152" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="130">
+        <label>uinteger16</label>
+        <link refid="structuinteger16"/>
+        <childnode refid="129" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="132">
+        <label>uinteger32</label>
+        <link refid="structuinteger32"/>
+        <childnode refid="131" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="134">
+        <label>uinteger64</label>
+        <link refid="structuinteger64"/>
+        <childnode refid="133" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="128">
+        <label>uinteger8</label>
+        <link refid="structuinteger8"/>
+        <childnode refid="127" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>vector&lt; Value, Alloc &gt;</label>
         <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>vector&lt; byte_t &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>vector&lt; char &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>vector&lt; cmdline::option &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>vector&lt; cmdline::option_conflict &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>vector&lt; cmdline::option_dependency &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>vector&lt; const char * &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>const_iterator&lt; const_buffer &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
       <node id="49">
-        <label>vector&lt; timer_entry &gt;</label>
+        <label>iterator&lt; const_buffer &gt;</label>
         <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>vector&lt; context &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>vector&lt; dns_record &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>vector&lt; enum_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>vector&lt; filter_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>vector&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>vector&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>vector&lt; hpack_header_field &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>vector&lt; http2_settings_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>vector&lt; http_cookie &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>vector&lt; indent_context &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>vector&lt; int &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>vector&lt; lb_backend &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>vector&lt; log_event &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>vector&lt; meta_type * &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>const_iterator&lt; mutable_buffer &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>iterator&lt; mutable_buffer &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
       <node id="75">
-        <label>vector&lt; uint32_t &gt;</label>
+        <label>vector&lt; node &gt;</label>
         <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="89">
-        <label>vector&lt; T, Alloc &gt;</label>
+      <node id="18">
+        <label>vector&lt; pair&lt; Key, T &gt;, allocator&lt; pair&lt; Key, T &gt; &gt; &gt;</label>
         <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>vector&lt; part &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>vector&lt; pending_signal &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>vector&lt; priority_task &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>vector&lt; proxy_backend &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>vector&lt; ptr &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>vector&lt; route_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>vector&lt; segment &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>vector&lt; slot_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>vector&lt; sql_builder::column_definition &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>vector&lt; sql_builder::cte_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>vector&lt; sql_builder::set_op_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>vector&lt; stacktrace::frame &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>const_iterator&lt; string &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>vector&lt; sysinfo::numa_node_info &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>vector&lt; table_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
       <node id="64">
-        <label>vector&lt;::MYSQL_BIND &gt;</label>
+        <label>vector&lt; thread &gt;</label>
         <link refid="classvector"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="142">
+      <node id="65">
+        <label>vector&lt; timer_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>vector&lt; uint32_t &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>vector&lt; T, Alloc &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>vector&lt;::MYSQL_BIND &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="151">
         <label>wcharacter</label>
         <link refid="structwcharacter"/>
-        <childnode refid="141" relation="public-inheritance">
+        <childnode refid="150" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>

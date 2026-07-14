@@ -120,13 +120,10 @@ using&#160;</td><td class="memItemRight"><b>client_type</b> = <a class="el" href
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:ad10018ddca8fe8b23e58691e354de59b" id="r_ad10018ddca8fe8b23e58691e354de59b"><td class="memItemLeft"><a id="ad10018ddca8fe8b23e58691e354de59b" name="ad10018ddca8fe8b23e58691e354de59b"></a>
-&#160;</td><td class="memItemRight"><b>http_client</b> ()</td></tr>
-<tr class="memdesc:ad10018ddca8fe8b23e58691e354de59b"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
-<tr class="memitem:ad888731f5976b90608c62ee9714ca3b6" id="r_ad888731f5976b90608c62ee9714ca3b6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad888731f5976b90608c62ee9714ca3b6">http_client</a> (<a class="el" href="structhttp__client_1_1config.html">config</a> <a class="el" href="structhttp__client_1_1config.html">config</a>)</td></tr>
-<tr class="memdesc:ad888731f5976b90608c62ee9714ca3b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
-<tr class="memitem:ac1f10f57bd5b9ac789bb26fb3441f876" id="r_ac1f10f57bd5b9ac789bb26fb3441f876"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac1f10f57bd5b9ac789bb26fb3441f876">http_client</a> (<a class="el" href="classssl__context.html">ssl_context</a> ctx, <a class="el" href="structhttp__client_1_1config.html">config</a> <a class="el" href="structhttp__client_1_1config.html">config</a>)</td></tr>
-<tr class="memdesc:ac1f10f57bd5b9ac789bb26fb3441f876"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数（带SSL上下文）  <br /></td></tr>
+<tr class="memitem:a42ac497148b0aff27d27526be2cdc636" id="r_a42ac497148b0aff27d27526be2cdc636"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a42ac497148b0aff27d27526be2cdc636">http_client</a> (<a class="el" href="classio__context.html">io_context</a> &amp;ioc, <a class="el" href="structhttp__client_1_1config.html">config</a> cfg)</td></tr>
+<tr class="memdesc:a42ac497148b0aff27d27526be2cdc636"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:aef0e9c1bb99304cf7e1e7b4c584ad038" id="r_aef0e9c1bb99304cf7e1e7b4c584ad038"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aef0e9c1bb99304cf7e1e7b4c584ad038">http_client</a> (<a class="el" href="classio__context.html">io_context</a> &amp;ioc, <a class="el" href="classssl__context.html">ssl_context</a> ctx, <a class="el" href="structhttp__client_1_1config.html">config</a> cfg)</td></tr>
+<tr class="memdesc:aef0e9c1bb99304cf7e1e7b4c584ad038"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数（带SSL上下文）  <br /></td></tr>
 <tr class="memitem:ab91bcc15568273a955d9f6b5824455b1" id="r_ab91bcc15568273a955d9f6b5824455b1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab91bcc15568273a955d9f6b5824455b1">set_config</a> (<a class="el" href="structhttp__client_1_1config.html">config</a> cfg)</td></tr>
 <tr class="memdesc:ab91bcc15568273a955d9f6b5824455b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置客户端配置  <br /></td></tr>
 <tr class="memitem:a3acc26f27e0604472ad09ff517c00e87" id="r_a3acc26f27e0604472ad09ff517c00e87"><td class="memItemLeft">const <a class="el" href="structhttp__client_1_1config.html">config</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3acc26f27e0604472ad09ff517c00e87">get_config</a> () const noexcept</td></tr>
@@ -209,7 +206,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
 <li>分块传输处理</li>
 </ul>
 <p>使用示例： </p><div class="fragment"><div class="line"><span class="comment">// 创建HTTP客户端</span></div>
-<div class="line"><a class="code hl_function" href="#ad10018ddca8fe8b23e58691e354de59b">http_client</a> client;</div>
+<div class="line">http_client client;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// GET请求</span></div>
 <div class="line"><span class="keyword">auto</span> response = client.<a class="code hl_function" href="#a8b699560881d5bc626bbe1b689fc38a8">get</a>(<span class="stringliteral">&quot;https://api.example.com/users&quot;</span>);</div>
@@ -245,18 +242,17 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
 <div class="ttc" id="aclasshttp__client_html_a5be4106ae9e01da48bfd67446c3a9934"><div class="ttname"><a href="#a5be4106ae9e01da48bfd67446c3a9934">http_client::request_async</a></div><div class="ttdeci">future&lt; http_client_response &gt; request_async(http_client_request req)</div><div class="ttdoc">异步HTTP请求</div></div>
 <div class="ttc" id="aclasshttp__client_html_a68a4fe6eee2be78cd4cafe9f9f5ab7a1"><div class="ttname"><a href="#a68a4fe6eee2be78cd4cafe9f9f5ab7a1">http_client::post_form</a></div><div class="ttdeci">http_client_response post_form(const string &amp;url_str, const unordered_map&lt; string, string &gt; &amp;form_data, const unordered_map&lt; string, string &gt; &amp;headers)</div><div class="ttdoc">发送POST表单请求</div></div>
 <div class="ttc" id="aclasshttp__client_html_a8b699560881d5bc626bbe1b689fc38a8"><div class="ttname"><a href="#a8b699560881d5bc626bbe1b689fc38a8">http_client::get</a></div><div class="ttdeci">http_client_response get(const string &amp;url, const unordered_map&lt; string, string &gt; &amp;headers={})</div><div class="ttdoc">发送GET请求</div></div>
-<div class="ttc" id="aclasshttp__client_html_a8fbfac0ce0aec7e72a981e49d92f805c"><div class="ttname"><a href="#a8fbfac0ce0aec7e72a981e49d92f805c">http_client::set_proxy</a></div><div class="ttdeci">void set_proxy(string host, const ports port)</div><div class="ttdoc">设置代理</div><div class="ttdef"><b>定义</b> <a href="http__client_8hpp_source.html#l00233">http_client.hpp:233</a></div></div>
+<div class="ttc" id="aclasshttp__client_html_a8fbfac0ce0aec7e72a981e49d92f805c"><div class="ttname"><a href="#a8fbfac0ce0aec7e72a981e49d92f805c">http_client::set_proxy</a></div><div class="ttdeci">void set_proxy(string host, const ports port)</div><div class="ttdoc">设置代理</div><div class="ttdef"><b>定义</b> <a href="http__client_8hpp_source.html#l00236">http_client.hpp:236</a></div></div>
 <div class="ttc" id="aclasshttp__client_html_ab0508e55089eb0bd650ccc260a84f588"><div class="ttname"><a href="#ab0508e55089eb0bd650ccc260a84f588">http_client::post_json</a></div><div class="ttdeci">http_client_response post_json(const string &amp;url_str, const string &amp;json_body, const unordered_map&lt; string, string &gt; &amp;headers)</div><div class="ttdoc">发送POST JSON请求</div></div>
-<div class="ttc" id="aclasshttp__client_html_ad10018ddca8fe8b23e58691e354de59b"><div class="ttname"><a href="#ad10018ddca8fe8b23e58691e354de59b">http_client::http_client</a></div><div class="ttdeci">http_client()</div><div class="ttdoc">默认构造函数</div><div class="ttdef"><b>定义</b> <a href="http__client_8hpp_source.html#l00139">http_client.hpp:139</a></div></div>
-<div class="ttc" id="aclasshttp__client_html_aff71524812f199c5e114cc38301446e7"><div class="ttname"><a href="#aff71524812f199c5e114cc38301446e7">http_client::set_timeout</a></div><div class="ttdeci">void set_timeout(milliseconds timeout)</div><div class="ttdoc">设置统一超时时间</div><div class="ttdef"><b>定义</b> <a href="http__client_8hpp_source.html#l00222">http_client.hpp:222</a></div></div>
+<div class="ttc" id="aclasshttp__client_html_aff71524812f199c5e114cc38301446e7"><div class="ttname"><a href="#aff71524812f199c5e114cc38301446e7">http_client::set_timeout</a></div><div class="ttdeci">void set_timeout(milliseconds timeout)</div><div class="ttdoc">设置统一超时时间</div><div class="ttdef"><b>定义</b> <a href="http__client_8hpp_source.html#l00225">http_client.hpp:225</a></div></div>
 <div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
-<div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00699">console.hpp:699</a></div></div>
+<div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00701">console.hpp:701</a></div></div>
 <div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
 </div><!-- fragment --> 
 <p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00081">81</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
-<a id="ad888731f5976b90608c62ee9714ca3b6" name="ad888731f5976b90608c62ee9714ca3b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad888731f5976b90608c62ee9714ca3b6">&#9670;&#160;</a></span>http_client() <span class="overload">[1/2]</span></h2>
+<a id="a42ac497148b0aff27d27526be2cdc636" name="a42ac497148b0aff27d27526be2cdc636"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42ac497148b0aff27d27526be2cdc636">&#9670;&#160;</a></span>http_client() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -267,8 +263,12 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
         <tr>
           <td class="memname">http_client::http_client </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structhttp__client_1_1config.html">config</a></td>          <td class="paramname"><span class="paramname"><em>config</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classio__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ioc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="structhttp__client_1_1config.html">config</a></td>          <td class="paramname"><span class="paramname"><em>cfg</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -281,15 +281,18 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
 <p>构造函数 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">config</td><td>客户端配置 </td></tr>
+    <tr><td class="paramname">ioc</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">cfg</td><td>客户端配置 </td></tr>
   </table>
   </dd>
 </dl>
 
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
 </div>
 </div>
-<a id="ac1f10f57bd5b9ac789bb26fb3441f876" name="ac1f10f57bd5b9ac789bb26fb3441f876"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1f10f57bd5b9ac789bb26fb3441f876">&#9670;&#160;</a></span>http_client() <span class="overload">[2/2]</span></h2>
+<a id="aef0e9c1bb99304cf7e1e7b4c584ad038" name="aef0e9c1bb99304cf7e1e7b4c584ad038"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef0e9c1bb99304cf7e1e7b4c584ad038">&#9670;&#160;</a></span>http_client() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -300,12 +303,17 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
         <tr>
           <td class="memname">http_client::http_client </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="classio__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ioc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="classssl__context.html">ssl_context</a></td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structhttp__client_1_1config.html">config</a></td>          <td class="paramname"><span class="paramname"><em>config</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="structhttp__client_1_1config.html">config</a></td>          <td class="paramname"><span class="paramname"><em>cfg</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -318,13 +326,12 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
 <p>构造函数（带SSL上下文） </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
+    <tr><td class="paramname">ioc</td><td>异步 I/O 执行上下文 </td></tr>
     <tr><td class="paramname">ctx</td><td>SSL上下文 </td></tr>
-    <tr><td class="paramname">config</td><td>客户端配置 </td></tr>
+    <tr><td class="paramname">cfg</td><td>客户端配置 </td></tr>
   </table>
   </dd>
 </dl>
-
-<p class="reference">引用了 <a class="el" href="http__client_8hpp_source.html#l00139">http_client()</a>.</p>
 
 </div>
 </div>
@@ -456,7 +463,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
 <p>获取底层客户端 </p>
 <dl class="section return"><dt>返回</dt><dd>客户端引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00184">184</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00187">187</a> 行定义.</p>
 
 </div>
 </div>
@@ -486,7 +493,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
 <p>获取客户端配置 </p>
 <dl class="section return"><dt>返回</dt><dd>配置常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00178">178</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00181">181</a> 行定义.</p>
 
 </div>
 </div>
@@ -516,7 +523,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
 <p>获取所有Cookie </p>
 <dl class="section return"><dt>返回</dt><dd>Cookie映射 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00290">290</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00293">293</a> 行定义.</p>
 
 </div>
 </div>
@@ -578,7 +585,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
 <p>检查是否已连接 </p>
 <dl class="section return"><dt>返回</dt><dd>已连接返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00451">451</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00454">454</a> 行定义.</p>
 
 </div>
 </div>
@@ -853,7 +860,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00201">201</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00204">204</a> 行定义.</p>
 
 </div>
 </div>
@@ -940,11 +947,11 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00169">169</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00172">172</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="http__client_8hpp_source.html#l00169">set_config()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="http__client_8hpp_source.html#l00172">set_config()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="http__client_8hpp_source.html#l00169">set_config()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="http__client_8hpp_source.html#l00172">set_config()</a>.</p>
 
 </div>
 </div>
@@ -1020,7 +1027,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00192">192</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00195">195</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -1057,7 +1064,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00256">256</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00259">259</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -1094,7 +1101,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00216">216</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00219">219</a> 行定义.</p>
 
 </div>
 </div>
@@ -1129,7 +1136,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00210">210</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00213">213</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00133">max()</a>.</p>
 
@@ -1166,7 +1173,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00250">250</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00253">253</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -1208,7 +1215,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00233">233</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00236">236</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -1270,7 +1277,7 @@ void&#160;</td><td class="memItemRight"><b>close</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00222">222</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__client_8hpp_source.html">http_client.hpp</a> 第 <a class="el" href="http__client_8hpp_source.html#l00225">225</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00035">timeout</a>.</p>
 

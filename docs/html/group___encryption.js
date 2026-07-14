@@ -2,6 +2,7 @@ var group___encryption =
 [
     [ "AES-256", "group___a_e_s256.html", "group___a_e_s256" ],
     [ "Base64", "group___base64.html", "group___base64" ],
+    [ "ChaCha20-Poly1305", "group___cha_cha20_poly1305.html", "group___cha_cha20_poly1305" ],
     [ "MD5", "group___m_d5.html", "group___m_d5" ],
     [ "SHA-1", "group___s_h_a1.html", "group___s_h_a1" ],
     [ "SHA-256", "group___s_h_a256.html", "group___s_h_a256" ],

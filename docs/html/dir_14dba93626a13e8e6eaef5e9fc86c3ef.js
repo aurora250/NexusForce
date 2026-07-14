@@ -4,6 +4,8 @@ var dir_14dba93626a13e8e6eaef5e9fc86c3ef =
     [ "allocated_ptr.hpp", "allocated__ptr_8hpp.html", "allocated__ptr_8hpp" ],
     [ "allocator_traits.hpp", "allocator__traits_8hpp.html", null ],
     [ "bit.hpp", "bit_8hpp.html", "bit_8hpp" ],
+    [ "bounded_queue.hpp", "bounded__queue_8hpp_source.html", null ],
+    [ "buffer.hpp", "buffer_8hpp.html", "buffer_8hpp" ],
     [ "byte_cursor.hpp", "byte__cursor_8hpp.html", null ],
     [ "construct.hpp", "construct_8hpp.html", "construct_8hpp" ],
     [ "endian.hpp", "endian_8hpp.html", null ],

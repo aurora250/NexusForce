@@ -5,28 +5,11 @@
     <basecompoundref refid="structmemory__exception" prot="public" virt="non-virtual">memory_exception</basecompoundref>
     <derivedcompoundref refid="structanycast__exception" prot="public" virt="non-virtual">anycast_exception</derivedcompoundref>
     <includes refid="exception_8hpp" local="no">exception.hpp</includes>
-    <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="structtypecast__exception_1a5c60676c7fb1f11a6f442e537b12b51d" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>auto</type>
-        <definition>auto typecast_exception::static_type</definition>
-        <argsstring></argsstring>
-        <name>static_type</name>
-        <qualifiedname>typecast_exception::static_type</qualifiedname>
-        <initializer>= &quot;typecast_exception&quot;</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="216" column="190" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="216" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structtypecast__exception_1a9188dcb4847c4faa0444caca39974f92" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structtypecast__exception_1add94c97ee7b65cd96c91302fe5c026cb" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>typecast_exception::typecast_exception</definition>
-        <argsstring>(const char *info=&quot;Type Cast Mismatch.&quot;, const char *type=static_type, const int code=0) noexcept</argsstring>
+        <argsstring>(const char *info=&quot;Type Cast Mismatch.&quot;) noexcept</argsstring>
         <name>typecast_exception</name>
         <qualifiedname>typecast_exception::typecast_exception</qualifiedname>
         <param>
@@ -34,23 +17,13 @@
           <declname>info</declname>
           <defval>&quot;Type Cast Mismatch.&quot;</defval>
         </param>
-        <param>
-          <type>const char *</type>
-          <declname>type</declname>
-          <defval>static_type</defval>
-        </param>
-        <param>
-          <type>const int</type>
-          <declname>code</declname>
-          <defval>0</defval>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="216" column="52" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="216" bodyend="216"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="186" column="52" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="186" bodyend="186"/>
       </memberdef>
       <memberdef kind="function" id="structtypecast__exception_1a16326fc4b8d79a2e12ea37615a88cba7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -68,12 +41,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="216" column="108" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="216" bodyend="216"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="186" column="98" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="186" bodyend="186"/>
       </memberdef>
-      <memberdef kind="function" id="structtypecast__exception_1a0a1e21f8b96d83dab38c374613c43df7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="structtypecast__exception_1a2cc97682606d29747847fc7396f36bb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>virtual typecast_exception::~typecast_exception</definition>
-        <argsstring>()=default</argsstring>
+        <definition>typecast_exception::~typecast_exception</definition>
+        <argsstring>() override=default</argsstring>
         <name>~typecast_exception</name>
         <qualifiedname>typecast_exception::~typecast_exception</qualifiedname>
         <briefdescription>
@@ -82,7 +55,27 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="216" column="138"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="186" column="120"/>
+      </memberdef>
+      <memberdef kind="function" id="structtypecast__exception_1a5be57daae0b20efdada4b761552882dd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const char *</type>
+        <definition>const char * typecast_exception::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>typecast_exception::type</qualifiedname>
+        <reimplements refid="structmemory__exception_1aa037c36915112a83b2540cee91b428ca">type</reimplements>
+        <briefdescription>
+<para>获取异常类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="186" column="172" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="186" bodyend="186"/>
+        <references refid="group___exception_handling_1gae678474841c27ba5f9d8215c812fefae" compoundref="exception_8hpp" startline="44" endline="49">NEFORCE_ERROR_BUILD_DERIVED_CLASS</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -132,25 +125,23 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="216" column="2" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="216" bodyend="216"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="186" column="2" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="186" bodyend="186"/>
     <listofallmembers>
-      <member refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>code</name></member>
-      <member refid="structexception_1a33710bd2e564614575128e2c3de94883" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>exception</name></member>
+      <member refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>exception</name></member>
       <member refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>exception</name></member>
       <member refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>exception</name></member>
       <member refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>exception</name></member>
-      <member refid="structmemory__exception_1a95cafcfdd2931cf236c9c00ec8f6435c" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>memory_exception</name></member>
+      <member refid="structmemory__exception_1a3cd878239c285001e1f2613a0705ae55" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>memory_exception</name></member>
       <member refid="structmemory__exception_1ac708d45b04b3ca993bdd6af93ba6ce88" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>memory_exception</name></member>
       <member refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>operator=</name></member>
       <member refid="structexception_1a709d705f97cbad7d531dfb5023107536" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>operator=</name></member>
-      <member refid="structtypecast__exception_1a5c60676c7fb1f11a6f442e537b12b51d" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>static_type</name></member>
-      <member refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>type</name></member>
-      <member refid="structtypecast__exception_1a9188dcb4847c4faa0444caca39974f92" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>typecast_exception</name></member>
+      <member refid="structtypecast__exception_1a5be57daae0b20efdada4b761552882dd" prot="public" virt="virtual"><scope>typecast_exception</scope><name>type</name></member>
+      <member refid="structtypecast__exception_1add94c97ee7b65cd96c91302fe5c026cb" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>typecast_exception</name></member>
       <member refid="structtypecast__exception_1a16326fc4b8d79a2e12ea37615a88cba7" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>typecast_exception</name></member>
-      <member refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>what</name></member>
+      <member refid="structexception_1ae5dc04391190559c19adcf269cab48e2" prot="public" virt="virtual"><scope>typecast_exception</scope><name>what</name></member>
       <member refid="structexception_1a80249b2b108c9b913dc7144839092a2b" prot="public" virt="virtual"><scope>typecast_exception</scope><name>~exception</name></member>
-      <member refid="structmemory__exception_1a36add89e1d26ad88d5970a0156acd6db" prot="public" virt="virtual"><scope>typecast_exception</scope><name>~memory_exception</name></member>
-      <member refid="structtypecast__exception_1a0a1e21f8b96d83dab38c374613c43df7" prot="public" virt="virtual"><scope>typecast_exception</scope><name>~typecast_exception</name></member>
+      <member refid="structmemory__exception_1a9e0fa477b0e3b9b54616ac6497bd408d" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>~memory_exception</name></member>
+      <member refid="structtypecast__exception_1a2cc97682606d29747847fc7396f36bb5" prot="public" virt="non-virtual"><scope>typecast_exception</scope><name>~typecast_exception</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

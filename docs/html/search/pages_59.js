@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['标准合规_0',['📡 标准合规',['../md__m_a_i_n_p_a_g_e.html#autotoc_md8',1,'']]]
+  ['有意不纳入的特性及原因_0',['有意不纳入的特性及原因',['../group___s_q_l.html#exclusions',1,'']]]
 ];

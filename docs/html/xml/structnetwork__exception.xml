@@ -2,35 +2,18 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
   <compounddef id="structnetwork__exception" kind="struct" language="C++" prot="public">
     <compoundname>network_exception</compoundname>
-    <basecompoundref refid="structexception" prot="public" virt="non-virtual">exception</basecompoundref>
+    <basecompoundref refid="structsystem__exception" prot="public" virt="non-virtual">system_exception</basecompoundref>
     <derivedcompoundref refid="classdns__exception" prot="public" virt="non-virtual">dns_exception</derivedcompoundref>
     <derivedcompoundref refid="structftp__exception" prot="public" virt="non-virtual">ftp_exception</derivedcompoundref>
     <derivedcompoundref refid="structhttp__exception" prot="public" virt="non-virtual">http_exception</derivedcompoundref>
     <derivedcompoundref refid="structsmtp__exception" prot="public" virt="non-virtual">smtp_exception</derivedcompoundref>
     <derivedcompoundref refid="structsocket__exception" prot="public" virt="non-virtual">socket_exception</derivedcompoundref>
-    <includes refid="exception_8hpp" local="no">exception.hpp</includes>
-    <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="structnetwork__exception_1a62412e9a5c0c27515f02ab465b285fd9" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>auto</type>
-        <definition>auto network_exception::static_type</definition>
-        <argsstring></argsstring>
-        <name>static_type</name>
-        <qualifiedname>network_exception::static_type</qualifiedname>
-        <initializer>= &quot;network_exception&quot;</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="258" column="179" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="258" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
+    <includes refid="system__exception_8hpp" local="no">system_exception.hpp</includes>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structnetwork__exception_1a1c5c5012b13913cd9140dab35407bc9a" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structnetwork__exception_1a66ee989b6949597bd44de5a744e71e36" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>network_exception::network_exception</definition>
-        <argsstring>(const char *info=&quot;Network Operation or Action Failed.&quot;, const char *type=static_type, const int code=0) noexcept</argsstring>
+        <argsstring>(const char *info=&quot;Network Operation or Action Failed.&quot;, const error_code code=last_error()) noexcept</argsstring>
         <name>network_exception</name>
         <qualifiedname>network_exception::network_exception</qualifiedname>
         <param>
@@ -39,14 +22,9 @@
           <defval>&quot;Network Operation or Action Failed.&quot;</defval>
         </param>
         <param>
-          <type>const char *</type>
-          <declname>type</declname>
-          <defval>static_type</defval>
-        </param>
-        <param>
-          <type>const int</type>
+          <type>const error_code</type>
           <declname>code</declname>
-          <defval>0</defval>
+          <defval>last_error()</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -54,7 +32,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="258" column="44" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="258" bodyend="258"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="83" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" bodystart="83" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="structnetwork__exception_1a0761824a079985f5f4409c1fb865a185" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>network_exception::network_exception</definition>
+        <argsstring>(const error_code err)</argsstring>
+        <name>network_exception</name>
+        <qualifiedname>network_exception::network_exception</qualifiedname>
+        <param>
+          <type>const error_code</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="87" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" bodystart="87" bodyend="88"/>
       </memberdef>
       <memberdef kind="function" id="structnetwork__exception_1ad506a4b8a7174eacd12e4b1ea79bcc23" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -72,12 +68,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="258" column="99" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="258" bodyend="258"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="90" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" bodystart="90" bodyend="91"/>
       </memberdef>
-      <memberdef kind="function" id="structnetwork__exception_1ae32a5f099231d2ce49e3639e85092cc6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="structnetwork__exception_1a188cf0c9087d0319e7608f95389f5905" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>virtual network_exception::~network_exception</definition>
-        <argsstring>()=default</argsstring>
+        <definition>network_exception::~network_exception</definition>
+        <argsstring>() override=default</argsstring>
         <name>~network_exception</name>
         <qualifiedname>network_exception::~network_exception</qualifiedname>
         <briefdescription>
@@ -86,7 +82,28 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="258" column="128"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="93" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structnetwork__exception_1adcb36910c235605c7ce30cad58c95273" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const char *</type>
+        <definition>const char * network_exception::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>network_exception::type</qualifiedname>
+        <reimplements refid="structexception_1a2f7dcc6349b3ef905ebb76859aa8abe6">type</reimplements>
+        <reimplementedby refid="structsmtp__exception_1a2247e9b2588afe7d536199697991aa06">type</reimplementedby>
+        <reimplementedby refid="structsocket__exception_1a4137dcf65ec2693eb5ce8db6a74d0e4b">type</reimplementedby>
+        <briefdescription>
+<para>获取异常类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="95" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" bodystart="95" bodyend="95"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -95,23 +112,23 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="3">
+      <node id="4">
         <label>dns_exception</label>
         <link refid="classdns__exception"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="2">
+      <node id="3">
         <label>exception</label>
         <link refid="structexception"/>
       </node>
-      <node id="4">
+      <node id="5">
         <label>ftp_exception</label>
         <link refid="structftp__exception"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="5">
+      <node id="6">
         <label>http_exception</label>
         <link refid="structhttp__exception"/>
         <childnode refid="1" relation="public-inheritance">
@@ -123,21 +140,27 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="6">
+      <node id="7">
         <label>smtp_exception</label>
         <link refid="structsmtp__exception"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
+      <node id="8">
         <label>socket_exception</label>
         <link refid="structsocket__exception"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="2">
+        <label>system_exception</label>
+        <link refid="structsystem__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="2">
+      <node id="3">
         <label>exception</label>
         <link refid="structexception"/>
       </node>
@@ -147,23 +170,34 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="2">
+        <label>system_exception</label>
+        <link refid="structsystem__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="258" column="2" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="258" bodyend="258"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="82" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" bodystart="82" bodyend="96"/>
     <listofallmembers>
-      <member refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" prot="public" virt="non-virtual"><scope>network_exception</scope><name>code</name></member>
-      <member refid="structexception_1a33710bd2e564614575128e2c3de94883" prot="public" virt="non-virtual"><scope>network_exception</scope><name>exception</name></member>
+      <member refid="structsystem__exception_1af69c032fcd6d9bb66a14ae52a3566977" prot="public" virt="virtual"><scope>network_exception</scope><name>code</name></member>
+      <member refid="structsystem__exception_1af985d25515bd806e9e05ca75ac0aa559" prot="protected" virt="non-virtual"><scope>network_exception</scope><name>code_</name></member>
+      <member refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" prot="public" virt="non-virtual"><scope>network_exception</scope><name>exception</name></member>
       <member refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" prot="public" virt="non-virtual"><scope>network_exception</scope><name>exception</name></member>
       <member refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" prot="public" virt="non-virtual"><scope>network_exception</scope><name>exception</name></member>
       <member refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" prot="public" virt="non-virtual"><scope>network_exception</scope><name>exception</name></member>
-      <member refid="structnetwork__exception_1a1c5c5012b13913cd9140dab35407bc9a" prot="public" virt="non-virtual"><scope>network_exception</scope><name>network_exception</name></member>
+      <member refid="structnetwork__exception_1a66ee989b6949597bd44de5a744e71e36" prot="public" virt="non-virtual"><scope>network_exception</scope><name>network_exception</name></member>
+      <member refid="structnetwork__exception_1a0761824a079985f5f4409c1fb865a185" prot="public" virt="non-virtual"><scope>network_exception</scope><name>network_exception</name></member>
       <member refid="structnetwork__exception_1ad506a4b8a7174eacd12e4b1ea79bcc23" prot="public" virt="non-virtual"><scope>network_exception</scope><name>network_exception</name></member>
       <member refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" prot="public" virt="non-virtual"><scope>network_exception</scope><name>operator=</name></member>
       <member refid="structexception_1a709d705f97cbad7d531dfb5023107536" prot="public" virt="non-virtual"><scope>network_exception</scope><name>operator=</name></member>
-      <member refid="structnetwork__exception_1a62412e9a5c0c27515f02ab465b285fd9" prot="public" virt="non-virtual"><scope>network_exception</scope><name>static_type</name></member>
-      <member refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" prot="public" virt="non-virtual"><scope>network_exception</scope><name>type</name></member>
-      <member refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" prot="public" virt="non-virtual"><scope>network_exception</scope><name>what</name></member>
+      <member refid="structsystem__exception_1a40cdfe9b12f818d7632abc6e2696b3ea" prot="public" virt="non-virtual"><scope>network_exception</scope><name>system_exception</name></member>
+      <member refid="structsystem__exception_1acdb31c0077759cae3ccd8f1f2e892606" prot="public" virt="non-virtual"><scope>network_exception</scope><name>system_exception</name></member>
+      <member refid="structsystem__exception_1aa4eb872d3a9680bc738f6358db79989f" prot="public" virt="non-virtual"><scope>network_exception</scope><name>system_exception</name></member>
+      <member refid="structnetwork__exception_1adcb36910c235605c7ce30cad58c95273" prot="public" virt="virtual"><scope>network_exception</scope><name>type</name></member>
+      <member refid="structexception_1ae5dc04391190559c19adcf269cab48e2" prot="public" virt="virtual"><scope>network_exception</scope><name>what</name></member>
       <member refid="structexception_1a80249b2b108c9b913dc7144839092a2b" prot="public" virt="virtual"><scope>network_exception</scope><name>~exception</name></member>
-      <member refid="structnetwork__exception_1ae32a5f099231d2ce49e3639e85092cc6" prot="public" virt="virtual"><scope>network_exception</scope><name>~network_exception</name></member>
+      <member refid="structnetwork__exception_1a188cf0c9087d0319e7608f95389f5905" prot="public" virt="non-virtual"><scope>network_exception</scope><name>~network_exception</name></member>
+      <member refid="structsystem__exception_1a7b61682a3e3db92b6e91087792444955" prot="public" virt="non-virtual"><scope>network_exception</scope><name>~system_exception</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

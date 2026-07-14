@@ -10,5 +10,6 @@ var classzlib__compressor_1_1stream__compressor =
     [ "compression_ratio", "classzlib__compressor_1_1stream__compressor.html#a86a9f46ce0a39e570f409fe06537a975", null ],
     [ "finish", "classzlib__compressor_1_1stream__compressor.html#a3c9ae650c7c4966c05ee29da212a021c", null ],
     [ "operator=", "classzlib__compressor_1_1stream__compressor.html#ae581cc759c603e5a5f6b1bfed3541948", null ],
-    [ "reset", "classzlib__compressor_1_1stream__compressor.html#a4f3592f6b277785d6de048eaec01e5c1", null ]
+    [ "reset", "classzlib__compressor_1_1stream__compressor.html#a4f3592f6b277785d6de048eaec01e5c1", null ],
+    [ "soft_reset", "classzlib__compressor_1_1stream__compressor.html#a6033d5aa75455a6a54a5ae28cc53c448", null ]
 ];

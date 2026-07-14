@@ -1,0 +1,242 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classexecutor" kind="class" language="C++" prot="public">
+    <compoundname>executor</compoundname>
+    <includes refid="executor_8hpp" local="no">executor.hpp</includes>
+    <innerclass refid="structexecutor_1_1executor__base" prot="public">executor::executor_base</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classexecutor_1af0da49dd27f3e4d3482cdc12b64b029e" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>using executor::handler_type = function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>handler_type</name>
+        <qualifiedname>executor::handler_type</qualifiedname>
+        <briefdescription>
+<para>handler 类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="39" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classexecutor_1af2b52cc57ac3d465461ff51658168ad2" prot="private" static="no" mutable="no">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="structexecutor_1_1executor__base" kindref="compound">executor_base</ref> &gt;</type>
+        <definition>shared_ptr&lt;executor_base&gt; executor::exec_</definition>
+        <argsstring></argsstring>
+        <name>exec_</name>
+        <qualifiedname>executor::exec_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="50" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classexecutor_1a7ea500bdfe1e8efce559ea0374bdaeb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>executor::executor</definition>
+        <argsstring>()=default</argsstring>
+        <name>executor</name>
+        <qualifiedname>executor::executor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="53" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classexecutor_1ade1b82df93959af7939db0cf8a983625" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Exec</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Exec &gt;, <ref refid="classexecutor" kindref="compound">executor</ref> &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>executor::executor</definition>
+        <argsstring>(Exec exec)</argsstring>
+        <name>executor</name>
+        <qualifiedname>executor::executor</qualifiedname>
+        <param>
+          <type>Exec</type>
+          <declname>exec</declname>
+        </param>
+        <briefdescription>
+<para>从任意满足 executor 概念的类型构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Exec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>包装的执行器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>exec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要包装的执行器实例 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="61" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" bodystart="61" bodyend="69"/>
+        <references refid="classexecutor_1a05088cfcfaa46c36b305b896f36c359c" compoundref="executor_8hpp" startline="75" endline="79">execute</references>
+        <references refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" compoundref="shared__ptr_8hpp" startline="849" endline="877">make_shared</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classexecutor_1a05088cfcfaa46c36b305b896f36c359c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void executor::execute</definition>
+        <argsstring>(handler_type handler) const</argsstring>
+        <name>execute</name>
+        <qualifiedname>executor::execute</qualifiedname>
+        <param>
+          <type><ref refid="classexecutor_1af0da49dd27f3e4d3482cdc12b64b029e" kindref="member">handler_type</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>投递 handler 到执行器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的 handler </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="75" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" bodystart="75" bodyend="79"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <referencedby refid="classexecutor_1ade1b82df93959af7939db0cf8a983625" compoundref="executor_8hpp" startline="61" endline="69">executor</referencedby>
+        <referencedby refid="classexecutor_1ab30264241e49b07ccba91286028c9101" compoundref="executor_8hpp" startline="85" endline="85">post</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classexecutor_1ab30264241e49b07ccba91286028c9101" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void executor::post</definition>
+        <argsstring>(handler_type handler) const</argsstring>
+        <name>post</name>
+        <qualifiedname>executor::post</qualifiedname>
+        <param>
+          <type><ref refid="classexecutor_1af0da49dd27f3e4d3482cdc12b64b029e" kindref="member">handler_type</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>投递 handler 到执行器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的 handler </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="85" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" bodystart="85" bodyend="85"/>
+        <references refid="classexecutor_1a05088cfcfaa46c36b305b896f36c359c" compoundref="executor_8hpp" startline="75" endline="79">execute</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <referencedby refid="structsignal_1adbc2cde66647502a24e5b3f675bf7ae6" compoundref="signals_8hpp" startline="586" endline="598">signal&lt; Types &gt;::emit_executor</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classexecutor_1abdfbbcbd210e344dad8c256855fd38f7" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>executor::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>executor::operator bool</qualifiedname>
+        <briefdescription>
+<para>检查执行器是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="90" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classexecutor_1a2066c2b4146009453063ecd70ca773da" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool executor::operator==</definition>
+        <argsstring>(const executor &amp;other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>executor::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classexecutor" kindref="compound">executor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>相等比较 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="95" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" bodystart="95" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classexecutor_1a9b595c58cdc6fe52bb28f967eedd5ce6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool executor::operator!=</definition>
+        <argsstring>(const executor &amp;other) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>executor::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classexecutor" kindref="compound">executor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>不等比较 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="100" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" bodystart="100" bodyend="100"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>多态执行器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>类型擦除的执行器句柄，可包装任意满足 executor 概念的类型。 任意拥有一个可调用 execute(handler_type) 方法的类型都可以 通过模板构造函数包装为 executor。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="36" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" bodystart="36" bodyend="101"/>
+    <listofallmembers>
+      <member refid="classexecutor_1af2b52cc57ac3d465461ff51658168ad2" prot="private" virt="non-virtual"><scope>executor</scope><name>exec_</name></member>
+      <member refid="classexecutor_1a05088cfcfaa46c36b305b896f36c359c" prot="public" virt="non-virtual"><scope>executor</scope><name>execute</name></member>
+      <member refid="classexecutor_1a7ea500bdfe1e8efce559ea0374bdaeb6" prot="public" virt="non-virtual"><scope>executor</scope><name>executor</name></member>
+      <member refid="classexecutor_1ade1b82df93959af7939db0cf8a983625" prot="public" virt="non-virtual"><scope>executor</scope><name>executor</name></member>
+      <member refid="classexecutor_1af0da49dd27f3e4d3482cdc12b64b029e" prot="public" virt="non-virtual"><scope>executor</scope><name>handler_type</name></member>
+      <member refid="classexecutor_1abdfbbcbd210e344dad8c256855fd38f7" prot="public" virt="non-virtual"><scope>executor</scope><name>operator bool</name></member>
+      <member refid="classexecutor_1a9b595c58cdc6fe52bb28f967eedd5ce6" prot="public" virt="non-virtual"><scope>executor</scope><name>operator!=</name></member>
+      <member refid="classexecutor_1a2066c2b4146009453063ecd70ca773da" prot="public" virt="non-virtual"><scope>executor</scope><name>operator==</name></member>
+      <member refid="classexecutor_1ab30264241e49b07ccba91286028c9101" prot="public" virt="non-virtual"><scope>executor</scope><name>post</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

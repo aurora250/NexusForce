@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['参数示例_0',['参数示例',['../group___bloom_filter.html#parameter_examples',1,'']]]
+  ['压缩_20compress_0',['📦 压缩 (Compress)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md32',1,'']]]
 ];

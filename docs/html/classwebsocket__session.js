@@ -14,7 +14,7 @@ var classwebsocket__session =
     [ "set_close_handler", "classwebsocket__session.html#af77e313e481b77c5a125ef3c9819dcd6", null ],
     [ "set_deflate_config", "classwebsocket__session.html#a578830e009dcb82f49a1dedd6909ea79", null ],
     [ "set_error_handler", "classwebsocket__session.html#a40df249d0e94b96b4a736c8ff752f5ea", null ],
-    [ "set_event_loop", "classwebsocket__session.html#ab4118af153f998bb2ea260b03542cee7", null ],
+    [ "set_io_context", "classwebsocket__session.html#a3e75cc22aefd0261c07b0a6da9242028", null ],
     [ "set_message_handler", "classwebsocket__session.html#aaebbcc5d2e0a943226e6d53d95066cca", null ],
     [ "socket", "classwebsocket__session.html#a8c5e17fbe27db7ab514b45e5af7364df", null ],
     [ "socket", "classwebsocket__session.html#ab75d9beacbd176cff4c40fe06af47e19", null ],

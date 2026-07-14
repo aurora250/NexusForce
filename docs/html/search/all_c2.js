@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['选择运算仿函数_0',['选择运算仿函数',['../group___selection_functors.html',1,'']]],
-  ['选项语法规则_1',['选项语法规则',['../group___command_line.html#option_syntax',1,'']]]
+  ['连接模式_0',['TLS 连接模式',['../group___s_m_t_p.html#tls_modes',1,'']]]
 ];

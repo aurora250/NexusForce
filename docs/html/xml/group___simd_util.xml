@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___simd_util" kind="group">
+    <compoundname>SimdUtil</compoundname>
+    <title>SIMD</title>
+    <innerclass refid="structvec128__t" prot="public">vec128_t</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___simd_util_1ga56eae6fc6417785408c04c235a2b8e05" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structvec128__t" kindref="compound">vec128_t</ref></type>
+        <definition>vec128_t fill_byte</definition>
+        <argsstring>(byte_t c) noexcept</argsstring>
+        <name>fill_byte</name>
+        <param>
+          <type><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>将单字节广播到 128-bit SIMD 向量的全部 16 个位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源字节值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>所有字节均为 c 的向量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/simd/simd_util.hpp" line="45" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/simd/simd_util.hpp" bodystart="45" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="group___simd_util_1ga24adabe50ed6a09cf80b2632c08eed98" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structvec128__t" kindref="compound">vec128_t</ref></type>
+        <definition>vec128_t load_unaligned</definition>
+        <argsstring>(const void *ptr) noexcept</argsstring>
+        <name>load_unaligned</name>
+        <param>
+          <type>const void *</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>非对齐加载 16 字节到 SIMD 向量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源内存地址（无需 16 字节对齐） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载的向量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/simd/simd_util.hpp" line="64" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/simd/simd_util.hpp" bodystart="64" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="group___simd_util_1ga8495d91d58e8fe45c1c65d96a0de94fd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structvec128__t" kindref="compound">vec128_t</ref></type>
+        <definition>vec128_t match_bytes</definition>
+        <argsstring>(vec128_t a, vec128_t b) noexcept</argsstring>
+        <name>match_bytes</name>
+        <param>
+          <type><ref refid="structvec128__t" kindref="compound">vec128_t</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="structvec128__t" kindref="compound">vec128_t</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>逐字节比较两个 128-bit SIMD 向量的相等性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>相等位置为 0xFF，不等位置为 0x00 的向量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/simd/simd_util.hpp" line="85" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/simd/simd_util.hpp" bodystart="85" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="group___simd_util_1gaf5440904d9e86ae59f126309206b64fa" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int to_bitmask</definition>
+        <argsstring>(vec128_t v) noexcept</argsstring>
+        <name>to_bitmask</name>
+        <param>
+          <type><ref refid="structvec128__t" kindref="compound">vec128_t</ref></type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>提取向量中每个字节的最高位，组成 16-bit 掩码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>16-bit 掩码，bit i 对应字节 i 的最高位 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/simd/simd_util.hpp" line="104" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/simd/simd_util.hpp" bodystart="104" bodyend="127"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>跨平台 SIMD 操作的抽象封装 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -2,8 +2,8 @@ var classhttp__server =
 [
     [ "session_manager", "structhttp__server_1_1session__manager.html", "structhttp__server_1_1session__manager" ],
     [ "socket_type", "classhttp__server.html#a755df815f0f63dae3a202c876d4ad75b", null ],
-    [ "http_server", "classhttp__server.html#a7b7f5de4c7c6eadc0012134d33f96cc2", null ],
-    [ "http_server", "classhttp__server.html#aba4ee10f91e7ed646e3f49c5d7bf4a1f", null ],
+    [ "http_server", "classhttp__server.html#a03a43333903ed3d1bb3cd97f6f55c667", null ],
+    [ "http_server", "classhttp__server.html#a63ad7db62ac147cc7d799f656ece9528", null ],
     [ "add_sni_host", "classhttp__server.html#a805f62b063a1bd5ed34d673c28304f0e", null ],
     [ "cookie_name", "classhttp__server.html#a98ad1ce884f67e32cf822564062a0739", null ],
     [ "get_session", "classhttp__server.html#a03440381bb1a27bd8bf77bb396645497", null ],

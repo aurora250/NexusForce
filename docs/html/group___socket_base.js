@@ -25,7 +25,7 @@ var group___socket_base =
     ] ],
     [ "socket_base", "classsocket__base.html", [
       [ "family", "classsocket__base.html#a815042c384cb1e40434411f9d1cfa80d", null ],
-      [ "native_handle_type", "classsocket__base.html#a84bf18aff95bf7f3485de66d4f63bef6", null ],
+      [ "native_handle_type", "classsocket__base.html#ab609d0c1ee77f66e90cb73c57baf343f", null ],
       [ "protocol", "classsocket__base.html#a222cf9dab4869480c9467b50767c2bda", [
         [ "AUTO", "classsocket__base.html#a222cf9dab4869480c9467b50767c2bdaae1f2d5134ed2543d38a0de9751cf75d9", null ],
         [ "ICMP", "classsocket__base.html#a222cf9dab4869480c9467b50767c2bdaa7d6fe0dd606232f7155fdeae2ea620a9", null ],
@@ -40,7 +40,6 @@ var group___socket_base =
         [ "ARP", "classsocket__base.html#a222cf9dab4869480c9467b50767c2bdaae18712a7bcb07021704b7d53577c8501", null ],
         [ "IPV6", "classsocket__base.html#a222cf9dab4869480c9467b50767c2bdaa3fbcd320695e3a01273994471d09cc36", null ],
         [ "LAT", "classsocket__base.html#a222cf9dab4869480c9467b50767c2bdaac4a8afa234be2060691c81928eb1b701", null ],
-        [ "ETHERCAT", "classsocket__base.html#a222cf9dab4869480c9467b50767c2bdaac954164d21804a68c6bd9c9ed29ac5b3", null ],
         [ "VLAN", "classsocket__base.html#a222cf9dab4869480c9467b50767c2bdaa9881f82f0dd89588831f9d1682bd5492", null ],
         [ "LLDP", "classsocket__base.html#a222cf9dab4869480c9467b50767c2bdaa2bad208e9a1343317d536d15106834ef", null ],
         [ "MPLS", "classsocket__base.html#a222cf9dab4869480c9467b50767c2bdaa32ea4687a585ba359fefb81028f20adb", null ]

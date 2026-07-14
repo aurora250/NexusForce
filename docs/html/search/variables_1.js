@@ -11,6 +11,5 @@ var searchData=
   ['build_8',['build',['../structsysinfo_1_1os__version__info.html#a201fa2fa0bd48266b2fc5b51d2adffe6',1,'sysinfo::os_version_info']]],
   ['busy_5fthreads_9',['busy_threads',['../structthread__pool_1_1pool__statistics.html#a22d0f279b8e8f1e13cc6c687f6614129',1,'thread_pool::pool_statistics']]],
   ['byte1_10',['byte1',['../structfile__diff_1_1binary__diff__entry.html#af96102b7d9ae605f77d4ed5b5e9bc3ea',1,'file_diff::binary_diff_entry']]],
-  ['byte2_11',['byte2',['../structfile__diff_1_1binary__diff__entry.html#aa8f0ffa20840e7088a5a6859c99fa640',1,'file_diff::binary_diff_entry']]],
-  ['bytes_5ftransferred_12',['bytes_transferred',['../structfile__async_1_1async__result.html#a86281a9390bd57c926a398c722845084',1,'file_async::async_result']]]
+  ['byte2_11',['byte2',['../structfile__diff_1_1binary__diff__entry.html#aa8f0ffa20840e7088a5a6859c99fa640',1,'file_diff::binary_diff_entry']]]
 ];

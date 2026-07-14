@@ -51,7 +51,7 @@ var group___hash_table =
       [ "erase", "classhashtable.html#a33185aeb2ea3ef8b694919568fd03705", null ],
       [ "find", "classhashtable.html#a5601c4779b8f98c1c8c5bd6f2432368b", null ],
       [ "find", "classhashtable.html#acbce53f2593135ac86f624327aca6ea0", null ],
-      [ "hash_func", "classhashtable.html#a5c297118874a18939b42f1b1844c95ea", null ],
+      [ "hash_function", "classhashtable.html#ad1b0dff6a4da8e05321b281e9301f95d", null ],
       [ "insert_equal", "classhashtable.html#a0a7a5c9d96591dd5467bfb4ff9d093c8", null ],
       [ "insert_equal", "classhashtable.html#ae6978a04ab0770cc3408d005216fecbb", null ],
       [ "insert_equal", "classhashtable.html#aee4852d8a5458f72b2f4f8076fa495f1", null ],

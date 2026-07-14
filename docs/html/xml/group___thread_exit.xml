@@ -6,18 +6,34 @@
     <innerclass refid="structthread__exit__listener" prot="public">thread_exit_listener</innerclass>
     <innerclass refid="classthread__exit__notifier" prot="public">thread_exit_notifier</innerclass>
     <innerclass refid="structthread__exit__elt" prot="public">thread_exit_elt</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___thread_exit_1ga5fc0baa1aebebd461babfb58c9f37c48" prot="public" static="no">
+        <type>void(*)(void *)</type>
+        <definition>using thread_exit_callback_t = void (*)(void*)</definition>
+        <argsstring></argsstring>
+        <name>thread_exit_callback_t</name>
+        <briefdescription>
+<para>线程退出回调类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" line="31" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___thread_exit_1ga3f979cd07e3fd729bc96313ec9285e6b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___thread_exit_1ga61ee52a597905b57d6fa90f45918bdfa" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
         <definition>void thread_exit_register</definition>
-        <argsstring>(thread_exit_elt *elt, void(*callback)(void *)) noexcept</argsstring>
+        <argsstring>(thread_exit_elt *elt, thread_exit_callback_t callback) noexcept</argsstring>
         <name>thread_exit_register</name>
         <param>
           <type><ref refid="structthread__exit__elt" kindref="compound">thread_exit_elt</ref> *</type>
           <declname>elt</declname>
         </param>
         <param>
-          <type>void(*)(void *)</type>
+          <type><ref refid="group___thread_exit_1ga5fc0baa1aebebd461babfb58c9f37c48" kindref="member">thread_exit_callback_t</ref></type>
           <declname>callback</declname>
         </param>
         <briefdescription>
@@ -45,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" line="47" column="7" declfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" declline="47" declcolumn="7"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" line="53" column="7" declfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" declline="53" declcolumn="7"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

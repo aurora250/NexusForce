@@ -117,6 +117,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a3c9ae650c7c4966c05ee29da212a021c"><td class="mdescLeft">&#160;</td><td class="mdescRight">完成压缩并返回剩余数据  <br /></td></tr>
 <tr class="memitem:a4f3592f6b277785d6de048eaec01e5c1" id="r_a4f3592f6b277785d6de048eaec01e5c1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4f3592f6b277785d6de048eaec01e5c1">reset</a> (<a class="el" href="group___compression.html#gabdadcdb8dedcef8891e61f37348a3b89">compress_level</a> level=<a class="el" href="group___compression.html#ggabdadcdb8dedcef8891e61f37348a3b89a6637b88286cba926cc1bb0ef49f9d2e8">compress_level::default_level</a>, <a class="el" href="group___compression.html#ga3b93af7c96730e487e7d9126ae98183e">compress_strategy</a> strategy=<a class="el" href="group___compression.html#gga3b93af7c96730e487e7d9126ae98183ea631738167a29f3283fb2afb8be36482d">compress_strategy::default_strategy</a>, <a class="el" href="group___compression.html#gaf18959145f07c95c3feacddae6234a0c">compress_format</a> <a class="el" href="group___format.html#gac0f4499364ec899fcdfaae1f7acbda76">format</a>=<a class="el" href="group___compression.html#ggaf18959145f07c95c3feacddae6234a0ca7a990d405d2c6fb93aa8fbb0ec1a3b23">compress_format::zlib</a>)</td></tr>
 <tr class="memdesc:a4f3592f6b277785d6de048eaec01e5c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">重置压缩器状态  <br /></td></tr>
+<tr class="memitem:a6033d5aa75455a6a54a5ae28cc53c448" id="r_a6033d5aa75455a6a54a5ae28cc53c448"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6033d5aa75455a6a54a5ae28cc53c448">soft_reset</a> ()</td></tr>
+<tr class="memdesc:a6033d5aa75455a6a54a5ae28cc53c448"><td class="mdescLeft">&#160;</td><td class="mdescRight">软重置压缩器  <br /></td></tr>
 <tr class="memitem:a2ebd6ab8e4c4be08794b5b218852e2b6" id="r_a2ebd6ab8e4c4be08794b5b218852e2b6"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2ebd6ab8e4c4be08794b5b218852e2b6">bytes_input</a> () const noexcept</td></tr>
 <tr class="memdesc:a2ebd6ab8e4c4be08794b5b218852e2b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取输入字节数  <br /></td></tr>
 <tr class="memitem:a729c279787591a3f0f06c70e5f5726a3" id="r_a729c279787591a3f0f06c70e5f5726a3"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a729c279787591a3f0f06c70e5f5726a3">bytes_output</a> () const noexcept</td></tr>
@@ -128,7 +130,7 @@ Public 成员函数</h2></td></tr>
 <div class="textblock"><p>流式压缩器 </p>
 <p>支持分块压缩数据，适用于大文件或网络传输场景。 维护压缩状态，可以多次添加数据并最终完成压缩。 </p>
 
-<p class="definition">在文件 <a class="el" href="zlib__compress_8hpp_source.html">zlib_compress.hpp</a> 第 <a class="el" href="zlib__compress_8hpp_source.html#l00260">260</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="zlib__compress_8hpp_source.html">zlib_compress.hpp</a> 第 <a class="el" href="zlib__compress_8hpp_source.html#l00264">264</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="aeed6ccb2b5cc547dea0a3f53fc7d4823" name="aeed6ccb2b5cc547dea0a3f53fc7d4823"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeed6ccb2b5cc547dea0a3f53fc7d4823">&#9670;&#160;</a></span>stream_compressor() <span class="overload">[1/2]</span></h2>
@@ -178,7 +180,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="zlib__compress_8hpp_source.html#l00060">default_level</a>, <a class="el" href="zlib__compress_8hpp_source.html#l00071">default_strategy</a>, <a class="el" href="format_8hpp_source.html#l00792">format()</a> , 以及 <a class="el" href="zlib__compress_8hpp_source.html#l00085">zlib</a>.</p>
+<p class="reference">引用了 <a class="el" href="zlib__compress_8hpp_source.html#l00064">default_level</a>, <a class="el" href="zlib__compress_8hpp_source.html#l00075">default_strategy</a>, <a class="el" href="format_8hpp_source.html#l00805">format()</a> , 以及 <a class="el" href="zlib__compress_8hpp_source.html#l00089">zlib</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#ae581cc759c603e5a5f6b1bfed3541948">operator=()</a>, <a class="el" href="#a693ddacffc2e2c894e6ffbf15528f6a7">stream_compressor()</a> , 以及 <a class="el" href="#ac4f3d9dc19534a863999b715f3d10477">~stream_compressor()</a>.</p>
 
@@ -246,7 +248,7 @@ Public 成员函数</h2></td></tr>
 <p>获取输入字节数 </p>
 <dl class="section return"><dt>返回</dt><dd>已处理的输入字节数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="zlib__compress_8hpp_source.html">zlib_compress.hpp</a> 第 <a class="el" href="zlib__compress_8hpp_source.html#l00341">341</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="zlib__compress_8hpp_source.html">zlib_compress.hpp</a> 第 <a class="el" href="zlib__compress_8hpp_source.html#l00353">353</a> 行定义.</p>
 
 </div>
 </div>
@@ -276,7 +278,7 @@ Public 成员函数</h2></td></tr>
 <p>获取输出字节数 </p>
 <dl class="section return"><dt>返回</dt><dd>已产生的输出字节数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="zlib__compress_8hpp_source.html">zlib_compress.hpp</a> 第 <a class="el" href="zlib__compress_8hpp_source.html#l00347">347</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="zlib__compress_8hpp_source.html">zlib_compress.hpp</a> 第 <a class="el" href="zlib__compress_8hpp_source.html#l00359">359</a> 行定义.</p>
 
 </div>
 </div>
@@ -384,7 +386,7 @@ Public 成员函数</h2></td></tr>
 <p>获取压缩率 </p>
 <dl class="section return"><dt>返回</dt><dd>输出/输入字节比率 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="zlib__compress_8hpp_source.html">zlib_compress.hpp</a> 第 <a class="el" href="zlib__compress_8hpp_source.html#l00353">353</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="zlib__compress_8hpp_source.html">zlib_compress.hpp</a> 第 <a class="el" href="zlib__compress_8hpp_source.html#l00365">365</a> 行定义.</p>
 
 </div>
 </div>
@@ -492,7 +494,33 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="zlib__compress_8hpp_source.html#l00060">default_level</a>, <a class="el" href="zlib__compress_8hpp_source.html#l00071">default_strategy</a>, <a class="el" href="format_8hpp_source.html#l00792">format()</a> , 以及 <a class="el" href="zlib__compress_8hpp_source.html#l00085">zlib</a>.</p>
+<p class="reference">引用了 <a class="el" href="zlib__compress_8hpp_source.html#l00064">default_level</a>, <a class="el" href="zlib__compress_8hpp_source.html#l00075">default_strategy</a>, <a class="el" href="format_8hpp_source.html#l00805">format()</a> , 以及 <a class="el" href="zlib__compress_8hpp_source.html#l00089">zlib</a>.</p>
+
+</div>
+</div>
+<a id="a6033d5aa75455a6a54a5ae28cc53c448" name="a6033d5aa75455a6a54a5ae28cc53c448"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6033d5aa75455a6a54a5ae28cc53c448">&#9670;&#160;</a></span>soft_reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void zlib_compressor::stream_compressor::soft_reset </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>软重置压缩器 </p>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structzlib__exception.html" title="ZLib操作异常类">zlib_exception</a></td><td>当重置失败时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>保留已建立的 LZ77 字典以便后续消息复用上下文。 </p>
 
 </div>
 </div>

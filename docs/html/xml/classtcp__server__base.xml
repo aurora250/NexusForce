@@ -53,6 +53,36 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="36" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classtcp__server__base_1a73226a9a043e5fa0ae1654a84706b136" prot="protected" static="no" mutable="no">
+        <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+        <definition>io_context&amp; tcp_server_base::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>tcp_server_base::ctx_</qualifiedname>
+        <briefdescription>
+<para>异步 I/O 执行上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="37" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtcp__server__base_1a9e31297177313381a5ea8dd10325f840" prot="protected" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classio__context_1_1work" kindref="compound">io_context::work</ref> &gt;</type>
+        <definition>unique_ptr&lt;io_context::work&gt; tcp_server_base::ctx_work_</definition>
+        <argsstring></argsstring>
+        <name>ctx_work_</name>
+        <qualifiedname>tcp_server_base::ctx_work_</qualifiedname>
+        <briefdescription>
+<para><ref refid="classio__context" kindref="compound">io_context</ref> 工作守卫 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="38" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classtcp__server__base_1aa38767b5f095b470707df772b5cb0107" prot="protected" static="no" mutable="no">
         <type><ref refid="structports" kindref="compound">ports</ref></type>
         <definition>ports tcp_server_base::port_</definition>
@@ -66,8 +96,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="37" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="37" bodyend="-1"/>
-        <referencedby refid="classtcp__server__base_1afb78680be84f7030e9af5fe6958f258b" compoundref="tcp__server_8hpp" startline="160" endline="160">port</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="39" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="39" bodyend="-1"/>
+        <referencedby refid="classtcp__server__base_1afb78680be84f7030e9af5fe6958f258b" compoundref="tcp__server_8hpp" startline="156" endline="156">port</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classtcp__server__base_1ae598f3ebdc396f44146ba8da6bed8f67" prot="protected" static="no" mutable="no">
         <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
@@ -83,8 +113,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="38" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="38" bodyend="38"/>
-        <referencedby refid="classtcp__server__base_1aae7b9c4980b19196d0f8e34b428b3758" compoundref="tcp__server_8hpp" startline="154" endline="154">is_running</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="40" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="40" bodyend="40"/>
+        <referencedby refid="classtcp__server__base_1aae7b9c4980b19196d0f8e34b428b3758" compoundref="tcp__server_8hpp" startline="150" endline="150">is_running</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classtcp__server__base_1aa8d9f9a53edb4699d0825cf499baba0c" prot="protected" static="no" mutable="no">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classthread" kindref="compound">thread</ref> &gt;</type>
@@ -93,28 +123,13 @@
         <name>worker_threads_</name>
         <qualifiedname>tcp_server_base::worker_threads_</qualifiedname>
         <briefdescription>
-<para>工作线程列表 </para>
+<para>工作线程列表（含 accept 线程） </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="39" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="39" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classtcp__server__base_1a2d72c2c3af83d0bc20fcd5effaf05874" prot="protected" static="no" mutable="no">
-        <type><ref refid="classthread__pool" kindref="compound">thread_pool</ref></type>
-        <definition>thread_pool tcp_server_base::client_pool_</definition>
-        <argsstring></argsstring>
-        <name>client_pool_</name>
-        <qualifiedname>tcp_server_base::client_pool_</qualifiedname>
-        <briefdescription>
-<para>客户端处理线程池 </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="40" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="40" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="41" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classtcp__server__base_1a735bef21abd2a1a64c22fc2ebb9c9ec8" prot="protected" static="no" mutable="no">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -129,22 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="41" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="41" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classtcp__server__base_1af6dd3d7553c83b5c22e63790a189996f" prot="protected" static="no" mutable="no">
-        <type>::WSAEVENT</type>
-        <definition>::WSAEVENT tcp_server_base::wake_event_</definition>
-        <argsstring></argsstring>
-        <name>wake_event_</name>
-        <qualifiedname>tcp_server_base::wake_event_</qualifiedname>
-        <initializer>{WSA_INVALID_EVENT}</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="44" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="44" bodyend="44"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="42" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classtcp__server__base_1ade73ba8bbe4053f6f29d41cb2a34aba5" prot="protected" static="no" mutable="yes">
         <type><ref refid="classshared__mutex" kindref="compound">shared_mutex</ref></type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="48" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="48" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="44" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classtcp__server__base_1a5e6ff6717c9972d255c9bee34975594e" prot="protected" static="no" mutable="no">
         <type><ref refid="classtcp__server__base_1abef2c5b5cbfeda60f09e2c43f7b9a6ae" kindref="member">client_handler_t</ref></type>
@@ -173,8 +173,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="50" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="50" bodyend="-1"/>
-        <referencedby refid="classtcp__server__base_1ad0918dc0cbe8e5bb50e51efffb1cfbcb" compoundref="tcp__server_8hpp" startline="71" endline="75">handle_client</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="46" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="46" bodyend="-1"/>
+        <referencedby refid="classtcp__server__base_1ad0918dc0cbe8e5bb50e51efffb1cfbcb" compoundref="tcp__server_8hpp" startline="66" endline="70">handle_client</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classtcp__server__base_1a831cef70165579b406d091ded06b6a19" prot="protected" static="no" mutable="no">
         <type><ref refid="classtcp__server__base_1a5f608ddaffbd9596fd27cdfc6401a27b" kindref="member">exception_handler_t</ref></type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="51" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="51" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="47" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classtcp__server__base_1a1a7e1de9c6df5ba9aa1a12feb06023b8" prot="protected" static="no" mutable="no">
         <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
@@ -204,25 +204,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="52" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="52" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="48" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classtcp__server__base_1a6cfadb556ef18b029e0c510f143e833b" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void tcp_server_base::notify_stop</definition>
-        <argsstring>() noexcept</argsstring>
-        <name>notify_stop</name>
-        <qualifiedname>tcp_server_base::notify_stop</qualifiedname>
-        <briefdescription>
-<para>向 wake_pipe_ 写端写入一个字节，唤醒 accept_loop </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="57" column="10"/>
-      </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1a339fb280765125ff0e63bb3cb89bcb15" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void tcp_server_base::accept_loop</definition>
@@ -233,12 +218,11 @@
 <para>接受连接的主循环 </para>
         </briefdescription>
         <detaileddescription>
+<para>使用 <ref refid="classio__context_1ac408f8abdf19b28a5440687229a56afc" kindref="member">io_context::add_fd</ref> + run_one() 驱动事件等待， 替代 raw poll/WSAEventSelect。专用线程确保 SSL 握手等阻塞操作 不影响 <ref refid="classio__context" kindref="compound">io_context</ref> 池线程。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="62" column="10"/>
-        <references refid="classtcp__server__base_1a339fb280765125ff0e63bb3cb89bcb15">accept_loop</references>
-        <referencedby refid="classtcp__server__base_1a339fb280765125ff0e63bb3cb89bcb15">accept_loop</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="57" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1ad0918dc0cbe8e5bb50e51efffb1cfbcb" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -267,11 +251,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="71" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="71" bodyend="75"/>
-        <references refid="classtcp__server__base_1a5e6ff6717c9972d255c9bee34975594e" compoundref="tcp__server_8hpp" startline="50">client_handler_</references>
-        <references refid="classtcp__server__base_1ad0918dc0cbe8e5bb50e51efffb1cfbcb" compoundref="tcp__server_8hpp" startline="71" endline="75">handle_client</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="66" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="66" bodyend="70"/>
+        <references refid="classtcp__server__base_1a5e6ff6717c9972d255c9bee34975594e" compoundref="tcp__server_8hpp" startline="46">client_handler_</references>
         <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
-        <referencedby refid="classtcp__server__base_1ad0918dc0cbe8e5bb50e51efffb1cfbcb" compoundref="tcp__server_8hpp" startline="71" endline="75">handle_client</referencedby>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1a0f40159b08863e754d41ea0a32ff78ce" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt; &gt;</type>
@@ -291,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="84" column="22"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="79" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1ab04f76ce60e358af3452ca403ad8c2c3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -334,14 +316,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="93" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="88" column="18"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classtcp__server__base_1afd3f0bf8e207d844dbedb1b8c6720e5c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classtcp__server__base_1a453e86b5d7386dea0eab18c93d0470f3" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>tcp_server_base::tcp_server_base</definition>
-        <argsstring>(ports port, size_t worker_count=thread_pool::max_thread_threshhold())</argsstring>
+        <argsstring>(ports port, io_context &amp;ctx, size_t worker_count=0)</argsstring>
         <name>tcp_server_base</name>
         <qualifiedname>tcp_server_base::tcp_server_base</qualifiedname>
         <param>
@@ -349,9 +331,13 @@
           <declname>port</declname>
         </param>
         <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
           <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
           <declname>worker_count</declname>
-          <defval>thread_pool::max_thread_threshhold()</defval>
+          <defval>0</defval>
         </param>
         <briefdescription>
 <para>构造函数 </para>
@@ -363,6 +349,14 @@
 </parameternamelist>
 <parameterdescription>
 <para>监听端口 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -387,8 +381,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="102" column="14"/>
-        <references refid="classtcp__server__base_1afb78680be84f7030e9af5fe6958f258b" compoundref="tcp__server_8hpp" startline="160" endline="160">port</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="98" column="14"/>
+        <references refid="classtcp__server__base_1afb78680be84f7030e9af5fe6958f258b" compoundref="tcp__server_8hpp" startline="156" endline="156">port</references>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1ae8163e7386fbe9d18a798e5a6e1f1b3e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type></type>
@@ -404,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="109" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="109" bodyend="109"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="105" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="105" bodyend="105"/>
         <references refid="classtcp__server__base_1a77bb0334985546f7b3b27f7ebbcbb902">stop</references>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1a7dbdc38039a593e363a0ecb0eee2bbbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -422,7 +416,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="111" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="107" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1a817e76551150298c61eefe51d88e45f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> &amp;</type>
@@ -439,7 +433,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="112" column="21"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="108" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1aff23675d9f2b7e6b8f269e68eda0c8df" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -457,7 +451,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="114" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="110" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1adb02246758504d817229562eabeb262a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> &amp;</type>
@@ -475,7 +469,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="115" column="21"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="111" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1a49f2008a2bc05e9f00c51e6098bb5a6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -506,7 +500,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="124" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="120" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1aa7a0567cb6f4b407b8f2afb1a82d90b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -537,7 +531,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="131" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="127" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1ab1957c65d507878b7d376b3433f1aabf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -570,7 +564,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="141" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="137" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1a77bb0334985546f7b3b27f7ebbcbb902" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -586,8 +580,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="148" column="10"/>
-        <referencedby refid="classtcp__server__base_1ae8163e7386fbe9d18a798e5a6e1f1b3e" compoundref="tcp__server_8hpp" startline="109" endline="109">~tcp_server_base</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="144" column="10"/>
+        <referencedby refid="classtcp__server__base_1ae8163e7386fbe9d18a798e5a6e1f1b3e" compoundref="tcp__server_8hpp" startline="105" endline="105">~tcp_server_base</referencedby>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1aae7b9c4980b19196d0f8e34b428b3758" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -605,8 +599,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="154" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="154" bodyend="154"/>
-        <references refid="classtcp__server__base_1ae598f3ebdc396f44146ba8da6bed8f67" compoundref="tcp__server_8hpp" startline="38" endline="38">running_</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="150" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="150" bodyend="150"/>
+        <references refid="classtcp__server__base_1ae598f3ebdc396f44146ba8da6bed8f67" compoundref="tcp__server_8hpp" startline="40" endline="40">running_</references>
       </memberdef>
       <memberdef kind="function" id="classtcp__server__base_1afb78680be84f7030e9af5fe6958f258b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="structports" kindref="compound">ports</ref></type>
@@ -624,10 +618,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="160" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="160" bodyend="160"/>
-        <references refid="classtcp__server__base_1aa38767b5f095b470707df772b5cb0107" compoundref="tcp__server_8hpp" startline="37">port_</references>
-        <referencedby refid="classssl__server_1ae975999b59c678bdf7e16867ecdd1d31">ssl_server::ssl_server</referencedby>
-        <referencedby refid="classtcp__server__base_1afd3f0bf8e207d844dbedb1b8c6720e5c">tcp_server_base</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="156" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="156" bodyend="156"/>
+        <references refid="classtcp__server__base_1aa38767b5f095b470707df772b5cb0107" compoundref="tcp__server_8hpp" startline="39">port_</references>
+        <referencedby refid="classssl__server_1ab626ef1e654653245dd259bb125bf771">ssl_server::ssl_server</referencedby>
+        <referencedby refid="classtcp__server__base_1a453e86b5d7386dea0eab18c93d0470f3">tcp_server_base</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -655,49 +649,53 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="6">
+      <node id="8">
         <label>atomic&lt; bool &gt;</label>
         <link refid="structatomic_3_01bool_01_4"/>
       </node>
-      <node id="13">
+      <node id="14">
         <label>function&lt; void(const exception &amp;)&gt;</label>
         <link refid="classfunction"/>
       </node>
-      <node id="12">
+      <node id="13">
         <label>function&lt; void(unique_ptr&lt; tcp_socket &gt;)&gt;</label>
         <link refid="classfunction"/>
       </node>
-      <node id="8">
+      <node id="10">
         <label>icollector&lt; T &gt;</label>
         <link refid="structicollector"/>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>icomparable&lt; T &gt;</label>
-        <link refid="structicomparable"/>
-      </node>
-      <node id="4">
-        <label>iobject&lt; ports &gt;</label>
-        <link refid="structiobject"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>istringify&lt; ports &gt;</label>
-        <link refid="structistringify"/>
-      </node>
-      <node id="14">
-        <label>mutex</label>
-        <link refid="classmutex"/>
-      </node>
-      <node id="3">
-        <label>ports</label>
-        <link refid="structports"/>
-        <childnode refid="4" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
       <node id="11">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="3">
+        <label>io_context</label>
+        <link refid="classio__context"/>
+      </node>
+      <node id="6">
+        <label>iobject&lt; ports &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>istringify&lt; ports &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="15">
+        <label>mutex</label>
+        <link refid="classmutex"/>
+      </node>
+      <node id="5">
+        <label>ports</label>
+        <link refid="structports"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
         <label>shared_mutex</label>
         <link refid="classshared__mutex"/>
       </node>
@@ -708,46 +706,49 @@
           <edgelabel>acceptor_</edgelabel>
         </childnode>
         <childnode refid="3" relation="usage">
+          <edgelabel>ctx_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ctx_work_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
           <edgelabel>port_</edgelabel>
         </childnode>
-        <childnode refid="6" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>running_</edgelabel>
         </childnode>
-        <childnode refid="7" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>worker_threads_</edgelabel>
         </childnode>
-        <childnode refid="10" relation="usage">
-          <edgelabel>client_pool_</edgelabel>
-        </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="12" relation="usage">
           <edgelabel>handler_mutex_</edgelabel>
         </childnode>
-        <childnode refid="12" relation="usage">
+        <childnode refid="13" relation="usage">
           <edgelabel>client_handler_</edgelabel>
         </childnode>
-        <childnode refid="13" relation="usage">
+        <childnode refid="14" relation="usage">
           <edgelabel>exception_handler_</edgelabel>
         </childnode>
-        <childnode refid="14" relation="usage">
+        <childnode refid="15" relation="usage">
           <edgelabel>acceptor_mutex_</edgelabel>
         </childnode>
       </node>
-      <node id="10">
-        <label>thread_pool</label>
-        <link refid="classthread__pool"/>
+      <node id="4">
+        <label>unique_ptr&lt; io_context::work &gt;</label>
+        <link refid="classunique__ptr"/>
       </node>
       <node id="2">
         <label>unique_ptr&lt; tcp_acceptor &gt;</label>
         <link refid="classunique__ptr"/>
       </node>
-      <node id="7">
+      <node id="9">
         <label>vector&lt; thread &gt;</label>
         <link refid="classvector"/>
-        <childnode refid="8" relation="public-inheritance">
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="30" bodyend="161"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="30" bodyend="157"/>
     <listofallmembers>
       <member refid="classtcp__server__base_1a339fb280765125ff0e63bb3cb89bcb15" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>accept_loop</name></member>
       <member refid="classtcp__server__base_1a0f40159b08863e754d41ea0a32ff78ce" prot="protected" virt="pure-virtual"><scope>tcp_server_base</scope><name>accept_one</name></member>
@@ -755,14 +756,14 @@
       <member refid="classtcp__server__base_1a1a7e1de9c6df5ba9aa1a12feb06023b8" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>acceptor_mutex_</name></member>
       <member refid="classtcp__server__base_1a5e6ff6717c9972d255c9bee34975594e" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>client_handler_</name></member>
       <member refid="classtcp__server__base_1abef2c5b5cbfeda60f09e2c43f7b9a6ae" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>client_handler_t</name></member>
-      <member refid="classtcp__server__base_1a2d72c2c3af83d0bc20fcd5effaf05874" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>client_pool_</name></member>
       <member refid="classtcp__server__base_1ab04f76ce60e358af3452ca403ad8c2c3" prot="protected" virt="pure-virtual"><scope>tcp_server_base</scope><name>create_acceptor</name></member>
+      <member refid="classtcp__server__base_1a73226a9a043e5fa0ae1654a84706b136" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>ctx_</name></member>
+      <member refid="classtcp__server__base_1a9e31297177313381a5ea8dd10325f840" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>ctx_work_</name></member>
       <member refid="classtcp__server__base_1a831cef70165579b406d091ded06b6a19" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>exception_handler_</name></member>
       <member refid="classtcp__server__base_1a5f608ddaffbd9596fd27cdfc6401a27b" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>exception_handler_t</name></member>
       <member refid="classtcp__server__base_1ad0918dc0cbe8e5bb50e51efffb1cfbcb" prot="protected" virt="virtual"><scope>tcp_server_base</scope><name>handle_client</name></member>
       <member refid="classtcp__server__base_1ade73ba8bbe4053f6f29d41cb2a34aba5" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>handler_mutex_</name></member>
       <member refid="classtcp__server__base_1aae7b9c4980b19196d0f8e34b428b3758" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>is_running</name></member>
-      <member refid="classtcp__server__base_1a6cfadb556ef18b029e0c510f143e833b" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>notify_stop</name></member>
       <member refid="classtcp__server__base_1a817e76551150298c61eefe51d88e45f6" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>operator=</name></member>
       <member refid="classtcp__server__base_1adb02246758504d817229562eabeb262a" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>operator=</name></member>
       <member refid="classtcp__server__base_1afb78680be84f7030e9af5fe6958f258b" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>port</name></member>
@@ -772,10 +773,9 @@
       <member refid="classtcp__server__base_1aa7a0567cb6f4b407b8f2afb1a82d90b8" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>set_exception_handler</name></member>
       <member refid="classtcp__server__base_1ab1957c65d507878b7d376b3433f1aabf" prot="public" virt="virtual"><scope>tcp_server_base</scope><name>start</name></member>
       <member refid="classtcp__server__base_1a77bb0334985546f7b3b27f7ebbcbb902" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>stop</name></member>
-      <member refid="classtcp__server__base_1afd3f0bf8e207d844dbedb1b8c6720e5c" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>tcp_server_base</name></member>
+      <member refid="classtcp__server__base_1a453e86b5d7386dea0eab18c93d0470f3" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>tcp_server_base</name></member>
       <member refid="classtcp__server__base_1a7dbdc38039a593e363a0ecb0eee2bbbf" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>tcp_server_base</name></member>
       <member refid="classtcp__server__base_1aff23675d9f2b7e6b8f269e68eda0c8df" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>tcp_server_base</name></member>
-      <member refid="classtcp__server__base_1af6dd3d7553c83b5c22e63790a189996f" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>wake_event_</name></member>
       <member refid="classtcp__server__base_1a735bef21abd2a1a64c22fc2ebb9c9ec8" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>worker_count_</name></member>
       <member refid="classtcp__server__base_1aa8d9f9a53edb4699d0825cf499baba0c" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>worker_threads_</name></member>
       <member refid="classtcp__server__base_1ae8163e7386fbe9d18a798e5a6e1f1b3e" prot="public" virt="virtual"><scope>tcp_server_base</scope><name>~tcp_server_base</name></member>

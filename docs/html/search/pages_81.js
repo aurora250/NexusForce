@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['部分排序_0',['部分排序',['../group___sort_algorithms.html#partial_sorting',1,'']]]
+  ['遵循的国际标准_0',['遵循的国际标准',['../group___s_m_t_p.html#standards',1,'']]]
 ];

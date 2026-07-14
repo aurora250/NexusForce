@@ -10,6 +10,7 @@
         <argsstring></argsstring>
         <name>tokens</name>
         <qualifiedname>token_bucket::tokens</qualifiedname>
+        <initializer>{0.}</initializer>
         <briefdescription>
 <para>当前令牌数 </para>
         </briefdescription>
@@ -17,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="33" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="33" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="33" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="33" bodyend="33"/>
       </memberdef>
       <memberdef kind="variable" id="structtoken__bucket_1aa8efe94a5cfc7d34a59b23bcb5ea9b3b" prot="public" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
@@ -25,6 +26,7 @@
         <argsstring></argsstring>
         <name>last_refill_ms</name>
         <qualifiedname>token_bucket::last_refill_ms</qualifiedname>
+        <initializer>{0}</initializer>
         <briefdescription>
 <para>上次补充时间（毫秒时间戳） </para>
         </briefdescription>
@@ -32,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="34" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="34" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="34" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="34" bodyend="34"/>
       </memberdef>
       <memberdef kind="variable" id="structtoken__bucket_1abfd1e3fd7123a78cc98a0ea1fe51af2a" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -40,6 +42,7 @@
         <argsstring></argsstring>
         <name>refill_rate</name>
         <qualifiedname>token_bucket::refill_rate</qualifiedname>
+        <initializer>{1.}</initializer>
         <briefdescription>
 <para>每秒补充令牌数 </para>
         </briefdescription>
@@ -47,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="35" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="35" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="35" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="variable" id="structtoken__bucket_1a290e28a6b91d8987c1241052a9747047" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -55,6 +58,7 @@
         <argsstring></argsstring>
         <name>capacity</name>
         <qualifiedname>token_bucket::capacity</qualifiedname>
+        <initializer>{1.}</initializer>
         <briefdescription>
 <para>桶容量 </para>
         </briefdescription>
@@ -62,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="36" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="36" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="36" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="variable" id="structtoken__bucket_1a7c0e305f1b5c193c92f3bf3469e0eb51" prot="public" static="no" mutable="yes">
         <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
@@ -81,10 +85,10 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structtoken__bucket_1a203426fe20dcc7e9b857b503ff7df3f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structtoken__bucket_1a64483cc5842e5ee438f02ef4ef056d02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>token_bucket::token_bucket</definition>
-        <argsstring>()</argsstring>
+        <argsstring>()=default</argsstring>
         <name>token_bucket</name>
         <qualifiedname>token_bucket::token_bucket</qualifiedname>
         <briefdescription>
@@ -93,7 +97,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="39" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="39" bodyend="43"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="39" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structtoken__bucket_1a25f1cbbf10d8e3d4f6a10d1481dabf0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>token_bucket::~token_bucket</definition>
+        <argsstring>()=default</argsstring>
+        <name>~token_bucket</name>
+        <qualifiedname>token_bucket::~token_bucket</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="40" column="5"/>
       </memberdef>
       <memberdef kind="function" id="structtoken__bucket_1a784abdd39ce1b01304cdea23ebc5e17d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -115,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="45" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="45" bodyend="49"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="42" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="42" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="structtoken__bucket_1a59aadd8441bd59e5813c8a1aa6e9ce9f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -133,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="51" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="51" bodyend="55"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="48" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="48" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="structtoken__bucket_1a5cddeb31695694defc6c7e1c0c42bcbd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="structtoken__bucket" kindref="compound">token_bucket</ref> &amp;</type>
@@ -151,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="57" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="57" bodyend="65"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="54" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="54" bodyend="62"/>
       </memberdef>
       <memberdef kind="function" id="structtoken__bucket_1a95c74be9eec833240aa4da2e98317c48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -182,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="74" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="71" column="10"/>
       </memberdef>
       <memberdef kind="function" id="structtoken__bucket_1a90333d30bf537fd4dd58e146e0e1038b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -211,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="80" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="77" column="10"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -233,7 +251,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="32" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="32" bodyend="81"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="32" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="32" bodyend="78"/>
     <listofallmembers>
       <member refid="structtoken__bucket_1a290e28a6b91d8987c1241052a9747047" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>capacity</name></member>
       <member refid="structtoken__bucket_1aa8efe94a5cfc7d34a59b23bcb5ea9b3b" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>last_refill_ms</name></member>
@@ -241,11 +259,12 @@
       <member refid="structtoken__bucket_1a5cddeb31695694defc6c7e1c0c42bcbd" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>operator=</name></member>
       <member refid="structtoken__bucket_1a90333d30bf537fd4dd58e146e0e1038b" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>refill</name></member>
       <member refid="structtoken__bucket_1abfd1e3fd7123a78cc98a0ea1fe51af2a" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>refill_rate</name></member>
-      <member refid="structtoken__bucket_1a203426fe20dcc7e9b857b503ff7df3f3" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>token_bucket</name></member>
+      <member refid="structtoken__bucket_1a64483cc5842e5ee438f02ef4ef056d02" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>token_bucket</name></member>
       <member refid="structtoken__bucket_1a784abdd39ce1b01304cdea23ebc5e17d" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>token_bucket</name></member>
       <member refid="structtoken__bucket_1a59aadd8441bd59e5813c8a1aa6e9ce9f" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>token_bucket</name></member>
       <member refid="structtoken__bucket_1a5b830b2d53ddf67a0295b4856f86a768" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>tokens</name></member>
       <member refid="structtoken__bucket_1a95c74be9eec833240aa4da2e98317c48" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>try_consume</name></member>
+      <member refid="structtoken__bucket_1a25f1cbbf10d8e3d4f6a10d1481dabf0d" prot="public" virt="non-virtual"><scope>token_bucket</scope><name>~token_bucket</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

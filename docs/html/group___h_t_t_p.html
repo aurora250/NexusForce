@@ -508,10 +508,45 @@ WebSocket 协议细节</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">HTTP 版本  </td><td class="markdownTableBodyNone">HTTP/1.1（RFC 9112）与 HTTP/2（RFC 7540）  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">HTTP/2 帧层  </td><td class="markdownTableBodyNone">9 种帧类型：DATA / HEADERS / SETTINGS / PING / GOAWAY / RST_STREAM / WINDOW_UPDATE / PRIORITY /  </td></tr>
+<td class="markdownTableBodyNone">HTTP/2 帧层  </td><td class="markdownTableBodyNone">9 种帧类型：DATA / HEADERS / SETTINGS / PING / GOAWAY / RST_STREAM / WINDOW_UPDATE / PRIORITY / PUSH_PROMISE  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">HPACK 头部压缩  </td><td class="markdownTableBodyNone">静态表 61 项 + 动态表 + Huffman 编码（RFC 7541）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">头部字段大小写  </td><td class="markdownTableBodyNone">不区分大小写，存储为原始大小写  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">分块传输编码  </td><td class="markdownTableBodyNone">流式增量 chunked 解析，支持 Trailing Headers  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">内容协商  </td><td class="markdownTableBodyNone">Accept-Encoding 解析，gzip/deflate 响应压缩  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">字节范围请求  </td><td class="markdownTableBodyNone">单范围 206 与多范围 multipart/byteranges 206  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">CONNECT 隧道  </td><td class="markdownTableBodyNone">双工 TCP 隧道中继，用于 HTTPS 代理  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">路由匹配  </td><td class="markdownTableBodyNone">基于 Segment Radix Tree 的 O(k) 前缀匹配；静态路径、路径参数（:id）、通配符（*）、正则表达式回退  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">中间件执行顺序  </td><td class="markdownTableBodyNone">预过滤 → 核心过滤 → 路由处理 → 后过滤  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">会话存储  </td><td class="markdownTableBodyNone">可插拔 session_store（内存 / Redis 后端）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Cookie 解析  </td><td class="markdownTableBodyNone">支持 Set-Cookie 和 Cookie 头  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">会话标识符  </td><td class="markdownTableBodyNone">支持 JESSIONID, SESSIONID, PHPSESSID 等常见名称  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">CSRF 防护  </td><td class="markdownTableBodyNone">Double-Submit Cookie 模式，仅验证状态变更方法  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SNI 多证书  </td><td class="markdownTableBodyNone">基于 TLS SNI 扩展的 hostname → SSL_CTX 映射，支持通配符  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">IO Context  </td><td class="markdownTableBodyNone">Linux epoll 边缘触发，min-heap 定时器，单线程异步 I/O  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">WebSocket 运行模式  </td><td class="markdownTableBodyNone">线程模式（3线程/会话）和事件驱动模式（零线程）双模  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">WebSocket 心跳  </td><td class="markdownTableBodyNone">周期性发送 Ping 帧，等待 Pong 响应  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">WebSocket 压缩  </td><td class="markdownTableBodyNone">permessage-deflate（RFC 7692），支持窗口比特位协商与上下文接管  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">WebSocket 升级  </td><td class="markdownTableBodyNone">通用 Upgrade 分发器，支持自定义协议处理器  </td></tr>
 </table>
-<p>PUSH_PROMISE | | HPACK 头部压缩 | 静态表 61 项 + 动态表 + Huffman 编码（RFC 7541） | | 头部字段大小写 | 不区分大小写，存储为原始大小写 | | 分块传输编码 | 流式增量 chunked 解析，支持 Trailing Headers | | 内容协商 | Accept-Encoding 解析，gzip/deflate 响应压缩 | | 字节范围请求 | 单范围 206 与多范围 multipart/byteranges 206 | | CONNECT 隧道 | 双工 TCP 隧道中继，用于 HTTPS 代理 | | 路由匹配 | 基于 Segment Radix Tree 的 O(k) 前缀匹配 | | 静态路径、路径参数（:id）、通配符（*）、正则表达式回退 | | 中间件执行顺序 | 预过滤 → 核心过滤 → 路由处理 → 后过滤 | | 会话存储 | 可插拔 session_store（内存 / Redis 后端） | | Cookie 解析 | 支持 Set-Cookie 和 Cookie 头 | | 会话标识符 | 支持 JESSIONID, SESSIONID, PHPSESSID 等常见名称 | | CSRF 防护 | Double-Submit Cookie 模式，仅验证状态变更方法 | | SNI 多证书 | 基于 TLS SNI 扩展的 hostname → SSL_CTX 映射，支持通配符 | | Event Loop | Linux epoll 边缘触发，min-heap 定时器，单线程异步 I/O | | WebSocket 运行模式 | 线程模式（3线程/会话）和事件驱动模式（零线程）双模 | | WebSocket 心跳 | 周期性发送 Ping 帧，等待 Pong 响应 | | WebSocket 压缩 | permessage-deflate（RFC 7692），支持窗口比特位协商与上下文接管 | | WebSocket 升级 | 通用 Upgrade 分发器，支持自定义协议处理器 |</p>
-<dl class="section note"><dt>注解</dt><dd>本模块的 HTTP 解析器严格遵循 RFC 9112 语法规则，支持分块传输编码（chunked） 和 Content-Length 两种方式确定消息体长度。WebSocket 实现完整支持 RFC 6455 定义的控制帧（Ping/Pong/Close）和分片消息，并支持 RFC 7692 定义的 permessage-deflate 压缩扩展。HTTP/2 协议层提供纯 C++14 同步帧编解码， 传输层由 <a class="el" href="classevent__loop.html" title="单线程 I/O 事件循环">event_loop</a> 驱动。</dd></dl>
+<dl class="section note"><dt>注解</dt><dd>本模块的 HTTP 解析器严格遵循 RFC 9112 语法规则，支持分块传输编码（chunked） 和 Content-Length 两种方式确定消息体长度。WebSocket 实现完整支持 RFC 6455 定义的控制帧（Ping/Pong/Close）和分片消息，并支持 RFC 7692 定义的 permessage-deflate 压缩扩展。HTTP/2 协议层提供纯 C++14 同步帧编解码， 传输层由 <a class="el" href="classio__context.html" title="统一异步操作核心">io_context</a> 驱动。</dd></dl>
 <dl class="section warning"><dt>警告</dt><dd>生产环境中应始终通过 HTTPS 使用 Secure 属性的 Cookie， 并在敏感路由上启用 CSRF 防护。WebSocket 连接应考虑使用 WSS（WebSocket Secure）。</dd></dl>
 <dl class="section see"><dt>参见</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc9110.html">https://www.rfc-editor.org/rfc/rfc9110.html</a> </dd>
 <dd>

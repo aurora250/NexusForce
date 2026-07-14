@@ -208,15 +208,15 @@ static void&#160;</td><td class="memItemRight"><b>notify_watchdog</b> ()</td></t
 <div class="line"><span class="keywordflow">return</span> d.<a class="code hl_function" href="#a2ffe15afe821ced9a95513048cd6c5ad">run</a>();</div>
 <div class="ttc" id="aclassdaemon_html_a126ce2b9fcaa320df0fba7270788f274"><div class="ttname"><a href="#a126ce2b9fcaa320df0fba7270788f274">daemon::daemonize</a></div><div class="ttdeci">bool daemonize(const string &amp;work_dir=&quot;/&quot;)</div><div class="ttdoc">将当前进程转为守护进程（Linux 双 fork）</div></div>
 <div class="ttc" id="aclassdaemon_html_a2ffe15afe821ced9a95513048cd6c5ad"><div class="ttname"><a href="#a2ffe15afe821ced9a95513048cd6c5ad">daemon::run</a></div><div class="ttdeci">int run()</div><div class="ttdoc">进入信号驱动主循环（阻塞）</div></div>
-<div class="ttc" id="aclassdaemon_html_a45b1d6108b80d2a4ba035a346b31c456"><div class="ttname"><a href="#a45b1d6108b80d2a4ba035a346b31c456">daemon::on_start</a></div><div class="ttdeci">void on_start(start_callback cb)</div><div class="ttdoc">注册启动回调</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00164">daemon.hpp:164</a></div></div>
-<div class="ttc" id="aclassdaemon_html_aaa72dc82f4acf4d04e36be42fd5e4113"><div class="ttname"><a href="#aaa72dc82f4acf4d04e36be42fd5e4113">daemon::on_stop</a></div><div class="ttdeci">void on_stop(stop_callback cb)</div><div class="ttdoc">注册停止回调</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00167">daemon.hpp:167</a></div></div>
+<div class="ttc" id="aclassdaemon_html_a45b1d6108b80d2a4ba035a346b31c456"><div class="ttname"><a href="#a45b1d6108b80d2a4ba035a346b31c456">daemon::on_start</a></div><div class="ttdeci">void on_start(start_callback cb)</div><div class="ttdoc">注册启动回调</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00172">daemon.hpp:172</a></div></div>
+<div class="ttc" id="aclassdaemon_html_aaa72dc82f4acf4d04e36be42fd5e4113"><div class="ttname"><a href="#aaa72dc82f4acf4d04e36be42fd5e4113">daemon::on_stop</a></div><div class="ttdeci">void on_stop(stop_callback cb)</div><div class="ttdoc">注册停止回调</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00175">daemon.hpp:175</a></div></div>
 <div class="ttc" id="aclassdaemon_html_ad16b6eb4e743529fe1c2870062cfa8a5"><div class="ttname"><a href="#ad16b6eb4e743529fe1c2870062cfa8a5">daemon::add_child</a></div><div class="ttdeci">bool add_child(const child_config &amp;cfg)</div><div class="ttdoc">添加受管理的子进程</div></div>
 <div class="ttc" id="aclassdaemon_html_ae8ab5fa697056ffaca558b311ea9f53e"><div class="ttname"><a href="#ae8ab5fa697056ffaca558b311ea9f53e">daemon::write_pid_file</a></div><div class="ttdeci">bool write_pid_file(const string &amp;path)</div><div class="ttdoc">创建并锁定 PID 文件（单实例保护）</div></div>
-<div class="ttc" id="aclasslogger_html_a20714991a7e1651edb6c3e90a855849b"><div class="ttname"><a href="classlogger.html#a20714991a7e1651edb6c3e90a855849b">logger::info</a></div><div class="ttdeci">void info(string msg, source_loc loc)</div><div class="ttdoc">INFO 级别快捷方法</div><div class="ttdef"><b>定义</b> <a href="logger_8hpp_source.html#l00276">logger.hpp:276</a></div></div>
-<div class="ttc" id="astructdaemon_1_1child__config_html_a03d3fff0fb7374e26e531785610b84f8"><div class="ttname"><a href="structdaemon_1_1child__config.html#a03d3fff0fb7374e26e531785610b84f8">daemon::child_config::executable</a></div><div class="ttdeci">string executable</div><div class="ttdoc">可执行文件路径</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00077">daemon.hpp:77</a></div></div>
-<div class="ttc" id="astructdaemon_1_1child__config_html_a8155312a84066a465764bdba65fca846"><div class="ttname"><a href="structdaemon_1_1child__config.html#a8155312a84066a465764bdba65fca846">daemon::child_config::name</a></div><div class="ttdeci">string name</div><div class="ttdoc">唯一名称</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00076">daemon.hpp:76</a></div></div>
+<div class="ttc" id="aclasslogger_html_a20714991a7e1651edb6c3e90a855849b"><div class="ttname"><a href="classlogger.html#a20714991a7e1651edb6c3e90a855849b">logger::info</a></div><div class="ttdeci">void info(string msg, source_loc loc)</div><div class="ttdoc">INFO 级别快捷方法</div><div class="ttdef"><b>定义</b> <a href="logger_8hpp_source.html#l00210">logger.hpp:210</a></div></div>
+<div class="ttc" id="astructdaemon_1_1child__config_html_a03d3fff0fb7374e26e531785610b84f8"><div class="ttname"><a href="structdaemon_1_1child__config.html#a03d3fff0fb7374e26e531785610b84f8">daemon::child_config::executable</a></div><div class="ttdeci">string executable</div><div class="ttdoc">可执行文件路径</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00085">daemon.hpp:85</a></div></div>
+<div class="ttc" id="astructdaemon_1_1child__config_html_a8155312a84066a465764bdba65fca846"><div class="ttname"><a href="structdaemon_1_1child__config.html#a8155312a84066a465764bdba65fca846">daemon::child_config::name</a></div><div class="ttdeci">string name</div><div class="ttdoc">唯一名称</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00084">daemon.hpp:84</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">在文件 <a class="el" href="daemon_8hpp_source.html">daemon.hpp</a> 第 <a class="el" href="daemon_8hpp_source.html#l00063">63</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="daemon_8hpp_source.html">daemon.hpp</a> 第 <a class="el" href="daemon_8hpp_source.html#l00071">71</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
 <a id="ad05b7d9ed3adca1be5d4889df9accc19" name="ad05b7d9ed3adca1be5d4889df9accc19"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad05b7d9ed3adca1be5d4889df9accc19">&#9670;&#160;</a></span>daemon_state</h2>
@@ -252,7 +252,7 @@ static void&#160;</td><td class="memItemRight"><b>notify_watchdog</b> ()</td></t
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="daemon_8hpp_source.html">daemon.hpp</a> 第 <a class="el" href="daemon_8hpp_source.html#l00066">66</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="daemon_8hpp_source.html">daemon.hpp</a> 第 <a class="el" href="daemon_8hpp_source.html#l00074">74</a> 行定义.</p>
 
 </div>
 </div>
@@ -370,7 +370,7 @@ static void&#160;</td><td class="memItemRight"><b>notify_watchdog</b> ()</td></t
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a> , 以及 <a class="el" href="#a9d9162166407ac2d23502a5775423a78">remove_child()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a> , 以及 <a class="el" href="#a9d9162166407ac2d23502a5775423a78">remove_child()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#a9d9162166407ac2d23502a5775423a78">remove_child()</a>.</p>
 

@@ -21,7 +21,13 @@ var hierarchy =
     [ "any", "classany.html", null ],
     [ "arp", "classarp.html", null ],
     [ "barrier&lt; CmplFunc &gt;::arrival_token", "classbarrier_1_1arrival__token.html", null ],
-    [ "file_async::async_result", "structfile__async_1_1async__result.html", null ],
+    [ "async_result&lt; Token, Signature &gt;", "structasync__result.html", null ],
+    [ "async_stream", "classasync__stream.html", [
+      [ "ssl_stream", "classssl__stream.html", null ],
+      [ "tcp_socket", "classtcp__socket.html", [
+        [ "ssl_socket", "classssl__socket.html", null ]
+      ] ]
+    ] ],
     [ "atomic&lt; T &gt;", "structatomic.html", null ],
     [ "atomic&lt; bool &gt;", "structatomic_3_01bool_01_4.html", null ],
     [ "atomic&lt; shared_ptr&lt; T &gt; &gt;", "structatomic_3_01shared__ptr_3_01_t_01_4_01_4.html", null ],
@@ -94,6 +100,8 @@ var hierarchy =
     [ "atomic_ref_base&lt; T, false, false &gt;", "structatomic__ref__base_3_01_t_00_01false_00_01false_01_4.html", null ],
     [ "atomic_ref_base&lt; T, true, false &gt;", "structatomic__ref__base_3_01_t_00_01true_00_01false_01_4.html", null ],
     [ "atomic_semaphore&lt; LeastMaxValue &gt;", "classatomic__semaphore.html", null ],
+    [ "awaitable&lt; Args &gt;", "classawaitable.html", null ],
+    [ "awaitable&lt; void &gt;", "classawaitable_3_01void_01_4.html", null ],
     [ "task&lt; T &gt;::awaiter", "structtask_1_1awaiter.html", null ],
     [ "back_insert_iterator&lt; Container &gt;", "classback__insert__iterator.html", null ],
     [ "barrier&lt; CmplFunc &gt;", "classbarrier.html", null ],
@@ -152,7 +160,10 @@ var hierarchy =
     [ "byte_range", "structbyte__range.html", null ],
     [ "cached_response", "structcached__response.html", null ],
     [ "call_wrapper&lt; Types &gt;", "structcall__wrapper.html", null ],
+    [ "cancellation_slot", "classcancellation__slot.html", null ],
     [ "cancellation_token", "classcancellation__token.html", null ],
+    [ "chacha20_poly1305", "structchacha20__poly1305.html", null ],
+    [ "channel&lt; T &gt;", "classchannel.html", null ],
     [ "cancellation_token::check_awaiter", "structcancellation__token_1_1check__awaiter.html", null ],
     [ "daemon::child_config", "structdaemon_1_1child__config.html", null ],
     [ "daemon::child_status", "structdaemon_1_1child__status.html", null ],
@@ -160,6 +171,7 @@ var hierarchy =
     [ "chunked_body_reader", "classchunked__body__reader.html", null ],
     [ "click", "structclick.html", null ],
     [ "cmdline", "classcmdline.html", null ],
+    [ "co_spawn_task", "structco__spawn__task.html", null ],
     [ "codepoint", "classcodepoint.html", null ],
     [ "sql_builder::column_definition", "structsql__builder_1_1column__definition.html", null ],
     [ "column_meta", "structcolumn__meta.html", null ],
@@ -176,6 +188,7 @@ var hierarchy =
     [ "conjunction&lt; is_convertible&lt; typename unique_ptr&lt; U, E &gt;::pointer, pointer &gt;, negation&lt; is_array&lt; U &gt; &gt; &gt;", "structconjunction.html", null ],
     [ "connection", "classconnection.html", null ],
     [ "sys_console::console_size", "structsys__console_1_1console__size.html", null ],
+    [ "const_buffers", "classconst__buffers.html", null ],
     [ "coroutine_traits&lt; Res, Args &gt;", "structcoroutine__traits.html", null ],
     [ "sysinfo::CPU_info", "structsysinfo_1_1_c_p_u__info.html", null ],
     [ "cpu_times", "structcpu__times.html", null ],
@@ -191,8 +204,10 @@ var hierarchy =
     [ "default_deleter&lt; T &gt;", "structdefault__deleter.html", null ],
     [ "default_deleter&lt; T[]&gt;", "structdefault__deleter_3_01_t_0f_0e_4.html", null ],
     [ "default_spin_policy", "structdefault__spin__policy.html", null ],
+    [ "deferred_t", "structdeferred__t.html", null ],
     [ "deque&lt; coroutine_handle&lt;&gt; &gt;", "classdeque.html", null ],
     [ "deque&lt; vector&lt; byte_t &gt; &gt;", "classdeque.html", null ],
+    [ "detached_t", "structdetached__t.html", null ],
     [ "disjunction&lt; Args &gt;", "structdisjunction.html", null ],
     [ "disjunction&lt; is_assignable&lt; T &amp;, const optional&lt; U &gt; &amp; &gt;, is_assignable&lt; T &amp;, optional&lt; U &gt; &amp; &gt;, is_assignable&lt; T &amp;, const optional&lt; U &gt; &amp;&amp; &gt;, is_assignable&lt; T &amp;, optional&lt; U &gt; &amp;&amp; &gt; &gt;", "structdisjunction.html", null ],
     [ "disjunction&lt; is_constructible&lt; T, const optional&lt; U &gt; &amp; &gt;, is_constructible&lt; T, optional&lt; U &gt; &amp; &gt;, is_constructible&lt; T, const optional&lt; U &gt; &amp;&amp; &gt;, is_constructible&lt; T, optional&lt; U &gt; &amp;&amp; &gt;, is_convertible&lt; const optional&lt; U &gt; &amp;, T &gt;, is_convertible&lt; optional&lt; U &gt; &amp;, T &gt;, is_convertible&lt; const optional&lt; U &gt; &amp;&amp;, T &gt;, is_convertible&lt; optional&lt; U &gt; &amp;&amp;, T &gt; &gt;", "structdisjunction.html", null ],
@@ -208,6 +223,7 @@ var hierarchy =
     [ "dns_soa_record", "structdns__soa__record.html", null ],
     [ "dns_srv_record", "structdns__srv__record.html", null ],
     [ "duration&lt; Rep, Period &gt;", "structduration.html", null ],
+    [ "dynamic_buffer", "classdynamic__buffer.html", null ],
     [ "dynamic_library", "classdynamic__library.html", null ],
     [ "exception_ptr::ecb", "structexception__ptr_1_1ecb.html", null ],
     [ "empty_completion", "structempty__completion.html", null ],
@@ -232,7 +248,6 @@ var hierarchy =
     [ "environment", "structenvironment.html", null ],
     [ "equal_to&lt; T &gt;", "structequal__to.html", null ],
     [ "equal_to&lt; void &gt;", "structequal__to_3_01void_01_4.html", null ],
-    [ "event_loop", "classevent__loop.html", null ],
     [ "exact_arg_construct_tag", "structexact__arg__construct__tag.html", null ],
     [ "exception", "structexception.html", [
       [ "future_exception", "structfuture__exception.html", null ],
@@ -244,15 +259,7 @@ var hierarchy =
           [ "anycast_exception", "structanycast__exception.html", null ]
         ] ]
       ] ],
-      [ "network_exception", "structnetwork__exception.html", [
-        [ "dns_exception", "classdns__exception.html", null ],
-        [ "ftp_exception", "structftp__exception.html", null ],
-        [ "http_exception", "structhttp__exception.html", null ],
-        [ "smtp_exception", "structsmtp__exception.html", null ],
-        [ "socket_exception", "structsocket__exception.html", null ]
-      ] ],
       [ "system_exception", "structsystem__exception.html", [
-        [ "cmdline_exception", "structcmdline__exception.html", null ],
         [ "daemon_exception", "structdaemon__exception.html", null ],
         [ "device_exception", "structdevice__exception.html", [
           [ "console_exception", "structconsole__exception.html", null ]
@@ -260,11 +267,17 @@ var hierarchy =
         [ "dynamic_library_exception", "structdynamic__library__exception.html", null ],
         [ "file_exception", "structfile__exception.html", null ],
         [ "locale_exception", "structlocale__exception.html", null ],
+        [ "network_exception", "structnetwork__exception.html", [
+          [ "dns_exception", "classdns__exception.html", null ],
+          [ "ftp_exception", "structftp__exception.html", null ],
+          [ "http_exception", "structhttp__exception.html", null ],
+          [ "smtp_exception", "structsmtp__exception.html", null ],
+          [ "socket_exception", "structsocket__exception.html", null ]
+        ] ],
         [ "pipe_exception", "structpipe__exception.html", null ],
         [ "process_exception", "structprocess__exception.html", null ],
         [ "registry_key_exception", "structregistry__key__exception.html", null ],
-        [ "share_memory_exception", "structshare__memory__exception.html", null ],
-        [ "thread_exception", "structthread__exception.html", null ]
+        [ "share_memory_exception", "structshare__memory__exception.html", null ]
       ] ],
       [ "thirdparty_exception", "structthirdparty__exception.html", [
         [ "database_exception", "structdatabase__exception.html", [
@@ -275,7 +288,9 @@ var hierarchy =
         [ "ssl_exception", "structssl__exception.html", null ],
         [ "zlib_exception", "structzlib__exception.html", null ]
       ] ],
+      [ "thread_exception", "structthread__exception.html", null ],
       [ "value_exception", "structvalue__exception.html", [
+        [ "cmdline_exception", "structcmdline__exception.html", null ],
         [ "deserialize_exception", "structdeserialize__exception.html", [
           [ "missing_required_exception", "structmissing__required__exception.html", null ],
           [ "type_mismatch_exception", "structtype__mismatch__exception.html", null ]
@@ -294,6 +309,9 @@ var hierarchy =
     [ "exception_wrapper", "classexception__wrapper.html", [
       [ "typed_exception_wrapper< Ex >", "classtyped__exception__wrapper.html", null ]
     ] ],
+    [ "executor", "classexecutor.html", null ],
+    [ "io_context::executor", "classio__context_1_1executor.html", null ],
+    [ "executor::executor_base", "structexecutor_1_1executor__base.html", null ],
     [ "file", "classfile.html", null ],
     [ "file_async", "classfile__async.html", null ],
     [ "file_diff", "classfile__diff.html", null ],
@@ -304,12 +322,15 @@ var hierarchy =
     [ "file_watcher", "classfile__watcher.html", null ],
     [ "filesystem", "classfilesystem.html", null ],
     [ "task&lt; T &gt;::promise_type::final_awaiter", "structtask_1_1promise__type_1_1final__awaiter.html", null ],
+    [ "flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;", "classflat__unordered__map.html", null ],
+    [ "flat_unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;", "classflat__unordered__multimap.html", null ],
     [ "format_options", "structformat__options.html", null ],
     [ "formatter&lt; Number, Dummy &gt;", "structformatter.html", null ],
     [ "formatter&lt; bool &gt;", "structformatter_3_01bool_01_4.html", null ],
     [ "formatter&lt; char * &gt;", "structformatter_3_01char_01_5_01_4.html", null ],
     [ "formatter&lt; char &gt;", "structformatter_3_01char_01_4.html", null ],
     [ "formatter&lt; const char * &gt;", "structformatter_3_01const_01char_01_5_01_4.html", null ],
+    [ "formatter&lt; datetime &gt;", "structformatter_3_01datetime_01_4.html", null ],
     [ "formatter&lt; nullptr_t &gt;", "structformatter_3_01nullptr__t_01_4.html", null ],
     [ "formatter&lt; string &gt;", "structformatter_3_01string_01_4.html", null ],
     [ "formatter&lt; string_view &gt;", "structformatter_3_01string__view_01_4.html", null ],
@@ -321,8 +342,12 @@ var hierarchy =
     [ "function&lt; Sign &gt;", "classfunction.html", null ],
     [ "function&lt; Res(Args...)&gt;", "classfunction_3_01_res_07_args_8_8_8_08_4.html", null ],
     [ "future&lt; Res &gt;", "classfuture.html", null ],
+    [ "future&lt; dns_query_result &gt;", "classfuture.html", null ],
+    [ "future&lt; pair&lt; size_t, ip_address &gt; &gt;", "classfuture.html", null ],
     [ "future&lt; Res &amp; &gt;", "classfuture_3_01_res_01_6_01_4.html", null ],
+    [ "future&lt; size_t &gt;", "classfuture.html", null ],
     [ "future&lt; T &gt;", "classfuture.html", null ],
+    [ "future&lt; tcp_socket &gt;", "classfuture.html", null ],
     [ "future&lt; void &gt;", "classfuture_3_01void_01_4.html", null ],
     [ "future_result&lt; T &gt;", "structfuture__result.html", null ],
     [ "future_result&lt; void &gt;", "structfuture__result_3_01void_01_4.html", null ],
@@ -520,6 +545,9 @@ var hierarchy =
       [ "icollector< queue< T, deque< T > > >", "structicollector.html", null ],
       [ "icollector< stack< T, deque< T > > >", "structicollector.html", null ],
       [ "icollector< vector< T, allocator< T > > >", "structicollector.html", null ],
+      [ "icollector< flat_hashtable< pair< Key, T >, Key, hash< Key >, select1st< pair< Key, T > >, equal_to< Key >, allocator< pair< Key, T > > > >", "structicollector.html", [
+        [ "flat_hashtable< pair< Key, T >, Key, hash< Key >, select1st< pair< Key, T > >, equal_to< Key >, allocator< pair< Key, T > > >", "classflat__hashtable.html", null ]
+      ] ],
       [ "icollector< rb_tree< Key, pair< const Key, T >, select1st< pair< const Key, T > >, less< Key >, allocator< rb_tree_node< pair< const Key, T > > > > >", "structicollector.html", [
         [ "rb_tree< Key, pair< const Key, T >, select1st< pair< const Key, T > >, less< Key >, allocator< rb_tree_node< pair< const Key, T > > > >", "classrb__tree.html", null ]
       ] ],
@@ -549,6 +577,8 @@ var hierarchy =
       [ "icollector< T >", "structicollector.html", [
         [ "deque< connection_entry >", "classdeque.html", null ],
         [ "deque< frame >", "classdeque.html", null ],
+        [ "flat_hashtable< pair< Key, T >, Key, HashFcn, select1st< pair< Key, T > >, EqualKey, Alloc >", "classflat__hashtable.html", null ],
+        [ "flat_hashtable< Value, Value, HashFcn, identity< Value >, EqualKey, Alloc >", "classflat__hashtable.html", null ],
         [ "hashtable< pair< const Key, T >, Key, HashFcn, select1st< pair< const Key, T > >, EqualKey, Alloc >", "classhashtable.html", null ],
         [ "hashtable< Value, Value, HashFcn, identity< Value >, EqualKey, Alloc >", "classhashtable.html", null ],
         [ "priority_queue< priority_task >", "classpriority__queue.html", null ],
@@ -561,14 +591,16 @@ var hierarchy =
         [ "vector< Value, Alloc >", "classvector.html", null ],
         [ "vector< byte_t >", "classvector.html", null ],
         [ "vector< ptr >", "classvector.html", null ],
+        [ "iterator< mutable_buffer >", "classvector.html", null ],
+        [ "const_iterator< mutable_buffer >", "classvector.html", null ],
+        [ "iterator< const_buffer >", "classvector.html", null ],
+        [ "const_iterator< const_buffer >", "classvector.html", null ],
         [ "const_iterator< string >", "classvector.html", null ],
         [ "vector< segment >", "classvector.html", null ],
         [ "vector< cmdline::option >", "classvector.html", null ],
         [ "vector< cmdline::option_dependency >", "classvector.html", null ],
         [ "vector< cmdline::option_conflict >", "classvector.html", null ],
         [ "vector< dns_record >", "classvector.html", null ],
-        [ "vector< timer_entry >", "classvector.html", null ],
-        [ "vector< aiocb_type * >", "classvector.html", null ],
         [ "vector< char >", "classvector.html", null ],
         [ "vector< table_entry >", "classvector.html", null ],
         [ "vector< hpack_header_field >", "classvector.html", null ],
@@ -577,6 +609,7 @@ var hierarchy =
         [ "vector< filter_entry >", "classvector.html", null ],
         [ "vector< route_entry >", "classvector.html", null ],
         [ "vector< thread >", "classvector.html", null ],
+        [ "vector< timer_entry >", "classvector.html", null ],
         [ "vector< lb_backend >", "classvector.html", null ],
         [ "vector< part >", "classvector.html", null ],
         [ "vector< log_event >", "classvector.html", null ],
@@ -601,6 +634,8 @@ var hierarchy =
         [ "vector< hashtable_node< pair< const Key, T > > >", "classvector.html", null ],
         [ "vector< indent_context >", "classvector.html", null ],
         [ "deque< T, Alloc, BufSize >", "classdeque.html", null ],
+        [ "flat_unordered_multiset< Value, HashFcn, EqualKey, Alloc >", "classflat__unordered__multiset.html", null ],
+        [ "flat_unordered_set< Value, HashFcn, EqualKey, Alloc >", "classflat__unordered__set.html", null ],
         [ "priority_queue< T, Sequence, Compare >", "classpriority__queue.html", null ],
         [ "queue< T, Sequence >", "classqueue.html", null ],
         [ "sparse_multiset< Key, Compare, Alloc >", "classsparse__multiset.html", null ],
@@ -642,8 +677,8 @@ var hierarchy =
         [ "ipackage< float64, float64_t >", "structipackage.html", null ],
         [ "ipackage< decimal, decimal_t >", "structipackage.html", null ],
         [ "ipackage< T, CharT >", "structipackage.html", null ],
-        [ "pair< const Key, T >", "structpair.html", null ],
         [ "pair< Key, T >", "structpair.html", null ],
+        [ "pair< const Key, T >", "structpair.html", null ],
         [ "basic_string< CharT, Traits, Alloc >", "classbasic__string.html", null ],
         [ "compressed_pair< IfEmpty, T, Compressed >", "structcompressed__pair.html", null ],
         [ "ipackage< T, PackageT >", "structipackage.html", null ]
@@ -777,10 +812,26 @@ var hierarchy =
       [ "icommon< error_code >", "structicommon.html", null ]
     ] ],
     [ "icomparable&lt; error_condition &gt;", "structicomparable.html", null ],
-    [ "icomparable&lt; hashtable&lt; pair&lt; const aiocb_type *, async_context * &gt;, aiocb_type *, hash&lt; aiocb_type * &gt;, select1st&lt; pair&lt; const aiocb_type *, async_context * &gt; &gt;, equal_to&lt; aiocb_type * &gt;, allocator&lt; hashtable_node&lt; pair&lt; const aiocb_type *, async_context * &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
-      [ "icollector< hashtable< pair< const aiocb_type *, async_context * >, aiocb_type *, hash< aiocb_type * >, select1st< pair< const aiocb_type *, async_context * > >, equal_to< aiocb_type * >, allocator< hashtable_node< pair< const aiocb_type *, async_context * > > > > >", "structicollector.html", [
-        [ "hashtable< pair< const aiocb_type *, async_context * >, aiocb_type *, hash< aiocb_type * >, select1st< pair< const aiocb_type *, async_context * > >, equal_to< aiocb_type * >, allocator< hashtable_node< pair< const aiocb_type *, async_context * > > > >", "classhashtable.html", null ]
+    [ "icomparable&lt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;", "structicomparable.html", [
+      [ "icollector< flat_hashtable< Value, Key, HashFcn, ExtractKey, EqualKey, Alloc > >", "structicollector.html", [
+        [ "flat_hashtable< Value, Key, HashFcn, ExtractKey, EqualKey, Alloc >", "classflat__hashtable.html", null ]
       ] ]
+    ] ],
+    [ "icomparable&lt; flat_hashtable&lt; Value, Value, hash&lt; Value &gt;, identity&lt; Value &gt;, equal_to&lt; Value &gt;, allocator&lt; Value &gt; &gt; &gt;", "structicomparable.html", [
+      [ "icollector< flat_hashtable< Value, Value, hash< Value >, identity< Value >, equal_to< Value >, allocator< Value > > >", "structicollector.html", [
+        [ "flat_hashtable< Value, Value, hash< Value >, identity< Value >, equal_to< Value >, allocator< Value > >", "classflat__hashtable.html", null ]
+      ] ]
+    ] ],
+    [ "icomparable&lt; flat_hashtable_iterator&lt; IsConst, FlatHT &gt; &gt;", "structicomparable.html", [
+      [ "iiterator< flat_hashtable_iterator< IsConst, FlatHT > >", "structiiterator.html", [
+        [ "flat_hashtable_iterator< IsConst, FlatHT >", "structflat__hashtable__iterator.html", null ]
+      ] ]
+    ] ],
+    [ "icomparable&lt; flat_unordered_multiset&lt; Value, hash&lt; Value &gt;, equal_to&lt; Value &gt;, allocator&lt; Value &gt; &gt; &gt;", "structicomparable.html", [
+      [ "icollector< flat_unordered_multiset< Value, hash< Value >, equal_to< Value >, allocator< Value > > >", "structicollector.html", null ]
+    ] ],
+    [ "icomparable&lt; flat_unordered_set&lt; Value, hash&lt; Value &gt;, equal_to&lt; Value &gt;, allocator&lt; Value &gt; &gt; &gt;", "structicomparable.html", [
+      [ "icollector< flat_unordered_set< Value, hash< Value >, equal_to< Value >, allocator< Value > > >", "structicollector.html", null ]
     ] ],
     [ "icomparable&lt; hashtable&lt; pair&lt; const basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt;, basic_string&lt; char &gt;, hash&lt; basic_string&lt; char &gt; &gt;, select1st&lt; pair&lt; const basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt; &gt;, equal_to&lt; basic_string&lt; char &gt; &gt;, allocator&lt; hashtable_node&lt; pair&lt; const basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
       [ "icollector< hashtable< pair< const basic_string< char >, basic_string< char > >, basic_string< char >, hash< basic_string< char > >, select1st< pair< const basic_string< char >, basic_string< char > > >, equal_to< basic_string< char > >, allocator< hashtable_node< pair< const basic_string< char >, basic_string< char > > > > > >", "structicollector.html", [
@@ -937,16 +988,6 @@ var hierarchy =
         [ "hashtable< pair< const id_type, worker_context >, id_type, hash< id_type >, select1st< pair< const id_type, worker_context > >, equal_to< id_type >, allocator< hashtable_node< pair< const id_type, worker_context > > > >", "classhashtable.html", null ]
       ] ]
     ] ],
-    [ "icomparable&lt; hashtable&lt; pair&lt; const int, fd_info &gt;, int, hash&lt; int &gt;, select1st&lt; pair&lt; const int, fd_info &gt; &gt;, equal_to&lt; int &gt;, allocator&lt; hashtable_node&lt; pair&lt; const int, fd_info &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
-      [ "icollector< hashtable< pair< const int, fd_info >, int, hash< int >, select1st< pair< const int, fd_info > >, equal_to< int >, allocator< hashtable_node< pair< const int, fd_info > > > > >", "structicollector.html", [
-        [ "hashtable< pair< const int, fd_info >, int, hash< int >, select1st< pair< const int, fd_info > >, equal_to< int >, allocator< hashtable_node< pair< const int, fd_info > > > >", "classhashtable.html", null ]
-      ] ]
-    ] ],
-    [ "icomparable&lt; hashtable&lt; pair&lt; const int, void * &gt;, int, hash&lt; int &gt;, select1st&lt; pair&lt; const int, void * &gt; &gt;, equal_to&lt; int &gt;, allocator&lt; hashtable_node&lt; pair&lt; const int, void * &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
-      [ "icollector< hashtable< pair< const int, void * >, int, hash< int >, select1st< pair< const int, void * > >, equal_to< int >, allocator< hashtable_node< pair< const int, void * > > > > >", "structicollector.html", [
-        [ "hashtable< pair< const int, void * >, int, hash< int >, select1st< pair< const int, void * > >, equal_to< int >, allocator< hashtable_node< pair< const int, void * > > > >", "classhashtable.html", null ]
-      ] ]
-    ] ],
     [ "icomparable&lt; hashtable&lt; pair&lt; const Key, list_iterator &gt;, Key, hash&lt; Key &gt;, select1st&lt; pair&lt; const Key, list_iterator &gt; &gt;, equal_to&lt; Key &gt;, allocator&lt; hashtable_node&lt; pair&lt; const Key, list_iterator &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
       [ "icollector< hashtable< pair< const Key, list_iterator >, Key, hash< Key >, select1st< pair< const Key, list_iterator > >, equal_to< Key >, allocator< hashtable_node< pair< const Key, list_iterator > > > > >", "structicollector.html", [
         [ "hashtable< pair< const Key, list_iterator >, Key, hash< Key >, select1st< pair< const Key, list_iterator > >, equal_to< Key >, allocator< hashtable_node< pair< const Key, list_iterator > > > >", "classhashtable.html", null ]
@@ -955,6 +996,16 @@ var hierarchy =
     [ "icomparable&lt; hashtable&lt; pair&lt; const Key, time_point &gt;, Key, hash&lt; Key &gt;, select1st&lt; pair&lt; const Key, time_point &gt; &gt;, equal_to&lt; Key &gt;, allocator&lt; hashtable_node&lt; pair&lt; const Key, time_point &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
       [ "icollector< hashtable< pair< const Key, time_point >, Key, hash< Key >, select1st< pair< const Key, time_point > >, equal_to< Key >, allocator< hashtable_node< pair< const Key, time_point > > > > >", "structicollector.html", [
         [ "hashtable< pair< const Key, time_point >, Key, hash< Key >, select1st< pair< const Key, time_point > >, equal_to< Key >, allocator< hashtable_node< pair< const Key, time_point > > > >", "classhashtable.html", null ]
+      ] ]
+    ] ],
+    [ "icomparable&lt; hashtable&lt; pair&lt; const native_handle_type, fd_info &gt;, native_handle_type, hash&lt; native_handle_type &gt;, select1st&lt; pair&lt; const native_handle_type, fd_info &gt; &gt;, equal_to&lt; native_handle_type &gt;, allocator&lt; hashtable_node&lt; pair&lt; const native_handle_type, fd_info &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
+      [ "icollector< hashtable< pair< const native_handle_type, fd_info >, native_handle_type, hash< native_handle_type >, select1st< pair< const native_handle_type, fd_info > >, equal_to< native_handle_type >, allocator< hashtable_node< pair< const native_handle_type, fd_info > > > > >", "structicollector.html", [
+        [ "hashtable< pair< const native_handle_type, fd_info >, native_handle_type, hash< native_handle_type >, select1st< pair< const native_handle_type, fd_info > >, equal_to< native_handle_type >, allocator< hashtable_node< pair< const native_handle_type, fd_info > > > >", "classhashtable.html", null ]
+      ] ]
+    ] ],
+    [ "icomparable&lt; hashtable&lt; pair&lt; const native_handle_type, void * &gt;, native_handle_type, hash&lt; native_handle_type &gt;, select1st&lt; pair&lt; const native_handle_type, void * &gt; &gt;, equal_to&lt; native_handle_type &gt;, allocator&lt; hashtable_node&lt; pair&lt; const native_handle_type, void * &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
+      [ "icollector< hashtable< pair< const native_handle_type, void * >, native_handle_type, hash< native_handle_type >, select1st< pair< const native_handle_type, void * > >, equal_to< native_handle_type >, allocator< hashtable_node< pair< const native_handle_type, void * > > > > >", "structicollector.html", [
+        [ "hashtable< pair< const native_handle_type, void * >, native_handle_type, hash< native_handle_type >, select1st< pair< const native_handle_type, void * > >, equal_to< native_handle_type >, allocator< hashtable_node< pair< const native_handle_type, void * > > > >", "classhashtable.html", null ]
       ] ]
     ] ],
     [ "icomparable&lt; hashtable&lt; pair&lt; const type_id, type_id &gt;, type_id, hash&lt; type_id &gt;, select1st&lt; pair&lt; const type_id, type_id &gt; &gt;, equal_to&lt; type_id &gt;, allocator&lt; hashtable_node&lt; pair&lt; const type_id, type_id &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
@@ -997,6 +1048,11 @@ var hierarchy =
         [ "hashtable< pair< const uint32_t, unique_ptr< http2_stream > >, uint32_t, hash< uint32_t >, select1st< pair< const uint32_t, unique_ptr< http2_stream > > >, equal_to< uint32_t >, allocator< hashtable_node< pair< const uint32_t, unique_ptr< http2_stream > > > > >", "classhashtable.html", null ]
       ] ]
     ] ],
+    [ "icomparable&lt; hashtable&lt; pair&lt; const uintptr_t, function&lt; void(error_code, size_t, void *overlapped)&gt; &gt;, uintptr_t, hash&lt; uintptr_t &gt;, select1st&lt; pair&lt; const uintptr_t, function&lt; void(error_code, size_t, void *overlapped)&gt; &gt; &gt;, equal_to&lt; uintptr_t &gt;, allocator&lt; hashtable_node&lt; pair&lt; const uintptr_t, function&lt; void(error_code, size_t, void *overlapped)&gt; &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
+      [ "icollector< hashtable< pair< const uintptr_t, function< void(error_code, size_t, void *overlapped)> >, uintptr_t, hash< uintptr_t >, select1st< pair< const uintptr_t, function< void(error_code, size_t, void *overlapped)> > >, equal_to< uintptr_t >, allocator< hashtable_node< pair< const uintptr_t, function< void(error_code, size_t, void *overlapped)> > > > > >", "structicollector.html", [
+        [ "hashtable< pair< const uintptr_t, function< void(error_code, size_t, void *overlapped)> >, uintptr_t, hash< uintptr_t >, select1st< pair< const uintptr_t, function< void(error_code, size_t, void *overlapped)> > >, equal_to< uintptr_t >, allocator< hashtable_node< pair< const uintptr_t, function< void(error_code, size_t, void *overlapped)> > > > >", "classhashtable.html", null ]
+      ] ]
+    ] ],
     [ "icomparable&lt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;", "structicomparable.html", [
       [ "icollector< hashtable< Value, Key, HashFcn, ExtractKey, EqualKey, Alloc > >", "structicollector.html", [
         [ "hashtable< Value, Key, HashFcn, ExtractKey, EqualKey, Alloc >", "classhashtable.html", null ]
@@ -1032,6 +1088,8 @@ var hierarchy =
         [ "basic_string_iterator< true, basic_string >", "structbasic__string__iterator.html", null ],
         [ "bitmap_iterator< false, bitmap >", "structbitmap__iterator.html", null ],
         [ "bitmap_iterator< true, bitmap >", "structbitmap__iterator.html", null ],
+        [ "flat_hashtable_iterator< false, flat_hashtable >", "structflat__hashtable__iterator.html", null ],
+        [ "flat_hashtable_iterator< true, flat_hashtable >", "structflat__hashtable__iterator.html", null ],
         [ "hashtable_iterator< false, hashtable >", "structhashtable__iterator.html", null ],
         [ "hashtable_iterator< true, hashtable >", "structhashtable__iterator.html", null ],
         [ "list_iterator< false, list >", "structlist__iterator.html", null ],
@@ -1072,11 +1130,6 @@ var hierarchy =
     [ "icomparable&lt; pair&lt; basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt; &gt;", "structicomparable.html", [
       [ "icommon< pair< basic_string< char >, basic_string< char > > >", "structicommon.html", [
         [ "pair< basic_string< char >, basic_string< char > >", "structpair.html", null ]
-      ] ]
-    ] ],
-    [ "icomparable&lt; pair&lt; const aiocb_type *, async_context * &gt; &gt;", "structicomparable.html", [
-      [ "icommon< pair< const aiocb_type *, async_context * > >", "structicommon.html", [
-        [ "pair< const aiocb_type *, async_context * >", "structpair.html", null ]
       ] ]
     ] ],
     [ "icomparable&lt; pair&lt; const basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt; &gt;", "structicomparable.html", [
@@ -1234,16 +1287,6 @@ var hierarchy =
         [ "pair< const id_type, worker_context >", "structpair.html", null ]
       ] ]
     ] ],
-    [ "icomparable&lt; pair&lt; const int, fd_info &gt; &gt;", "structicomparable.html", [
-      [ "icommon< pair< const int, fd_info > >", "structicommon.html", [
-        [ "pair< const int, fd_info >", "structpair.html", null ]
-      ] ]
-    ] ],
-    [ "icomparable&lt; pair&lt; const int, void * &gt; &gt;", "structicomparable.html", [
-      [ "icommon< pair< const int, void * > >", "structicommon.html", [
-        [ "pair< const int, void * >", "structpair.html", null ]
-      ] ]
-    ] ],
     [ "icomparable&lt; pair&lt; const Key, list_iterator &gt; &gt;", "structicomparable.html", [
       [ "icommon< pair< const Key, list_iterator > >", "structicommon.html", [
         [ "pair< const Key, list_iterator >", "structpair.html", null ]
@@ -1252,6 +1295,16 @@ var hierarchy =
     [ "icomparable&lt; pair&lt; const Key, time_point &gt; &gt;", "structicomparable.html", [
       [ "icommon< pair< const Key, time_point > >", "structicommon.html", [
         [ "pair< const Key, time_point >", "structpair.html", null ]
+      ] ]
+    ] ],
+    [ "icomparable&lt; pair&lt; const native_handle_type, fd_info &gt; &gt;", "structicomparable.html", [
+      [ "icommon< pair< const native_handle_type, fd_info > >", "structicommon.html", [
+        [ "pair< const native_handle_type, fd_info >", "structpair.html", null ]
+      ] ]
+    ] ],
+    [ "icomparable&lt; pair&lt; const native_handle_type, void * &gt; &gt;", "structicomparable.html", [
+      [ "icommon< pair< const native_handle_type, void * > >", "structicommon.html", [
+        [ "pair< const native_handle_type, void * >", "structpair.html", null ]
       ] ]
     ] ],
     [ "icomparable&lt; pair&lt; const type_id, type_id &gt; &gt;", "structicomparable.html", [
@@ -1292,6 +1345,11 @@ var hierarchy =
     [ "icomparable&lt; pair&lt; const uint32_t, unique_ptr&lt; http2_stream &gt; &gt; &gt;", "structicomparable.html", [
       [ "icommon< pair< const uint32_t, unique_ptr< http2_stream > > >", "structicommon.html", [
         [ "pair< const uint32_t, unique_ptr< http2_stream > >", "structpair.html", null ]
+      ] ]
+    ] ],
+    [ "icomparable&lt; pair&lt; const uintptr_t, function&lt; void(error_code, size_t, void *overlapped)&gt; &gt; &gt;", "structicomparable.html", [
+      [ "icommon< pair< const uintptr_t, function< void(error_code, size_t, void *overlapped)> > >", "structicommon.html", [
+        [ "pair< const uintptr_t, function< void(error_code, size_t, void *overlapped)> >", "structpair.html", null ]
       ] ]
     ] ],
     [ "icomparable&lt; pair&lt; size_t, size_t &gt; &gt;", "structicomparable.html", [
@@ -1340,9 +1398,9 @@ var hierarchy =
         [ "rb_tree< token, pair< const token, shared_ptr< promise< void > > >, select1st< pair< const token, shared_ptr< promise< void > > > >, less< token >, allocator< rb_tree_node< pair< const token, shared_ptr< promise< void > > > > > >", "classrb__tree.html", null ]
       ] ]
     ] ],
-    [ "icomparable&lt; rb_tree&lt; token, pair&lt; const token, typename set&lt; node &gt;::iterator &gt;, select1st&lt; pair&lt; const token, typename set&lt; node &gt;::iterator &gt; &gt;, less&lt; token &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const token, typename set&lt; node &gt;::iterator &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
-      [ "icollector< rb_tree< token, pair< const token, typename set< node >::iterator >, select1st< pair< const token, typename set< node >::iterator > >, less< token >, allocator< rb_tree_node< pair< const token, typename set< node >::iterator > > > > >", "structicollector.html", [
-        [ "rb_tree< token, pair< const token, typename set< node >::iterator >, select1st< pair< const token, typename set< node >::iterator > >, less< token >, allocator< rb_tree_node< pair< const token, typename set< node >::iterator > > > >", "classrb__tree.html", null ]
+    [ "icomparable&lt; rb_tree&lt; token, pair&lt; const token, typename set&lt; node &gt;vector&lt; mutable_buffer &gt;::iterator &gt;, select1st&lt; pair&lt; const token, typename set&lt; node &gt;vector&lt; mutable_buffer &gt;::iterator &gt; &gt;, less&lt; token &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const token, typename set&lt; node &gt;vector&lt; mutable_buffer &gt;::iterator &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
+      [ "icollector< rb_tree< token, pair< const token, typename set< node >vector< mutable_buffer >::iterator >, select1st< pair< const token, typename set< node >vector< mutable_buffer >::iterator > >, less< token >, allocator< rb_tree_node< pair< const token, typename set< node >vector< mutable_buffer >::iterator > > > > >", "structicollector.html", [
+        [ "rb_tree< token, pair< const token, typename set< node >vector< mutable_buffer >::iterator >, select1st< pair< const token, typename set< node >vector< mutable_buffer >::iterator > >, less< token >, allocator< rb_tree_node< pair< const token, typename set< node >vector< mutable_buffer >::iterator > > > >", "classrb__tree.html", null ]
       ] ]
     ] ],
     [ "icomparable&lt; rb_tree_iterator&lt; IsConst, RbTree &gt; &gt;", "structicomparable.html", [
@@ -1405,9 +1463,6 @@ var hierarchy =
     ] ],
     [ "icomparable&lt; vector&lt; ::MYSQL_BIND, allocator&lt;::MYSQL_BIND &gt; &gt; &gt;", "structicomparable.html", [
       [ "icollector< vector< ::MYSQL_BIND, allocator<::MYSQL_BIND > > >", "structicollector.html", null ]
-    ] ],
-    [ "icomparable&lt; vector&lt; aiocb_type *, allocator&lt; aiocb_type * &gt; &gt; &gt;", "structicomparable.html", [
-      [ "icollector< vector< aiocb_type *, allocator< aiocb_type * > > >", "structicollector.html", null ]
     ] ],
     [ "icomparable&lt; vector&lt; char, allocator&lt; char &gt; &gt; &gt;", "structicomparable.html", [
       [ "icollector< vector< char, allocator< char > > >", "structicollector.html", null ]
@@ -1648,9 +1703,6 @@ var hierarchy =
     [ "ihashable&lt; pair&lt; basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt; &gt;", "structihashable.html", [
       [ "icommon< pair< basic_string< char >, basic_string< char > > >", "structicommon.html", null ]
     ] ],
-    [ "ihashable&lt; pair&lt; const aiocb_type *, async_context * &gt; &gt;", "structihashable.html", [
-      [ "icommon< pair< const aiocb_type *, async_context * > >", "structicommon.html", null ]
-    ] ],
     [ "ihashable&lt; pair&lt; const basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt; &gt;", "structihashable.html", [
       [ "icommon< pair< const basic_string< char >, basic_string< char > > >", "structicommon.html", null ]
     ] ],
@@ -1744,17 +1796,17 @@ var hierarchy =
     [ "ihashable&lt; pair&lt; const id_type, worker_context &gt; &gt;", "structihashable.html", [
       [ "icommon< pair< const id_type, worker_context > >", "structicommon.html", null ]
     ] ],
-    [ "ihashable&lt; pair&lt; const int, fd_info &gt; &gt;", "structihashable.html", [
-      [ "icommon< pair< const int, fd_info > >", "structicommon.html", null ]
-    ] ],
-    [ "ihashable&lt; pair&lt; const int, void * &gt; &gt;", "structihashable.html", [
-      [ "icommon< pair< const int, void * > >", "structicommon.html", null ]
-    ] ],
     [ "ihashable&lt; pair&lt; const Key, list_iterator &gt; &gt;", "structihashable.html", [
       [ "icommon< pair< const Key, list_iterator > >", "structicommon.html", null ]
     ] ],
     [ "ihashable&lt; pair&lt; const Key, time_point &gt; &gt;", "structihashable.html", [
       [ "icommon< pair< const Key, time_point > >", "structicommon.html", null ]
+    ] ],
+    [ "ihashable&lt; pair&lt; const native_handle_type, fd_info &gt; &gt;", "structihashable.html", [
+      [ "icommon< pair< const native_handle_type, fd_info > >", "structicommon.html", null ]
+    ] ],
+    [ "ihashable&lt; pair&lt; const native_handle_type, void * &gt; &gt;", "structihashable.html", [
+      [ "icommon< pair< const native_handle_type, void * > >", "structicommon.html", null ]
     ] ],
     [ "ihashable&lt; pair&lt; const type_id, type_id &gt; &gt;", "structihashable.html", [
       [ "icommon< pair< const type_id, type_id > >", "structicommon.html", null ]
@@ -1779,6 +1831,9 @@ var hierarchy =
     ] ],
     [ "ihashable&lt; pair&lt; const uint32_t, unique_ptr&lt; http2_stream &gt; &gt; &gt;", "structihashable.html", [
       [ "icommon< pair< const uint32_t, unique_ptr< http2_stream > > >", "structicommon.html", null ]
+    ] ],
+    [ "ihashable&lt; pair&lt; const uintptr_t, function&lt; void(error_code, size_t, void *overlapped)&gt; &gt; &gt;", "structihashable.html", [
+      [ "icommon< pair< const uintptr_t, function< void(error_code, size_t, void *overlapped)> > >", "structicommon.html", null ]
     ] ],
     [ "ihashable&lt; pair&lt; size_t, size_t &gt; &gt;", "structihashable.html", [
       [ "icommon< pair< size_t, size_t > >", "structicommon.html", null ]
@@ -1929,6 +1984,7 @@ var hierarchy =
     [ "integral_constant&lt; uint64_t, Value &gt;", "structintegral__constant.html", null ],
     [ "invoke_result&lt; Sign &gt;", "structinvoke__result.html", null ],
     [ "invoke_result&lt; F(Args...)&gt;", "structinvoke__result_3_01_f_07_args_8_8_8_08_4.html", null ],
+    [ "io_context", "classio__context.html", null ],
     [ "ip_header", "structip__header.html", null ],
     [ "iplugin", "structiplugin.html", null ],
     [ "is_ADL_swappable&lt; T, Dummy &gt;", "structis___a_d_l__swappable.html", null ],
@@ -2241,7 +2297,7 @@ var hierarchy =
     [ "map&lt; basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt;", "classmap.html", null ],
     [ "map&lt; token, shared_ptr&lt; atomic&lt; bool &gt; &gt; &gt;", "classmap.html", null ],
     [ "map&lt; token, shared_ptr&lt; promise&lt; void &gt; &gt; &gt;", "classmap.html", null ],
-    [ "map&lt; token, typename set&lt; node &gt;::iterator &gt;", "classmap.html", null ],
+    [ "map&lt; token, typename set&lt; node &gt;vector&lt; mutable_buffer &gt;::iterator &gt;", "classmap.html", null ],
     [ "file_mapper::map_info", "structfile__mapper_1_1map__info.html", null ],
     [ "match_result", "classmatch__result.html", null ],
     [ "max_value&lt; Values &gt;", "structmax__value.html", null ],
@@ -2267,6 +2323,7 @@ var hierarchy =
     [ "multiplies&lt; void &gt;", "structmultiplies_3_01void_01_4.html", null ],
     [ "multiset&lt; Key, Compare, Alloc &gt;", "classmultiset.html", null ],
     [ "murmur_hash", "structmurmur__hash.html", null ],
+    [ "mutable_buffers", "classmutable__buffers.html", null ],
     [ "mutex", "classmutex.html", null ],
     [ "named_mutex", "classnamed__mutex.html", null ],
     [ "named_pipe", "classnamed__pipe.html", null ],
@@ -2432,9 +2489,7 @@ var hierarchy =
         [ "tcp_acceptor", "classtcp__acceptor.html", [
           [ "ssl_acceptor", "classssl__acceptor.html", null ]
         ] ],
-        [ "tcp_socket", "classtcp__socket.html", [
-          [ "ssl_socket", "classssl__socket.html", null ]
-        ] ],
+        [ "tcp_socket", "classtcp__socket.html", null ],
         [ "udp_socket", "classudp__socket.html", null ]
       ] ]
     ] ],
@@ -2445,7 +2500,6 @@ var hierarchy =
     [ "sql_builder", "classsql__builder.html", null ],
     [ "sql_mapper&lt; T &gt;", "classsql__mapper.html", null ],
     [ "ssl_context", "classssl__context.html", null ],
-    [ "ssl_stream", "classssl__stream.html", null ],
     [ "standard_allocator&lt; T &gt;", "classstandard__allocator.html", [
       [ "compressed_pair< standard_allocator, size_t >", "structcompressed__pair.html", null ]
     ] ],
@@ -2460,6 +2514,7 @@ var hierarchy =
     [ "stop_callback&lt; Callback &gt;", "classstop__callback.html", null ],
     [ "stop_source", "classstop__source.html", null ],
     [ "stop_token", "classstop__token.html", null ],
+    [ "strand", "classstrand.html", null ],
     [ "neforce::lz4_compressor::stream_compressor", "classneforce_1_1lz4__compressor_1_1stream__compressor.html", null ],
     [ "zlib_compressor::stream_compressor", "classzlib__compressor_1_1stream__compressor.html", null ],
     [ "neforce::lz4_compressor::stream_decompressor", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html", null ],
@@ -2492,6 +2547,7 @@ var hierarchy =
     [ "thread_exit_listener", "structthread__exit__listener.html", null ],
     [ "thread_exit_notifier", "classthread__exit__notifier.html", null ],
     [ "thread_pool", "classthread__pool.html", null ],
+    [ "thread_pool_executor", "structthread__pool__executor.html", null ],
     [ "thread_tracker", "classthread__tracker.html", null ],
     [ "locale::time_info", "structlocale_1_1time__info.html", null ],
     [ "process::time_info", "structprocess_1_1time__info.html", null ],
@@ -2523,7 +2579,6 @@ var hierarchy =
     [ "unique_ptr&lt; T, Deleter &gt;", "classunique__ptr.html", null ],
     [ "unique_ptr&lt; T[], Deleter &gt;", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html", null ],
     [ "unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;", "classunordered__map.html", null ],
-    [ "unordered_map&lt; aiocb_type *, async_context * &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; basic_string&lt; char &gt;, bucket_entry &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; basic_string&lt; char &gt;, child_entry &gt;", "classunordered__map.html", null ],
@@ -2555,10 +2610,10 @@ var hierarchy =
     [ "unordered_map&lt; event, function&lt; bool(event, void *)&gt; &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; id_type, unique_ptr&lt; lazy_thread &gt; &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; id_type, worker_context &gt;", "classunordered__map.html", null ],
-    [ "unordered_map&lt; int, fd_info &gt;", "classunordered__map.html", null ],
-    [ "unordered_map&lt; int, void * &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; Key, list_iterator &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; Key, time_point &gt;", "classunordered__map.html", null ],
+    [ "unordered_map&lt; native_handle_type, fd_info &gt;", "classunordered__map.html", null ],
+    [ "unordered_map&lt; native_handle_type, void * &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; string, any &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; T *, stacktrace &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; type_id, type_id &gt;", "classunordered__map.html", null ],
@@ -2569,6 +2624,7 @@ var hierarchy =
     [ "unordered_map&lt; uint32_t, uint32_t &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; uint32_t, uint8_t &gt;", "classunordered__map.html", null ],
     [ "unordered_map&lt; uint32_t, unique_ptr&lt; http2_stream &gt; &gt;", "classunordered__map.html", null ],
+    [ "unordered_map&lt; uintptr_t, function&lt; void(error_code, size_t, void *overlapped)&gt; &gt;", "classunordered__map.html", null ],
     [ "unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;", "classunordered__multimap.html", null ],
     [ "unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;", "classunordered__multiset.html", null ],
     [ "unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;", "classunordered__set.html", null ],
@@ -2579,6 +2635,8 @@ var hierarchy =
     [ "unwrap_reference&lt; T &gt;", "structunwrap__reference.html", null ],
     [ "unwrap_reference&lt; reference_wrapper&lt; T &gt; &gt;", "structunwrap__reference_3_01reference__wrapper_3_01_t_01_4_01_4.html", null ],
     [ "sql_builder::update_data", "structsql__builder_1_1update__data.html", null ],
+    [ "use_awaitable_t", "structuse__awaitable__t.html", null ],
+    [ "use_future_t", "structuse__future__t.html", null ],
     [ "utf8_iterator", "classutf8__iterator.html", null ],
     [ "utf8_range", "classutf8__range.html", null ],
     [ "map&lt; Key, T, Compare, Alloc &gt;::value_compare", "structmap_1_1value__compare.html", null ],
@@ -2588,12 +2646,12 @@ var hierarchy =
     [ "registry_key::value_info", "structregistry__key_1_1value__info.html", null ],
     [ "variant_alternative&lt; Variant, Idx &gt;", "structvariant__alternative.html", null ],
     [ "variant_index&lt; Variant, T &gt;", "structvariant__index.html", null ],
+    [ "vec128_t", "structvec128__t.html", null ],
     [ "vector&lt; atomic&lt; worker_context * &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; basic_string&lt; char &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; basic_string_view&lt; char &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; duration&lt; int64_t, milli &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; function&lt; string(const string &amp;name, const string &amp;value)&gt; &gt;", "classvector.html", null ],
-    [ "vector&lt; hashtable_node&lt; pair&lt; const aiocb_type *, async_context * &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const basic_string&lt; char &gt;, bucket_entry &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const basic_string&lt; char &gt;, child_entry &gt; &gt; &gt;", "classvector.html", null ],
@@ -2625,10 +2683,10 @@ var hierarchy =
     [ "vector&lt; hashtable_node&lt; pair&lt; const event, function&lt; bool(event, void *)&gt; &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const id_type, unique_ptr&lt; lazy_thread &gt; &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const id_type, worker_context &gt; &gt; &gt;", "classvector.html", null ],
-    [ "vector&lt; hashtable_node&lt; pair&lt; const int, fd_info &gt; &gt; &gt;", "classvector.html", null ],
-    [ "vector&lt; hashtable_node&lt; pair&lt; const int, void * &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const Key, list_iterator &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const Key, time_point &gt; &gt; &gt;", "classvector.html", null ],
+    [ "vector&lt; hashtable_node&lt; pair&lt; const native_handle_type, fd_info &gt; &gt; &gt;", "classvector.html", null ],
+    [ "vector&lt; hashtable_node&lt; pair&lt; const native_handle_type, void * &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const type_id, type_id &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const type_id, unique_ptr&lt; meta_type &gt; &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const uint16_t, pending_entry &gt; &gt; &gt;", "classvector.html", null ],
@@ -2637,10 +2695,12 @@ var hierarchy =
     [ "vector&lt; hashtable_node&lt; pair&lt; const uint32_t, uint32_t &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const uint32_t, uint8_t &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; pair&lt; const uint32_t, unique_ptr&lt; http2_stream &gt; &gt; &gt; &gt;", "classvector.html", null ],
+    [ "vector&lt; hashtable_node&lt; pair&lt; const uintptr_t, function&lt; void(error_code, size_t, void *overlapped)&gt; &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; hashtable_node&lt; Value &gt; &gt;", "classvector.html", null ],
+    [ "vector&lt; memory_view&lt; char &gt; &gt;", "classvector.html", null ],
+    [ "vector&lt; memory_view&lt; const char &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; pair&lt; basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; pair&lt; size_t, size_t &gt; &gt;", "classvector.html", null ],
-    [ "vector&lt; shared_ptr&lt; event_loop &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; shared_ptr&lt; log_sink &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; shared_ptr&lt; logger &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; shared_ptr&lt; websocket_session &gt; &gt;", "classvector.html", null ],
@@ -2678,6 +2738,7 @@ var hierarchy =
     [ "websocket_deflate_config", "structwebsocket__deflate__config.html", null ],
     [ "websocket_frame_header", "structwebsocket__frame__header.html", null ],
     [ "websocket_server", "classwebsocket__server.html", null ],
+    [ "io_context::work", "classio__context_1_1work.html", null ],
     [ "worker_context", "structworker__context.html", null ],
     [ "XOR", "struct_x_o_r.html", null ],
     [ "yaml_builder", "classyaml__builder.html", null ],

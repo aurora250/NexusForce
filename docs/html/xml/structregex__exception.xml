@@ -4,28 +4,11 @@
     <compoundname>regex_exception</compoundname>
     <basecompoundref refid="structvalue__exception" prot="public" virt="non-virtual">value_exception</basecompoundref>
     <includes refid="regex_8hpp" local="no">regex.hpp</includes>
-    <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="structregex__exception_1af9792115ae01d6366f8c61aa738405a7" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>auto</type>
-        <definition>auto regex_exception::static_type</definition>
-        <argsstring></argsstring>
-        <name>static_type</name>
-        <qualifiedname>regex_exception::static_type</qualifiedname>
-        <initializer>= &quot;regex_exception&quot;</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="40" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="40" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structregex__exception_1aa92d8d10e3e86971746082c1861b7b16" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structregex__exception_1a5b5192fb1a93728618268ba21d737f17" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>regex_exception::regex_exception</definition>
-        <argsstring>(const char *info=&quot;Regex Operation Failed&quot;, const char *type=static_type, const int code=0) noexcept</argsstring>
+        <argsstring>(const char *info=&quot;Regex Operation Failed&quot;) noexcept</argsstring>
         <name>regex_exception</name>
         <qualifiedname>regex_exception::regex_exception</qualifiedname>
         <param>
@@ -33,23 +16,13 @@
           <declname>info</declname>
           <defval>&quot;Regex Operation Failed&quot;</defval>
         </param>
-        <param>
-          <type>const char *</type>
-          <declname>type</declname>
-          <defval>static_type</defval>
-        </param>
-        <param>
-          <type>const int</type>
-          <declname>code</declname>
-          <defval>0</defval>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="31" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="31" bodyend="33"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="31" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="31" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="structregex__exception_1a67308d66399cdc3b3bef6532981672cb" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -67,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="35" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="35" bodyend="36"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="34" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="34" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="structregex__exception_1a219df585b1359eb1c5697b72519292bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -81,7 +54,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="38" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="37" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structregex__exception_1a92054745beddba9f7357506864431d13" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const char *</type>
+        <definition>const char * regex_exception::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>regex_exception::type</qualifiedname>
+        <reimplements refid="structexception_1a2f7dcc6349b3ef905ebb76859aa8abe6">type</reimplements>
+        <briefdescription>
+<para>获取异常类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="39" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="39" bodyend="39"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -125,25 +117,23 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="30" bodyend="41"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="30" bodyend="40"/>
     <listofallmembers>
-      <member refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>code</name></member>
-      <member refid="structexception_1a33710bd2e564614575128e2c3de94883" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>exception</name></member>
+      <member refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>exception</name></member>
       <member refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>exception</name></member>
       <member refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>exception</name></member>
       <member refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>exception</name></member>
       <member refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>operator=</name></member>
       <member refid="structexception_1a709d705f97cbad7d531dfb5023107536" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>operator=</name></member>
-      <member refid="structregex__exception_1aa92d8d10e3e86971746082c1861b7b16" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>regex_exception</name></member>
+      <member refid="structregex__exception_1a5b5192fb1a93728618268ba21d737f17" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>regex_exception</name></member>
       <member refid="structregex__exception_1a67308d66399cdc3b3bef6532981672cb" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>regex_exception</name></member>
-      <member refid="structregex__exception_1af9792115ae01d6366f8c61aa738405a7" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>static_type</name></member>
-      <member refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>type</name></member>
-      <member refid="structvalue__exception_1a93d98834875dddd76676f984d49dbc8e" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>value_exception</name></member>
+      <member refid="structregex__exception_1a92054745beddba9f7357506864431d13" prot="public" virt="virtual"><scope>regex_exception</scope><name>type</name></member>
+      <member refid="structvalue__exception_1aae3013235b2ce148581a0134a056b2db" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>value_exception</name></member>
       <member refid="structvalue__exception_1a62e42e4366446f308bddac122dc685ca" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>value_exception</name></member>
-      <member refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>what</name></member>
+      <member refid="structexception_1ae5dc04391190559c19adcf269cab48e2" prot="public" virt="virtual"><scope>regex_exception</scope><name>what</name></member>
       <member refid="structexception_1a80249b2b108c9b913dc7144839092a2b" prot="public" virt="virtual"><scope>regex_exception</scope><name>~exception</name></member>
       <member refid="structregex__exception_1a219df585b1359eb1c5697b72519292bf" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>~regex_exception</name></member>
-      <member refid="structvalue__exception_1a7ed7431697b28ae8f8a7bfdd919c4795" prot="public" virt="virtual"><scope>regex_exception</scope><name>~value_exception</name></member>
+      <member refid="structvalue__exception_1a23c6772857ea279952af98d207fb115b" prot="public" virt="non-virtual"><scope>regex_exception</scope><name>~value_exception</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

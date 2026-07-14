@@ -39,7 +39,8 @@ var group___compression =
         [ "compression_ratio", "classzlib__compressor_1_1stream__compressor.html#a86a9f46ce0a39e570f409fe06537a975", null ],
         [ "finish", "classzlib__compressor_1_1stream__compressor.html#a3c9ae650c7c4966c05ee29da212a021c", null ],
         [ "operator=", "classzlib__compressor_1_1stream__compressor.html#ae581cc759c603e5a5f6b1bfed3541948", null ],
-        [ "reset", "classzlib__compressor_1_1stream__compressor.html#a4f3592f6b277785d6de048eaec01e5c1", null ]
+        [ "reset", "classzlib__compressor_1_1stream__compressor.html#a4f3592f6b277785d6de048eaec01e5c1", null ],
+        [ "soft_reset", "classzlib__compressor_1_1stream__compressor.html#a6033d5aa75455a6a54a5ae28cc53c448", null ]
       ] ],
       [ "stream_decompressor", "classzlib__compressor_1_1stream__decompressor.html", [
         [ "stream_decompressor", "classzlib__compressor_1_1stream__decompressor.html#a739b1c01acf4453a8648bb71f926a771", null ],
@@ -51,7 +52,8 @@ var group___compression =
         [ "expansion_ratio", "classzlib__compressor_1_1stream__decompressor.html#ae4e4d4858d5954ac287bcdcb43dccdc4", null ],
         [ "finish", "classzlib__compressor_1_1stream__decompressor.html#a204c334f80fbcd2219b7072a899f760f", null ],
         [ "operator=", "classzlib__compressor_1_1stream__decompressor.html#ad079279d28696f435e764e2dd9dea6c5", null ],
-        [ "reset", "classzlib__compressor_1_1stream__decompressor.html#ad33909522e889d1c832e14073bb40044", null ]
+        [ "reset", "classzlib__compressor_1_1stream__decompressor.html#ad33909522e889d1c832e14073bb40044", null ],
+        [ "soft_reset", "classzlib__compressor_1_1stream__decompressor.html#a3ec2a04116391a16aaafd8d592a4c19f", null ]
       ] ]
     ] ],
     [ "compress_format", "group___compression.html#gaf18959145f07c95c3feacddae6234a0c", [

@@ -4,6 +4,7 @@ var group___format =
       [ "align", "structformat__options.html#a1e59e7d1603c5aed7c9329f9497455b6", null ],
       [ "alternate", "structformat__options.html#ad2c4bd1370b1eaa7ff39cb8ceb8889b5", null ],
       [ "fill", "structformat__options.html#aa87387c79bc88f7a34b4ce68745be0db", null ],
+      [ "loc", "structformat__options.html#a5d433db61de76282b49f9e634e6730b5", null ],
       [ "precision", "structformat__options.html#a42db8df63c6c52f2f2cd4bc32edf1154", null ],
       [ "show_sign", "structformat__options.html#a81d3c2f99048f1e908f9176fa5eca827", null ],
       [ "space_sign", "structformat__options.html#a16efbb924767d50e491ef5379c205da4", null ],
@@ -30,6 +31,7 @@ var group___format =
     [ "formatter&lt; nullptr_t &gt;", "structformatter_3_01nullptr__t_01_4.html", null ],
     [ "formatter&lt; T *, enable_if_t&lt;!is_cstring_v&lt; T * &gt; &gt; &gt;", "structformatter_3_01_t_01_5_00_01enable__if__t_3_9is__cstring__v_3_01_t_01_5_01_4_01_4_01_4.html", null ],
     [ "formatter&lt; char * &gt;", "structformatter_3_01char_01_5_01_4.html", null ],
+    [ "formatter&lt; datetime &gt;", "structformatter_3_01datetime_01_4.html", null ],
     [ "format_align", "group___format.html#ga42d318d7a8f82021aa5e0db07e420beb", [
       [ "format_align::DEFAULT", "group___format.html#gga42d318d7a8f82021aa5e0db07e420beba5b39c8b553c821e7cddc6da64b5bd2ee", null ],
       [ "format_align::LEFT", "group___format.html#gga42d318d7a8f82021aa5e0db07e420beba684d325a7303f52e64011467ff5c5758", null ],
@@ -49,6 +51,7 @@ var group___format =
       [ "format_type::CHAR", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca027acd3aa6b1dd7f26119d3cf0f9a063", null ]
     ] ],
     [ "format", "group___format.html#ga41c686a01b3d4a7f5c79d2b9c60266bd", null ],
+    [ "format", "group___format.html#ga2ec36fbed0da2effda7fa9c9314ce093", null ],
     [ "format", "group___format.html#gac0f4499364ec899fcdfaae1f7acbda76", null ],
     [ "format_named", "group___format.html#ga401d7fa93048e25a6f79fc746b2a09fe", null ]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['动态库_0',['动态库',['../group___dynamic_library.html',1,'']]]
+  ['区域设置_0',['区域设置',['../group___locale.html',1,'']]]
 ];

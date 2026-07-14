@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['莱昂纳多堆算法_0',['莱昂纳多堆算法',['../group___leonardo_heap.html',1,'']]],
-  ['莱昂纳多堆结构_1',['莱昂纳多堆结构',['../group___leonardo_heap.html#heap_structure',1,'']]],
-  ['莱昂纳多数列_2',['莱昂纳多数列',['../group___leonardo_heap.html#leonardo_numbers',1,'']]]
+  ['编码规则_0',['UTF-8 编码规则',['../group___code_point.html#utf8_encoding',1,'']]],
+  ['编译器检测_1',['编译器检测',['../group___compiler_detection.html',1,'']]]
 ];

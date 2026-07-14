@@ -1,6 +1,5 @@
 var group___daemon =
 [
-    [ "daemon_exception", "structdaemon__exception.html", null ],
     [ "daemon", "classdaemon.html", [
       [ "child_config", "structdaemon_1_1child__config.html", [
         [ "args", "structdaemon_1_1child__config.html#a0c5c7875ab97e9e2cb27beb9d79cb4dd", null ],

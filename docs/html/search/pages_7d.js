@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['适用场景_0',['适用场景',['../group___s_h_a256.html#usage',1,'']]]
+  ['连接模式_0',['TLS 连接模式',['../group___s_m_t_p.html#tls_modes',1,'']]]
 ];

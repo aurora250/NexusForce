@@ -51,19 +51,20 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="53" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="53" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classhttp2__connection_1aab2f0ad67548d6d4e70e5289c99a8107" prot="private" static="no" mutable="no">
-        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classevent__loop" kindref="compound">event_loop</ref> &gt;</type>
-        <definition>shared_ptr&lt;event_loop&gt; http2_connection::loop_</definition>
+      <memberdef kind="variable" id="classhttp2__connection_1a8ccadaa5911af178141b87f601bcd463" prot="private" static="no" mutable="no">
+        <type><ref refid="classio__context" kindref="compound">io_context</ref> *</type>
+        <definition>io_context* http2_connection::ctx_</definition>
         <argsstring></argsstring>
-        <name>loop_</name>
-        <qualifiedname>http2_connection::loop_</qualifiedname>
+        <name>ctx_</name>
+        <qualifiedname>http2_connection::ctx_</qualifiedname>
+        <initializer>{nullptr}</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="54" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="54" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="54" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="54" bodyend="54"/>
       </memberdef>
       <memberdef kind="variable" id="classhttp2__connection_1aa91033231573c30e70791b56fb5ed84a" prot="private" static="no" mutable="no">
         <type><ref refid="classhttp2__framer" kindref="compound">http2_framer</ref></type>
@@ -420,10 +421,10 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="92" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classhttp2__connection_1a569799d4db60442bda413747ad8bfce7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhttp2__connection_1ac4363a7e979522d0dcebab33aca0e785" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void http2_connection::on_readable</definition>
-        <argsstring>(int fd, uint32_t events)</argsstring>
+        <argsstring>(int fd, uint32_t events, error_code ec)</argsstring>
         <name>on_readable</name>
         <qualifiedname>http2_connection::on_readable</qualifiedname>
         <param>
@@ -434,6 +435,10 @@
           <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
           <declname>events</declname>
         </param>
+        <param>
+          <type>error_code</type>
+          <declname>ec</declname>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -442,10 +447,10 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="95" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classhttp2__connection_1a236d0d3d0ad4948d04f27a193cc3f452" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhttp2__connection_1a029984c05322e07d4ed478c176e78e62" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void http2_connection::on_writable</definition>
-        <argsstring>(int fd, uint32_t events)</argsstring>
+        <argsstring>(int fd, uint32_t events, error_code ec)</argsstring>
         <name>on_writable</name>
         <qualifiedname>http2_connection::on_writable</qualifiedname>
         <param>
@@ -455,6 +460,10 @@
         <param>
           <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
           <declname>events</declname>
+        </param>
+        <param>
+          <type>error_code</type>
+          <declname>ec</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -833,10 +842,10 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhttp2__connection_1a9aa780080d54524ed7b49db64d4d5569" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhttp2__connection_1ae79ca2c091e4a46e59d367e8871cba68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>http2_connection::http2_connection</definition>
-        <argsstring>(unique_ptr&lt; tcp_socket &gt; socket, shared_ptr&lt; event_loop &gt; loop)</argsstring>
+        <argsstring>(unique_ptr&lt; tcp_socket &gt; socket, io_context &amp;ctx)</argsstring>
         <name>http2_connection</name>
         <qualifiedname>http2_connection::http2_connection</qualifiedname>
         <param>
@@ -844,8 +853,8 @@
           <declname>socket</declname>
         </param>
         <param>
-          <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classevent__loop" kindref="compound">event_loop</ref> &gt;</type>
-          <declname>loop</declname>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -1265,7 +1274,7 @@
 </listitem><listitem><para>与 <ref refid="classhttp__router" kindref="compound">http_router</ref> 集成</para>
 </listitem></itemizedlist>
 </para>
-<para>使用 <ref refid="classevent__loop" kindref="compound">event_loop</ref> 驱动异步 I/O。 继承 <ref refid="structenable__shared__from__this" kindref="compound">enable_shared_from_this</ref> 以支持异步回调生命周期安全。 </para>
+<para>使用 <ref refid="classio__context" kindref="compound">io_context</ref> 驱动异步 I/O。 继承 <ref refid="structenable__shared__from__this" kindref="compound">enable_shared_from_this</ref> 以支持异步回调生命周期安全。 </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
@@ -1298,6 +1307,7 @@
       <member refid="classhttp2__connection_1ab5bf5cc911a51c12f08a6aa11dd9fc50" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>close_handler_</name></member>
       <member refid="classhttp2__connection_1aec8f3a5369df93983281753a84c601a1" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>closed_</name></member>
       <member refid="classhttp2__connection_1a180212848a57db83ba46e0ba951e312c" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>connection_consumed_</name></member>
+      <member refid="classhttp2__connection_1a8ccadaa5911af178141b87f601bcd463" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>ctx_</name></member>
       <member refid="classhttp2__connection_1a818d4e5376e14ad8aebba3400e0e86f2" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>decoder_</name></member>
       <member refid="structenable__shared__from__this_1af6f855457646398a518c284275f5e929" prot="protected" virt="non-virtual"><scope>http2_connection</scope><name>enable_shared_from_this</name></member>
       <member refid="classhttp2__connection_1aa0933dea8ad21ee636a410729b8b63b3" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>encoder_</name></member>
@@ -1316,7 +1326,7 @@
       <member refid="classhttp2__connection_1a43d52ac6d670cd69039855fd293cd90d" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>handle_settings_frame</name></member>
       <member refid="classhttp2__connection_1a2a83cb1b5ec0b6c216c833485e866905" prot="public" virt="non-virtual"><scope>http2_connection</scope><name>handle_upgrade_request</name></member>
       <member refid="classhttp2__connection_1a09c39540bfbc0943655b918c930fd418" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>handle_window_update_frame</name></member>
-      <member refid="classhttp2__connection_1a9aa780080d54524ed7b49db64d4d5569" prot="public" virt="non-virtual"><scope>http2_connection</scope><name>http2_connection</name></member>
+      <member refid="classhttp2__connection_1ae79ca2c091e4a46e59d367e8871cba68" prot="public" virt="non-virtual"><scope>http2_connection</scope><name>http2_connection</name></member>
       <member refid="classhttp2__connection_1a04690454f9d869a7b3d7f56e2b4d4b26" prot="public" virt="non-virtual"><scope>http2_connection</scope><name>http2_connection</name></member>
       <member refid="classhttp2__connection_1af2b48ba088e646c207a651594b2f5942" prot="public" virt="non-virtual"><scope>http2_connection</scope><name>is_closed</name></member>
       <member refid="classhttp2__connection_1a93bccf7ea25bac1e57bcc62768aed078" prot="public" virt="non-virtual"><scope>http2_connection</scope><name>last_stream_id</name></member>
@@ -1324,9 +1334,8 @@
       <member refid="classhttp2__connection_1aeb035640689b58aabf64cee681043db3" prot="public" virt="non-virtual"><scope>http2_connection</scope><name>local_settings</name></member>
       <member refid="classhttp2__connection_1a576cf2f93c2778ae3c34ee6a44296b6a" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>local_settings_</name></member>
       <member refid="classhttp2__connection_1aa24b791b7e80fe2bc659bafb6702b148" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>local_stream_window_</name></member>
-      <member refid="classhttp2__connection_1aab2f0ad67548d6d4e70e5289c99a8107" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>loop_</name></member>
-      <member refid="classhttp2__connection_1a569799d4db60442bda413747ad8bfce7" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>on_readable</name></member>
-      <member refid="classhttp2__connection_1a236d0d3d0ad4948d04f27a193cc3f452" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>on_writable</name></member>
+      <member refid="classhttp2__connection_1ac4363a7e979522d0dcebab33aca0e785" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>on_readable</name></member>
+      <member refid="classhttp2__connection_1a029984c05322e07d4ed478c176e78e62" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>on_writable</name></member>
       <member refid="classhttp2__connection_1ab9bb7030aff53f9ea179d9440fa53054" prot="public" virt="non-virtual"><scope>http2_connection</scope><name>operator=</name></member>
       <member refid="classhttp2__connection_1a07bee175ec64f2f89f1c9c57f7f33e0b" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>pending_</name></member>
       <member refid="classhttp2__connection_1a2e23648def007a081ccb7edbb6727347" prot="private" virt="non-virtual"><scope>http2_connection</scope><name>preface_received_</name></member>

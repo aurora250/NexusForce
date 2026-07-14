@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: async_compose.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('async__compose_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">async_compose.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="async__compose_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_ASYNC_ASYNC_COMPOSE_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ASYNC_ASYNC_COMPOSE_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="async__stream_8hpp.html">NeForce/core/async/async_stream.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;NeForce/core/exception/error_code.hpp&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="functional_2function_8hpp.html">NeForce/core/functional/function.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="group___async_compose.html#gaa3a471689038b117d43614e9ac8f5618">   32</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___async_compose.html#gaa3a471689038b117d43614e9ac8f5618">async_read</a>(<a class="code hl_class" href="classasync__stream.html">async_stream</a>&amp; stream, <a class="code hl_class" href="classio__context.html">io_context</a>&amp; ctx, <a class="code hl_class" href="classvector.html">vector&lt;char&gt;</a>&amp; buffer,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                <a class="code hl_class" href="classfunction.html">function</a>&lt;<span class="keywordtype">void</span>(error_code, <span class="keywordtype">size_t</span>)&gt; handler);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="group___async_compose.html#ga180357bbe23447c41b8492b51a1be1fa">   45</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___async_compose.html#ga180357bbe23447c41b8492b51a1be1fa">async_write</a>(<a class="code hl_class" href="classasync__stream.html">async_stream</a>&amp; stream, <a class="code hl_class" href="classio__context.html">io_context</a>&amp; ctx, <span class="keyword">const</span> <span class="keywordtype">void</span>* <a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>, <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a>,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                 <a class="code hl_class" href="classfunction.html">function</a>&lt;<span class="keywordtype">void</span>(error_code, <span class="keywordtype">size_t</span>)&gt; handler);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> <span class="comment">// AsyncCompose</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_ASYNC_COMPOSE_HPP__</span></div>
+<div class="ttc" id="aasync__stream_8hpp_html"><div class="ttname"><a href="async__stream_8hpp.html">async_stream.hpp</a></div><div class="ttdoc">异步流抽象基类</div></div>
+<div class="ttc" id="aclassasync__stream_html"><div class="ttname"><a href="classasync__stream.html">async_stream</a></div><div class="ttdoc">异步流抽象基类</div><div class="ttdef"><b>定义</b> <a href="async__stream_8hpp_source.html#l00033">async_stream.hpp:33</a></div></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00029">functional/function.hpp:29</a></div></div>
+<div class="ttc" id="aclassio__context_html"><div class="ttname"><a href="classio__context.html">io_context</a></div><div class="ttdoc">统一异步操作核心</div><div class="ttdef"><b>定义</b> <a href="io__context_8hpp_source.html#l00064">io_context.hpp:64</a></div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="ttc" id="afunctional_2function_8hpp_html"><div class="ttname"><a href="functional_2function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
+<div class="ttc" id="agroup___async_compose_html_ga180357bbe23447c41b8492b51a1be1fa"><div class="ttname"><a href="group___async_compose.html#ga180357bbe23447c41b8492b51a1be1fa">async_write</a></div><div class="ttdeci">void async_write(async_stream &amp;stream, io_context &amp;ctx, const void *data, size_t size, function&lt; void(error_code, size_t)&gt; handler)</div><div class="ttdoc">异步写入指定字节数</div></div>
+<div class="ttc" id="agroup___async_compose_html_gaa3a471689038b117d43614e9ac8f5618"><div class="ttname"><a href="group___async_compose.html#gaa3a471689038b117d43614e9ac8f5618">async_read</a></div><div class="ttdeci">void async_read(async_stream &amp;stream, io_context &amp;ctx, vector&lt; char &gt; &amp;buffer, function&lt; void(error_code, size_t)&gt; handler)</div><div class="ttdoc">异步读取指定字节数</div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga630d7b0d77515784d2391b3725ac6df0"><div class="ttname"><a href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a></div><div class="ttdeci">constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00292">type_erase.hpp:292</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gaeed8bfb4510a906e04808100528dd9b8"><div class="ttname"><a href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00395">type_erase.hpp:395</a></div></div>
+<div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>async</b></li><li class="navelem"><a href="async__compose_8hpp.html">async_compose.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

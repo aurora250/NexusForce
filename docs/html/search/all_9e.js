@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['硬件锁消除（hle）修饰符_0',['硬件锁消除（HLE）修饰符',['../group___memory_order.html#hle_modifiers',1,'']]]
+  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
 ];

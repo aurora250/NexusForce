@@ -1,0 +1,2308 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classflat__unordered__map" kind="class" language="C++" prot="public">
+    <compoundname>flat_unordered_map</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">icollector&lt; flat_unordered_map&lt; Key, T, hash&lt; Key &gt;, equal_to&lt; Key &gt;, allocator&lt; pair&lt; Key, T &gt; &gt; &gt; &gt;</basecompoundref>
+    <includes refid="flat__unordered__map_8hpp" local="no">flat_unordered_map.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename HashFcn</type>
+        <defval><ref refid="structhash" kindref="compound">hash</ref>&lt;Key&gt;</defval>
+      </param>
+      <param>
+        <type>typename EqualKey</type>
+        <defval><ref refid="structequal__to" kindref="compound">equal_to</ref>&lt;Key&gt;</defval>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;Key, T&gt;&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classflat__unordered__map_1a12cc7d59aff8cb81f5b31e7b14a52475" prot="private" static="no">
+        <type><ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref>&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt;, Key, HashFcn, <ref refid="structselect1st" kindref="compound">select1st</ref>&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;</type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::base_type = flat_hashtable&lt;pair&lt;Key, T&gt;, Key, HashFcn, select1st&lt;pair&lt;Key, T&gt;&gt;, EqualKey,
+                                    Alloc&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>flat_unordered_map::base_type</qualifiedname>
+        <briefdescription>
+<para>底层平坦哈希表类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="46" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" prot="public" static="no">
+        <type>typename <ref refid="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" kindref="member">base_type::key_type</ref></type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_type = typename base_type::key_type</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>flat_unordered_map::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1a84ced70c24c4548098f105e0c3da3f81" prot="public" static="no">
+        <type>T</type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::mapped_type = T</definition>
+        <argsstring></argsstring>
+        <name>mapped_type</name>
+        <qualifiedname>flat_unordered_map::mapped_type</qualifiedname>
+        <briefdescription>
+<para>映射值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="51" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" prot="public" static="no">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt;</type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::value_type = pair&lt;Key, T&gt;</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>flat_unordered_map::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="52" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1a1b1bc07633e56f968de143f24ac74861" prot="public" static="no">
+        <type>typename <ref refid="classflat__hashtable_1af737cc8e4d5093189e019e9af2652843" kindref="member">base_type::hasher</ref></type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::hasher = typename base_type::hasher</definition>
+        <argsstring></argsstring>
+        <name>hasher</name>
+        <qualifiedname>flat_unordered_map::hasher</qualifiedname>
+        <briefdescription>
+<para>哈希函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="53" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1aa245c277af6f90db6be894b1b15c55ee" prot="public" static="no">
+        <type>typename <ref refid="classflat__hashtable_1a6ab4688b006581c1f6428d6c8b25a35f" kindref="member">base_type::key_equal</ref></type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_equal = typename base_type::key_equal</definition>
+        <argsstring></argsstring>
+        <name>key_equal</name>
+        <qualifiedname>flat_unordered_map::key_equal</qualifiedname>
+        <briefdescription>
+<para>键相等比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="54" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" prot="public" static="no">
+        <type>typename <ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">base_type::size_type</ref></type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::size_type = typename base_type::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>flat_unordered_map::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="56" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1af8ff71feaa03effd5ddae9c2f16077e4" prot="public" static="no">
+        <type>typename <ref refid="classflat__hashtable_1ae8dcc6073f22d3c3fb84124e40e519b4" kindref="member">base_type::difference_type</ref></type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::difference_type = typename base_type::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>flat_unordered_map::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="57" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1a5f07584bfb29ad9cb175acf21fc82344" prot="public" static="no">
+        <type><ref refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" kindref="member">value_type</ref> *</type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::pointer = value_type*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>flat_unordered_map::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="58" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1a82b8acd9f116bc288c8a6a01a40e494e" prot="public" static="no">
+        <type>const <ref refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" kindref="member">value_type</ref> *</type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::const_pointer = const value_type*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>flat_unordered_map::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="59" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1a67c1c76f848a8ca58250a5c21f74d0a7" prot="public" static="no">
+        <type><ref refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" kindref="member">value_type</ref> &amp;</type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::reference = value_type&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>flat_unordered_map::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="60" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1a59cec1c03011cb68e6385f9c11de711d" prot="public" static="no">
+        <type>const <ref refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" kindref="member">value_type</ref> &amp;</type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::const_reference = const value_type&amp;</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>flat_unordered_map::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="61" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" prot="public" static="no">
+        <type>typename <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">base_type::iterator</ref></type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::iterator = typename base_type::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>flat_unordered_map::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="62" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" prot="public" static="no">
+        <type>typename <ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">base_type::const_iterator</ref></type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::const_iterator = typename base_type::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>flat_unordered_map::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="63" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__unordered__map_1a485e2ff87ba6fcbd6c42d005136aa068" prot="public" static="no">
+        <type>typename <ref refid="classflat__hashtable_1accaf416e778dcd42b45661a976182d8d" kindref="member">base_type::allocator_type</ref></type>
+        <definition>using flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::allocator_type = typename base_type::allocator_type</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>flat_unordered_map::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="64" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classflat__unordered__map_1a71e60a0fb3f096a1d6a43021ffabc6aa" prot="private" static="no" mutable="no">
+        <type>base_type</type>
+        <definition>base_type flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::ht_</definition>
+        <argsstring></argsstring>
+        <name>ht_</name>
+        <qualifiedname>flat_unordered_map::ht_</qualifiedname>
+        <briefdescription>
+<para>底层平坦哈希表实例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="67" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>()=default</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空 flat_unordered_map。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="75" column="5"/>
+        <referencedby refid="classflat__unordered__map_1a13b46aaa2dd3e178407a923182086c71" compoundref="flat__unordered__map_8hpp" startline="518" endline="520">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_to</referencedby>
+        <referencedby refid="classflat__unordered__map_1ac8044319a98910e7dacf8f1b9bbebdcc" compoundref="flat__unordered__map_8hpp" startline="105" endline="106">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1a50b93145d52c7a296d7980b60172aefd" compoundref="flat__unordered__map_8hpp" startline="122" endline="123">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1aa4d82375788d2d884683e49cae60d774" compoundref="flat__unordered__map_8hpp" startline="193" endline="194">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1a36fcfe70c91e70d53071b88c161d465e" compoundref="flat__unordered__map_8hpp" startline="201" endline="202">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1a6ef46c25e882236ee88defc0610b4efa" compoundref="flat__unordered__map_8hpp" startline="210" endline="211">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1a4a98a38eed93b4fb0c639b5e02952f44" compoundref="flat__unordered__map_8hpp" startline="220" endline="222">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1accbfefd1b0f89d278b8cf6e70c11154a" compoundref="flat__unordered__map_8hpp" startline="527" endline="529">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::less_than</referencedby>
+        <referencedby refid="classflat__unordered__map_1ab79dc7bda6a936ac23bf63c4ba9f641e" compoundref="flat__unordered__map_8hpp" startline="113" endline="116">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classflat__unordered__map_1a397502dd5a777d6a5a08f093e795c1ef" compoundref="flat__unordered__map_8hpp" startline="130" endline="133">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classflat__unordered__map_1a71114de86b99b2b33c6d76b28da09912" compoundref="flat__unordered__map_8hpp" startline="511" endline="511">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1af88c35ba9a4a83876aeafbd4e82fcf51" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="81" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="81" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a4d6020ced32b745c3c849374d5777f3e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(const size_type n, const hasher &amp;hf)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a1b1bc07633e56f968de143f24ac74861" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始容量和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="89" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="89" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1af945fb883e77b9a439eea838b971fd02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(const size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a1b1bc07633e56f968de143f24ac74861" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1aa245c277af6f90db6be894b1b15c55ee" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始容量、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="98" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="98" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1ac8044319a98910e7dacf8f1b9bbebdcc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(const flat_unordered_map &amp;other)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源 <ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="105" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="105" bodyend="106"/>
+        <references refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1ab79dc7bda6a936ac23bf63c4ba9f641e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> &amp;</type>
+        <definition>flat_unordered_map &amp; flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(const flat_unordered_map &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>flat_unordered_map::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源 <ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="113" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="113" bodyend="116"/>
+        <references refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a50b93145d52c7a296d7980b60172aefd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; base_type &gt;" virt="non-virtual">
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(flat_unordered_map &amp;&amp;other)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type><ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源 <ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="122" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="122" bodyend="123"/>
+        <references refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</references>
+        <references refid="group___type_special_member_function_checks_1ga34e3584e54b63fd9e6a35fffd41080bd" compoundref="type__traits_8hpp" startline="2862">is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a397502dd5a777d6a5a08f093e795c1ef" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_assignable_v&lt; base_type &gt;" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> &amp;</type>
+        <definition>flat_unordered_map &amp; flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(flat_unordered_map &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>flat_unordered_map::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源 <ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="130" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="130" bodyend="133"/>
+        <references refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</references>
+        <references refid="group___type_special_member_function_checks_1gad26f59ba1b8a873f9d8374f72a4002c4" compoundref="type__traits_8hpp" startline="2923">is_nothrow_move_assignable_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1ac457e3eccbbd60139ceb8e500485aa70" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="142" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="142" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a0b84d9a330866dacdaf964b8274ce7a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(Iterator first, Iterator last, const size_type n)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="155" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="155" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a1bc175785940f550970608b4d86cb4e5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(Iterator first, Iterator last, const size_type n, const hasher &amp;hf)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a1b1bc07633e56f968de143f24ac74861" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始容量和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="169" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="169" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a1ce8b78d5355df92f94135f327578089" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(Iterator first, Iterator last, const size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a1b1bc07633e56f968de143f24ac74861" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1aa245c277af6f90db6be894b1b15c55ee" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始容量、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="184" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="184" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1aa4d82375788d2d884683e49cae60d774" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="193" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="193" bodyend="194"/>
+        <references refid="classflat__unordered__map_1a1c9562075330af468b86c67220589b84" compoundref="flat__unordered__map_8hpp" startline="228" endline="228">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classflat__unordered__map_1a1705ca7d9e8eee20a0bdc732e8eec7b1" compoundref="flat__unordered__map_8hpp" startline="234" endline="234">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a36fcfe70c91e70d53071b88c161d465e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, const size_type n)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="201" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="201" bodyend="202"/>
+        <references refid="classflat__unordered__map_1a1c9562075330af468b86c67220589b84" compoundref="flat__unordered__map_8hpp" startline="228" endline="228">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classflat__unordered__map_1a1705ca7d9e8eee20a0bdc732e8eec7b1" compoundref="flat__unordered__map_8hpp" startline="234" endline="234">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a6ef46c25e882236ee88defc0610b4efa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, const size_type n, const hasher &amp;hf)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a1b1bc07633e56f968de143f24ac74861" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始容量和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="210" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="210" bodyend="211"/>
+        <references refid="classflat__unordered__map_1a1c9562075330af468b86c67220589b84" compoundref="flat__unordered__map_8hpp" startline="228" endline="228">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classflat__unordered__map_1a1705ca7d9e8eee20a0bdc732e8eec7b1" compoundref="flat__unordered__map_8hpp" startline="234" endline="234">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a4a98a38eed93b4fb0c639b5e02952f44" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, const size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>flat_unordered_map</name>
+        <qualifiedname>flat_unordered_map::flat_unordered_map</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a1b1bc07633e56f968de143f24ac74861" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1aa245c277af6f90db6be894b1b15c55ee" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始容量、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="220" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="220" bodyend="222"/>
+        <references refid="classflat__unordered__map_1a1c9562075330af468b86c67220589b84" compoundref="flat__unordered__map_8hpp" startline="228" endline="228">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classflat__unordered__map_1a1705ca7d9e8eee20a0bdc732e8eec7b1" compoundref="flat__unordered__map_8hpp" startline="234" endline="234">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a1c9562075330af468b86c67220589b84" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref></type>
+        <definition>iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>flat_unordered_map::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="228" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="228" bodyend="228"/>
+        <referencedby refid="classflat__unordered__map_1aa4d82375788d2d884683e49cae60d774" compoundref="flat__unordered__map_8hpp" startline="193" endline="194">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1a36fcfe70c91e70d53071b88c161d465e" compoundref="flat__unordered__map_8hpp" startline="201" endline="202">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1a6ef46c25e882236ee88defc0610b4efa" compoundref="flat__unordered__map_8hpp" startline="210" endline="211">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1a4a98a38eed93b4fb0c639b5e02952f44" compoundref="flat__unordered__map_8hpp" startline="220" endline="222">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a1705ca7d9e8eee20a0bdc732e8eec7b1" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref></type>
+        <definition>iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>flat_unordered_map::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="234" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="234" bodyend="234"/>
+        <referencedby refid="classflat__unordered__map_1a90ea35abae62238ef3c2025ef694049a" compoundref="flat__unordered__map_8hpp" startline="499" endline="505">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::at</referencedby>
+        <referencedby refid="classflat__unordered__map_1a9ec95e2403619dcf6bca0645d1c398bd" compoundref="flat__unordered__map_8hpp" startline="485" endline="491">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::at</referencedby>
+        <referencedby refid="classflat__unordered__map_1aa4d82375788d2d884683e49cae60d774" compoundref="flat__unordered__map_8hpp" startline="193" endline="194">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1a36fcfe70c91e70d53071b88c161d465e" compoundref="flat__unordered__map_8hpp" startline="201" endline="202">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1a6ef46c25e882236ee88defc0610b4efa" compoundref="flat__unordered__map_8hpp" startline="210" endline="211">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+        <referencedby refid="classflat__unordered__map_1a4a98a38eed93b4fb0c639b5e02952f44" compoundref="flat__unordered__map_8hpp" startline="220" endline="222">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a15c7e2ea5134c2d8beaad258c511974a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>flat_unordered_map::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="240" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="240" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1abedbc3bbc08596e4de324513329aa09b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>flat_unordered_map::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="246" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="246" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a99910acdad9b855f97bd8d8dee278b27" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>flat_unordered_map::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="252" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="252" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a320d21dd9374b0d1b8e04c470903af2d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>flat_unordered_map::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="258" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="258" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a8b2e80ee3476d38e616016946c61389c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+        <definition>size_type flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>flat_unordered_map::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="264" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="264" bodyend="264"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1aa5d54f7c514d283a4d9e06c25d85e988" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+        <definition>size_type flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>flat_unordered_map::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="270" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="270" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a4f3e1ba4015a40bc0d8df6ec28e09761" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>flat_unordered_map::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="276" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="276" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1ac00fcde3146ba48f52d5e06af7347bde" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+        <definition>size_type flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::capacity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capacity</name>
+        <qualifiedname>flat_unordered_map::capacity</qualifiedname>
+        <briefdescription>
+<para>获取容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>slot 总数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="282" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="282" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a7be2ca8ec020080154de5a7a6d406bc8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.count(key))" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+        <definition>size_type flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>flat_unordered_map::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量（0 或 1） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="289" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="289" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1ae162486ed7c6cf2803854bcd1f0937a9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.contains(key))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::contains</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>contains</name>
+        <qualifiedname>flat_unordered_map::contains</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>检查是否包含指定键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否包含 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="298" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="298" bodyend="300"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a9830ad0d0aad395702ee10f65ef83317" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.hash_function())" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1a1b1bc07633e56f968de143f24ac74861" kindref="member">hasher</ref></type>
+        <definition>hasher flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::hash_function</definition>
+        <argsstring>() const</argsstring>
+        <name>hash_function</name>
+        <qualifiedname>flat_unordered_map::hash_function</qualifiedname>
+        <briefdescription>
+<para>获取哈希函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="306" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="306" bodyend="308"/>
+        <references refid="classflat__unordered__map_1a9830ad0d0aad395702ee10f65ef83317" compoundref="flat__unordered__map_8hpp" startline="306" endline="308">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::hash_function</references>
+        <referencedby refid="classflat__unordered__map_1a9830ad0d0aad395702ee10f65ef83317" compoundref="flat__unordered__map_8hpp" startline="306" endline="308">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::hash_function</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a2f0bcbbcfba004b36d4a182fa538cd96" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.key_eql())" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1aa245c277af6f90db6be894b1b15c55ee" kindref="member">key_equal</ref></type>
+        <definition>key_equal flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_eql</definition>
+        <argsstring>() const</argsstring>
+        <name>key_eql</name>
+        <qualifiedname>flat_unordered_map::key_eql</qualifiedname>
+        <briefdescription>
+<para>获取键相等比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键相等比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="314" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="314" bodyend="314"/>
+        <references refid="classflat__unordered__map_1a2f0bcbbcfba004b36d4a182fa538cd96" compoundref="flat__unordered__map_8hpp" startline="314" endline="314">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_eql</references>
+        <referencedby refid="classflat__unordered__map_1a2f0bcbbcfba004b36d4a182fa538cd96" compoundref="flat__unordered__map_8hpp" startline="314" endline="314">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_eql</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a0c4c7968e6407e1c4eaf1438db6a4738" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>load_factor</name>
+        <qualifiedname>flat_unordered_map::load_factor</qualifiedname>
+        <briefdescription>
+<para>获取当前负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>负载因子 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="320" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="320" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a40c6215e004fa0821f00d26f491969bc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>flat_unordered_map::max_load_factor</qualifiedname>
+        <briefdescription>
+<para>获取最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大负载因子 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="326" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="326" bodyend="326"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1aadf4ddbe9be3e850d5fde541a4327bc0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>(const float lf) noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>flat_unordered_map::max_load_factor</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>lf</declname>
+        </param>
+        <briefdescription>
+<para>设置最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的最大负载因子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="332" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="332" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a683ddf2a3dd37305a8f973fb01dbb893" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::rehash</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>rehash</name>
+        <qualifiedname>flat_unordered_map::rehash</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>重新哈希，调整容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标容量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="338" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="338" bodyend="338"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a2e443740c129809605cd55a9971bf92e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::reserve</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>flat_unordered_map::reserve</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留空间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的元素数量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+确保容器至少能容纳 n 个元素而不触发 rehash。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="346" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="346" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a743cb176277a2d2f65399f9a33ce9107" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>flat_unordered_map::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在容器中就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="355" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="355" bodyend="357"/>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1ad9911f744282977305155bfd9ab1813a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>flat_unordered_map::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（拷贝版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="364" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="364" bodyend="364"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a6597d6edd303ce4f48edc71650b0e130" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>flat_unordered_map::insert</qualifiedname>
+        <param>
+          <type><ref refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="371" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="371" bodyend="371"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1ab3a7280b4b2ac2ec309a9b9ba558d4c6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>flat_unordered_map::insert</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="380" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="380" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a7b124c2988ea4de9c75b5940497f1567" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>insert</name>
+        <qualifiedname>flat_unordered_map::insert</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="388" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="388" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a3ab4755779eb60cec9b192afd7476aa0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" kindref="member">size_type</ref></type>
+        <definition>size_type flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>flat_unordered_map::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="395" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="395" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1af298ddf9eec3de2439f2fc0357f5dec0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref></type>
+        <definition>iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const iterator position) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>flat_unordered_map::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="402" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="402" bodyend="402"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1aa90f1414dc6431e4b37144d7193828f2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref></type>
+        <definition>iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const iterator first, const iterator last) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>flat_unordered_map::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="410" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="410" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1aad847221a7dbb9b8e5e1247b9e3848ac" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const const_iterator position) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>flat_unordered_map::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="417" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="417" bodyend="417"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a7ab1cef1747992f4d6d752ec091e5382" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const const_iterator first, const const_iterator last) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>flat_unordered_map::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="425" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="425" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a21dbb2d17c3755f62eabaa1011b1b434" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>flat_unordered_map::clear</qualifiedname>
+        <briefdescription>
+<para>清空容器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="432" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="432" bodyend="432"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a5af9a6f68680203ae7ed873b63db829a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref></type>
+        <definition>iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>flat_unordered_map::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回 <ref refid="classflat__unordered__map_1a1705ca7d9e8eee20a0bdc732e8eec7b1" kindref="member">end()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="439" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="439" bodyend="439"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a6bd35dd01708d994172191ca6459ba4f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>flat_unordered_map::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回 <ref refid="classflat__unordered__map_1a320d21dd9374b0d1b8e04c470903af2d" kindref="member">cend()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="446" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="446" bodyend="446"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a98c3980fe7d6b55ddc531132271d6ce5" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref>, <ref refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" kindref="member">iterator</ref> &gt;</type>
+        <definition>pair&lt; iterator, iterator &gt; flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>flat_unordered_map::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的 pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="453" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="453" bodyend="453"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a6853b6f1e64eb6d45f93b719ddd2c8d8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref>, <ref refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>pair&lt; const_iterator, const_iterator &gt; flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>flat_unordered_map::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的常量元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的 pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="460" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="460" bodyend="462"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a79ed0cd022f0242ef29127c8261b9ced" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator[]</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>flat_unordered_map::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>下标访问操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要访问的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应键的值的引用</para>
+</simplesect>
+如果键不存在，则插入一个默认构造的值并返回其引用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="471" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="471" bodyend="477"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a9ec95e2403619dcf6bca0645d1c398bd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::at</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>at</name>
+        <qualifiedname>flat_unordered_map::at</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>带边界检查的常量访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要访问的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应键的值的常量引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structiterator__exception" kindref="compound">iterator_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果键不存在 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="485" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="485" bodyend="491"/>
+        <references refid="classflat__unordered__map_1a1705ca7d9e8eee20a0bdc732e8eec7b1" compoundref="flat__unordered__map_8hpp" startline="234" endline="234">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a90ea35abae62238ef3c2025ef694049a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::at</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>at</name>
+        <qualifiedname>flat_unordered_map::at</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>带边界检查的访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要访问的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应键的值的引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structiterator__exception" kindref="compound">iterator_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果键不存在 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="499" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="499" bodyend="505"/>
+        <references refid="classflat__unordered__map_1a1705ca7d9e8eee20a0bdc732e8eec7b1" compoundref="flat__unordered__map_8hpp" startline="234" endline="234">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a71114de86b99b2b33c6d76b28da09912" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; base_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</definition>
+        <argsstring>(flat_unordered_map &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>flat_unordered_map::swap</qualifiedname>
+        <param>
+          <type><ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个容器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的容器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="511" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="511" bodyend="511"/>
+        <references refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</references>
+        <references refid="group___swap_utility_1gaf740a9b650d7a3063e9414c3c50ffdb5" compoundref="type__traits_8hpp" startline="3967">is_nothrow_swappable_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1a13b46aaa2dd3e178407a923182086c71" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_==rhs.ht_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_to</definition>
+        <argsstring>(const flat_unordered_map &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>flat_unordered_map::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧容器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="518" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="518" bodyend="520"/>
+        <references refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</references>
+      </memberdef>
+      <memberdef kind="function" id="classflat__unordered__map_1accbfefd1b0f89d278b8cf6e70c11154a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_&lt; rhs.ht_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::less_than</definition>
+        <argsstring>(const flat_unordered_map &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>flat_unordered_map::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧容器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="527" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="527" bodyend="529"/>
+        <references refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::flat_unordered_map</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>平坦无序映射容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>HashFcn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数类型，默认为 <ref refid="structhash" kindref="compound">hash&lt;Key&gt;</ref> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>EqualKey</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数类型，默认为 <ref refid="structequal__to" kindref="compound">equal_to&lt;Key&gt;</ref> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref> 是一种关联容器，存储键值对（key-value pairs），每个键在容器中唯一。 元素无序存储，由哈希函数将键映射到槽位。 底层使用开放寻址平坦哈希表，提供优于链地址法的缓存局部性。</para>
+<para><simplesect kind="note"><para>与 <ref refid="classunordered__map" kindref="compound">unordered_map</ref> 不同，本容器使用 <ref refid="structpair" kindref="compound">pair&lt;Key, T&gt;</ref>（非 const Key）作为值类型， 以适应平坦存储的元素搬移需求。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" line="41" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_map.hpp" bodystart="41" bodyend="530"/>
+    <listofallmembers>
+      <member refid="classflat__unordered__map_1a485e2ff87ba6fcbd6c42d005136aa068" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>allocator_type</name></member>
+      <member refid="classflat__unordered__map_1a9ec95e2403619dcf6bca0645d1c398bd" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>at</name></member>
+      <member refid="classflat__unordered__map_1a90ea35abae62238ef3c2025ef694049a" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>at</name></member>
+      <member refid="classflat__unordered__map_1a12cc7d59aff8cb81f5b31e7b14a52475" prot="private" virt="non-virtual"><scope>flat_unordered_map</scope><name>base_type</name></member>
+      <member refid="classflat__unordered__map_1a1c9562075330af468b86c67220589b84" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>begin</name></member>
+      <member refid="classflat__unordered__map_1a15c7e2ea5134c2d8beaad258c511974a" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>begin</name></member>
+      <member refid="classflat__unordered__map_1ac00fcde3146ba48f52d5e06af7347bde" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>capacity</name></member>
+      <member refid="classflat__unordered__map_1a99910acdad9b855f97bd8d8dee278b27" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>cbegin</name></member>
+      <member refid="classflat__unordered__map_1a320d21dd9374b0d1b8e04c470903af2d" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>cend</name></member>
+      <member refid="classflat__unordered__map_1a21dbb2d17c3755f62eabaa1011b1b434" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>clear</name></member>
+      <member refid="classflat__unordered__map_1aa58ab80e6a51a04af96506f38a1bb9f3" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>const_iterator</name></member>
+      <member refid="classflat__unordered__map_1a82b8acd9f116bc288c8a6a01a40e494e" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>const_pointer</name></member>
+      <member refid="classflat__unordered__map_1a59cec1c03011cb68e6385f9c11de711d" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>const_reference</name></member>
+      <member refid="classflat__unordered__map_1ae162486ed7c6cf2803854bcd1f0937a9" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>contains</name></member>
+      <member refid="classflat__unordered__map_1a7be2ca8ec020080154de5a7a6d406bc8" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>count</name></member>
+      <member refid="classflat__unordered__map_1af8ff71feaa03effd5ddae9c2f16077e4" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>difference_type</name></member>
+      <member refid="classflat__unordered__map_1a743cb176277a2d2f65399f9a33ce9107" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>emplace</name></member>
+      <member refid="classflat__unordered__map_1a4f3e1ba4015a40bc0d8df6ec28e09761" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>empty</name></member>
+      <member refid="classflat__unordered__map_1a1705ca7d9e8eee20a0bdc732e8eec7b1" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>end</name></member>
+      <member refid="classflat__unordered__map_1abedbc3bbc08596e4de324513329aa09b" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>end</name></member>
+      <member refid="classflat__unordered__map_1a98c3980fe7d6b55ddc531132271d6ce5" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>equal_range</name></member>
+      <member refid="classflat__unordered__map_1a6853b6f1e64eb6d45f93b719ddd2c8d8" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>equal_range</name></member>
+      <member refid="classflat__unordered__map_1a13b46aaa2dd3e178407a923182086c71" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>equal_to</name></member>
+      <member refid="classflat__unordered__map_1a3ab4755779eb60cec9b192afd7476aa0" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>erase</name></member>
+      <member refid="classflat__unordered__map_1af298ddf9eec3de2439f2fc0357f5dec0" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>erase</name></member>
+      <member refid="classflat__unordered__map_1aa90f1414dc6431e4b37144d7193828f2" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>erase</name></member>
+      <member refid="classflat__unordered__map_1aad847221a7dbb9b8e5e1247b9e3848ac" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>erase</name></member>
+      <member refid="classflat__unordered__map_1a7ab1cef1747992f4d6d752ec091e5382" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>erase</name></member>
+      <member refid="classflat__unordered__map_1a5af9a6f68680203ae7ed873b63db829a" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>find</name></member>
+      <member refid="classflat__unordered__map_1a6bd35dd01708d994172191ca6459ba4f" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>find</name></member>
+      <member refid="classflat__unordered__map_1a0082d64732b92041d480e8f9b6b0822b" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1af88c35ba9a4a83876aeafbd4e82fcf51" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1a4d6020ced32b745c3c849374d5777f3e" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1af945fb883e77b9a439eea838b971fd02" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1ac8044319a98910e7dacf8f1b9bbebdcc" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1a50b93145d52c7a296d7980b60172aefd" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1ac457e3eccbbd60139ceb8e500485aa70" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1a0b84d9a330866dacdaf964b8274ce7a8" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1a1bc175785940f550970608b4d86cb4e5" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1a1ce8b78d5355df92f94135f327578089" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1aa4d82375788d2d884683e49cae60d774" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1a36fcfe70c91e70d53071b88c161d465e" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1a6ef46c25e882236ee88defc0610b4efa" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1a4a98a38eed93b4fb0c639b5e02952f44" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>flat_unordered_map</name></member>
+      <member refid="classflat__unordered__map_1a9830ad0d0aad395702ee10f65ef83317" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>hash_function</name></member>
+      <member refid="classflat__unordered__map_1a1b1bc07633e56f968de143f24ac74861" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>hasher</name></member>
+      <member refid="classflat__unordered__map_1a71e60a0fb3f096a1d6a43021ffabc6aa" prot="private" virt="non-virtual"><scope>flat_unordered_map</scope><name>ht_</name></member>
+      <member refid="classflat__unordered__map_1ad9911f744282977305155bfd9ab1813a" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>insert</name></member>
+      <member refid="classflat__unordered__map_1a6597d6edd303ce4f48edc71650b0e130" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>insert</name></member>
+      <member refid="classflat__unordered__map_1ab3a7280b4b2ac2ec309a9b9ba558d4c6" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>insert</name></member>
+      <member refid="classflat__unordered__map_1a7b124c2988ea4de9c75b5940497f1567" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>insert</name></member>
+      <member refid="classflat__unordered__map_1a862486c6bdb9852c73f9667605ba9a9b" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>iterator</name></member>
+      <member refid="classflat__unordered__map_1a2f0bcbbcfba004b36d4a182fa538cd96" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>key_eql</name></member>
+      <member refid="classflat__unordered__map_1aa245c277af6f90db6be894b1b15c55ee" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>key_equal</name></member>
+      <member refid="classflat__unordered__map_1a610339e474efab1fdac20db1ceda1583" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>key_type</name></member>
+      <member refid="classflat__unordered__map_1accbfefd1b0f89d278b8cf6e70c11154a" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>less_than</name></member>
+      <member refid="classflat__unordered__map_1a0c4c7968e6407e1c4eaf1438db6a4738" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>load_factor</name></member>
+      <member refid="classflat__unordered__map_1a84ced70c24c4548098f105e0c3da3f81" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>mapped_type</name></member>
+      <member refid="classflat__unordered__map_1a40c6215e004fa0821f00d26f491969bc" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>max_load_factor</name></member>
+      <member refid="classflat__unordered__map_1aadf4ddbe9be3e850d5fde541a4327bc0" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>max_load_factor</name></member>
+      <member refid="classflat__unordered__map_1aa5d54f7c514d283a4d9e06c25d85e988" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>max_size</name></member>
+      <member refid="classflat__unordered__map_1ab79dc7bda6a936ac23bf63c4ba9f641e" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>operator=</name></member>
+      <member refid="classflat__unordered__map_1a397502dd5a777d6a5a08f093e795c1ef" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>operator=</name></member>
+      <member refid="classflat__unordered__map_1a79ed0cd022f0242ef29127c8261b9ced" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>operator[]</name></member>
+      <member refid="classflat__unordered__map_1a5f07584bfb29ad9cb175acf21fc82344" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>pointer</name></member>
+      <member refid="classflat__unordered__map_1a67c1c76f848a8ca58250a5c21f74d0a7" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>reference</name></member>
+      <member refid="classflat__unordered__map_1a683ddf2a3dd37305a8f973fb01dbb893" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>rehash</name></member>
+      <member refid="classflat__unordered__map_1a2e443740c129809605cd55a9971bf92e" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>reserve</name></member>
+      <member refid="classflat__unordered__map_1a8b2e80ee3476d38e616016946c61389c" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>size</name></member>
+      <member refid="classflat__unordered__map_1a3755a6adc916a3b7bc3eafc61bcecbff" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>size_type</name></member>
+      <member refid="classflat__unordered__map_1a71114de86b99b2b33c6d76b28da09912" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>swap</name></member>
+      <member refid="classflat__unordered__map_1acc34696ca2f184b52dc4fe4c8ca797fe" prot="public" virt="non-virtual"><scope>flat_unordered_map</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

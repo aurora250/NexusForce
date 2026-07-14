@@ -147,10 +147,46 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
+      <node id="74">
+        <label>NeForce/core/exception/errc.hpp</label>
+        <link refid="errc_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>NeForce/core/exception/error_category.hpp</label>
+        <link refid="error__category_8hpp_source"/>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>NeForce/core/exception/error_code.hpp</label>
+        <link refid="error__code_8hpp_source"/>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>NeForce/core/exception/error_condition.hpp</label>
+        <link refid="error__condition_8hpp_source"/>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
       <node id="31">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
         <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>NeForce/core/exception/system_exception.hpp</label>
+        <link refid="system__exception_8hpp_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -414,6 +450,8 @@
         </childnode>
         <childnode refid="69" relation="include">
         </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
       </node>
       <node id="53">
         <label>NeForce/core/string/string.hpp</label>
@@ -427,7 +465,7 @@
         <childnode refid="57" relation="include">
         </childnode>
       </node>
-      <node id="70">
+      <node id="77">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
         <childnode refid="30" relation="include">
@@ -457,6 +495,14 @@
         <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="67" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>NeForce/core/system/locale.hpp</label>
+        <link refid="locale_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
         </childnode>
       </node>
       <node id="49">
@@ -508,7 +554,7 @@
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="77" relation="include">
         </childnode>
       </node>
       <node id="20">
@@ -529,7 +575,7 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="69">
+      <node id="76">
         <label>NeForce/core/utility/tuple.hpp</label>
         <link refid="tuple_8hpp"/>
         <childnode refid="20" relation="include">
@@ -537,6 +583,9 @@
       </node>
       <node id="12">
         <label>cassert</label>
+      </node>
+      <node id="75">
+        <label>cerrno</label>
       </node>
       <node id="6">
         <label>initializer_list</label>
@@ -594,15 +643,15 @@
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27" refid="structtoml__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">toml_exception<sp/>final<sp/>:<sp/>value_exception<sp/>{</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>toml_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>info<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TOML<sp/>Operation<sp/>Failed.&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" kindref="member">type</ref><sp/>=<sp/>static_type,</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" kindref="member">code</ref><sp/>=<sp/>0)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>value_exception(info,<sp/><ref refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" kindref="member">type</ref>,<sp/><ref refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" kindref="member">code</ref>)<sp/>{}</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>toml_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structexception_1a33710bd2e564614575128e2c3de94883" kindref="member">exception</ref>&amp;<sp/>e)<sp/>:</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>value_exception(e)<sp/>{}</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>~toml_exception()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>static_type<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;toml_exception&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>toml_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>info<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TOML<sp/>Operation<sp/>Failed.&quot;</highlight><highlight class="normal">)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>value_exception(info)<sp/>{}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>toml_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" kindref="member">exception</ref>&amp;<sp/>e)<sp/>:</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>value_exception(e)<sp/>{}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>~toml_exception()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="structtoml__exception_1ac1aef277596c54fe06166e99f6315644" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structtoml__exception_1ac1aef277596c54fe06166e99f6315644" kindref="member">type</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;toml_exception&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
 <codeline lineno="37"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Exceptions</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>

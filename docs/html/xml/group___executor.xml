@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___executor" kind="group">
+    <compoundname>Executor</compoundname>
+    <title>执行器</title>
+    <innerclass refid="classexecutor" prot="public">executor</innerclass>
+    <innerclass refid="structthread__pool__executor" prot="public">thread_pool_executor</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___executor_1ga90251abe6bcc372cac0d502b478eded6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Executor</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void post</definition>
+        <argsstring>(Executor &amp;ex, function&lt; void()&gt; handler)</argsstring>
+        <name>post</name>
+        <param>
+          <type>Executor &amp;</type>
+          <declname>ex</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void()&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>向执行器投递 handler </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Executor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>执行器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>执行器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的 handler</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+统一的 post 语义，handler 在 ex 的上下文中异步执行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="112" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" bodystart="112" bodyend="114"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>多态执行器抽象 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -3,29 +3,12 @@
   <compounddef id="structfile__exception" kind="struct" language="C++" prot="public" final="yes">
     <compoundname>file_exception</compoundname>
     <basecompoundref refid="structsystem__exception" prot="public" virt="non-virtual">system_exception</basecompoundref>
-    <includes refid="exception_8hpp" local="no">exception.hpp</includes>
-    <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="structfile__exception_1ae6bc2a5c21561e96cfcf161cacae9a82" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>auto</type>
-        <definition>auto file_exception::static_type</definition>
-        <argsstring></argsstring>
-        <name>static_type</name>
-        <qualifiedname>file_exception::static_type</qualifiedname>
-        <initializer>= &quot;file_exception&quot;</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="234" column="175" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="234" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
+    <includes refid="system__exception_8hpp" local="no">system_exception.hpp</includes>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structfile__exception_1a674bb677ac6a509185f524259c9e2365" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structfile__exception_1a9eef86e836a9b4119f0602bce46689c9" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>file_exception::file_exception</definition>
-        <argsstring>(const char *info=&quot;File Operation Failed.&quot;, const char *type=static_type, const int code=0) noexcept</argsstring>
+        <argsstring>(const char *info=&quot;File Operation Failed.&quot;, const error_code code=last_error()) noexcept</argsstring>
         <name>file_exception</name>
         <qualifiedname>file_exception::file_exception</qualifiedname>
         <param>
@@ -34,14 +17,9 @@
           <defval>&quot;File Operation Failed.&quot;</defval>
         </param>
         <param>
-          <type>const char *</type>
-          <declname>type</declname>
-          <defval>static_type</defval>
-        </param>
-        <param>
-          <type>const int</type>
+          <type>const error_code</type>
           <declname>code</declname>
-          <defval>0</defval>
+          <defval>last_error()</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -49,7 +27,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="234" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="234" bodyend="234"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="63" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" bodystart="63" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="structfile__exception_1a6d89f1976a4dfeb85d980b6a447ffb75" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>file_exception::file_exception</definition>
+        <argsstring>(const error_code err)</argsstring>
+        <name>file_exception</name>
+        <qualifiedname>file_exception::file_exception</qualifiedname>
+        <param>
+          <type>const error_code</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="67" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" bodystart="67" bodyend="68"/>
       </memberdef>
       <memberdef kind="function" id="structfile__exception_1afaec9cf379b0706908fe821a3c78289d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -67,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="234" column="100" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="234" bodyend="234"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="70" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" bodystart="70" bodyend="71"/>
       </memberdef>
       <memberdef kind="function" id="structfile__exception_1adc8d61b548b8ddb0794a3c6508c02435" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -81,7 +77,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="234" column="118"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="73" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structfile__exception_1a95c5be84d0797d5a179aa4fb5bc4b908" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const char *</type>
+        <definition>const char * file_exception::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>file_exception::type</qualifiedname>
+        <reimplements refid="structexception_1a2f7dcc6349b3ef905ebb76859aa8abe6">type</reimplements>
+        <briefdescription>
+<para>获取异常类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="75" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" bodystart="75" bodyend="75"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -125,25 +140,27 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="234" column="2" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="234" bodyend="234"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="62" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" bodystart="62" bodyend="76"/>
     <listofallmembers>
-      <member refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" prot="public" virt="non-virtual"><scope>file_exception</scope><name>code</name></member>
-      <member refid="structexception_1a33710bd2e564614575128e2c3de94883" prot="public" virt="non-virtual"><scope>file_exception</scope><name>exception</name></member>
+      <member refid="structsystem__exception_1af69c032fcd6d9bb66a14ae52a3566977" prot="public" virt="virtual"><scope>file_exception</scope><name>code</name></member>
+      <member refid="structsystem__exception_1af985d25515bd806e9e05ca75ac0aa559" prot="protected" virt="non-virtual"><scope>file_exception</scope><name>code_</name></member>
+      <member refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" prot="public" virt="non-virtual"><scope>file_exception</scope><name>exception</name></member>
       <member refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" prot="public" virt="non-virtual"><scope>file_exception</scope><name>exception</name></member>
       <member refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" prot="public" virt="non-virtual"><scope>file_exception</scope><name>exception</name></member>
       <member refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" prot="public" virt="non-virtual"><scope>file_exception</scope><name>exception</name></member>
-      <member refid="structfile__exception_1a674bb677ac6a509185f524259c9e2365" prot="public" virt="non-virtual"><scope>file_exception</scope><name>file_exception</name></member>
+      <member refid="structfile__exception_1a9eef86e836a9b4119f0602bce46689c9" prot="public" virt="non-virtual"><scope>file_exception</scope><name>file_exception</name></member>
+      <member refid="structfile__exception_1a6d89f1976a4dfeb85d980b6a447ffb75" prot="public" virt="non-virtual"><scope>file_exception</scope><name>file_exception</name></member>
       <member refid="structfile__exception_1afaec9cf379b0706908fe821a3c78289d" prot="public" virt="non-virtual"><scope>file_exception</scope><name>file_exception</name></member>
       <member refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" prot="public" virt="non-virtual"><scope>file_exception</scope><name>operator=</name></member>
       <member refid="structexception_1a709d705f97cbad7d531dfb5023107536" prot="public" virt="non-virtual"><scope>file_exception</scope><name>operator=</name></member>
-      <member refid="structfile__exception_1ae6bc2a5c21561e96cfcf161cacae9a82" prot="public" virt="non-virtual"><scope>file_exception</scope><name>static_type</name></member>
-      <member refid="structsystem__exception_1ab11bfa8bc6b1dd70bde6e63faf4c7a00" prot="public" virt="non-virtual"><scope>file_exception</scope><name>system_exception</name></member>
+      <member refid="structsystem__exception_1a40cdfe9b12f818d7632abc6e2696b3ea" prot="public" virt="non-virtual"><scope>file_exception</scope><name>system_exception</name></member>
+      <member refid="structsystem__exception_1acdb31c0077759cae3ccd8f1f2e892606" prot="public" virt="non-virtual"><scope>file_exception</scope><name>system_exception</name></member>
       <member refid="structsystem__exception_1aa4eb872d3a9680bc738f6358db79989f" prot="public" virt="non-virtual"><scope>file_exception</scope><name>system_exception</name></member>
-      <member refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" prot="public" virt="non-virtual"><scope>file_exception</scope><name>type</name></member>
-      <member refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" prot="public" virt="non-virtual"><scope>file_exception</scope><name>what</name></member>
+      <member refid="structfile__exception_1a95c5be84d0797d5a179aa4fb5bc4b908" prot="public" virt="virtual"><scope>file_exception</scope><name>type</name></member>
+      <member refid="structexception_1ae5dc04391190559c19adcf269cab48e2" prot="public" virt="virtual"><scope>file_exception</scope><name>what</name></member>
       <member refid="structexception_1a80249b2b108c9b913dc7144839092a2b" prot="public" virt="virtual"><scope>file_exception</scope><name>~exception</name></member>
       <member refid="structfile__exception_1adc8d61b548b8ddb0794a3c6508c02435" prot="public" virt="non-virtual"><scope>file_exception</scope><name>~file_exception</name></member>
-      <member refid="structsystem__exception_1a5d1dadefd1078030fb74276941472d4d" prot="public" virt="virtual"><scope>file_exception</scope><name>~system_exception</name></member>
+      <member refid="structsystem__exception_1a7b61682a3e3db92b6e91087792444955" prot="public" virt="non-virtual"><scope>file_exception</scope><name>~system_exception</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

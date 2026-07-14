@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['校验和算法_0',['校验和算法',['../group___i_c_m_p.html#checksum_algorithm',1,'']]]
+  ['标准合规_0',['📡 标准合规',['../md__m_a_i_n_p_a_g_e.html#autotoc_md8',1,'']]]
 ];

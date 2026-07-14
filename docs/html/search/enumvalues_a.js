@@ -33,6 +33,8 @@ var searchData=
   ['log_5fuucp_30',['LOG_UUCP',['../group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a3f29e6ef6790b2e19a70a44e7afc1b64',1,'log_sink.hpp']]],
   ['login_31',['login',['../classsmtp__socket.html#ac7a4dad72a3278c790807d7ab64efc95ad56b699830e77ba53855679cb1d252da',1,'smtp_socket']]],
   ['logoff_32',['LOGOFF',['../classsystem__signal__manager.html#a442e5d505e7801160e93504232ce2616aa5ddcf1c01f56182e72d5b0183aefb5f',1,'system_signal_manager']]],
-  ['loongarch32_33',['LOONGARCH32',['../classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a3a91efc2ac870d790cd3e6fc9b7c7f9a',1,'sysinfo']]],
-  ['loongarch64_34',['LOONGARCH64',['../classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a444899381b9d044c3d148a9e99a3ec9f',1,'sysinfo']]]
+  ['long_5ffmt_33',['long_fmt',['../classlocale.html#a21b91f6a56be0980b9b915db9c92fa09a4e399dc5fc460b171732aba58d01281c',1,'locale::long_fmt'],['../classlocale.html#ac683e0b5ff2bb1584a217b0d636299a9a4e399dc5fc460b171732aba58d01281c',1,'locale::long_fmt']]],
+  ['loongarch32_34',['LOONGARCH32',['../classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a3a91efc2ac870d790cd3e6fc9b7c7f9a',1,'sysinfo']]],
+  ['loongarch64_35',['LOONGARCH64',['../classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a444899381b9d044c3d148a9e99a3ec9f',1,'sysinfo']]],
+  ['ltr_36',['LTR',['../classlocale.html#accbbc2608cdfca312a7aa85e9ad94dcba3e35661f311d49f66eccb1bc2ea4de46',1,'locale']]]
 ];

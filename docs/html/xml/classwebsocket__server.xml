@@ -81,21 +81,21 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="143" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="143" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classwebsocket__server_1a60eb5f46c6cc791da8865ac1256f18e1" prot="private" static="no" mutable="no">
-        <type><ref refid="classevent__loop" kindref="compound">event_loop</ref> *</type>
-        <definition>event_loop* websocket_server::loop_</definition>
+      <memberdef kind="variable" id="classwebsocket__server_1a1218f4e95e61dadb49f750b6cf6c1393" prot="private" static="no" mutable="no">
+        <type><ref refid="classio__context" kindref="compound">io_context</ref> *</type>
+        <definition>io_context* websocket_server::ctx_</definition>
         <argsstring></argsstring>
-        <name>loop_</name>
-        <qualifiedname>websocket_server::loop_</qualifiedname>
-        <initializer>= nullptr</initializer>
+        <name>ctx_</name>
+        <qualifiedname>websocket_server::ctx_</qualifiedname>
+        <initializer>{nullptr}</initializer>
         <briefdescription>
-<para>事件循环指针 </para>
+<para>异步 I/O 执行上下文 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="144" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="144" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="144" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="144" bodyend="144"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -195,6 +195,37 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="154" column="22"/>
       </memberdef>
+      <memberdef kind="function" id="classwebsocket__server_1a86174e8e2894c87d3fa216b15c6e1cee" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_server::set_io_context</definition>
+        <argsstring>(io_context &amp;ctx) noexcept</argsstring>
+        <name>set_io_context</name>
+        <qualifiedname>websocket_server::set_io_context</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>设置异步 I/O 执行上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classio__context" kindref="compound">io_context</ref> 引用</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+设置后，新创建的 WebSocket 会话将使用 <ref refid="classio__context" kindref="compound">io_context</ref> 驱动 I/O 替代默认的线程模式。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="163" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="163" bodyend="163"/>
+        <references refid="classwebsocket__server_1a86174e8e2894c87d3fa216b15c6e1cee" compoundref="websocket_8hpp" startline="163" endline="163">set_io_context</references>
+        <referencedby refid="classwebsocket__server_1a86174e8e2894c87d3fa216b15c6e1cee" compoundref="websocket_8hpp" startline="163" endline="163">set_io_context</referencedby>
+      </memberdef>
       <memberdef kind="function" id="classwebsocket__server_1a1ef3d7d2914ea79ef7826d1c7bb2769b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void websocket_server::route</definition>
@@ -234,10 +265,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="161" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="161" bodyend="161"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="170" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="170" bodyend="170"/>
         <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
-        <references refid="classwebsocket__server_1a1ef3d7d2914ea79ef7826d1c7bb2769b" compoundref="websocket_8hpp" startline="161" endline="161">route</references>
-        <referencedby refid="classwebsocket__server_1a1ef3d7d2914ea79ef7826d1c7bb2769b" compoundref="websocket_8hpp" startline="161" endline="161">route</referencedby>
       </memberdef>
       <memberdef kind="function" id="classwebsocket__server_1a3e14f19b6262afe51436d8be3e7b1201" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -280,7 +309,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="169" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="178" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classwebsocket__server_1ab2e671190c316c10a67c9811d5db759e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -309,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="175" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="184" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classwebsocket__server_1a29d21fc78e5d157de0f2677505be0ab1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -323,7 +352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="176" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="185" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classwebsocket__server_1ab70f9fb7a4a031f9859946074546c21f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -365,38 +394,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="183" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="192" column="10"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
         <references refid="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0fa61a96ffcb251bb9bf0abf8fec19d0ea8" compoundref="websocket_8hpp" startline="81">TEXT</references>
-      </memberdef>
-      <memberdef kind="function" id="classwebsocket__server_1a8d7a63ae0103ab0c48c987638f9f276f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void websocket_server::set_event_loop</definition>
-        <argsstring>(event_loop *loop) noexcept</argsstring>
-        <name>set_event_loop</name>
-        <qualifiedname>websocket_server::set_event_loop</qualifiedname>
-        <param>
-          <type><ref refid="classevent__loop" kindref="compound">event_loop</ref> *</type>
-          <declname>loop</declname>
-        </param>
-        <briefdescription>
-<para>设置事件循环 </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>loop</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>事件循环指针</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-设置后，新创建的 WebSocket 会话将使用 <ref refid="classevent__loop" kindref="compound">event_loop</ref> 驱动 I/O。 设为 nullptr 则回退到线程模式。 </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="192" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="192" bodyend="192"/>
       </memberdef>
       <memberdef kind="function" id="classwebsocket__server_1a324f35e43f1597de143ce170512841f4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -441,8 +441,8 @@
     <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="135" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="135" bodyend="205"/>
     <listofallmembers>
       <member refid="classwebsocket__server_1ab70f9fb7a4a031f9859946074546c21f" prot="public" virt="non-virtual"><scope>websocket_server</scope><name>broadcast</name></member>
+      <member refid="classwebsocket__server_1a1218f4e95e61dadb49f750b6cf6c1393" prot="private" virt="non-virtual"><scope>websocket_server</scope><name>ctx_</name></member>
       <member refid="classwebsocket__server_1a3e14f19b6262afe51436d8be3e7b1201" prot="public" virt="non-virtual"><scope>websocket_server</scope><name>handle_upgrade</name></member>
-      <member refid="classwebsocket__server_1a60eb5f46c6cc791da8865ac1256f18e1" prot="private" virt="non-virtual"><scope>websocket_server</scope><name>loop_</name></member>
       <member refid="classwebsocket__server_1afde7f6b6f7559f784bfff89cd2f2f3b7" prot="public" virt="non-virtual"><scope>websocket_server</scope><name>operator=</name></member>
       <member refid="classwebsocket__server_1a0a0bb2c03e16930b42c3e37dbdc8db85" prot="public" virt="non-virtual"><scope>websocket_server</scope><name>operator=</name></member>
       <member refid="classwebsocket__server_1ab2e671190c316c10a67c9811d5db759e" prot="public" virt="non-virtual"><scope>websocket_server</scope><name>remove_session</name></member>
@@ -453,7 +453,7 @@
       <member refid="classwebsocket__server_1ae34039860d8e90e6112af725a134005a" prot="public" virt="non-virtual"><scope>websocket_server</scope><name>session_ptr</name></member>
       <member refid="classwebsocket__server_1a11eaedad9dd1856ab5322e6d0c42d543" prot="private" virt="non-virtual"><scope>websocket_server</scope><name>sessions_</name></member>
       <member refid="classwebsocket__server_1a36f7afe2bf48192c450d14513a2e2d54" prot="private" virt="non-virtual"><scope>websocket_server</scope><name>sessions_mutex_</name></member>
-      <member refid="classwebsocket__server_1a8d7a63ae0103ab0c48c987638f9f276f" prot="public" virt="non-virtual"><scope>websocket_server</scope><name>set_event_loop</name></member>
+      <member refid="classwebsocket__server_1a86174e8e2894c87d3fa216b15c6e1cee" prot="public" virt="non-virtual"><scope>websocket_server</scope><name>set_io_context</name></member>
       <member refid="classwebsocket__server_1a29d21fc78e5d157de0f2677505be0ab1" prot="public" virt="non-virtual"><scope>websocket_server</scope><name>stop</name></member>
       <member refid="classwebsocket__server_1a8c57ed9bd885ed0ac7d7f65573b2a1b9" prot="public" virt="non-virtual"><scope>websocket_server</scope><name>websocket_server</name></member>
       <member refid="classwebsocket__server_1ade34268964e9dc66a9f56cf8bfa634de" prot="public" virt="non-virtual"><scope>websocket_server</scope><name>websocket_server</name></member>

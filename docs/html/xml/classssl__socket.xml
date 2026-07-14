@@ -44,7 +44,7 @@
         <name>ssl_socket</name>
         <qualifiedname>ssl_socket::ssl_socket</qualifiedname>
         <param>
-          <type>const <ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref></type>
+          <type>const <ref refid="classsocket__base_1ab609d0c1ee77f66e90cb73c57baf343f" kindref="member">native_handle_type</ref></type>
           <declname>fd</declname>
         </param>
         <briefdescription>
@@ -543,6 +543,10 @@ TLS握手完成后通过ALPN协商确定的应用层协议。 需要在init_serv
 </programlisting> </para>
     </detaileddescription>
     <inheritancegraph>
+      <node id="5">
+        <label>async_stream</label>
+        <link refid="classasync__stream"/>
+      </node>
       <node id="3">
         <label>ip_socket</label>
         <link refid="classip__socket"/>
@@ -563,10 +567,16 @@ TLS握手完成后通过ALPN协商确定的应用层协议。 需要在init_serv
         <label>tcp_socket</label>
         <link refid="classtcp__socket"/>
         <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
+      <node id="5">
+        <label>async_stream</label>
+        <link refid="classasync__stream"/>
+      </node>
       <node id="3">
         <label>ip_socket</label>
         <link refid="classip__socket"/>
@@ -587,12 +597,41 @@ TLS握手完成后通过ALPN协商确定的应用层协议。 需要在init_serv
         <label>tcp_socket</label>
         <link refid="classtcp__socket"/>
         <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
     <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="73" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" bodystart="73" bodyend="204"/>
     <listofallmembers>
       <member refid="classip__socket_1ad0d10499d585a7074c06152831e3dd88" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>address_family</name></member>
+      <member refid="classtcp__socket_1a27156e0a77eb3fa3189993ce037c4c18" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1a8a6e50928810ecc929bb131bfe178a08" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1a882c8ee63552bc3e1b33878149a0f84f" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1abb27b761512794856a74064953d99958" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1a5f4b853fbbed1a995dc05b2f6913492a" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1af7fdd87ea0672cb6f3aa6dd0fe46c37e" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1ae1eec8ce0560b6f9426070504cb2f8c8" prot="public" virt="virtual"><scope>ssl_socket</scope><name>async_read</name></member>
+      <member refid="classtcp__socket_1af57d14bbf43ba1326203ed9508b7850d" prot="public" virt="virtual"><scope>ssl_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a0051d844a8e4a2a79429ba644bec9c32" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>ssl_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1abe6469f417ff23bec1b439151c870998" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>ssl_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a4dec67d9232c626b29da1bc831757fd5" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>ssl_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a0a640b341717691f22fae0acf674d235" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>ssl_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a3a686bf64f378efcd1ac737b3a62282f" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>ssl_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a31296aee86f5591a179850836e7b9fca" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>ssl_socket</scope><name>async_read</name></member>
+      <member refid="classtcp__socket_1aa0d3a078a1d676cdf45fd8eb897d9689" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_receive</name></member>
+      <member refid="classtcp__socket_1ae3a835a3724020cececf29d27911d8dc" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_receive</name></member>
+      <member refid="classtcp__socket_1a1bf83c52000b681c66f00766f4597d8a" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_receive</name></member>
+      <member refid="classtcp__socket_1a7cad5bedc80d9909d8cc657ad04683d4" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_send</name></member>
+      <member refid="classtcp__socket_1af828d3d5c748999903e5b1e06afbe5ef" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_send</name></member>
+      <member refid="classtcp__socket_1abc80dd8bc0b9a6e06ca1b006eac10b30" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>async_send</name></member>
+      <member refid="classtcp__socket_1ac0126b85f5b33835de4a1175d1b10172" prot="public" virt="virtual"><scope>ssl_socket</scope><name>async_write</name></member>
+      <member refid="classtcp__socket_1a4e3dbf515f6a17ee332cb5f47ecdbeff" prot="public" virt="virtual"><scope>ssl_socket</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1af0350479bc553eb7e76dd103d0238859" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>ssl_socket</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1a6325eb7c21abf48337f0d0e0fc389834" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>ssl_socket</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1aa6b1889815d02c3e8483252a45139b08" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>ssl_socket</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1a929ddcabcc0650dd4e6177d3da04e3e1" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>ssl_socket</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1a5a1a66d6160f864f90225a9bddc7f605" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>ssl_socket</scope><name>async_write</name></member>
       <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>bind</name></member>
       <member refid="classssl__socket_1ac93b5cdb322b13fce97428b4b366c228" prot="public" virt="virtual"><scope>ssl_socket</scope><name>close</name></member>
       <member refid="classtcp__socket_1a5edcc5a4efa0c0cdb1cf61f7fa07c66b" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>connect</name></member>
@@ -625,7 +664,7 @@ TLS握手完成后通过ALPN协商确定的应用层协议。 需要在init_serv
       <member refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>listen</name></member>
       <member refid="classsocket__base_1a1d9ff8b37d502077065ad505098f1c10" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>local_endpoint</name></member>
       <member refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>native_handle</name></member>
-      <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>native_handle_type</name></member>
+      <member refid="classsocket__base_1ab609d0c1ee77f66e90cb73c57baf343f" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>native_handle_type</name></member>
       <member refid="classsocket__base_1a3b85c967d07f91b5e45349495e2a1481" prot="protected" virt="non-virtual"><scope>ssl_socket</scope><name>nonblocking_</name></member>
       <member refid="classtcp__socket_1a34441a6c2a85f433b36b687aa7555193" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>open</name></member>
       <member refid="classsocket__base_1a27acf9f7219de7e4462af8744e44137a" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>ssl_socket</scope><name>open</name></member>
@@ -675,6 +714,7 @@ TLS握手完成后通过ALPN协商确定的应用层协议。 需要在init_serv
       <member refid="classtcp__socket_1aef337d72fe3a8446418aa979771e3bf3" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>tcp_socket</name></member>
       <member refid="classsocket__base_1a7333214e4562884b671ed9545313985a" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>try_open</name></member>
       <member refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>type</name></member>
+      <member refid="classasync__stream_1a77ea4f279fa385fe527b8ac032432a5a" prot="public" virt="virtual"><scope>ssl_socket</scope><name>~async_stream</name></member>
       <member refid="classip__socket_1a4a1d2bcfb15b0d319defef1c9da3c0d4" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>~ip_socket</name></member>
       <member refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" prot="public" virt="virtual"><scope>ssl_socket</scope><name>~socket_base</name></member>
       <member refid="classssl__socket_1a76cf3d2ca514fa1fe702c82f5e534c79" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>~ssl_socket</name></member>

@@ -52,7 +52,7 @@ var classunordered__map =
     [ "erase", "classunordered__map.html#ae812d8a0ccbd45f125b3f7fed26d6ffe", null ],
     [ "find", "classunordered__map.html#a206850d56bbbd516b39dbbfa756a6733", null ],
     [ "find", "classunordered__map.html#ae1000b7215ade068ccbc22d65a09cd87", null ],
-    [ "hash_func", "classunordered__map.html#a963dbf3a951fba90a7f80ba91631ce90", null ],
+    [ "hash_function", "classunordered__map.html#aba898619cdac9c177e58ebd04e47e1e6", null ],
     [ "insert", "classunordered__map.html#a007aa8de643b57810214c82b90ed5d38", null ],
     [ "insert", "classunordered__map.html#a78ffc4eb6d7ace95dd41ffb045922493", null ],
     [ "insert", "classunordered__map.html#a9c6a2d48bbc98152dda38310d90858a9", null ],

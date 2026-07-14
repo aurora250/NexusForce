@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['非求值辅助工具_0',['非求值辅助工具',['../group___declval_tools.html',1,'']]]
+  ['集合算法_0',['集合算法',['../group___set_algorithms.html',1,'']]]
 ];

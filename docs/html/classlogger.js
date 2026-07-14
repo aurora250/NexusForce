@@ -4,6 +4,7 @@ var classlogger =
     [ "add_context", "classlogger.html#a362589e68610127e4333750d3fa0cfec", null ],
     [ "add_sink", "classlogger.html#ae8938cbad141b618717fe8f79975da52", null ],
     [ "clear_context", "classlogger.html#a5d5089ffd2e6075a5014f23219431106", null ],
+    [ "clear_sinks", "classlogger.html#a54bb5cdfb8301a7c85f49b9cb395677f", null ],
     [ "debug", "classlogger.html#a9a534c07043a19e5dd4e51bb3f5aa4c1", null ],
     [ "disable_async", "classlogger.html#a524d8d9abe8dbf80e2cbb5af16fc6362", null ],
     [ "effective_level", "classlogger.html#af90daa54d800e45fbee7b53a878ed416", null ],

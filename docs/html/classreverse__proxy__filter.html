@@ -114,9 +114,10 @@ using&#160;</td><td class="memItemRight"><b>backend_selector_cb</b> = <a class="
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a8e76329c54c8fbe3728faa8a1718ed5e" id="r_a8e76329c54c8fbe3728faa8a1718ed5e"><td class="memItemLeft"><a id="a8e76329c54c8fbe3728faa8a1718ed5e" name="a8e76329c54c8fbe3728faa8a1718ed5e"></a>
-&#160;</td><td class="memItemRight"><b>reverse_proxy_filter</b> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> host, <a class="el" href="structports.html">ports</a> port, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> scheme=&quot;http&quot;)</td></tr>
-<tr class="memdesc:a8e76329c54c8fbe3728faa8a1718ed5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数（单后端） <br /></td></tr>
+<tr class="memitem:a1c306076871fceeebe308b1183af1402" id="r_a1c306076871fceeebe308b1183af1402"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1c306076871fceeebe308b1183af1402">reverse_proxy_filter</a> (<a class="el" href="classio__context.html">io_context</a> &amp;ctx)</td></tr>
+<tr class="memdesc:a1c306076871fceeebe308b1183af1402"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a53a752d1187ab8ff27aefa5ae8b2610e" id="r_a53a752d1187ab8ff27aefa5ae8b2610e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a53a752d1187ab8ff27aefa5ae8b2610e">reverse_proxy_filter</a> (<a class="el" href="classio__context.html">io_context</a> &amp;ctx, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> host, <a class="el" href="structports.html">ports</a> port, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> scheme=&quot;http&quot;)</td></tr>
+<tr class="memdesc:a53a752d1187ab8ff27aefa5ae8b2610e"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数（单后端）  <br /></td></tr>
 <tr class="memitem:aec693ad2c4d4e671f2b362a0a6dcb5bc" id="r_aec693ad2c4d4e671f2b362a0a6dcb5bc"><td class="memItemLeft"><a id="aec693ad2c4d4e671f2b362a0a6dcb5bc" name="aec693ad2c4d4e671f2b362a0a6dcb5bc"></a>
 void&#160;</td><td class="memItemRight"><b>add_backend</b> (<a class="el" href="structproxy__backend.html">proxy_backend</a> backend)</td></tr>
 <tr class="memdesc:aec693ad2c4d4e671f2b362a0a6dcb5bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加后端服务器 <br /></td></tr>
@@ -163,18 +164,106 @@ bool&#160;</td><td class="memItemRight"><b>passthrough_host_header</b> {false}</
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>HTTP反向代理过滤器 </p>
 <p>将匹配的请求转发到后端服务器，并将响应返回给客户端。 支持请求头重写、响应头过滤、超时控制。</p>
-<p>使用示例： </p><div class="fragment"><div class="line">reverse_proxy_filter proxy;</div>
+<p>使用示例： </p><div class="fragment"><div class="line"><a class="code hl_function" href="#a1c306076871fceeebe308b1183af1402">reverse_proxy_filter</a> proxy;</div>
 <div class="line">proxy.<a class="code hl_function" href="#aec693ad2c4d4e671f2b362a0a6dcb5bc">add_backend</a>({<span class="stringliteral">&quot;api-backend&quot;</span>, <a class="code hl_struct" href="structports.html">ports</a>(8080)});</div>
 <div class="line">proxy.<a class="code hl_function" href="#aa3b054e55ed07633adc5a052c73cda1e">set_path_prefix</a>(<span class="stringliteral">&quot;/api&quot;</span>);  <span class="comment">// 仅代理 /api/ * 路径</span></div>
 <div class="line">router.use(<a class="code hl_function" href="group___unique_pointer.html#ga20caa9b68a94ba614667d6ec6585c044">make_unique&lt;reverse_proxy_filter&gt;</a>(<a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(proxy)));</div>
-<div class="ttc" id="aclassreverse__proxy__filter_html_aa3b054e55ed07633adc5a052c73cda1e"><div class="ttname"><a href="#aa3b054e55ed07633adc5a052c73cda1e">reverse_proxy_filter::set_path_prefix</a></div><div class="ttdeci">void set_path_prefix(string prefix)</div><div class="ttdoc">设置路径前缀匹配（仅代理匹配路径）</div><div class="ttdef"><b>定义</b> <a href="reverse__proxy_8hpp_source.html#l00090">reverse_proxy.hpp:90</a></div></div>
-<div class="ttc" id="aclassreverse__proxy__filter_html_aec693ad2c4d4e671f2b362a0a6dcb5bc"><div class="ttname"><a href="#aec693ad2c4d4e671f2b362a0a6dcb5bc">reverse_proxy_filter::add_backend</a></div><div class="ttdeci">void add_backend(proxy_backend backend)</div><div class="ttdoc">添加后端服务器</div><div class="ttdef"><b>定义</b> <a href="reverse__proxy_8hpp_source.html#l00082">reverse_proxy.hpp:82</a></div></div>
+<div class="ttc" id="aclassreverse__proxy__filter_html_a1c306076871fceeebe308b1183af1402"><div class="ttname"><a href="#a1c306076871fceeebe308b1183af1402">reverse_proxy_filter::reverse_proxy_filter</a></div><div class="ttdeci">reverse_proxy_filter(io_context &amp;ctx)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="reverse__proxy_8hpp_source.html#l00074">reverse_proxy.hpp:74</a></div></div>
+<div class="ttc" id="aclassreverse__proxy__filter_html_aa3b054e55ed07633adc5a052c73cda1e"><div class="ttname"><a href="#aa3b054e55ed07633adc5a052c73cda1e">reverse_proxy_filter::set_path_prefix</a></div><div class="ttdeci">void set_path_prefix(string prefix)</div><div class="ttdoc">设置路径前缀匹配（仅代理匹配路径）</div><div class="ttdef"><b>定义</b> <a href="reverse__proxy_8hpp_source.html#l00097">reverse_proxy.hpp:97</a></div></div>
+<div class="ttc" id="aclassreverse__proxy__filter_html_aec693ad2c4d4e671f2b362a0a6dcb5bc"><div class="ttname"><a href="#aec693ad2c4d4e671f2b362a0a6dcb5bc">reverse_proxy_filter::add_backend</a></div><div class="ttdeci">void add_backend(proxy_backend backend)</div><div class="ttdoc">添加后端服务器</div><div class="ttdef"><b>定义</b> <a href="reverse__proxy_8hpp_source.html#l00089">reverse_proxy.hpp:89</a></div></div>
 <div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
 <div class="ttc" id="agroup___unique_pointer_html_ga20caa9b68a94ba614667d6ec6585c044"><div class="ttname"><a href="group___unique_pointer.html#ga20caa9b68a94ba614667d6ec6585c044">make_unique</a></div><div class="ttdeci">constexpr unique_ptr&lt; T &gt; make_unique(Args &amp;&amp;... args)</div><div class="ttdoc">创建unique_ptr</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00973">unique_ptr.hpp:973</a></div></div>
 <div class="ttc" id="astructports_html"><div class="ttname"><a href="structports.html">ports</a></div><div class="ttdoc">网络端口封装类</div><div class="ttdef"><b>定义</b> <a href="ports_8hpp_source.html#l00124">ports.hpp:124</a></div></div>
 </div><!-- fragment --> 
 <p class="definition">在文件 <a class="el" href="reverse__proxy_8hpp_source.html">reverse_proxy.hpp</a> 第 <a class="el" href="reverse__proxy_8hpp_source.html#l00052">52</a> 行定义.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a1c306076871fceeebe308b1183af1402" name="a1c306076871fceeebe308b1183af1402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c306076871fceeebe308b1183af1402">&#9670;&#160;</a></span>reverse_proxy_filter() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">reverse_proxy_filter::reverse_proxy_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classio__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="reverse__proxy_8hpp_source.html">reverse_proxy.hpp</a> 第 <a class="el" href="reverse__proxy_8hpp_source.html#l00074">74</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a53a752d1187ab8ff27aefa5ae8b2610e" name="a53a752d1187ab8ff27aefa5ae8b2610e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53a752d1187ab8ff27aefa5ae8b2610e">&#9670;&#160;</a></span>reverse_proxy_filter() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">reverse_proxy_filter::reverse_proxy_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classio__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>host</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structports.html">ports</a></td>          <td class="paramname"><span class="paramname"><em>port</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>scheme</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;http&quot;</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数（单后端） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="reverse__proxy_8hpp_source.html">reverse_proxy.hpp</a> 第 <a class="el" href="reverse__proxy_8hpp_source.html#l00081">81</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="reverse__proxy_8hpp_source.html#l00089">add_backend()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a00f4e1b1cf25b22590e0d88c42163fe1" name="a00f4e1b1cf25b22590e0d88c42163fe1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a00f4e1b1cf25b22590e0d88c42163fe1">&#9670;&#160;</a></span>do_filter()</h2>
 
@@ -214,7 +303,7 @@ bool&#160;</td><td class="memItemRight"><b>passthrough_host_header</b> {false}</
 
 <p>实现了 <a class="el" href="classhttp__filter.html#a00ee11e4e2b0c596d6f99cbafec3ddad">http_filter</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="reverse__proxy_8hpp_source.html">reverse_proxy.hpp</a> 第 <a class="el" href="reverse__proxy_8hpp_source.html#l00120">120</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reverse__proxy_8hpp_source.html">reverse_proxy.hpp</a> 第 <a class="el" href="reverse__proxy_8hpp_source.html#l00127">127</a> 行定义.</p>
 
 </div>
 </div>
@@ -246,7 +335,7 @@ bool&#160;</td><td class="memItemRight"><b>passthrough_host_header</b> {false}</
 
 <p>重载 <a class="el" href="classhttp__filter.html#a72030f612655463f1f4ef9340c03f1ec">http_filter</a> .</p>
 
-<p class="definition">在文件 <a class="el" href="reverse__proxy_8hpp_source.html">reverse_proxy.hpp</a> 第 <a class="el" href="reverse__proxy_8hpp_source.html#l00121">121</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reverse__proxy_8hpp_source.html">reverse_proxy.hpp</a> 第 <a class="el" href="reverse__proxy_8hpp_source.html#l00128">128</a> 行定义.</p>
 
 </div>
 </div>

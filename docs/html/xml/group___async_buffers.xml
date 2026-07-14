@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___async_buffers" kind="group">
+    <compoundname>AsyncBuffers</compoundname>
+    <title>缓冲区</title>
+    <innerclass refid="classmutable__buffers" prot="public">mutable_buffers</innerclass>
+    <innerclass refid="classconst__buffers" prot="public">const_buffers</innerclass>
+    <innerclass refid="classdynamic__buffer" prot="public">dynamic_buffer</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___async_buffers_1ga06c3bb4bf878f75df59e10a15c7a9354" prot="public" static="no">
+        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+        <definition>using mutable_buffer = memory_view&lt;char&gt;</definition>
+        <argsstring></argsstring>
+        <name>mutable_buffer</name>
+        <briefdescription>
+<para>可变缓冲区（用于异步读取操作） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>对可写内存区域的视图封装，传入 async_read 作为接收目标。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/buffer.hpp" line="26" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/buffer.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___async_buffers_1gaf3362bf45fb28c11f4efbabf2aa3141c" prot="public" static="no">
+        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+        <definition>using const_buffer = memory_view&lt;const char&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_buffer</name>
+        <briefdescription>
+<para>常量缓冲区（用于异步写入操作） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>对只读内存区域的视图封装，传入 async_write 作为发送源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/buffer.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/buffer.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异步 I/O 缓冲区抽象 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

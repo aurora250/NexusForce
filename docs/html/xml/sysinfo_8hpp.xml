@@ -4,6 +4,7 @@
     <compoundname>sysinfo.hpp</compoundname>
     <includes refid="atomic_8hpp" local="yes">NeForce/core/async/atomic.hpp</includes>
     <includes refid="string_8hpp" local="yes">NeForce/core/string/string.hpp</includes>
+    <includedby refid="tcp__server_8hpp" local="yes">tcp_server.hpp</includedby>
     <includedby refid="thread__pool_8hpp" local="yes">thread_pool.hpp</includedby>
     <incdepgraph>
       <node id="40">
@@ -424,14 +425,10 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="2">
+      <node id="4">
         <label>thread_pool.hpp</label>
         <link refid="thread__pool_8hpp"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -439,53 +436,21 @@
         <link refid="sysinfo_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
       </node>
-      <node id="9">
+      <node id="5">
         <label>logger.hpp</label>
         <link refid="logger_8hpp"/>
       </node>
       <node id="3">
-        <label>dns_client.hpp</label>
-        <link refid="dns__client_8hpp"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>ftp_client.hpp</label>
-        <link refid="ftp__client_8hpp_source"/>
-      </node>
-      <node id="7">
-        <label>http_client.hpp</label>
-        <link refid="http__client_8hpp"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="11">
         <label>http_server.hpp</label>
         <link refid="http__server_8hpp"/>
       </node>
-      <node id="8">
-        <label>reverse_proxy.hpp</label>
-        <link refid="reverse__proxy_8hpp"/>
-      </node>
-      <node id="5">
-        <label>smtp_socket.hpp</label>
-        <link refid="smtp__socket_8hpp"/>
-      </node>
-      <node id="6">
-        <label>tcp_client.hpp</label>
-        <link refid="tcp__client_8hpp"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-      </node>
-      <node id="10">
+      <node id="2">
         <label>tcp_server.hpp</label>
         <link refid="tcp__server_8hpp"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="3" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

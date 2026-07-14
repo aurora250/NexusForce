@@ -212,10 +212,46 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
+      <node id="88">
+        <label>NeForce/core/exception/errc.hpp</label>
+        <link refid="errc_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>NeForce/core/exception/error_category.hpp</label>
+        <link refid="error__category_8hpp_source"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>NeForce/core/exception/error_code.hpp</label>
+        <link refid="error__code_8hpp_source"/>
+        <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>NeForce/core/exception/error_condition.hpp</label>
+        <link refid="error__condition_8hpp_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
       <node id="31">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
         <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>NeForce/core/exception/system_exception.hpp</label>
+        <link refid="system__exception_8hpp_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -497,6 +533,8 @@
         </childnode>
         <childnode refid="83" relation="include">
         </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
       </node>
       <node id="48">
         <label>NeForce/core/string/string.hpp</label>
@@ -510,7 +548,7 @@
         <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="84">
+      <node id="91">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
         <childnode refid="30" relation="include">
@@ -540,6 +578,14 @@
         <childnode refid="78" relation="include">
         </childnode>
         <childnode refid="81" relation="include">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>NeForce/core/system/locale.hpp</label>
+        <link refid="locale_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
         </childnode>
       </node>
       <node id="71">
@@ -591,7 +637,7 @@
         </childnode>
         <childnode refid="74" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
       </node>
       <node id="20">
@@ -612,7 +658,7 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="83">
+      <node id="90">
         <label>NeForce/core/utility/tuple.hpp</label>
         <link refid="tuple_8hpp"/>
         <childnode refid="20" relation="include">
@@ -620,6 +666,9 @@
       </node>
       <node id="12">
         <label>cassert</label>
+      </node>
+      <node id="89">
+        <label>cerrno</label>
       </node>
       <node id="65">
         <label>ctime</label>
@@ -697,15 +746,15 @@
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
 <codeline lineno="29" refid="structyaml__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">yaml_exception<sp/>final<sp/>:<sp/>value_exception<sp/>{</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>yaml_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>info<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;YAML<sp/>Operation<sp/>Failed.&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" kindref="member">type</ref><sp/>=<sp/>static_type,</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" kindref="member">code</ref><sp/>=<sp/>0)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>value_exception(info,<sp/><ref refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" kindref="member">type</ref>,<sp/><ref refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" kindref="member">code</ref>)<sp/>{}</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>yaml_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structexception_1a33710bd2e564614575128e2c3de94883" kindref="member">exception</ref>&amp;<sp/>e)<sp/>:</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>value_exception(e)<sp/>{}</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>~yaml_exception()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>static_type<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;yaml_exception&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>yaml_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>info<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;YAML<sp/>Operation<sp/>Failed.&quot;</highlight><highlight class="normal">)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>value_exception(info)<sp/>{}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>yaml_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" kindref="member">exception</ref>&amp;<sp/>e)<sp/>:</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>value_exception(e)<sp/>{}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>~yaml_exception()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38" refid="structyaml__exception_1a926bd4ceb835ddcc020c89261e99c4a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structyaml__exception_1a926bd4ceb835ddcc020c89261e99c4a1" kindref="member">type</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;yaml_exception&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
 <codeline lineno="39"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Exceptions</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>

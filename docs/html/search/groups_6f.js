@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['莱昂纳多堆算法_0',['莱昂纳多堆算法',['../group___leonardo_heap.html',1,'']]]
+  ['编译器检测_0',['编译器检测',['../group___compiler_detection.html',1,'']]]
 ];

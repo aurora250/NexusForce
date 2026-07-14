@@ -109,10 +109,16 @@ thread_exit_register.hpp 的引用(Include)关系图:</div>
 <tr class="memitem:thread_5Fexit_5Felt" id="r_thread_5Fexit_5Felt"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structthread__exit__elt.html">thread_exit_elt</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程退出回调元素  <a href="structthread__exit__elt.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+类型定义</h2></td></tr>
+<tr class="memitem:ga5fc0baa1aebebd461babfb58c9f37c48" id="r_ga5fc0baa1aebebd461babfb58c9f37c48"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>thread_exit_callback_t</b> = void (*)(void*)</td></tr>
+<tr class="memdesc:ga5fc0baa1aebebd461babfb58c9f37c48"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程退出回调类型 <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga3f979cd07e3fd729bc96313ec9285e6b" id="r_ga3f979cd07e3fd729bc96313ec9285e6b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___thread_exit.html#ga3f979cd07e3fd729bc96313ec9285e6b">thread_exit_register</a> (<a class="el" href="structthread__exit__elt.html">thread_exit_elt</a> *elt, void(*callback)(void *)) noexcept</td></tr>
-<tr class="memdesc:ga3f979cd07e3fd729bc96313ec9285e6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册线程退出回调  <br /></td></tr>
+<tr class="memitem:ga61ee52a597905b57d6fa90f45918bdfa" id="r_ga61ee52a597905b57d6fa90f45918bdfa"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___thread_exit.html#ga61ee52a597905b57d6fa90f45918bdfa">thread_exit_register</a> (<a class="el" href="structthread__exit__elt.html">thread_exit_elt</a> *elt, <a class="el" href="group___thread_exit.html#ga5fc0baa1aebebd461babfb58c9f37c48">thread_exit_callback_t</a> callback) noexcept</td></tr>
+<tr class="memdesc:ga61ee52a597905b57d6fa90f45918bdfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册线程退出回调  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>线程退出回调支持 </p>

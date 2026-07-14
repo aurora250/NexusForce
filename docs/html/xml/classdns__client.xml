@@ -4,6 +4,7 @@
     <compoundname>dns_client</compoundname>
     <includes refid="dns__client_8hpp" local="no">dns_client.hpp</includes>
     <innerclass refid="structdns__client_1_1config" prot="public">dns_client::config</innerclass>
+    <innerclass refid="structdns__client_1_1dns__query__op" prot="private">dns_client::dns_query_op</innerclass>
     <innerclass refid="structdns__client_1_1pending__entry" prot="private">dns_client::pending_entry</innerclass>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classdns__client_1aefede57e86193c8e07a843b5383eebd7" prot="private" static="no" mutable="no">
@@ -20,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="65" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="65" bodyend="65"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="91" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="91" bodyend="91"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1a35f80e7757226a8f3003e824e3364d44" prot="private" static="no" mutable="no">
         <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="structdns__query__result" kindref="compound">dns_query_result</ref>, <ref refid="structsteady__clock_1aaf25d203f1455c8c7010a6681de52dc5" kindref="member">steady_clock::time_point</ref> &gt; &gt;</type>
@@ -35,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="66" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="66" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="92" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1aa052424faaea499d4134cf91a049d8e8" prot="private" static="no" mutable="yes">
         <type><ref refid="classshared__mutex" kindref="compound">shared_mutex</ref></type>
@@ -50,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="67" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="67" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="93" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="93" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1ad1d637c5629c574e5436949bfbeaf90e" prot="private" static="no" mutable="no">
         <type><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref></type>
@@ -66,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="68" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="68" bodyend="68"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="94" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="94" bodyend="94"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1a8d4ac78462aaba21b650d0eb3227f7f6" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -82,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="69" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="69" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="95" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1ac09761177f39cbfb2d686889c3039e3e" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -98,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="70" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="70" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="97" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1a894b059679777b4b6e1fe211c32e7245" prot="private" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
@@ -114,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="71" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="71" bodyend="71"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="98" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="98" bodyend="98"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1af52771a4616843edf7c58d45cacb60bb" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -130,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="72" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="72" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="99" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1aa45984d89df591f3f7f3bff0dc249946" prot="private" static="no" mutable="no">
         <type><ref refid="classudp__socket" kindref="compound">udp_socket</ref></type>
@@ -145,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="74" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="74" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="101" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1ad6e2381c9b3775a136a879a7b215190d" prot="private" static="no" mutable="no">
         <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref>, pending_entry &gt;</type>
@@ -160,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="75" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="75" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="102" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1aa531b95ac0323c19dc9b02f8b47924ad" prot="private" static="no" mutable="yes">
         <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
@@ -175,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="76" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="76" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="103" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1af8cf06c502543c4978b276ef7d6747e7" prot="private" static="no" mutable="yes">
         <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
@@ -190,22 +191,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="77" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="77" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="104" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="104" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classdns__client_1af94a7acfc822b7d9cb4f335b963a7110" prot="private" static="no" mutable="no">
-        <type><ref refid="classthread__pool" kindref="compound">thread_pool</ref></type>
-        <definition>thread_pool dns_client::io_pool_</definition>
+      <memberdef kind="variable" id="classdns__client_1aa4cba8a4bd088d2d3ce636f7d5ef073b" prot="private" static="no" mutable="no">
+        <type><ref refid="classio__context" kindref="compound">io_context</ref> *</type>
+        <definition>io_context* dns_client::ctx_</definition>
         <argsstring></argsstring>
-        <name>io_pool_</name>
-        <qualifiedname>dns_client::io_pool_</qualifiedname>
+        <name>ctx_</name>
+        <qualifiedname>dns_client::ctx_</qualifiedname>
+        <initializer>{nullptr}</initializer>
         <briefdescription>
-<para>I/O线程池 </para>
+<para>异步 I/O 执行上下文 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="78" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="78" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="105" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="105" bodyend="105"/>
       </memberdef>
       <memberdef kind="variable" id="classdns__client_1a2eaca1da7811bc1215dc5bfd96867c60" prot="private" static="no" mutable="no">
         <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
@@ -221,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="82" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="82" bodyend="82"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="106" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="106" bodyend="106"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -237,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="85" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="109" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a58c2f427086698945633ec2fb8e29f84" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -251,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="86" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="110" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a7016a05a5b650900afa01a54bf31afbc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -265,21 +267,93 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="87" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="111" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classdns__client_1a7caadf6e0f7c27132f5ebf0c04990ad9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classdns__client_1a86f5ee03f21d21f9674501c176fb00c4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void dns_client::io_receive_loop</definition>
+        <definition>void dns_client::register_shared_receive</definition>
         <argsstring>()</argsstring>
-        <name>io_receive_loop</name>
-        <qualifiedname>dns_client::io_receive_loop</qualifiedname>
+        <name>register_shared_receive</name>
+        <qualifiedname>dns_client::register_shared_receive</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="88" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="112" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdns__client_1a34a1e5065d24746e711f62d70b386305" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dns_client::on_udp_readable</definition>
+        <argsstring>(error_code ec)</argsstring>
+        <name>on_udp_readable</name>
+        <qualifiedname>dns_client::on_udp_readable</qualifiedname>
+        <param>
+          <type>error_code</type>
+          <declname>ec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="113" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdns__client_1ac0d2b188e5d362f5cebdaf273e856555" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dns_client::process_udp_receive</definition>
+        <argsstring>()</argsstring>
+        <name>process_udp_receive</name>
+        <qualifiedname>dns_client::process_udp_receive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="114" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdns__client_1afd27ca28cd290e00c68df4faeb61d326" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dns_client::dispatch_to_op</definition>
+        <argsstring>(uint16_t txid, byte_vector response)</argsstring>
+        <name>dispatch_to_op</name>
+        <qualifiedname>dns_client::dispatch_to_op</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+          <declname>txid</declname>
+        </param>
+        <param>
+          <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="115" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdns__client_1a89a8258c9517b23a4e54c2c1caac0c61" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dns_client::unregister_query</definition>
+        <argsstring>(uint16_t txid)</argsstring>
+        <name>unregister_query</name>
+        <qualifiedname>dns_client::unregister_query</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+          <declname>txid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="116" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a7ddd579586a8ac02a428f8eacf33d7dc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -297,7 +371,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="90" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="118" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a5ed0a2a0ee4a3ab0245545b85e3d8537" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
@@ -315,7 +389,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="91" column="17"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="119" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a956e30ef214fa779fc117e6e5bac23ce" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="structdns__query__result" kindref="compound">dns_query_result</ref> &gt;</type>
@@ -333,7 +407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="93" column="14"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="121" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1abe4da0b069be27c9622ce9a255060a57" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -355,14 +429,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="94" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="122" column="10"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classdns__client_1a8c20c9dde44af13993769f4422981684" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classdns__client_1aa6e8e29444e46be3bbea3b541b6cbff7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>dns_client::dns_client</definition>
-        <argsstring>()</argsstring>
+        <argsstring>()=default</argsstring>
         <name>dns_client</name>
         <qualifiedname>dns_client::dns_client</qualifiedname>
         <briefdescription>
@@ -373,20 +447,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="102" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="102" bodyend="103"/>
-        <references refid="classdns__client_1a8c20c9dde44af13993769f4422981684" compoundref="dns__client_8hpp" startline="102" endline="103">dns_client</references>
-        <referencedby refid="classdns__client_1a8c20c9dde44af13993769f4422981684" compoundref="dns__client_8hpp" startline="102" endline="103">dns_client</referencedby>
-        <referencedby refid="classdns__client_1a370b7017afd3cb7057169a0a57ec055b">dns_client</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="130" column="5"/>
+        <referencedby refid="classdns__client_1a8aa4b707d08846a888fba0dbd43d3424">dns_client</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classdns__client_1a370b7017afd3cb7057169a0a57ec055b" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classdns__client_1a8aa4b707d08846a888fba0dbd43d3424" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>dns_client::dns_client</definition>
-        <argsstring>(config cfg, bool use_tcp=false)</argsstring>
+        <argsstring>(config cfg, io_context &amp;ctx, bool use_tcp=false)</argsstring>
         <name>dns_client</name>
         <qualifiedname>dns_client::dns_client</qualifiedname>
         <param>
           <type><ref refid="structdns__client_1_1config" kindref="compound">config</ref></type>
           <declname>cfg</declname>
+        </param>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
         </param>
         <param>
           <type>bool</type>
@@ -403,6 +479,14 @@
 </parameternamelist>
 <parameterdescription>
 <para>客户端配置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -427,8 +511,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="111" column="14"/>
-        <references refid="classdns__client_1a8c20c9dde44af13993769f4422981684" compoundref="dns__client_8hpp" startline="102" endline="103">dns_client</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="139" column="14"/>
+        <references refid="classdns__client_1aa6e8e29444e46be3bbea3b541b6cbff7">dns_client</references>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a59ac4e421fccc7050b83995a0869fce4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -442,7 +526,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="113" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="141" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a4d8791290564cbb4d6a5e845735157c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -459,7 +543,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="115" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="143" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a9b823ec3ca31d0b61cee834a2df41f20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classdns__client" kindref="compound">dns_client</ref> &amp;</type>
@@ -476,7 +560,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="116" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="144" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a7f18ad9f959c882b4c9c05c970a8e197" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -493,7 +577,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="117" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="145" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a023f0ab6457ed1be750b80145dbb53d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classdns__client" kindref="compound">dns_client</ref> &amp;</type>
@@ -510,7 +594,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="118" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="146" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a537280a1846c09630af1c534a83a2ce2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -539,7 +623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="124" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="124" bodyend="124"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="152" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="152" bodyend="152"/>
         <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a5f1384cf1bb9a17c6c1ed57592785513" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -569,7 +653,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="130" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="130" bodyend="130"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="158" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="158" bodyend="158"/>
         <references refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" compoundref="condition__variable_8hpp" startline="35">timeout</references>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a8798882626c3a891f6d93ff69b5efb3e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -599,7 +683,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="136" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="136" bodyend="136"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="164" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="164" bodyend="164"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1af0b1c211296f65301e8ae6b5caca05e2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -628,7 +712,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="142" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="142" bodyend="142"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="170" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="170" bodyend="170"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a223261533df5ad7d30d609db1a205cc5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -657,7 +741,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="148" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="148" bodyend="148"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="176" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="176" bodyend="176"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a4ddc884584c0f30de8a7bea7ec4cefec" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -686,7 +770,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="154" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="154" bodyend="154"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="182" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="182" bodyend="182"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1aca121d56b87e302c7bca3e736000293a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -715,7 +799,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="160" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="160" bodyend="160"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="188" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="188" bodyend="188"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a6ebe6d67d0a69e3b60facc24d41ae968" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -730,7 +814,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="165" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="165" bodyend="165"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="193" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="193" bodyend="193"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1ae8f3ba97e2a5c2a3260f8eea9a174525" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structdns__query__result" kindref="compound">dns_query_result</ref></type>
@@ -796,9 +880,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="175" column="22"/>
-        <references refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" compoundref="dns__message_8hpp" startline="293">dns_record::A</references>
-        <references refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" compoundref="dns__message_8hpp" startline="191">INTERNET</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="203" column="22"/>
+        <references refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" compoundref="dns__message_8hpp" startline="294">dns_record::A</references>
+        <references refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" compoundref="dns__message_8hpp" startline="192">INTERNET</references>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a12c1a550173e9a600c4ecaa27ef98d8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classfuture" kindref="compound">future</ref>&lt; <ref refid="structdns__query__result" kindref="compound">dns_query_result</ref> &gt;</type>
@@ -821,7 +905,7 @@
           <defval><ref refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" kindref="member">dns_class::INTERNET</ref></defval>
         </param>
         <briefdescription>
-<para>异步DNS查询 </para>
+<para>异步DNS查询（遗留 API——返回 future） </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -855,9 +939,409 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="185" column="12"/>
-        <references refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" compoundref="dns__message_8hpp" startline="293">dns_record::A</references>
-        <references refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" compoundref="dns__message_8hpp" startline="191">INTERNET</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="213" column="12"/>
+        <references refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" compoundref="dns__message_8hpp" startline="294">dns_record::A</references>
+        <references refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" compoundref="dns__message_8hpp" startline="192">INTERNET</references>
+      </memberdef>
+      <memberdef kind="function" id="classdns__client_1ab570f7754861ea04184a63d13fb9fd51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, function&lt; void(error_code, dns_query_result)&gt; handler)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="structdns__query__result" kindref="compound">dns_query_result</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——回调完成 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, dns_query_result) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="223" column="10"/>
+        <referencedby refid="classdns__client_1a07a3b7a688402f2407969172af8d6c80" compoundref="dns__client_8hpp" startline="247" endline="249">async_query</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdns__client_1aaacf77241c9096f915b997ee5a53c12e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, cancellation_slot &amp;slot, function&lt; void(error_code, dns_query_result)&gt; handler)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="structdns__query__result" kindref="compound">dns_query_result</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——回调完成 + 取消槽 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, dns_query_result) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="234" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdns__client_1a07a3b7a688402f2407969172af8d6c80" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Token</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Token &gt;, <ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="structdns__query__result" kindref="compound">dns_query_result</ref>)&gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, Token &amp;&amp;token)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type>Token &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——任意完成令牌 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌类型（use_future / detached / use_awaitable / 任意可调用对象） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="247" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="247" bodyend="249"/>
+        <references refid="classdns__client_1ab570f7754861ea04184a63d13fb9fd51">async_query</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classdns__client_1a49375f4c02c1f7702c90ca8071114f35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, use_future_t)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__future__t" kindref="compound">use_future_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——use_future </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classfuture" kindref="compound">future&lt;dns_query_result&gt;</ref> 异步查询结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="258" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdns__client_1a11168e4296fb4f410ae7a48ebcda814d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, detached_t)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type><ref refid="structdetached__t" kindref="compound">detached_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——detached（即发即忘） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="266" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdns__client_1aa13be3e169b8c20441a72683ae44b88d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, use_awaitable_t)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__awaitable__t" kindref="compound">use_awaitable_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——use_awaitable </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classawaitable" kindref="compound">awaitable&lt;dns_query_result&gt;</ref> 可协程等待的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="276" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1ab1ffb7132c5521d8fc2d63325a3556a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
@@ -888,7 +1372,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="193" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="284" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a0aec8dde61805ee2efcf1d7662dc7bd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
@@ -919,7 +1403,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="200" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="291" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1ad849698d1c498c88ae034fff46776f75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
@@ -950,7 +1434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="207" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="298" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1afb94d5c9b5e963359d20a6dfb3ede162" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
@@ -981,7 +1465,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="214" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="305" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a81f5256f98dc39727b4d55a7dbb92e42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
@@ -1012,7 +1496,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="221" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="312" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a31a048f9c5f6f3720bc7f34765dbea57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structdns__srv__record" kindref="compound">dns_srv_record</ref> &gt;</type>
@@ -1043,7 +1527,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="228" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="319" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a6e27fcc650a0ddf7a5cdb270bc8dc5df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="structdns__soa__record" kindref="compound">dns_soa_record</ref> &gt;</type>
@@ -1074,7 +1558,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="235" column="14"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="326" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a3c24ec3e33330b5d4a6f33a8867ba08f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
@@ -1114,7 +1598,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="246" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="337" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a8916c88780f4fff4097d783d17f428a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structdns__query__result" kindref="compound">dns_query_result</ref> &gt;</type>
@@ -1158,8 +1642,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="256" column="12"/>
-        <references refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" compoundref="dns__message_8hpp" startline="293">dns_record::A</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="347" column="12"/>
+        <references refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" compoundref="dns__message_8hpp" startline="294">dns_record::A</references>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -1270,10 +1754,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="269" column="24"/>
-        <references refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" compoundref="dns__message_8hpp" startline="293">dns_record::A</references>
-        <references refid="namespaceedns_1af389633c2659ce56089ac80bc1581fa9" compoundref="dns__message_8hpp" startline="390">edns::DEFAULT_UDP_PAYLOAD</references>
-        <references refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" compoundref="dns__message_8hpp" startline="191">INTERNET</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="360" column="24"/>
+        <references refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" compoundref="dns__message_8hpp" startline="294">dns_record::A</references>
+        <references refid="namespaceedns_1af389633c2659ce56089ac80bc1581fa9" compoundref="dns__message_8hpp" startline="391">edns::DEFAULT_UDP_PAYLOAD</references>
+        <references refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" compoundref="dns__message_8hpp" startline="192">INTERNET</references>
       </memberdef>
       <memberdef kind="function" id="classdns__client_1a0233cd26c8972d7f507cd9cbd1ce0704" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structdns__query__result" kindref="compound">dns_query_result</ref></type>
@@ -1326,7 +1810,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="280" column="29"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="371" column="29"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1344,8 +1828,14 @@
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="46" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="46" bodyend="281"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="46" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="46" bodyend="372"/>
     <listofallmembers>
+      <member refid="classdns__client_1ab570f7754861ea04184a63d13fb9fd51" prot="public" virt="non-virtual"><scope>dns_client</scope><name>async_query</name></member>
+      <member refid="classdns__client_1aaacf77241c9096f915b997ee5a53c12e" prot="public" virt="non-virtual"><scope>dns_client</scope><name>async_query</name></member>
+      <member refid="classdns__client_1a07a3b7a688402f2407969172af8d6c80" prot="public" virt="non-virtual"><scope>dns_client</scope><name>async_query</name></member>
+      <member refid="classdns__client_1a49375f4c02c1f7702c90ca8071114f35" prot="public" virt="non-virtual"><scope>dns_client</scope><name>async_query</name></member>
+      <member refid="classdns__client_1a11168e4296fb4f410ae7a48ebcda814d" prot="public" virt="non-virtual"><scope>dns_client</scope><name>async_query</name></member>
+      <member refid="classdns__client_1aa13be3e169b8c20441a72683ae44b88d" prot="public" virt="non-virtual"><scope>dns_client</scope><name>async_query</name></member>
       <member refid="classdns__client_1a8916c88780f4fff4097d783d17f428a8" prot="public" virt="non-virtual"><scope>dns_client</scope><name>batch_query</name></member>
       <member refid="classdns__client_1a71fa0565d1def9a1300d9285c5351a27" prot="public" virt="non-virtual"><scope>dns_client</scope><name>build_query</name></member>
       <member refid="classdns__client_1a35f80e7757226a8f3003e824e3364d44" prot="private" virt="non-virtual"><scope>dns_client</scope><name>cache_</name></member>
@@ -1354,24 +1844,27 @@
       <member refid="classdns__client_1a956e30ef214fa779fc117e6e5bac23ce" prot="private" virt="non-virtual"><scope>dns_client</scope><name>check_cache</name></member>
       <member refid="classdns__client_1a6ebe6d67d0a69e3b60facc24d41ae968" prot="public" virt="non-virtual"><scope>dns_client</scope><name>clear_cache</name></member>
       <member refid="classdns__client_1aefede57e86193c8e07a843b5383eebd7" prot="private" virt="non-virtual"><scope>dns_client</scope><name>config_</name></member>
-      <member refid="classdns__client_1a8c20c9dde44af13993769f4422981684" prot="public" virt="non-virtual"><scope>dns_client</scope><name>dns_client</name></member>
-      <member refid="classdns__client_1a370b7017afd3cb7057169a0a57ec055b" prot="public" virt="non-virtual"><scope>dns_client</scope><name>dns_client</name></member>
+      <member refid="classdns__client_1aa4cba8a4bd088d2d3ce636f7d5ef073b" prot="private" virt="non-virtual"><scope>dns_client</scope><name>ctx_</name></member>
+      <member refid="classdns__client_1afd27ca28cd290e00c68df4faeb61d326" prot="private" virt="non-virtual"><scope>dns_client</scope><name>dispatch_to_op</name></member>
+      <member refid="classdns__client_1aa6e8e29444e46be3bbea3b541b6cbff7" prot="public" virt="non-virtual"><scope>dns_client</scope><name>dns_client</name></member>
+      <member refid="classdns__client_1a8aa4b707d08846a888fba0dbd43d3424" prot="public" virt="non-virtual"><scope>dns_client</scope><name>dns_client</name></member>
       <member refid="classdns__client_1a4d8791290564cbb4d6a5e845735157c0" prot="public" virt="non-virtual"><scope>dns_client</scope><name>dns_client</name></member>
       <member refid="classdns__client_1a7f18ad9f959c882b4c9c05c970a8e197" prot="public" virt="non-virtual"><scope>dns_client</scope><name>dns_client</name></member>
       <member refid="classdns__client_1af52771a4616843edf7c58d45cacb60bb" prot="private" virt="non-virtual"><scope>dns_client</scope><name>dnssec_ok_</name></member>
       <member refid="classdns__client_1a894b059679777b4b6e1fe211c32e7245" prot="private" virt="non-virtual"><scope>dns_client</scope><name>edns_udp_payload_</name></member>
       <member refid="classdns__client_1a784d51070a26c90a1dc9b7d00bb8747d" prot="private" virt="non-virtual"><scope>dns_client</scope><name>ensure_io_started</name></member>
-      <member refid="classdns__client_1af94a7acfc822b7d9cb4f335b963a7110" prot="private" virt="non-virtual"><scope>dns_client</scope><name>io_pool_</name></member>
-      <member refid="classdns__client_1a7caadf6e0f7c27132f5ebf0c04990ad9" prot="private" virt="non-virtual"><scope>dns_client</scope><name>io_receive_loop</name></member>
       <member refid="classdns__client_1a2eaca1da7811bc1215dc5bfd96867c60" prot="private" virt="non-virtual"><scope>dns_client</scope><name>io_running_</name></member>
+      <member refid="classdns__client_1a34a1e5065d24746e711f62d70b386305" prot="private" virt="non-virtual"><scope>dns_client</scope><name>on_udp_readable</name></member>
       <member refid="classdns__client_1a9b823ec3ca31d0b61cee834a2df41f20" prot="public" virt="non-virtual"><scope>dns_client</scope><name>operator=</name></member>
       <member refid="classdns__client_1a023f0ab6457ed1be750b80145dbb53d9" prot="public" virt="non-virtual"><scope>dns_client</scope><name>operator=</name></member>
       <member refid="classdns__client_1a0233cd26c8972d7f507cd9cbd1ce0704" prot="public" virt="non-virtual"><scope>dns_client</scope><name>parse_response</name></member>
       <member refid="classdns__client_1aa531b95ac0323c19dc9b02f8b47924ad" prot="private" virt="non-virtual"><scope>dns_client</scope><name>pending_mutex_</name></member>
       <member refid="classdns__client_1ad6e2381c9b3775a136a879a7b215190d" prot="private" virt="non-virtual"><scope>dns_client</scope><name>pending_queries_</name></member>
+      <member refid="classdns__client_1ac0d2b188e5d362f5cebdaf273e856555" prot="private" virt="non-virtual"><scope>dns_client</scope><name>process_udp_receive</name></member>
       <member refid="classdns__client_1ae8f3ba97e2a5c2a3260f8eea9a174525" prot="public" virt="non-virtual"><scope>dns_client</scope><name>query</name></member>
       <member refid="classdns__client_1a12c1a550173e9a600c4ecaa27ef98d8e" prot="public" virt="non-virtual"><scope>dns_client</scope><name>query_async</name></member>
       <member refid="classdns__client_1ac09761177f39cbfb2d686889c3039e3e" prot="private" virt="non-virtual"><scope>dns_client</scope><name>recursion_desired_</name></member>
+      <member refid="classdns__client_1a86f5ee03f21d21f9674501c176fb00c4" prot="private" virt="non-virtual"><scope>dns_client</scope><name>register_shared_receive</name></member>
       <member refid="classdns__client_1ab1ffb7132c5521d8fc2d63325a3556a2" prot="public" virt="non-virtual"><scope>dns_client</scope><name>resolve_a</name></member>
       <member refid="classdns__client_1a0aec8dde61805ee2efcf1d7662dc7bd9" prot="public" virt="non-virtual"><scope>dns_client</scope><name>resolve_aaaa</name></member>
       <member refid="classdns__client_1ad849698d1c498c88ae034fff46776f75" prot="public" virt="non-virtual"><scope>dns_client</scope><name>resolve_cname</name></member>
@@ -1393,6 +1886,7 @@
       <member refid="classdns__client_1aa45984d89df591f3f7f3bff0dc249946" prot="private" virt="non-virtual"><scope>dns_client</scope><name>shared_socket_</name></member>
       <member refid="classdns__client_1a58c2f427086698945633ec2fb8e29f84" prot="private" virt="non-virtual"><scope>dns_client</scope><name>start_io</name></member>
       <member refid="classdns__client_1a7016a05a5b650900afa01a54bf31afbc" prot="private" virt="non-virtual"><scope>dns_client</scope><name>stop_io</name></member>
+      <member refid="classdns__client_1a89a8258c9517b23a4e54c2c1caac0c61" prot="private" virt="non-virtual"><scope>dns_client</scope><name>unregister_query</name></member>
       <member refid="classdns__client_1abe4da0b069be27c9622ce9a255060a57" prot="private" virt="non-virtual"><scope>dns_client</scope><name>update_cache</name></member>
       <member refid="classdns__client_1a8d4ac78462aaba21b650d0eb3227f7f6" prot="private" virt="non-virtual"><scope>dns_client</scope><name>use_tcp_</name></member>
       <member refid="classdns__client_1a59ac4e421fccc7050b83995a0869fce4" prot="public" virt="non-virtual"><scope>dns_client</scope><name>~dns_client</name></member>

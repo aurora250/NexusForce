@@ -19,6 +19,7 @@ var format_8hpp =
       [ "CHAR", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca027acd3aa6b1dd7f26119d3cf0f9a063", null ]
     ] ],
     [ "format", "group___format.html#ga41c686a01b3d4a7f5c79d2b9c60266bd", null ],
+    [ "format", "group___format.html#ga2ec36fbed0da2effda7fa9c9314ce093", null ],
     [ "format", "group___format.html#gac0f4499364ec899fcdfaae1f7acbda76", null ],
     [ "format_named", "group___format.html#ga401d7fa93048e25a6f79fc746b2a09fe", null ]
 ];

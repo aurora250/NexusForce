@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['插件系统_20plugin_0',['🔌 插件系统 (Plugin)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md33',1,'']]]
+  ['扩展特性_0',['GNU 扩展特性',['../group___command_line.html#gnu_extensions',1,'']]]
 ];

@@ -8,8 +8,9 @@ var searchData=
   ['unordered_5fmultiset_2ehpp_5',['unordered_multiset.hpp',['../unordered__multiset_8hpp.html',1,'']]],
   ['unordered_5fset_2ehpp_6',['unordered_set.hpp',['../unordered__set_8hpp.html',1,'']]],
   ['url_2ehpp_7',['url.hpp',['../url_8hpp.html',1,'']]],
-  ['utf_2ehpp_8',['utf.hpp',['../utf_8hpp.html',1,'']]],
-  ['utf_5fiterator_2ehpp_9',['utf_iterator.hpp',['../utf__iterator_8hpp.html',1,'']]],
-  ['utility_2fany_2ehpp_10',['any.hpp',['../utility_2any_8hpp.html',1,'']]],
-  ['uuid_2ehpp_11',['uuid.hpp',['../uuid_8hpp.html',1,'']]]
+  ['use_5fawaitable_2ehpp_8',['use_awaitable.hpp',['../use__awaitable_8hpp.html',1,'']]],
+  ['utf_2ehpp_9',['utf.hpp',['../utf_8hpp.html',1,'']]],
+  ['utf_5fiterator_2ehpp_10',['utf_iterator.hpp',['../utf__iterator_8hpp.html',1,'']]],
+  ['utility_2fany_2ehpp_11',['any.hpp',['../utility_2any_8hpp.html',1,'']]],
+  ['uuid_2ehpp_12',['uuid.hpp',['../uuid_8hpp.html',1,'']]]
 ];

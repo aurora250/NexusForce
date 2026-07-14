@@ -17,7 +17,7 @@ var group___web_socket =
       [ "remove_session", "classwebsocket__server.html#ab2e671190c316c10a67c9811d5db759e", null ],
       [ "route", "classwebsocket__server.html#a1ef3d7d2914ea79ef7826d1c7bb2769b", null ],
       [ "session_count", "classwebsocket__server.html#a324f35e43f1597de143ce170512841f4", null ],
-      [ "set_event_loop", "classwebsocket__server.html#a8d7a63ae0103ab0c48c987638f9f276f", null ]
+      [ "set_io_context", "classwebsocket__server.html#a86174e8e2894c87d3fa216b15c6e1cee", null ]
     ] ],
     [ "websocket_session", "classwebsocket__session.html", [
       [ "close_handler", "classwebsocket__session.html#a3046e7a8e4c7d218190d5dd0267f3dd8", null ],
@@ -34,7 +34,7 @@ var group___web_socket =
       [ "set_close_handler", "classwebsocket__session.html#af77e313e481b77c5a125ef3c9819dcd6", null ],
       [ "set_deflate_config", "classwebsocket__session.html#a578830e009dcb82f49a1dedd6909ea79", null ],
       [ "set_error_handler", "classwebsocket__session.html#a40df249d0e94b96b4a736c8ff752f5ea", null ],
-      [ "set_event_loop", "classwebsocket__session.html#ab4118af153f998bb2ea260b03542cee7", null ],
+      [ "set_io_context", "classwebsocket__session.html#a3e75cc22aefd0261c07b0a6da9242028", null ],
       [ "set_message_handler", "classwebsocket__session.html#aaebbcc5d2e0a943226e6d53d95066cca", null ],
       [ "socket", "classwebsocket__session.html#a8c5e17fbe27db7ab514b45e5af7364df", null ],
       [ "socket", "classwebsocket__session.html#ab75d9beacbd176cff4c40fe06af47e19", null ],

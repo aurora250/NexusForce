@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___async_compose" kind="group">
+    <compoundname>AsyncCompose</compoundname>
+    <title>组合操作</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___async_compose_1gaa3a471689038b117d43614e9ac8f5618" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void async_read</definition>
+        <argsstring>(async_stream &amp;stream, io_context &amp;ctx, vector&lt; char &gt; &amp;buffer, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_read</name>
+        <param>
+          <type><ref refid="classasync__stream" kindref="compound">async_stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classvector" kindref="compound">vector</ref>&lt; char &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步读取指定字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stream</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步流 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区（大小决定读取量） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t total_read)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+持续调用 <ref refid="classasync__stream_1a8ae4d0e9a1e4196adefdab847faaf6c8" kindref="member">async_stream::async_read</ref> 直到填满 buffer 或连接关闭。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_compose.hpp" line="32" column="6" declfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_compose.hpp" declline="32" declcolumn="6"/>
+        <referencedby refid="classasync__stream_1a31296aee86f5591a179850836e7b9fca" compoundref="async__stream_8hpp" startline="204" endline="212">async_stream::async_read</referencedby>
+        <referencedby refid="classasync__stream_1a4dec67d9232c626b29da1bc831757fd5" compoundref="async__stream_8hpp" startline="108" endline="110">async_stream::async_read</referencedby>
+        <referencedby refid="classasync__stream_1a0051d844a8e4a2a79429ba644bec9c32" compoundref="async__stream_8hpp" startline="87" endline="89">async_stream::async_read</referencedby>
+        <referencedby refid="classasync__stream_1a0a640b341717691f22fae0acf674d235" compoundref="async__stream_8hpp" startline="119" endline="123">async_stream::async_read</referencedby>
+        <referencedby refid="classasync__stream_1abe6469f417ff23bec1b439151c870998" compoundref="async__stream_8hpp" startline="97" endline="101">async_stream::async_read</referencedby>
+        <referencedby refid="classtcp__socket_1ae3a835a3724020cececf29d27911d8dc" compoundref="tcp__socket_8hpp" startline="261" endline="264">tcp_socket::async_receive</referencedby>
+        <referencedby refid="classtcp__socket_1aa0d3a078a1d676cdf45fd8eb897d9689" compoundref="tcp__socket_8hpp" startline="250" endline="252">tcp_socket::async_receive</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___async_compose_1ga180357bbe23447c41b8492b51a1be1fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void async_write</definition>
+        <argsstring>(async_stream &amp;stream, io_context &amp;ctx, const void *data, size_t size, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_write</name>
+        <param>
+          <type><ref refid="classasync__stream" kindref="compound">async_stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步写入指定字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stream</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步流 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据大小 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t total_written)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+持续调用 <ref refid="classasync__stream_1abb3e320776014dd8e830433cc903e454" kindref="member">async_stream::async_write</ref> 直到所有数据发送完毕。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_compose.hpp" line="45" column="6" declfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_compose.hpp" declline="45" declcolumn="6"/>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <referencedby refid="classtcp__socket_1af828d3d5c748999903e5b1e06afbe5ef" compoundref="tcp__socket_8hpp" startline="283" endline="286">tcp_socket::async_send</referencedby>
+        <referencedby refid="classtcp__socket_1a7cad5bedc80d9909d8cc657ad04683d4" compoundref="tcp__socket_8hpp" startline="272" endline="274">tcp_socket::async_send</referencedby>
+        <referencedby refid="classasync__stream_1aa6b1889815d02c3e8483252a45139b08" compoundref="async__stream_8hpp" startline="157" endline="159">async_stream::async_write</referencedby>
+        <referencedby refid="classasync__stream_1af0350479bc553eb7e76dd103d0238859" compoundref="async__stream_8hpp" startline="136" endline="138">async_stream::async_write</referencedby>
+        <referencedby refid="classasync__stream_1a929ddcabcc0650dd4e6177d3da04e3e1" compoundref="async__stream_8hpp" startline="168" endline="172">async_stream::async_write</referencedby>
+        <referencedby refid="classasync__stream_1a6325eb7c21abf48337f0d0e0fc389834" compoundref="async__stream_8hpp" startline="146" endline="150">async_stream::async_write</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异步组合操作 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

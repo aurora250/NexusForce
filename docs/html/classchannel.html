@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: channel&lt; T &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classchannel.html','','classchannel-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">channel&lt; T &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___channel.html">消息通道</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>有限容量的 CSP 消息通道  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="channel_8hpp_source.html">channel.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:adb5b7f3bb996bc69a5ae2e58d4ca6e70" id="r_adb5b7f3bb996bc69a5ae2e58d4ca6e70"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#adb5b7f3bb996bc69a5ae2e58d4ca6e70">channel</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> capacity=<a class="el" href="#a8e48ce46104b610852dea60d6e3e908e">capacity_max</a>)</td></tr>
+<tr class="memdesc:adb5b7f3bb996bc69a5ae2e58d4ca6e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a463a8a394d62add8f038774283ed61b8" id="r_a463a8a394d62add8f038774283ed61b8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a463a8a394d62add8f038774283ed61b8">try_write</a> (T value)</td></tr>
+<tr class="memdesc:a463a8a394d62add8f038774283ed61b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试发送消息（非阻塞）  <br /></td></tr>
+<tr class="memitem:a57978eeb34d19f1f475eb6aecabac435" id="r_a57978eeb34d19f1f475eb6aecabac435"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a57978eeb34d19f1f475eb6aecabac435">write</a> (T value)</td></tr>
+<tr class="memdesc:a57978eeb34d19f1f475eb6aecabac435"><td class="mdescLeft">&#160;</td><td class="mdescRight">发送消息（阻塞直到空间可用或通道关闭）  <br /></td></tr>
+<tr class="memitem:abf50e25fc91a073500d958af7c906cbe" id="r_abf50e25fc91a073500d958af7c906cbe"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abf50e25fc91a073500d958af7c906cbe">try_read</a> (T &amp;out)</td></tr>
+<tr class="memdesc:abf50e25fc91a073500d958af7c906cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试读取消息（非阻塞）  <br /></td></tr>
+<tr class="memitem:a6c20eb8b50e7d4d6445b06483e9f6b83" id="r_a6c20eb8b50e7d4d6445b06483e9f6b83"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6c20eb8b50e7d4d6445b06483e9f6b83">read</a> (T &amp;out)</td></tr>
+<tr class="memdesc:a6c20eb8b50e7d4d6445b06483e9f6b83"><td class="mdescLeft">&#160;</td><td class="mdescRight">读取消息（阻塞直到有数据或通道关闭）  <br /></td></tr>
+<tr class="memitem:a3edf2203b498691a931b92546d15cb05" id="r_a3edf2203b498691a931b92546d15cb05"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3edf2203b498691a931b92546d15cb05">close</a> ()</td></tr>
+<tr class="memdesc:a3edf2203b498691a931b92546d15cb05"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭通道  <br /></td></tr>
+<tr class="memitem:a5dd6e65bc0b3a2c0c2ee8ec43df7555a" id="r_a5dd6e65bc0b3a2c0c2ee8ec43df7555a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5dd6e65bc0b3a2c0c2ee8ec43df7555a">is_closed</a> () const noexcept</td></tr>
+<tr class="memdesc:a5dd6e65bc0b3a2c0c2ee8ec43df7555a"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查通道是否已关闭  <br /></td></tr>
+<tr class="memitem:afd47c417028666c9ee1d42e38db3e6c0" id="r_afd47c417028666c9ee1d42e38db3e6c0"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#afd47c417028666c9ee1d42e38db3e6c0">size</a> () const noexcept</td></tr>
+<tr class="memdesc:afd47c417028666c9ee1d42e38db3e6c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前缓冲消息数量  <br /></td></tr>
+<tr class="memitem:ac79d74439bd8d77b1ff4c41bd03bcb9d" id="r_ac79d74439bd8d77b1ff4c41bd03bcb9d"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac79d74439bd8d77b1ff4c41bd03bcb9d">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:ac79d74439bd8d77b1ff4c41bd03bcb9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查缓冲区是否为空  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+静态 Public 属性</h2></td></tr>
+<tr class="memitem:a8e48ce46104b610852dea60d6e3e908e" id="r_a8e48ce46104b610852dea60d6e3e908e"><td class="memItemLeft"><a id="a8e48ce46104b610852dea60d6e3e908e" name="a8e48ce46104b610852dea60d6e3e908e"></a>
+static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>capacity_max</b> = <a class="el" href="classnumeric__traits.html">numeric_traits</a>&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&gt;<a class="el" href="group___compare_algorithms.html#ga01c48c11cc5d3222cb2e3adf0f843f3e">::max</a>()</td></tr>
+<tr class="memdesc:a8e48ce46104b610852dea60d6e3e908e"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大容量常量 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+class channel&lt; T &gt;</div><p>有限容量的 CSP 消息通道 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>消息类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>支持多生产者/多消费者的线程安全消息通道。 容量为 0 表示无缓冲（同步握手），capacity_max 表示无上限。</p>
+<dl class="section note"><dt>注解</dt><dd>容量耗尽时写入阻塞，无数据时读取阻塞。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="channel_8hpp_source.html">channel.hpp</a> 第 <a class="el" href="channel_8hpp_source.html#l00034">34</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="adb5b7f3bb996bc69a5ae2e58d4ca6e70" name="adb5b7f3bb996bc69a5ae2e58d4ca6e70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb5b7f3bb996bc69a5ae2e58d4ca6e70">&#9670;&#160;</a></span>channel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classchannel.html">channel</a>&lt; T &gt;::channel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>capacity</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a8e48ce46104b610852dea60d6e3e908e">capacity_max</a></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">capacity</td><td>通道容量，0 表示无缓冲，capacity_max 表示无上限 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structvalue__exception.html" title="变量处理异常">value_exception</a></td><td><a class="el" href="#a8e48ce46104b610852dea60d6e3e908e" title="最大容量常量">capacity_max</a> 容量不合法时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="channel_8hpp_source.html">channel.hpp</a> 第 <a class="el" href="channel_8hpp_source.html#l00048">48</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="channel_8hpp_source.html#l00057">capacity_max</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a3edf2203b498691a931b92546d15cb05" name="a3edf2203b498691a931b92546d15cb05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3edf2203b498691a931b92546d15cb05">&#9670;&#160;</a></span>close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classchannel.html">channel</a>&lt; T &gt;::close </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>关闭通道 </p>
+<p>关闭后不再接受新消息，唤醒所有等待的读写线程。 已缓冲的数据仍可读取。 </p>
+
+<p class="definition">在文件 <a class="el" href="channel_8hpp_source.html">channel.hpp</a> 第 <a class="el" href="channel_8hpp_source.html#l00134">134</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac79d74439bd8d77b1ff4c41bd03bcb9d" name="ac79d74439bd8d77b1ff4c41bd03bcb9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac79d74439bd8d77b1ff4c41bd03bcb9d">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classchannel.html">channel</a>&lt; T &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查缓冲区是否为空 </p>
+<dl class="section return"><dt>返回</dt><dd>为空返回 true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="channel_8hpp_source.html">channel.hpp</a> 第 <a class="el" href="channel_8hpp_source.html#l00162">162</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5dd6e65bc0b3a2c0c2ee8ec43df7555a" name="a5dd6e65bc0b3a2c0c2ee8ec43df7555a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dd6e65bc0b3a2c0c2ee8ec43df7555a">&#9670;&#160;</a></span>is_closed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classchannel.html">channel</a>&lt; T &gt;::is_closed </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查通道是否已关闭 </p>
+<dl class="section return"><dt>返回</dt><dd>已关闭返回 true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="channel_8hpp_source.html">channel.hpp</a> 第 <a class="el" href="channel_8hpp_source.html#l00144">144</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6c20eb8b50e7d4d6445b06483e9f6b83" name="a6c20eb8b50e7d4d6445b06483e9f6b83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c20eb8b50e7d4d6445b06483e9f6b83">&#9670;&#160;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classchannel.html">channel</a>&lt; T &gt;::read </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>out</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>读取消息（阻塞直到有数据或通道关闭） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>输出消息 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>读取成功返回 true，通道关闭且无数据返回 false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="channel_8hpp_source.html">channel.hpp</a> 第 <a class="el" href="channel_8hpp_source.html#l00116">116</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+</div>
+</div>
+<a id="afd47c417028666c9ee1d42e38db3e6c0" name="afd47c417028666c9ee1d42e38db3e6c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd47c417028666c9ee1d42e38db3e6c0">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="classchannel.html">channel</a>&lt; T &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>当前缓冲消息数量 </p>
+<dl class="section return"><dt>返回</dt><dd>消息数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="channel_8hpp_source.html">channel.hpp</a> 第 <a class="el" href="channel_8hpp_source.html#l00153">153</a> 行定义.</p>
+
+</div>
+</div>
+<a id="abf50e25fc91a073500d958af7c906cbe" name="abf50e25fc91a073500d958af7c906cbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf50e25fc91a073500d958af7c906cbe">&#9670;&#160;</a></span>try_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classchannel.html">channel</a>&lt; T &gt;::try_read </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>out</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>尝试读取消息（非阻塞） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>输出消息 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>读取成功返回 true，通道空或关闭且无数据返回 false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="channel_8hpp_source.html">channel.hpp</a> 第 <a class="el" href="channel_8hpp_source.html#l00100">100</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+</div>
+</div>
+<a id="a463a8a394d62add8f038774283ed61b8" name="a463a8a394d62add8f038774283ed61b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a463a8a394d62add8f038774283ed61b8">&#9670;&#160;</a></span>try_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classchannel.html">channel</a>&lt; T &gt;::try_write </td>
+          <td>(</td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>尝试发送消息（非阻塞） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要发送的消息 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>发送成功返回 true，通道已满或已关闭返回 false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="channel_8hpp_source.html">channel.hpp</a> 第 <a class="el" href="channel_8hpp_source.html#l00064">64</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+</div>
+</div>
+<a id="a57978eeb34d19f1f475eb6aecabac435" name="a57978eeb34d19f1f475eb6aecabac435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57978eeb34d19f1f475eb6aecabac435">&#9670;&#160;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classchannel.html">channel</a>&lt; T &gt;::write </td>
+          <td>(</td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>发送消息（阻塞直到空间可用或通道关闭） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要发送的消息 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>发送成功返回 true，通道关闭返回 false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="channel_8hpp_source.html">channel.hpp</a> 第 <a class="el" href="channel_8hpp_source.html#l00082">82</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="channel_8hpp_source.html">channel.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classchannel.html">channel</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

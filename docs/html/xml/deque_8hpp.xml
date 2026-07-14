@@ -9,6 +9,7 @@
     <includes refid="standard__allocator_8hpp" local="yes">NeForce/core/memory/standard_allocator.hpp</includes>
     <includes refid="uninitialized_8hpp" local="yes">NeForce/core/memory/uninitialized.hpp</includes>
     <includes refid="compressed__pair_8hpp" local="yes">NeForce/core/utility/compressed_pair.hpp</includes>
+    <includedby refid="channel_8hpp" local="yes">channel.hpp</includedby>
     <includedby refid="queue_8hpp" local="yes">queue.hpp</includedby>
     <includedby refid="stack_8hpp" local="yes">stack.hpp</includedby>
     <incdepgraph>
@@ -254,17 +255,17 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="5">
+      <node id="2">
+        <label>channel.hpp</label>
+        <link refid="channel_8hpp"/>
+      </node>
+      <node id="6">
         <label>thread_pool.hpp</label>
         <link refid="thread__pool_8hpp"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="7">
         <label>virtual_thread.hpp</label>
         <link refid="virtual__thread_8hpp"/>
       </node>
@@ -273,107 +274,69 @@
         <link refid="deque_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>queue.hpp</label>
-        <link refid="queue_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>queue.hpp</label>
+        <link refid="queue_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>stack.hpp</label>
-        <link refid="stack_8hpp"/>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>json_builder.hpp</label>
-        <link refid="json__builder_8hpp"/>
-        <childnode refid="18" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>toml_builder.hpp</label>
-        <link refid="toml__builder_8hpp"/>
-      </node>
-      <node id="20">
-        <label>yaml_builder.hpp</label>
-        <link refid="yaml__builder_8hpp"/>
-      </node>
-      <node id="18">
-        <label>json_serializer.hpp</label>
-        <link refid="json__serializer_8hpp"/>
-      </node>
-      <node id="3">
-        <label>database_pool.hpp</label>
-        <link refid="database__pool_8hpp"/>
-      </node>
-      <node id="4">
-        <label>logger.hpp</label>
-        <link refid="logger_8hpp"/>
-      </node>
-      <node id="6">
-        <label>dns_client.hpp</label>
-        <link refid="dns__client_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>ftp_client.hpp</label>
-        <link refid="ftp__client_8hpp_source"/>
       </node>
       <node id="10">
-        <label>http_client.hpp</label>
-        <link refid="http__client_8hpp"/>
+        <label>stack.hpp</label>
+        <link refid="stack_8hpp"/>
         <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>json_builder.hpp</label>
+        <link refid="json__builder_8hpp"/>
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="13">
+        <label>toml_builder.hpp</label>
+        <link refid="toml__builder_8hpp"/>
+      </node>
+      <node id="14">
+        <label>yaml_builder.hpp</label>
+        <link refid="yaml__builder_8hpp"/>
+      </node>
+      <node id="12">
+        <label>json_serializer.hpp</label>
+        <link refid="json__serializer_8hpp"/>
+      </node>
+      <node id="4">
+        <label>database_pool.hpp</label>
+        <link refid="database__pool_8hpp"/>
+      </node>
+      <node id="5">
+        <label>logger.hpp</label>
+        <link refid="logger_8hpp"/>
+      </node>
+      <node id="9">
         <label>http_server.hpp</label>
         <link refid="http__server_8hpp"/>
       </node>
-      <node id="11">
-        <label>reverse_proxy.hpp</label>
-        <link refid="reverse__proxy_8hpp"/>
-      </node>
-      <node id="15">
+      <node id="8">
         <label>websocket.hpp</label>
         <link refid="websocket_8hpp"/>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>smtp_socket.hpp</label>
-        <link refid="smtp__socket_8hpp"/>
-      </node>
-      <node id="9">
-        <label>tcp_client.hpp</label>
-        <link refid="tcp__client_8hpp"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>tcp_server.hpp</label>
-        <link refid="tcp__server_8hpp"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -562,7 +525,7 @@
 <codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">map_allocator<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Alloc::template<sp/>rebind&lt;pointer&gt;::other;<sp/></highlight></codeline>
 <codeline lineno="291"><highlight class="normal"></highlight></codeline>
 <codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref><sp/>start_{};<sp/><sp/></highlight></codeline>
-<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref><sp/>finish_{};<sp/></highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">iterator</ref><sp/>finish_{};<sp/></highlight></codeline>
 <codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>压缩存储：分配器<sp/>+<sp/>中控器大小</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/>compressed_pair&lt;allocator_type,<sp/>size_type&gt;<sp/>map_size_pair_{default_construct_tag{},<sp/>0};</highlight></codeline>
 <codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>压缩存储：中控器分配器<sp/>+<sp/>中控器指针</highlight><highlight class="normal"></highlight></codeline>

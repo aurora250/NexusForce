@@ -6,5 +6,6 @@ var structhttp__content =
     [ "content", "structhttp__content.html#a60ec08e6c174009ee270c2d304e278b3", null ],
     [ "operator=", "structhttp__content.html#ac0b6f075b3f047ed029b955d70bcbc0b", null ],
     [ "operator=", "structhttp__content.html#a10fc7658505f1c91c2cada2ddbb8e6f7", null ],
-    [ "to_string", "structhttp__content.html#a3cd336bf80d7d1c008d535bd0c64c066", null ]
+    [ "to_string", "structhttp__content.html#a3cd336bf80d7d1c008d535bd0c64c066", null ],
+    [ "with_charset", "structhttp__content.html#a2877293ad31d699cfe9f2fc7f17e72fe", null ]
 ];

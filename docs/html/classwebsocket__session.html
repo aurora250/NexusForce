@@ -147,8 +147,8 @@ void&#160;</td><td class="memItemRight"><b>stop</b> ()</td></tr>
 <tr class="memdesc:a9d5031322e89b2856de67e77e4d0f656"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取permessage-deflate协商配置  <br /></td></tr>
 <tr class="memitem:a8d0b83258f006a6eb4d815b627be5a89" id="r_a8d0b83258f006a6eb4d815b627be5a89"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a8d0b83258f006a6eb4d815b627be5a89">has_deflate_config</a> () const noexcept</td></tr>
 <tr class="memdesc:a8d0b83258f006a6eb4d815b627be5a89"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否已启用deflate压缩  <br /></td></tr>
-<tr class="memitem:ab4118af153f998bb2ea260b03542cee7" id="r_ab4118af153f998bb2ea260b03542cee7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab4118af153f998bb2ea260b03542cee7">set_event_loop</a> (<a class="el" href="classevent__loop.html">event_loop</a> *loop) noexcept</td></tr>
-<tr class="memdesc:ab4118af153f998bb2ea260b03542cee7"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置事件循环（启用事件驱动模式）  <br /></td></tr>
+<tr class="memitem:a3e75cc22aefd0261c07b0a6da9242028" id="r_a3e75cc22aefd0261c07b0a6da9242028"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3e75cc22aefd0261c07b0a6da9242028">set_io_context</a> (<a class="el" href="classio__context.html">io_context</a> &amp;ctx) noexcept</td></tr>
+<tr class="memdesc:a3e75cc22aefd0261c07b0a6da9242028"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置 io_context（启用事件驱动模式）  <br /></td></tr>
 <tr class="memitem:ab75d9beacbd176cff4c40fe06af47e19" id="r_ab75d9beacbd176cff4c40fe06af47e19"><td class="memItemLeft"><a class="el" href="classtcp__socket.html">tcp_socket</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab75d9beacbd176cff4c40fe06af47e19">socket</a> () noexcept</td></tr>
 <tr class="memdesc:ab75d9beacbd176cff4c40fe06af47e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取底层socket引用  <br /></td></tr>
 <tr class="memitem:a8c5e17fbe27db7ab514b45e5af7364df" id="r_a8c5e17fbe27db7ab514b45e5af7364df"><td class="memItemLeft">const <a class="el" href="classtcp__socket.html">tcp_socket</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8c5e17fbe27db7ab514b45e5af7364df">socket</a> () const noexcept</td></tr>
@@ -185,7 +185,7 @@ void&#160;</td><td class="memItemRight"><b>stop</b> ()</td></tr>
 <div class="line">    <a class="code hl_function" href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a>(<span class="stringliteral">&quot;Closed: &quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(status), <span class="stringliteral">&quot; - &quot;</span>, reason);</div>
 <div class="line">});</div>
 <div class="line">session-&gt;start();</div>
-<div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00699">console.hpp:699</a></div></div>
+<div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00701">console.hpp:701</a></div></div>
 <div class="ttc" id="agroup___shared_pointer_html_gab47fa86d2917e14f57f68dfa9e83495e"><div class="ttname"><a href="group___shared_pointer.html#gab47fa86d2917e14f57f68dfa9e83495e">make_shared</a></div><div class="ttdeci">enable_if_t&lt;!is_unbounded_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, shared_ptr&lt; T &gt; &gt; make_shared(Args &amp;&amp;... args)</div><div class="ttdoc">融合分配创建共享指针</div><div class="ttdef"><b>定义</b> <a href="shared__ptr_8hpp_source.html#l00849">shared_ptr.hpp:849</a></div></div>
 <div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
 <div class="ttc" id="agroup___web_socket_html_ga6f03b53401c24a4ee83541255774ef0f"><div class="ttname"><a href="group___web_socket.html#ga6f03b53401c24a4ee83541255774ef0f">websocket_opcode</a></div><div class="ttdeci">websocket_opcode</div><div class="ttdoc">WebSocket帧操作码</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00079">websocket.hpp:79</a></div></div>
@@ -530,8 +530,8 @@ void&#160;</td><td class="memItemRight"><b>stop</b> ()</td></tr>
 
 </div>
 </div>
-<a id="ab4118af153f998bb2ea260b03542cee7" name="ab4118af153f998bb2ea260b03542cee7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4118af153f998bb2ea260b03542cee7">&#9670;&#160;</a></span>set_event_loop()</h2>
+<a id="a3e75cc22aefd0261c07b0a6da9242028" name="a3e75cc22aefd0261c07b0a6da9242028"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e75cc22aefd0261c07b0a6da9242028">&#9670;&#160;</a></span>set_io_context()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -540,9 +540,9 @@ void&#160;</td><td class="memItemRight"><b>stop</b> ()</td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void websocket_session::set_event_loop </td>
+          <td class="memname">void websocket_session::set_io_context </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classevent__loop.html">event_loop</a> *</td>          <td class="paramname"><span class="paramname"><em>loop</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classio__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -553,14 +553,14 @@ void&#160;</td><td class="memItemRight"><b>stop</b> ()</td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>设置事件循环（启用事件驱动模式） </p>
+<p>设置 io_context（启用事件驱动模式） </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">loop</td><td>事件循环指针</td></tr>
+    <tr><td class="paramname">ctx</td><td><a class="el" href="classio__context.html" title="统一异步操作核心">io_context</a> 引用</td></tr>
   </table>
   </dd>
 </dl>
-<p>必须在 <a class="el" href="#a191ca2f118812d4c03f30fc1076c2ff8" title="启动会话">start()</a> 之前调用。设置后会话将以事件驱动模式运行， 使用 <a class="el" href="classevent__loop.html" title="单线程 I/O 事件循环">event_loop</a> 回调替代 3 个专用线程。 </p>
+<p>必须在 <a class="el" href="#a191ca2f118812d4c03f30fc1076c2ff8" title="启动会话">start()</a> 之前调用。设置后会话将以事件驱动模式运行， 使用 <a class="el" href="classio__context.html#ac408f8abdf19b28a5440687229a56afc" title="注册 fd 进行事件监控">io_context::add_fd</a> / schedule_timer 替代 3 个专用线程。 </p>
 
 <p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00399">399</a> 行定义.</p>
 

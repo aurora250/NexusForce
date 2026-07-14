@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['临时缓冲区_0',['临时缓冲区',['../group___temporary_buffer.html',1,'']]]
+  ['串行化执行器_0',['串行化执行器',['../group___strand.html',1,'']]]
 ];

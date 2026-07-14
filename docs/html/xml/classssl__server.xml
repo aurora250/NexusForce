@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="221" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="221" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="217" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="217" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="224" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="220" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classssl__server_1acb728856c49a52662f8ea6057e78e12b" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt; &gt;</type>
@@ -81,14 +81,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="225" column="14"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="221" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classssl__server_1ae975999b59c678bdf7e16867ecdd1d31" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classssl__server_1ab626ef1e654653245dd259bb125bf771" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>ssl_server::ssl_server</definition>
-        <argsstring>(ports port, size_t worker_count=thread_pool::max_thread_threshhold())</argsstring>
+        <argsstring>(ports port, io_context &amp;ctx, size_t worker_count=0)</argsstring>
         <name>ssl_server</name>
         <qualifiedname>ssl_server::ssl_server</qualifiedname>
         <param>
@@ -96,9 +96,13 @@
           <declname>port</declname>
         </param>
         <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
           <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
           <declname>worker_count</declname>
-          <defval>thread_pool::max_thread_threshhold()</defval>
+          <defval>0</defval>
         </param>
         <briefdescription>
 <para>构造函数 </para>
@@ -114,6 +118,14 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>worker_count</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -125,8 +137,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="233" column="14"/>
-        <references refid="classtcp__server__base_1afb78680be84f7030e9af5fe6958f258b" compoundref="tcp__server_8hpp" startline="160" endline="160">tcp_server_base::port</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="230" column="14"/>
+        <references refid="classtcp__server__base_1afb78680be84f7030e9af5fe6958f258b" compoundref="tcp__server_8hpp" startline="156" endline="156">tcp_server_base::port</references>
       </memberdef>
       <memberdef kind="function" id="classssl__server_1adc241568c950d70a1a0e4d2e5d7c899a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -169,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="241" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="238" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classssl__server_1a76f284fac9a5869f37c82d710e8a1bdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -207,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="248" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="245" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classssl__server_1aacbb3906ee50d75b62223e20a62cb754" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
@@ -225,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="254" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="254" bodyend="254"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="251" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="251" bodyend="251"/>
       </memberdef>
       <memberdef kind="function" id="classssl__server_1ae509d4d594e01df0cd2a0b442ffc0811" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
@@ -243,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="260" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="260" bodyend="260"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="257" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="257" bodyend="257"/>
       </memberdef>
       <memberdef kind="function" id="classssl__server_1ac4fa071e7d0bd04844671436657fb0a5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -276,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="269" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="266" column="10"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -285,7 +297,7 @@
     <detaileddescription>
 <para>实现SSL/TLS加密的TCP服务器，使用ssl_acceptor接受连接。</para>
 <para>使用示例： <programlisting><codeline><highlight class="comment">//<sp/>创建SSL服务器</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><ref refid="classssl__server_1ae975999b59c678bdf7e16867ecdd1d31" kindref="member">ssl_server</ref><sp/>server(443,<sp/>10);</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classssl__server_1ab626ef1e654653245dd259bb125bf771" kindref="member">ssl_server</ref><sp/>server(443,<sp/>10);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>加载证书</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!server.load_certificate(</highlight><highlight class="stringliteral">&quot;server.crt&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;server.key&quot;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
@@ -315,49 +327,53 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="7">
+      <node id="9">
         <label>atomic&lt; bool &gt;</label>
         <link refid="structatomic_3_01bool_01_4"/>
       </node>
-      <node id="14">
+      <node id="15">
         <label>function&lt; void(const exception &amp;)&gt;</label>
         <link refid="classfunction"/>
       </node>
-      <node id="13">
+      <node id="14">
         <label>function&lt; void(unique_ptr&lt; tcp_socket &gt;)&gt;</label>
         <link refid="classfunction"/>
       </node>
-      <node id="9">
+      <node id="11">
         <label>icollector&lt; T &gt;</label>
         <link refid="structicollector"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>icomparable&lt; T &gt;</label>
-        <link refid="structicomparable"/>
-      </node>
-      <node id="5">
-        <label>iobject&lt; ports &gt;</label>
-        <link refid="structiobject"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>istringify&lt; ports &gt;</label>
-        <link refid="structistringify"/>
-      </node>
-      <node id="15">
-        <label>mutex</label>
-        <link refid="classmutex"/>
-      </node>
-      <node id="4">
-        <label>ports</label>
-        <link refid="structports"/>
-        <childnode refid="5" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
       <node id="12">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="4">
+        <label>io_context</label>
+        <link refid="classio__context"/>
+      </node>
+      <node id="7">
+        <label>iobject&lt; ports &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>istringify&lt; ports &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="16">
+        <label>mutex</label>
+        <link refid="classmutex"/>
+      </node>
+      <node id="6">
+        <label>ports</label>
+        <link refid="structports"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
         <label>shared_mutex</label>
         <link refid="classshared__mutex"/>
       </node>
@@ -374,46 +390,49 @@
           <edgelabel>acceptor_</edgelabel>
         </childnode>
         <childnode refid="4" relation="usage">
+          <edgelabel>ctx_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>ctx_work_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
           <edgelabel>port_</edgelabel>
         </childnode>
-        <childnode refid="7" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>running_</edgelabel>
         </childnode>
-        <childnode refid="8" relation="usage">
+        <childnode refid="10" relation="usage">
           <edgelabel>worker_threads_</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
-          <edgelabel>client_pool_</edgelabel>
-        </childnode>
-        <childnode refid="12" relation="usage">
+        <childnode refid="13" relation="usage">
           <edgelabel>handler_mutex_</edgelabel>
         </childnode>
-        <childnode refid="13" relation="usage">
+        <childnode refid="14" relation="usage">
           <edgelabel>client_handler_</edgelabel>
         </childnode>
-        <childnode refid="14" relation="usage">
+        <childnode refid="15" relation="usage">
           <edgelabel>exception_handler_</edgelabel>
         </childnode>
-        <childnode refid="15" relation="usage">
+        <childnode refid="16" relation="usage">
           <edgelabel>acceptor_mutex_</edgelabel>
         </childnode>
       </node>
-      <node id="11">
-        <label>thread_pool</label>
-        <link refid="classthread__pool"/>
+      <node id="5">
+        <label>unique_ptr&lt; io_context::work &gt;</label>
+        <link refid="classunique__ptr"/>
       </node>
       <node id="3">
         <label>unique_ptr&lt; tcp_acceptor &gt;</label>
         <link refid="classunique__ptr"/>
       </node>
-      <node id="8">
+      <node id="10">
         <label>vector&lt; thread &gt;</label>
         <link refid="classvector"/>
-        <childnode refid="9" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="219" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="219" bodyend="270"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="215" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="215" bodyend="267"/>
     <listofallmembers>
       <member refid="classtcp__server__base_1a339fb280765125ff0e63bb3cb89bcb15" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>accept_loop</name></member>
       <member refid="classssl__server_1acb728856c49a52662f8ea6057e78e12b" prot="private" virt="virtual"><scope>ssl_server</scope><name>accept_one</name></member>
@@ -421,8 +440,9 @@
       <member refid="classtcp__server__base_1a1a7e1de9c6df5ba9aa1a12feb06023b8" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>acceptor_mutex_</name></member>
       <member refid="classtcp__server__base_1a5e6ff6717c9972d255c9bee34975594e" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>client_handler_</name></member>
       <member refid="classtcp__server__base_1abef2c5b5cbfeda60f09e2c43f7b9a6ae" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>client_handler_t</name></member>
-      <member refid="classtcp__server__base_1a2d72c2c3af83d0bc20fcd5effaf05874" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>client_pool_</name></member>
       <member refid="classssl__server_1a77ddd9e4f1baf16db48d0967084acaa7" prot="private" virt="virtual"><scope>ssl_server</scope><name>create_acceptor</name></member>
+      <member refid="classtcp__server__base_1a73226a9a043e5fa0ae1654a84706b136" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>ctx_</name></member>
+      <member refid="classtcp__server__base_1a9e31297177313381a5ea8dd10325f840" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>ctx_work_</name></member>
       <member refid="classtcp__server__base_1a831cef70165579b406d091ded06b6a19" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>exception_handler_</name></member>
       <member refid="classtcp__server__base_1a5f608ddaffbd9596fd27cdfc6401a27b" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>exception_handler_t</name></member>
       <member refid="classssl__server_1aacbb3906ee50d75b62223e20a62cb754" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>get_ssl_context</name></member>
@@ -431,7 +451,6 @@
       <member refid="classtcp__server__base_1ade73ba8bbe4053f6f29d41cb2a34aba5" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>handler_mutex_</name></member>
       <member refid="classtcp__server__base_1aae7b9c4980b19196d0f8e34b428b3758" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>is_running</name></member>
       <member refid="classssl__server_1adc241568c950d70a1a0e4d2e5d7c899a" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>load_certificate</name></member>
-      <member refid="classtcp__server__base_1a6cfadb556ef18b029e0c510f143e833b" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>notify_stop</name></member>
       <member refid="classtcp__server__base_1a817e76551150298c61eefe51d88e45f6" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>operator=</name></member>
       <member refid="classtcp__server__base_1adb02246758504d817229562eabeb262a" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>operator=</name></member>
       <member refid="classtcp__server__base_1afb78680be84f7030e9af5fe6958f258b" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>port</name></member>
@@ -441,13 +460,12 @@
       <member refid="classtcp__server__base_1aa7a0567cb6f4b407b8f2afb1a82d90b8" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>set_exception_handler</name></member>
       <member refid="classssl__server_1a76f284fac9a5869f37c82d710e8a1bdd" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>set_ssl_context</name></member>
       <member refid="classssl__server_1a9630754b70908341540328c7e70f6d16" prot="private" virt="non-virtual"><scope>ssl_server</scope><name>ssl_ctx_</name></member>
-      <member refid="classssl__server_1ae975999b59c678bdf7e16867ecdd1d31" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>ssl_server</name></member>
+      <member refid="classssl__server_1ab626ef1e654653245dd259bb125bf771" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>ssl_server</name></member>
       <member refid="classssl__server_1ac4fa071e7d0bd04844671436657fb0a5" prot="public" virt="virtual"><scope>ssl_server</scope><name>start</name></member>
       <member refid="classtcp__server__base_1a77bb0334985546f7b3b27f7ebbcbb902" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>stop</name></member>
-      <member refid="classtcp__server__base_1afd3f0bf8e207d844dbedb1b8c6720e5c" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>tcp_server_base</name></member>
+      <member refid="classtcp__server__base_1a453e86b5d7386dea0eab18c93d0470f3" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>tcp_server_base</name></member>
       <member refid="classtcp__server__base_1a7dbdc38039a593e363a0ecb0eee2bbbf" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>tcp_server_base</name></member>
       <member refid="classtcp__server__base_1aff23675d9f2b7e6b8f269e68eda0c8df" prot="public" virt="non-virtual"><scope>ssl_server</scope><name>tcp_server_base</name></member>
-      <member refid="classtcp__server__base_1af6dd3d7553c83b5c22e63790a189996f" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>wake_event_</name></member>
       <member refid="classtcp__server__base_1a735bef21abd2a1a64c22fc2ebb9c9ec8" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>worker_count_</name></member>
       <member refid="classtcp__server__base_1aa8d9f9a53edb4699d0825cf499baba0c" prot="protected" virt="non-virtual"><scope>ssl_server</scope><name>worker_threads_</name></member>
       <member refid="classtcp__server__base_1ae8163e7386fbe9d18a798e5a6e1f1b3e" prot="public" virt="virtual"><scope>ssl_server</scope><name>~tcp_server_base</name></member>

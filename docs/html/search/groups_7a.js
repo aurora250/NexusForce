@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['错误码_0',['错误码',['../group___error_code.html',1,'']]]
+  ['配置格式操作_0',['配置格式操作',['../group___config_format.html',1,'']]]
 ];

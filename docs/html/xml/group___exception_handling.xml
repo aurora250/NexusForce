@@ -23,7 +23,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="268" column="6" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" declline="268" declcolumn="6"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="220" column="6" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" declline="220" declcolumn="6"/>
         <references refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1">uncaught_exceptions</references>
         <referencedby refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" compoundref="scope_8hpp" startline="151" endline="155">scope_fail&lt; Func &gt;::scope_fail</referencedby>
         <referencedby refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" compoundref="scope_8hpp" startline="237" endline="241">scope_success&lt; Func &gt;::scope_success</referencedby>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="274" column="24" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" declline="274" declcolumn="24"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="226" column="24" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" declline="226" declcolumn="24"/>
         <references refid="group___exception_handling_1gafe66b310cbf7bfa17ba13537186a4891">throw_with_stack</references>
         <referencedby refid="group___exception_handling_1gafe66b310cbf7bfa17ba13537186a4891">throw_with_stack</referencedby>
       </memberdef>
@@ -171,10 +171,10 @@
         <param><defname>THIS</defname></param>
         <param><defname>BASE</defname></param>
         <param><defname>INFO</defname></param>
-        <initializer>explicit THIS(const char* info = INFO, const char* type = static_type, const int code = 0) noexcept : \
-BASE(info, type, code) {}                                                                             \
-                                                                                                      \
-explicit THIS(const <ref refid="structexception" kindref="compound">exception</ref>&amp; e) :                                                                   \
+        <initializer>explicit THIS(const char* info = INFO) noexcept : \
+BASE(info) {}                                     \
+                                                  \
+explicit THIS(const <ref refid="structexception" kindref="compound">exception</ref>&amp; e) :               \
 BASE(e) {}</initializer>
         <briefdescription>
         </briefdescription>
@@ -187,7 +187,7 @@ BASE(e) {}</initializer>
       <memberdef kind="define" id="group___exception_handling_1gad1d1f545fb56f3b3894f8661dda823a1" prot="public" static="no">
         <name>__NEFORCE_ERROR_DERIVED_DESTRUCTOR</name>
         <param><defname>CLASS</defname></param>
-        <initializer>virtual ~CLASS() = default;</initializer>
+        <initializer>~CLASS() override = default;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -211,14 +211,14 @@ BASE(e) {}</initializer>
       <memberdef kind="define" id="group___exception_handling_1ga7b9007b6051e7998c5ca452e1ac91d8a" prot="public" static="no">
         <name>__NEFORCE_ERROR_TYPE</name>
         <param><defname>CLASS</defname></param>
-        <initializer>static constexpr auto static_type = #CLASS;</initializer>
+        <initializer>NEFORCE_NODISCARD const char* type() const noexcept override { return #CLASS; }</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="32" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="32" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="32" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="32" bodyend="33"/>
       </memberdef>
       <memberdef kind="define" id="group___exception_handling_1gae678474841c27ba5f9d8215c812fefae" prot="public" static="no">
         <name>NEFORCE_ERROR_BUILD_DERIVED_CLASS</name>
@@ -263,7 +263,12 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="43" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="43" bodyend="48"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="44" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="44" bodyend="49"/>
+        <referencedby refid="structallocate__exception_1abf8e86731f53b98421d81f6f94969c82" compoundref="exception_8hpp" startline="174" endline="174">allocate_exception::type</referencedby>
+        <referencedby refid="structdatabase__exception_1a689be1c6b17f7e0d8c8e741356dc1a41" compoundref="exception_8hpp" startline="210" endline="210">database_exception::type</referencedby>
+        <referencedby refid="structthirdparty__exception_1a0458ccbae979bf561a95292267b7365c" compoundref="exception_8hpp" startline="204" endline="204">thirdparty_exception::type</referencedby>
+        <referencedby refid="structtypecast__exception_1a5be57daae0b20efdada4b761552882dd" compoundref="exception_8hpp" startline="186" endline="186">typecast_exception::type</referencedby>
+        <referencedby refid="structvalue__exception_1aa97aa270e8ae90ff12f120d74f68e17b" compoundref="exception_8hpp" startline="192" endline="192">value_exception::type</referencedby>
       </memberdef>
       <memberdef kind="define" id="group___exception_handling_1ga438313508830676344f6ccbfad172758" prot="public" static="no">
         <name>NEFORCE_ERROR_BUILD_FINAL_CLASS</name>
@@ -308,7 +313,9 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="59" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="59" bodyend="64"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="60" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="60" bodyend="65"/>
+        <referencedby refid="structiterator__exception_1a52211201a2280f4c0a71713be4cd5587" compoundref="exception_8hpp" startline="180" endline="180">iterator_exception::type</referencedby>
+        <referencedby refid="structmath__exception_1a58093be54a613fdd4333c8e7226151e7" compoundref="exception_8hpp" startline="198" endline="198">math_exception::type</referencedby>
       </memberdef>
       <memberdef kind="define" id="group___exception_handling_1ga68249361ffc8d150053285c070c426b9" prot="public" static="no">
         <name>NEFORCE_THROW_EXCEPTION</name>
@@ -320,7 +327,7 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="279" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="279" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="231" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="231" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="group___exception_handling_1gab8d2a61217d1d4200f90aefe0e99a813" prot="public" static="no">
         <name>NEFORCE_ASSERTION</name>
@@ -334,7 +341,7 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="282" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="282" bodyend="285"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="234" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="234" bodyend="237"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

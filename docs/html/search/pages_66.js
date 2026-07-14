@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['码点范围定义_0',['Unicode 码点范围定义',['../group___code_point.html#unicode_ranges',1,'']]],
-  ['码点验证规则_1',['码点验证规则',['../group___code_point.html#validation_rules',1,'']]]
+  ['状态码分类_0',['HTTP 状态码分类',['../group___h_t_t_p.html#http_status_categories',1,'']]],
+  ['状态码说明_1',['gRPC 状态码说明',['../group__g_r_p_c.html#grpc_status_codes',1,'']]]
 ];

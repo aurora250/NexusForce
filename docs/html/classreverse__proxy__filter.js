@@ -2,7 +2,8 @@ var classreverse__proxy__filter =
 [
     [ "backend_selector_cb", "classreverse__proxy__filter.html#a2cfdcaab576227ae3c60c687a9866cd2", null ],
     [ "header_rewrite_cb", "classreverse__proxy__filter.html#a6cbdca6ef5f56e0c58bb4aee243ebfcd", null ],
-    [ "reverse_proxy_filter", "classreverse__proxy__filter.html#a8e76329c54c8fbe3728faa8a1718ed5e", null ],
+    [ "reverse_proxy_filter", "classreverse__proxy__filter.html#a1c306076871fceeebe308b1183af1402", null ],
+    [ "reverse_proxy_filter", "classreverse__proxy__filter.html#a53a752d1187ab8ff27aefa5ae8b2610e", null ],
     [ "add_backend", "classreverse__proxy__filter.html#aec693ad2c4d4e671f2b362a0a6dcb5bc", null ],
     [ "add_skip_response_header", "classreverse__proxy__filter.html#a58d132f60122e4fb8d6b9715f8c5b645", null ],
     [ "do_filter", "classreverse__proxy__filter.html#a00f4e1b1cf25b22590e0d88c42163fe1", null ],

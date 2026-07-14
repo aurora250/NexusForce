@@ -1,0 +1,927 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classasync__stream" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>async_stream</compoundname>
+    <derivedcompoundref refid="classssl__stream" prot="public" virt="non-virtual">ssl_stream</derivedcompoundref>
+    <derivedcompoundref refid="classtcp__socket" prot="public" virt="non-virtual">tcp_socket</derivedcompoundref>
+    <includes refid="async__stream_8hpp" local="no">async_stream.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classasync__stream_1a77ea4f279fa385fe527b8ac032432a5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual async_stream::~async_stream</definition>
+        <argsstring>()=default</argsstring>
+        <name>~async_stream</name>
+        <qualifiedname>async_stream::~async_stream</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="38" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1a8ae4d0e9a1e4196adefdab847faaf6c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void async_stream::async_read</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, function&lt; void(error_code, size_t)&gt; handler)=0</argsstring>
+        <name>async_read</name>
+        <qualifiedname>async_stream::async_read</qualifiedname>
+        <reimplementedby refid="classssl__stream_1a1dc7cd64bb9738ccd6465a253d16010a">async_read</reimplementedby>
+        <reimplementedby refid="classtcp__socket_1ae1eec8ce0560b6f9426070504cb2f8c8">async_read</reimplementedby>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步读取数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="46" column="18"/>
+        <referencedby refid="classtcp__socket_1a1bf83c52000b681c66f00766f4597d8a" compoundref="tcp__socket_8hpp" startline="296" endline="298">tcp_socket::async_receive</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1a969402529c88b5f6ea5fce03fb89bf4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void async_stream::async_read</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, cancellation_slot &amp;slot, function&lt; void(error_code, size_t)&gt; handler)=0</argsstring>
+        <name>async_read</name>
+        <qualifiedname>async_stream::async_read</qualifiedname>
+        <reimplementedby refid="classssl__stream_1a26a746d825b3f46cae936d656a14a81b">async_read</reimplementedby>
+        <reimplementedby refid="classtcp__socket_1af57d14bbf43ba1326203ed9508b7850d">async_read</reimplementedby>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步读取（带取消槽） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="55" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1abb3e320776014dd8e830433cc903e454" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void async_stream::async_write</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; buffer, function&lt; void(error_code, size_t)&gt; handler)=0</argsstring>
+        <name>async_write</name>
+        <qualifiedname>async_stream::async_write</qualifiedname>
+        <reimplementedby refid="classssl__stream_1afa9e5a93689a8e786de95b73f1fe11af">async_write</reimplementedby>
+        <reimplementedby refid="classtcp__socket_1ac0126b85f5b33835de4a1175d1b10172">async_write</reimplementedby>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步写入数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="64" column="18"/>
+        <referencedby refid="classtcp__socket_1abc80dd8bc0b9a6e06ca1b006eac10b30" compoundref="tcp__socket_8hpp" startline="308" endline="310">tcp_socket::async_send</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1af044064a9c39321c16c7496aed30c67f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void async_stream::async_write</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; buffer, cancellation_slot &amp;slot, function&lt; void(error_code, size_t)&gt; handler)=0</argsstring>
+        <name>async_write</name>
+        <qualifiedname>async_stream::async_write</qualifiedname>
+        <reimplementedby refid="classssl__stream_1afe4d1a5185cd84f1f98ff8c8dbed4c40">async_write</reimplementedby>
+        <reimplementedby refid="classtcp__socket_1a4e3dbf515f6a17ee332cb5f47ecdbeff">async_write</reimplementedby>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步写入（带取消槽） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="74" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1a0051d844a8e4a2a79429ba644bec9c32" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Token</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Token &gt;, <ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void async_stream::async_read</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, Token &amp;&amp;token)</argsstring>
+        <name>async_read</name>
+        <qualifiedname>async_stream::async_read</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>Token &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>异步读取—任意可调用对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型，需满足 void(error_code, size_t) 签名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+委托到纯虚 async_read(ctx, buffer, function&lt;...&gt;)。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="87" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" bodystart="87" bodyend="89"/>
+        <references refid="group___async_compose_1gaa3a471689038b117d43614e9ac8f5618">async_read</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1abe6469f417ff23bec1b439151c870998" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto async_stream::async_read</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, use_future_t)</argsstring>
+        <name>async_read</name>
+        <qualifiedname>async_stream::async_read</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__future__t" kindref="compound">use_future_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步读取—use_future </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classfuture" kindref="compound">future&lt;size_t&gt;</ref> 读取字节数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="97" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" bodystart="97" bodyend="101"/>
+        <references refid="group___async_compose_1gaa3a471689038b117d43614e9ac8f5618">async_read</references>
+        <references refid="group___completion_tokens_1ga1e645f41f2c2ddff978c87c8c91b18c6" compoundref="async__result_8hpp" startline="37" endline="37">use_future</references>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1a4dec67d9232c626b29da1bc831757fd5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void async_stream::async_read</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, detached_t)</argsstring>
+        <name>async_read</name>
+        <qualifiedname>async_stream::async_read</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structdetached__t" kindref="compound">detached_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步读取—detached（即发即忘） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="108" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" bodystart="108" bodyend="110"/>
+        <references refid="group___async_compose_1gaa3a471689038b117d43614e9ac8f5618">async_read</references>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1a0a640b341717691f22fae0acf674d235" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto async_stream::async_read</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, use_awaitable_t)</argsstring>
+        <name>async_read</name>
+        <qualifiedname>async_stream::async_read</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__awaitable__t" kindref="compound">use_awaitable_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步读取—use_awaitable </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classawaitable" kindref="compound">awaitable&lt;size_t&gt;</ref> 可协程等待的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="119" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" bodystart="119" bodyend="123"/>
+        <references refid="group___async_compose_1gaa3a471689038b117d43614e9ac8f5618">async_read</references>
+        <references refid="group___completion_tokens_1ga9fe3f0a59b8db368024b61ce6215b3b4" compoundref="use__awaitable_8hpp" startline="27" endline="27">use_awaitable</references>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1af0350479bc553eb7e76dd103d0238859" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Token</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Token &gt;, <ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void async_stream::async_write</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; buffer, Token &amp;&amp;token)</argsstring>
+        <name>async_write</name>
+        <qualifiedname>async_stream::async_write</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>Token &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>异步写入—任意可调用对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型，需满足 void(error_code, size_t) 签名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+委托到纯虚 async_write(ctx, buffer, function&lt;...&gt;)。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="136" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" bodystart="136" bodyend="138"/>
+        <references refid="group___async_compose_1ga180357bbe23447c41b8492b51a1be1fa">async_write</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1a6325eb7c21abf48337f0d0e0fc389834" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto async_stream::async_write</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; buffer, use_future_t)</argsstring>
+        <name>async_write</name>
+        <qualifiedname>async_stream::async_write</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__future__t" kindref="compound">use_future_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步写入—use_future </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classfuture" kindref="compound">future&lt;size_t&gt;</ref> 写入字节数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="146" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" bodystart="146" bodyend="150"/>
+        <references refid="group___async_compose_1ga180357bbe23447c41b8492b51a1be1fa">async_write</references>
+        <references refid="group___completion_tokens_1ga1e645f41f2c2ddff978c87c8c91b18c6" compoundref="async__result_8hpp" startline="37" endline="37">use_future</references>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1aa6b1889815d02c3e8483252a45139b08" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void async_stream::async_write</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; buffer, detached_t)</argsstring>
+        <name>async_write</name>
+        <qualifiedname>async_stream::async_write</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structdetached__t" kindref="compound">detached_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步写入—detached（即发即忘） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="157" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" bodystart="157" bodyend="159"/>
+        <references refid="group___async_compose_1ga180357bbe23447c41b8492b51a1be1fa">async_write</references>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1a929ddcabcc0650dd4e6177d3da04e3e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto async_stream::async_write</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; buffer, use_awaitable_t)</argsstring>
+        <name>async_write</name>
+        <qualifiedname>async_stream::async_write</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__awaitable__t" kindref="compound">use_awaitable_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步写入—use_awaitable </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classawaitable" kindref="compound">awaitable&lt;size_t&gt;</ref> 可协程等待的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="168" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" bodystart="168" bodyend="172"/>
+        <references refid="group___async_compose_1ga180357bbe23447c41b8492b51a1be1fa">async_write</references>
+        <references refid="group___completion_tokens_1ga9fe3f0a59b8db368024b61ce6215b3b4" compoundref="use__awaitable_8hpp" startline="27" endline="27">use_awaitable</references>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1a3a686bf64f378efcd1ac737b3a62282f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void async_stream::async_read</definition>
+        <argsstring>(io_context &amp;ctx, mutable_buffers &amp;bufs, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_read</name>
+        <qualifiedname>async_stream::async_read</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmutable__buffers" kindref="compound">mutable_buffers</ref> &amp;</type>
+          <declname>bufs</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步读取—scatter-gather </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bufs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>多个接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t total_read)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+依次填满每个缓冲区，委托到纯虚 async_read。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="183" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1a5a1a66d6160f864f90225a9bddc7f605" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void async_stream::async_write</definition>
+        <argsstring>(io_context &amp;ctx, const_buffers &amp;bufs, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_write</name>
+        <qualifiedname>async_stream::async_write</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classconst__buffers" kindref="compound">const_buffers</ref> &amp;</type>
+          <declname>bufs</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步写入—scatter-gather </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bufs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>多个发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t total_written)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+依次发送每个缓冲区，委托到纯虚 async_write。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="193" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classasync__stream_1a31296aee86f5591a179850836e7b9fca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void async_stream::async_read</definition>
+        <argsstring>(io_context &amp;ctx, dynamic_buffer &amp;buf, size_t n, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_read</name>
+        <qualifiedname>async_stream::async_read</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classdynamic__buffer" kindref="compound">dynamic_buffer</ref> &amp;</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步读取到 <ref refid="classdynamic__buffer" kindref="compound">dynamic_buffer</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>动态缓冲区（prepare/commit/consume） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最少读取字节数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_read)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+调用 buf.prepare(n) 获取写入区域，完成后 buf.commit(n)。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="204" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" bodystart="204" bodyend="212"/>
+        <references refid="group___async_compose_1gaa3a471689038b117d43614e9ac8f5618">async_read</references>
+        <references refid="classdynamic__buffer_1ae5bb486e702913b21cb899f9c32d5980" compoundref="buffer_8hpp" startline="260" endline="260">dynamic_buffer::commit</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classdynamic__buffer_1a5e2f38eaf7fc7350ca912eeda10f9c58" compoundref="buffer_8hpp" startline="244" endline="249">dynamic_buffer::prepare</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异步流抽象基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>定义异步读写的纯虚接口。派生类实现四个纯虚方法后， 自动获得 use_future、detached、use_awaitable 等完成令牌支持。</para>
+<para><simplesect kind="note"><para>仅抽象异步 read/write 行为——连接（connect/accept）和地址操作留在具体类中。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>async_stream</label>
+        <link refid="classasync__stream"/>
+      </node>
+      <node id="4">
+        <label>ssl_socket</label>
+        <link refid="classssl__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ssl_stream</label>
+        <link refid="classssl__stream"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>tcp_socket</label>
+        <link refid="classtcp__socket"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/async_stream.hpp" bodystart="33" bodyend="213"/>
+    <listofallmembers>
+      <member refid="classasync__stream_1a8ae4d0e9a1e4196adefdab847faaf6c8" prot="public" virt="pure-virtual"><scope>async_stream</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a969402529c88b5f6ea5fce03fb89bf4a" prot="public" virt="pure-virtual"><scope>async_stream</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a0051d844a8e4a2a79429ba644bec9c32" prot="public" virt="non-virtual"><scope>async_stream</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1abe6469f417ff23bec1b439151c870998" prot="public" virt="non-virtual"><scope>async_stream</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a4dec67d9232c626b29da1bc831757fd5" prot="public" virt="non-virtual"><scope>async_stream</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a0a640b341717691f22fae0acf674d235" prot="public" virt="non-virtual"><scope>async_stream</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a3a686bf64f378efcd1ac737b3a62282f" prot="public" virt="non-virtual"><scope>async_stream</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a31296aee86f5591a179850836e7b9fca" prot="public" virt="non-virtual"><scope>async_stream</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1abb3e320776014dd8e830433cc903e454" prot="public" virt="pure-virtual"><scope>async_stream</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1af044064a9c39321c16c7496aed30c67f" prot="public" virt="pure-virtual"><scope>async_stream</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1af0350479bc553eb7e76dd103d0238859" prot="public" virt="non-virtual"><scope>async_stream</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1a6325eb7c21abf48337f0d0e0fc389834" prot="public" virt="non-virtual"><scope>async_stream</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1aa6b1889815d02c3e8483252a45139b08" prot="public" virt="non-virtual"><scope>async_stream</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1a929ddcabcc0650dd4e6177d3da04e3e1" prot="public" virt="non-virtual"><scope>async_stream</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1a5a1a66d6160f864f90225a9bddc7f605" prot="public" virt="non-virtual"><scope>async_stream</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1a77ea4f279fa385fe527b8ac032432a5a" prot="public" virt="virtual"><scope>async_stream</scope><name>~async_stream</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

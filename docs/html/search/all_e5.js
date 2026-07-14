@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🧬_20类型与特性_20typeinfo_0',['🧬 类型与特性 (TypeInfo)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md30',1,'']]]
+  ['🗄️_20数据库_20db_0',['🗄️ 数据库 (DB)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md23',1,'']]]
 ];

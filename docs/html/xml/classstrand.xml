@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classstrand" kind="class" language="C++" prot="public">
+    <compoundname>strand</compoundname>
+    <includes refid="strand_8hpp" local="no">strand.hpp</includes>
+    <innerclass refid="structstrand_1_1impl" prot="private">strand::impl</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classstrand_1a72b8474d5315e453e885d80cc9dddc28" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>using strand::handler_type = function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>handler_type</name>
+        <qualifiedname>strand::handler_type</qualifiedname>
+        <briefdescription>
+<para>handler 类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="33" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classstrand_1aa100bb6a9199ff859aef3120fccab483" prot="private" static="no" mutable="no">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; impl &gt;</type>
+        <definition>shared_ptr&lt;impl&gt; strand::impl_</definition>
+        <argsstring></argsstring>
+        <name>impl_</name>
+        <qualifiedname>strand::impl_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="63" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classstrand_1ae6476e4acab565747bc4fc103dc45227" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>strand::strand</definition>
+        <argsstring>(io_context &amp;ctx)</argsstring>
+        <name>strand</name>
+        <qualifiedname>strand::strand</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>构造 strand </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>关联的 <ref refid="classio__context" kindref="compound">io_context</ref></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+strand 绑定到指定的 io_context。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="72" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="72" bodyend="73"/>
+        <references refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" compoundref="shared__ptr_8hpp" startline="849" endline="877">make_shared</references>
+      </memberdef>
+      <memberdef kind="function" id="classstrand_1a3a394074e58455067579184770e3c094" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void strand::post</definition>
+        <argsstring>(handler_type handler)</argsstring>
+        <name>post</name>
+        <qualifiedname>strand::post</qualifiedname>
+        <param>
+          <type><ref refid="classstrand_1a72b8474d5315e453e885d80cc9dddc28" kindref="member">handler_type</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>投递 handler 到 strand 队列末尾 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的 handler</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+handler 保证与 strand 中其他 handler 串行执行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="81" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="81" bodyend="84"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <referencedby refid="classstrand_1a270126e0264f86d6ab428c3467ae97b7" compoundref="strand_8hpp" startline="93" endline="102">dispatch</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classstrand_1a270126e0264f86d6ab428c3467ae97b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void strand::dispatch</definition>
+        <argsstring>(handler_type handler)</argsstring>
+        <name>dispatch</name>
+        <qualifiedname>strand::dispatch</qualifiedname>
+        <param>
+          <type><ref refid="classstrand_1a72b8474d5315e453e885d80cc9dddc28" kindref="member">handler_type</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>尽可能在当前线程同步执行 handler </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的 handler</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+若当前没有其他 handler 在执行（strand 未锁定），则在调用线程立即执行 handler。 否则降级为 <ref refid="classstrand_1a3a394074e58455067579184770e3c094" kindref="member">post()</ref>，投递到队列等待串行执行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="93" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="93" bodyend="102"/>
+        <references refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <references refid="group___memory_order_1ga1872f4bd7e5e4170b898e1dcab55bbec" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classstrand_1a3a394074e58455067579184770e3c094" compoundref="strand_8hpp" startline="81" endline="84">post</references>
+      </memberdef>
+      <memberdef kind="function" id="classstrand_1ac86947b478683b070485f632f152e8e8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classio__context_1_1executor" kindref="compound">io_context::executor</ref></type>
+        <definition>io_context::executor strand::get_executor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_executor</name>
+        <qualifiedname>strand::get_executor</qualifiedname>
+        <briefdescription>
+<para>获取关联的 <ref refid="classio__context" kindref="compound">io_context</ref> 执行器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><ref refid="classio__context_1_1executor" kindref="compound">io_context::executor</ref> 句柄 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="108" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="108" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classstrand_1a85ce618cf02779afda08ab2ffed99ae1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+        <definition>io_context &amp; strand::context</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>context</name>
+        <qualifiedname>strand::context</qualifiedname>
+        <briefdescription>
+<para>获取关联的 <ref refid="classio__context" kindref="compound">io_context</ref> 引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><ref refid="classio__context" kindref="compound">io_context</ref> 引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="114" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="114" bodyend="114"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>串行化执行器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>所有投递到 strand 的 handler 严格串行执行，无需显式加锁。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="30" bodyend="115"/>
+    <listofallmembers>
+      <member refid="classstrand_1a85ce618cf02779afda08ab2ffed99ae1" prot="public" virt="non-virtual"><scope>strand</scope><name>context</name></member>
+      <member refid="classstrand_1a270126e0264f86d6ab428c3467ae97b7" prot="public" virt="non-virtual"><scope>strand</scope><name>dispatch</name></member>
+      <member refid="classstrand_1ac86947b478683b070485f632f152e8e8" prot="public" virt="non-virtual"><scope>strand</scope><name>get_executor</name></member>
+      <member refid="classstrand_1a72b8474d5315e453e885d80cc9dddc28" prot="public" virt="non-virtual"><scope>strand</scope><name>handler_type</name></member>
+      <member refid="classstrand_1aa100bb6a9199ff859aef3120fccab483" prot="private" virt="non-virtual"><scope>strand</scope><name>impl_</name></member>
+      <member refid="classstrand_1a3a394074e58455067579184770e3c094" prot="public" virt="non-virtual"><scope>strand</scope><name>post</name></member>
+      <member refid="classstrand_1ae6476e4acab565747bc4fc103dc45227" prot="public" virt="non-virtual"><scope>strand</scope><name>strand</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

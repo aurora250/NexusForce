@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['旧式仿函数基类_0',['旧式仿函数基类',['../group___legacy_function_adapters.html',1,'']]]
+  ['方根函数实现_0',['方根函数实现',['../group___math_functions.html#root_functions',1,'']]]
 ];

@@ -6,6 +6,7 @@
     <includes refid="mutex_8hpp" local="yes">NeForce/core/async/mutex.hpp</includes>
     <includes refid="thread_8hpp" local="yes">NeForce/core/async/thread.hpp</includes>
     <includes refid="vector_8hpp" local="yes">NeForce/core/container/vector.hpp</includes>
+    <includes refid="system__exception_8hpp" local="yes">NeForce/core/exception/system_exception.hpp</includes>
     <includes refid="file__constants_8hpp" local="yes">NeForce/core/file/file_constants.hpp</includes>
     <includes refid="path_8hpp" local="yes">NeForce/core/file/path.hpp</includes>
     <includes refid="functional_2function_8hpp" local="yes">NeForce/core/functional/function.hpp</includes>
@@ -180,6 +181,34 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
+      <node id="64">
+        <label>NeForce/core/exception/errc.hpp</label>
+        <link refid="errc_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>NeForce/core/exception/error_category.hpp</label>
+        <link refid="error__category_8hpp_source"/>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>NeForce/core/exception/error_code.hpp</label>
+        <link refid="error__code_8hpp_source"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>NeForce/core/exception/error_condition.hpp</label>
+        <link refid="error__condition_8hpp_source"/>
+        <childnode refid="63" relation="include">
+        </childnode>
+      </node>
       <node id="25">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
@@ -187,15 +216,23 @@
         </childnode>
       </node>
       <node id="60">
+        <label>NeForce/core/exception/system_exception.hpp</label>
+        <link refid="system__exception_8hpp_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
         <label>NeForce/core/file/file_constants.hpp</label>
         <link refid="file__constants_8hpp"/>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="61" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
-        <childnode refid="62" relation="include">
+        <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="63" relation="include">
+        <childnode refid="76" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -211,17 +248,19 @@
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
-        <childnode refid="64" relation="include">
-        </childnode>
         <childnode refid="73" relation="include">
         </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
       </node>
-      <node id="64">
+      <node id="77">
         <label>NeForce/core/file/path.hpp</label>
         <link refid="path_8hpp"/>
         <childnode refid="39" relation="include">
         </childnode>
-        <childnode refid="65" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
       </node>
       <node id="26">
@@ -232,10 +271,10 @@
         <childnode refid="29" relation="include">
         </childnode>
       </node>
-      <node id="73">
+      <node id="79">
         <label>NeForce/core/functional/function.hpp</label>
         <link refid="functional_2function_8hpp"/>
-        <childnode refid="74" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
@@ -278,7 +317,7 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="65">
+      <node id="78">
         <label>NeForce/core/interface/istringify.hpp</label>
         <link refid="istringify_8hpp"/>
         <childnode refid="66" relation="include">
@@ -500,16 +539,19 @@
         <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="62">
+      <node id="75">
         <label>WinBase.h</label>
       </node>
       <node id="9">
         <label>cassert</label>
       </node>
+      <node id="65">
+        <label>cerrno</label>
+      </node>
       <node id="16">
         <label>ctime</label>
       </node>
-      <node id="63">
+      <node id="76">
         <label>fcntl.h</label>
       </node>
       <node id="43">
@@ -536,13 +578,13 @@
       <node id="14">
         <label>synchapi.h</label>
       </node>
-      <node id="74">
+      <node id="80">
         <label>typeinfo</label>
       </node>
       <node id="34">
         <label>utility</label>
       </node>
-      <node id="61">
+      <node id="74">
         <label>windef.h</label>
       </node>
     </incdepgraph>
@@ -562,67 +604,68 @@
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="mutex_8hpp" kindref="compound">NeForce/core/async/mutex.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="thread_8hpp" kindref="compound">NeForce/core/async/thread.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="vector_8hpp" kindref="compound">NeForce/core/container/vector.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="file__constants_8hpp" kindref="compound">NeForce/core/file/file_constants.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="path_8hpp" kindref="compound">NeForce/core/file/path.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="functional_2function_8hpp" kindref="compound">NeForce/core/functional/function.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33" refid="classfile__watcher" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref><sp/>{</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">callback_t<sp/>=<sp/><ref refid="classfunction" kindref="compound">function</ref>&lt;void(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;,<sp/><ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref>)&gt;;<sp/></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpath" kindref="compound">path</ref><sp/>watch_path_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>recursive_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structatomic" kindref="compound">atomic&lt;bool&gt;</ref><sp/>watching_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structatomic" kindref="compound">atomic&lt;bool&gt;</ref><sp/>stopping_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>callback_t<sp/>callback_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref><sp/>current_events_{<ref refid="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a5fb1f955b45e38e31789286a1790398d" kindref="member">file_watch_event::ALL</ref>};<sp/></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;char&gt;</ref><sp/>buffer_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmutex" kindref="compound">mutex</ref><sp/>callback_mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>dir_handle_<sp/>=<sp/>INVALID_HANDLE_VALUE;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>completion_port_<sp/>=<sp/>INVALID_HANDLE_VALUE;<sp/></highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4" kindref="member">::OVERLAPPED</ref><sp/>overlapped_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>inotify_fd_<sp/>=<sp/>-1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>watch_descriptor_<sp/>=<sp/>-1;<sp/></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>event_fd_<sp/>=<sp/>-1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"></highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classthread" kindref="compound">thread</ref><sp/>watch_thread_;<sp/></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>watch_thread_func();</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="72" refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref>(<ref refid="classpath" kindref="compound">path</ref><sp/><ref refid="classfile__watcher_1a441a760a25969bb613fe5ea29e13dfd0" kindref="member">watch_path</ref>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>recursive<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79" refid="classfile__watcher_1a1cfab722bf2385f8154c4e4040a73d16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__watcher_1a1cfab722bf2385f8154c4e4040a73d16" kindref="member">~file_watcher</ref>();</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93" refid="classfile__watcher_1a6e0fdafaa416021b7a8641712f44c33f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1a6e0fdafaa416021b7a8641712f44c33f" kindref="member">start</ref>(callback_t<sp/>callback,<sp/><ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref><sp/>events<sp/>=<sp/><ref refid="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a5fb1f955b45e38e31789286a1790398d" kindref="member">file_watch_event::ALL</ref>);</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="100" refid="classfile__watcher_1a6540e99efd23e8b52d78019871d52c04" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1a6540e99efd23e8b52d78019871d52c04" kindref="member">stop</ref>();</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight></codeline>
-<codeline lineno="106" refid="classfile__watcher_1a441a760a25969bb613fe5ea29e13dfd0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;<sp/><ref refid="classfile__watcher_1a441a760a25969bb613fe5ea29e13dfd0" kindref="member">watch_path</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>watch_path_;<sp/>}</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112" refid="classfile__watcher_1aec3ccf50f4a6b5133a8cb4a0a29d1b17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref><sp/><ref refid="classfile__watcher_1aec3ccf50f4a6b5133a8cb4a0a29d1b17" kindref="member">current_events</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>current_events_;<sp/>}</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"></highlight></codeline>
-<codeline lineno="118" refid="classfile__watcher_1a56099dc0e92560e3f0e303b20f7018d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1a56099dc0e92560e3f0e303b20f7018d8" kindref="member">is_watching</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>watching_.load();<sp/>}</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="124" refid="classfile__watcher_1abc79d5e4bb595fdfe928d210b0973c71" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1abc79d5e4bb595fdfe928d210b0973c71" kindref="member">is_recursive</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>recursive_;<sp/>}</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight></codeline>
-<codeline lineno="133" refid="classfile__watcher_1a9d34c9236ac414aa01fb2072dcce6756" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1a9d34c9236ac414aa01fb2072dcce6756" kindref="member">update_watch</ref>(<ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref><sp/>events);</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="142" refid="classfile__watcher_1a3f9a8e33c3225c12b8ee6b9f00d0bb7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1a3f9a8e33c3225c12b8ee6b9f00d0bb7c" kindref="member">update_recursive</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>recursive);</highlight></codeline>
-<codeline lineno="143"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>File</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="147"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_FILE_FILE_WATCHER_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;NeForce/core/exception/system_exception.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="file__constants_8hpp" kindref="compound">NeForce/core/file/file_constants.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="path_8hpp" kindref="compound">NeForce/core/file/path.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="functional_2function_8hpp" kindref="compound">NeForce/core/functional/function.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="classfile__watcher" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref><sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">callback_t<sp/>=<sp/><ref refid="classfunction" kindref="compound">function</ref>&lt;void(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;,<sp/><ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref>)&gt;;<sp/></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpath" kindref="compound">path</ref><sp/>watch_path_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>recursive_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structatomic" kindref="compound">atomic&lt;bool&gt;</ref><sp/>watching_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structatomic" kindref="compound">atomic&lt;bool&gt;</ref><sp/>stopping_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>callback_t<sp/>callback_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref><sp/>current_events_{<ref refid="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a5fb1f955b45e38e31789286a1790398d" kindref="member">file_watch_event::ALL</ref>};<sp/></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;char&gt;</ref><sp/>buffer_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmutex" kindref="compound">mutex</ref><sp/>callback_mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>dir_handle_<sp/>=<sp/>INVALID_HANDLE_VALUE;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>completion_port_<sp/>=<sp/>INVALID_HANDLE_VALUE;<sp/></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4" kindref="member">::OVERLAPPED</ref><sp/>overlapped_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>inotify_fd_<sp/>=<sp/>-1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>watch_descriptor_<sp/>=<sp/>-1;<sp/></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>event_fd_<sp/>=<sp/>-1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classthread" kindref="compound">thread</ref><sp/>watch_thread_;<sp/></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>watch_thread_func();</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="73" refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref>(<ref refid="classpath" kindref="compound">path</ref><sp/><ref refid="classfile__watcher_1a441a760a25969bb613fe5ea29e13dfd0" kindref="member">watch_path</ref>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>recursive<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="classfile__watcher_1a1cfab722bf2385f8154c4e4040a73d16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__watcher_1a1cfab722bf2385f8154c4e4040a73d16" kindref="member">~file_watcher</ref>();</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" kindref="member">file_watcher</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94" refid="classfile__watcher_1a6e0fdafaa416021b7a8641712f44c33f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1a6e0fdafaa416021b7a8641712f44c33f" kindref="member">start</ref>(callback_t<sp/>callback,<sp/><ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref><sp/>events<sp/>=<sp/><ref refid="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a5fb1f955b45e38e31789286a1790398d" kindref="member">file_watch_event::ALL</ref>);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101" refid="classfile__watcher_1a6540e99efd23e8b52d78019871d52c04" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1a6540e99efd23e8b52d78019871d52c04" kindref="member">stop</ref>();</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="classfile__watcher_1a441a760a25969bb613fe5ea29e13dfd0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;<sp/><ref refid="classfile__watcher_1a441a760a25969bb613fe5ea29e13dfd0" kindref="member">watch_path</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>watch_path_;<sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="classfile__watcher_1aec3ccf50f4a6b5133a8cb4a0a29d1b17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref><sp/><ref refid="classfile__watcher_1aec3ccf50f4a6b5133a8cb4a0a29d1b17" kindref="member">current_events</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>current_events_;<sp/>}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119" refid="classfile__watcher_1a56099dc0e92560e3f0e303b20f7018d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1a56099dc0e92560e3f0e303b20f7018d8" kindref="member">is_watching</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>watching_.load();<sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125" refid="classfile__watcher_1abc79d5e4bb595fdfe928d210b0973c71" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1abc79d5e4bb595fdfe928d210b0973c71" kindref="member">is_recursive</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>recursive_;<sp/>}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134" refid="classfile__watcher_1a9d34c9236ac414aa01fb2072dcce6756" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1a9d34c9236ac414aa01fb2072dcce6756" kindref="member">update_watch</ref>(<ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref><sp/>events);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143" refid="classfile__watcher_1a3f9a8e33c3225c12b8ee6b9f00d0bb7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__watcher_1a3f9a8e33c3225c12b8ee6b9f00d0bb7c" kindref="member">update_recursive</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>recursive);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>File</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_FILE_FILE_WATCHER_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp"/>
   </compounddef>

@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classio__context_1_1executor" kind="class" language="C++" prot="public">
+    <compoundname>io_context::executor</compoundname>
+    <includes refid="io__context_8hpp" local="no">io_context.hpp</includes>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classio__context_1_1executor_1ae4ebd7f4e6b89410361739cc952a6ace" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class io_context</definition>
+        <argsstring></argsstring>
+        <name>io_context</name>
+        <qualifiedname>io_context::executor::io_context</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="328" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="328" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classio__context_1_1executor_1ad2fdd92f33b53a5f07c371b0327df0c1" prot="private" static="no" mutable="no">
+        <type><ref refid="classio__context" kindref="compound">io_context</ref> *</type>
+        <definition>io_context* io_context::executor::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>io_context::executor::ctx_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="333" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="333" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classio__context_1_1executor_1a37c8ac3144d636ac9a5dcda453fbdad4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>io_context::executor::executor</definition>
+        <argsstring>(const executor &amp;other) noexcept=default</argsstring>
+        <name>executor</name>
+        <qualifiedname>io_context::executor::executor</qualifiedname>
+        <param>
+          <type>const <ref refid="classexecutor" kindref="compound">executor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="304" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classio__context_1_1executor_1a9a1b6772b37e09f66efdad273ec50d91" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classexecutor" kindref="compound">executor</ref> &amp;</type>
+        <definition>executor &amp; io_context::executor::operator=</definition>
+        <argsstring>(const executor &amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>io_context::executor::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classexecutor" kindref="compound">executor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="305" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classio__context_1_1executor_1a58514ad1aa500d7d53da3805afef20ca" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void io_context::executor::execute</definition>
+        <argsstring>(handler_type handler) const</argsstring>
+        <name>execute</name>
+        <qualifiedname>io_context::executor::execute</qualifiedname>
+        <param>
+          <type><ref refid="classio__context_1a765e5fcf407110e43f638f86f88e1df4" kindref="member">handler_type</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>在关联的 <ref refid="classio__context" kindref="compound">io_context</ref> 上投递 handler </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="310" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="310" bodyend="310"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classio__context_1_1executor_1a9de4829a909f3f0c678eb67d0e4519d7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+        <definition>io_context &amp; io_context::executor::context</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>context</name>
+        <qualifiedname>io_context::executor::context</qualifiedname>
+        <briefdescription>
+<para>获取关联的 <ref refid="classio__context" kindref="compound">io_context</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="315" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="315" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="function" id="classio__context_1_1executor_1ac3dc3384d59a45cc43c71b07af167b6e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool io_context::executor::operator==</definition>
+        <argsstring>(const executor &amp;other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>io_context::executor::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classexecutor" kindref="compound">executor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>相等比较 — 同一 <ref refid="classio__context" kindref="compound">io_context</ref> 的执行器相等 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="320" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="320" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="classio__context_1_1executor_1aeddb6b7b3a12244b45352ef4d723d756" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool io_context::executor::operator!=</definition>
+        <argsstring>(const executor &amp;other) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>io_context::executor::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classexecutor" kindref="compound">executor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>不等比较 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="325" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="325" bodyend="325"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classio__context_1_1executor_1ac6da44c8237140d5f8548562f30b86f8" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>io_context::executor::executor</definition>
+        <argsstring>(io_context &amp;ctx) noexcept</argsstring>
+        <name>executor</name>
+        <qualifiedname>io_context::executor::executor</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="330" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="330" bodyend="331"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classio__context" kindref="compound">io_context</ref> 的执行器句柄 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>轻量级可拷贝句柄，引用关联的 io_context。 满足 Executor 概念，可被 strand 和 co_spawn 使用。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="302" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="302" bodyend="334"/>
+    <listofallmembers>
+      <member refid="classio__context_1_1executor_1a9de4829a909f3f0c678eb67d0e4519d7" prot="public" virt="non-virtual"><scope>io_context::executor</scope><name>context</name></member>
+      <member refid="classio__context_1_1executor_1ad2fdd92f33b53a5f07c371b0327df0c1" prot="private" virt="non-virtual"><scope>io_context::executor</scope><name>ctx_</name></member>
+      <member refid="classio__context_1_1executor_1a58514ad1aa500d7d53da3805afef20ca" prot="public" virt="non-virtual"><scope>io_context::executor</scope><name>execute</name></member>
+      <member refid="classio__context_1_1executor_1a37c8ac3144d636ac9a5dcda453fbdad4" prot="public" virt="non-virtual"><scope>io_context::executor</scope><name>executor</name></member>
+      <member refid="classio__context_1_1executor_1ac6da44c8237140d5f8548562f30b86f8" prot="private" virt="non-virtual"><scope>io_context::executor</scope><name>executor</name></member>
+      <member refid="classio__context_1_1executor_1aeddb6b7b3a12244b45352ef4d723d756" prot="public" virt="non-virtual"><scope>io_context::executor</scope><name>operator!=</name></member>
+      <member refid="classio__context_1_1executor_1a9a1b6772b37e09f66efdad273ec50d91" prot="public" virt="non-virtual"><scope>io_context::executor</scope><name>operator=</name></member>
+      <member refid="classio__context_1_1executor_1ac3dc3384d59a45cc43c71b07af167b6e" prot="public" virt="non-virtual"><scope>io_context::executor</scope><name>operator==</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

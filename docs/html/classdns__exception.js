@@ -7,5 +7,6 @@ var classdns__exception =
       [ "SERVER_FAILURE", "classdns__exception.html#a67b3537fad6fd5a5d873b41c82020270af3be33aa3dbdb9c86e55775e9c67ffb5", null ],
       [ "TRUNCATED", "classdns__exception.html#a67b3537fad6fd5a5d873b41c82020270ac7ba492dac2b841be722a016d670052d", null ],
       [ "NO_RECORD", "classdns__exception.html#a67b3537fad6fd5a5d873b41c82020270abc9c5dcbadbc3c20ff3dbc637e7c284b", null ]
-    ] ]
+    ] ],
+    [ "type", "classdns__exception.html#a82eb54a6507dec17950eaf3e7331caa3", null ]
 ];

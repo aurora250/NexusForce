@@ -22,6 +22,22 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhttp__server_1ad5d7427d23bd2b1225eb3e293ce93c1d" prot="private" static="no" mutable="no">
+        <type><ref refid="classio__context" kindref="compound">io_context</ref> *</type>
+        <definition>io_context* http_server::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>http_server::ctx_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>异步 I/O 执行上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="110" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="110" bodyend="110"/>
+      </memberdef>
       <memberdef kind="variable" id="classhttp__server_1acc682d73a7ac26ebce8499ceb0711725" prot="private" static="no" mutable="no">
         <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> &gt;</type>
         <definition>unique_ptr&lt;tcp_server_base&gt; http_server::server_</definition>
@@ -35,22 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="110" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="110" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classhttp__server_1a9fd32695e1eff1a0b79ed92b9fdce72a" prot="private" static="no" mutable="no">
-        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classevent__loop" kindref="compound">event_loop</ref> &gt; &gt;</type>
-        <definition>vector&lt;shared_ptr&lt;event_loop&gt; &gt; http_server::h2c_loops_</definition>
-        <argsstring></argsstring>
-        <name>h2c_loops_</name>
-        <qualifiedname>http_server::h2c_loops_</qualifiedname>
-        <briefdescription>
-<para>h2c升级连接的事件循环 </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="111" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="111" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="111" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhttp__server_1ac020890523c758a615665780625df1cb" prot="private" static="no" mutable="no">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classthread" kindref="compound">thread</ref> &gt;</type>
@@ -420,28 +421,6 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="129" column="25"/>
       </memberdef>
-      <memberdef kind="function" id="classhttp__server_1a0581b05fad043f522413cb4bf855b645" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>static void http_server::handle_connect</definition>
-        <argsstring>(const unique_ptr&lt; tcp_socket &gt; &amp;client_socket, http_request &amp;request)</argsstring>
-        <name>handle_connect</name>
-        <qualifiedname>http_server::handle_connect</qualifiedname>
-        <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt; &amp;</type>
-          <declname>client_socket</declname>
-        </param>
-        <param>
-          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
-          <declname>request</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="154" column="17"/>
-      </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classhttp__server_1a42900572f80787d24b7e53586a4a31e3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -484,6 +463,28 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="153" column="10"/>
       </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a1e6ba5e779cd5c7f63406cb9cceb985f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_server::handle_connect</definition>
+        <argsstring>(const unique_ptr&lt; tcp_socket &gt; &amp;client_socket, http_request &amp;request)</argsstring>
+        <name>handle_connect</name>
+        <qualifiedname>http_server::handle_connect</qualifiedname>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt; &amp;</type>
+          <declname>client_socket</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="154" column="10"/>
+      </memberdef>
       <memberdef kind="function" id="classhttp__server_1a1a6b049d0e2b5a37dacab05a10a0d048" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void http_server::handle_request_with_forward</definition>
@@ -512,10 +513,10 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhttp__server_1a03a43333903ed3d1bb3cd97f6f55c667" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>http_server::http_server</definition>
-        <argsstring>(ports port, size_t worker_count=thread_pool::max_thread_threshhold())</argsstring>
+        <argsstring>(ports port, io_context &amp;ioc, size_t worker_count=0)</argsstring>
         <name>http_server</name>
         <qualifiedname>http_server::http_server</qualifiedname>
         <param>
@@ -523,9 +524,13 @@
           <declname>port</declname>
         </param>
         <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ioc</declname>
+        </param>
+        <param>
           <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
           <declname>worker_count</declname>
-          <defval>thread_pool::max_thread_threshhold()</defval>
+          <defval>0</defval>
         </param>
         <briefdescription>
 <para>构造HTTP服务器 </para>
@@ -541,10 +546,18 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername>ioc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>worker_count</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>工作线程数（默认最大） </para>
+<para>工作线程数（0=CPU线程数） </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -552,19 +565,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="163" column="14"/>
-        <references refid="classhttp__server_1af11eee5a3759cd1bc598ae38fc3353b1" compoundref="http__server_8hpp" startline="290" endline="290">port</references>
-        <referencedby refid="classhttp__server_1aba4ee10f91e7ed646e3f49c5d7bf4a1f">http_server</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="164" column="14"/>
+        <references refid="classhttp__server_1af11eee5a3759cd1bc598ae38fc3353b1" compoundref="http__server_8hpp" startline="292" endline="292">port</references>
+        <referencedby refid="classhttp__server_1a63ad7db62ac147cc7d799f656ece9528">http_server</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhttp__server_1aba4ee10f91e7ed646e3f49c5d7bf4a1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhttp__server_1a63ad7db62ac147cc7d799f656ece9528" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>http_server::http_server</definition>
-        <argsstring>(ports port, ssl_context ctx, size_t worker_count=thread_pool::max_thread_threshhold())</argsstring>
+        <argsstring>(ports port, io_context &amp;ioc, ssl_context ctx, size_t worker_count=0)</argsstring>
         <name>http_server</name>
         <qualifiedname>http_server::http_server</qualifiedname>
         <param>
           <type><ref refid="structports" kindref="compound">ports</ref></type>
           <declname>port</declname>
+        </param>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ioc</declname>
         </param>
         <param>
           <type><ref refid="classssl__context" kindref="compound">ssl_context</ref></type>
@@ -573,7 +590,7 @@
         <param>
           <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
           <declname>worker_count</declname>
-          <defval>thread_pool::max_thread_threshhold()</defval>
+          <defval>0</defval>
         </param>
         <briefdescription>
 <para>构造HTTPS服务器 </para>
@@ -589,6 +606,14 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername>ioc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>ctx</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -600,7 +625,7 @@
 <parametername>worker_count</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>工作线程数（默认最大） </para>
+<para>工作线程数（0=CPU线程数） </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -608,9 +633,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="171" column="5"/>
-        <references refid="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2">http_server</references>
-        <references refid="classhttp__server_1af11eee5a3759cd1bc598ae38fc3353b1" compoundref="http__server_8hpp" startline="290" endline="290">port</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="173" column="5"/>
+        <references refid="classhttp__server_1a03a43333903ed3d1bb3cd97f6f55c667">http_server</references>
+        <references refid="classhttp__server_1af11eee5a3759cd1bc598ae38fc3353b1" compoundref="http__server_8hpp" startline="292" endline="292">port</references>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a56536bcbdc8b4b1ec4cad5f40f064020" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -624,7 +649,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="173" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="175" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a9010468dd7743b95d97cc2f22ed54b1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -641,7 +666,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="175" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="177" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1afa809e97830f11f8f1e15c7ddad67afd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classhttp__server" kindref="compound">http_server</ref> &amp;</type>
@@ -658,7 +683,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="176" column="17"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="178" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1ab114e8aa3b253ec0a411798999709cbf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -675,7 +700,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="178" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="180" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a871fadc08f6dd2d1995f5ae28cd36547" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classhttp__server" kindref="compound">http_server</ref> &amp;</type>
@@ -692,7 +717,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="179" column="17"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="181" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1ad38cd02ebb3673ef7ce5b53546935b09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -735,7 +760,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="187" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="189" column="10"/>
         <references refid="classhttp__server_1ad38cd02ebb3673ef7ce5b53546935b09">load_certificate</references>
         <referencedby refid="classhttp__server_1ad38cd02ebb3673ef7ce5b53546935b09">load_certificate</referencedby>
       </memberdef>
@@ -778,10 +803,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="197" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="197" bodyend="197"/>
-        <references refid="classhttp__server_1a805f62b063a1bd5ed34d673c28304f0e" compoundref="http__server_8hpp" startline="197" endline="197">add_sni_host</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="199" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="199" bodyend="199"/>
+        <references refid="classhttp__server_1a805f62b063a1bd5ed34d673c28304f0e" compoundref="http__server_8hpp" startline="199" endline="199">add_sni_host</references>
         <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
-        <referencedby refid="classhttp__server_1a805f62b063a1bd5ed34d673c28304f0e" compoundref="http__server_8hpp" startline="197" endline="197">add_sni_host</referencedby>
+        <referencedby refid="classhttp__server_1a805f62b063a1bd5ed34d673c28304f0e" compoundref="http__server_8hpp" startline="199" endline="199">add_sni_host</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a8eb76e0231a79eae2f3339bc52b27fe1" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classsni__manager" kindref="compound">sni_manager</ref> &amp;</type>
@@ -799,7 +824,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="203" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="203" bodyend="203"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="205" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="205" bodyend="205"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a7018dda9a7659df1a20edc0a050df359" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classsni__manager" kindref="compound">sni_manager</ref> &amp;</type>
@@ -817,7 +842,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="209" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="209" bodyend="209"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="211" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="211" bodyend="211"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a8be106c4b1ae0ad44b6d1177237f3681" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classhttp__router" kindref="compound">http_router</ref> &amp;</type>
@@ -835,7 +860,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="215" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="215" bodyend="215"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="217" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="217" bodyend="217"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1ab0bdfb6ce456dadcc52483e7dc2a15c2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classhttp__router" kindref="compound">http_router</ref> &amp;</type>
@@ -853,7 +878,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="221" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="221" bodyend="221"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="223" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="223" bodyend="223"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a8f03753ab36550d253352f4c3ba35888" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classwebsocket__server" kindref="compound">websocket_server</ref> &amp;</type>
@@ -871,7 +896,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="227" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="227" bodyend="227"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="229" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="229" bodyend="229"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a4555bf3aa9e757021d7668978439dd01" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classwebsocket__server" kindref="compound">websocket_server</ref> &amp;</type>
@@ -889,7 +914,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="233" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="233" bodyend="233"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="235" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="235" bodyend="235"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a8ae0b82bc4ef2d1ff3288b0689c82256" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -918,9 +943,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="239" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="239" bodyend="239"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="241" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="241" bodyend="241"/>
         <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
-        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="475" endline="477">name</references>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a5d56fef9bf624af16b404e1b55baaaea" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -949,7 +974,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="248" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="248" bodyend="248"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="250" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="250" bodyend="250"/>
         <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a9b76e4fb7d4cfdd0e7fa64ef77067ae2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -968,7 +993,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="254" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="254" bodyend="254"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="256" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="256" bodyend="256"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a98ad1ce884f67e32cf822564062a0739" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="structhttp__cookie__name" kindref="compound">http_cookie_name</ref> &amp;</type>
@@ -986,7 +1011,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="260" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="260" bodyend="260"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="262" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="262" bodyend="262"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1af27919173888fc86812614162e7973c0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -1015,7 +1040,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="266" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="266" bodyend="266"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="268" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="268" bodyend="268"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a5a233441cb3717e67bb65f80b4abdc86" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -1044,7 +1069,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="272" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="272" bodyend="272"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="274" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="274" bodyend="274"/>
         <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="compare_8hpp" startline="133" endline="135">max</references>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1ab67a685cfba430d62d5eeddd68a040c0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -1086,7 +1111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="282" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="282" bodyend="284"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="284" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="284" bodyend="286"/>
         <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1af11eee5a3759cd1bc598ae38fc3353b1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -1105,10 +1130,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="290" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="290" bodyend="290"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="292" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="292" bodyend="292"/>
         <references refid="structports_1ac83896c19af3451bbd0ce66a1b9a233e" compoundref="ports_8hpp" startline="164" endline="164">ports::port</references>
-        <referencedby refid="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2">http_server</referencedby>
-        <referencedby refid="classhttp__server_1aba4ee10f91e7ed646e3f49c5d7bf4a1f">http_server</referencedby>
+        <referencedby refid="classhttp__server_1a03a43333903ed3d1bb3cd97f6f55c667">http_server</referencedby>
+        <referencedby refid="classhttp__server_1a63ad7db62ac147cc7d799f656ece9528">http_server</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1ab5d0912bca865bd7ce0f15b5a1901b9e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1126,7 +1151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="296" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="296" bodyend="296"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="298" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="298" bodyend="298"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a03440381bb1a27bd8bf77bb396645497" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structhttp__session" kindref="compound">http_session</ref> *</type>
@@ -1170,7 +1195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="304" column="19"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="306" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a16d4679ab288d1c2a76aa52b05d87650" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -1202,7 +1227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="311" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="311" bodyend="311"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="313" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="313" bodyend="313"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1adab9d134cf5e2bffa2ba2a93701cb0d5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -1217,7 +1242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="316" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="316" bodyend="316"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="318" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="318" bodyend="318"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a57e8f85d4c53505fcdc3d359a85c016f" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> *</type>
@@ -1235,7 +1260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="322" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="322" bodyend="322"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="324" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="324" bodyend="324"/>
       </memberdef>
       <memberdef kind="function" id="classhttp__server_1a601833147e6f0028799a8f04516ff6ba" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> *</type>
@@ -1253,7 +1278,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="328" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="328" bodyend="328"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="330" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="330" bodyend="330"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1262,7 +1287,7 @@
     <detaileddescription>
 <para>提供完整的HTTP/HTTPS服务器功能，包括请求解析、路由分发、 会话管理、WebSocket升级等。</para>
 <para>使用示例： <programlisting><codeline><highlight class="comment">//<sp/>HTTP服务器</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><ref refid="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2" kindref="member">http_server</ref><sp/><ref refid="classhttp__server_1a57e8f85d4c53505fcdc3d359a85c016f" kindref="member">server</ref>(ports{8080});</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhttp__server_1a03a43333903ed3d1bb3cd97f6f55c667" kindref="member">http_server</ref><sp/><ref refid="classhttp__server_1a57e8f85d4c53505fcdc3d359a85c016f" kindref="member">server</ref>(ports{8080});</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>设置路由</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"><ref refid="classhttp__server_1a57e8f85d4c53505fcdc3d359a85c016f" kindref="member">server</ref>.router().get(</highlight><highlight class="stringliteral">&quot;/&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
@@ -1337,7 +1362,7 @@
         <link refid="structistringify"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="71" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="71" bodyend="329"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="71" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="71" bodyend="331"/>
     <listofallmembers>
       <member refid="classhttp__server_1a805f62b063a1bd5ed34d673c28304f0e" prot="public" virt="non-virtual"><scope>http_server</scope><name>add_sni_host</name></member>
       <member refid="classhttp__server_1ac4e2c1a3d3c69eaa0238e1742c17c982" prot="public" virt="non-virtual"><scope>http_server</scope><name>body_read_timeout</name></member>
@@ -1345,18 +1370,18 @@
       <member refid="classhttp__server_1a9c2910bbd9db21f029f2b8e4617461f7" prot="private" virt="non-virtual"><scope>http_server</scope><name>conn_per_ip_</name></member>
       <member refid="classhttp__server_1a98ad1ce884f67e32cf822564062a0739" prot="public" virt="non-virtual"><scope>http_server</scope><name>cookie_name</name></member>
       <member refid="classhttp__server_1a306b132e82b41bf9f14ed31262d7a6b0" prot="private" virt="non-virtual"><scope>http_server</scope><name>cookie_name_</name></member>
+      <member refid="classhttp__server_1ad5d7427d23bd2b1225eb3e293ce93c1d" prot="private" virt="non-virtual"><scope>http_server</scope><name>ctx_</name></member>
       <member refid="classhttp__server_1a0934d8d1b244a08d0afae48a30fa5079" prot="public" virt="non-virtual"><scope>http_server</scope><name>enable_connect</name></member>
       <member refid="classhttp__server_1a6448c63c08a21979469e9e1ffc56012b" prot="public" virt="non-virtual"><scope>http_server</scope><name>enable_websocket</name></member>
       <member refid="classhttp__server_1a491c7cc10be8d5b932984c9caa6f820f" prot="private" virt="non-virtual"><scope>http_server</scope><name>get_or_create_session</name></member>
       <member refid="classhttp__server_1a03440381bb1a27bd8bf77bb396645497" prot="public" virt="non-virtual"><scope>http_server</scope><name>get_session</name></member>
-      <member refid="classhttp__server_1a9fd32695e1eff1a0b79ed92b9fdce72a" prot="private" virt="non-virtual"><scope>http_server</scope><name>h2c_loops_</name></member>
       <member refid="classhttp__server_1a00e28623ab7be65713e4058bd5c900e6" prot="private" virt="non-virtual"><scope>http_server</scope><name>h2c_mutex_</name></member>
       <member refid="classhttp__server_1ac020890523c758a615665780625df1cb" prot="private" virt="non-virtual"><scope>http_server</scope><name>h2c_threads_</name></member>
       <member refid="classhttp__server_1a42900572f80787d24b7e53586a4a31e3" prot="private" virt="non-virtual"><scope>http_server</scope><name>handle_client</name></member>
-      <member refid="classhttp__server_1a0581b05fad043f522413cb4bf855b645" prot="private" virt="non-virtual"><scope>http_server</scope><name>handle_connect</name></member>
+      <member refid="classhttp__server_1a1e6ba5e779cd5c7f63406cb9cceb985f" prot="private" virt="non-virtual"><scope>http_server</scope><name>handle_connect</name></member>
       <member refid="classhttp__server_1a1a6b049d0e2b5a37dacab05a10a0d048" prot="private" virt="non-virtual"><scope>http_server</scope><name>handle_request_with_forward</name></member>
-      <member refid="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
-      <member refid="classhttp__server_1aba4ee10f91e7ed646e3f49c5d7bf4a1f" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
+      <member refid="classhttp__server_1a03a43333903ed3d1bb3cd97f6f55c667" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
+      <member refid="classhttp__server_1a63ad7db62ac147cc7d799f656ece9528" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
       <member refid="classhttp__server_1a9010468dd7743b95d97cc2f22ed54b1f" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
       <member refid="classhttp__server_1ab114e8aa3b253ec0a411798999709cbf" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
       <member refid="classhttp__server_1ab5d0912bca865bd7ce0f15b5a1901b9e" prot="public" virt="non-virtual"><scope>http_server</scope><name>is_running</name></member>

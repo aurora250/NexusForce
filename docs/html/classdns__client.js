@@ -1,8 +1,14 @@
 var classdns__client =
 [
     [ "config", "structdns__client_1_1config.html", "structdns__client_1_1config" ],
-    [ "dns_client", "classdns__client.html#a8c20c9dde44af13993769f4422981684", null ],
-    [ "dns_client", "classdns__client.html#a370b7017afd3cb7057169a0a57ec055b", null ],
+    [ "dns_client", "classdns__client.html#aa6e8e29444e46be3bbea3b541b6cbff7", null ],
+    [ "dns_client", "classdns__client.html#a8aa4b707d08846a888fba0dbd43d3424", null ],
+    [ "async_query", "classdns__client.html#aaacf77241c9096f915b997ee5a53c12e", null ],
+    [ "async_query", "classdns__client.html#a11168e4296fb4f410ae7a48ebcda814d", null ],
+    [ "async_query", "classdns__client.html#ab570f7754861ea04184a63d13fb9fd51", null ],
+    [ "async_query", "classdns__client.html#a07a3b7a688402f2407969172af8d6c80", null ],
+    [ "async_query", "classdns__client.html#aa13be3e169b8c20441a72683ae44b88d", null ],
+    [ "async_query", "classdns__client.html#a49375f4c02c1f7702c90ca8071114f35", null ],
     [ "batch_query", "classdns__client.html#a8916c88780f4fff4097d783d17f428a8", null ],
     [ "clear_cache", "classdns__client.html#a6ebe6d67d0a69e3b60facc24d41ae968", null ],
     [ "query", "classdns__client.html#ae8f3ba97e2a5c2a3260f8eea9a174525", null ],

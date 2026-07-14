@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['弃用列表_0',['弃用列表',['../deprecated.html',1,'']]]
+  ['异常处理_20exception_0',['❗ 异常处理 (Exception)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md34',1,'']]]
 ];

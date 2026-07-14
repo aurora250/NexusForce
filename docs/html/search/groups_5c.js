@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
+  ['消息通道_0',['消息通道',['../group___channel.html',1,'']]]
 ];

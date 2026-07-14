@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___flat_hash_table" kind="group">
+    <compoundname>FlatHashTable</compoundname>
+    <title>平坦哈希表</title>
+    <innerclass refid="classflat__hashtable" prot="public">flat_hashtable</innerclass>
+    <innerclass refid="structflat__hashtable__iterator" prot="public">flat_hashtable_iterator</innerclass>
+    <briefdescription>
+<para>基于开放寻址法的平坦哈希表实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>平坦哈希表采用开放寻址法（Open Addressing）处理冲突， 使用元数据控制块实现 H2 预过滤，大幅减少对数据数组的内存访问。</para>
+<sect1 id="group___flat_hash_table_1flat_hash_metadata">
+<title>元数据控制块</title><para>每个 slot 对应 1 字节元数据，独立于数据数组存储：</para>
+<para><table rows="4" cols="3"><row>
+<entry thead="yes"><para>状态  </para>
+</entry><entry thead="yes"><para>值  </para>
+</entry><entry thead="yes"><para>含义  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>EMPTY  </para>
+</entry><entry thead="no"><para>0x80  </para>
+</entry><entry thead="no"><para>从未使用  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>DELETED (tombstone)  </para>
+</entry><entry thead="no"><para>0xFE  </para>
+</entry><entry thead="no"><para>已删除，可复用  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>H2 tag  </para>
+</entry><entry thead="no"><para>[0,127]  </para>
+</entry><entry thead="no"><para>7-bit 哈希标签  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___flat_hash_table_1flat_hash_probe">
+<title>探测策略</title><para>使用线性探测：idx = (idx + 1) &amp; (capacity - 1)。 通过元数据字节的 H2 标签预过滤，仅当 H2 匹配时才访问数据数组进行完整键比较。 支持 SSE2 批量探测：一次加载 16 字节元数据，单指令比较 16 个 slot。</para>
+</sect1>
+<sect1 id="group___flat_hash_table_1flat_hash_complexity">
+<title>时间复杂度</title><para><table rows="5" cols="3"><row>
+<entry thead="yes"><para>操作  </para>
+</entry><entry thead="yes"><para>平均情况  </para>
+</entry><entry thead="yes"><para>最坏情况  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>insert  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>erase  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>find  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>rehash  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___flat_hash_table_1flat_hash_iterator">
+<title>迭代器失效规则</title><para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>操作  </para>
+</entry><entry thead="yes"><para>失效范围  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>insert  </para>
+</entry><entry thead="no"><para>rehash 时全部失效  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>erase  </para>
+</entry><entry thead="no"><para>仅失效指向被删除元素的迭代器  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>rehash  </para>
+</entry><entry thead="no"><para>全部迭代器失效  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>clear  </para>
+</entry><entry thead="no"><para>全部迭代器失效  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

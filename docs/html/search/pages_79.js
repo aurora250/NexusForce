@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['请求方法_0',['HTTP 请求方法',['../group___h_t_t_p.html#http_methods',1,'']]]
+  ['记录类型_0',['DNS 记录类型',['../group___d_n_s.html#dns_record_types',1,'']]]
 ];

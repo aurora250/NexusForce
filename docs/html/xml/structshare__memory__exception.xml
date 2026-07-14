@@ -4,44 +4,22 @@
     <compoundname>share_memory_exception</compoundname>
     <basecompoundref refid="structsystem__exception" prot="public" virt="non-virtual">system_exception</basecompoundref>
     <includes refid="share__memory_8hpp" local="no">share_memory.hpp</includes>
-    <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="structshare__memory__exception_1aa86086cdb9b2d4515cb1220355ee9977" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>auto</type>
-        <definition>auto share_memory_exception::static_type</definition>
-        <argsstring></argsstring>
-        <name>static_type</name>
-        <qualifiedname>share_memory_exception::static_type</qualifiedname>
-        <initializer>= &quot;shared_memory_exception&quot;</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="33" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="33" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structshare__memory__exception_1a0ac8ae1e42c37a809b5dd43fac2dee4b" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structshare__memory__exception_1af977e93c11c6b5d33527fdd56cf049e4" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>share_memory_exception::share_memory_exception</definition>
-        <argsstring>(const char *info=&quot;Shared Memory Operation Failed.&quot;, const char *type=static_type, const int code=0) noexcept</argsstring>
+        <argsstring>(const char *info=&quot;Share Memory Operation Failed.&quot;, const error_code code=last_error()) noexcept</argsstring>
         <name>share_memory_exception</name>
         <qualifiedname>share_memory_exception::share_memory_exception</qualifiedname>
         <param>
           <type>const char *</type>
           <declname>info</declname>
-          <defval>&quot;Shared Memory Operation Failed.&quot;</defval>
+          <defval>&quot;Share Memory Operation Failed.&quot;</defval>
         </param>
         <param>
-          <type>const char *</type>
-          <declname>type</declname>
-          <defval>static_type</defval>
-        </param>
-        <param>
-          <type>const int</type>
+          <type>const error_code</type>
           <declname>code</declname>
-          <defval>0</defval>
+          <defval>last_error()</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -82,6 +60,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="32" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structshare__memory__exception_1afc12da4bd5a1734273573feb6553656e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const char *</type>
+        <definition>const char * share_memory_exception::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>share_memory_exception::type</qualifiedname>
+        <reimplements refid="structexception_1a2f7dcc6349b3ef905ebb76859aa8abe6">type</reimplements>
+        <briefdescription>
+<para>获取异常类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="34" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="34" bodyend="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -125,25 +122,26 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="24" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="24" bodyend="34"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="24" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="24" bodyend="35"/>
     <listofallmembers>
-      <member refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>code</name></member>
-      <member refid="structexception_1a33710bd2e564614575128e2c3de94883" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>exception</name></member>
+      <member refid="structsystem__exception_1af69c032fcd6d9bb66a14ae52a3566977" prot="public" virt="virtual"><scope>share_memory_exception</scope><name>code</name></member>
+      <member refid="structsystem__exception_1af985d25515bd806e9e05ca75ac0aa559" prot="protected" virt="non-virtual"><scope>share_memory_exception</scope><name>code_</name></member>
+      <member refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>exception</name></member>
       <member refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>exception</name></member>
       <member refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>exception</name></member>
       <member refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>exception</name></member>
       <member refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>operator=</name></member>
       <member refid="structexception_1a709d705f97cbad7d531dfb5023107536" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>operator=</name></member>
-      <member refid="structshare__memory__exception_1a0ac8ae1e42c37a809b5dd43fac2dee4b" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>share_memory_exception</name></member>
+      <member refid="structshare__memory__exception_1af977e93c11c6b5d33527fdd56cf049e4" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>share_memory_exception</name></member>
       <member refid="structshare__memory__exception_1a7392875da59ba3fb6291c3e4be701479" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>share_memory_exception</name></member>
-      <member refid="structshare__memory__exception_1aa86086cdb9b2d4515cb1220355ee9977" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>static_type</name></member>
-      <member refid="structsystem__exception_1ab11bfa8bc6b1dd70bde6e63faf4c7a00" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>system_exception</name></member>
+      <member refid="structsystem__exception_1a40cdfe9b12f818d7632abc6e2696b3ea" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>system_exception</name></member>
+      <member refid="structsystem__exception_1acdb31c0077759cae3ccd8f1f2e892606" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>system_exception</name></member>
       <member refid="structsystem__exception_1aa4eb872d3a9680bc738f6358db79989f" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>system_exception</name></member>
-      <member refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>type</name></member>
-      <member refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>what</name></member>
+      <member refid="structshare__memory__exception_1afc12da4bd5a1734273573feb6553656e" prot="public" virt="virtual"><scope>share_memory_exception</scope><name>type</name></member>
+      <member refid="structexception_1ae5dc04391190559c19adcf269cab48e2" prot="public" virt="virtual"><scope>share_memory_exception</scope><name>what</name></member>
       <member refid="structexception_1a80249b2b108c9b913dc7144839092a2b" prot="public" virt="virtual"><scope>share_memory_exception</scope><name>~exception</name></member>
       <member refid="structshare__memory__exception_1a4107b4c7b17c8586bd25dadba1657e9b" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>~share_memory_exception</name></member>
-      <member refid="structsystem__exception_1a5d1dadefd1078030fb74276941472d4d" prot="public" virt="virtual"><scope>share_memory_exception</scope><name>~system_exception</name></member>
+      <member refid="structsystem__exception_1a7b61682a3e3db92b6e91087792444955" prot="public" virt="non-virtual"><scope>share_memory_exception</scope><name>~system_exception</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

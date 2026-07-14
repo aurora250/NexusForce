@@ -3,6 +3,7 @@
   <compounddef id="classtcp__socket" kind="class" language="C++" prot="public">
     <compoundname>tcp_socket</compoundname>
     <basecompoundref refid="classip__socket" prot="public" virt="non-virtual">ip_socket</basecompoundref>
+    <basecompoundref refid="classasync__stream" prot="public" virt="non-virtual">async_stream</basecompoundref>
     <derivedcompoundref refid="classssl__socket" prot="public" virt="non-virtual">ssl_socket</derivedcompoundref>
     <includes refid="tcp__socket_8hpp" local="no">tcp_socket.hpp</includes>
     <sectiondef kind="public-func">
@@ -19,11 +20,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="69" column="5"/>
-        <references refid="classtcp__socket_1a72e6e572e36c55fb4b110a315e79fe13">tcp_socket</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="74" column="5"/>
+        <referencedby refid="classtcp__socket_1ac38f95134157b6a88c1a416f402e0e4f">operator=</referencedby>
         <referencedby refid="classssl__socket_1a8e99620bef12b00c9b56639b5ad41fd7" compoundref="ssl__socket_8hpp" startline="87" endline="88">ssl_socket::ssl_socket</referencedby>
         <referencedby refid="classssl__socket_1ac28d7742ab7ed2ac7386598c872b7615" compoundref="ssl__socket_8hpp" startline="97" endline="98">ssl_socket::ssl_socket</referencedby>
-        <referencedby refid="classtcp__socket_1a72e6e572e36c55fb4b110a315e79fe13">tcp_socket</referencedby>
+        <referencedby refid="classtcp__socket_1a1a9225c2f9677f82c852c2c709be3a9c">tcp_socket</referencedby>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1a1a9225c2f9677f82c852c2c709be3a9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -35,12 +36,14 @@
           <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &amp;&amp;</type>
         </param>
         <briefdescription>
+<para>移动构造函数 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="71" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="79" column="5"/>
+        <references refid="classtcp__socket_1a72e6e572e36c55fb4b110a315e79fe13">tcp_socket</references>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1ac38f95134157b6a88c1a416f402e0e4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &amp;</type>
@@ -52,12 +55,14 @@
           <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &amp;&amp;</type>
         </param>
         <briefdescription>
+<para>移动赋值运算符 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="72" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="84" column="16"/>
+        <references refid="classtcp__socket_1a72e6e572e36c55fb4b110a315e79fe13">tcp_socket</references>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1aef337d72fe3a8446418aa979771e3bf3" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -66,7 +71,7 @@
         <name>tcp_socket</name>
         <qualifiedname>tcp_socket::tcp_socket</qualifiedname>
         <param>
-          <type><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref></type>
+          <type><ref refid="classsocket__base_1ab609d0c1ee77f66e90cb73c57baf343f" kindref="member">native_handle_type</ref></type>
           <declname>fd</declname>
         </param>
         <briefdescription>
@@ -86,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="78" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="78" bodyend="79"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="90" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="90" bodyend="91"/>
         <references refid="classip__socket_1aaae0820ef1814fdd2299e646e7ce0b88">ip_socket::ip_socket</references>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1ae478390813792609937744c3ef8efce3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -102,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="84" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="96" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1a34441a6c2a85f433b36b687aa7555193" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -141,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="93" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="105" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1a5edcc5a4efa0c0cdb1cf61f7fa07c66b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -214,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="107" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="119" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1ad3d58c073c38c262bdb17719a1a18e18" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref></type>
@@ -276,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="120" column="21"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="132" column="21"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1a734cf0a89eef6b5811ef1e5d689c979f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -342,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="132" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="144" column="13"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1a2285234ecbf05ad20648056f88a984b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -381,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="142" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="154" column="10"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1ab36f07bf68660b6cf08f485a9865fd5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
@@ -444,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="155" column="21"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="167" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1ade0c66a5525a70ed0ff8bf2f58e966b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; char &gt;</type>
@@ -484,7 +489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="166" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="178" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__socket_1a57397ce241cbe72787a8b452321c715a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -503,7 +508,973 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="172" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="172" bodyend="172"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="184" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="184" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1a27156e0a77eb3fa3189993ce037c4c18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void tcp_socket::async_connect</definition>
+        <argsstring>(io_context &amp;ctx, const ip_address &amp;endpoint, function&lt; void(error_code)&gt; handler)</argsstring>
+        <name>async_connect</name>
+        <qualifiedname>tcp_socket::async_connect</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步连接到远程端点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>远程端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+发起异步TCP连接。socket 会被设为非阻塞模式。 handler 在 <ref refid="classio__context_1a495e72fb34e3758f161fbedf6a805c76" kindref="member">io_context::run()</ref> 线程中执行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="195" column="10"/>
+        <referencedby refid="classtcp__socket_1a5f4b853fbbed1a995dc05b2f6913492a" compoundref="tcp__socket_8hpp" startline="343" endline="345">async_connect</referencedby>
+        <referencedby refid="classtcp__socket_1a882c8ee63552bc3e1b33878149a0f84f" compoundref="tcp__socket_8hpp" startline="322" endline="324">async_connect</referencedby>
+        <referencedby refid="classtcp__socket_1af7fdd87ea0672cb6f3aa6dd0fe46c37e" compoundref="tcp__socket_8hpp" startline="354" endline="358">async_connect</referencedby>
+        <referencedby refid="classtcp__socket_1abb27b761512794856a74064953d99958" compoundref="tcp__socket_8hpp" startline="332" endline="336">async_connect</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1a8a6e50928810ecc929bb131bfe178a08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void tcp_socket::async_connect</definition>
+        <argsstring>(io_context &amp;ctx, const ip_address &amp;endpoint, cancellation_slot &amp;slot, function&lt; void(error_code)&gt; handler)</argsstring>
+        <name>async_connect</name>
+        <qualifiedname>tcp_socket::async_connect</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步连接（带取消槽） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>远程端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="204" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1ae1eec8ce0560b6f9426070504cb2f8c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void tcp_socket::async_read</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, function&lt; void(error_code, size_t)&gt; handler) override</argsstring>
+        <name>async_read</name>
+        <qualifiedname>tcp_socket::async_read</qualifiedname>
+        <reimplements refid="classasync__stream_1a8ae4d0e9a1e4196adefdab847faaf6c8">async_read</reimplements>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步读取数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="213" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1af57d14bbf43ba1326203ed9508b7850d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void tcp_socket::async_read</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, cancellation_slot &amp;slot, function&lt; void(error_code, size_t)&gt; handler) override</argsstring>
+        <name>async_read</name>
+        <qualifiedname>tcp_socket::async_read</qualifiedname>
+        <reimplements refid="classasync__stream_1a969402529c88b5f6ea5fce03fb89bf4a">async_read</reimplements>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步读取（带取消槽） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="222" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1ac0126b85f5b33835de4a1175d1b10172" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void tcp_socket::async_write</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; buffer, function&lt; void(error_code, size_t)&gt; handler) override</argsstring>
+        <name>async_write</name>
+        <qualifiedname>tcp_socket::async_write</qualifiedname>
+        <reimplements refid="classasync__stream_1abb3e320776014dd8e830433cc903e454">async_write</reimplements>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步写入数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="231" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1a4e3dbf515f6a17ee332cb5f47ecdbeff" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void tcp_socket::async_write</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; buffer, cancellation_slot &amp;slot, function&lt; void(error_code, size_t)&gt; handler) override</argsstring>
+        <name>async_write</name>
+        <qualifiedname>tcp_socket::async_write</qualifiedname>
+        <reimplements refid="classasync__stream_1af044064a9c39321c16c7496aed30c67f">async_write</reimplements>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步写入（带取消槽） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="241" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1aa0d3a078a1d676cdf45fd8eb897d9689" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void tcp_socket::async_receive</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_receive</name>
+        <qualifiedname>tcp_socket::async_receive</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步接收（转发到 async_read） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="250" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="250" bodyend="252"/>
+        <references refid="group___async_compose_1gaa3a471689038b117d43614e9ac8f5618">async_read</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1ae3a835a3724020cececf29d27911d8dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void tcp_socket::async_receive</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, cancellation_slot &amp;slot, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_receive</name>
+        <qualifiedname>tcp_socket::async_receive</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步接收（带取消槽，转发到 async_read） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="261" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="261" bodyend="264"/>
+        <references refid="group___async_compose_1gaa3a471689038b117d43614e9ac8f5618">async_read</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1a7cad5bedc80d9909d8cc657ad04683d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void tcp_socket::async_send</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; buffer, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_send</name>
+        <qualifiedname>tcp_socket::async_send</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步发送（转发到 async_write） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="272" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="272" bodyend="274"/>
+        <references refid="group___async_compose_1ga180357bbe23447c41b8492b51a1be1fa">async_write</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1af828d3d5c748999903e5b1e06afbe5ef" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void tcp_socket::async_send</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; buffer, cancellation_slot &amp;slot, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_send</name>
+        <qualifiedname>tcp_socket::async_send</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步发送（带取消槽，转发到 async_write） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_transferred) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="283" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="283" bodyend="286"/>
+        <references refid="group___async_compose_1ga180357bbe23447c41b8492b51a1be1fa">async_write</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1a1bf83c52000b681c66f00766f4597d8a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Token</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Token &gt;, <ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) tcp_socket::async_receive</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, Token &amp;&amp;token)</argsstring>
+        <name>async_receive</name>
+        <qualifiedname>tcp_socket::async_receive</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>Token &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>异步接收—模板令牌版本（转发到 async_read） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="296" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="296" bodyend="298"/>
+        <references refid="classasync__stream_1a8ae4d0e9a1e4196adefdab847faaf6c8">async_stream::async_read</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1abc80dd8bc0b9a6e06ca1b006eac10b30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Token</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Token &gt;, <ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>)&gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) tcp_socket::async_send</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; buffer, Token &amp;&amp;token)</argsstring>
+        <name>async_send</name>
+        <qualifiedname>tcp_socket::async_send</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>Token &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>异步发送—模板令牌版本（转发到 async_write） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="308" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="308" bodyend="310"/>
+        <references refid="classasync__stream_1abb3e320776014dd8e830433cc903e454">async_stream::async_write</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1a882c8ee63552bc3e1b33878149a0f84f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Token</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Token &gt;, <ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code)&gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void tcp_socket::async_connect</definition>
+        <argsstring>(io_context &amp;ctx, const ip_address &amp;endpoint, Token &amp;&amp;token)</argsstring>
+        <name>async_connect</name>
+        <qualifiedname>tcp_socket::async_connect</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type>Token &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>异步连接—任意可调用对象版本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型，需满足 void(error_code) 签名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>远程端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+handler 可以是任意满足 void(error_code) 的可调用对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="322" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="322" bodyend="324"/>
+        <references refid="classtcp__socket_1a27156e0a77eb3fa3189993ce037c4c18">async_connect</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1abb27b761512794856a74064953d99958" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto tcp_socket::async_connect</definition>
+        <argsstring>(io_context &amp;ctx, const ip_address &amp;endpoint, use_future_t)</argsstring>
+        <name>async_connect</name>
+        <qualifiedname>tcp_socket::async_connect</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__future__t" kindref="compound">use_future_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步连接—use_future </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>远程端点地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classfuture_3_01void_01_4" kindref="compound">future&lt;void&gt;</ref> 异步操作结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="332" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="332" bodyend="336"/>
+        <references refid="classtcp__socket_1a27156e0a77eb3fa3189993ce037c4c18">async_connect</references>
+        <references refid="group___completion_tokens_1ga1e645f41f2c2ddff978c87c8c91b18c6" compoundref="async__result_8hpp" startline="37" endline="37">use_future</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1a5f4b853fbbed1a995dc05b2f6913492a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void tcp_socket::async_connect</definition>
+        <argsstring>(io_context &amp;ctx, const ip_address &amp;endpoint, detached_t)</argsstring>
+        <name>async_connect</name>
+        <qualifiedname>tcp_socket::async_connect</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="structdetached__t" kindref="compound">detached_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步连接—detached（即发即忘） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>远程端点地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="343" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="343" bodyend="345"/>
+        <references refid="classtcp__socket_1a27156e0a77eb3fa3189993ce037c4c18">async_connect</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__socket_1af7fdd87ea0672cb6f3aa6dd0fe46c37e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto tcp_socket::async_connect</definition>
+        <argsstring>(io_context &amp;ctx, const ip_address &amp;endpoint, use_awaitable_t)</argsstring>
+        <name>async_connect</name>
+        <qualifiedname>tcp_socket::async_connect</qualifiedname>
+        <param>
+          <type><ref refid="classio__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="structuse__awaitable__t" kindref="compound">use_awaitable_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步连接—use_awaitable </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>远程端点地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classawaitable_3_01void_01_4" kindref="compound">awaitable&lt;void&gt;</ref> 可协程等待的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="354" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="354" bodyend="358"/>
+        <references refid="classtcp__socket_1a27156e0a77eb3fa3189993ce037c4c18">async_connect</references>
+        <references refid="group___completion_tokens_1ga9fe3f0a59b8db368024b61ce6215b3b4" compoundref="use__awaitable_8hpp" startline="27" endline="27">use_awaitable</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -547,6 +1518,10 @@
 </programlisting> </para>
     </detaileddescription>
     <inheritancegraph>
+      <node id="4">
+        <label>async_stream</label>
+        <link refid="classasync__stream"/>
+      </node>
       <node id="2">
         <label>ip_socket</label>
         <link refid="classip__socket"/>
@@ -557,7 +1532,7 @@
         <label>socket_base</label>
         <link refid="classsocket__base"/>
       </node>
-      <node id="4">
+      <node id="5">
         <label>ssl_socket</label>
         <link refid="classssl__socket"/>
         <childnode refid="1" relation="public-inheritance">
@@ -568,9 +1543,15 @@
         <link refid="classtcp__socket"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
+      <node id="4">
+        <label>async_stream</label>
+        <link refid="classasync__stream"/>
+      </node>
       <node id="2">
         <label>ip_socket</label>
         <link refid="classip__socket"/>
@@ -586,11 +1567,40 @@
         <link refid="classtcp__socket"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="64" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="64" bodyend="173"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" line="69" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_socket.hpp" bodystart="69" bodyend="360"/>
     <listofallmembers>
       <member refid="classip__socket_1ad0d10499d585a7074c06152831e3dd88" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>address_family</name></member>
+      <member refid="classtcp__socket_1a27156e0a77eb3fa3189993ce037c4c18" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1a8a6e50928810ecc929bb131bfe178a08" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1a882c8ee63552bc3e1b33878149a0f84f" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1abb27b761512794856a74064953d99958" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1a5f4b853fbbed1a995dc05b2f6913492a" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1af7fdd87ea0672cb6f3aa6dd0fe46c37e" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_connect</name></member>
+      <member refid="classtcp__socket_1ae1eec8ce0560b6f9426070504cb2f8c8" prot="public" virt="virtual"><scope>tcp_socket</scope><name>async_read</name></member>
+      <member refid="classtcp__socket_1af57d14bbf43ba1326203ed9508b7850d" prot="public" virt="virtual"><scope>tcp_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a0051d844a8e4a2a79429ba644bec9c32" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>tcp_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1abe6469f417ff23bec1b439151c870998" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>tcp_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a4dec67d9232c626b29da1bc831757fd5" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>tcp_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a0a640b341717691f22fae0acf674d235" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>tcp_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a3a686bf64f378efcd1ac737b3a62282f" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>tcp_socket</scope><name>async_read</name></member>
+      <member refid="classasync__stream_1a31296aee86f5591a179850836e7b9fca" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>tcp_socket</scope><name>async_read</name></member>
+      <member refid="classtcp__socket_1aa0d3a078a1d676cdf45fd8eb897d9689" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_receive</name></member>
+      <member refid="classtcp__socket_1ae3a835a3724020cececf29d27911d8dc" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_receive</name></member>
+      <member refid="classtcp__socket_1a1bf83c52000b681c66f00766f4597d8a" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_receive</name></member>
+      <member refid="classtcp__socket_1a7cad5bedc80d9909d8cc657ad04683d4" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_send</name></member>
+      <member refid="classtcp__socket_1af828d3d5c748999903e5b1e06afbe5ef" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_send</name></member>
+      <member refid="classtcp__socket_1abc80dd8bc0b9a6e06ca1b006eac10b30" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>async_send</name></member>
+      <member refid="classtcp__socket_1ac0126b85f5b33835de4a1175d1b10172" prot="public" virt="virtual"><scope>tcp_socket</scope><name>async_write</name></member>
+      <member refid="classtcp__socket_1a4e3dbf515f6a17ee332cb5f47ecdbeff" prot="public" virt="virtual"><scope>tcp_socket</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1af0350479bc553eb7e76dd103d0238859" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>tcp_socket</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1a6325eb7c21abf48337f0d0e0fc389834" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>tcp_socket</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1aa6b1889815d02c3e8483252a45139b08" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>tcp_socket</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1a929ddcabcc0650dd4e6177d3da04e3e1" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>tcp_socket</scope><name>async_write</name></member>
+      <member refid="classasync__stream_1a5a1a66d6160f864f90225a9bddc7f605" prot="public" virt="non-virtual" ambiguityscope="async_stream::"><scope>tcp_socket</scope><name>async_write</name></member>
       <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>bind</name></member>
       <member refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" prot="public" virt="virtual"><scope>tcp_socket</scope><name>close</name></member>
       <member refid="classtcp__socket_1a5edcc5a4efa0c0cdb1cf61f7fa07c66b" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>connect</name></member>
@@ -620,7 +1630,7 @@
       <member refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>listen</name></member>
       <member refid="classsocket__base_1a1d9ff8b37d502077065ad505098f1c10" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>local_endpoint</name></member>
       <member refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>native_handle</name></member>
-      <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>native_handle_type</name></member>
+      <member refid="classsocket__base_1ab609d0c1ee77f66e90cb73c57baf343f" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>native_handle_type</name></member>
       <member refid="classsocket__base_1a3b85c967d07f91b5e45349495e2a1481" prot="protected" virt="non-virtual"><scope>tcp_socket</scope><name>nonblocking_</name></member>
       <member refid="classtcp__socket_1a34441a6c2a85f433b36b687aa7555193" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>open</name></member>
       <member refid="classsocket__base_1a27acf9f7219de7e4462af8744e44137a" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>tcp_socket</scope><name>open</name></member>
@@ -661,6 +1671,7 @@
       <member refid="classtcp__socket_1aef337d72fe3a8446418aa979771e3bf3" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>tcp_socket</name></member>
       <member refid="classsocket__base_1a7333214e4562884b671ed9545313985a" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>try_open</name></member>
       <member refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>type</name></member>
+      <member refid="classasync__stream_1a77ea4f279fa385fe527b8ac032432a5a" prot="public" virt="virtual"><scope>tcp_socket</scope><name>~async_stream</name></member>
       <member refid="classip__socket_1a4a1d2bcfb15b0d319defef1c9da3c0d4" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>~ip_socket</name></member>
       <member refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" prot="public" virt="virtual"><scope>tcp_socket</scope><name>~socket_base</name></member>
       <member refid="classtcp__socket_1ae478390813792609937744c3ef8efce3" prot="public" virt="non-virtual"><scope>tcp_socket</scope><name>~tcp_socket</name></member>

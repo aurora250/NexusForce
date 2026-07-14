@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['量词算法_0',['量词算法',['../group___quantifier_algorithms.html',1,'']]]
+  ['邮件格式说明_0',['邮件格式说明',['../group___s_m_t_p.html#email_format',1,'']]]
 ];

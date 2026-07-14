@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['网络工具_0',['网络工具',['../group___network_util.html',1,'']]]
+  ['缓冲区格式化_0',['缓冲区格式化',['../group___buffer_format.html',1,'']]],
+  ['缓冲区_1',['缓冲区',['../group___async_buffers.html',1,'']]],
+  ['缓存_2',['缓存',['../group___cache.html',1,'']]]
 ];

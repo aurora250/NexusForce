@@ -7,5 +7,6 @@ var dir_dc1a87d153d51472552e4f87e766c776 =
     [ "error_condition.hpp", "error__condition_8hpp_source.html", null ],
     [ "exception.hpp", "exception_8hpp.html", "exception_8hpp" ],
     [ "exception_ptr.hpp", "exception__ptr_8hpp.html", "exception__ptr_8hpp" ],
+    [ "system_exception.hpp", "system__exception_8hpp_source.html", null ],
     [ "terminate.hpp", "terminate_8hpp.html", "terminate_8hpp" ]
 ];

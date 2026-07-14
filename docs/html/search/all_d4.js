@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['💾_20内存管理_20memory_0',['💾 内存管理 (Memory)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md31',1,'']]]
+  ['颜色分量定义_0',['颜色分量定义',['../group___color.html#color_components',1,'']]],
+  ['颜色_1',['颜色',['../group___color.html',1,'']]]
 ];

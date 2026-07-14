@@ -52,11 +52,12 @@ var searchData=
   ['min_5fsize_49',['min_size',['../structdatabase__pool_1_1pool__config.html#a1395067e2971084a8e053499da0f3fcc',1,'database_pool::pool_config::min_size'],['../classcompress__filter.html#aca46308ffd31d37fcd9e7f35cd9b953d',1,'compress_filter::min_size']]],
   ['minimum_50',['minimum',['../structdns__soa__record.html#ae58843f45515c99b0698f8b2d86568b7',1,'dns_soa_record']]],
   ['minor_51',['minor',['../structsysinfo_1_1os__version__info.html#a8c7e7dd389d78e4994a8432e60306767',1,'sysinfo::os_version_info']]],
-  ['mname_52',['mname',['../structdns__soa__record.html#a017d0a4766dffcdadfad5fc019feb454',1,'dns_soa_record']]],
-  ['mon_5fdecimal_5fpoint_53',['mon_decimal_point',['../structlocale_1_1monetary__info.html#a182753e0aa681781409d521f4f8ca6a1',1,'locale::monetary_info']]],
-  ['mon_5fgrouping_54',['mon_grouping',['../structlocale_1_1monetary__info.html#ab397058dd4401272814d051a789371a0',1,'locale::monetary_info']]],
-  ['mon_5fthousands_5fsep_55',['mon_thousands_sep',['../structlocale_1_1monetary__info.html#abc1efd192f78a20233253481d8e24478',1,'locale::monetary_info']]],
-  ['month_5fdays_56',['month_days',['../classdate.html#a78731e993e4f87ef6dad6f086107ac9a',1,'date']]],
-  ['month_5fnames_57',['month_names',['../structlocale_1_1time__info.html#a62616b19965cb0dd7a1b04192f60c516',1,'locale::time_info']]],
-  ['mutex_5f_58',['mutex_',['../structhttp__server_1_1session__manager.html#af89775ec4991ee5acd1a254d5338af84',1,'http_server::session_manager::mutex_'],['../structtoken__bucket.html#a7c0e305f1b5c193c92f3bf3469e0eb51',1,'token_bucket::mutex_']]]
+  ['minus_5fsign_52',['minus_sign',['../structlocale_1_1numeric__info.html#a679558b0f91b0781ffb1648fc5f31d8d',1,'locale::numeric_info']]],
+  ['mname_53',['mname',['../structdns__soa__record.html#a017d0a4766dffcdadfad5fc019feb454',1,'dns_soa_record']]],
+  ['mon_5fdecimal_5fpoint_54',['mon_decimal_point',['../structlocale_1_1monetary__info.html#a182753e0aa681781409d521f4f8ca6a1',1,'locale::monetary_info']]],
+  ['mon_5fgrouping_55',['mon_grouping',['../structlocale_1_1monetary__info.html#ab397058dd4401272814d051a789371a0',1,'locale::monetary_info']]],
+  ['mon_5fthousands_5fsep_56',['mon_thousands_sep',['../structlocale_1_1monetary__info.html#abc1efd192f78a20233253481d8e24478',1,'locale::monetary_info']]],
+  ['month_5fdays_57',['month_days',['../classdate.html#a78731e993e4f87ef6dad6f086107ac9a',1,'date']]],
+  ['month_5fnames_58',['month_names',['../structlocale_1_1time__info.html#a62616b19965cb0dd7a1b04192f60c516',1,'locale::time_info']]],
+  ['mutex_5f_59',['mutex_',['../structhttp__server_1_1session__manager.html#af89775ec4991ee5acd1a254d5338af84',1,'http_server::session_manager::mutex_'],['../structtoken__bucket.html#a7c0e305f1b5c193c92f3bf3469e0eb51',1,'token_bucket::mutex_']]]
 ];

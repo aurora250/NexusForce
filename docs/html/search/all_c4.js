@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['邮件格式说明_0',['邮件格式说明',['../group___s_m_t_p.html#email_format',1,'']]]
+  ['适用场景_0',['适用场景',['../group___s_h_a256.html#usage',1,'']]]
 ];

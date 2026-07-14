@@ -1,0 +1,2311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classflat__hashtable.html','','classflat__hashtable-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___flat_hash_table.html">平坦哈希表</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>平坦哈希表容器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classflat__hashtable__inherit__graph.svg" width="756" height="70"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a072bf58037a16f37f6a9deb761c8fee0" id="r_a072bf58037a16f37f6a9deb761c8fee0"><td class="memItemLeft"><a id="a072bf58037a16f37f6a9deb761c8fee0" name="a072bf58037a16f37f6a9deb761c8fee0"></a>
+using&#160;</td><td class="memItemRight"><b>key_type</b> = Key</td></tr>
+<tr class="memdesc:a072bf58037a16f37f6a9deb761c8fee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">键类型 <br /></td></tr>
+<tr class="memitem:af737cc8e4d5093189e019e9af2652843" id="r_af737cc8e4d5093189e019e9af2652843"><td class="memItemLeft"><a id="af737cc8e4d5093189e019e9af2652843" name="af737cc8e4d5093189e019e9af2652843"></a>
+using&#160;</td><td class="memItemRight"><b>hasher</b> = HashFcn</td></tr>
+<tr class="memdesc:af737cc8e4d5093189e019e9af2652843"><td class="mdescLeft">&#160;</td><td class="mdescRight">哈希函数类型 <br /></td></tr>
+<tr class="memitem:a6ab4688b006581c1f6428d6c8b25a35f" id="r_a6ab4688b006581c1f6428d6c8b25a35f"><td class="memItemLeft"><a id="a6ab4688b006581c1f6428d6c8b25a35f" name="a6ab4688b006581c1f6428d6c8b25a35f"></a>
+using&#160;</td><td class="memItemRight"><b>key_equal</b> = EqualKey</td></tr>
+<tr class="memdesc:a6ab4688b006581c1f6428d6c8b25a35f"><td class="mdescLeft">&#160;</td><td class="mdescRight">键相等比较函数类型 <br /></td></tr>
+<tr class="memitem:a0bbd80544e66122b170b1a49b812b62d" id="r_a0bbd80544e66122b170b1a49b812b62d"><td class="memItemLeft"><a id="a0bbd80544e66122b170b1a49b812b62d" name="a0bbd80544e66122b170b1a49b812b62d"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = Value</td></tr>
+<tr class="memdesc:a0bbd80544e66122b170b1a49b812b62d"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:ac71458da99b3f27b2030546051b3645c" id="r_ac71458da99b3f27b2030546051b3645c"><td class="memItemLeft"><a id="ac71458da99b3f27b2030546051b3645c" name="ac71458da99b3f27b2030546051b3645c"></a>
+using&#160;</td><td class="memItemRight"><b>pointer</b> = Value*</td></tr>
+<tr class="memdesc:ac71458da99b3f27b2030546051b3645c"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:afc09f078a1a8e8133a440779b152aedc" id="r_afc09f078a1a8e8133a440779b152aedc"><td class="memItemLeft"><a id="afc09f078a1a8e8133a440779b152aedc" name="afc09f078a1a8e8133a440779b152aedc"></a>
+using&#160;</td><td class="memItemRight"><b>reference</b> = Value&amp;</td></tr>
+<tr class="memdesc:afc09f078a1a8e8133a440779b152aedc"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:a1851299c44d99677b68948ddb08f20f7" id="r_a1851299c44d99677b68948ddb08f20f7"><td class="memItemLeft"><a id="a1851299c44d99677b68948ddb08f20f7" name="a1851299c44d99677b68948ddb08f20f7"></a>
+using&#160;</td><td class="memItemRight"><b>const_pointer</b> = const Value*</td></tr>
+<tr class="memdesc:a1851299c44d99677b68948ddb08f20f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量指针类型 <br /></td></tr>
+<tr class="memitem:a723dec47a32b4afb122d306540caf910" id="r_a723dec47a32b4afb122d306540caf910"><td class="memItemLeft"><a id="a723dec47a32b4afb122d306540caf910" name="a723dec47a32b4afb122d306540caf910"></a>
+using&#160;</td><td class="memItemRight"><b>const_reference</b> = const Value&amp;</td></tr>
+<tr class="memdesc:a723dec47a32b4afb122d306540caf910"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量引用类型 <br /></td></tr>
+<tr class="memitem:ad3bfd047fc8a2e763cff5d040f819645" id="r_ad3bfd047fc8a2e763cff5d040f819645"><td class="memItemLeft"><a id="ad3bfd047fc8a2e763cff5d040f819645" name="ad3bfd047fc8a2e763cff5d040f819645"></a>
+using&#160;</td><td class="memItemRight"><b>size_type</b> = <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td></tr>
+<tr class="memdesc:ad3bfd047fc8a2e763cff5d040f819645"><td class="mdescLeft">&#160;</td><td class="mdescRight">大小类型 <br /></td></tr>
+<tr class="memitem:ae8dcc6073f22d3c3fb84124e40e519b4" id="r_ae8dcc6073f22d3c3fb84124e40e519b4"><td class="memItemLeft"><a id="ae8dcc6073f22d3c3fb84124e40e519b4" name="ae8dcc6073f22d3c3fb84124e40e519b4"></a>
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a></td></tr>
+<tr class="memdesc:ae8dcc6073f22d3c3fb84124e40e519b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:aa8dfbb52fac37f0a2991e77de4566fdc" id="r_aa8dfbb52fac37f0a2991e77de4566fdc"><td class="memItemLeft"><a id="aa8dfbb52fac37f0a2991e77de4566fdc" name="aa8dfbb52fac37f0a2991e77de4566fdc"></a>
+using&#160;</td><td class="memItemRight"><b>iterator</b> = <a class="el" href="structflat__hashtable__iterator.html">flat_hashtable_iterator</a>&lt;false, <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&gt;</td></tr>
+<tr class="memdesc:aa8dfbb52fac37f0a2991e77de4566fdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类型 <br /></td></tr>
+<tr class="memitem:afd05540a5593f8f4a203c03b057ba0fb" id="r_afd05540a5593f8f4a203c03b057ba0fb"><td class="memItemLeft"><a id="afd05540a5593f8f4a203c03b057ba0fb" name="afd05540a5593f8f4a203c03b057ba0fb"></a>
+using&#160;</td><td class="memItemRight"><b>const_iterator</b> = <a class="el" href="structflat__hashtable__iterator.html">flat_hashtable_iterator</a>&lt;true, <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&gt;</td></tr>
+<tr class="memdesc:afd05540a5593f8f4a203c03b057ba0fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量迭代器类型 <br /></td></tr>
+<tr class="memitem:accaf416e778dcd42b45661a976182d8d" id="r_accaf416e778dcd42b45661a976182d8d"><td class="memItemLeft"><a id="accaf416e778dcd42b45661a976182d8d" name="accaf416e778dcd42b45661a976182d8d"></a>
+using&#160;</td><td class="memItemRight"><b>allocator_type</b> = Alloc</td></tr>
+<tr class="memdesc:accaf416e778dcd42b45661a976182d8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">分配器类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ae779ef34587d03c03ea3f7de8669bbeb" id="r_ae779ef34587d03c03ea3f7de8669bbeb"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae779ef34587d03c03ea3f7de8669bbeb">flat_hashtable</a> (const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a> n=0)</td></tr>
+<tr class="memdesc:ae779ef34587d03c03ea3f7de8669bbeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定初始容量  <br /></td></tr>
+<tr class="memitem:a96f87a270340d8a508cf0a5807215734" id="r_a96f87a270340d8a508cf0a5807215734"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a96f87a270340d8a508cf0a5807215734">flat_hashtable</a> (const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a> n, const HashFcn &amp;hf)</td></tr>
+<tr class="memdesc:a96f87a270340d8a508cf0a5807215734"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定初始容量和哈希函数  <br /></td></tr>
+<tr class="memitem:ad3812ccf5f38c1659fc4748e7da57ce4" id="r_ad3812ccf5f38c1659fc4748e7da57ce4"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad3812ccf5f38c1659fc4748e7da57ce4">flat_hashtable</a> (const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a> n, const HashFcn &amp;hf, const EqualKey &amp;eql)</td></tr>
+<tr class="memdesc:ad3812ccf5f38c1659fc4748e7da57ce4"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定初始容量、哈希函数和相等比较函数  <br /></td></tr>
+<tr class="memitem:a7031b30b4f5e8c3135b14064110f1059" id="r_a7031b30b4f5e8c3135b14064110f1059"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7031b30b4f5e8c3135b14064110f1059">flat_hashtable</a> (const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a> n, const HashFcn &amp;hf, const EqualKey &amp;eql, const ExtractKey &amp;ext)</td></tr>
+<tr class="memdesc:a7031b30b4f5e8c3135b14064110f1059"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定所有函数对象  <br /></td></tr>
+<tr class="memitem:aaa971f0d52a49fd2391d0956b93535b9" id="r_aaa971f0d52a49fd2391d0956b93535b9"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aaa971f0d52a49fd2391d0956b93535b9">flat_hashtable</a> (const <a class="el" href="classflat__hashtable.html">flat_hashtable</a> &amp;other)</td></tr>
+<tr class="memdesc:aaa971f0d52a49fd2391d0956b93535b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数  <br /></td></tr>
+<tr class="memitem:a2151010dc8f254cc34b067ea17d3057b" id="r_a2151010dc8f254cc34b067ea17d3057b"><td class="memItemLeft"><a class="el" href="classflat__hashtable.html">flat_hashtable</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2151010dc8f254cc34b067ea17d3057b">operator=</a> (const <a class="el" href="classflat__hashtable.html">flat_hashtable</a> &amp;other)</td></tr>
+<tr class="memdesc:a2151010dc8f254cc34b067ea17d3057b"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝赋值运算符  <br /></td></tr>
+<tr class="memitem:a0a716dd28e1d980e2cc54fa1f80e795b" id="r_a0a716dd28e1d980e2cc54fa1f80e795b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a0a716dd28e1d980e2cc54fa1f80e795b">flat_hashtable</a> (<a class="el" href="classflat__hashtable.html">flat_hashtable</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a0a716dd28e1d980e2cc54fa1f80e795b"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
+<tr class="memitem:a716b8d5cf397cb025d6f49e5f92ffe1b" id="r_a716b8d5cf397cb025d6f49e5f92ffe1b"><td class="memItemLeft"><a class="el" href="classflat__hashtable.html">flat_hashtable</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a716b8d5cf397cb025d6f49e5f92ffe1b">operator=</a> (<a class="el" href="classflat__hashtable.html">flat_hashtable</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a716b8d5cf397cb025d6f49e5f92ffe1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:a0de6765034f2106ee54595c5f477db26" id="r_a0de6765034f2106ee54595c5f477db26"><td class="memItemLeft"><a id="a0de6765034f2106ee54595c5f477db26" name="a0de6765034f2106ee54595c5f477db26"></a>
+&#160;</td><td class="memItemRight"><b>~flat_hashtable</b> ()</td></tr>
+<tr class="memdesc:a0de6765034f2106ee54595c5f477db26"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:a141488637aa6cd99065058a566c2a95a" id="r_a141488637aa6cd99065058a566c2a95a"><td class="memItemLeft"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a141488637aa6cd99065058a566c2a95a">begin</a> () noexcept</td></tr>
+<tr class="memdesc:a141488637aa6cd99065058a566c2a95a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取起始迭代器  <br /></td></tr>
+<tr class="memitem:a9408156c455037f16a3c46020f8893e2" id="r_a9408156c455037f16a3c46020f8893e2"><td class="memItemLeft"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9408156c455037f16a3c46020f8893e2">end</a> () noexcept</td></tr>
+<tr class="memdesc:a9408156c455037f16a3c46020f8893e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结束迭代器  <br /></td></tr>
+<tr class="memitem:a406429621a2c6af5d4ea8e029297481b" id="r_a406429621a2c6af5d4ea8e029297481b"><td class="memItemLeft"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a406429621a2c6af5d4ea8e029297481b">begin</a> () const noexcept</td></tr>
+<tr class="memdesc:a406429621a2c6af5d4ea8e029297481b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:a2147f254d3f831e0d7aec15de1f5b43f" id="r_a2147f254d3f831e0d7aec15de1f5b43f"><td class="memItemLeft"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2147f254d3f831e0d7aec15de1f5b43f">end</a> () const noexcept</td></tr>
+<tr class="memdesc:a2147f254d3f831e0d7aec15de1f5b43f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:affc978b4ed5004125f397ba1d7bdd2fb" id="r_affc978b4ed5004125f397ba1d7bdd2fb"><td class="memItemLeft"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#affc978b4ed5004125f397ba1d7bdd2fb">cbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:affc978b4ed5004125f397ba1d7bdd2fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:aa5369fb5de21e5cb6902c52400f14a13" id="r_aa5369fb5de21e5cb6902c52400f14a13"><td class="memItemLeft"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa5369fb5de21e5cb6902c52400f14a13">cend</a> () const noexcept</td></tr>
+<tr class="memdesc:aa5369fb5de21e5cb6902c52400f14a13"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:ab0467fd90b6ad79d56e068a75249d33b" id="r_ab0467fd90b6ad79d56e068a75249d33b"><td class="memItemLeft"><a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab0467fd90b6ad79d56e068a75249d33b">size</a> () const noexcept</td></tr>
+<tr class="memdesc:ab0467fd90b6ad79d56e068a75249d33b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取元素数量  <br /></td></tr>
+<tr class="memitem:aa6d17354d1a6f4bfc6176ea93bf08d2a" id="r_aa6d17354d1a6f4bfc6176ea93bf08d2a"><td class="memItemLeft"><a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa6d17354d1a6f4bfc6176ea93bf08d2a">max_size</a> () const noexcept</td></tr>
+<tr class="memdesc:aa6d17354d1a6f4bfc6176ea93bf08d2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最大可能大小  <br /></td></tr>
+<tr class="memitem:a86578a458341d5b056ea84d77dcddd03" id="r_a86578a458341d5b056ea84d77dcddd03"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a86578a458341d5b056ea84d77dcddd03">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a86578a458341d5b056ea84d77dcddd03"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为空  <br /></td></tr>
+<tr class="memitem:ae4151641106dc9924ce4fd6d2c923c08" id="r_ae4151641106dc9924ce4fd6d2c923c08"><td class="memItemLeft"><a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae4151641106dc9924ce4fd6d2c923c08">capacity</a> () const noexcept</td></tr>
+<tr class="memdesc:ae4151641106dc9924ce4fd6d2c923c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取容量（slot 总数）  <br /></td></tr>
+<tr class="memitem:af44801a9515893279d229d2a490f4dfe" id="r_af44801a9515893279d229d2a490f4dfe"><td class="memItemLeft"><a class="el" href="#af737cc8e4d5093189e019e9af2652843">hasher</a>&#160;</td><td class="memItemRight"><a class="el" href="#af44801a9515893279d229d2a490f4dfe">hash_function</a> () const noexcept(<a class="el" href="group___type_special_member_function_checks.html#ga1a08255d43824dc23e14e09d4f9a3d22">is_nothrow_copy_constructible_v</a>&lt; <a class="el" href="#af737cc8e4d5093189e019e9af2652843">hasher</a> &gt;)</td></tr>
+<tr class="memdesc:af44801a9515893279d229d2a490f4dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取哈希函数对象  <br /></td></tr>
+<tr class="memitem:ad3a4ca09b3ed1c3c5e5afde93ea13439" id="r_ad3a4ca09b3ed1c3c5e5afde93ea13439"><td class="memItemLeft"><a class="el" href="#a6ab4688b006581c1f6428d6c8b25a35f">key_equal</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad3a4ca09b3ed1c3c5e5afde93ea13439">key_eql</a> () const noexcept(<a class="el" href="group___type_special_member_function_checks.html#ga1a08255d43824dc23e14e09d4f9a3d22">is_nothrow_copy_constructible_v</a>&lt; <a class="el" href="#a6ab4688b006581c1f6428d6c8b25a35f">key_equal</a> &gt;)</td></tr>
+<tr class="memdesc:ad3a4ca09b3ed1c3c5e5afde93ea13439"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取键相等比较函数对象  <br /></td></tr>
+<tr class="memitem:ab8852ca9b927e2dc334bbd3ab17df96d" id="r_ab8852ca9b927e2dc334bbd3ab17df96d"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#ab8852ca9b927e2dc334bbd3ab17df96d">load_factor</a> () const noexcept</td></tr>
+<tr class="memdesc:ab8852ca9b927e2dc334bbd3ab17df96d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前负载因子  <br /></td></tr>
+<tr class="memitem:a81f3f7a1b06950c99c097316cf078b08" id="r_a81f3f7a1b06950c99c097316cf078b08"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a81f3f7a1b06950c99c097316cf078b08">max_load_factor</a> () const noexcept</td></tr>
+<tr class="memdesc:a81f3f7a1b06950c99c097316cf078b08"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最大负载因子  <br /></td></tr>
+<tr class="memitem:a64605a3dbdec47ab51c0f2f70d712e3c" id="r_a64605a3dbdec47ab51c0f2f70d712e3c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a64605a3dbdec47ab51c0f2f70d712e3c">max_load_factor</a> (const float lf) noexcept</td></tr>
+<tr class="memdesc:a64605a3dbdec47ab51c0f2f70d712e3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置最大负载因子  <br /></td></tr>
+<tr class="memitem:a98bad05939c8e221a69d9dd7fe7e9ee3" id="r_a98bad05939c8e221a69d9dd7fe7e9ee3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a98bad05939c8e221a69d9dd7fe7e9ee3">rehash</a> (const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a> new_size)</td></tr>
+<tr class="memdesc:a98bad05939c8e221a69d9dd7fe7e9ee3"><td class="mdescLeft">&#160;</td><td class="mdescRight">重新哈希，调整容量  <br /></td></tr>
+<tr class="memitem:a1e03ab971a293d2e8c539241302483a0" id="r_a1e03ab971a293d2e8c539241302483a0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1e03ab971a293d2e8c539241302483a0">reserve</a> (const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a> n)</td></tr>
+<tr class="memdesc:a1e03ab971a293d2e8c539241302483a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">预留空间  <br /></td></tr>
+<tr class="memitem:a439073b59350c68d8803d5224385d64c" id="r_a439073b59350c68d8803d5224385d64c"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a439073b59350c68d8803d5224385d64c template"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>, bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a439073b59350c68d8803d5224385d64c">emplace_unique</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a439073b59350c68d8803d5224385d64c"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造元素（唯一键版本）  <br /></td></tr>
+<tr class="memitem:aba830f935eacbb5c9bac9b5c040ded65" id="r_aba830f935eacbb5c9bac9b5c040ded65"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:aba830f935eacbb5c9bac9b5c040ded65 template"><td class="memItemLeft"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aba830f935eacbb5c9bac9b5c040ded65">emplace_equal</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:aba830f935eacbb5c9bac9b5c040ded65"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造元素（允许重复键版本）  <br /></td></tr>
+<tr class="memitem:a3b969ee6cd6d80a14d2b0d508c4e8cb0" id="r_a3b969ee6cd6d80a14d2b0d508c4e8cb0"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>, bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3b969ee6cd6d80a14d2b0d508c4e8cb0">insert_unique</a> (const <a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &amp;value)</td></tr>
+<tr class="memdesc:a3b969ee6cd6d80a14d2b0d508c4e8cb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入元素（唯一键，拷贝版本）  <br /></td></tr>
+<tr class="memitem:a7d6d9aed0b78189b40452f2dd9a6ac7b" id="r_a7d6d9aed0b78189b40452f2dd9a6ac7b"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>, bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a7d6d9aed0b78189b40452f2dd9a6ac7b">insert_unique</a> (<a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &amp;&amp;value)</td></tr>
+<tr class="memdesc:a7d6d9aed0b78189b40452f2dd9a6ac7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入元素（唯一键，移动版本）  <br /></td></tr>
+<tr class="memitem:a8cd1df5f574362a27e95ed3fda162c37" id="r_a8cd1df5f574362a27e95ed3fda162c37"><td class="memItemLeft"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8cd1df5f574362a27e95ed3fda162c37">insert_equal</a> (const <a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &amp;value)</td></tr>
+<tr class="memdesc:a8cd1df5f574362a27e95ed3fda162c37"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入元素（允许重复键，拷贝版本）  <br /></td></tr>
+<tr class="memitem:add4dcd3885f4d73e87e8f7e0a53174b7" id="r_add4dcd3885f4d73e87e8f7e0a53174b7"><td class="memItemLeft"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#add4dcd3885f4d73e87e8f7e0a53174b7">insert_equal</a> (<a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &amp;&amp;value)</td></tr>
+<tr class="memdesc:add4dcd3885f4d73e87e8f7e0a53174b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入元素（允许重复键，移动版本）  <br /></td></tr>
+<tr class="memitem:aff06d3c7277cd8e15949f16388e56f5a" id="r_aff06d3c7277cd8e15949f16388e56f5a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:aff06d3c7277cd8e15949f16388e56f5a template"><td class="memItemLeft"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga3d298019699d72aef974a27a13c65393">is_ranges_fwd_iter_v</a>&lt; Iterator &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aff06d3c7277cd8e15949f16388e56f5a">insert_unique</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:aff06d3c7277cd8e15949f16388e56f5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围插入元素（唯一键，前向迭代器版本）  <br /></td></tr>
+<tr class="memitem:ac33af62483732c2aa9bf5200f62bec85" id="r_ac33af62483732c2aa9bf5200f62bec85"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ac33af62483732c2aa9bf5200f62bec85 template"><td class="memItemLeft"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="group___iterator_category_checks.html#ga3d298019699d72aef974a27a13c65393">is_ranges_fwd_iter_v</a>&lt; Iterator &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac33af62483732c2aa9bf5200f62bec85">insert_unique</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ac33af62483732c2aa9bf5200f62bec85"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围插入元素（唯一键，非前向迭代器版本）  <br /></td></tr>
+<tr class="memitem:a9f1d5524a9e7218845aca229b45809da" id="r_a9f1d5524a9e7218845aca229b45809da"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9f1d5524a9e7218845aca229b45809da">insert_unique</a> (std::initializer_list&lt; <a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &gt; ilist)</td></tr>
+<tr class="memdesc:a9f1d5524a9e7218845aca229b45809da"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表插入（唯一键）  <br /></td></tr>
+<tr class="memitem:ab21f2efc787233cc12113ebd1998af21" id="r_ab21f2efc787233cc12113ebd1998af21"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ab21f2efc787233cc12113ebd1998af21 template"><td class="memItemLeft"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga3d298019699d72aef974a27a13c65393">is_ranges_fwd_iter_v</a>&lt; Iterator &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab21f2efc787233cc12113ebd1998af21">insert_equal</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ab21f2efc787233cc12113ebd1998af21"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围插入元素（允许重复键，前向迭代器版本）  <br /></td></tr>
+<tr class="memitem:ae238260a30b8b0bc7c55a42b77ee7ef4" id="r_ae238260a30b8b0bc7c55a42b77ee7ef4"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ae238260a30b8b0bc7c55a42b77ee7ef4 template"><td class="memItemLeft"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="group___iterator_category_checks.html#ga3d298019699d72aef974a27a13c65393">is_ranges_fwd_iter_v</a>&lt; Iterator &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae238260a30b8b0bc7c55a42b77ee7ef4">insert_equal</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ae238260a30b8b0bc7c55a42b77ee7ef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围插入元素（允许重复键，非前向迭代器版本）  <br /></td></tr>
+<tr class="memitem:a30d68b0780b63462324378b5afc49197" id="r_a30d68b0780b63462324378b5afc49197"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a30d68b0780b63462324378b5afc49197">insert_equal</a> (std::initializer_list&lt; <a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &gt; ilist)</td></tr>
+<tr class="memdesc:a30d68b0780b63462324378b5afc49197"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表插入（允许重复键）  <br /></td></tr>
+<tr class="memitem:af622d43d66e9d76cf0b04751ba2c84b7" id="r_af622d43d66e9d76cf0b04751ba2c84b7"><td class="memItemLeft"><a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#af622d43d66e9d76cf0b04751ba2c84b7">erase</a> (const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;key) noexcept</td></tr>
+<tr class="memdesc:af622d43d66e9d76cf0b04751ba2c84b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除所有具有指定键的元素  <br /></td></tr>
+<tr class="memitem:a76a68cf3a97cf416de5f57eb420cc993" id="r_a76a68cf3a97cf416de5f57eb420cc993"><td class="memItemLeft"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a76a68cf3a97cf416de5f57eb420cc993">erase</a> (const <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> &amp;position) noexcept</td></tr>
+<tr class="memdesc:a76a68cf3a97cf416de5f57eb420cc993"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定位置的元素  <br /></td></tr>
+<tr class="memitem:a220837676e2e6aef18144840731ab307" id="r_a220837676e2e6aef18144840731ab307"><td class="memItemLeft"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a220837676e2e6aef18144840731ab307">erase</a> (<a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> first, <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> last) noexcept</td></tr>
+<tr class="memdesc:a220837676e2e6aef18144840731ab307"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定范围内的元素  <br /></td></tr>
+<tr class="memitem:a89f423ae8251f001917eda49ebf26ba5" id="r_a89f423ae8251f001917eda49ebf26ba5"><td class="memItemLeft"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a89f423ae8251f001917eda49ebf26ba5">erase</a> (const <a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> &amp;position) noexcept</td></tr>
+<tr class="memdesc:a89f423ae8251f001917eda49ebf26ba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定位置的元素（常量迭代器版本）  <br /></td></tr>
+<tr class="memitem:aa32438d119ee9f88cc2edbbc5c859327" id="r_aa32438d119ee9f88cc2edbbc5c859327"><td class="memItemLeft"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa32438d119ee9f88cc2edbbc5c859327">erase</a> (<a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> first, <a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> last) noexcept</td></tr>
+<tr class="memdesc:aa32438d119ee9f88cc2edbbc5c859327"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定范围内的常量元素  <br /></td></tr>
+<tr class="memitem:a9a52179a3d869dd5be9c3379f08e1da0" id="r_a9a52179a3d869dd5be9c3379f08e1da0"><td class="memItemLeft"><a id="a9a52179a3d869dd5be9c3379f08e1da0" name="a9a52179a3d869dd5be9c3379f08e1da0"></a>
+void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
+<tr class="memdesc:a9a52179a3d869dd5be9c3379f08e1da0"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空哈希表 <br /></td></tr>
+<tr class="memitem:aa8146447cabc045187899cc09ac14967" id="r_aa8146447cabc045187899cc09ac14967"><td class="memItemLeft"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa8146447cabc045187899cc09ac14967">find</a> (const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;key) noexcept</td></tr>
+<tr class="memdesc:aa8146447cabc045187899cc09ac14967"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找具有指定键的元素  <br /></td></tr>
+<tr class="memitem:a793f5d5d87120990a91a69ba1223dc3f" id="r_a793f5d5d87120990a91a69ba1223dc3f"><td class="memItemLeft"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a793f5d5d87120990a91a69ba1223dc3f">find</a> (const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;key) const noexcept</td></tr>
+<tr class="memdesc:a793f5d5d87120990a91a69ba1223dc3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找具有指定键的元素（常量版本）  <br /></td></tr>
+<tr class="memitem:a7b336e16875ae331a7a4e16067ba18e0" id="r_a7b336e16875ae331a7a4e16067ba18e0"><td class="memItemLeft"><a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7b336e16875ae331a7a4e16067ba18e0">count</a> (const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;key) const noexcept</td></tr>
+<tr class="memdesc:a7b336e16875ae331a7a4e16067ba18e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">统计具有指定键的元素数量  <br /></td></tr>
+<tr class="memitem:a59a27686b1fe1e1da0ab36ff978493fa" id="r_a59a27686b1fe1e1da0ab36ff978493fa"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a59a27686b1fe1e1da0ab36ff978493fa">contains</a> (const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;key) const noexcept</td></tr>
+<tr class="memdesc:a59a27686b1fe1e1da0ab36ff978493fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否包含指定键  <br /></td></tr>
+<tr class="memitem:a6c97ec8f8928137b91478f90124052dc" id="r_a6c97ec8f8928137b91478f90124052dc"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>, <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a6c97ec8f8928137b91478f90124052dc">equal_range</a> (const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a6c97ec8f8928137b91478f90124052dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的元素范围  <br /></td></tr>
+<tr class="memitem:aab6f8fc9cfd67ba460451cea48d5759f" id="r_aab6f8fc9cfd67ba460451cea48d5759f"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a>, <a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aab6f8fc9cfd67ba460451cea48d5759f">equal_range</a> (const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:aab6f8fc9cfd67ba460451cea48d5759f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的元素范围（常量版本）  <br /></td></tr>
+<tr class="memitem:a893f08ecfe8d460d9fd456a30089a9cd" id="r_a893f08ecfe8d460d9fd456a30089a9cd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a893f08ecfe8d460d9fd456a30089a9cd">swap</a> (<a class="el" href="classflat__hashtable.html">flat_hashtable</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:a893f08ecfe8d460d9fd456a30089a9cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个哈希表的内容  <br /></td></tr>
+<tr class="memitem:a9ad934a4d890b7888b55c94b9ccb1fe7" id="r_a9ad934a4d890b7888b55c94b9ccb1fe7"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a9ad934a4d890b7888b55c94b9ccb1fe7">equal_to</a> (const <a class="el" href="classflat__hashtable.html">flat_hashtable</a> &amp;rhs) const</td></tr>
+<tr class="memdesc:a9ad934a4d890b7888b55c94b9ccb1fe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:a5b072cc21b4f82e47bf3293929b6fbcf" id="r_a5b072cc21b4f82e47bf3293929b6fbcf"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5b072cc21b4f82e47bf3293929b6fbcf">less_than</a> (const <a class="el" href="classflat__hashtable.html">flat_hashtable</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga852d6f970d2af419ffe467715fb10b01">lexicographical_compare</a>(<a class="el" href="#affc978b4ed5004125f397ba1d7bdd2fb">cbegin</a>(), <a class="el" href="#aa5369fb5de21e5cb6902c52400f14a13">cend</a>(), rhs.cbegin(), rhs.cend())))</td></tr>
+<tr class="memdesc:a5b072cc21b4f82e47bf3293929b6fbcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
+<tr class="inherit_header pub_methods_structicollector"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structicollector')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structicollector.html">icollector&lt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</a></td></tr>
+<tr class="memitem:a81c300cff7d482cad8064e08abdb5392 inherit pub_methods_structicollector" id="r_a81c300cff7d482cad8064e08abdb5392"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="structicollector.html#a81c300cff7d482cad8064e08abdb5392">size</a> () const noexcept(noexcept(derived().size()))</td></tr>
+<tr class="memdesc:a81c300cff7d482cad8064e08abdb5392 inherit pub_methods_structicollector"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取集合大小  <br /></td></tr>
+<tr class="memitem:ae47d32b5c747d4f85fd9aa4fb850a2dc inherit pub_methods_structicollector" id="r_ae47d32b5c747d4f85fd9aa4fb850a2dc"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structicollector.html#ae47d32b5c747d4f85fd9aa4fb850a2dc">empty</a> () const noexcept(noexcept(derived().empty()))</td></tr>
+<tr class="memdesc:ae47d32b5c747d4f85fd9aa4fb850a2dc inherit pub_methods_structicollector"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查集合是否为空  <br /></td></tr>
+<tr class="inherit_header pub_methods_structicomparable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structicomparable')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structicomparable.html">icomparable&lt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</a></td></tr>
+<tr class="memitem:a19b050f922dcb00e282f1fd440e2df77 inherit pub_methods_structicomparable" id="r_a19b050f922dcb00e282f1fd440e2df77"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structicomparable.html#a19b050f922dcb00e282f1fd440e2df77">operator==</a> (const <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;rhs) const noexcept(noexcept(derived().<a class="el" href="structequal__to.html">equal_to</a>(rhs)))</td></tr>
+<tr class="memdesc:a19b050f922dcb00e282f1fd440e2df77 inherit pub_methods_structicomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较运算符  <br /></td></tr>
+<tr class="memitem:a5666568813e0b179355cae28bb101cb5 inherit pub_methods_structicomparable" id="r_a5666568813e0b179355cae28bb101cb5"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structicomparable.html#a5666568813e0b179355cae28bb101cb5">operator!=</a> (const <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;rhs) const noexcept(noexcept(!(derived().<a class="el" href="structequal__to.html">equal_to</a>(rhs))))</td></tr>
+<tr class="memdesc:a5666568813e0b179355cae28bb101cb5 inherit pub_methods_structicomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">不等比较运算符  <br /></td></tr>
+<tr class="memitem:ad55728ed77b4804c1cfc944085e1ff01 inherit pub_methods_structicomparable" id="r_ad55728ed77b4804c1cfc944085e1ff01"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structicomparable.html#ad55728ed77b4804c1cfc944085e1ff01">operator&lt;</a> (const <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;rhs) const noexcept(noexcept(derived().less_than(rhs)))</td></tr>
+<tr class="memdesc:ad55728ed77b4804c1cfc944085e1ff01 inherit pub_methods_structicomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较运算符  <br /></td></tr>
+<tr class="memitem:a5d2fcdbcf595020adcaccc310d90fc16 inherit pub_methods_structicomparable" id="r_a5d2fcdbcf595020adcaccc310d90fc16"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structicomparable.html#a5d2fcdbcf595020adcaccc310d90fc16">operator&gt;</a> (const <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;rhs) const noexcept(noexcept(rhs.less_than(derived())))</td></tr>
+<tr class="memdesc:a5d2fcdbcf595020adcaccc310d90fc16 inherit pub_methods_structicomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">大于比较运算符  <br /></td></tr>
+<tr class="memitem:a024a6a008fa61eb0e486150f52d36310 inherit pub_methods_structicomparable" id="r_a024a6a008fa61eb0e486150f52d36310"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structicomparable.html#a024a6a008fa61eb0e486150f52d36310">operator&lt;=</a> (const <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;rhs) const noexcept(noexcept(!(rhs.less_than(derived()))))</td></tr>
+<tr class="memdesc:a024a6a008fa61eb0e486150f52d36310 inherit pub_methods_structicomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于等于比较运算符  <br /></td></tr>
+<tr class="memitem:a108835b6418a11d9f26fb6849e820f0f inherit pub_methods_structicomparable" id="r_a108835b6418a11d9f26fb6849e820f0f"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structicomparable.html#a108835b6418a11d9f26fb6849e820f0f">operator&gt;=</a> (const <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;rhs) const noexcept(noexcept(!(derived().less_than(rhs))))</td></tr>
+<tr class="memdesc:a108835b6418a11d9f26fb6849e820f0f inherit pub_methods_structicomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">大于等于比较运算符  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+静态 Public 属性</h2></td></tr>
+<tr class="memitem:ab44846c976e4235fc6c752c2b5c14bf3" id="r_ab44846c976e4235fc6c752c2b5c14bf3"><td class="memItemLeft"><a id="ab44846c976e4235fc6c752c2b5c14bf3" name="ab44846c976e4235fc6c752c2b5c14bf3"></a>
+static constexpr <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>&#160;</td><td class="memItemRight"><b>FLAT_HT_EMPTY</b> = 0x80</td></tr>
+<tr class="memdesc:ab44846c976e4235fc6c752c2b5c14bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">EMPTY 元数据标记 <br /></td></tr>
+<tr class="memitem:a26f8ff8f9a47cc0b8fbe25fe6318e922" id="r_a26f8ff8f9a47cc0b8fbe25fe6318e922"><td class="memItemLeft"><a id="a26f8ff8f9a47cc0b8fbe25fe6318e922" name="a26f8ff8f9a47cc0b8fbe25fe6318e922"></a>
+static constexpr <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>&#160;</td><td class="memItemRight"><b>FLAT_HT_DELETED</b> = 0xFE</td></tr>
+<tr class="memdesc:a26f8ff8f9a47cc0b8fbe25fe6318e922"><td class="mdescLeft">&#160;</td><td class="mdescRight">DELETED 元数据标记 <br /></td></tr>
+<tr class="memitem:a0b5d78cc44d56719dd7098ecf32cdbef" id="r_a0b5d78cc44d56719dd7098ecf32cdbef"><td class="memItemLeft"><a id="a0b5d78cc44d56719dd7098ecf32cdbef" name="a0b5d78cc44d56719dd7098ecf32cdbef"></a>
+static constexpr <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>&#160;</td><td class="memItemRight"><b>FLAT_HT_H2_MASK</b> = 0x7F</td></tr>
+<tr class="memdesc:a0b5d78cc44d56719dd7098ecf32cdbef"><td class="mdescLeft">&#160;</td><td class="mdescRight">H2 标签位掩码 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt;<br />
+class flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;</div><p>平坦哈希表容器 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Value</td><td>值类型 </td></tr>
+    <tr><td class="paramname">Key</td><td>键类型 </td></tr>
+    <tr><td class="paramname">HashFcn</td><td>哈希函数类型 </td></tr>
+    <tr><td class="paramname">ExtractKey</td><td>从值中提取键的函数对象类型 </td></tr>
+    <tr><td class="paramname">EqualKey</td><td>键相等比较函数对象类型 </td></tr>
+    <tr><td class="paramname">Alloc</td><td>分配器类型（用于 Value 分配）</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>平坦哈希表使用开放寻址法处理冲突，采用元数据控制块实现 H2 预过滤， 提供平均常数时间复杂度的插入、删除和查找操作。 </p>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00179">179</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="ae779ef34587d03c03ea3f7de8669bbeb" name="ae779ef34587d03c03ea3f7de8669bbeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae779ef34587d03c03ea3f7de8669bbeb">&#9670;&#160;</a></span>flat_hashtable() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数，指定初始容量 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>初始容量提示 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00600">600</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a96f87a270340d8a508cf0a5807215734" name="a96f87a270340d8a508cf0a5807215734"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96f87a270340d8a508cf0a5807215734">&#9670;&#160;</a></span>flat_hashtable() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const HashFcn &amp;</td>          <td class="paramname"><span class="paramname"><em>hf</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数，指定初始容量和哈希函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>初始容量提示 </td></tr>
+    <tr><td class="paramname">hf</td><td>哈希函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00614">614</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad3812ccf5f38c1659fc4748e7da57ce4" name="ad3812ccf5f38c1659fc4748e7da57ce4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3812ccf5f38c1659fc4748e7da57ce4">&#9670;&#160;</a></span>flat_hashtable() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const HashFcn &amp;</td>          <td class="paramname"><span class="paramname"><em>hf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const EqualKey &amp;</td>          <td class="paramname"><span class="paramname"><em>eql</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数，指定初始容量、哈希函数和相等比较函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>初始容量提示 </td></tr>
+    <tr><td class="paramname">hf</td><td>哈希函数 </td></tr>
+    <tr><td class="paramname">eql</td><td>相等比较函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00630">630</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7031b30b4f5e8c3135b14064110f1059" name="a7031b30b4f5e8c3135b14064110f1059"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7031b30b4f5e8c3135b14064110f1059">&#9670;&#160;</a></span>flat_hashtable() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const HashFcn &amp;</td>          <td class="paramname"><span class="paramname"><em>hf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const EqualKey &amp;</td>          <td class="paramname"><span class="paramname"><em>eql</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ExtractKey &amp;</td>          <td class="paramname"><span class="paramname"><em>ext</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数，指定所有函数对象 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>初始容量提示 </td></tr>
+    <tr><td class="paramname">hf</td><td>哈希函数 </td></tr>
+    <tr><td class="paramname">eql</td><td>相等比较函数 </td></tr>
+    <tr><td class="paramname">ext</td><td>值提取函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00648">648</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aaa971f0d52a49fd2391d0956b93535b9" name="aaa971f0d52a49fd2391d0956b93535b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa971f0d52a49fd2391d0956b93535b9">&#9670;&#160;</a></span>flat_hashtable() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源哈希表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00664">664</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0a716dd28e1d980e2cc54fa1f80e795b" name="a0a716dd28e1d980e2cc54fa1f80e795b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a716dd28e1d980e2cc54fa1f80e795b">&#9670;&#160;</a></span>flat_hashtable() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源哈希表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00694">694</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a406429621a2c6af5d4ea8e029297481b" name="a406429621a2c6af5d4ea8e029297481b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a406429621a2c6af5d4ea8e029297481b">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00754">754</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a141488637aa6cd99065058a566c2a95a" name="a141488637aa6cd99065058a566c2a95a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a141488637aa6cd99065058a566c2a95a">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00734">734</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae4151641106dc9924ce4fd6d2c923c08" name="ae4151641106dc9924ce4fd6d2c923c08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4151641106dc9924ce4fd6d2c923c08">&#9670;&#160;</a></span>capacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::capacity </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取容量（slot 总数） </p>
+<dl class="section return"><dt>返回</dt><dd>容量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00804">804</a> 行定义.</p>
+
+</div>
+</div>
+<a id="affc978b4ed5004125f397ba1d7bdd2fb" name="affc978b4ed5004125f397ba1d7bdd2fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affc978b4ed5004125f397ba1d7bdd2fb">&#9670;&#160;</a></span>cbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::cbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00766">766</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l00754">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin()</a> , 以及 <a class="el" href="flat__hashtable_8hpp_source.html#l01387">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than()</a>.</p>
+
+</div>
+</div>
+<a id="aa5369fb5de21e5cb6902c52400f14a13" name="aa5369fb5de21e5cb6902c52400f14a13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5369fb5de21e5cb6902c52400f14a13">&#9670;&#160;</a></span>cend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::cend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向末尾的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00780">780</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l00766">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::cbegin()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l01242">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l00760">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::end()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l01299">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l01189">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::find()</a> , 以及 <a class="el" href="flat__hashtable_8hpp_source.html#l01387">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than()</a>.</p>
+
+</div>
+</div>
+<a id="a59a27686b1fe1e1da0ab36ff978493fa" name="a59a27686b1fe1e1da0ab36ff978493fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59a27686b1fe1e1da0ab36ff978493fa">&#9670;&#160;</a></span>contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::contains </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否包含指定键 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要检查的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否包含 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01242">1242</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7b336e16875ae331a7a4e16067ba18e0" name="a7b336e16875ae331a7a4e16067ba18e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b336e16875ae331a7a4e16067ba18e0">&#9670;&#160;</a></span>count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::count </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>统计具有指定键的元素数量 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要统计的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>匹配的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01215">1215</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aba830f935eacbb5c9bac9b5c040ded65" name="aba830f935eacbb5c9bac9b5c040ded65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba830f935eacbb5c9bac9b5c040ded65">&#9670;&#160;</a></span>emplace_equal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::emplace_equal </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造元素（允许重复键版本） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00905">905</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l00959">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal()</a> , 以及 <a class="el" href="flat__hashtable_8hpp_source.html#l00966">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal()</a>.</p>
+
+</div>
+</div>
+<a id="a439073b59350c68d8803d5224385d64c" name="a439073b59350c68d8803d5224385d64c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a439073b59350c68d8803d5224385d64c">&#9670;&#160;</a></span>emplace_unique()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>, bool &gt; <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::emplace_unique </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造元素（唯一键版本） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00868">868</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l00945">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique()</a> , 以及 <a class="el" href="flat__hashtable_8hpp_source.html#l00952">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique()</a>.</p>
+
+</div>
+</div>
+<a id="a86578a458341d5b056ea84d77dcddd03" name="a86578a458341d5b056ea84d77dcddd03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86578a458341d5b056ea84d77dcddd03">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否为空 </p>
+<dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00798">798</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2147f254d3f831e0d7aec15de1f5b43f" name="a2147f254d3f831e0d7aec15de1f5b43f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2147f254d3f831e0d7aec15de1f5b43f">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向末尾的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00760">760</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9408156c455037f16a3c46020f8893e2" name="a9408156c455037f16a3c46020f8893e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9408156c455037f16a3c46020f8893e2">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向末尾的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00748">748</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l00734">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l01249">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l01076">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l01106">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase()</a> , 以及 <a class="el" href="flat__hashtable_8hpp_source.html#l01163">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::find()</a>.</p>
+
+</div>
+</div>
+<a id="a6c97ec8f8928137b91478f90124052dc" name="a6c97ec8f8928137b91478f90124052dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c97ec8f8928137b91478f90124052dc">&#9670;&#160;</a></span>equal_range() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>, <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> &gt; <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_range </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取等于指定键的元素范围 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含范围起始和结束的 pair </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01249">1249</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aab6f8fc9cfd67ba460451cea48d5759f" name="aab6f8fc9cfd67ba460451cea48d5759f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab6f8fc9cfd67ba460451cea48d5759f">&#9670;&#160;</a></span>equal_range() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a>, <a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> &gt; <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_range </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取等于指定键的元素范围（常量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含范围起始和结束的 pair </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01299">1299</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9ad934a4d890b7888b55c94b9ccb1fe7" name="a9ad934a4d890b7888b55c94b9ccb1fe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ad934a4d890b7888b55c94b9ccb1fe7">&#9670;&#160;</a></span>equal_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_to </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧哈希表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个哈希表大小相等且对应元素相等返回 true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01366">1366</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a89f423ae8251f001917eda49ebf26ba5" name="a89f423ae8251f001917eda49ebf26ba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89f423ae8251f001917eda49ebf26ba5">&#9670;&#160;</a></span>erase() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定位置的元素（常量迭代器版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>要删除的位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向被删除元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01130">1130</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a76a68cf3a97cf416de5f57eb420cc993" name="a76a68cf3a97cf416de5f57eb420cc993"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76a68cf3a97cf416de5f57eb420cc993">&#9670;&#160;</a></span>erase() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定位置的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>要删除的位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向被删除元素之后位置的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01076">1076</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af622d43d66e9d76cf0b04751ba2c84b7" name="af622d43d66e9d76cf0b04751ba2c84b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af622d43d66e9d76cf0b04751ba2c84b7">&#9670;&#160;</a></span>erase() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除所有具有指定键的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要删除的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>删除的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01045">1045</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l01130">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase()</a> , 以及 <a class="el" href="flat__hashtable_8hpp_source.html#l01140">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase()</a>.</p>
+
+</div>
+</div>
+<a id="aa32438d119ee9f88cc2edbbc5c859327" name="aa32438d119ee9f88cc2edbbc5c859327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa32438d119ee9f88cc2edbbc5c859327">&#9670;&#160;</a></span>erase() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a></td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定范围内的常量元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个被删除元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01140">1140</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a220837676e2e6aef18144840731ab307" name="a220837676e2e6aef18144840731ab307"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a220837676e2e6aef18144840731ab307">&#9670;&#160;</a></span>erase() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a></td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定范围内的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个被删除元素之后位置的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01106">1106</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a793f5d5d87120990a91a69ba1223dc3f" name="a793f5d5d87120990a91a69ba1223dc3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a793f5d5d87120990a91a69ba1223dc3f">&#9670;&#160;</a></span>find() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#afd05540a5593f8f4a203c03b057ba0fb">const_iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找具有指定键的元素（常量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要查找的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的常量迭代器，未找到则返回 <a class="el" href="#aa5369fb5de21e5cb6902c52400f14a13" title="获取常量结束迭代器">cend()</a> </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01189">1189</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa8146447cabc045187899cc09ac14967" name="aa8146447cabc045187899cc09ac14967"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8146447cabc045187899cc09ac14967">&#9670;&#160;</a></span>find() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a072bf58037a16f37f6a9deb761c8fee0">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找具有指定键的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要查找的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的迭代器，未找到则返回 <a class="el" href="#a9408156c455037f16a3c46020f8893e2" title="获取结束迭代器">end()</a> </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01163">1163</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l01242">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains()</a>.</p>
+
+</div>
+</div>
+<a id="af44801a9515893279d229d2a490f4dfe" name="af44801a9515893279d229d2a490f4dfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af44801a9515893279d229d2a490f4dfe">&#9670;&#160;</a></span>hash_function()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af737cc8e4d5093189e019e9af2652843">hasher</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hash_function </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取哈希函数对象 </p>
+<dl class="section return"><dt>返回</dt><dd>哈希函数对象的副本 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00810">810</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8cd1df5f574362a27e95ed3fda162c37" name="a8cd1df5f574362a27e95ed3fda162c37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cd1df5f574362a27e95ed3fda162c37">&#9670;&#160;</a></span>insert_equal() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>插入元素（允许重复键，拷贝版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00959">959</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l01011">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal()</a>.</p>
+
+</div>
+</div>
+<a id="ae238260a30b8b0bc7c55a42b77ee7ef4" name="ae238260a30b8b0bc7c55a42b77ee7ef4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae238260a30b8b0bc7c55a42b77ee7ef4">&#9670;&#160;</a></span>insert_equal() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="group___iterator_category_checks.html#ga3d298019699d72aef974a27a13c65393">is_ranges_fwd_iter_v</a>&lt; Iterator &gt; &gt; <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围插入元素（允许重复键，非前向迭代器版本） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01028">1028</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab21f2efc787233cc12113ebd1998af21" name="ab21f2efc787233cc12113ebd1998af21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab21f2efc787233cc12113ebd1998af21">&#9670;&#160;</a></span>insert_equal() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga3d298019699d72aef974a27a13c65393">is_ranges_fwd_iter_v</a>&lt; Iterator &gt; &gt; <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围插入元素（允许重复键，前向迭代器版本） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01011">1011</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a30d68b0780b63462324378b5afc49197" name="a30d68b0780b63462324378b5afc49197"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30d68b0780b63462324378b5afc49197">&#9670;&#160;</a></span>insert_equal() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表插入（允许重复键） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01038">1038</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l01038">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal()</a>.</p>
+
+</div>
+</div>
+<a id="add4dcd3885f4d73e87e8f7e0a53174b7" name="add4dcd3885f4d73e87e8f7e0a53174b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add4dcd3885f4d73e87e8f7e0a53174b7">&#9670;&#160;</a></span>insert_equal() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>插入元素（允许重复键，移动版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00966">966</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3b969ee6cd6d80a14d2b0d508c4e8cb0" name="a3b969ee6cd6d80a14d2b0d508c4e8cb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b969ee6cd6d80a14d2b0d508c4e8cb0">&#9670;&#160;</a></span>insert_unique() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>, bool &gt; <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>插入元素（唯一键，拷贝版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00945">945</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l00975">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique()</a>.</p>
+
+</div>
+</div>
+<a id="ac33af62483732c2aa9bf5200f62bec85" name="ac33af62483732c2aa9bf5200f62bec85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac33af62483732c2aa9bf5200f62bec85">&#9670;&#160;</a></span>insert_unique() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="group___iterator_category_checks.html#ga3d298019699d72aef974a27a13c65393">is_ranges_fwd_iter_v</a>&lt; Iterator &gt; &gt; <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围插入元素（唯一键，非前向迭代器版本） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00992">992</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aff06d3c7277cd8e15949f16388e56f5a" name="aff06d3c7277cd8e15949f16388e56f5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff06d3c7277cd8e15949f16388e56f5a">&#9670;&#160;</a></span>insert_unique() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga3d298019699d72aef974a27a13c65393">is_ranges_fwd_iter_v</a>&lt; Iterator &gt; &gt; <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围插入元素（唯一键，前向迭代器版本） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00975">975</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9f1d5524a9e7218845aca229b45809da" name="a9f1d5524a9e7218845aca229b45809da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f1d5524a9e7218845aca229b45809da">&#9670;&#160;</a></span>insert_unique() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表插入（唯一键） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01002">1002</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l01002">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique()</a>.</p>
+
+</div>
+</div>
+<a id="a7d6d9aed0b78189b40452f2dd9a6ac7b" name="a7d6d9aed0b78189b40452f2dd9a6ac7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d6d9aed0b78189b40452f2dd9a6ac7b">&#9670;&#160;</a></span>insert_unique() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aa8dfbb52fac37f0a2991e77de4566fdc">iterator</a>, bool &gt; <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a0bbd80544e66122b170b1a49b812b62d">value_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>插入元素（唯一键，移动版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00952">952</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad3a4ca09b3ed1c3c5e5afde93ea13439" name="ad3a4ca09b3ed1c3c5e5afde93ea13439"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3a4ca09b3ed1c3c5e5afde93ea13439">&#9670;&#160;</a></span>key_eql()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a6ab4688b006581c1f6428d6c8b25a35f">key_equal</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::key_eql </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取键相等比较函数对象 </p>
+<dl class="section return"><dt>返回</dt><dd>键相等比较函数对象的副本 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00816">816</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5b072cc21b4f82e47bf3293929b6fbcf" name="a5b072cc21b4f82e47bf3293929b6fbcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b072cc21b4f82e47bf3293929b6fbcf">&#9670;&#160;</a></span>less_than()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::less_than </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧哈希表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01387">1387</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab8852ca9b927e2dc334bbd3ab17df96d" name="ab8852ca9b927e2dc334bbd3ab17df96d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8852ca9b927e2dc334bbd3ab17df96d">&#9670;&#160;</a></span>load_factor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::load_factor </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前负载因子 </p>
+<dl class="section return"><dt>返回</dt><dd>负载因子（元素数量/容量） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00822">822</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a81f3f7a1b06950c99c097316cf078b08" name="a81f3f7a1b06950c99c097316cf078b08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81f3f7a1b06950c99c097316cf078b08">&#9670;&#160;</a></span>max_load_factor() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_load_factor </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最大负载因子 </p>
+<dl class="section return"><dt>返回</dt><dd>最大负载因子 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00830">830</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l01147">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::clear()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l00905">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_equal()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l00868">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l00614">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l00630">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l00648">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l00600">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l01011">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l00975">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique()</a> , 以及 <a class="el" href="flat__hashtable_8hpp_source.html#l00854">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve()</a>.</p>
+
+</div>
+</div>
+<a id="a64605a3dbdec47ab51c0f2f70d712e3c" name="a64605a3dbdec47ab51c0f2f70d712e3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64605a3dbdec47ab51c0f2f70d712e3c">&#9670;&#160;</a></span>max_load_factor() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_load_factor </td>
+          <td>(</td>
+          <td class="paramtype">const float</td>          <td class="paramname"><span class="paramname"><em>lf</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置最大负载因子 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lf</td><td>新的最大负载因子 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00836">836</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa6d17354d1a6f4bfc6176ea93bf08d2a" name="aa6d17354d1a6f4bfc6176ea93bf08d2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6d17354d1a6f4bfc6176ea93bf08d2a">&#9670;&#160;</a></span>max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最大可能大小 </p>
+<dl class="section return"><dt>返回</dt><dd>最大元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00792">792</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2151010dc8f254cc34b067ea17d3057b" name="a2151010dc8f254cc34b067ea17d3057b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2151010dc8f254cc34b067ea17d3057b">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classflat__hashtable.html">flat_hashtable</a> &amp; <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源哈希表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00677">677</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a716b8d5cf397cb025d6f49e5f92ffe1b" name="a716b8d5cf397cb025d6f49e5f92ffe1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a716b8d5cf397cb025d6f49e5f92ffe1b">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classflat__hashtable.html">flat_hashtable</a> &amp; <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源哈希表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00716">716</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a98bad05939c8e221a69d9dd7fe7e9ee3" name="a98bad05939c8e221a69d9dd7fe7e9ee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98bad05939c8e221a69d9dd7fe7e9ee3">&#9670;&#160;</a></span>rehash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::rehash </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a></td>          <td class="paramname"><span class="paramname"><em>new_size</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>重新哈希，调整容量 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_size</td><td>目标容量 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00846">846</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flat__hashtable_8hpp_source.html#l00905">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_equal()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l00868">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l01011">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal()</a>, <a class="el" href="flat__hashtable_8hpp_source.html#l00975">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique()</a> , 以及 <a class="el" href="flat__hashtable_8hpp_source.html#l00854">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve()</a>.</p>
+
+</div>
+</div>
+<a id="a1e03ab971a293d2e8c539241302483a0" name="a1e03ab971a293d2e8c539241302483a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e03ab971a293d2e8c539241302483a0">&#9670;&#160;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::reserve </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>预留空间 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>期望的元素数量</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>确保哈希表至少能容纳 n 个元素而不触发 rehash。 </p>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00854">854</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab0467fd90b6ad79d56e068a75249d33b" name="ab0467fd90b6ad79d56e068a75249d33b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0467fd90b6ad79d56e068a75249d33b">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad3bfd047fc8a2e763cff5d040f819645">size_type</a> <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取元素数量 </p>
+<dl class="section return"><dt>返回</dt><dd>元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l00786">786</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a893f08ecfe8d460d9fd456a30089a9cd" name="a893f08ecfe8d460d9fd456a30089a9cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a893f08ecfe8d460d9fd456a30089a9cd">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value, typename Key, typename HashFcn, typename ExtractKey, typename EqualKey, typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classflat__hashtable.html">flat_hashtable</a>&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个哈希表的内容 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要交换的另一个哈希表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a> 第 <a class="el" href="flat__hashtable_8hpp_source.html#l01346">1346</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="flat__hashtable_8hpp_source.html">flat_hashtable.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classflat__hashtable.html">flat_hashtable</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

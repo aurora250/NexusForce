@@ -43,21 +43,12 @@ var group___logging =
       [ "flush", "classsyslog__sink.html#ad29345f21bd6a464cc1a8906bde28ed1", null ],
       [ "log", "classsyslog__sink.html#a9e8a533f90b698d80b78d2aee0960909", null ]
     ] ],
-    [ "bounded_queue&lt; T &gt;", "classbounded__queue.html", [
-      [ "bounded_queue", "classbounded__queue.html#a0ca5f411fd8a86489fad7939a801ce76", null ],
-      [ "capacity", "classbounded__queue.html#a05b85716f4079237364edce6c3e42c12", null ],
-      [ "empty", "classbounded__queue.html#aa0d74b28c59fcfe04b24591d882eb2c6", null ],
-      [ "front", "classbounded__queue.html#a6b3446d1c693652a6a91df0190684990", null ],
-      [ "full", "classbounded__queue.html#afd87dbb77e0364181093251086036991", null ],
-      [ "pop", "classbounded__queue.html#a3567da783cc3b62a1468e8adacacdce4", null ],
-      [ "push", "classbounded__queue.html#afe1c07d4ef201454a6ce574aeb63e7ec", null ],
-      [ "size", "classbounded__queue.html#ab1bc91255b97d2138d9d0daa7b7a23cb", null ]
-    ] ],
     [ "logger", "classlogger.html", [
       [ "logger", "classlogger.html#ad0dc86f63c1ea3fac4c3b45263086051", null ],
       [ "add_context", "classlogger.html#a362589e68610127e4333750d3fa0cfec", null ],
       [ "add_sink", "classlogger.html#ae8938cbad141b618717fe8f79975da52", null ],
       [ "clear_context", "classlogger.html#a5d5089ffd2e6075a5014f23219431106", null ],
+      [ "clear_sinks", "classlogger.html#a54bb5cdfb8301a7c85f49b9cb395677f", null ],
       [ "debug", "classlogger.html#a9a534c07043a19e5dd4e51bb3f5aa4c1", null ],
       [ "disable_async", "classlogger.html#a524d8d9abe8dbf80e2cbb5af16fc6362", null ],
       [ "effective_level", "classlogger.html#af90daa54d800e45fbee7b53a878ed416", null ],

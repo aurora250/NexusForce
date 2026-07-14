@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['性能与精度说明_0',['性能与精度说明',['../group___math_functions.html#performance_notes',1,'']]]
+  ['弱智能指针_0',['弱智能指针',['../group___weak_pointer.html',1,'']]]
 ];

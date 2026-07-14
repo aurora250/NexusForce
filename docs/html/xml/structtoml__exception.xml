@@ -4,28 +4,11 @@
     <compoundname>toml_exception</compoundname>
     <basecompoundref refid="structvalue__exception" prot="public" virt="non-virtual">value_exception</basecompoundref>
     <includes refid="toml__value_8hpp" local="no">toml_value.hpp</includes>
-    <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="structtoml__exception_1a12111a568d6cc45fce65b7d57052b798" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>auto</type>
-        <definition>auto toml_exception::static_type</definition>
-        <argsstring></argsstring>
-        <name>static_type</name>
-        <qualifiedname>toml_exception::static_type</qualifiedname>
-        <initializer>= &quot;toml_exception&quot;</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="36" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="36" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structtoml__exception_1a393c93ca26791d29a8cf747acd44d48c" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structtoml__exception_1a82d06274a23f2913a173c5cddb805156" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>toml_exception::toml_exception</definition>
-        <argsstring>(const char *info=&quot;TOML Operation Failed.&quot;, const char *type=static_type, const int code=0) noexcept</argsstring>
+        <argsstring>(const char *info=&quot;TOML Operation Failed.&quot;) noexcept</argsstring>
         <name>toml_exception</name>
         <qualifiedname>toml_exception::toml_exception</qualifiedname>
         <param>
@@ -33,23 +16,13 @@
           <declname>info</declname>
           <defval>&quot;TOML Operation Failed.&quot;</defval>
         </param>
-        <param>
-          <type>const char *</type>
-          <declname>type</declname>
-          <defval>static_type</defval>
-        </param>
-        <param>
-          <type>const int</type>
-          <declname>code</declname>
-          <defval>0</defval>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="28" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="28" bodyend="30"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="28" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="28" bodyend="29"/>
       </memberdef>
       <memberdef kind="function" id="structtoml__exception_1a843f8366d8d38aff64e03c2ed1a03102" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -67,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="32" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="32" bodyend="33"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="31" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="31" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="structtoml__exception_1a480f1da0c939ca5796621c2c74cd48a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -81,7 +54,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="35" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="34" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structtoml__exception_1ac1aef277596c54fe06166e99f6315644" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const char *</type>
+        <definition>const char * toml_exception::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>toml_exception::type</qualifiedname>
+        <reimplements refid="structexception_1a2f7dcc6349b3ef905ebb76859aa8abe6">type</reimplements>
+        <briefdescription>
+<para>获取异常类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="36" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="36" bodyend="36"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -127,23 +119,21 @@
     </collaborationgraph>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="27" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="27" bodyend="37"/>
     <listofallmembers>
-      <member refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>code</name></member>
-      <member refid="structexception_1a33710bd2e564614575128e2c3de94883" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>exception</name></member>
+      <member refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>exception</name></member>
       <member refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>exception</name></member>
       <member refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>exception</name></member>
       <member refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>exception</name></member>
       <member refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>operator=</name></member>
       <member refid="structexception_1a709d705f97cbad7d531dfb5023107536" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>operator=</name></member>
-      <member refid="structtoml__exception_1a12111a568d6cc45fce65b7d57052b798" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>static_type</name></member>
-      <member refid="structtoml__exception_1a393c93ca26791d29a8cf747acd44d48c" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>toml_exception</name></member>
+      <member refid="structtoml__exception_1a82d06274a23f2913a173c5cddb805156" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>toml_exception</name></member>
       <member refid="structtoml__exception_1a843f8366d8d38aff64e03c2ed1a03102" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>toml_exception</name></member>
-      <member refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>type</name></member>
-      <member refid="structvalue__exception_1a93d98834875dddd76676f984d49dbc8e" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>value_exception</name></member>
+      <member refid="structtoml__exception_1ac1aef277596c54fe06166e99f6315644" prot="public" virt="virtual"><scope>toml_exception</scope><name>type</name></member>
+      <member refid="structvalue__exception_1aae3013235b2ce148581a0134a056b2db" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>value_exception</name></member>
       <member refid="structvalue__exception_1a62e42e4366446f308bddac122dc685ca" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>value_exception</name></member>
-      <member refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>what</name></member>
+      <member refid="structexception_1ae5dc04391190559c19adcf269cab48e2" prot="public" virt="virtual"><scope>toml_exception</scope><name>what</name></member>
       <member refid="structexception_1a80249b2b108c9b913dc7144839092a2b" prot="public" virt="virtual"><scope>toml_exception</scope><name>~exception</name></member>
       <member refid="structtoml__exception_1a480f1da0c939ca5796621c2c74cd48a9" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>~toml_exception</name></member>
-      <member refid="structvalue__exception_1a7ed7431697b28ae8f8a7bfdd919c4795" prot="public" virt="virtual"><scope>toml_exception</scope><name>~value_exception</name></member>
+      <member refid="structvalue__exception_1a23c6772857ea279952af98d207fb115b" prot="public" virt="non-virtual"><scope>toml_exception</scope><name>~value_exception</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -11,11 +11,12 @@ var searchData=
   ['reflect_2ehpp_8',['reflect.hpp',['../reflect_8hpp.html',1,'']]],
   ['reflect_2fany_2ehpp_9',['any.hpp',['../reflect_2any_8hpp.html',1,'']]],
   ['reflect_2ffunction_2ehpp_10',['function.hpp',['../reflect_2function_8hpp.html',1,'']]],
-  ['reflect_2fregistry_2ehpp_11',['registry.hpp',['../reflect_2registry_8hpp.html',1,'']]],
-  ['reflect_5fmacros_2ehpp_12',['reflect_macros.hpp',['../reflect__macros_8hpp.html',1,'']]],
-  ['regex_2ehpp_13',['regex.hpp',['../regex_8hpp.html',1,'']]],
-  ['remove_2ehpp_14',['remove.hpp',['../remove_8hpp.html',1,'']]],
-  ['repository_2ehpp_15',['repository.hpp',['../repository_8hpp.html',1,'']]],
-  ['reverse_5fiterator_2ehpp_16',['reverse_iterator.hpp',['../reverse__iterator_8hpp.html',1,'']]],
-  ['reverse_5fproxy_2ehpp_17',['reverse_proxy.hpp',['../reverse__proxy_8hpp.html',1,'']]]
+  ['reflect_5fmacros_2ehpp_11',['reflect_macros.hpp',['../reflect__macros_8hpp.html',1,'']]],
+  ['regex_2ehpp_12',['regex.hpp',['../regex_8hpp.html',1,'']]],
+  ['registry_2ehpp_13',['registry.hpp',['../registry_8hpp.html',1,'']]],
+  ['registry_5fkey_2ehpp_14',['registry_key.hpp',['../registry__key_8hpp.html',1,'']]],
+  ['remove_2ehpp_15',['remove.hpp',['../remove_8hpp.html',1,'']]],
+  ['repository_2ehpp_16',['repository.hpp',['../repository_8hpp.html',1,'']]],
+  ['reverse_5fiterator_2ehpp_17',['reverse_iterator.hpp',['../reverse__iterator_8hpp.html',1,'']]],
+  ['reverse_5fproxy_2ehpp_18',['reverse_proxy.hpp',['../reverse__proxy_8hpp.html',1,'']]]
 ];

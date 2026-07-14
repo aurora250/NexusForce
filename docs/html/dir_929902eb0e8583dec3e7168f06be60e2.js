@@ -1,6 +1,9 @@
 var dir_929902eb0e8583dec3e7168f06be60e2 =
 [
     [ "async.hpp", "async_8hpp.html", "async_8hpp" ],
+    [ "async_compose.hpp", "async__compose_8hpp.html", "async__compose_8hpp" ],
+    [ "async_result.hpp", "async__result_8hpp.html", "async__result_8hpp" ],
+    [ "async_stream.hpp", "async__stream_8hpp.html", null ],
     [ "atomic.hpp", "atomic_8hpp.html", null ],
     [ "atomic_base.hpp", "atomic__base_8hpp.html", "atomic__base_8hpp" ],
     [ "atomic_futex.hpp", "atomic__futex_8hpp.html", null ],
@@ -8,13 +11,17 @@ var dir_929902eb0e8583dec3e7168f06be60e2 =
     [ "atomic_wait.hpp", "atomic__wait_8hpp.html", "atomic__wait_8hpp" ],
     [ "barrier.hpp", "barrier_8hpp.html", "barrier_8hpp" ],
     [ "call_once.hpp", "call__once_8hpp.html", "call__once_8hpp" ],
+    [ "cancellation_slot.hpp", "cancellation__slot_8hpp.html", "cancellation__slot_8hpp" ],
+    [ "channel.hpp", "channel_8hpp.html", null ],
+    [ "co_spawn.hpp", "co__spawn_8hpp.html", "co__spawn_8hpp" ],
     [ "condition_variable.hpp", "condition__variable_8hpp.html", "condition__variable_8hpp" ],
     [ "coroutine.hpp", "coroutine_8hpp.html", "coroutine_8hpp" ],
-    [ "event_loop.hpp", "event__loop_8hpp.html", "event__loop_8hpp" ],
+    [ "executor.hpp", "executor_8hpp.html", "executor_8hpp" ],
     [ "futex.hpp", "futex_8hpp.html", "futex_8hpp" ],
     [ "future.hpp", "future_8hpp.html", "future_8hpp" ],
     [ "generator.hpp", "generator_8hpp.html", "generator_8hpp" ],
     [ "hazard_ptr.hpp", "hazard__ptr_8hpp.html", "hazard__ptr_8hpp" ],
+    [ "io_context.hpp", "io__context_8hpp.html", "io__context_8hpp" ],
     [ "latch.hpp", "latch_8hpp.html", null ],
     [ "lazy_thread.hpp", "lazy__thread_8hpp.html", null ],
     [ "lock_free_queue.hpp", "lock__free__queue_8hpp.html", null ],
@@ -28,6 +35,7 @@ var dir_929902eb0e8583dec3e7168f06be60e2 =
     [ "shared_mutex.hpp", "shared__mutex_8hpp.html", null ],
     [ "signals.hpp", "signals_8hpp.html", "signals_8hpp" ],
     [ "stop_token.hpp", "stop__token_8hpp.html", null ],
+    [ "strand.hpp", "strand_8hpp.html", null ],
     [ "this_thread.hpp", "this__thread_8hpp.html", "this__thread_8hpp" ],
     [ "thread.hpp", "thread_8hpp.html", "thread_8hpp" ],
     [ "thread_exit_notifier.hpp", "thread__exit__notifier_8hpp_source.html", null ],
@@ -35,5 +43,6 @@ var dir_929902eb0e8583dec3e7168f06be60e2 =
     [ "thread_pool.hpp", "thread__pool_8hpp.html", "thread__pool_8hpp" ],
     [ "thread_tracker.hpp", "thread__tracker_8hpp.html", "thread__tracker_8hpp" ],
     [ "timer.hpp", "timer_8hpp.html", "timer_8hpp" ],
+    [ "use_awaitable.hpp", "use__awaitable_8hpp.html", "use__awaitable_8hpp" ],
     [ "virtual_thread.hpp", "virtual__thread_8hpp.html", "virtual__thread_8hpp" ]
 ];

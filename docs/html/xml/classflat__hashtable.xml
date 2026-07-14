@@ -1,0 +1,2795 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classflat__hashtable" kind="class" language="C++" prot="public">
+    <compoundname>flat_hashtable</compoundname>
+    <basecompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</basecompoundref>
+    <includes refid="flat__hashtable_8hpp" local="no">flat_hashtable.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Value</type>
+      </param>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename HashFcn</type>
+      </param>
+      <param>
+        <type>typename ExtractKey</type>
+      </param>
+      <param>
+        <type>typename EqualKey</type>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" prot="public" static="no">
+        <type>Key</type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::key_type = Key</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>flat_hashtable::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="181" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1af737cc8e4d5093189e019e9af2652843" prot="public" static="no">
+        <type>HashFcn</type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hasher = HashFcn</definition>
+        <argsstring></argsstring>
+        <name>hasher</name>
+        <qualifiedname>flat_hashtable::hasher</qualifiedname>
+        <briefdescription>
+<para>哈希函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="182" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="182" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1a6ab4688b006581c1f6428d6c8b25a35f" prot="public" static="no">
+        <type>EqualKey</type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::key_equal = EqualKey</definition>
+        <argsstring></argsstring>
+        <name>key_equal</name>
+        <qualifiedname>flat_hashtable::key_equal</qualifiedname>
+        <briefdescription>
+<para>键相等比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="183" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1a0bbd80544e66122b170b1a49b812b62d" prot="public" static="no">
+        <type>Value</type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::value_type = Value</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>flat_hashtable::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="184" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1ac71458da99b3f27b2030546051b3645c" prot="public" static="no">
+        <type>Value *</type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::pointer = Value*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>flat_hashtable::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="186" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1afc09f078a1a8e8133a440779b152aedc" prot="public" static="no">
+        <type>Value &amp;</type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::reference = Value&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>flat_hashtable::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="187" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1a1851299c44d99677b68948ddb08f20f7" prot="public" static="no">
+        <type>const Value *</type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::const_pointer = const Value*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>flat_hashtable::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="188" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1a723dec47a32b4afb122d306540caf910" prot="public" static="no">
+        <type>const Value &amp;</type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::const_reference = const Value&amp;</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>flat_hashtable::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="189" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::size_type = size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>flat_hashtable::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="190" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1ae8dcc6073f22d3c3fb84124e40e519b4" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref></type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>flat_hashtable::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="191" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" prot="public" static="no">
+        <type><ref refid="structflat__hashtable__iterator" kindref="compound">flat_hashtable_iterator</ref>&lt; false, <ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &gt;</type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::iterator = flat_hashtable_iterator&lt;false, flat_hashtable&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>flat_hashtable::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="193" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" prot="public" static="no">
+        <type><ref refid="structflat__hashtable__iterator" kindref="compound">flat_hashtable_iterator</ref>&lt; true, <ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &gt;</type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::const_iterator = flat_hashtable_iterator&lt;true, flat_hashtable&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>flat_hashtable::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="194" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classflat__hashtable_1accaf416e778dcd42b45661a976182d8d" prot="public" static="no">
+        <type>Alloc</type>
+        <definition>using flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::allocator_type = Alloc</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>flat_hashtable::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="196" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="196" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classflat__hashtable_1ab44846c976e4235fc6c752c2b5c14bf3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+        <definition>byte_t flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::FLAT_HT_EMPTY</definition>
+        <argsstring></argsstring>
+        <name>FLAT_HT_EMPTY</name>
+        <qualifiedname>flat_hashtable::FLAT_HT_EMPTY</qualifiedname>
+        <initializer>= 0x80</initializer>
+        <briefdescription>
+<para>EMPTY 元数据标记 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="198" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="198" bodyend="-1"/>
+        <referencedby refid="structflat__hashtable__iterator_1a2fffcc02bdab47e48a51fe7760ba1ff7" compoundref="flat__hashtable_8hpp" startline="130" endline="140">flat_hashtable_iterator&lt; false, flat_hashtable &gt;::increment</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classflat__hashtable_1a26f8ff8f9a47cc0b8fbe25fe6318e922" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+        <definition>byte_t flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::FLAT_HT_DELETED</definition>
+        <argsstring></argsstring>
+        <name>FLAT_HT_DELETED</name>
+        <qualifiedname>flat_hashtable::FLAT_HT_DELETED</qualifiedname>
+        <initializer>= 0xFE</initializer>
+        <briefdescription>
+<para>DELETED 元数据标记 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="199" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="199" bodyend="-1"/>
+        <referencedby refid="structflat__hashtable__iterator_1a2fffcc02bdab47e48a51fe7760ba1ff7" compoundref="flat__hashtable_8hpp" startline="130" endline="140">flat_hashtable_iterator&lt; false, flat_hashtable &gt;::increment</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classflat__hashtable_1a0b5d78cc44d56719dd7098ecf32cdbef" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+        <definition>byte_t flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::FLAT_HT_H2_MASK</definition>
+        <argsstring></argsstring>
+        <name>FLAT_HT_H2_MASK</name>
+        <qualifiedname>flat_hashtable::FLAT_HT_H2_MASK</qualifiedname>
+        <initializer>= 0x7F</initializer>
+        <briefdescription>
+<para>H2 标签位掩码 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="200" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classflat__hashtable_1a6d614786e14a98a767734ef1084d4f6a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::npos</definition>
+        <argsstring></argsstring>
+        <name>npos</name>
+        <qualifiedname>flat_hashtable::npos</qualifiedname>
+        <initializer>= static_cast&lt;<ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>&gt;(-1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="201" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="201" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classflat__hashtable_1a34ee23ffb4dfc864cd83ef97d3878d91" prot="private" static="no" mutable="no">
+        <type>Value *</type>
+        <definition>Value* flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>flat_hashtable::data_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>数据数组 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="204" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classflat__hashtable_1afaa28396b777576e06c7c829e3e8044f" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+        <definition>byte_t* flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::metadata_</definition>
+        <argsstring></argsstring>
+        <name>metadata_</name>
+        <qualifiedname>flat_hashtable::metadata_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>元数据字节数组 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="205" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classflat__hashtable_1a4cdf831c0d96c2ed13028f639bd694b1" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::capacity_</definition>
+        <argsstring></argsstring>
+        <name>capacity_</name>
+        <qualifiedname>flat_hashtable::capacity_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>slot 总数（2 的幂） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="206" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classflat__hashtable_1ace1035228fbc9a225be84b99add136ba" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::size_</definition>
+        <argsstring></argsstring>
+        <name>size_</name>
+        <qualifiedname>flat_hashtable::size_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>存活元素数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="207" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classflat__hashtable_1aed156037ccee3e0ca7889670b824952c" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::growth_left_</definition>
+        <argsstring></argsstring>
+        <name>growth_left_</name>
+        <qualifiedname>flat_hashtable::growth_left_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>触发 rehash 前可插入数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="208" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classflat__hashtable_1a8cf7f6fcc967710cc31903eb2dc0775e" prot="private" static="no" mutable="no">
+        <type><ref refid="classflat__hashtable_1af737cc8e4d5093189e019e9af2652843" kindref="member">hasher</ref></type>
+        <definition>hasher flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hasher_</definition>
+        <argsstring></argsstring>
+        <name>hasher_</name>
+        <qualifiedname>flat_hashtable::hasher_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>哈希函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="209" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="209" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="variable" id="classflat__hashtable_1afd4442b7efafa65ef163bfa7374a6310" prot="private" static="no" mutable="no">
+        <type><ref refid="classflat__hashtable_1a6ab4688b006581c1f6428d6c8b25a35f" kindref="member">key_equal</ref></type>
+        <definition>key_equal flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equals_</definition>
+        <argsstring></argsstring>
+        <name>equals_</name>
+        <qualifiedname>flat_hashtable::equals_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>键相等比较对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="210" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="210" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="variable" id="classflat__hashtable_1a2ddd207bb95765e21eaf0a849d3e67dd" prot="private" static="no" mutable="no">
+        <type>ExtractKey</type>
+        <definition>ExtractKey flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::extracter_</definition>
+        <argsstring></argsstring>
+        <name>extracter_</name>
+        <qualifiedname>flat_hashtable::extracter_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>值提取键对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="211" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="211" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="variable" id="classflat__hashtable_1a0b989f4541e74627ee22396ef2fc87b8" prot="private" static="no" mutable="no">
+        <type><ref refid="structcompressed__pair" kindref="compound">compressed_pair</ref>&lt; <ref refid="classflat__hashtable_1accaf416e778dcd42b45661a976182d8d" kindref="member">allocator_type</ref>, float &gt;</type>
+        <definition>compressed_pair&lt;allocator_type, float&gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::alloc_lf_</definition>
+        <argsstring></argsstring>
+        <name>alloc_lf_</name>
+        <qualifiedname>flat_hashtable::alloc_lf_</qualifiedname>
+        <initializer>{<ref refid="structdefault__construct__tag" kindref="compound">default_construct_tag</ref>{}, 0.875F}</initializer>
+        <briefdescription>
+<para>分配器与最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="213" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="213" bodyend="213"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classflat__hashtable_1ac4a5ff321c387acc086c4d21f4c8b20c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>struct</type>
+        <definition>friend struct flat_hashtable_iterator</definition>
+        <argsstring></argsstring>
+        <name>flat_hashtable_iterator</name>
+        <qualifiedname>flat_hashtable::flat_hashtable_iterator</qualifiedname>
+        <param>
+          <type><ref refid="structflat__hashtable__iterator" kindref="compound">flat_hashtable_iterator</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="216" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="216" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classflat__hashtable_1a60e8bf2a860dc3fe00687ccdbe9011cd" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>static size_t flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::next_power_of_2</definition>
+        <argsstring>(const size_t n) noexcept</argsstring>
+        <name>next_power_of_2</name>
+        <qualifiedname>flat_hashtable::next_power_of_2</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>计算不小于 n 的下一个 2 的幂 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参考值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>2 的幂 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="224" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="224" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1af1c0b400bcebeaffbbde2e20aa97a0fb" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+        <definition>static byte_t flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hash_to_h2</definition>
+        <argsstring>(const size_t hash) noexcept</argsstring>
+        <name>hash_to_h2</name>
+        <qualifiedname>flat_hashtable::hash_to_h2</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>hash</declname>
+        </param>
+        <briefdescription>
+<para>从哈希值提取 7-bit 标签（H2） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hash</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>H2 标签 [0, 127] </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="247" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="247" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a74050d0540f6dbd8deae9759c42f2c11" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
+        <definition>static iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::to_iterator</definition>
+        <argsstring>(const const_iterator &amp;iter) noexcept</argsstring>
+        <name>to_iterator</name>
+        <qualifiedname>flat_hashtable::to_iterator</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref> &amp;</type>
+          <declname>iter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="588" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="588" bodyend="590"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a1551b4f412c7e6b9430ec74540200f32" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
+        <definition>static const_iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::to_const_iterator</definition>
+        <argsstring>(const iterator &amp;iter) noexcept</argsstring>
+        <name>to_const_iterator</name>
+        <qualifiedname>flat_hashtable::to_const_iterator</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref> &amp;</type>
+          <declname>iter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="591" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="591" bodyend="593"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classflat__hashtable_1a60c55475a8d6108349a05e4c3c2c5e57" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hash_to_index</definition>
+        <argsstring>(const size_t hash) const noexcept</argsstring>
+        <name>hash_to_index</name>
+        <qualifiedname>flat_hashtable::hash_to_index</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>hash</declname>
+        </param>
+        <briefdescription>
+<para>从哈希值计算初始探测索引（H1） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hash</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>初始槽位索引 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="240" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="240" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1abc3aa77f057555d26805f8c340ad4dd1" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1accaf416e778dcd42b45661a976182d8d" kindref="member">allocator_type</ref> &amp;</type>
+        <definition>allocator_type &amp; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::get_allocator</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get_allocator</name>
+        <qualifiedname>flat_hashtable::get_allocator</qualifiedname>
+        <briefdescription>
+<para>获取分配器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>分配器引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="253" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="253" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a801e2986ab572a2a6b687c6663d14dce" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::alloc_arrays</definition>
+        <argsstring>(const size_t cap)</argsstring>
+        <name>alloc_arrays</name>
+        <qualifiedname>flat_hashtable::alloc_arrays</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>cap</declname>
+        </param>
+        <briefdescription>
+<para>分配存储数组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>容量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="259" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="259" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1ade2a768e5198a40135afaadf1e7b7aa5" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::free_arrays</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>free_arrays</name>
+        <qualifiedname>flat_hashtable::free_arrays</qualifiedname>
+        <briefdescription>
+<para>释放存储数组 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="279" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="279" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a7b1cb98dc1627b1b1c81d05011f28850" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, bool &gt;</type>
+        <definition>pair&lt; size_t, bool &gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::probe_find_or_insert</definition>
+        <argsstring>(const key_type &amp;key, const byte_t h2) const noexcept</argsstring>
+        <name>probe_find_or_insert</name>
+        <qualifiedname>flat_hashtable::probe_find_or_insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+          <declname>h2</declname>
+        </param>
+        <briefdescription>
+<para>标量探测：查找键或插入位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>h2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>H2 标签 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>{slot_index, found} — found=true 表示已存在，found=false 表示插入位置 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="302" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="302" bodyend="322"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1acc356e70a4cfc4bfbcd7d88a90211482" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, bool &gt;</type>
+        <definition>pair&lt; size_t, bool &gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::probe_find_or_insert_simd</definition>
+        <argsstring>(const key_type &amp;key, const byte_t h2) const noexcept</argsstring>
+        <name>probe_find_or_insert_simd</name>
+        <qualifiedname>flat_hashtable::probe_find_or_insert_simd</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+          <declname>h2</declname>
+        </param>
+        <briefdescription>
+<para>SIMD 批量探测：查找键或插入位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>h2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>H2 标签 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>{slot_index, found} </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="330" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="330" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a057b04417ddf4713b8dd63c5360be04e" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::should_rehash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>should_rehash</name>
+        <qualifiedname>flat_hashtable::should_rehash</qualifiedname>
+        <briefdescription>
+<para>计算是否需要 rehash </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否需要扩容 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="401" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="401" bodyend="401"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a66db2374096c800571f4a2ab4e00439a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::rehash_impl</definition>
+        <argsstring>(const size_t min_capacity)</argsstring>
+        <name>rehash_impl</name>
+        <qualifiedname>flat_hashtable::rehash_impl</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>min_capacity</declname>
+        </param>
+        <briefdescription>
+<para>重新哈希 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>min_capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最小目标容量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="407" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="407" bodyend="467"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1ad718505001ba62e29a09b50fdd42dca0" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::construct_at</definition>
+        <argsstring>(const size_t idx, const byte_t h2, Args &amp;&amp;... args)</argsstring>
+        <name>construct_at</name>
+        <qualifiedname>flat_hashtable::construct_at</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+          <declname>h2</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>slot 索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>h2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>H2 标签 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="477" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="477" bodyend="482"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1aaa792090630320b69c79a5453b468457" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::copy_from</definition>
+        <argsstring>(const flat_hashtable &amp;other)</argsstring>
+        <name>copy_from</name>
+        <qualifiedname>flat_hashtable::copy_from</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从另一个哈希表拷贝 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="488" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="488" bodyend="507"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a47a7420a3bf54e63121df611a8cb4bf6" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_small</definition>
+        <argsstring>(const flat_hashtable &amp;rhs) const</argsstring>
+        <name>equal_small</name>
+        <qualifiedname>flat_hashtable::equal_small</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="509" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="509" bodyend="522"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a5b47a43acea45ad7669c7a98b01c5216" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_large</definition>
+        <argsstring>(const flat_hashtable &amp;rhs) const</argsstring>
+        <name>equal_large</name>
+        <qualifiedname>flat_hashtable::equal_large</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="524" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="524" bodyend="586"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classflat__hashtable_1ae779ef34587d03c03ea3f7de8669bbeb" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable</definition>
+        <argsstring>(const size_type n=0)</argsstring>
+        <name>flat_hashtable</name>
+        <qualifiedname>flat_hashtable::flat_hashtable</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="600" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="600" bodyend="607"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a96f87a270340d8a508cf0a5807215734" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable</definition>
+        <argsstring>(const size_type n, const HashFcn &amp;hf)</argsstring>
+        <name>flat_hashtable</name>
+        <qualifiedname>flat_hashtable::flat_hashtable</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const HashFcn &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始容量和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="614" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="614" bodyend="622"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1ad3812ccf5f38c1659fc4748e7da57ce4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable</definition>
+        <argsstring>(const size_type n, const HashFcn &amp;hf, const EqualKey &amp;eql)</argsstring>
+        <name>flat_hashtable</name>
+        <qualifiedname>flat_hashtable::flat_hashtable</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const HashFcn &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const EqualKey &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始容量、哈希函数和相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="630" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="630" bodyend="639"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a7031b30b4f5e8c3135b14064110f1059" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable</definition>
+        <argsstring>(const size_type n, const HashFcn &amp;hf, const EqualKey &amp;eql, const ExtractKey &amp;ext)</argsstring>
+        <name>flat_hashtable</name>
+        <qualifiedname>flat_hashtable::flat_hashtable</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const HashFcn &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const EqualKey &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <param>
+          <type>const ExtractKey &amp;</type>
+          <declname>ext</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定所有函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值提取函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="648" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="648" bodyend="658"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1aaa971f0d52a49fd2391d0956b93535b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable</definition>
+        <argsstring>(const flat_hashtable &amp;other)</argsstring>
+        <name>flat_hashtable</name>
+        <qualifiedname>flat_hashtable::flat_hashtable</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="664" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="664" bodyend="670"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a2151010dc8f254cc34b067ea17d3057b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
+        <definition>flat_hashtable &amp; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(const flat_hashtable &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>flat_hashtable::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="677" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="677" bodyend="688"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a0a716dd28e1d980e2cc54fa1f80e795b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::flat_hashtable</definition>
+        <argsstring>(flat_hashtable &amp;&amp;other) noexcept</argsstring>
+        <name>flat_hashtable</name>
+        <qualifiedname>flat_hashtable::flat_hashtable</qualifiedname>
+        <param>
+          <type><ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="694" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="694" bodyend="709"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a716b8d5cf397cb025d6f49e5f92ffe1b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
+        <definition>flat_hashtable &amp; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(flat_hashtable &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>flat_hashtable::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="716" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="716" bodyend="723"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a0de6765034f2106ee54595c5f477db26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::~flat_hashtable</definition>
+        <argsstring>()</argsstring>
+        <name>~flat_hashtable</name>
+        <qualifiedname>flat_hashtable::~flat_hashtable</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="728" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="728" bodyend="728"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a141488637aa6cd99065058a566c2a95a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
+        <definition>iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>flat_hashtable::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="734" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="734" bodyend="742"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a9408156c455037f16a3c46020f8893e2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
+        <definition>iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>flat_hashtable::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="748" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="748" bodyend="748"/>
+        <referencedby refid="classflat__hashtable_1a141488637aa6cd99065058a566c2a95a" compoundref="flat__hashtable_8hpp" startline="734" endline="742">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin</referencedby>
+        <referencedby refid="classflat__hashtable_1a6c97ec8f8928137b91478f90124052dc" compoundref="flat__hashtable_8hpp" startline="1249" endline="1292">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range</referencedby>
+        <referencedby refid="classflat__hashtable_1a76a68cf3a97cf416de5f57eb420cc993" compoundref="flat__hashtable_8hpp" startline="1076" endline="1098">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classflat__hashtable_1a220837676e2e6aef18144840731ab307" compoundref="flat__hashtable_8hpp" startline="1106" endline="1123">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classflat__hashtable_1aa8146447cabc045187899cc09ac14967" compoundref="flat__hashtable_8hpp" startline="1163" endline="1182">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a406429621a2c6af5d4ea8e029297481b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>flat_hashtable::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="754" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="754" bodyend="754"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a2147f254d3f831e0d7aec15de1f5b43f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>flat_hashtable::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="760" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="760" bodyend="760"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1affc978b4ed5004125f397ba1d7bdd2fb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>flat_hashtable::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="766" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="766" bodyend="774"/>
+        <referencedby refid="classflat__hashtable_1a406429621a2c6af5d4ea8e029297481b" compoundref="flat__hashtable_8hpp" startline="754" endline="754">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin</referencedby>
+        <referencedby refid="classflat__hashtable_1a5b072cc21b4f82e47bf3293929b6fbcf" compoundref="flat__hashtable_8hpp" startline="1387" endline="1390">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1aa5369fb5de21e5cb6902c52400f14a13" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>flat_hashtable::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="780" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="780" bodyend="780"/>
+        <referencedby refid="classflat__hashtable_1affc978b4ed5004125f397ba1d7bdd2fb" compoundref="flat__hashtable_8hpp" startline="766" endline="774">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::cbegin</referencedby>
+        <referencedby refid="classflat__hashtable_1a59a27686b1fe1e1da0ab36ff978493fa" compoundref="flat__hashtable_8hpp" startline="1242" endline="1242">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
+        <referencedby refid="classflat__hashtable_1a2147f254d3f831e0d7aec15de1f5b43f" compoundref="flat__hashtable_8hpp" startline="760" endline="760">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::end</referencedby>
+        <referencedby refid="classflat__hashtable_1aab6f8fc9cfd67ba460451cea48d5759f" compoundref="flat__hashtable_8hpp" startline="1299" endline="1340">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range</referencedby>
+        <referencedby refid="classflat__hashtable_1a793f5d5d87120990a91a69ba1223dc3f" compoundref="flat__hashtable_8hpp" startline="1189" endline="1208">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
+        <referencedby refid="classflat__hashtable_1a5b072cc21b4f82e47bf3293929b6fbcf" compoundref="flat__hashtable_8hpp" startline="1387" endline="1390">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1ab0467fd90b6ad79d56e068a75249d33b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
+        <definition>size_type flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>flat_hashtable::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="786" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="786" bodyend="786"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1aa6d17354d1a6f4bfc6176ea93bf08d2a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
+        <definition>size_type flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>flat_hashtable::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="792" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="792" bodyend="792"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a86578a458341d5b056ea84d77dcddd03" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>flat_hashtable::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="798" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="798" bodyend="798"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1ae4151641106dc9924ce4fd6d2c923c08" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
+        <definition>size_type flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::capacity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capacity</name>
+        <qualifiedname>flat_hashtable::capacity</qualifiedname>
+        <briefdescription>
+<para>获取容量（slot 总数） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>容量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="804" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="804" bodyend="804"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1af44801a9515893279d229d2a490f4dfe" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; hasher &gt;" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1af737cc8e4d5093189e019e9af2652843" kindref="member">hasher</ref></type>
+        <definition>hasher flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hash_function</definition>
+        <argsstring>() const</argsstring>
+        <name>hash_function</name>
+        <qualifiedname>flat_hashtable::hash_function</qualifiedname>
+        <briefdescription>
+<para>获取哈希函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="810" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="810" bodyend="810"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1ad3a4ca09b3ed1c3c5e5afde93ea13439" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; key_equal &gt;" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1a6ab4688b006581c1f6428d6c8b25a35f" kindref="member">key_equal</ref></type>
+        <definition>key_equal flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::key_eql</definition>
+        <argsstring>() const</argsstring>
+        <name>key_eql</name>
+        <qualifiedname>flat_hashtable::key_eql</qualifiedname>
+        <briefdescription>
+<para>获取键相等比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键相等比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="816" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="816" bodyend="816"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1ab8852ca9b927e2dc334bbd3ab17df96d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>load_factor</name>
+        <qualifiedname>flat_hashtable::load_factor</qualifiedname>
+        <briefdescription>
+<para>获取当前负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>负载因子（元素数量/容量） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="822" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="822" bodyend="824"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a81f3f7a1b06950c99c097316cf078b08" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>flat_hashtable::max_load_factor</qualifiedname>
+        <briefdescription>
+<para>获取最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大负载因子 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="830" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="830" bodyend="830"/>
+        <referencedby refid="classflat__hashtable_1a9a52179a3d869dd5be9c3379f08e1da0" compoundref="flat__hashtable_8hpp" startline="1147" endline="1156">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::clear</referencedby>
+        <referencedby refid="classflat__hashtable_1aba830f935eacbb5c9bac9b5c040ded65" compoundref="flat__hashtable_8hpp" startline="905" endline="938">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_equal</referencedby>
+        <referencedby refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" compoundref="flat__hashtable_8hpp" startline="868" endline="896">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1a96f87a270340d8a508cf0a5807215734" compoundref="flat__hashtable_8hpp" startline="614" endline="622">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
+        <referencedby refid="classflat__hashtable_1ad3812ccf5f38c1659fc4748e7da57ce4" compoundref="flat__hashtable_8hpp" startline="630" endline="639">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
+        <referencedby refid="classflat__hashtable_1a7031b30b4f5e8c3135b14064110f1059" compoundref="flat__hashtable_8hpp" startline="648" endline="658">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
+        <referencedby refid="classflat__hashtable_1ae779ef34587d03c03ea3f7de8669bbeb" compoundref="flat__hashtable_8hpp" startline="600" endline="607">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
+        <referencedby refid="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" compoundref="flat__hashtable_8hpp" startline="1011" endline="1019">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" compoundref="flat__hashtable_8hpp" startline="975" endline="983">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1a1e03ab971a293d2e8c539241302483a0" compoundref="flat__hashtable_8hpp" startline="854" endline="859">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a64605a3dbdec47ab51c0f2f70d712e3c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>(const float lf) noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>flat_hashtable::max_load_factor</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>lf</declname>
+        </param>
+        <briefdescription>
+<para>设置最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的最大负载因子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="836" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="836" bodyend="840"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a98bad05939c8e221a69d9dd7fe7e9ee3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::rehash</definition>
+        <argsstring>(const size_type new_size)</argsstring>
+        <name>rehash</name>
+        <qualifiedname>flat_hashtable::rehash</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
+          <declname>new_size</declname>
+        </param>
+        <briefdescription>
+<para>重新哈希，调整容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>new_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标容量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="846" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="846" bodyend="846"/>
+        <referencedby refid="classflat__hashtable_1aba830f935eacbb5c9bac9b5c040ded65" compoundref="flat__hashtable_8hpp" startline="905" endline="938">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_equal</referencedby>
+        <referencedby refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" compoundref="flat__hashtable_8hpp" startline="868" endline="896">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" compoundref="flat__hashtable_8hpp" startline="1011" endline="1019">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" compoundref="flat__hashtable_8hpp" startline="975" endline="983">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1a1e03ab971a293d2e8c539241302483a0" compoundref="flat__hashtable_8hpp" startline="854" endline="859">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a1e03ab971a293d2e8c539241302483a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::reserve</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>flat_hashtable::reserve</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留空间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的元素数量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+确保哈希表至少能容纳 n 个元素而不触发 rehash。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="854" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="854" bodyend="859"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::emplace_unique</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_unique</name>
+        <qualifiedname>flat_hashtable::emplace_unique</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>构造元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="868" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="868" bodyend="896"/>
+        <referencedby refid="classflat__hashtable_1a3b969ee6cd6d80a14d2b0d508c4e8cb0" compoundref="flat__hashtable_8hpp" startline="945" endline="945">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1a7d6d9aed0b78189b40452f2dd9a6ac7b" compoundref="flat__hashtable_8hpp" startline="952" endline="952">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1aba830f935eacbb5c9bac9b5c040ded65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
+        <definition>iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::emplace_equal</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_equal</name>
+        <qualifiedname>flat_hashtable::emplace_equal</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>构造元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="905" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="905" bodyend="938"/>
+        <referencedby refid="classflat__hashtable_1a8cd1df5f574362a27e95ed3fda162c37" compoundref="flat__hashtable_8hpp" startline="959" endline="959">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classflat__hashtable_1add4dcd3885f4d73e87e8f7e0a53174b7" compoundref="flat__hashtable_8hpp" startline="966" endline="966">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a3b969ee6cd6d80a14d2b0d508c4e8cb0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>flat_hashtable::insert_unique</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1a0bbd80544e66122b170b1a49b812b62d" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（唯一键，拷贝版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="945" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="945" bodyend="945"/>
+        <referencedby refid="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" compoundref="flat__hashtable_8hpp" startline="975" endline="983">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a7d6d9aed0b78189b40452f2dd9a6ac7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>flat_hashtable::insert_unique</qualifiedname>
+        <param>
+          <type><ref refid="classflat__hashtable_1a0bbd80544e66122b170b1a49b812b62d" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（唯一键，移动版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="952" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="952" bodyend="952"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a8cd1df5f574362a27e95ed3fda162c37" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
+        <definition>iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>flat_hashtable::insert_equal</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1a0bbd80544e66122b170b1a49b812b62d" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（允许重复键，拷贝版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="959" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="959" bodyend="959"/>
+        <referencedby refid="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" compoundref="flat__hashtable_8hpp" startline="1011" endline="1019">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1add4dcd3885f4d73e87e8f7e0a53174b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
+        <definition>iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>flat_hashtable::insert_equal</qualifiedname>
+        <param>
+          <type><ref refid="classflat__hashtable_1a0bbd80544e66122b170b1a49b812b62d" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（允许重复键，移动版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="966" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="966" bodyend="966"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>flat_hashtable::insert_unique</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素（唯一键，前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="975" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="975" bodyend="983"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1ac33af62483732c2aa9bf5200f62bec85" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt;!is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>flat_hashtable::insert_unique</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素（唯一键，非前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="992" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="992" bodyend="996"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a9f1d5524a9e7218845aca229b45809da" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>flat_hashtable::insert_unique</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classflat__hashtable_1a0bbd80544e66122b170b1a49b812b62d" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表插入（唯一键） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1002" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1002" bodyend="1002"/>
+        <referencedby refid="classflat__hashtable_1a9f1d5524a9e7218845aca229b45809da" compoundref="flat__hashtable_8hpp" startline="1002" endline="1002">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>flat_hashtable::insert_equal</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素（允许重复键，前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1011" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1011" bodyend="1019"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1ae238260a30b8b0bc7c55a42b77ee7ef4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt;!is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>flat_hashtable::insert_equal</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素（允许重复键，非前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1028" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1028" bodyend="1032"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a30d68b0780b63462324378b5afc49197" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>flat_hashtable::insert_equal</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classflat__hashtable_1a0bbd80544e66122b170b1a49b812b62d" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表插入（允许重复键） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1038" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1038" bodyend="1038"/>
+        <referencedby refid="classflat__hashtable_1a30d68b0780b63462324378b5afc49197" compoundref="flat__hashtable_8hpp" startline="1038" endline="1038">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1af622d43d66e9d76cf0b04751ba2c84b7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
+        <definition>size_type flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>flat_hashtable::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1045" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1045" bodyend="1069"/>
+        <referencedby refid="classflat__hashtable_1a89f423ae8251f001917eda49ebf26ba5" compoundref="flat__hashtable_8hpp" startline="1130" endline="1132">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classflat__hashtable_1aa32438d119ee9f88cc2edbbc5c859327" compoundref="flat__hashtable_8hpp" startline="1140" endline="1142">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a76a68cf3a97cf416de5f57eb420cc993" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
+        <definition>iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const iterator &amp;position) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>flat_hashtable::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1076" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1076" bodyend="1098"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a220837676e2e6aef18144840731ab307" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
+        <definition>iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>flat_hashtable::erase</qualifiedname>
+        <param>
+          <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1106" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1106" bodyend="1123"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a89f423ae8251f001917eda49ebf26ba5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const const_iterator &amp;position) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>flat_hashtable::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素（常量迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1130" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1130" bodyend="1132"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1aa32438d119ee9f88cc2edbbc5c859327" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const_iterator first, const_iterator last) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>flat_hashtable::erase</qualifiedname>
+        <param>
+          <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1140" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1140" bodyend="1142"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a9a52179a3d869dd5be9c3379f08e1da0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>flat_hashtable::clear</qualifiedname>
+        <briefdescription>
+<para>清空哈希表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1147" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1147" bodyend="1156"/>
+        <referencedby refid="classflat__hashtable_1a2151010dc8f254cc34b067ea17d3057b" compoundref="flat__hashtable_8hpp" startline="677" endline="688">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classflat__hashtable_1a716b8d5cf397cb025d6f49e5f92ffe1b" compoundref="flat__hashtable_8hpp" startline="716" endline="723">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1aa8146447cabc045187899cc09ac14967" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
+        <definition>iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) noexcept</argsstring>
+        <name>find</name>
+        <qualifiedname>flat_hashtable::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回 <ref refid="classflat__hashtable_1a9408156c455037f16a3c46020f8893e2" kindref="member">end()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1163" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1163" bodyend="1182"/>
+        <referencedby refid="classflat__hashtable_1a59a27686b1fe1e1da0ab36ff978493fa" compoundref="flat__hashtable_8hpp" startline="1242" endline="1242">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a793f5d5d87120990a91a69ba1223dc3f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const noexcept</argsstring>
+        <name>find</name>
+        <qualifiedname>flat_hashtable::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回 <ref refid="classflat__hashtable_1aa5369fb5de21e5cb6902c52400f14a13" kindref="member">cend()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1189" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1189" bodyend="1208"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a7b336e16875ae331a7a4e16067ba18e0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
+        <definition>size_type flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const noexcept</argsstring>
+        <name>count</name>
+        <qualifiedname>flat_hashtable::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1215" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1215" bodyend="1235"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a59a27686b1fe1e1da0ab36ff978493fa" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::contains</definition>
+        <argsstring>(const key_type &amp;key) const noexcept</argsstring>
+        <name>contains</name>
+        <qualifiedname>flat_hashtable::contains</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>检查是否包含指定键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否包含 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1242" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1242" bodyend="1242"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a6c97ec8f8928137b91478f90124052dc" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref>, <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref> &gt;</type>
+        <definition>pair&lt; iterator, iterator &gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>flat_hashtable::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的 pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1249" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1249" bodyend="1292"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1aab6f8fc9cfd67ba460451cea48d5759f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref>, <ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>pair&lt; const_iterator, const_iterator &gt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>flat_hashtable::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的 pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1299" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1299" bodyend="1340"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a893f08ecfe8d460d9fd456a30089a9cd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::swap</definition>
+        <argsstring>(flat_hashtable &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>flat_hashtable::swap</qualifiedname>
+        <param>
+          <type><ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个哈希表的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1346" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1346" bodyend="1359"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a9ad934a4d890b7888b55c94b9ccb1fe7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_to</definition>
+        <argsstring>(const flat_hashtable &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>flat_hashtable::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个哈希表大小相等且对应元素相等返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1366" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1366" bodyend="1380"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a5b072cc21b4f82e47bf3293929b6fbcf" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::less_than</definition>
+        <argsstring>(const flat_hashtable &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>flat_hashtable::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1387" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1387" bodyend="1390"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>平坦哈希表容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>HashFcn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ExtractKey</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>从值中提取键的函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>EqualKey</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型（用于 Value 分配）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+平坦哈希表使用开放寻址法处理冲突，采用元数据控制块实现 H2 预过滤， 提供平均常数时间复杂度的插入、删除和查找操作。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;</label>
+        <link refid="classflat__hashtable"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>icollector&lt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;</label>
+        <link refid="classflat__hashtable"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>icollector&lt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="166" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="179" bodyend="1391"/>
+    <listofallmembers>
+      <member refid="classflat__hashtable_1a801e2986ab572a2a6b687c6663d14dce" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>alloc_arrays</name></member>
+      <member refid="classflat__hashtable_1a0b989f4541e74627ee22396ef2fc87b8" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>alloc_lf_</name></member>
+      <member refid="classflat__hashtable_1accaf416e778dcd42b45661a976182d8d" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>allocator_type</name></member>
+      <member refid="classflat__hashtable_1a141488637aa6cd99065058a566c2a95a" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>begin</name></member>
+      <member refid="classflat__hashtable_1a406429621a2c6af5d4ea8e029297481b" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>begin</name></member>
+      <member refid="classflat__hashtable_1ae4151641106dc9924ce4fd6d2c923c08" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>capacity</name></member>
+      <member refid="classflat__hashtable_1a4cdf831c0d96c2ed13028f639bd694b1" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>capacity_</name></member>
+      <member refid="classflat__hashtable_1affc978b4ed5004125f397ba1d7bdd2fb" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>cbegin</name></member>
+      <member refid="classflat__hashtable_1aa5369fb5de21e5cb6902c52400f14a13" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>cend</name></member>
+      <member refid="classflat__hashtable_1a9a52179a3d869dd5be9c3379f08e1da0" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>clear</name></member>
+      <member refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>const_iterator</name></member>
+      <member refid="classflat__hashtable_1a1851299c44d99677b68948ddb08f20f7" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>const_pointer</name></member>
+      <member refid="classflat__hashtable_1a723dec47a32b4afb122d306540caf910" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>const_reference</name></member>
+      <member refid="classflat__hashtable_1ad718505001ba62e29a09b50fdd42dca0" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>construct_at</name></member>
+      <member refid="classflat__hashtable_1a59a27686b1fe1e1da0ab36ff978493fa" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>contains</name></member>
+      <member refid="classflat__hashtable_1aaa792090630320b69c79a5453b468457" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>copy_from</name></member>
+      <member refid="classflat__hashtable_1a7b336e16875ae331a7a4e16067ba18e0" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>count</name></member>
+      <member refid="classflat__hashtable_1a34ee23ffb4dfc864cd83ef97d3878d91" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>data_</name></member>
+      <member refid="classflat__hashtable_1ae8dcc6073f22d3c3fb84124e40e519b4" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>difference_type</name></member>
+      <member refid="classflat__hashtable_1aba830f935eacbb5c9bac9b5c040ded65" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>emplace_equal</name></member>
+      <member refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>emplace_unique</name></member>
+      <member refid="classflat__hashtable_1a86578a458341d5b056ea84d77dcddd03" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>empty</name></member>
+      <member refid="classflat__hashtable_1a9408156c455037f16a3c46020f8893e2" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>end</name></member>
+      <member refid="classflat__hashtable_1a2147f254d3f831e0d7aec15de1f5b43f" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>end</name></member>
+      <member refid="classflat__hashtable_1a5b47a43acea45ad7669c7a98b01c5216" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>equal_large</name></member>
+      <member refid="classflat__hashtable_1a6c97ec8f8928137b91478f90124052dc" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>equal_range</name></member>
+      <member refid="classflat__hashtable_1aab6f8fc9cfd67ba460451cea48d5759f" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>equal_range</name></member>
+      <member refid="classflat__hashtable_1a47a7420a3bf54e63121df611a8cb4bf6" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>equal_small</name></member>
+      <member refid="classflat__hashtable_1a9ad934a4d890b7888b55c94b9ccb1fe7" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>equal_to</name></member>
+      <member refid="classflat__hashtable_1afd4442b7efafa65ef163bfa7374a6310" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>equals_</name></member>
+      <member refid="classflat__hashtable_1af622d43d66e9d76cf0b04751ba2c84b7" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>erase</name></member>
+      <member refid="classflat__hashtable_1a76a68cf3a97cf416de5f57eb420cc993" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>erase</name></member>
+      <member refid="classflat__hashtable_1a220837676e2e6aef18144840731ab307" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>erase</name></member>
+      <member refid="classflat__hashtable_1a89f423ae8251f001917eda49ebf26ba5" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>erase</name></member>
+      <member refid="classflat__hashtable_1aa32438d119ee9f88cc2edbbc5c859327" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>erase</name></member>
+      <member refid="classflat__hashtable_1a2ddd207bb95765e21eaf0a849d3e67dd" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>extracter_</name></member>
+      <member refid="classflat__hashtable_1aa8146447cabc045187899cc09ac14967" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>find</name></member>
+      <member refid="classflat__hashtable_1a793f5d5d87120990a91a69ba1223dc3f" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>find</name></member>
+      <member refid="classflat__hashtable_1ae779ef34587d03c03ea3f7de8669bbeb" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>flat_hashtable</name></member>
+      <member refid="classflat__hashtable_1a96f87a270340d8a508cf0a5807215734" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>flat_hashtable</name></member>
+      <member refid="classflat__hashtable_1ad3812ccf5f38c1659fc4748e7da57ce4" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>flat_hashtable</name></member>
+      <member refid="classflat__hashtable_1a7031b30b4f5e8c3135b14064110f1059" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>flat_hashtable</name></member>
+      <member refid="classflat__hashtable_1aaa971f0d52a49fd2391d0956b93535b9" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>flat_hashtable</name></member>
+      <member refid="classflat__hashtable_1a0a716dd28e1d980e2cc54fa1f80e795b" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>flat_hashtable</name></member>
+      <member refid="classflat__hashtable_1a26f8ff8f9a47cc0b8fbe25fe6318e922" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>FLAT_HT_DELETED</name></member>
+      <member refid="classflat__hashtable_1ab44846c976e4235fc6c752c2b5c14bf3" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>FLAT_HT_EMPTY</name></member>
+      <member refid="classflat__hashtable_1a0b5d78cc44d56719dd7098ecf32cdbef" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>FLAT_HT_H2_MASK</name></member>
+      <member refid="classflat__hashtable_1ade2a768e5198a40135afaadf1e7b7aa5" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>free_arrays</name></member>
+      <member refid="classflat__hashtable_1abc3aa77f057555d26805f8c340ad4dd1" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>get_allocator</name></member>
+      <member refid="classflat__hashtable_1aed156037ccee3e0ca7889670b824952c" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>growth_left_</name></member>
+      <member refid="classflat__hashtable_1af44801a9515893279d229d2a490f4dfe" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>hash_function</name></member>
+      <member refid="classflat__hashtable_1af1c0b400bcebeaffbbde2e20aa97a0fb" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>hash_to_h2</name></member>
+      <member refid="classflat__hashtable_1a60c55475a8d6108349a05e4c3c2c5e57" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>hash_to_index</name></member>
+      <member refid="classflat__hashtable_1af737cc8e4d5093189e019e9af2652843" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>hasher</name></member>
+      <member refid="classflat__hashtable_1a8cf7f6fcc967710cc31903eb2dc0775e" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>hasher_</name></member>
+      <member refid="classflat__hashtable_1a8cd1df5f574362a27e95ed3fda162c37" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>insert_equal</name></member>
+      <member refid="classflat__hashtable_1add4dcd3885f4d73e87e8f7e0a53174b7" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>insert_equal</name></member>
+      <member refid="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>insert_equal</name></member>
+      <member refid="classflat__hashtable_1ae238260a30b8b0bc7c55a42b77ee7ef4" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>insert_equal</name></member>
+      <member refid="classflat__hashtable_1a30d68b0780b63462324378b5afc49197" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>insert_equal</name></member>
+      <member refid="classflat__hashtable_1a3b969ee6cd6d80a14d2b0d508c4e8cb0" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>insert_unique</name></member>
+      <member refid="classflat__hashtable_1a7d6d9aed0b78189b40452f2dd9a6ac7b" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>insert_unique</name></member>
+      <member refid="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>insert_unique</name></member>
+      <member refid="classflat__hashtable_1ac33af62483732c2aa9bf5200f62bec85" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>insert_unique</name></member>
+      <member refid="classflat__hashtable_1a9f1d5524a9e7218845aca229b45809da" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>insert_unique</name></member>
+      <member refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>iterator</name></member>
+      <member refid="classflat__hashtable_1ad3a4ca09b3ed1c3c5e5afde93ea13439" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>key_eql</name></member>
+      <member refid="classflat__hashtable_1a6ab4688b006581c1f6428d6c8b25a35f" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>key_equal</name></member>
+      <member refid="classflat__hashtable_1a072bf58037a16f37f6a9deb761c8fee0" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>key_type</name></member>
+      <member refid="classflat__hashtable_1a5b072cc21b4f82e47bf3293929b6fbcf" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>less_than</name></member>
+      <member refid="classflat__hashtable_1ab8852ca9b927e2dc334bbd3ab17df96d" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>load_factor</name></member>
+      <member refid="classflat__hashtable_1a81f3f7a1b06950c99c097316cf078b08" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>max_load_factor</name></member>
+      <member refid="classflat__hashtable_1a64605a3dbdec47ab51c0f2f70d712e3c" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>max_load_factor</name></member>
+      <member refid="classflat__hashtable_1aa6d17354d1a6f4bfc6176ea93bf08d2a" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>max_size</name></member>
+      <member refid="classflat__hashtable_1afaa28396b777576e06c7c829e3e8044f" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>metadata_</name></member>
+      <member refid="classflat__hashtable_1a60e8bf2a860dc3fe00687ccdbe9011cd" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>next_power_of_2</name></member>
+      <member refid="classflat__hashtable_1a6d614786e14a98a767734ef1084d4f6a" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>npos</name></member>
+      <member refid="structicomparable_1a5666568813e0b179355cae28bb101cb5" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>operator!=</name></member>
+      <member refid="structicomparable_1ad55728ed77b4804c1cfc944085e1ff01" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>operator&lt;</name></member>
+      <member refid="structicomparable_1a024a6a008fa61eb0e486150f52d36310" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>operator&lt;=</name></member>
+      <member refid="classflat__hashtable_1a2151010dc8f254cc34b067ea17d3057b" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>operator=</name></member>
+      <member refid="classflat__hashtable_1a716b8d5cf397cb025d6f49e5f92ffe1b" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>operator=</name></member>
+      <member refid="structicomparable_1a19b050f922dcb00e282f1fd440e2df77" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>operator==</name></member>
+      <member refid="structicomparable_1a5d2fcdbcf595020adcaccc310d90fc16" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a108835b6418a11d9f26fb6849e820f0f" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>operator&gt;=</name></member>
+      <member refid="classflat__hashtable_1ac71458da99b3f27b2030546051b3645c" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>pointer</name></member>
+      <member refid="classflat__hashtable_1a7b1cb98dc1627b1b1c81d05011f28850" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>probe_find_or_insert</name></member>
+      <member refid="classflat__hashtable_1acc356e70a4cfc4bfbcd7d88a90211482" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>probe_find_or_insert_simd</name></member>
+      <member refid="classflat__hashtable_1afc09f078a1a8e8133a440779b152aedc" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>reference</name></member>
+      <member refid="classflat__hashtable_1a98bad05939c8e221a69d9dd7fe7e9ee3" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>rehash</name></member>
+      <member refid="classflat__hashtable_1a66db2374096c800571f4a2ab4e00439a" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>rehash_impl</name></member>
+      <member refid="classflat__hashtable_1a1e03ab971a293d2e8c539241302483a0" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>reserve</name></member>
+      <member refid="classflat__hashtable_1a057b04417ddf4713b8dd63c5360be04e" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>should_rehash</name></member>
+      <member refid="classflat__hashtable_1ab0467fd90b6ad79d56e068a75249d33b" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>size</name></member>
+      <member refid="classflat__hashtable_1ace1035228fbc9a225be84b99add136ba" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>size_</name></member>
+      <member refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>size_type</name></member>
+      <member refid="classflat__hashtable_1a893f08ecfe8d460d9fd456a30089a9cd" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>swap</name></member>
+      <member refid="classflat__hashtable_1a1551b4f412c7e6b9430ec74540200f32" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>to_const_iterator</name></member>
+      <member refid="classflat__hashtable_1a74050d0540f6dbd8deae9759c42f2c11" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>to_iterator</name></member>
+      <member refid="classflat__hashtable_1a0bbd80544e66122b170b1a49b812b62d" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>value_type</name></member>
+      <member refid="classflat__hashtable_1a0de6765034f2106ee54595c5f477db26" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>~flat_hashtable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

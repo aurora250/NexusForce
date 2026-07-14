@@ -5,7 +5,9 @@
     <includes refid="c_09_09config_8hpp" local="yes">NeForce/core/config/c++config.hpp</includes>
     <includes refid="hash_8hpp" local="yes">NeForce/core/functional/hash.hpp</includes>
     <includes local="no">coroutine</includes>
+    <includedby refid="co__spawn_8hpp" local="yes">co_spawn.hpp</includedby>
     <includedby refid="generator_8hpp" local="yes">generator.hpp</includedby>
+    <includedby refid="use__awaitable_8hpp" local="yes">use_awaitable.hpp</includedby>
     <includedby refid="virtual__thread_8hpp" local="yes">virtual_thread.hpp</includedby>
     <incdepgraph>
       <node id="1">
@@ -56,6 +58,24 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="6">
+        <label>async_compose.hpp</label>
+        <link refid="async__compose_8hpp"/>
+      </node>
+      <node id="5">
+        <label>async_stream.hpp</label>
+        <link refid="async__stream_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>co_spawn.hpp</label>
+        <link refid="co__spawn_8hpp"/>
+      </node>
       <node id="1">
         <label>coroutine.hpp</label>
         <link refid="coroutine_8hpp"/>
@@ -63,14 +83,156 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
       </node>
-      <node id="2">
+      <node id="3">
         <label>generator.hpp</label>
         <link refid="generator_8hpp"/>
       </node>
-      <node id="3">
+      <node id="4">
+        <label>use_awaitable.hpp</label>
+        <link refid="use__awaitable_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
         <label>virtual_thread.hpp</label>
         <link refid="virtual__thread_8hpp"/>
+      </node>
+      <node id="24">
+        <label>dns_client.hpp</label>
+        <link refid="dns__client_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>ftp_client.hpp</label>
+        <link refid="ftp__client_8hpp_source"/>
+      </node>
+      <node id="8">
+        <label>ftp_protocol.hpp</label>
+        <link refid="ftp__protocol_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ftp_server.hpp</label>
+        <link refid="ftp__server_8hpp_source"/>
+      </node>
+      <node id="21">
+        <label>chunked_reader.hpp</label>
+        <link refid="chunked__reader_8hpp"/>
+      </node>
+      <node id="22">
+        <label>http2_connection.hpp</label>
+        <link refid="http2__connection_8hpp"/>
+      </node>
+      <node id="17">
+        <label>http_client.hpp</label>
+        <link refid="http__client_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>http_server.hpp</label>
+        <link refid="http__server_8hpp"/>
+      </node>
+      <node id="18">
+        <label>reverse_proxy.hpp</label>
+        <link refid="reverse__proxy_8hpp"/>
+      </node>
+      <node id="19">
+        <label>websocket.hpp</label>
+        <link refid="websocket_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>smtp_socket.hpp</label>
+        <link refid="smtp__socket_8hpp"/>
+      </node>
+      <node id="13">
+        <label>ssl_acceptor.hpp</label>
+        <link refid="ssl__acceptor_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>ssl_socket.hpp</label>
+        <link refid="ssl__socket_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>ssl_stream.hpp</label>
+        <link refid="ssl__stream_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>tcp_acceptor.hpp</label>
+        <link refid="tcp__acceptor_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>tcp_client.hpp</label>
+        <link refid="tcp__client_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>tcp_server.hpp</label>
+        <link refid="tcp__server_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>tcp_socket.hpp</label>
+        <link refid="tcp__socket_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>udp_socket.hpp</label>
+        <link refid="udp__socket_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
       </node>
     </invincdepgraph>
     <innerclass refid="structcoroutine__traits__impl" prot="public">coroutine_traits_impl</innerclass>

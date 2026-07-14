@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['色调色板_0',['ANSI 256 色调色板',['../group___color.html#ansi_256_palette',1,'']]],
-  ['色_1',['基本 ANSI 8/16 色',['../group___color.html#basic_ansi_colors',1,'']]]
+  ['缓冲区格式化_0',['缓冲区格式化',['../group___buffer_format.html',1,'']]],
+  ['缓冲区_1',['缓冲区',['../group___async_buffers.html',1,'']]],
+  ['缓存机制_2',['DNS 缓存机制',['../group___d_n_s.html#dns_caching',1,'']]],
+  ['缓存_3',['缓存',['../group___cache.html',1,'']]]
 ];
