@@ -351,8 +351,8 @@ The core components of NexusForce strictly adhere to relevant international stan
 | 📦 Package Manager                | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest              |
 | 🎨 Code Formatter                 | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19+                 |
 | 🔍 Static Analyzer                | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19+                 |
-| ⚠️ Mandatory Dependencies (vcpkg) | [GTest](https://google.github.io/googletest/)                       | 1.17.0+             |
-|                                   | [pcre2](https://www.pcre.org/)                                      | 10.47+              |
+| ⚠️ Mandatory Dependencies (vcpkg) | [pcre2](https://www.pcre.org/)                                      | 10.47+              |
+|                                   | [icu](https://icu.unicode.org/)                                     | 78.2+               |
 |                                   | [OpenSSL](https://www.openssl.org/)                                 | 3.6.1+              |
 | 📦 Optional Dependencies (vcpkg)  | [libpq](https://www.postgresql.org/)                                | 16.9+               |
 |                                   | [libmysql](https://www.mysql.com/)                                  | 8.0.40+             |
@@ -360,12 +360,19 @@ The core components of NexusForce strictly adhere to relevant international stan
 |                                   | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+              |
 |                                   | [lz4](https://lz4.org/)                                             | 1.10.0+             |
 |                                   | [zlib](https://www.zlib.net/)                                       | 1.3.1+              |
+|                                   | [GTest](https://google.github.io/googletest/)                       | 1.17.0+             |
+|                                   | [benchmark](https://github.com/google/benchmark/)                   | 1.9.5+              |
 
 ### 🏗️ Build Steps
 
 Ensure that CMake, vcpkg, clang-format, and clang-tidy are correctly installed and configured before building.
 
 > 💡 You can modify the configuration items in `config.json` (build options) and `vcpkg.json` (package management configuration) in the project root directory for personalized builds.
+>
+> **This project additionally relies on liburing-dev on Linux systems; please ensure you have installed it before building**
+>
+> In actual testing, on Linux, VCPKG requires libtirpc-dev libraries to build libmysql, libpq requires bison, flex, and autoconf libraries, and these libraries are not installed by default by the package manager.
+> If you need corresponding dependencies, you can install them in advance using the package manager to prevent cmake build failures
 
 #### 🪟 Windows
 

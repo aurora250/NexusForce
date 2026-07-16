@@ -350,13 +350,9 @@ target_compile_definitions(NexusForce PUBLIC
 message(STATUS "PCRE2 with JIT linked successfully")
 
 find_package(ICU REQUIRED COMPONENTS uc i18n)
-if(TARGET ICU::uc AND TARGET ICU::i18n)
-    target_link_libraries(NexusForce PUBLIC ICU::uc ICU::i18n)
-    target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_ICU)
-    message(STATUS "ICU linked successfully")
-else()
-    message(FATAL_ERROR "ICU CMake targets (ICU::uc, ICU::i18n) not found")
-endif()
+target_link_libraries(NexusForce PUBLIC ICU::uc ICU::i18n)
+target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_ICU)
+message(STATUS "ICU linked successfully")
 
 message(STATUS "")
 

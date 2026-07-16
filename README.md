@@ -330,7 +330,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **并行算法** - 并行执行策略
 - **数值算法** - 数值计算与累加
 - **堆算法** - 堆操作与优先级队列
-- **范围操作** - ranges 库支持
+- **范围操作** - ranges 支持
 - **哈希算法** - 多种哈希函数实现
 
 ### 📊 数学库 (Math)
@@ -345,21 +345,23 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 📋 前置依赖
 
-| 类型             | 依赖                                                                  | 版本要求     |
-|----------------|---------------------------------------------------------------------|----------|
-| 🔨 构建工具        | [CMake](https://cmake.org/)                                         | 3.19+    |
-| 📦 包管理器        | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest   |
-| 🎨 代码格式化       | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19+      |
-| 🔍 静态分析        | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19+      |
-| ⚠️ 必选依赖(vcpkg) | [GTest](https://google.github.io/googletest/)                       | 1.17.0+  |
-|                | [pcre2](https://www.pcre.org/)                                      | 10.47+   |
-|                | [OpenSSL](https://www.openssl.org/)                                 | 3.6.1+   |
-| 📦 可选依赖(vcpkg) | [libpq](https://www.postgresql.org/)                                | 16.9+    |
-|                | [libmysql](https://www.mysql.com/)                                  | 8.0.40+  |
-|                | [sqlite3](https://sqlite.org/index.html)                            | 3.51.2+  |
-|                | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+   |
-|                | [lz4](https://lz4.org/)                                             | 1.10.0+  |
-|                | [zlib](https://www.zlib.net/)                                       | 1.3.1+   |
+| 类型               | 依赖                                                                  | 版本要求    |
+|------------------|---------------------------------------------------------------------|---------|
+| 🔨 构建工具          | [CMake](https://cmake.org/)                                         | 3.19+   |
+| 📦 包管理器          | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest  |
+| 🎨 代码格式化         | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19+     |
+| 🔍 静态分析          | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19+     |
+| ⚠️ 必选依赖(vcpkg)   | [pcre2](https://www.pcre.org/)                                      | 10.47+  |
+|                  | [icu](https://icu.unicode.org/)                                     | 78.2+   |
+|                  | [OpenSSL](https://www.openssl.org/)                                 | 3.6.1+  |
+| 📦 可选依赖(vcpkg)   | [libpq](https://www.postgresql.org/)                                | 16.9+   |
+|                  | [libmysql](https://www.mysql.com/)                                  | 8.0.40+ |
+|                  | [sqlite3](https://sqlite.org/index.html)                            | 3.51.2+ |
+|                  | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+  |
+|                  | [lz4](https://lz4.org/)                                             | 1.10.0+ |
+|                  | [zlib](https://www.zlib.net/)                                       | 1.3.1+  |
+|                  | [GTest](https://google.github.io/googletest/)                       | 1.17.0+ |
+|                  | [benchmark](https://github.com/google/benchmark/)                   | 1.9.5+  |
 
 ### 🏗️ 编译步骤
 
