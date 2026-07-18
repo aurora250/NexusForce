@@ -95,14 +95,15 @@ $(function(){initNavTree('int128_8hpp.html','',''); });
 
 <p>128位整数类型实现  
 <a href="#details">更多...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="to__numerics_8hpp_source.html">NeForce/core/string/to_numerics.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="to__string_8hpp_source.html">NeForce/core/string/to_string.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="iobject_8hpp_source.html">NeForce/core/interface/iobject.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="msvc__intrinsic_8hpp_source.html">NeForce/core/config/msvc_intrinsic.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="exception_8hpp_source.html">NeForce/core/exception/exception.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="numeric__traits_8hpp_source.html">NeForce/core/numeric/numeric_traits.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="inumeric_8hpp_source.html">NeForce/core/interface/inumeric.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="icommon_8hpp_source.html">NeForce/core/interface/icommon.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 int128.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="int128_8hpp__incl.svg" width="2243" height="1670"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="int128_8hpp__incl.svg" width="740" height="672"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="int128_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -124,26 +125,18 @@ int128.hpp 的引用(Include)关系图:</div>
 <tr class="memdesc:gadab16538b261dc3a37900167c487c24c"><td class="mdescLeft">&#160;</td><td class="mdescRight">128位无符号整数字面量  <br /></td></tr>
 <tr class="memitem:ga05bd1975c8fd3ecbe41e9f2765e29f59" id="r_ga05bd1975c8fd3ecbe41e9f2765e29f59"><td class="memItemLeft">constexpr <a class="el" href="structint128__t.html">int128_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___user_literals.html#ga05bd1975c8fd3ecbe41e9f2765e29f59">operator&quot;&quot;_i128</a> (const unsigned long long val) noexcept</td></tr>
 <tr class="memdesc:ga05bd1975c8fd3ecbe41e9f2765e29f59"><td class="mdescLeft">&#160;</td><td class="mdescRight">128位有符号整数字面量  <br /></td></tr>
-<tr class="memitem:gaa40d57935d274a75859089b3f959cebf" id="r_gaa40d57935d274a75859089b3f959cebf"><td class="memItemLeft">constexpr <a class="el" href="structuint128__t.html">uint128_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___user_literals.html#gaa40d57935d274a75859089b3f959cebf">operator&quot;&quot;_u128</a> (const char *str, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len)</td></tr>
-<tr class="memdesc:gaa40d57935d274a75859089b3f959cebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">128位无符号整数字符串字面量  <br /></td></tr>
-<tr class="memitem:gaa437921a519a6a246a539dc02ec81ba6" id="r_gaa437921a519a6a246a539dc02ec81ba6"><td class="memItemLeft">constexpr <a class="el" href="structint128__t.html">int128_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___user_literals.html#gaa437921a519a6a246a539dc02ec81ba6">operator&quot;&quot;_i128</a> (const char *str, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len)</td></tr>
-<tr class="memdesc:gaa437921a519a6a246a539dc02ec81ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">128位有符号整数字符串字面量  <br /></td></tr>
-<tr class="memitem:ga00110fd2113bf3df11fe4fd12c7f4843" id="r_ga00110fd2113bf3df11fe4fd12c7f4843"><td class="memItemLeft">constexpr <a class="el" href="structuint128__t.html">uint128_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga00110fd2113bf3df11fe4fd12c7f4843">to_uint128</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> sv, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> *idx=nullptr, const int base=10)</td></tr>
-<tr class="memdesc:ga00110fd2113bf3df11fe4fd12c7f4843"><td class="mdescLeft">&#160;</td><td class="mdescRight">将字符串转换为128位无符号整数  <br /></td></tr>
-<tr class="memitem:gafde0106c7b3946708cbc9a6ecfb70607" id="r_gafde0106c7b3946708cbc9a6ecfb70607"><td class="memItemLeft">constexpr <a class="el" href="structint128__t.html">int128_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#gafde0106c7b3946708cbc9a6ecfb70607">to_int128</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> sv, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> *idx=nullptr, const int base=10)</td></tr>
-<tr class="memdesc:gafde0106c7b3946708cbc9a6ecfb70607"><td class="mdescLeft">&#160;</td><td class="mdescRight">将字符串转换为128位有符号整数  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>128位整数类型实现 </p>
-<p>此文件提供了128位有符号和无符号整数类型的完整实现。 支持所有基本算术运算、位运算、比较运算、字符串转换等功能。</p>
+<p>此文件提供了128位有符号和无符号整数类型的完整实现。 支持所有基本算术运算、位运算、比较运算。</p>
 <p>主要功能：</p><ul>
-<li>128位无符号整数与有符号整数</li>
-<li>所有算术运算符重载</li>
+<li>128位无符号整数与有符号整数（uint128_t / int128_t）</li>
+<li>所有算术运算符重载（header-only constexpr）</li>
 <li>位运算支持</li>
-<li>字符串解析和格式化</li>
 <li>与内置整数类型的隐式转换</li>
 <li>数值特性</li>
-<li>字面量支持 </li>
+<li>字面量支持</li>
+<li>128位整数包装类型（uinteger128 / integer128），支持字符串解析和格式化 </li>
 </ul>
 
 <p class="definition">在文件 <a class="el" href="int128_8hpp_source.html">int128.hpp</a> 中定义.</p>

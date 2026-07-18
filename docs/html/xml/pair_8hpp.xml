@@ -6,7 +6,7 @@
     <includes refid="integer__sequence_8hpp" local="yes">NeForce/core/utility/integer_sequence.hpp</includes>
     <includes refid="reference__wrapper_8hpp" local="yes">NeForce/core/utility/reference_wrapper.hpp</includes>
     <includes local="no">utility</includes>
-    <includedby refid="compare_8hpp" local="yes">compare.hpp</includedby>
+    <includedby refid="algorithm_2compare_8hpp" local="yes">compare.hpp</includedby>
     <includedby refid="rb__tree_8hpp" local="yes">rb_tree.hpp</includedby>
     <includedby refid="sparse__vector_8hpp" local="yes">sparse_vector.hpp</includedby>
     <includedby refid="tuple_8hpp" local="yes">tuple.hpp</includedby>
@@ -28,6 +28,8 @@
         <link refid="hash_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
       </node>
       <node id="2">
         <label>NeForce/core/interface/icommon.hpp</label>
@@ -36,6 +38,18 @@
         </childnode>
       </node>
       <node id="4">
+        <label>NeForce/core/memory/bit.hpp</label>
+        <link refid="bit_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>NeForce/core/memory/endian.hpp</label>
+        <link refid="endian_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
         <label>NeForce/core/typeinfo/type_traits.hpp</label>
         <link refid="type__traits_8hpp"/>
         <childnode refid="5" relation="include">
@@ -43,14 +57,14 @@
       </node>
       <node id="5">
         <label>NeForce/core/typeinfo/types.hpp</label>
-        <link refid="types_8hpp"/>
+        <link refid="typeinfo_2types_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="11">
         <label>NeForce/core/utility/integer_sequence.hpp</label>
         <link refid="integer__sequence_8hpp"/>
-        <childnode refid="4" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -58,23 +72,23 @@
         <link refid="pair_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
         <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
       </node>
-      <node id="10">
+      <node id="12">
         <label>NeForce/core/utility/reference_wrapper.hpp</label>
         <link refid="reference__wrapper_8hpp"/>
-        <childnode refid="4" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="7">
         <label>cassert</label>
       </node>
-      <node id="11">
+      <node id="13">
         <label>utility</label>
       </node>
     </incdepgraph>
@@ -83,71 +97,71 @@
         <label>lz4_compress.hpp</label>
         <link refid="lz4__compress_8hpp"/>
       </node>
-      <node id="178">
+      <node id="177">
         <label>zlib_compress.hpp</label>
         <link refid="zlib__compress_8hpp"/>
         <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="176" relation="include">
+        <childnode refid="175" relation="include">
         </childnode>
       </node>
-      <node id="231">
+      <node id="230">
         <label>algorithm.hpp</label>
         <link refid="algorithm_8hpp"/>
       </node>
       <node id="2">
         <label>compare.hpp</label>
-        <link refid="compare_8hpp"/>
+        <link refid="algorithm_2compare_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="207" relation="include">
+        <childnode refid="206" relation="include">
         </childnode>
-        <childnode refid="212" relation="include">
+        <childnode refid="211" relation="include">
+        </childnode>
+        <childnode refid="215" relation="include">
         </childnode>
         <childnode refid="216" relation="include">
         </childnode>
-        <childnode refid="217" relation="include">
+        <childnode refid="222" relation="include">
         </childnode>
-        <childnode refid="223" relation="include">
+        <childnode refid="229" relation="include">
         </childnode>
-        <childnode refid="230" relation="include">
+        <childnode refid="200" relation="include">
         </childnode>
-        <childnode refid="201" relation="include">
+        <childnode refid="231" relation="include">
         </childnode>
-        <childnode refid="232" relation="include">
-        </childnode>
-        <childnode refid="234" relation="include">
+        <childnode refid="233" relation="include">
         </childnode>
       </node>
-      <node id="198">
+      <node id="197">
         <label>leonardo_heap.hpp</label>
         <link refid="leonardo__heap_8hpp"/>
       </node>
-      <node id="233">
+      <node id="232">
         <label>merge.hpp</label>
         <link refid="merge_8hpp"/>
+        <childnode refid="229" relation="include">
+        </childnode>
+      </node>
+      <node id="239">
+        <label>parallel.hpp</label>
+        <link refid="parallel_8hpp"/>
         <childnode refid="230" relation="include">
         </childnode>
       </node>
-      <node id="240">
-        <label>parallel.hpp</label>
-        <link refid="parallel_8hpp"/>
-        <childnode refid="231" relation="include">
-        </childnode>
-      </node>
-      <node id="230">
+      <node id="229">
         <label>sort.hpp</label>
         <link refid="sort_8hpp"/>
-        <childnode refid="231" relation="include">
+        <childnode refid="230" relation="include">
         </childnode>
-        <childnode refid="183" relation="include">
+        <childnode refid="182" relation="include">
         </childnode>
-        <childnode refid="189" relation="include">
+        <childnode refid="188" relation="include">
         </childnode>
-        <childnode refid="197" relation="include">
+        <childnode refid="196" relation="include">
         </childnode>
       </node>
-      <node id="229">
+      <node id="228">
         <label>async.hpp</label>
         <link refid="async_8hpp"/>
       </node>
@@ -163,98 +177,98 @@
         <childnode refid="121" relation="include">
         </childnode>
       </node>
-      <node id="103">
+      <node id="102">
         <label>async_stream.hpp</label>
         <link refid="async__stream_8hpp"/>
         <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="104" relation="include">
+        <childnode refid="103" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
       </node>
       <node id="4">
         <label>barrier.hpp</label>
         <link refid="barrier_8hpp"/>
       </node>
-      <node id="102">
+      <node id="101">
         <label>cancellation_slot.hpp</label>
         <link refid="cancellation__slot_8hpp"/>
-        <childnode refid="103" relation="include">
+        <childnode refid="102" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="112" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
-        <childnode refid="104" relation="include">
+        <childnode refid="103" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="213">
+      <node id="212">
         <label>channel.hpp</label>
         <link refid="channel_8hpp"/>
       </node>
-      <node id="224">
+      <node id="223">
         <label>executor.hpp</label>
         <link refid="executor_8hpp"/>
       </node>
-      <node id="226">
+      <node id="225">
         <label>future.hpp</label>
         <link refid="future_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="227" relation="include">
+        <childnode refid="226" relation="include">
         </childnode>
       </node>
-      <node id="245">
+      <node id="244">
         <label>generator.hpp</label>
         <link refid="generator_8hpp"/>
       </node>
-      <node id="197">
+      <node id="196">
         <label>hazard_ptr.hpp</label>
         <link refid="hazard__ptr_8hpp"/>
       </node>
-      <node id="113">
+      <node id="112">
         <label>io_context.hpp</label>
         <link refid="io__context_8hpp"/>
-        <childnode refid="103" relation="include">
+        <childnode refid="102" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="112" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="104" relation="include">
+        <childnode refid="103" relation="include">
         </childnode>
-        <childnode refid="114" relation="include">
+        <childnode refid="113" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
         </childnode>
         <childnode refid="109" relation="include">
-        </childnode>
-        <childnode refid="110" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="238">
+      <node id="237">
         <label>lazy_thread.hpp</label>
         <link refid="lazy__thread_8hpp"/>
         <childnode refid="88" relation="include">
         </childnode>
       </node>
-      <node id="239">
+      <node id="238">
         <label>lock_free_queue.hpp</label>
         <link refid="lock__free__queue_8hpp"/>
-        <childnode refid="113" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
-        <childnode refid="114" relation="include">
+        <childnode refid="113" relation="include">
         </childnode>
         <childnode refid="88" relation="include">
         </childnode>
@@ -263,45 +277,45 @@
         <label>named_mutex.hpp</label>
         <link refid="named__mutex_8hpp"/>
       </node>
-      <node id="228">
+      <node id="227">
         <label>packaged_task.hpp</label>
         <link refid="packaged__task_8hpp"/>
-        <childnode refid="229" relation="include">
+        <childnode refid="228" relation="include">
         </childnode>
-        <childnode refid="219" relation="include">
+        <childnode refid="218" relation="include">
         </childnode>
       </node>
-      <node id="227">
+      <node id="226">
         <label>promise.hpp</label>
         <link refid="promise_8hpp"/>
         <childnode refid="116" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="228" relation="include">
+        <childnode refid="227" relation="include">
         </childnode>
       </node>
-      <node id="242">
+      <node id="241">
         <label>scope_thread.hpp</label>
         <link refid="scope__thread_8hpp"/>
       </node>
-      <node id="200">
+      <node id="199">
         <label>signals.hpp</label>
         <link refid="signals_8hpp"/>
       </node>
-      <node id="241">
+      <node id="240">
         <label>stop_token.hpp</label>
         <link refid="stop__token_8hpp"/>
-        <childnode refid="102" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
-        <childnode refid="242" relation="include">
+        <childnode refid="241" relation="include">
         </childnode>
       </node>
-      <node id="114">
+      <node id="113">
         <label>strand.hpp</label>
         <link refid="strand_8hpp"/>
       </node>
-      <node id="237">
+      <node id="236">
         <label>thread.hpp</label>
         <link refid="thread_8hpp"/>
         <childnode refid="4" relation="include">
@@ -312,27 +326,27 @@
         </childnode>
         <childnode refid="125" relation="include">
         </childnode>
-        <childnode refid="238" relation="include">
+        <childnode refid="237" relation="include">
         </childnode>
-        <childnode refid="239" relation="include">
+        <childnode refid="238" relation="include">
         </childnode>
         <childnode refid="86" relation="include">
         </childnode>
-        <childnode refid="228" relation="include">
+        <childnode refid="227" relation="include">
         </childnode>
-        <childnode refid="240" relation="include">
+        <childnode refid="239" relation="include">
         </childnode>
         <childnode refid="129" relation="include">
         </childnode>
-        <childnode refid="193" relation="include">
-        </childnode>
-        <childnode refid="241" relation="include">
-        </childnode>
-        <childnode refid="219" relation="include">
-        </childnode>
         <childnode refid="192" relation="include">
         </childnode>
-        <childnode refid="206" relation="include">
+        <childnode refid="240" relation="include">
+        </childnode>
+        <childnode refid="218" relation="include">
+        </childnode>
+        <childnode refid="191" relation="include">
+        </childnode>
+        <childnode refid="205" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
@@ -343,7 +357,7 @@
         <childnode refid="57" relation="include">
         </childnode>
       </node>
-      <node id="219">
+      <node id="218">
         <label>timer.hpp</label>
         <link refid="timer_8hpp"/>
         <childnode refid="88" relation="include">
@@ -352,18 +366,18 @@
       <node id="121">
         <label>use_awaitable.hpp</label>
         <link refid="use__awaitable_8hpp"/>
-        <childnode refid="103" relation="include">
+        <childnode refid="102" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="104" relation="include">
+        <childnode refid="103" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="206">
+      <node id="205">
         <label>virtual_thread.hpp</label>
         <link refid="virtual__thread_8hpp"/>
       </node>
@@ -399,91 +413,91 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="212">
+      <node id="211">
         <label>deque.hpp</label>
         <link refid="deque_8hpp"/>
+        <childnode refid="212" relation="include">
+        </childnode>
         <childnode refid="213" relation="include">
         </childnode>
         <childnode refid="214" relation="include">
         </childnode>
-        <childnode refid="215" relation="include">
-        </childnode>
       </node>
-      <node id="183">
+      <node id="182">
         <label>flat_hashtable.hpp</label>
         <link refid="flat__hashtable_8hpp"/>
+        <childnode refid="183" relation="include">
+        </childnode>
         <childnode refid="184" relation="include">
         </childnode>
         <childnode refid="185" relation="include">
         </childnode>
         <childnode refid="186" relation="include">
         </childnode>
-        <childnode refid="187" relation="include">
-        </childnode>
       </node>
-      <node id="184">
+      <node id="183">
         <label>flat_unordered_map.hpp</label>
         <link refid="flat__unordered__map_8hpp"/>
       </node>
-      <node id="185">
+      <node id="184">
         <label>flat_unordered_multimap.hpp</label>
         <link refid="flat__unordered__multimap_8hpp"/>
       </node>
-      <node id="186">
+      <node id="185">
         <label>flat_unordered_multiset.hpp</label>
         <link refid="flat__unordered__multiset_8hpp"/>
       </node>
-      <node id="187">
+      <node id="186">
         <label>flat_unordered_set.hpp</label>
         <link refid="flat__unordered__set_8hpp"/>
       </node>
-      <node id="189">
+      <node id="188">
         <label>hashtable.hpp</label>
         <link refid="hashtable_8hpp"/>
-        <childnode refid="190" relation="include">
+        <childnode refid="189" relation="include">
+        </childnode>
+        <childnode refid="193" relation="include">
         </childnode>
         <childnode refid="194" relation="include">
         </childnode>
         <childnode refid="195" relation="include">
         </childnode>
-        <childnode refid="196" relation="include">
-        </childnode>
       </node>
-      <node id="216">
+      <node id="215">
         <label>list.hpp</label>
         <link refid="list_8hpp"/>
+        <childnode refid="190" relation="include">
+        </childnode>
+      </node>
+      <node id="190">
+        <label>lru_cache.hpp</label>
+        <link refid="lru__cache_8hpp"/>
         <childnode refid="191" relation="include">
         </childnode>
       </node>
-      <node id="191">
-        <label>lru_cache.hpp</label>
-        <link refid="lru__cache_8hpp"/>
-        <childnode refid="192" relation="include">
-        </childnode>
-      </node>
-      <node id="218">
+      <node id="217">
         <label>map.hpp</label>
         <link refid="map_8hpp"/>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="219" relation="include">
+        <childnode refid="218" relation="include">
         </childnode>
       </node>
-      <node id="220">
+      <node id="219">
         <label>multimap.hpp</label>
         <link refid="multimap_8hpp"/>
       </node>
-      <node id="221">
+      <node id="220">
         <label>multiset.hpp</label>
         <link refid="multiset_8hpp"/>
       </node>
-      <node id="199">
+      <node id="198">
         <label>priority_queue.hpp</label>
         <link refid="priority__queue_8hpp"/>
         <childnode refid="88" relation="include">
         </childnode>
       </node>
-      <node id="214">
+      <node id="213">
         <label>queue.hpp</label>
         <link refid="queue_8hpp"/>
         <childnode refid="62" relation="include">
@@ -492,58 +506,58 @@
         </childnode>
         <childnode refid="88" relation="include">
         </childnode>
-        <childnode refid="206" relation="include">
+        <childnode refid="205" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="217">
+      <node id="216">
         <label>rb_tree.hpp</label>
         <link refid="rb__tree_8hpp"/>
-        <childnode refid="218" relation="include">
+        <childnode refid="217" relation="include">
+        </childnode>
+        <childnode refid="219" relation="include">
         </childnode>
         <childnode refid="220" relation="include">
         </childnode>
         <childnode refid="221" relation="include">
         </childnode>
-        <childnode refid="222" relation="include">
-        </childnode>
       </node>
-      <node id="222">
+      <node id="221">
         <label>set.hpp</label>
         <link refid="container_2set_8hpp"/>
-        <childnode refid="219" relation="include">
+        <childnode refid="218" relation="include">
         </childnode>
       </node>
-      <node id="202">
+      <node id="201">
         <label>sparse_map.hpp</label>
         <link refid="sparse__map_8hpp"/>
       </node>
-      <node id="203">
+      <node id="202">
         <label>sparse_multimap.hpp</label>
         <link refid="sparse__multimap_8hpp"/>
       </node>
-      <node id="204">
+      <node id="203">
         <label>sparse_multiset.hpp</label>
         <link refid="sparse__multiset_8hpp"/>
       </node>
-      <node id="205">
+      <node id="204">
         <label>sparse_set.hpp</label>
         <link refid="sparse__set_8hpp"/>
       </node>
-      <node id="201">
+      <node id="200">
         <label>sparse_vector.hpp</label>
         <link refid="sparse__vector_8hpp"/>
+        <childnode refid="201" relation="include">
+        </childnode>
         <childnode refid="202" relation="include">
         </childnode>
         <childnode refid="203" relation="include">
         </childnode>
         <childnode refid="204" relation="include">
         </childnode>
-        <childnode refid="205" relation="include">
-        </childnode>
       </node>
-      <node id="215">
+      <node id="214">
         <label>stack.hpp</label>
         <link refid="stack_8hpp"/>
         <childnode refid="151" relation="include">
@@ -553,11 +567,11 @@
         <childnode refid="92" relation="include">
         </childnode>
       </node>
-      <node id="192">
+      <node id="191">
         <label>ttl_cache.hpp</label>
         <link refid="ttl__cache_8hpp"/>
       </node>
-      <node id="190">
+      <node id="189">
         <label>unordered_map.hpp</label>
         <link refid="unordered__map_8hpp"/>
         <childnode refid="48" relation="include">
@@ -570,7 +584,7 @@
         </childnode>
         <childnode refid="140" relation="include">
         </childnode>
-        <childnode refid="98" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
@@ -580,13 +594,13 @@
         </childnode>
         <childnode refid="143" relation="include">
         </childnode>
-        <childnode refid="113" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="150" relation="include">
         </childnode>
         <childnode refid="86" relation="include">
         </childnode>
-        <childnode refid="191" relation="include">
+        <childnode refid="190" relation="include">
         </childnode>
         <childnode refid="50" relation="include">
         </childnode>
@@ -594,7 +608,7 @@
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="193" relation="include">
+        <childnode refid="192" relation="include">
         </childnode>
         <childnode refid="173" relation="include">
         </childnode>
@@ -613,15 +627,15 @@
         <childnode refid="91" relation="include">
         </childnode>
       </node>
-      <node id="194">
+      <node id="193">
         <label>unordered_multimap.hpp</label>
         <link refid="unordered__multimap_8hpp"/>
       </node>
-      <node id="195">
+      <node id="194">
         <label>unordered_multiset.hpp</label>
         <link refid="unordered__multiset_8hpp"/>
       </node>
-      <node id="196">
+      <node id="195">
         <label>unordered_set.hpp</label>
         <link refid="unordered__set_8hpp"/>
       </node>
@@ -640,41 +654,41 @@
         </childnode>
         <childnode refid="139" relation="include">
         </childnode>
+        <childnode refid="178" relation="include">
+        </childnode>
         <childnode refid="179" relation="include">
         </childnode>
         <childnode refid="180" relation="include">
-        </childnode>
-        <childnode refid="181" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
         <childnode refid="61" relation="include">
         </childnode>
-        <childnode refid="97" relation="include">
+        <childnode refid="96" relation="include">
         </childnode>
-        <childnode refid="182" relation="include">
+        <childnode refid="181" relation="include">
         </childnode>
         <childnode refid="155" relation="include">
         </childnode>
         <childnode refid="125" relation="include">
         </childnode>
-        <childnode refid="183" relation="include">
+        <childnode refid="182" relation="include">
+        </childnode>
+        <childnode refid="187" relation="include">
         </childnode>
         <childnode refid="188" relation="include">
         </childnode>
-        <childnode refid="189" relation="include">
-        </childnode>
-        <childnode refid="197" relation="include">
+        <childnode refid="196" relation="include">
         </childnode>
         <childnode refid="84" relation="include">
         </childnode>
         <childnode refid="119" relation="include">
         </childnode>
-        <childnode refid="113" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="150" relation="include">
         </childnode>
-        <childnode refid="198" relation="include">
+        <childnode refid="197" relation="include">
         </childnode>
         <childnode refid="94" relation="include">
         </childnode>
@@ -688,7 +702,7 @@
         </childnode>
         <childnode refid="154" relation="include">
         </childnode>
-        <childnode refid="199" relation="include">
+        <childnode refid="198" relation="include">
         </childnode>
         <childnode refid="129" relation="include">
         </childnode>
@@ -700,23 +714,23 @@
         </childnode>
         <childnode refid="170" relation="include">
         </childnode>
-        <childnode refid="193" relation="include">
+        <childnode refid="192" relation="include">
         </childnode>
-        <childnode refid="200" relation="include">
+        <childnode refid="199" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="201" relation="include">
+        <childnode refid="200" relation="include">
         </childnode>
         <childnode refid="171" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
         <childnode refid="89" relation="include">
         </childnode>
-        <childnode refid="206" relation="include">
+        <childnode refid="205" relation="include">
         </childnode>
-        <childnode refid="177" relation="include">
+        <childnode refid="176" relation="include">
         </childnode>
         <childnode refid="91" relation="include">
         </childnode>
@@ -729,7 +743,7 @@
         <label>base64.hpp</label>
         <link refid="base64_8hpp"/>
       </node>
-      <node id="181">
+      <node id="180">
         <label>chacha20_poly1305.hpp</label>
         <link refid="chacha20__poly1305_8hpp"/>
       </node>
@@ -745,36 +759,38 @@
         <label>sha256.hpp</label>
         <link refid="sha256_8hpp"/>
       </node>
-      <node id="177">
+      <node id="176">
         <label>xor.hpp</label>
         <link refid="xor_8hpp"/>
       </node>
-      <node id="99">
+      <node id="98">
         <label>error_category.hpp</label>
-        <link refid="error__category_8hpp_source"/>
-        <childnode refid="100" relation="include">
+        <link refid="error__category_8hpp"/>
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
-      <node id="101">
+      <node id="100">
         <label>error_code.hpp</label>
-        <link refid="error__code_8hpp_source"/>
+        <link refid="error__code_8hpp"/>
         <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="102" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
         <childnode refid="81" relation="include">
         </childnode>
+        <childnode refid="111" relation="include">
+        </childnode>
         <childnode refid="112" relation="include">
         </childnode>
-        <childnode refid="113" relation="include">
+        <childnode refid="114" relation="include">
         </childnode>
         <childnode refid="115" relation="include">
         </childnode>
       </node>
-      <node id="100">
+      <node id="99">
         <label>error_condition.hpp</label>
-        <link refid="error__condition_8hpp_source"/>
-        <childnode refid="101" relation="include">
+        <link refid="error__condition_8hpp"/>
+        <childnode refid="100" relation="include">
         </childnode>
       </node>
       <node id="115">
@@ -784,7 +800,7 @@
         </childnode>
         <childnode refid="53" relation="include">
         </childnode>
-        <childnode refid="97" relation="include">
+        <childnode refid="96" relation="include">
         </childnode>
         <childnode refid="122" relation="include">
         </childnode>
@@ -827,7 +843,7 @@
         <childnode refid="82" relation="include">
         </childnode>
       </node>
-      <node id="112">
+      <node id="111">
         <label>file_async.hpp</label>
         <link refid="file__async_8hpp"/>
         <childnode refid="81" relation="include">
@@ -943,22 +959,22 @@
         <childnode refid="93" relation="include">
         </childnode>
       </node>
-      <node id="236">
+      <node id="235">
         <label>apply.hpp</label>
         <link refid="apply_8hpp"/>
-        <childnode refid="200" relation="include">
+        <childnode refid="199" relation="include">
         </childnode>
-        <childnode refid="237" relation="include">
+        <childnode refid="236" relation="include">
         </childnode>
       </node>
-      <node id="243">
+      <node id="242">
         <label>bind.hpp</label>
         <link refid="bind_8hpp"/>
       </node>
-      <node id="244">
+      <node id="243">
         <label>call_wrapper.hpp</label>
         <link refid="call__wrapper_8hpp"/>
-        <childnode refid="229" relation="include">
+        <childnode refid="228" relation="include">
         </childnode>
       </node>
       <node id="134">
@@ -971,8 +987,6 @@
         <label>iobject.hpp</label>
         <link refid="iobject_8hpp"/>
         <childnode refid="51" relation="include">
-        </childnode>
-        <childnode refid="95" relation="include">
         </childnode>
         <childnode refid="58" relation="include">
         </childnode>
@@ -1009,20 +1023,20 @@
         <childnode refid="91" relation="include">
         </childnode>
       </node>
-      <node id="246">
+      <node id="245">
         <label>ranges.hpp</label>
         <link refid="ranges_8hpp_source"/>
       </node>
-      <node id="179">
+      <node id="178">
         <label>bounded_queue.hpp</label>
         <link refid="bounded__queue_8hpp_source"/>
         <childnode refid="57" relation="include">
         </childnode>
       </node>
-      <node id="180">
+      <node id="179">
         <label>buffer.hpp</label>
         <link refid="buffer_8hpp"/>
-        <childnode refid="103" relation="include">
+        <childnode refid="102" relation="include">
         </childnode>
       </node>
       <node id="9">
@@ -1041,83 +1055,79 @@
         <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="223">
+      <node id="222">
         <label>shared_ptr.hpp</label>
         <link refid="shared__ptr_8hpp"/>
         <childnode refid="116" relation="include">
         </childnode>
-        <childnode refid="102" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
         <childnode refid="62" relation="include">
         </childnode>
-        <childnode refid="224" relation="include">
+        <childnode refid="223" relation="include">
         </childnode>
-        <childnode refid="113" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="172" relation="include">
         </childnode>
-        <childnode refid="114" relation="include">
+        <childnode refid="113" relation="include">
         </childnode>
-        <childnode refid="219" relation="include">
+        <childnode refid="218" relation="include">
         </childnode>
-        <childnode refid="225" relation="include">
+        <childnode refid="224" relation="include">
         </childnode>
         <childnode refid="91" relation="include">
         </childnode>
       </node>
-      <node id="232">
+      <node id="231">
         <label>temporary_buffer.hpp</label>
         <link refid="temporary__buffer_8hpp"/>
-        <childnode refid="233" relation="include">
+        <childnode refid="232" relation="include">
         </childnode>
       </node>
       <node id="54">
         <label>trace_memory.hpp</label>
         <link refid="trace__memory_8hpp"/>
       </node>
-      <node id="225">
+      <node id="224">
         <label>weak_ptr.hpp</label>
         <link refid="weak__ptr_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="226" relation="include">
+        <childnode refid="225" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="156" relation="include">
         </childnode>
-        <childnode refid="200" relation="include">
+        <childnode refid="199" relation="include">
         </childnode>
         <childnode refid="88" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="95">
-        <label>int128.hpp</label>
-        <link refid="int128_8hpp"/>
-      </node>
-      <node id="210">
+      <node id="209">
         <label>any.hpp</label>
         <link refid="reflect_2any_8hpp"/>
-        <childnode refid="182" relation="include">
+        <childnode refid="181" relation="include">
         </childnode>
-        <childnode refid="188" relation="include">
+        <childnode refid="187" relation="include">
         </childnode>
         <childnode refid="161" relation="include">
         </childnode>
-        <childnode refid="200" relation="include">
+        <childnode refid="199" relation="include">
         </childnode>
       </node>
-      <node id="182">
+      <node id="181">
         <label>enum.hpp</label>
         <link refid="enum_8hpp"/>
         <childnode refid="162" relation="include">
         </childnode>
       </node>
-      <node id="188">
+      <node id="187">
         <label>function.hpp</label>
         <link refid="reflect_2function_8hpp"/>
         <childnode refid="164" relation="include">
@@ -1181,16 +1191,16 @@
         <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="208">
+      <node id="207">
         <label>basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
-        <childnode refid="209" relation="include">
+        <childnode refid="208" relation="include">
         </childnode>
       </node>
-      <node id="207">
+      <node id="206">
         <label>char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
-        <childnode refid="208" relation="include">
+        <childnode refid="207" relation="include">
         </childnode>
       </node>
       <node id="42">
@@ -1200,7 +1210,7 @@
         </childnode>
         <childnode refid="44" relation="include">
         </childnode>
-        <childnode refid="96" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
@@ -1234,13 +1244,13 @@
         </childnode>
         <childnode refid="42" relation="include">
         </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
         <childnode refid="97" relation="include">
         </childnode>
         <childnode refid="98" relation="include">
         </childnode>
-        <childnode refid="99" relation="include">
-        </childnode>
-        <childnode refid="112" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
@@ -1276,33 +1286,29 @@
         </childnode>
         <childnode refid="174" relation="include">
         </childnode>
-        <childnode refid="175" relation="include">
-        </childnode>
         <childnode refid="162" relation="include">
+        </childnode>
+        <childnode refid="175" relation="include">
         </childnode>
         <childnode refid="176" relation="include">
         </childnode>
         <childnode refid="177" relation="include">
         </childnode>
-        <childnode refid="178" relation="include">
-        </childnode>
       </node>
-      <node id="209">
+      <node id="208">
         <label>string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="210" relation="include">
+        <childnode refid="209" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="211" relation="include">
+        <childnode refid="210" relation="include">
         </childnode>
       </node>
-      <node id="211">
+      <node id="210">
         <label>to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
         <childnode refid="47" relation="include">
-        </childnode>
-        <childnode refid="95" relation="include">
         </childnode>
         <childnode refid="58" relation="include">
         </childnode>
@@ -1312,8 +1318,6 @@
         <link refid="to__string_8hpp"/>
         <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
-        </childnode>
       </node>
       <node id="44">
         <label>utf.hpp</label>
@@ -1321,7 +1325,7 @@
         <childnode refid="45" relation="include">
         </childnode>
       </node>
-      <node id="96">
+      <node id="95">
         <label>utf_iterator.hpp</label>
         <link refid="utf__iterator_8hpp"/>
       </node>
@@ -1351,7 +1355,7 @@
         <label>dynamic_library_import.hpp</label>
         <link refid="dynamic__library__import_8hpp"/>
       </node>
-      <node id="98">
+      <node id="97">
         <label>environment.hpp</label>
         <link refid="environment_8hpp"/>
       </node>
@@ -1381,7 +1385,7 @@
         <label>share_memory.hpp</label>
         <link refid="share__memory_8hpp"/>
       </node>
-      <node id="193">
+      <node id="192">
         <label>signal.hpp</label>
         <link refid="signal_8hpp"/>
         <childnode refid="130" relation="include">
@@ -1393,10 +1397,10 @@
         <childnode refid="54" relation="include">
         </childnode>
       </node>
-      <node id="175">
+      <node id="174">
         <label>sysinfo.hpp</label>
         <link refid="sysinfo_8hpp"/>
-        <childnode refid="109" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
         <childnode refid="88" relation="include">
         </childnode>
@@ -1476,27 +1480,27 @@
         <link refid="pair_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="217" relation="include">
+        <childnode refid="216" relation="include">
         </childnode>
-        <childnode refid="201" relation="include">
+        <childnode refid="200" relation="include">
         </childnode>
-        <childnode refid="235" relation="include">
+        <childnode refid="234" relation="include">
         </childnode>
       </node>
-      <node id="235">
+      <node id="234">
         <label>tuple.hpp</label>
         <link refid="tuple_8hpp"/>
-        <childnode refid="236" relation="include">
+        <childnode refid="235" relation="include">
+        </childnode>
+        <childnode refid="242" relation="include">
         </childnode>
         <childnode refid="243" relation="include">
         </childnode>
-        <childnode refid="244" relation="include">
-        </childnode>
         <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="245" relation="include">
+        <childnode refid="244" relation="include">
         </childnode>
-        <childnode refid="246" relation="include">
+        <childnode refid="245" relation="include">
         </childnode>
         <childnode refid="121" relation="include">
         </childnode>
@@ -1505,7 +1509,7 @@
         <label>uuid.hpp</label>
         <link refid="uuid_8hpp"/>
       </node>
-      <node id="234">
+      <node id="233">
         <label>variant.hpp</label>
         <link refid="variant_8hpp"/>
         <childnode refid="117" relation="include">
@@ -1675,7 +1679,7 @@
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="97">
+      <node id="96">
         <label>dns_message.hpp</label>
         <link refid="dns__message_8hpp"/>
         <childnode refid="11" relation="include">
@@ -1685,15 +1689,15 @@
         <label>ftp_client.hpp</label>
         <link refid="ftp__client_8hpp_source"/>
       </node>
-      <node id="105">
+      <node id="104">
         <label>ftp_protocol.hpp</label>
         <link refid="ftp__protocol_8hpp_source"/>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="105" relation="include">
         </childnode>
       </node>
-      <node id="106">
+      <node id="105">
         <label>ftp_server.hpp</label>
         <link refid="ftp__server_8hpp_source"/>
       </node>
@@ -1861,7 +1865,7 @@
         <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="176">
+      <node id="175">
         <label>websocket_deflate.hpp</label>
         <link refid="websocket__deflate_8hpp"/>
         <childnode refid="40" relation="include">
@@ -1874,11 +1878,11 @@
       <node id="120">
         <label>ip_socket.hpp</label>
         <link refid="ip__socket_8hpp"/>
-        <childnode refid="105" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
@@ -1903,10 +1907,10 @@
         <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="108">
+      <node id="107">
         <label>ssl_acceptor.hpp</label>
         <link refid="ssl__acceptor_8hpp"/>
-        <childnode refid="109" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
       </node>
       <node id="172">
@@ -1914,41 +1918,41 @@
         <link refid="ssl__context_8hpp"/>
         <childnode refid="173" relation="include">
         </childnode>
-        <childnode refid="104" relation="include">
+        <childnode refid="103" relation="include">
         </childnode>
       </node>
-      <node id="174">
+      <node id="114">
         <label>ssl_exception.hpp</label>
-        <link refid="ssl__exception_8hpp_source"/>
-        <childnode refid="172" relation="include">
+        <link refid="ssl__exception_8hpp"/>
+        <childnode refid="106" relation="include">
         </childnode>
       </node>
-      <node id="107">
+      <node id="106">
         <label>ssl_socket.hpp</label>
         <link refid="ssl__socket_8hpp"/>
-        <childnode refid="108" relation="include">
+        <childnode refid="107" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="104">
+      <node id="103">
         <label>ssl_stream.hpp</label>
         <link refid="ssl__stream_8hpp"/>
-        <childnode refid="105" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="107" relation="include">
-        </childnode>
-      </node>
-      <node id="111">
-        <label>tcp_acceptor.hpp</label>
-        <link refid="tcp__acceptor_8hpp"/>
         <childnode refid="106" relation="include">
         </childnode>
-        <childnode refid="108" relation="include">
+      </node>
+      <node id="110">
+        <label>tcp_acceptor.hpp</label>
+        <link refid="tcp__acceptor_8hpp"/>
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="107" relation="include">
         </childnode>
       </node>
       <node id="14">
@@ -1957,13 +1961,13 @@
         <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="109">
+      <node id="108">
         <label>tcp_server.hpp</label>
         <link refid="tcp__server_8hpp"/>
         <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="110">
+      <node id="109">
         <label>tcp_socket.hpp</label>
         <link refid="tcp__socket_8hpp"/>
         <childnode refid="48" relation="include">
@@ -1972,9 +1976,9 @@
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
-        <childnode refid="107" relation="include">
+        <childnode refid="106" relation="include">
         </childnode>
-        <childnode refid="111" relation="include">
+        <childnode refid="110" relation="include">
         </childnode>
       </node>
       <node id="10">
@@ -2097,7 +2101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="653" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="653" bodyend="655"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="650" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="650" bodyend="652"/>
       </memberdef>
       <member refid="group___pair_1gad7ca81798c37a2dbf158218594b5943b" kind="function"><name>get</name></member>
       <member refid="group___pair_1ga9d23c668fa502df611995662f9e31ee1" kind="function"><name>get</name></member>
@@ -2125,7 +2129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="692" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="692" bodyend="694"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="689" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="689" bodyend="691"/>
       </memberdef>
       <member refid="group___pair_1gaca1af7f9b14c3f3b3428fe1bf642d633" kind="function"><name>get</name></member>
       <member refid="group___pair_1ga573ccd745acb645736cd57ab72fe0a15" kind="function"><name>get</name></member>
@@ -2153,7 +2157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="732" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="732" bodyend="734"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="729" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="729" bodyend="731"/>
         <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
       </memberdef>
       <member refid="group___pair_1ga7e1d6870cb4a167c9c322e776fd0c1f4" kind="function"><name>get</name></member>
@@ -2182,7 +2186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="772" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="772" bodyend="774"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="769" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="769" bodyend="771"/>
         <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
       </memberdef>
     </sectiondef>
@@ -2446,257 +2450,254 @@
 <codeline lineno="431"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;<ref refid="structpair_1aed925258783c91efbc5432030709d54e" kindref="member">first</ref><sp/>&lt;<sp/>y.first<sp/>||<sp/>(!(y.first<sp/>&lt;<sp/>this-&gt;<ref refid="structpair_1aed925258783c91efbc5432030709d54e" kindref="member">first</ref>)<sp/>&amp;&amp;<sp/>this-&gt;<ref refid="structpair_1a63ae1bbd5a6ce6bd6167b5359fa7a01f" kindref="member">second</ref><sp/>&lt;<sp/>y.second);</highlight></codeline>
 <codeline lineno="432"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="433"><highlight class="normal"></highlight></codeline>
-<codeline lineno="440" refid="structpair_1a69e680b666c112c4d39d7628c2bd85b1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structpair_1a69e680b666c112c4d39d7628c2bd85b1" kindref="member">to_hash</ref>()<sp/>const</highlight></codeline>
-<codeline lineno="441"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>noexcept(noexcept(<ref refid="structhash" kindref="compound">hash</ref>&lt;<ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt;T1&gt;&gt;()(<ref refid="structpair_1aed925258783c91efbc5432030709d54e" kindref="member">first</ref>)<sp/>^<sp/><ref refid="structhash" kindref="compound">hash</ref>&lt;<ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt;T2&gt;&gt;()(<ref refid="structpair_1a63ae1bbd5a6ce6bd6167b5359fa7a01f" kindref="member">second</ref>)))<sp/>{</highlight></codeline>
-<codeline lineno="442"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhash" kindref="compound">hash&lt;remove_cvref_t&lt;T1&gt;</ref>&gt;()(<ref refid="structpair_1aed925258783c91efbc5432030709d54e" kindref="member">first</ref>)<sp/>^<sp/><ref refid="structhash" kindref="compound">hash&lt;remove_cvref_t&lt;T2&gt;</ref>&gt;()(<ref refid="structpair_1a63ae1bbd5a6ce6bd6167b5359fa7a01f" kindref="member">second</ref>);</highlight></codeline>
-<codeline lineno="443"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="444"><highlight class="normal"></highlight></codeline>
-<codeline lineno="449"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="450" refid="structpair_1acac4d296cf22d094158ff60a298c5dad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structpair_1acac4d296cf22d094158ff60a298c5dad" kindref="member">swap</ref>(<ref refid="structpair_1a651bc7e73c0e01a484760f12d893fff5" kindref="member">pair</ref>&amp;<sp/>p)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="structconjunction" kindref="compound">conjunction&lt;is_nothrow_swappable&lt;T1&gt;</ref>,<sp/><ref refid="structis__nothrow__swappable" kindref="compound">is_nothrow_swappable&lt;T2&gt;</ref>&gt;::value)<sp/>{</highlight></codeline>
-<codeline lineno="451"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(<ref refid="structpair_1aed925258783c91efbc5432030709d54e" kindref="member">first</ref>,<sp/>p.first);</highlight></codeline>
-<codeline lineno="452"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(<ref refid="structpair_1a63ae1bbd5a6ce6bd6167b5359fa7a01f" kindref="member">second</ref>,<sp/>p.second);</highlight></codeline>
-<codeline lineno="453"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="454"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="455"><highlight class="normal"></highlight></codeline>
-<codeline lineno="456"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="457"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="458"><highlight class="normal"><ref refid="structpair" kindref="compound">pair</ref>(T1,<sp/>T2)<sp/>-&gt;<sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>;</highlight></codeline>
-<codeline lineno="459"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="460"><highlight class="normal"></highlight></codeline>
-<codeline lineno="461"><highlight class="normal"></highlight></codeline>
-<codeline lineno="472"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="473"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;unwrap_ref_decay_t&lt;T1&gt;</ref>,<sp/><ref refid="group___reference_wrapper_1gab50d469d33ed56a0ce32f87d03ac5f10" kindref="member">unwrap_ref_decay_t&lt;T2&gt;</ref>&gt;</highlight></codeline>
-<codeline lineno="474" refid="group___pair_1ga3fc92626b5f2ddb8e7b4cd5f6ccde69e" refkind="member"><highlight class="normal"><ref refid="group___pair_1ga3fc92626b5f2ddb8e7b4cd5f6ccde69e" kindref="member">make_pair</ref>(T1&amp;&amp;<sp/>x,<sp/>T2&amp;&amp;<sp/>y)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="structconjunction" kindref="compound">conjunction&lt;is_nothrow_constructible&lt;unwrap_ref_decay_t&lt;T1&gt;</ref>,<sp/>T1&gt;,</highlight></codeline>
-<codeline lineno="475"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structis__nothrow__constructible" kindref="compound">is_nothrow_constructible&lt;unwrap_ref_decay_t&lt;T2&gt;</ref>,<sp/>T2&gt;&gt;::value)<sp/>{</highlight></codeline>
-<codeline lineno="476"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">unwrap_pair<sp/>=<sp/><ref refid="structpair" kindref="compound">pair&lt;unwrap_ref_decay_t&lt;T1&gt;</ref>,<sp/><ref refid="group___reference_wrapper_1gab50d469d33ed56a0ce32f87d03ac5f10" kindref="member">unwrap_ref_decay_t&lt;T2&gt;</ref>&gt;;</highlight></codeline>
-<codeline lineno="477"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>unwrap_pair(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T1&gt;</ref>(x),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T2&gt;</ref>(y));</highlight></codeline>
-<codeline lineno="478"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="479"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Pair</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="481"><highlight class="normal"></highlight></codeline>
-<codeline lineno="487"><highlight class="normal"></highlight></codeline>
-<codeline lineno="493"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Types&gt;</highlight></codeline>
-<codeline lineno="494"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__size" kindref="compound">tuple_size</ref>&lt;tuple&lt;Types...&gt;&gt;<sp/>:<sp/><ref refid="structintegral__constant" kindref="compound">integral_constant</ref>&lt;size_t,<sp/>sizeof...(Types)&gt;<sp/>{};</highlight></codeline>
-<codeline lineno="495"><highlight class="normal"></highlight></codeline>
-<codeline lineno="496"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__NEFORCE_BUILD_TUPLE_TUPLE_SIZE(CV)<sp/>\</highlight></codeline>
-<codeline lineno="497"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename...<sp/>Types&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="498"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>struct<sp/>tuple_size&lt;tuple&lt;Types...&gt;<sp/>CV&gt;<sp/>:<sp/>integral_constant&lt;size_t,<sp/>sizeof...(Types)&gt;<sp/>{};</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="499"><highlight class="normal"><ref refid="group___type_range_macros_1ga2032ee051ba8db7cbb55294148af56a4" kindref="member">NEFORCE_MACRO_RANGES_CV</ref>(__NEFORCE_BUILD_TUPLE_TUPLE_SIZE)</highlight></codeline>
-<codeline lineno="500"><highlight class="normal"></highlight><highlight class="preprocessor">#undef<sp/>__NEFORCE_BUILD_TUPLE_TUPLE_SIZE</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="501"><highlight class="normal"></highlight></codeline>
-<codeline lineno="502"><highlight class="normal"></highlight></codeline>
-<codeline lineno="508"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index&gt;</highlight></codeline>
-<codeline lineno="509"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;Index,<sp/>tuple&lt;&gt;&gt;<sp/>{};</highlight></codeline>
-<codeline lineno="510"><highlight class="normal"></highlight></codeline>
-<codeline lineno="516"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>This,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Rest&gt;</highlight></codeline>
-<codeline lineno="517" refid="structtuple__element_3_010_00_01tuple_3_01_this_00_01_rest_8_8_8_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;0,<sp/>tuple&lt;This,<sp/>Rest...&gt;&gt;<sp/>{</highlight></codeline>
-<codeline lineno="518"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>This;</highlight></codeline>
-<codeline lineno="519"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">tuple_type<sp/>=<sp/>tuple&lt;This,<sp/>Rest...&gt;;</highlight></codeline>
-<codeline lineno="520"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="521"><highlight class="normal"></highlight></codeline>
-<codeline lineno="528"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>This,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Rest&gt;</highlight></codeline>
-<codeline lineno="529" refid="structtuple__element_3_01_index_00_01tuple_3_01_this_00_01_rest_8_8_8_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;Index,<sp/>tuple&lt;This,<sp/>Rest...&gt;&gt;<sp/>:<sp/><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;Index<sp/>-<sp/>1,<sp/>tuple&lt;Rest...&gt;&gt;<sp/>{};</highlight></codeline>
-<codeline lineno="530"><highlight class="normal"></highlight></codeline>
-<codeline lineno="537"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Types&gt;</highlight></codeline>
-<codeline lineno="538"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__element" kindref="compound">tuple_element</ref><sp/>:<sp/><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;Index,<sp/>tuple&lt;Types...&gt;&gt;<sp/>{};</highlight></codeline>
-<codeline lineno="539"><highlight class="normal"></highlight></codeline>
-<codeline lineno="540"><highlight class="normal"></highlight></codeline>
-<codeline lineno="546"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="547" refid="structtuple__size_3_01pair_3_01_t1_00_01_t2_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__size" kindref="compound">tuple_size</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;T1,<sp/>T2&gt;&gt;<sp/>:<sp/><ref refid="structintegral__constant" kindref="compound">integral_constant</ref>&lt;size_t,<sp/>2&gt;<sp/>{};</highlight></codeline>
-<codeline lineno="548"><highlight class="normal"></highlight></codeline>
-<codeline lineno="549"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__NEFORCE_BUILD_PAIR_TUPLE_SIZE(CV)<sp/>\</highlight></codeline>
-<codeline lineno="550"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>T1,<sp/>typename<sp/>T2&gt;<sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="551"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>struct<sp/>tuple_size&lt;pair&lt;T1,<sp/>T2&gt;<sp/>CV&gt;<sp/>:<sp/>integral_constant&lt;size_t,<sp/>2&gt;<sp/>{};</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="552" refid="group___tuple_1ga7b9b44ad424931d74c85fa2580bcb512" refkind="member"><highlight class="normal"><ref refid="group___type_range_macros_1ga2032ee051ba8db7cbb55294148af56a4" kindref="member">NEFORCE_MACRO_RANGES_CV</ref>(__NEFORCE_BUILD_PAIR_TUPLE_SIZE)</highlight></codeline>
-<codeline lineno="553"><highlight class="normal"></highlight><highlight class="preprocessor">#undef<sp/>__NEFORCE_BUILD_PAIR_TUPLE_SIZE</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="554"><highlight class="normal"></highlight></codeline>
-<codeline lineno="561"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="562"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;Index,<sp/><ref refid="structpair" kindref="compound">pair</ref>&lt;T1,<sp/>T2&gt;&gt;<sp/>{</highlight></codeline>
-<codeline lineno="563"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(Index<sp/>&lt;<sp/>2,<sp/></highlight><highlight class="stringliteral">&quot;pair<sp/>element<sp/>index<sp/>out<sp/>of<sp/>range.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="564"><highlight class="normal"></highlight></codeline>
-<codeline lineno="565"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t&lt;Index == 0, T1, T2&gt;</ref>;<sp/></highlight></codeline>
-<codeline lineno="566"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">tuple_type<sp/>=<sp/>tuple&lt;T1,<sp/>T2&gt;;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="567"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="568"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Tuple</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="570"><highlight class="normal"></highlight></codeline>
-<codeline lineno="576"><highlight class="normal"></highlight></codeline>
-<codeline lineno="577"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="579"><highlight class="normal">NEFORCE_BEGIN_INNER__</highlight></codeline>
-<codeline lineno="580"><highlight class="normal"></highlight></codeline>
-<codeline lineno="581"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="582"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__pair_get_helper;</highlight></codeline>
-<codeline lineno="583"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="584"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__pair_get_helper&lt;0,<sp/>T1,<sp/>T2&gt;<sp/>{</highlight></codeline>
-<codeline lineno="585"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;0, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(pair&lt;T1,<sp/>T2&gt;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="440" refid="structpair_1ab212f5f87ab3e6830ab82370d4f5344b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structpair_1ab212f5f87ab3e6830ab82370d4f5344b" kindref="member">to_hash</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="hash_8hpp_1ada0179e2ceb52916b0009f805dbb58c8" kindref="member">hash_combine_all</ref>(<ref refid="structpair_1aed925258783c91efbc5432030709d54e" kindref="member">first</ref>,<sp/><ref refid="structpair_1a63ae1bbd5a6ce6bd6167b5359fa7a01f" kindref="member">second</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="441"><highlight class="normal"></highlight></codeline>
+<codeline lineno="446"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="447" refid="structpair_1acac4d296cf22d094158ff60a298c5dad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structpair_1acac4d296cf22d094158ff60a298c5dad" kindref="member">swap</ref>(<ref refid="structpair_1a651bc7e73c0e01a484760f12d893fff5" kindref="member">pair</ref>&amp;<sp/>p)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="structconjunction" kindref="compound">conjunction&lt;is_nothrow_swappable&lt;T1&gt;</ref>,<sp/><ref refid="structis__nothrow__swappable" kindref="compound">is_nothrow_swappable&lt;T2&gt;</ref>&gt;::value)<sp/>{</highlight></codeline>
+<codeline lineno="448"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(<ref refid="structpair_1aed925258783c91efbc5432030709d54e" kindref="member">first</ref>,<sp/>p.first);</highlight></codeline>
+<codeline lineno="449"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(<ref refid="structpair_1a63ae1bbd5a6ce6bd6167b5359fa7a01f" kindref="member">second</ref>,<sp/>p.second);</highlight></codeline>
+<codeline lineno="450"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="451"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="452"><highlight class="normal"></highlight></codeline>
+<codeline lineno="453"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="454"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="455"><highlight class="normal"><ref refid="structpair" kindref="compound">pair</ref>(T1,<sp/>T2)<sp/>-&gt;<sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>;</highlight></codeline>
+<codeline lineno="456"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="457"><highlight class="normal"></highlight></codeline>
+<codeline lineno="458"><highlight class="normal"></highlight></codeline>
+<codeline lineno="469"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="470"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;unwrap_ref_decay_t&lt;T1&gt;</ref>,<sp/><ref refid="group___reference_wrapper_1gab50d469d33ed56a0ce32f87d03ac5f10" kindref="member">unwrap_ref_decay_t&lt;T2&gt;</ref>&gt;</highlight></codeline>
+<codeline lineno="471" refid="group___pair_1ga3fc92626b5f2ddb8e7b4cd5f6ccde69e" refkind="member"><highlight class="normal"><ref refid="group___pair_1ga3fc92626b5f2ddb8e7b4cd5f6ccde69e" kindref="member">make_pair</ref>(T1&amp;&amp;<sp/>x,<sp/>T2&amp;&amp;<sp/>y)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="structconjunction" kindref="compound">conjunction&lt;is_nothrow_constructible&lt;unwrap_ref_decay_t&lt;T1&gt;</ref>,<sp/>T1&gt;,</highlight></codeline>
+<codeline lineno="472"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structis__nothrow__constructible" kindref="compound">is_nothrow_constructible&lt;unwrap_ref_decay_t&lt;T2&gt;</ref>,<sp/>T2&gt;&gt;::value)<sp/>{</highlight></codeline>
+<codeline lineno="473"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">unwrap_pair<sp/>=<sp/><ref refid="structpair" kindref="compound">pair&lt;unwrap_ref_decay_t&lt;T1&gt;</ref>,<sp/><ref refid="group___reference_wrapper_1gab50d469d33ed56a0ce32f87d03ac5f10" kindref="member">unwrap_ref_decay_t&lt;T2&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="474"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>unwrap_pair(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T1&gt;</ref>(x),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T2&gt;</ref>(y));</highlight></codeline>
+<codeline lineno="475"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="476"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Pair</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="478"><highlight class="normal"></highlight></codeline>
+<codeline lineno="484"><highlight class="normal"></highlight></codeline>
+<codeline lineno="490"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Types&gt;</highlight></codeline>
+<codeline lineno="491"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__size" kindref="compound">tuple_size</ref>&lt;tuple&lt;Types...&gt;&gt;<sp/>:<sp/><ref refid="structintegral__constant" kindref="compound">integral_constant</ref>&lt;size_t,<sp/>sizeof...(Types)&gt;<sp/>{};</highlight></codeline>
+<codeline lineno="492"><highlight class="normal"></highlight></codeline>
+<codeline lineno="493"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__NEFORCE_BUILD_TUPLE_TUPLE_SIZE(CV)<sp/>\</highlight></codeline>
+<codeline lineno="494"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename...<sp/>Types&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="495"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>struct<sp/>tuple_size&lt;tuple&lt;Types...&gt;<sp/>CV&gt;<sp/>:<sp/>integral_constant&lt;size_t,<sp/>sizeof...(Types)&gt;<sp/>{};</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="496"><highlight class="normal"><ref refid="group___type_range_macros_1ga2032ee051ba8db7cbb55294148af56a4" kindref="member">NEFORCE_MACRO_RANGES_CV</ref>(__NEFORCE_BUILD_TUPLE_TUPLE_SIZE)</highlight></codeline>
+<codeline lineno="497"><highlight class="normal"></highlight><highlight class="preprocessor">#undef<sp/>__NEFORCE_BUILD_TUPLE_TUPLE_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="498"><highlight class="normal"></highlight></codeline>
+<codeline lineno="499"><highlight class="normal"></highlight></codeline>
+<codeline lineno="505"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index&gt;</highlight></codeline>
+<codeline lineno="506"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;Index,<sp/>tuple&lt;&gt;&gt;<sp/>{};</highlight></codeline>
+<codeline lineno="507"><highlight class="normal"></highlight></codeline>
+<codeline lineno="513"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>This,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Rest&gt;</highlight></codeline>
+<codeline lineno="514" refid="structtuple__element_3_010_00_01tuple_3_01_this_00_01_rest_8_8_8_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;0,<sp/>tuple&lt;This,<sp/>Rest...&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="515"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>This;</highlight></codeline>
+<codeline lineno="516"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">tuple_type<sp/>=<sp/>tuple&lt;This,<sp/>Rest...&gt;;</highlight></codeline>
+<codeline lineno="517"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="518"><highlight class="normal"></highlight></codeline>
+<codeline lineno="525"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>This,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Rest&gt;</highlight></codeline>
+<codeline lineno="526" refid="structtuple__element_3_01_index_00_01tuple_3_01_this_00_01_rest_8_8_8_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;Index,<sp/>tuple&lt;This,<sp/>Rest...&gt;&gt;<sp/>:<sp/><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;Index<sp/>-<sp/>1,<sp/>tuple&lt;Rest...&gt;&gt;<sp/>{};</highlight></codeline>
+<codeline lineno="527"><highlight class="normal"></highlight></codeline>
+<codeline lineno="534"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Types&gt;</highlight></codeline>
+<codeline lineno="535"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__element" kindref="compound">tuple_element</ref><sp/>:<sp/><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;Index,<sp/>tuple&lt;Types...&gt;&gt;<sp/>{};</highlight></codeline>
+<codeline lineno="536"><highlight class="normal"></highlight></codeline>
+<codeline lineno="537"><highlight class="normal"></highlight></codeline>
+<codeline lineno="543"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="544" refid="structtuple__size_3_01pair_3_01_t1_00_01_t2_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__size" kindref="compound">tuple_size</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;T1,<sp/>T2&gt;&gt;<sp/>:<sp/><ref refid="structintegral__constant" kindref="compound">integral_constant</ref>&lt;size_t,<sp/>2&gt;<sp/>{};</highlight></codeline>
+<codeline lineno="545"><highlight class="normal"></highlight></codeline>
+<codeline lineno="546"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__NEFORCE_BUILD_PAIR_TUPLE_SIZE(CV)<sp/>\</highlight></codeline>
+<codeline lineno="547"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>T1,<sp/>typename<sp/>T2&gt;<sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="548"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>struct<sp/>tuple_size&lt;pair&lt;T1,<sp/>T2&gt;<sp/>CV&gt;<sp/>:<sp/>integral_constant&lt;size_t,<sp/>2&gt;<sp/>{};</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="549" refid="group___tuple_1ga7b9b44ad424931d74c85fa2580bcb512" refkind="member"><highlight class="normal"><ref refid="group___type_range_macros_1ga2032ee051ba8db7cbb55294148af56a4" kindref="member">NEFORCE_MACRO_RANGES_CV</ref>(__NEFORCE_BUILD_PAIR_TUPLE_SIZE)</highlight></codeline>
+<codeline lineno="550"><highlight class="normal"></highlight><highlight class="preprocessor">#undef<sp/>__NEFORCE_BUILD_PAIR_TUPLE_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="551"><highlight class="normal"></highlight></codeline>
+<codeline lineno="558"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="559"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt;Index,<sp/><ref refid="structpair" kindref="compound">pair</ref>&lt;T1,<sp/>T2&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="560"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(Index<sp/>&lt;<sp/>2,<sp/></highlight><highlight class="stringliteral">&quot;pair<sp/>element<sp/>index<sp/>out<sp/>of<sp/>range.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="561"><highlight class="normal"></highlight></codeline>
+<codeline lineno="562"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t&lt;Index == 0, T1, T2&gt;</ref>;<sp/></highlight></codeline>
+<codeline lineno="563"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">tuple_type<sp/>=<sp/>tuple&lt;T1,<sp/>T2&gt;;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="564"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="565"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Tuple</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="567"><highlight class="normal"></highlight></codeline>
+<codeline lineno="573"><highlight class="normal"></highlight></codeline>
+<codeline lineno="574"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="576"><highlight class="normal">NEFORCE_BEGIN_INNER__</highlight></codeline>
+<codeline lineno="577"><highlight class="normal"></highlight></codeline>
+<codeline lineno="578"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="579"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__pair_get_helper;</highlight></codeline>
+<codeline lineno="580"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="581"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__pair_get_helper&lt;0,<sp/>T1,<sp/>T2&gt;<sp/>{</highlight></codeline>
+<codeline lineno="582"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;0, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(pair&lt;T1,<sp/>T2&gt;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="583"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.first;</highlight></codeline>
+<codeline lineno="584"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="585"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;0, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>pair&lt;T1,<sp/>T2&gt;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="586"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.first;</highlight></codeline>
 <codeline lineno="587"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="588"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;0, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>pair&lt;T1,<sp/>T2&gt;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="589"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.first;</highlight></codeline>
+<codeline lineno="588"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;0, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(pair&lt;T1,<sp/>T2&gt;&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="589"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T1&gt;</ref>(pir.first);</highlight></codeline>
 <codeline lineno="590"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="591"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;0, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(pair&lt;T1,<sp/>T2&gt;&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="592"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T1&gt;</ref>(pir.first);</highlight></codeline>
+<codeline lineno="591"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;0, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>pair&lt;T1,<sp/>T2&gt;&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="592"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T1&gt;</ref>(pir.first);</highlight></codeline>
 <codeline lineno="593"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="594"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;0, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>pair&lt;T1,<sp/>T2&gt;&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="595"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T1&gt;</ref>(pir.first);</highlight></codeline>
-<codeline lineno="596"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="597"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="598"><highlight class="normal"></highlight></codeline>
-<codeline lineno="599"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="600"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__pair_get_helper&lt;1,<sp/>T1,<sp/>T2&gt;<sp/>{</highlight></codeline>
-<codeline lineno="601"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;1, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(pair&lt;T1,<sp/>T2&gt;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="594"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="595"><highlight class="normal"></highlight></codeline>
+<codeline lineno="596"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="597"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__pair_get_helper&lt;1,<sp/>T1,<sp/>T2&gt;<sp/>{</highlight></codeline>
+<codeline lineno="598"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;1, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(pair&lt;T1,<sp/>T2&gt;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="599"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.second;</highlight></codeline>
+<codeline lineno="600"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="601"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;1, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>pair&lt;T1,<sp/>T2&gt;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="602"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.second;</highlight></codeline>
 <codeline lineno="603"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="604"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;1, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>pair&lt;T1,<sp/>T2&gt;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="605"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.second;</highlight></codeline>
+<codeline lineno="604"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;1, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(pair&lt;T1,<sp/>T2&gt;&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="605"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T2&gt;</ref>(pir.second);</highlight></codeline>
 <codeline lineno="606"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="607"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;1, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(pair&lt;T1,<sp/>T2&gt;&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="608"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T2&gt;</ref>(pir.second);</highlight></codeline>
+<codeline lineno="607"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;1, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>pair&lt;T1,<sp/>T2&gt;&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="608"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T2&gt;</ref>(pir.second);</highlight></codeline>
 <codeline lineno="609"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="610"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;1, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>pair&lt;T1,<sp/>T2&gt;&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="611"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T2&gt;</ref>(pir.second);</highlight></codeline>
-<codeline lineno="612"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="613"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="614"><highlight class="normal"></highlight></codeline>
-<codeline lineno="615"><highlight class="normal">NEFORCE_END_INNER__</highlight></codeline>
-<codeline lineno="617"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>!NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="618"><highlight class="normal"></highlight></codeline>
-<codeline lineno="622"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="623"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="624"><highlight class="normal"></highlight></codeline>
-<codeline lineno="625"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="626"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="627" refid="group___pair_1gabd7f82c978556d424ee8c108958d7852" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="628"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Index<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="629"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.first;</highlight></codeline>
-<codeline lineno="630"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="631"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.second;</highlight></codeline>
-<codeline lineno="632"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="633"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="634"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="635"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="636"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="637"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inner::__pair_get_helper&lt;Index,<sp/>T1,<sp/>T2&gt;::get(pir);</highlight></codeline>
-<codeline lineno="638"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="639"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="640"><highlight class="normal"></highlight></codeline>
-<codeline lineno="644"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="645" refid="group___pair_1ga1860920265f022954dc44e149c95a23f" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T1&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="646"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.first;</highlight></codeline>
-<codeline lineno="647"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="648"><highlight class="normal"></highlight></codeline>
-<codeline lineno="652"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1&gt;</highlight></codeline>
-<codeline lineno="653" refid="pair_8hpp_1ga1860920265f022954dc44e149c95a23f" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T2&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="654"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.second;</highlight></codeline>
-<codeline lineno="655"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="656"><highlight class="normal"></highlight></codeline>
-<codeline lineno="657"><highlight class="normal"></highlight></codeline>
-<codeline lineno="661"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="662"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="663"><highlight class="normal"></highlight></codeline>
-<codeline lineno="664"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="665"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="666" refid="group___pair_1gad7ca81798c37a2dbf158218594b5943b" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="667"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Index<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="668"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.first;</highlight></codeline>
-<codeline lineno="669"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="670"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.second;</highlight></codeline>
-<codeline lineno="671"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="672"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="673"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="674"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="675"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="676"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inner::__pair_get_helper&lt;Index,<sp/>T1,<sp/>T2&gt;::get(pir);</highlight></codeline>
-<codeline lineno="677"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="678"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="679"><highlight class="normal"></highlight></codeline>
-<codeline lineno="683"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="684" refid="group___pair_1ga9d23c668fa502df611995662f9e31ee1" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T1&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="685"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.first;</highlight></codeline>
-<codeline lineno="686"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="687"><highlight class="normal"></highlight></codeline>
-<codeline lineno="691"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1&gt;</highlight></codeline>
-<codeline lineno="692" refid="pair_8hpp_1ga9d23c668fa502df611995662f9e31ee1" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T2&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="693"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.second;</highlight></codeline>
-<codeline lineno="694"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="695"><highlight class="normal"></highlight></codeline>
-<codeline lineno="696"><highlight class="normal"></highlight></codeline>
-<codeline lineno="700"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="701"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="702"><highlight class="normal"></highlight></codeline>
-<codeline lineno="703"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="704"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="705" refid="group___pair_1gaca1af7f9b14c3f3b3428fe1bf642d633" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="706"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Index<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="707"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T1&gt;</ref>(pir.first);</highlight></codeline>
-<codeline lineno="708"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="709"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T2&gt;</ref>(pir.second);</highlight></codeline>
-<codeline lineno="710"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="711"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="712"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="713"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="714"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="715"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&gt;(</highlight></codeline>
-<codeline lineno="716"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::__pair_get_helper&lt;Index,<sp/>T1,<sp/>T2&gt;::get(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&gt;(pir)));</highlight></codeline>
-<codeline lineno="717"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="718"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="719"><highlight class="normal"></highlight></codeline>
-<codeline lineno="723"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="724" refid="group___pair_1ga573ccd745acb645736cd57ab72fe0a15" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T1&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="725"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T1&gt;</ref>(pir.first);</highlight></codeline>
-<codeline lineno="726"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="727"><highlight class="normal"></highlight></codeline>
-<codeline lineno="731"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1&gt;</highlight></codeline>
-<codeline lineno="732" refid="pair_8hpp_1ga573ccd745acb645736cd57ab72fe0a15" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T2&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="733"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T2&gt;</ref>(pir.second);</highlight></codeline>
-<codeline lineno="734"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="735"><highlight class="normal"></highlight></codeline>
-<codeline lineno="736"><highlight class="normal"></highlight></codeline>
-<codeline lineno="740"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="741"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="742"><highlight class="normal"></highlight></codeline>
-<codeline lineno="743"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="744"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="745" refid="group___pair_1ga7e1d6870cb4a167c9c322e776fd0c1f4" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="746"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Index<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="747"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T1&gt;</ref>(pir.first);</highlight></codeline>
-<codeline lineno="748"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="749"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T2&gt;</ref>(pir.second);</highlight></codeline>
-<codeline lineno="750"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="751"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="752"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="753"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="754"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="755"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&gt;(</highlight></codeline>
-<codeline lineno="756"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::__pair_get_helper&lt;Index,<sp/>T1,<sp/>T2&gt;::get(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&gt;(pir)));</highlight></codeline>
-<codeline lineno="757"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="758"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="759"><highlight class="normal"></highlight></codeline>
-<codeline lineno="763"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="764" refid="group___pair_1ga18f43fc543f4f7eb01b3aff5818f9519" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T1&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="765"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T1&gt;</ref>(pir.first);</highlight></codeline>
-<codeline lineno="766"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="767"><highlight class="normal"></highlight></codeline>
-<codeline lineno="771"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1&gt;</highlight></codeline>
-<codeline lineno="772" refid="pair_8hpp_1ga18f43fc543f4f7eb01b3aff5818f9519" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T2&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="773"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T2&gt;</ref>(pir.second);</highlight></codeline>
-<codeline lineno="774"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="775"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Pair</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="777"><highlight class="normal"></highlight></codeline>
-<codeline lineno="778"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="779"><highlight class="normal"></highlight></codeline>
-<codeline lineno="780"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="781"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="782"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">std<sp/>{</highlight></codeline>
-<codeline lineno="783"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="784"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">tuple_size&lt;_NEFORCE<sp/>pair&lt;T1,<sp/>T2&gt;&gt;<sp/>:<sp/>_NEFORCE<sp/>integral_constant&lt;_NEFORCE<sp/>size_t,<sp/>2&gt;<sp/>{};</highlight></codeline>
-<codeline lineno="785"><highlight class="normal"></highlight></codeline>
-<codeline lineno="786"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;_NEFORCE<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>I,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
-<codeline lineno="787"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">tuple_element&lt;I,<sp/>_NEFORCE<sp/>pair&lt;T1,<sp/>T2&gt;&gt;<sp/>{</highlight></codeline>
-<codeline lineno="788"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;I, _NEFORCE pair&lt;T1, T2&gt;</ref>&gt;;</highlight></codeline>
-<codeline lineno="789"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="790"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>std</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="791"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="792"><highlight class="normal"></highlight></codeline>
-<codeline lineno="793"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_UTILITY_PAIR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="610"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="611"><highlight class="normal"></highlight></codeline>
+<codeline lineno="612"><highlight class="normal">NEFORCE_END_INNER__</highlight></codeline>
+<codeline lineno="614"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>!NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="615"><highlight class="normal"></highlight></codeline>
+<codeline lineno="619"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="620"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="621"><highlight class="normal"></highlight></codeline>
+<codeline lineno="622"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="623"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="624" refid="group___pair_1gabd7f82c978556d424ee8c108958d7852" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="625"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Index<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="626"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.first;</highlight></codeline>
+<codeline lineno="627"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="628"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.second;</highlight></codeline>
+<codeline lineno="629"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="630"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="631"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="632"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="633"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="634"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inner::__pair_get_helper&lt;Index,<sp/>T1,<sp/>T2&gt;::get(pir);</highlight></codeline>
+<codeline lineno="635"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="636"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="637"><highlight class="normal"></highlight></codeline>
+<codeline lineno="641"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="642" refid="group___pair_1ga1860920265f022954dc44e149c95a23f" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T1&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="643"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.first;</highlight></codeline>
+<codeline lineno="644"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="645"><highlight class="normal"></highlight></codeline>
+<codeline lineno="649"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1&gt;</highlight></codeline>
+<codeline lineno="650" refid="pair_8hpp_1ga1860920265f022954dc44e149c95a23f" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T2&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="651"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.second;</highlight></codeline>
+<codeline lineno="652"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="653"><highlight class="normal"></highlight></codeline>
+<codeline lineno="654"><highlight class="normal"></highlight></codeline>
+<codeline lineno="658"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="659"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="660"><highlight class="normal"></highlight></codeline>
+<codeline lineno="661"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="662"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="663" refid="group___pair_1gad7ca81798c37a2dbf158218594b5943b" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="664"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Index<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="665"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.first;</highlight></codeline>
+<codeline lineno="666"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="667"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.second;</highlight></codeline>
+<codeline lineno="668"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="669"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="670"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="671"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="672"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="673"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inner::__pair_get_helper&lt;Index,<sp/>T1,<sp/>T2&gt;::get(pir);</highlight></codeline>
+<codeline lineno="674"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="675"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="676"><highlight class="normal"></highlight></codeline>
+<codeline lineno="680"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="681" refid="group___pair_1ga9d23c668fa502df611995662f9e31ee1" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T1&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="682"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.first;</highlight></codeline>
+<codeline lineno="683"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="684"><highlight class="normal"></highlight></codeline>
+<codeline lineno="688"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1&gt;</highlight></codeline>
+<codeline lineno="689" refid="pair_8hpp_1ga9d23c668fa502df611995662f9e31ee1" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T2&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="690"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pir.second;</highlight></codeline>
+<codeline lineno="691"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="692"><highlight class="normal"></highlight></codeline>
+<codeline lineno="693"><highlight class="normal"></highlight></codeline>
+<codeline lineno="697"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="698"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="699"><highlight class="normal"></highlight></codeline>
+<codeline lineno="700"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="701"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="702" refid="group___pair_1gaca1af7f9b14c3f3b3428fe1bf642d633" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="703"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Index<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="704"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T1&gt;</ref>(pir.first);</highlight></codeline>
+<codeline lineno="705"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="706"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T2&gt;</ref>(pir.second);</highlight></codeline>
+<codeline lineno="707"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="708"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="709"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="710"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="711"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="712"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&gt;(</highlight></codeline>
+<codeline lineno="713"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::__pair_get_helper&lt;Index,<sp/>T1,<sp/>T2&gt;::get(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&gt;(pir)));</highlight></codeline>
+<codeline lineno="714"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="715"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="716"><highlight class="normal"></highlight></codeline>
+<codeline lineno="720"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="721" refid="group___pair_1ga573ccd745acb645736cd57ab72fe0a15" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T1&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="722"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T1&gt;</ref>(pir.first);</highlight></codeline>
+<codeline lineno="723"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="724"><highlight class="normal"></highlight></codeline>
+<codeline lineno="728"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1&gt;</highlight></codeline>
+<codeline lineno="729" refid="pair_8hpp_1ga573ccd745acb645736cd57ab72fe0a15" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T2&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(<ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="730"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;T2&gt;</ref>(pir.second);</highlight></codeline>
+<codeline lineno="731"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="732"><highlight class="normal"></highlight></codeline>
+<codeline lineno="733"><highlight class="normal"></highlight></codeline>
+<codeline lineno="737"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="738"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="739"><highlight class="normal"></highlight></codeline>
+<codeline lineno="740"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="741"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="742" refid="group___pair_1ga7e1d6870cb4a167c9c322e776fd0c1f4" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="743"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Index<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="744"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T1&gt;</ref>(pir.first);</highlight></codeline>
+<codeline lineno="745"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="746"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T2&gt;</ref>(pir.second);</highlight></codeline>
+<codeline lineno="747"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="748"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="749"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="750"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="751"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="752"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const tuple_element_t&lt;Index, pair&lt;T1, T2&gt;</ref>&gt;&gt;(</highlight></codeline>
+<codeline lineno="753"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::__pair_get_helper&lt;Index,<sp/>T1,<sp/>T2&gt;::get(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&gt;(pir)));</highlight></codeline>
+<codeline lineno="754"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="755"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="756"><highlight class="normal"></highlight></codeline>
+<codeline lineno="760"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="761" refid="group___pair_1ga18f43fc543f4f7eb01b3aff5818f9519" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T1&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="762"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T1&gt;</ref>(pir.first);</highlight></codeline>
+<codeline lineno="763"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="764"><highlight class="normal"></highlight></codeline>
+<codeline lineno="768"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1&gt;</highlight></codeline>
+<codeline lineno="769" refid="pair_8hpp_1ga18f43fc543f4f7eb01b3aff5818f9519" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T2&amp;&amp;<sp/><ref refid="group___tuple_1gad4c1b89f774c60a9562ee7daf2bde78a" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;T1, T2&gt;</ref>&amp;&amp;<sp/>pir)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="770"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;const T2&gt;</ref>(pir.second);</highlight></codeline>
+<codeline lineno="771"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="772"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Pair</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="774"><highlight class="normal"></highlight></codeline>
+<codeline lineno="775"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="776"><highlight class="normal"></highlight></codeline>
+<codeline lineno="777"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="778"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="779"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">std<sp/>{</highlight></codeline>
+<codeline lineno="780"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="781"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">tuple_size&lt;_NEFORCE<sp/>pair&lt;T1,<sp/>T2&gt;&gt;<sp/>:<sp/>_NEFORCE<sp/>integral_constant&lt;_NEFORCE<sp/>size_t,<sp/>2&gt;<sp/>{};</highlight></codeline>
+<codeline lineno="782"><highlight class="normal"></highlight></codeline>
+<codeline lineno="783"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;_NEFORCE<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>I,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="784"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">tuple_element&lt;I,<sp/>_NEFORCE<sp/>pair&lt;T1,<sp/>T2&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="785"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;I, _NEFORCE pair&lt;T1, T2&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="786"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="787"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>std</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="788"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="789"><highlight class="normal"></highlight></codeline>
+<codeline lineno="790"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_UTILITY_PAIR_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp"/>
   </compounddef>

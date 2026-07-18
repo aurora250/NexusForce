@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="simd_2types_8hpp" kind="file" language="C++">
+    <compoundname>simd/types.hpp</compoundname>
+    <includes refid="typeinfo_2types_8hpp" local="yes">NeForce/core/typeinfo/types.hpp</includes>
+    <includedby refid="arithmetic_8hpp" local="yes">arithmetic.hpp</includedby>
+    <includedby refid="bitwise_8hpp" local="yes">bitwise.hpp</includedby>
+    <includedby refid="bytes_8hpp" local="yes">bytes.hpp</includedby>
+    <includedby refid="simd_2compare_8hpp" local="yes">compare.hpp</includedby>
+    <includedby refid="simd_2memory_8hpp" local="yes">memory.hpp</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
+      </node>
+      <node id="1">
+        <label>types.hpp</label>
+        <link refid="simd_2types_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>NeForce/core/typeinfo/types.hpp</label>
+        <link refid="typeinfo_2types_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>cassert</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5">
+        <label>flat_hashtable.hpp</label>
+        <link refid="flat__hashtable_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>flat_unordered_map.hpp</label>
+        <link refid="flat__unordered__map_8hpp"/>
+      </node>
+      <node id="7">
+        <label>flat_unordered_multimap.hpp</label>
+        <link refid="flat__unordered__multimap_8hpp"/>
+      </node>
+      <node id="8">
+        <label>flat_unordered_multiset.hpp</label>
+        <link refid="flat__unordered__multiset_8hpp"/>
+      </node>
+      <node id="9">
+        <label>flat_unordered_set.hpp</label>
+        <link refid="flat__unordered__set_8hpp"/>
+      </node>
+      <node id="2">
+        <label>arithmetic.hpp</label>
+        <link refid="arithmetic_8hpp"/>
+      </node>
+      <node id="3">
+        <label>bitwise.hpp</label>
+        <link refid="bitwise_8hpp"/>
+      </node>
+      <node id="4">
+        <label>bytes.hpp</label>
+        <link refid="bytes_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>compare.hpp</label>
+        <link refid="simd_2compare_8hpp"/>
+      </node>
+      <node id="11">
+        <label>memory.hpp</label>
+        <link refid="simd_2memory_8hpp"/>
+      </node>
+      <node id="1">
+        <label>types.hpp</label>
+        <link refid="simd_2types_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structvec128__t" prot="public">vec128_t</innerclass>
+    <innerclass refid="structvec128f__t" prot="public">vec128f_t</innerclass>
+    <innerclass refid="structvec128d__t" prot="public">vec128d_t</innerclass>
+    <innerclass refid="structvec256__t" prot="public">vec256_t</innerclass>
+    <innerclass refid="structvec256f__t" prot="public">vec256f_t</innerclass>
+    <innerclass refid="structvec256d__t" prot="public">vec256d_t</innerclass>
+    <innerclass refid="structvec512__t" prot="public">vec512_t</innerclass>
+    <innerclass refid="structvec512f__t" prot="public">vec512f_t</innerclass>
+    <innerclass refid="structvec512d__t" prot="public">vec512d_t</innerclass>
+    <briefdescription>
+<para>SIMD 向量类型定义 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>此文件定义跨平台 SIMD 向量类型。 未启用任何 SIMD 指令集时，所有类型退化为标量数组结构体。 </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_SIMD_TYPES_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_SIMD_TYPES_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="typeinfo_2types_8hpp" kindref="compound">NeForce/core/typeinfo/types.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(NEFORCE_SIMD_AVX2)<sp/>||<sp/>defined(NEFORCE_SIMD_AVX512F)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&lt;immintrin.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(NEFORCE_SIMD_SSE2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&lt;emmintrin.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(NEFORCE_SIMD_NEON)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&lt;arm_neon.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">NEFORCE_BEGIN_SIMD__</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_SIMD_SSE2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec128__t" kindref="compound">vec128_t</ref><sp/>=<sp/>::__m128i;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec128f__t" kindref="compound">vec128f_t</ref><sp/>=<sp/>::__m128;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec128d__t" kindref="compound">vec128d_t</ref><sp/>=<sp/>::__m128d;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(NEFORCE_SIMD_NEON)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec128__t" kindref="compound">vec128_t</ref><sp/>=<sp/>::uint8x16_t;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec128f__t" kindref="compound">vec128f_t</ref><sp/>=<sp/>::float32x4_t;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>ifdef<sp/>__aarch64__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec128d__t" kindref="compound">vec128d_t</ref><sp/>=<sp/>::float64x2_t;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvec128d__t" kindref="compound">vec128d_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>data[2];</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="structvec128__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvec128__t" kindref="compound">vec128_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref><sp/>data[16];</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="56" refid="structvec128f__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvec128f__t" kindref="compound">vec128f_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>data[4];</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="60" refid="structvec128d__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvec128d__t" kindref="compound">vec128d_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>data[2];</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(NEFORCE_SIMD_AVX2)<sp/>||<sp/>defined(NEFORCE_SIMD_AVX)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>ifdef<sp/>NEFORCE_SIMD_AVX2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec256__t" kindref="compound">vec256_t</ref><sp/>=<sp/>::__m256i;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvec256__t" kindref="compound">vec256_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>[32];</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec256f__t" kindref="compound">vec256f_t</ref><sp/>=<sp/>::__m256;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec256d__t" kindref="compound">vec256d_t</ref><sp/>=<sp/>::__m256d;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81" refid="structvec256__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvec256__t" kindref="compound">vec256_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref><sp/>data[32];</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="85" refid="structvec256f__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvec256f__t" kindref="compound">vec256f_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>data[8];</highlight></codeline>
+<codeline lineno="87"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="89" refid="structvec256d__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvec256d__t" kindref="compound">vec256d_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>data[4];</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_SIMD_AVX512F</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec512__t" kindref="compound">vec512_t</ref><sp/>=<sp/>::__m512i;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec512f__t" kindref="compound">vec512f_t</ref><sp/>=<sp/>::__m512;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structvec512d__t" kindref="compound">vec512d_t</ref><sp/>=<sp/>::__m512d;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103" refid="structvec512__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvec512__t" kindref="compound">vec512_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref><sp/>data[64];</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="107" refid="structvec512f__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvec512f__t" kindref="compound">vec512f_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>data[16];</highlight></codeline>
+<codeline lineno="109"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="111" refid="structvec512d__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structvec512d__t" kindref="compound">vec512d_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>data[8];</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>SIMD</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal">NEFORCE_END_SIMD__</highlight></codeline>
+<codeline lineno="119"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_SIMD_TYPES_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/simd/types.hpp"/>
+  </compounddef>
+</doxygen>

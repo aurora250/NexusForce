@@ -24,13 +24,13 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="67" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classio__context_1a22c6e7f6dd490bb02ce70b8ca1bbc5cc" prot="public" static="no">
-        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(int fd, <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> events, error_code ec)&gt;</type>
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(int fd, <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> events, <ref refid="classerror__code" kindref="compound">error_code</ref> ec)&gt;</type>
         <definition>using io_context::fd_callback = function&lt;void(int fd, uint32_t events, error_code ec)&gt;</definition>
         <argsstring></argsstring>
         <name>fd_callback</name>
         <qualifiedname>io_context::fd_callback</qualifiedname>
         <briefdescription>
-<para>fd 事件回调，参数为 (fd, events, error_code) </para>
+<para>fd 事件回调，参数为 (fd, events, <ref refid="classerror__code" kindref="compound">error_code</ref>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -73,7 +73,7 @@ uintptr_t</definition>
     </sectiondef>
     <sectiondef kind="private-type">
       <memberdef kind="typedef" id="classio__context_1adb61d66d7d3f2a918f3c60b2f314d531" prot="private" static="no">
-        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(error_code, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, void *overlapped)&gt;</type>
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(<ref refid="classerror__code" kindref="compound">error_code</ref>, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, void *overlapped)&gt;</type>
         <definition>using io_context::file_completion_cb = function&lt;void(error_code, size_t, void* overlapped)&gt;</definition>
         <argsstring></argsstring>
         <name>file_completion_cb</name>

@@ -106,6 +106,12 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
+      <node id="5">
+        <label>error_code</label>
+        <link refid="classerror__code"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="4">
         <label>exception</label>
         <link refid="structexception"/>
@@ -115,6 +121,22 @@
         <link refid="structftp__exception"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="6">
+        <label>icommon&lt; error_code &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>icomparable&lt; error_code &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="8">
+        <label>ihashable&lt; error_code &gt;</label>
+        <link refid="structihashable"/>
       </node>
       <node id="2">
         <label>network_exception</label>
@@ -126,6 +148,9 @@
         <label>system_exception</label>
         <link refid="structsystem__exception"/>
         <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>code_</edgelabel>
         </childnode>
       </node>
     </collaborationgraph>

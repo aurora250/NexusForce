@@ -60,7 +60,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="100" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="100" bodyend="-1"/>
         <referencedby refid="classrb__tree_1abeb1e733137d582f1ad6e8edfeac072a" compoundref="rb__tree_8hpp" startline="1448" endline="1452">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::count</referencedby>
-        <referencedby refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" compoundref="flat__hashtable_8hpp" startline="868" endline="896">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" compoundref="flat__hashtable_8hpp" startline="935" endline="962">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
         <referencedby refid="classrb__tree_1a79de846348690d31fcd35c4624e04a05" compoundref="rb__tree_8hpp" startline="1343" endline="1348">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
         <referencedby refid="classyaml__mapping_1a535ab4b16c2d165107d3d64315095ccd" compoundref="yaml__value_8hpp" startline="783" endline="792">yaml_mapping::merge_from</referencedby>
         <referencedby refid="group___string_converts_1gaa32de20a0663a6c9aa0cbab9fd31e072" compoundref="to__string_8hpp" startline="171" endline="173">to_string</referencedby>
@@ -81,7 +81,7 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="101" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="101" bodyend="-1"/>
         <referencedby refid="classttl__cache_1a28c11bd9546c0dd4d5c9940f3004cf06" compoundref="ttl__cache_8hpp" startline="253" endline="256">ttl_cache&lt; Key, Value &gt;::cleanup</referencedby>
         <referencedby refid="classrb__tree_1abeb1e733137d582f1ad6e8edfeac072a" compoundref="rb__tree_8hpp" startline="1448" endline="1452">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::count</referencedby>
-        <referencedby refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" compoundref="flat__hashtable_8hpp" startline="868" endline="896">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" compoundref="flat__hashtable_8hpp" startline="935" endline="962">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
         <referencedby refid="classrb__tree_1a79de846348690d31fcd35c4624e04a05" compoundref="rb__tree_8hpp" startline="1343" endline="1348">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
         <referencedby refid="classyaml__mapping_1a535ab4b16c2d165107d3d64315095ccd" compoundref="yaml__value_8hpp" startline="783" endline="792">yaml_mapping::merge_from</referencedby>
         <referencedby refid="group___string_converts_1gaa32de20a0663a6c9aa0cbab9fd31e072" compoundref="to__string_8hpp" startline="171" endline="173">to_string</referencedby>
@@ -994,10 +994,10 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="429" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="429" bodyend="432"/>
       </memberdef>
-      <memberdef kind="function" id="structpair_1a69e680b666c112c4d39d7628c2bd85b1" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(hash&lt; remove_cvref_t&lt; T1 &gt; &gt;()(first) ^ hash&lt; remove_cvref_t&lt; T2 &gt; &gt;()(second))" virt="non-virtual">
+      <memberdef kind="function" id="structpair_1ab212f5f87ab3e6830ab82370d4f5344b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
         <definition>size_t pair&lt; T1, T2 &gt;::to_hash</definition>
-        <argsstring>() const</argsstring>
+        <argsstring>() const noexcept</argsstring>
         <name>to_hash</name>
         <qualifiedname>pair::to_hash</qualifiedname>
         <briefdescription>
@@ -1010,7 +1010,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="440" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="440" bodyend="443"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="440" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="440" bodyend="440"/>
       </memberdef>
       <memberdef kind="function" id="structpair_1acac4d296cf22d094158ff60a298c5dad" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="conjunction&lt; is_nothrow_swappable&lt; T1 &gt;, is_nothrow_swappable&lt; T2 &gt; &gt;::value" virt="non-virtual">
         <type>void</type>
@@ -1039,7 +1039,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="450" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="450" bodyend="453"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="447" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="447" bodyend="450"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1113,7 +1113,7 @@ pair是一个可以存储两个不同类型的值的模板类，常用于返回�
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="96" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="96" bodyend="454"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="96" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="96" bodyend="451"/>
     <listofallmembers>
       <member refid="structpair_1ab0f23a39a1972c433856304676411096" prot="public" virt="non-virtual"><scope>pair</scope><name>equal_to</name></member>
       <member refid="structpair_1a5fc8fdee8d793958cc55b507f85eaafe" prot="public" virt="non-virtual"><scope>pair</scope><name>explicit</name></member>
@@ -1146,7 +1146,7 @@ pair是一个可以存储两个不同类型的值的模板类，常用于返回�
       <member refid="structpair_1a63ae1bbd5a6ce6bd6167b5359fa7a01f" prot="public" virt="non-virtual"><scope>pair</scope><name>second</name></member>
       <member refid="structpair_1add93c5df676cfcc8af0f4b2ebde4d20b" prot="public" virt="non-virtual"><scope>pair</scope><name>second_type</name></member>
       <member refid="structpair_1acac4d296cf22d094158ff60a298c5dad" prot="public" virt="non-virtual"><scope>pair</scope><name>swap</name></member>
-      <member refid="structpair_1a69e680b666c112c4d39d7628c2bd85b1" prot="public" virt="non-virtual"><scope>pair</scope><name>to_hash</name></member>
+      <member refid="structpair_1ab212f5f87ab3e6830ab82370d4f5344b" prot="public" virt="non-virtual"><scope>pair</scope><name>to_hash</name></member>
       <member refid="structihashable_1ab6261b4b80267f9a413a4021191fea86" prot="public" virt="non-virtual"><scope>pair</scope><name>to_ihash</name></member>
       <member refid="structpair_1af8e639481d411ddefca10501f23d31f3" prot="public" virt="non-virtual"><scope>pair</scope><name>~pair</name></member>
     </listofallmembers>

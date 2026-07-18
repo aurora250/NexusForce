@@ -56,6 +56,7 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="42" column="17"/>
         <references refid="structsocket__exception_1ac120faa4a48b9c05bb4e0632ce707a38">is_would_block</references>
         <references refid="structsocket__exception_1a33a91e5eb9896fd1543ec91aa05a514a">last_error</references>
+        <references refid="group___error_code_1ga0a43b58885d603f4ee012cee3debd9f9">system_category</references>
         <referencedby refid="structsocket__exception_1ac120faa4a48b9c05bb4e0632ce707a38">is_would_block</referencedby>
       </memberdef>
     </sectiondef>
@@ -72,9 +73,9 @@
           <defval>&quot;Socket Operation Failed.&quot;</defval>
         </param>
         <param>
-          <type>const error_code</type>
+          <type>const <ref refid="classerror__code" kindref="compound">error_code</ref></type>
           <declname>code</declname>
-          <defval>error_code(<ref refid="structsocket__exception_1a33a91e5eb9896fd1543ec91aa05a514a" kindref="member">last_error</ref>(), system_category())</defval>
+          <defval><ref refid="classerror__code" kindref="compound">error_code</ref>(<ref refid="structsocket__exception_1a33a91e5eb9896fd1543ec91aa05a514a" kindref="member">last_error</ref>(), <ref refid="group___error_code_1ga0a43b58885d603f4ee012cee3debd9f9" kindref="member">system_category</ref>())</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -167,9 +168,31 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
+      <node id="5">
+        <label>error_code</label>
+        <link refid="classerror__code"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="4">
         <label>exception</label>
         <link refid="structexception"/>
+      </node>
+      <node id="6">
+        <label>icommon&lt; error_code &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>icomparable&lt; error_code &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="8">
+        <label>ihashable&lt; error_code &gt;</label>
+        <link refid="structihashable"/>
       </node>
       <node id="2">
         <label>network_exception</label>
@@ -187,6 +210,9 @@
         <label>system_exception</label>
         <link refid="structsystem__exception"/>
         <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>code_</edgelabel>
         </childnode>
       </node>
     </collaborationgraph>

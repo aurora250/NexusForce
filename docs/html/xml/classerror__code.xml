@@ -3,6 +3,7 @@
   <compounddef id="classerror__code" kind="class" language="C++" prot="public">
     <compoundname>error_code</compoundname>
     <basecompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; error_code &gt;</basecompoundref>
+    <includes refid="error__code_8hpp" local="no">error_code.hpp</includes>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classerror__code_1a9e97b9748546327e9e5915b0744ceaa5" prot="private" static="no" mutable="no">
         <type>int</type>
@@ -12,27 +13,29 @@
         <qualifiedname>error_code::value_</qualifiedname>
         <initializer>{0}</initializer>
         <briefdescription>
+<para>错误码值 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="8" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="8" bodyend="8"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="28" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="28" bodyend="28"/>
       </memberdef>
       <memberdef kind="variable" id="classerror__code_1af35fb553e036e4af7f6d848cd8b9b8f5" prot="private" static="no" mutable="no">
-        <type>const error_category *</type>
+        <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> *</type>
         <definition>const error_category* error_code::category_</definition>
         <argsstring></argsstring>
         <name>category_</name>
         <qualifiedname>error_code::category_</qualifiedname>
-        <initializer>{&amp;system_category()}</initializer>
+        <initializer>{&amp;<ref refid="group___error_code_1ga0a43b58885d603f4ee012cee3debd9f9" kindref="member">system_category</ref>()}</initializer>
         <briefdescription>
+<para>错误类别指针 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="9" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="9" bodyend="9"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="29" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="29" bodyend="29"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -43,12 +46,15 @@
         <name>error_code</name>
         <qualifiedname>error_code::error_code</qualifiedname>
         <briefdescription>
+<para>默认构造函数 </para>
         </briefdescription>
         <detaileddescription>
+<para>构造值为0、类别为 <ref refid="group___error_code_1ga0a43b58885d603f4ee012cee3debd9f9" kindref="member">system_category()</ref> 的空错误码。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="12" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="37" column="5"/>
+        <referencedby refid="classerror__code_1a9d99bcfe7d925c4640e5b9ace201f88e" compoundref="error__code_8hpp" startline="44" endline="46">error_code</referencedby>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1a9d99bcfe7d925c4640e5b9ace201f88e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -61,16 +67,36 @@
           <declname>val</declname>
         </param>
         <param>
-          <type>const error_category &amp;</type>
+          <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
           <declname>cat</declname>
         </param>
         <briefdescription>
+<para>构造函数 </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误码值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误类别 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="14" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="14" bodyend="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="44" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="44" bodyend="46"/>
+        <references refid="classerror__code_1a9335d313d8494f01c47b4b5dfec63620">error_code</references>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1afce46bf9d74d1b9f4cb181aaf2d4c972" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -83,12 +109,24 @@
           <declname>e</declname>
         </param>
         <briefdescription>
+<para>从 errc 枚举构造 </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误码枚举值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+等价于 make_error_code(e)，类别为 <ref refid="group___error_code_1ga44686197784a7bc703b8eb62ba7cb064" kindref="member">generic_category()</ref>。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="18" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="18" bodyend="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="54" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="54" bodyend="54"/>
+        <references refid="group___error_code_1ga93e09becd8af3be0dc0fa5711a338861" compoundref="error__code_8hpp" startline="151" endline="151">make_error_code</references>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1ae7173838d4a8a549f54f118a7a26d631" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -101,16 +139,35 @@
           <declname>val</declname>
         </param>
         <param>
-          <type>const error_category &amp;</type>
+          <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
           <declname>cat</declname>
         </param>
         <briefdescription>
+<para>赋值错误码值和类别 </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误码值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误类别 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="20" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="20" bodyend="23"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="61" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="61" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1af691b8796439dd5a84dffde7c885df49" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -119,12 +176,15 @@
         <name>clear</name>
         <qualifiedname>error_code::clear</qualifiedname>
         <briefdescription>
+<para>清空错误码 </para>
         </briefdescription>
         <detaileddescription>
+<para>重置值为0，类别重置为 <ref refid="group___error_code_1ga0a43b58885d603f4ee012cee3debd9f9" kindref="member">system_category()</ref>。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="25" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="25" bodyend="28"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="71" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="71" bodyend="74"/>
+        <references refid="group___error_code_1ga0a43b58885d603f4ee012cee3debd9f9">system_category</references>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1a4cc82a2028f97b5a8957bab3ba72a3f0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>int</type>
@@ -133,12 +193,16 @@
         <name>value</name>
         <qualifiedname>error_code::value</qualifiedname>
         <briefdescription>
+<para>获取错误码值 </para>
         </briefdescription>
         <detaileddescription>
+<para><simplesect kind="return"><para>整数值 </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="30" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="30" bodyend="30"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="80" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="80" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1aa123912fa8fbbf6cbccdac35a95e72a9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___error_code_1gaf82e70cdc0af1c3132fe6f20443944e6" kindref="member">errc</ref></type>
@@ -147,40 +211,52 @@
         <name>error</name>
         <qualifiedname>error_code::error</qualifiedname>
         <briefdescription>
+<para>获取对应 errc 枚举值 </para>
         </briefdescription>
         <detaileddescription>
+<para><simplesect kind="return"><para>errc 枚举值 </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="31" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="31" bodyend="31"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="86" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="86" bodyend="86"/>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1aaf0653a11c4eb4efb3ac625c0e16cb57" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>const error_category &amp;</type>
+        <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
         <definition>const error_category &amp; error_code::category</definition>
         <argsstring>() const noexcept</argsstring>
         <name>category</name>
         <qualifiedname>error_code::category</qualifiedname>
         <briefdescription>
+<para>获取错误类别 </para>
         </briefdescription>
         <detaileddescription>
+<para><simplesect kind="return"><para>错误类别引用 </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="32" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="32" bodyend="32"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="92" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="92" bodyend="92"/>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1aadffe96515e28d6a09edfe7becd80560" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>error_condition</type>
+        <type><ref refid="classerror__condition" kindref="compound">error_condition</ref></type>
         <definition>error_condition error_code::default_error_condition</definition>
         <argsstring>() const noexcept</argsstring>
         <name>default_error_condition</name>
         <qualifiedname>error_code::default_error_condition</qualifiedname>
         <briefdescription>
+<para>获取对应的默认错误条件 </para>
         </briefdescription>
         <detaileddescription>
+<para><simplesect kind="return"><para>错误条件 </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="34" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="34" bodyend="36"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="98" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="98" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1a2b7f207b7daa509cb5658d4551f798fd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
@@ -189,12 +265,16 @@
         <name>message</name>
         <qualifiedname>error_code::message</qualifiedname>
         <briefdescription>
+<para>获取错误描述信息 </para>
         </briefdescription>
         <detaileddescription>
+<para><simplesect kind="return"><para>错误描述字符串 </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="38" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="38" bodyend="38"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="106" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="106" bodyend="106"/>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1a5e671906037853a351923557f307c0d5" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -203,12 +283,16 @@
         <name>operator bool</name>
         <qualifiedname>error_code::operator bool</qualifiedname>
         <briefdescription>
+<para>布尔转换 </para>
         </briefdescription>
         <detaileddescription>
+<para><simplesect kind="return"><para>值非零返回true </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="40" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="40" bodyend="40"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="112" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="112" bodyend="112"/>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1a3370530ad5282e784c3f32a6e9a8f147" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -217,7 +301,7 @@
         <name>equal_to</name>
         <qualifiedname>error_code::equal_to</qualifiedname>
         <param>
-          <type>const error_code &amp;</type>
+          <type>const <ref refid="classerror__code" kindref="compound">error_code</ref> &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -226,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="42" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="42" bodyend="44"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="114" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="114" bodyend="116"/>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1a16abe36edc174f696165e91be8005481" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -235,7 +319,7 @@
         <name>less_than</name>
         <qualifiedname>error_code::less_than</qualifiedname>
         <param>
-          <type>const error_code &amp;</type>
+          <type>const <ref refid="classerror__code" kindref="compound">error_code</ref> &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -244,7 +328,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="45" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="45" bodyend="53"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="117" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="117" bodyend="125"/>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1a927bf8b9158d36b65cccbf6fa619301b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -253,16 +337,29 @@
         <name>operator==</name>
         <qualifiedname>error_code::operator==</qualifiedname>
         <param>
-          <type>const error_condition &amp;</type>
+          <type>const <ref refid="classerror__condition" kindref="compound">error_condition</ref> &amp;</type>
           <declname>cond</declname>
         </param>
         <briefdescription>
+<para>与错误条件进行等价比较 </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cond</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误条件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>等价返回true </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="55" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="55" bodyend="57"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="132" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="132" bodyend="134"/>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1a7d252c7ce7d571ae924a7755b7cc278d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -271,16 +368,29 @@
         <name>operator!=</name>
         <qualifiedname>error_code::operator!=</qualifiedname>
         <param>
-          <type>const error_condition &amp;</type>
+          <type>const <ref refid="classerror__condition" kindref="compound">error_condition</ref> &amp;</type>
           <declname>cond</declname>
         </param>
         <briefdescription>
+<para>与错误条件进行不等价比较 </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cond</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误条件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>不等价返回true </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="58" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="58" bodyend="58"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="141" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="141" bodyend="141"/>
       </memberdef>
       <memberdef kind="function" id="classerror__code_1a7251357af300374e5d793c835198bf72" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -294,16 +404,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="60" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="60" bodyend="68"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="143" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="143" bodyend="143"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
+<para>错误码 </para>
     </briefdescription>
     <detaileddescription>
+<para>错误码由整数值和错误类别指针组成，表示特定类别域内的一个具体错误。 </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
         <label>error_code</label>
+        <link refid="classerror__code"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
@@ -327,6 +440,7 @@
     <collaborationgraph>
       <node id="1">
         <label>error_code</label>
+        <link refid="classerror__code"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
@@ -347,7 +461,7 @@
         <link refid="structihashable"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="6" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="6" bodyend="69"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="26" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="26" bodyend="144"/>
     <listofallmembers>
       <member refid="classerror__code_1ae7173838d4a8a549f54f118a7a26d631" prot="public" virt="non-virtual"><scope>error_code</scope><name>assign</name></member>
       <member refid="classerror__code_1aaf0653a11c4eb4efb3ac625c0e16cb57" prot="public" virt="non-virtual"><scope>error_code</scope><name>category</name></member>

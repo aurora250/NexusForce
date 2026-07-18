@@ -34,6 +34,12 @@
     <innerclass refid="structunpackage_3_01uinteger64_01_4" prot="public">unpackage&lt; uinteger64 &gt;</innerclass>
     <innerclass refid="structpackage_3_01long_01_4" prot="public">package&lt; long &gt;</innerclass>
     <innerclass refid="structpackage_3_01unsigned_01long_01_4" prot="public">package&lt; unsigned long &gt;</innerclass>
+    <innerclass refid="structuinteger128" prot="public">uinteger128</innerclass>
+    <innerclass refid="structinteger128" prot="public">integer128</innerclass>
+    <innerclass refid="structpackage_3_01uint128__t_01_4" prot="public">package&lt; uint128_t &gt;</innerclass>
+    <innerclass refid="structunpackage_3_01uinteger128_01_4" prot="public">unpackage&lt; uinteger128 &gt;</innerclass>
+    <innerclass refid="structpackage_3_01int128__t_01_4" prot="public">package&lt; int128_t &gt;</innerclass>
+    <innerclass refid="structunpackage_3_01integer128_01_4" prot="public">unpackage&lt; integer128 &gt;</innerclass>
     <innerclass refid="structfloat32" prot="public">float32</innerclass>
     <innerclass refid="structpackage_3_01float32__t_01_4" prot="public">package&lt; float32_t &gt;</innerclass>
     <innerclass refid="structunpackage_3_01float32_01_4" prot="public">unpackage&lt; float32 &gt;</innerclass>
@@ -58,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" line="229" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" bodystart="229" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" line="230" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" bodystart="230" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="define">
@@ -73,7 +79,113 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" line="110" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" bodystart="110" bodyend="155"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" line="111" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" bodystart="111" bodyend="156"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___packages_1gafae20155fcd78ad421123fa1657d70b1" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>uinteger128::uinteger128</definition>
+        <argsstring>(string_view str, int base=10)</argsstring>
+        <name>uinteger128</name>
+        <qualifiedname>uinteger128::uinteger128</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>从字符串视图构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数字字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（默认10） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串格式无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" line="305" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" bodystart="456" bodyend="458"/>
+        <references refid="group___string_converts_1ga00110fd2113bf3df11fe4fd12c7f4843" compoundref="to__numerics_8hpp" startline="713" endline="724">to_uint128</references>
+      </memberdef>
+      <memberdef kind="function" id="group___packages_1ga765b3f316083ec15809d917572d12c24" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>integer128::integer128</definition>
+        <argsstring>(const string_view str, const int base=10)</argsstring>
+        <name>integer128</name>
+        <qualifiedname>integer128::integer128</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>从字符串视图构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数字字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（默认10） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串格式无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" line="406" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp" bodystart="460" bodyend="462"/>
+        <references refid="group___string_converts_1gafde0106c7b3946708cbc9a6ecfb70607" compoundref="to__numerics_8hpp" startline="734" endline="745">to_int128</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

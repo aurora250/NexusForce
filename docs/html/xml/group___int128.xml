@@ -5,6 +5,354 @@
     <title>128位整数</title>
     <innerclass refid="structuint128__t" prot="public">uint128_t</innerclass>
     <innerclass refid="structint128__t" prot="public">int128_t</innerclass>
+    <innerclass refid="structmake__signed_3_01uint128__t_01_4" prot="public">make_signed&lt; uint128_t &gt;</innerclass>
+    <innerclass refid="structmake__unsigned_3_01int128__t_01_4" prot="public">make_unsigned&lt; int128_t &gt;</innerclass>
+    <innerclass refid="structis__unsigned_3_01uint128__t_01_4" prot="public">is_unsigned&lt; uint128_t &gt;</innerclass>
+    <innerclass refid="structis__integral_3_01int128__t_01_4" prot="public">is_integral&lt; int128_t &gt;</innerclass>
+    <innerclass refid="structis__signed_3_01int128__t_01_4" prot="public">is_signed&lt; int128_t &gt;</innerclass>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="group___int128_1ga76b9e7a0c6cb6cade24848a073121de8" prot="public" static="no">
+        <name>__NEFORCE_DEFINE_MAKE_SIGN</name>
+        <param><defname>CV</defname></param>
+        <initializer>template &lt;&gt;                         \
+struct <ref refid="structmake__signed" kindref="compound">make_signed</ref>&lt;<ref refid="structuint128__t" kindref="compound">uint128_t</ref> CV&gt; {  \
+    using type = <ref refid="structint128__t" kindref="compound">int128_t</ref>;          \
+};                                  \
+template &lt;&gt;                         \
+struct <ref refid="structmake__unsigned" kindref="compound">make_unsigned</ref>&lt;<ref refid="structint128__t" kindref="compound">int128_t</ref> CV&gt; { \
+    using type = <ref refid="structuint128__t" kindref="compound">uint128_t</ref>;         \
+};</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="801" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="801" bodyend="809"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___int128_1gab40fe5ee21b1fe9bdda327986481b5a3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structuint128__t" kindref="compound">uint128_t</ref> &amp;</type>
+        <definition>uint128_t &amp; uint128_t::operator*=</definition>
+        <argsstring>(const uint128_t &amp;other) noexcept</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>uint128_t::operator*=</qualifiedname>
+        <param>
+          <type>const <ref refid="structuint128__t" kindref="compound">uint128_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>乘法赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="172" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="695" bodyend="698"/>
+        <references refid="structuint128__t_1a8913876815e6234e180ec578cc481c1d" compoundref="int128_8hpp" startline="349" endline="368">uint128_t::mul128</references>
+      </memberdef>
+      <memberdef kind="function" id="group___int128_1gae5314f6ef352bad7d713d74f895e02e6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structuint128__t" kindref="compound">uint128_t</ref> &amp;</type>
+        <definition>uint128_t &amp; uint128_t::operator/=</definition>
+        <argsstring>(const uint128_t &amp;other)</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>uint128_t::operator/=</qualifiedname>
+        <param>
+          <type>const <ref refid="structuint128__t" kindref="compound">uint128_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>除法赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数为0时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="180" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="700" bodyend="705"/>
+        <references refid="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" compoundref="shift_8hpp" startline="90" endline="98">copy</references>
+        <references refid="group___int128_1ga69509dd7c99156f370da7052970acdf7" compoundref="int128_8hpp" startline="714" endline="757">uint128_t::divmod128</references>
+      </memberdef>
+      <memberdef kind="function" id="group___int128_1ga78f31473f4db8c1189123d4b0f9d5d59" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structuint128__t" kindref="compound">uint128_t</ref> &amp;</type>
+        <definition>uint128_t &amp; uint128_t::operator%=</definition>
+        <argsstring>(const uint128_t &amp;other)</argsstring>
+        <name>operator%=</name>
+        <qualifiedname>uint128_t::operator%=</qualifiedname>
+        <param>
+          <type>const <ref refid="structuint128__t" kindref="compound">uint128_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>取模赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数为0时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="188" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="707" bodyend="712"/>
+        <references refid="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" compoundref="shift_8hpp" startline="90" endline="98">copy</references>
+        <references refid="group___int128_1ga69509dd7c99156f370da7052970acdf7" compoundref="int128_8hpp" startline="714" endline="757">uint128_t::divmod128</references>
+      </memberdef>
+      <memberdef kind="function" id="group___int128_1ga69509dd7c99156f370da7052970acdf7" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void uint128_t::divmod128</definition>
+        <argsstring>(const uint128_t &amp;dividend, const uint128_t &amp;divisor, uint128_t &amp;quotient, uint128_t &amp;remainder)</argsstring>
+        <name>divmod128</name>
+        <qualifiedname>uint128_t::divmod128</qualifiedname>
+        <param>
+          <type>const <ref refid="structuint128__t" kindref="compound">uint128_t</ref> &amp;</type>
+          <declname>dividend</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structuint128__t" kindref="compound">uint128_t</ref> &amp;</type>
+          <declname>divisor</declname>
+        </param>
+        <param>
+          <type><ref refid="structuint128__t" kindref="compound">uint128_t</ref> &amp;</type>
+          <declname>quotient</declname>
+        </param>
+        <param>
+          <type><ref refid="structuint128__t" kindref="compound">uint128_t</ref> &amp;</type>
+          <declname>remainder</declname>
+        </param>
+        <briefdescription>
+<para>128位除法辅助函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dividend</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被除数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>divisor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>quotient</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出商 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>remainder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出余数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数为0时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="378" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="714" bodyend="757"/>
+        <references refid="group___bit_manipulation_1gabf99d81145eddb72c385cba53ca589fb" compoundref="bit_8hpp" startline="40" endline="69">clz64</references>
+        <references refid="structuint128__t_1a4bd3026bec573a2cea90dc2558bad011" compoundref="int128_8hpp" startline="42" endline="42">uint128_t::hi</references>
+        <references refid="structuint128__t_1ac14cbc19a3001f6d2e2908170b0efb87" compoundref="int128_8hpp" startline="41" endline="41">uint128_t::lo</references>
+        <references refid="group___math_functions_1gaff7c9e0e66113479054c2a5d3a00a1d9" compoundref="math_8hpp" startline="821" endline="826">remainder</references>
+        <referencedby refid="group___int128_1ga78f31473f4db8c1189123d4b0f9d5d59" compoundref="int128_8hpp" startline="707" endline="712">uint128_t::operator%=</referencedby>
+        <referencedby refid="group___int128_1gae5314f6ef352bad7d713d74f895e02e6" compoundref="int128_8hpp" startline="700" endline="705">uint128_t::operator/=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___int128_1gabffd95a2dc52dd3c001c78c46322e8ea" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structint128__t" kindref="compound">int128_t</ref> &amp;</type>
+        <definition>int128_t &amp; int128_t::operator/=</definition>
+        <argsstring>(const int128_t &amp;other)</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>int128_t::operator/=</qualifiedname>
+        <param>
+          <type>const <ref refid="structint128__t" kindref="compound">int128_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>除法赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数为0时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="574" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="759" bodyend="771"/>
+        <references refid="structuint128__t_1a4bd3026bec573a2cea90dc2558bad011" compoundref="int128_8hpp" startline="42" endline="42">uint128_t::hi</references>
+        <references refid="structint128__t_1a6d093c1357f5c1a9cd6995f3c2fb20f2" compoundref="int128_8hpp" startline="485" endline="485">int128_t::is_negative</references>
+        <references refid="structuint128__t_1ac14cbc19a3001f6d2e2908170b0efb87" compoundref="int128_8hpp" startline="41" endline="41">uint128_t::lo</references>
+        <references refid="structint128__t_1acadbfb9ba64c4417c1b276e5c1b7ff62" compoundref="int128_8hpp" startline="520" endline="524">int128_t::negation</references>
+        <references refid="structint128__t_1a456b4725c05a7d1a8e56c4426796cd85" compoundref="int128_8hpp" startline="491" endline="491">int128_t::to_uint128</references>
+      </memberdef>
+      <memberdef kind="function" id="group___int128_1ga982503b4754183be177cca47ad0e7fbd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structint128__t" kindref="compound">int128_t</ref> &amp;</type>
+        <definition>int128_t &amp; int128_t::operator%=</definition>
+        <argsstring>(const int128_t &amp;other)</argsstring>
+        <name>operator%=</name>
+        <qualifiedname>int128_t::operator%=</qualifiedname>
+        <param>
+          <type>const <ref refid="structint128__t" kindref="compound">int128_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>取模赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数为0时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="582" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="773" bodyend="784"/>
+        <references refid="structuint128__t_1a4bd3026bec573a2cea90dc2558bad011" compoundref="int128_8hpp" startline="42" endline="42">uint128_t::hi</references>
+        <references refid="structint128__t_1a6d093c1357f5c1a9cd6995f3c2fb20f2" compoundref="int128_8hpp" startline="485" endline="485">int128_t::is_negative</references>
+        <references refid="structuint128__t_1ac14cbc19a3001f6d2e2908170b0efb87" compoundref="int128_8hpp" startline="41" endline="41">uint128_t::lo</references>
+        <references refid="structint128__t_1acadbfb9ba64c4417c1b276e5c1b7ff62" compoundref="int128_8hpp" startline="520" endline="524">int128_t::negation</references>
+        <references refid="structint128__t_1a456b4725c05a7d1a8e56c4426796cd85" compoundref="int128_8hpp" startline="491" endline="491">int128_t::to_uint128</references>
+      </memberdef>
+      <memberdef kind="function" id="group___int128_1ga3e6f579ddf77c4567ea9b1c78d372631" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>uint128_t::operator int128_t</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator int128_t</name>
+        <qualifiedname>uint128_t::operator int128_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="97" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="786" bodyend="786"/>
+      </memberdef>
+      <memberdef kind="function" id="group___int128_1ga5afa2a7eeba32c20a0f152cdb0829001" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structint128__t" kindref="compound">int128_t</ref></type>
+        <definition>int128_t uint128_t::to_int128</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_int128</name>
+        <qualifiedname>uint128_t::to_int128</qualifiedname>
+        <briefdescription>
+<para>转换为有符号128位整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有符号128位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="103" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="787" bodyend="787"/>
+        <references refid="structuint128__t_1a4bd3026bec573a2cea90dc2558bad011" compoundref="int128_8hpp" startline="42" endline="42">uint128_t::hi</references>
+        <references refid="structuint128__t_1ac14cbc19a3001f6d2e2908170b0efb87" compoundref="int128_8hpp" startline="41" endline="41">uint128_t::lo</references>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
 <para>128位有符号和无符号整数类型的完整实现 </para>
     </briefdescription>

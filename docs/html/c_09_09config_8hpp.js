@@ -37,11 +37,17 @@ var c_09_09config_8hpp =
     [ "NEFORCE_PLATFORM_WINDOWS", "group___platform_detection.html#gafbe22ba3c6a132654e1193b1c02bfb3f", null ],
     [ "NEFORCE_PLATFORM_WINDOWS32", "group___platform_detection.html#ga64749912ecf2bafd8ebb7e23432e2ed8", null ],
     [ "NEFORCE_PLATFORM_WINDOWS64", "group___platform_detection.html#gab99bb2a8e1dff9c8064f39a99da90d46", null ],
+    [ "NEFORCE_SIMD_AES_ARM", "group___aesni_detection.html#ga4b6e9aa36d0ca8ab6d6e9034254ad6ef", null ],
+    [ "NEFORCE_SIMD_AES_NI", "group___aesni_detection.html#ga15f0e1ef20bd74745b30c21b7eb691db", null ],
+    [ "NEFORCE_SIMD_AVX", "group___simd_detection.html#ga2d1700bcc8f83cf4afd65a8c22bd83f7", null ],
     [ "NEFORCE_SIMD_AVX2", "group___simd_detection.html#ga2b313af10581f30921ca358e1906d813", null ],
+    [ "NEFORCE_SIMD_AVX512F", "group___simd_detection.html#ga83edd7c45a38004a44e1614603a96e69", null ],
     [ "NEFORCE_SIMD_SSE2", "group___simd_detection.html#ga9a3fcc3223f4c779a66b1dd8bb961238", null ],
+    [ "NEFORCE_SIMD_SSSE3", "group___simd_detection.html#gad46b911094579c5158b4172fba39bfd5", null ],
     [ "NEFORCE_STANDARD_11", "group___cxx_standard_detection.html#ga255d3eff2058ff3b9f998ab7546e1cb3", null ],
     [ "NEFORCE_STANDARD_14", "group___cxx_standard_detection.html#gaddbf00d28e1b3dcb0a4e3937565280fe", null ],
     [ "NEFORCE_STANDARD_17", "group___cxx_standard_detection.html#gacfb11e8f0b3c4bdd52b4f6b3fcca5caf", null ],
     [ "NEFORCE_STANDARD_20", "group___cxx_standard_detection.html#ga15a44225a036fa856299c55ee8951862", null ],
-    [ "NEFORCE_STANDARD_98", "group___cxx_standard_detection.html#gae2287f3ed3e2c7e723dbdc9d79b097c0", null ]
+    [ "NEFORCE_STANDARD_98", "group___cxx_standard_detection.html#gae2287f3ed3e2c7e723dbdc9d79b097c0", null ],
+    [ "NEFORCE_SUPPORT_SIMD", "group___simd_detection.html#gaddbbe48067769a249a7e44c7b68f9c22", null ]
 ];

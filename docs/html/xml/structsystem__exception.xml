@@ -16,7 +16,7 @@
     <includes refid="system__exception_8hpp" local="no">system_exception.hpp</includes>
     <sectiondef kind="protected-attrib">
       <memberdef kind="variable" id="structsystem__exception_1af985d25515bd806e9e05ca75ac0aa559" prot="protected" static="no" mutable="no">
-        <type>error_code</type>
+        <type><ref refid="classerror__code" kindref="compound">error_code</ref></type>
         <definition>error_code system_exception::code_</definition>
         <argsstring></argsstring>
         <name>code_</name>
@@ -43,9 +43,9 @@
           <defval>&quot;System Access Failed.&quot;</defval>
         </param>
         <param>
-          <type>const error_code</type>
+          <type>const <ref refid="classerror__code" kindref="compound">error_code</ref></type>
           <declname>code</declname>
-          <defval>last_error()</defval>
+          <defval><ref refid="group___error_code_1ga6b25836281d33e8dad1b0440801e2ace" kindref="member">last_error</ref>()</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -62,7 +62,7 @@
         <name>system_exception</name>
         <qualifiedname>system_exception::system_exception</qualifiedname>
         <param>
-          <type>const error_code</type>
+          <type>const <ref refid="classerror__code" kindref="compound">error_code</ref></type>
           <declname>code</declname>
         </param>
         <briefdescription>
@@ -125,7 +125,7 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" line="30" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/system_exception.hpp" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="structsystem__exception_1af69c032fcd6d9bb66a14ae52a3566977" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
-        <type>const error_code &amp;</type>
+        <type>const <ref refid="classerror__code" kindref="compound">error_code</ref> &amp;</type>
         <definition>virtual const error_code &amp; system_exception::code</definition>
         <argsstring>() const noexcept</argsstring>
         <name>code</name>
@@ -253,14 +253,39 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
+      <node id="3">
+        <label>error_code</label>
+        <link refid="classerror__code"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="2">
         <label>exception</label>
         <link refid="structexception"/>
+      </node>
+      <node id="4">
+        <label>icommon&lt; error_code &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>icomparable&lt; error_code &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="6">
+        <label>ihashable&lt; error_code &gt;</label>
+        <link refid="structihashable"/>
       </node>
       <node id="1">
         <label>system_exception</label>
         <link refid="structsystem__exception"/>
         <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>code_</edgelabel>
         </childnode>
       </node>
     </collaborationgraph>

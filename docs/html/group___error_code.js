@@ -1,5 +1,52 @@
 var group___error_code =
 [
+    [ "error_category", "classerror__category.html", [
+      [ "default_error_condition", "classerror__category.html#abe2db9ea89d04c9326dfd9df68636d21", null ],
+      [ "equivalent", "classerror__category.html#af04b9c0d13d184cab31afd60cce2e99a", null ],
+      [ "equivalent", "classerror__category.html#a2444a8c46001b0a9f06df4487ded09c7", null ],
+      [ "message", "classerror__category.html#a7cffeb0831c3b5a8c302de3c3744c926", null ],
+      [ "name", "classerror__category.html#aabe20643ad4f133d44ea592114e92ad4", null ]
+    ] ],
+    [ "generic_error_category", "classgeneric__error__category.html", [
+      [ "default_error_condition", "classgeneric__error__category.html#aabb9388fe4ede4eaf642d45f3b3add34", null ],
+      [ "message", "classgeneric__error__category.html#ab5548fb1841f2d6a6c4052014dc6a942", null ],
+      [ "name", "classgeneric__error__category.html#a145e1f3c819e136808c7c794160a788c", null ]
+    ] ],
+    [ "system_error_category", "classsystem__error__category.html", [
+      [ "default_error_condition", "classsystem__error__category.html#a435df687e6a26f3aee45087e271aa985", null ],
+      [ "message", "classsystem__error__category.html#affa5efc2a68f643326d66a34e870cbc2", null ],
+      [ "name", "classsystem__error__category.html#aa6e967e588d46ec33ede089fa405a36d", null ]
+    ] ],
+    [ "error_code", "classerror__code.html", [
+      [ "error_code", "classerror__code.html#a9335d313d8494f01c47b4b5dfec63620", null ],
+      [ "error_code", "classerror__code.html#a9d99bcfe7d925c4640e5b9ace201f88e", null ],
+      [ "error_code", "classerror__code.html#afce46bf9d74d1b9f4cb181aaf2d4c972", null ],
+      [ "assign", "classerror__code.html#ae7173838d4a8a549f54f118a7a26d631", null ],
+      [ "category", "classerror__code.html#aaf0653a11c4eb4efb3ac625c0e16cb57", null ],
+      [ "clear", "classerror__code.html#af691b8796439dd5a84dffde7c885df49", null ],
+      [ "default_error_condition", "classerror__code.html#aadffe96515e28d6a09edfe7becd80560", null ],
+      [ "error", "classerror__code.html#aa123912fa8fbbf6cbccdac35a95e72a9", null ],
+      [ "message", "classerror__code.html#a2b7f207b7daa509cb5658d4551f798fd", null ],
+      [ "operator bool", "classerror__code.html#a5e671906037853a351923557f307c0d5", null ],
+      [ "operator!=", "classerror__code.html#a7d252c7ce7d571ae924a7755b7cc278d", null ],
+      [ "operator==", "classerror__code.html#a927bf8b9158d36b65cccbf6fa619301b", null ],
+      [ "value", "classerror__code.html#a4cc82a2028f97b5a8957bab3ba72a3f0", null ]
+    ] ],
+    [ "error_condition", "classerror__condition.html", [
+      [ "error_condition", "classerror__condition.html#aedbf29684f577fe28b4a0aabc8147d03", null ],
+      [ "error_condition", "classerror__condition.html#a05a115f5029827946276f3b8f6d4a4b7", null ],
+      [ "error_condition", "classerror__condition.html#a3533d7c1bf9dda46ef0e6b917e4a62bb", null ],
+      [ "assign", "classerror__condition.html#a45dddb5870e637af64939893a6840f37", null ],
+      [ "category", "classerror__condition.html#abeb932834f1beabf47cf3d67802d6139", null ],
+      [ "clear", "classerror__condition.html#a0b33f88d934d984f6e78bf211f90fb3d", null ],
+      [ "message", "classerror__condition.html#a1f2e0f00b4ebf01ce7705bcc03a08382", null ],
+      [ "operator bool", "classerror__condition.html#a5c0575ed85927734159c162727c3ef22", null ],
+      [ "value", "classerror__condition.html#adcc4fddf78f05e65c0694dbb8fb482ad", null ]
+    ] ],
+    [ "ssl_error_category", "classssl__error__category.html", [
+      [ "message", "classssl__error__category.html#a25fe2865010f25740224841cdcf3c08c", null ],
+      [ "name", "classssl__error__category.html#a820a5363cece5ea13af97f860b1e5c09", null ]
+    ] ],
     [ "errc", "group___error_code.html#gaf82e70cdc0af1c3132fe6f20443944e6", [
       [ "errc::success", "group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a260ca9dd8a4577fc00b7bd5810298076", null ],
       [ "errc::address_family_not_supported", "group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a8ab69162f060cc46b805b3265ad1cdf1", null ],
@@ -77,5 +124,13 @@ var group___error_code =
       [ "errc::identifier_removed", "group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a054e5b4ff59331386872de744d661719", null ],
       [ "errc::no_link", "group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6add431dfaf61ea842693dca8be1ebcaf7", null ],
       [ "errc::not_a_socket", "group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a22ac64bb14c46bcbc338a21950b6e722", null ]
-    ] ]
+    ] ],
+    [ "error_category::generic", "group___error_code.html#ga4f790ec0995fecd48182d4d9431b6b73", null ],
+    [ "generic_category", "group___error_code.html#ga44686197784a7bc703b8eb62ba7cb064", null ],
+    [ "last_error", "group___error_code.html#ga6b25836281d33e8dad1b0440801e2ace", null ],
+    [ "make_error_code", "group___error_code.html#ga93e09becd8af3be0dc0fa5711a338861", null ],
+    [ "make_error_condition", "group___error_code.html#gacb51295502c634e06aa45c9dfdc302f9", null ],
+    [ "ssl_category", "group___error_code.html#gaaacfb67aaf96e9281c59499eeb838522", null ],
+    [ "error_category::system", "group___error_code.html#gaf683d20ab9b827279a2c044a78ae5fbf", null ],
+    [ "system_category", "group___error_code.html#ga0a43b58885d603f4ee012cee3debd9f9", null ]
 ];

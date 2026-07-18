@@ -30,8 +30,28 @@ var group___packages =
     [ "uinteger16", "structuinteger16.html", null ],
     [ "uinteger32", "structuinteger32.html", null ],
     [ "uinteger64", "structuinteger64.html", null ],
+    [ "uinteger128", "structuinteger128.html", [
+      [ "uinteger128", "structuinteger128.html#a0058b0396042c97c37996ee5c337ea95", null ],
+      [ "uinteger128", "structuinteger128.html#a78d97910fcf5d845db7e3773e425f4ba", null ],
+      [ "uinteger128", "group___packages.html#gafae20155fcd78ad421123fa1657d70b1", null ],
+      [ "operator<<=", "structuinteger128.html#a1c98f0fa8785e60958f3c683e738b7e4", null ],
+      [ "operator=", "structuinteger128.html#a1107560e55f86a92ebb9bca22bb14fe8", null ],
+      [ "operator>>=", "structuinteger128.html#a78b5657aa302a29d2d187c83bf01c55e", null ],
+      [ "to_string", "structuinteger128.html#ab38c5582f53ba91c1e7fc51d5df55610", null ]
+    ] ],
+    [ "integer128", "structinteger128.html", [
+      [ "integer128", "structinteger128.html#a768d07bdd94aac6ec0f0b08d2b9cf6c4", null ],
+      [ "integer128", "structinteger128.html#ad4fe5555a2b2512f8717d8c419afe8d1", null ],
+      [ "integer128", "group___packages.html#ga765b3f316083ec15809d917572d12c24", null ],
+      [ "operator<<=", "structinteger128.html#abc1260621bfcdab30a5d5c7c1e71ce1f", null ],
+      [ "operator=", "structinteger128.html#a85c8027758453f65be780139d4b23b9a", null ],
+      [ "operator>>=", "structinteger128.html#acf2939cb6e4845f56f3be3ad3c43c68b", null ],
+      [ "to_string", "structinteger128.html#a61870e50ba39d2c322230bec578c159d", null ]
+    ] ],
     [ "float32", "structfloat32.html", null ],
     [ "float64", "structfloat64.html", null ],
     [ "decimal", "structdecimal.html", null ],
-    [ "byte", "group___packages.html#ga8272194b0ac3062bc8183f769e367900", null ]
+    [ "byte", "group___packages.html#ga8272194b0ac3062bc8183f769e367900", null ],
+    [ "integer128::integer128", "group___packages.html#ga765b3f316083ec15809d917572d12c24", null ],
+    [ "uinteger128::uinteger128", "group___packages.html#gafae20155fcd78ad421123fa1657d70b1", null ]
 ];

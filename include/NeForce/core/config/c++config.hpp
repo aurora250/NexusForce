@@ -306,7 +306,7 @@
 #        define NEFORCE_SIMD_AVX512F 1 ///< AVX-512F指令集可用
 #    endif
 #    if (defined(NEFORCE_COMPILER_MSVC) && (defined(__AVX__) || defined(__AVX2__) || defined(__AVX512F__))) || \
-            defined(__SSSE3__)
+            defined(__SSSE3__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_SIMD_SSSE3 1 ///< SSSE3指令集可用
 #    endif
 #elif (defined(NEFORCE_ARCH_ARM) && defined(__ARM_NEON)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
@@ -329,7 +329,8 @@
 #    if defined(__AES__) || defined(_MSC_VER) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_SIMD_AES_NI 1 ///< Intel AES-NI指令集可用
 #    endif
-#elif defined(NEFORCE_ARCH_ARM)
+#endif
+#if defined(NEFORCE_ARCH_ARM)
 #    if defined(__ARM_FEATURE_AES) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_SIMD_AES_ARM 1 ///< ARM AES指令集可用
 #    endif

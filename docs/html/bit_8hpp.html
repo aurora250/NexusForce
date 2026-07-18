@@ -95,7 +95,7 @@ $(function(){initNavTree('bit_8hpp.html','',''); });
 
 <p>位操作函数  
 <a href="#details">更多...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="types_8hpp_source.html">NeForce/core/typeinfo/types.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="typeinfo_2types_8hpp_source.html">NeForce/core/typeinfo/types.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 bit.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
@@ -106,8 +106,8 @@ bit.hpp 的引用(Include)关系图:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga824e509947a5b48a2eb51434220ac36c" id="r_ga824e509947a5b48a2eb51434220ac36c"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="group___bit_manipulation.html#ga824e509947a5b48a2eb51434220ac36c">popcount64</a> (const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> x) noexcept</td></tr>
-<tr class="memdesc:ga824e509947a5b48a2eb51434220ac36c"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算64位整数中1的个数  <br /></td></tr>
+<tr class="memitem:ga7c5ea7c223e91008f9420f8bcde1e42a" id="r_ga7c5ea7c223e91008f9420f8bcde1e42a"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="group___bit_manipulation.html#ga7c5ea7c223e91008f9420f8bcde1e42a">popcount64</a> (<a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> x) noexcept</td></tr>
+<tr class="memdesc:ga7c5ea7c223e91008f9420f8bcde1e42a"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算64位整数中1的个数  <br /></td></tr>
 <tr class="memitem:gabf99d81145eddb72c385cba53ca589fb" id="r_gabf99d81145eddb72c385cba53ca589fb"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="group___bit_manipulation.html#gabf99d81145eddb72c385cba53ca589fb">clz64</a> (<a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> x) noexcept</td></tr>
 <tr class="memdesc:gabf99d81145eddb72c385cba53ca589fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算64位整数前导零的个数  <br /></td></tr>
 <tr class="memitem:ga2e8de9ca6e14827b422486dc3ed35706" id="r_ga2e8de9ca6e14827b422486dc3ed35706"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="group___bit_manipulation.html#ga2e8de9ca6e14827b422486dc3ed35706">popcount32</a> (const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> x) noexcept</td></tr>
@@ -166,15 +166,10 @@ bit.hpp 的引用(Include)关系图:</div>
 <tr class="memdesc:ga6d479a2f9fba29a8fc0109f60c2b4254"><td class="mdescLeft">&#160;</td><td class="mdescRight">反转整数的位顺序  <br /></td></tr>
 <tr class="memitem:ga502c62305af2c0eb853c3d7d755933bd" id="r_ga502c62305af2c0eb853c3d7d755933bd"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___bit_manipulation.html#ga502c62305af2c0eb853c3d7d755933bd">mask_from_to</a> (const int from, const int to) noexcept</td></tr>
 <tr class="memdesc:ga502c62305af2c0eb853c3d7d755933bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成从from到to的位掩码  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
-变量</h2></td></tr>
-<tr class="memitem:gabe329559203f4fb8435a04120412513d" id="r_gabe329559203f4fb8435a04120412513d"><td class="memItemLeft">constexpr <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___bit_manipulation.html#gabe329559203f4fb8435a04120412513d">POPCOUNT_TABLE</a> [256]</td></tr>
-<tr class="memdesc:gabe329559203f4fb8435a04120412513d"><td class="mdescLeft">&#160;</td><td class="mdescRight">popcount查找表  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>位操作函数 </p>
-<p>此文件提供了各种位操作函数的实现，包括位计数、前导零计数、位旋转、位反转等。 支持32位和64位平台，使用查表法和位运算技巧优化性能。 </p>
+<p>此文件提供了各种位操作函数的实现，包括位计数、前导零计数、位旋转、位反转等。 </p>
 
 <p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

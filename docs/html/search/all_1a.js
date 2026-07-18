@@ -95,5 +95,6 @@ var searchData=
   ['ws_92',['WS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8abda72ed8541710980b8ec46af261a740',1,'ports']]],
   ['wss_93',['WSS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8af285b1726d9a5c79c618622a8e2d5bce',1,'ports']]],
   ['wstring_94',['wstring',['../group___string.html#gac8b291943e376bed3f3ed295a7dd68af',1,'string.hpp']]],
-  ['wstring_5fview_95',['wstring_view',['../group___string_view.html#ga5164ea4aed26e7700ce4a006d1d32475',1,'string_view.hpp']]]
+  ['wstring_5fview_95',['wstring_view',['../group___string_view.html#ga5164ea4aed26e7700ce4a006d1d32475',1,'string_view.hpp']]],
+  ['wyhash_96',['wyhash',['../group___hash_primary.html#ga735504626407442e0b3de37f796866d2',1,'hash.hpp']]]
 ];

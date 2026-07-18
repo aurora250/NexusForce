@@ -4,7 +4,9 @@
     <compoundname>error_category</compoundname>
     <basecompoundref refid="structicomparable" prot="public" virt="non-virtual">icomparable&lt; error_category &gt;</basecompoundref>
     <derivedcompoundref refid="classgeneric__error__category" prot="public" virt="non-virtual">generic_error_category</derivedcompoundref>
+    <derivedcompoundref refid="classssl__error__category" prot="public" virt="non-virtual">ssl_error_category</derivedcompoundref>
     <derivedcompoundref refid="classsystem__error__category" prot="public" virt="non-virtual">system_error_category</derivedcompoundref>
+    <includes refid="error__category_8hpp" local="no">error_category.hpp</includes>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classerror__category_1a660d988e0f8bed8b3394f114a1478fe3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -18,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="12" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="39" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classerror__category_1a012784ae8bb38b305411190610264cb4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type></type>
@@ -32,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="13" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="40" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classerror__category_1a68e764c9e67ac96562b75f29ab2d7146" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -41,7 +43,7 @@
         <name>error_category</name>
         <qualifiedname>error_category::error_category</qualifiedname>
         <param>
-          <type>const error_category &amp;</type>
+          <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -49,16 +51,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="15" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="42" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classerror__category_1ac18e3968bcded52622b9f9cf5c1256b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>error_category &amp;</type>
+        <type><ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
         <definition>error_category &amp; error_category::operator=</definition>
         <argsstring>(const error_category &amp;)=delete</argsstring>
         <name>operator=</name>
         <qualifiedname>error_category::operator=</qualifiedname>
         <param>
-          <type>const error_category &amp;</type>
+          <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -66,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="16" column="20"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="43" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classerror__category_1aabe20643ad4f133d44ea592114e92ad4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>const char *</type>
@@ -74,13 +76,20 @@
         <argsstring>() const noexcept=0</argsstring>
         <name>name</name>
         <qualifiedname>error_category::name</qualifiedname>
+        <reimplementedby refid="classgeneric__error__category_1a145e1f3c819e136808c7c794160a788c">name</reimplementedby>
+        <reimplementedby refid="classssl__error__category_1a820a5363cece5ea13af97f860b1e5c09">name</reimplementedby>
+        <reimplementedby refid="classsystem__error__category_1aa6e967e588d46ec33ede089fa405a36d">name</reimplementedby>
         <briefdescription>
+<para>获取错误类别名称 </para>
         </briefdescription>
         <detaileddescription>
+<para><simplesect kind="return"><para>类别名称 </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="18" column="25"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="49" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classerror__category_1a7cffeb0831c3b5a8c302de3c3744c926" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
@@ -88,35 +97,70 @@
         <argsstring>(int32_t ev) const =0</argsstring>
         <name>message</name>
         <qualifiedname>error_category::message</qualifiedname>
+        <reimplementedby refid="classgeneric__error__category_1ab5548fb1841f2d6a6c4052014dc6a942">message</reimplementedby>
+        <reimplementedby refid="classssl__error__category_1a25fe2865010f25740224841cdcf3c08c">message</reimplementedby>
+        <reimplementedby refid="classsystem__error__category_1affa5efc2a68f643326d66a34e870cbc2">message</reimplementedby>
         <param>
           <type><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
           <declname>ev</declname>
         </param>
         <briefdescription>
+<para>获取错误码对应的可读描述 </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ev</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误码值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>错误描述字符串 </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="19" column="21"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="56" column="21"/>
+        <references refid="classerror__category_1a7cffeb0831c3b5a8c302de3c3744c926">message</references>
+        <referencedby refid="classerror__category_1a7cffeb0831c3b5a8c302de3c3744c926">message</referencedby>
       </memberdef>
       <memberdef kind="function" id="classerror__category_1abe2db9ea89d04c9326dfd9df68636d21" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
-        <type>error_condition</type>
+        <type><ref refid="classerror__condition" kindref="compound">error_condition</ref></type>
         <definition>virtual error_condition error_category::default_error_condition</definition>
         <argsstring>(int32_t ev) const noexcept</argsstring>
         <name>default_error_condition</name>
         <qualifiedname>error_category::default_error_condition</qualifiedname>
+        <reimplementedby refid="classgeneric__error__category_1aabb9388fe4ede4eaf642d45f3b3add34">default_error_condition</reimplementedby>
+        <reimplementedby refid="classsystem__error__category_1a435df687e6a26f3aee45087e271aa985">default_error_condition</reimplementedby>
         <param>
           <type><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
           <declname>ev</declname>
         </param>
         <briefdescription>
+<para>获取错误码对应的默认错误条件 </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ev</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误码值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>默认错误条件</para>
+</simplesect>
+将当前类别的错误码映射到跨类别的通用错误条件。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="21" column="30"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="65" column="30"/>
+        <references refid="classerror__category_1abe2db9ea89d04c9326dfd9df68636d21">default_error_condition</references>
+        <referencedby refid="classerror__category_1abe2db9ea89d04c9326dfd9df68636d21">default_error_condition</referencedby>
       </memberdef>
       <memberdef kind="function" id="classerror__category_1a2444a8c46001b0a9f06df4487ded09c7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -129,16 +173,40 @@
           <declname>code</declname>
         </param>
         <param>
-          <type>const error_condition &amp;</type>
+          <type>const <ref refid="classerror__condition" kindref="compound">error_condition</ref> &amp;</type>
           <declname>condition</declname>
         </param>
         <briefdescription>
+<para>检查错误码与错误条件是否等价 </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>code</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误码值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误条件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>等价返回true </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="23" column="19"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="73" column="19"/>
+        <references refid="classerror__category_1a2444a8c46001b0a9f06df4487ded09c7">equivalent</references>
+        <referencedby refid="classerror__category_1af04b9c0d13d184cab31afd60cce2e99a">equivalent</referencedby>
+        <referencedby refid="classerror__category_1a2444a8c46001b0a9f06df4487ded09c7">equivalent</referencedby>
       </memberdef>
       <memberdef kind="function" id="classerror__category_1af04b9c0d13d184cab31afd60cce2e99a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -147,7 +215,7 @@
         <name>equivalent</name>
         <qualifiedname>error_category::equivalent</qualifiedname>
         <param>
-          <type>const error_code &amp;</type>
+          <type>const <ref refid="classerror__code" kindref="compound">error_code</ref> &amp;</type>
           <declname>code</declname>
         </param>
         <param>
@@ -155,12 +223,34 @@
           <declname>condition</declname>
         </param>
         <briefdescription>
+<para>检查错误码与错误条件是否等价 </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>code</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误码 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误码值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>等价返回true </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="24" column="19"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="81" column="19"/>
+        <references refid="classerror__category_1a2444a8c46001b0a9f06df4487ded09c7">equivalent</references>
       </memberdef>
       <memberdef kind="function" id="classerror__category_1afbcd3dfe6b0e49c585eb31ff043a6197" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -169,7 +259,7 @@
         <name>equal_to</name>
         <qualifiedname>error_category::equal_to</qualifiedname>
         <param>
-          <type>const error_category &amp;</type>
+          <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -178,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="26" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" bodystart="26" bodyend="26"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="83" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" bodystart="83" bodyend="83"/>
       </memberdef>
       <memberdef kind="function" id="classerror__category_1a2b956cff908978a634a71d9913c258cb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -187,7 +277,7 @@
         <name>less_than</name>
         <qualifiedname>error_category::less_than</qualifiedname>
         <param>
-          <type>const error_category &amp;</type>
+          <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -196,57 +286,61 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="27" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" bodystart="27" bodyend="29"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="84" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" bodystart="84" bodyend="86"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classerror__category_1a4f790ec0995fecd48182d4d9431b6b73" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>const error_category &amp;</type>
-        <definition>const error_category &amp; error_category::generic</definition>
-        <argsstring>() noexcept</argsstring>
-        <name>generic</name>
-        <qualifiedname>error_category::generic</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="31" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" bodystart="50" bodyend="50"/>
-      </memberdef>
-      <memberdef kind="function" id="classerror__category_1af683d20ab9b827279a2c044a78ae5fbf" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>const error_category &amp;</type>
-        <definition>const error_category &amp; error_category::system</definition>
-        <argsstring>() noexcept</argsstring>
-        <name>system</name>
-        <qualifiedname>error_category::system</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="32" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" bodystart="64" bodyend="64"/>
-      </memberdef>
+      <member refid="group___error_code_1ga4f790ec0995fecd48182d4d9431b6b73" kind="function"><name>generic</name></member>
+      <member refid="group___error_code_1gaf683d20ab9b827279a2c044a78ae5fbf" kind="function"><name>system</name></member>
     </sectiondef>
     <briefdescription>
+<para>错误类别抽象基类 </para>
     </briefdescription>
     <detaileddescription>
+<para>定义错误类别的核心接口。每个错误类别以单例形式存在， 通过地址比较区分，提供错误码到可读消息的映射能力。</para>
+<para>内置两种标准类别：<itemizedlist>
+<listitem><para><ref refid="group___error_code_1ga44686197784a7bc703b8eb62ba7cb064" kindref="member">generic_category()</ref>：通用错误类别，映射 POSIX errc 枚举</para>
+</listitem><listitem><para><ref refid="group___error_code_1ga0a43b58885d603f4ee012cee3debd9f9" kindref="member">system_category()</ref>：系统错误类别，映射操作系统原生错误码</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>实例不可复制、不可移动，始终通过引用或指针使用 </para>
+</simplesect>
+</para>
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
         <label>error_category</label>
+        <link refid="classerror__category"/>
         <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>generic_error_category</label>
+        <link refid="classgeneric__error__category"/>
+        <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
         <label>icomparable&lt; error_category &gt;</label>
         <link refid="structicomparable"/>
       </node>
+      <node id="4">
+        <label>ssl_error_category</label>
+        <link refid="classssl__error__category"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>system_error_category</label>
+        <link refid="classsystem__error__category"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
     </inheritancegraph>
     <collaborationgraph>
       <node id="1">
         <label>error_category</label>
+        <link refid="classerror__category"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
@@ -255,7 +349,7 @@
         <link refid="structicomparable"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="10" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" bodystart="10" bodyend="33"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="37" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" bodystart="37" bodyend="99"/>
     <listofallmembers>
       <member refid="classerror__category_1abe2db9ea89d04c9326dfd9df68636d21" prot="public" virt="virtual"><scope>error_category</scope><name>default_error_condition</name></member>
       <member refid="classerror__category_1afbcd3dfe6b0e49c585eb31ff043a6197" prot="public" virt="non-virtual"><scope>error_category</scope><name>equal_to</name></member>
@@ -263,7 +357,7 @@
       <member refid="classerror__category_1af04b9c0d13d184cab31afd60cce2e99a" prot="public" virt="virtual"><scope>error_category</scope><name>equivalent</name></member>
       <member refid="classerror__category_1a660d988e0f8bed8b3394f114a1478fe3" prot="public" virt="non-virtual"><scope>error_category</scope><name>error_category</name></member>
       <member refid="classerror__category_1a68e764c9e67ac96562b75f29ab2d7146" prot="public" virt="non-virtual"><scope>error_category</scope><name>error_category</name></member>
-      <member refid="classerror__category_1a4f790ec0995fecd48182d4d9431b6b73" prot="public" virt="non-virtual"><scope>error_category</scope><name>generic</name></member>
+      <member refid="group___error_code_1ga4f790ec0995fecd48182d4d9431b6b73" prot="public" virt="non-virtual"><scope>error_category</scope><name>generic</name></member>
       <member refid="classerror__category_1a2b956cff908978a634a71d9913c258cb" prot="public" virt="non-virtual"><scope>error_category</scope><name>less_than</name></member>
       <member refid="classerror__category_1a7cffeb0831c3b5a8c302de3c3744c926" prot="public" virt="pure-virtual"><scope>error_category</scope><name>message</name></member>
       <member refid="classerror__category_1aabe20643ad4f133d44ea592114e92ad4" prot="public" virt="pure-virtual"><scope>error_category</scope><name>name</name></member>
@@ -274,7 +368,7 @@
       <member refid="structicomparable_1a19b050f922dcb00e282f1fd440e2df77" prot="public" virt="non-virtual"><scope>error_category</scope><name>operator==</name></member>
       <member refid="structicomparable_1a5d2fcdbcf595020adcaccc310d90fc16" prot="public" virt="non-virtual"><scope>error_category</scope><name>operator&gt;</name></member>
       <member refid="structicomparable_1a108835b6418a11d9f26fb6849e820f0f" prot="public" virt="non-virtual"><scope>error_category</scope><name>operator&gt;=</name></member>
-      <member refid="classerror__category_1af683d20ab9b827279a2c044a78ae5fbf" prot="public" virt="non-virtual"><scope>error_category</scope><name>system</name></member>
+      <member refid="group___error_code_1gaf683d20ab9b827279a2c044a78ae5fbf" prot="public" virt="non-virtual"><scope>error_category</scope><name>system</name></member>
       <member refid="classerror__category_1a012784ae8bb38b305411190610264cb4" prot="public" virt="virtual"><scope>error_category</scope><name>~error_category</name></member>
     </listofallmembers>
   </compounddef>

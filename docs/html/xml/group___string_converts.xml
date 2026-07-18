@@ -52,141 +52,6 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/istringify.hpp" line="68" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/istringify.hpp" bodystart="68" bodyend="70"/>
       </memberdef>
-      <memberdef kind="function" id="group___string_converts_1ga00110fd2113bf3df11fe4fd12c7f4843" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="structuint128__t" kindref="compound">uint128_t</ref></type>
-        <definition>uint128_t to_uint128</definition>
-        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
-        <name>to_uint128</name>
-        <param>
-          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
-          <declname>sv</declname>
-        </param>
-        <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
-          <declname>idx</declname>
-          <defval>nullptr</defval>
-        </param>
-        <param>
-          <type>const int</type>
-          <declname>base</declname>
-          <defval>10</defval>
-        </param>
-        <briefdescription>
-<para>将字符串转换为128位无符号整数 </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>sv</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>要转换的字符串视图 </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>idx</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>可选参数，存储转换结束位置索引 </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>base</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>进制基数（0表示自动检测） </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>转换后的128位无符号整数 </para>
-</simplesect>
-<parameterlist kind="exception"><parameteritem>
-<parameternamelist>
-<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
-</parameternamelist>
-<parameterdescription>
-<para>转换失败时 </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="793" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="793" bodyend="803"/>
-        <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
-        <referencedby refid="structint128__t_1ad5e375eb299cf57a009c308b9e6d7a99" compoundref="int128_8hpp" startline="526" endline="529">int128_t::operator&lt;&lt;=</referencedby>
-        <referencedby refid="structuint128__t_1adac20986bb26baa46fe3a8fe1edd869b" compoundref="int128_8hpp" startline="827" endline="827">uint128_t::uint128_t</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="group___string_converts_1gafde0106c7b3946708cbc9a6ecfb70607" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="structint128__t" kindref="compound">int128_t</ref></type>
-        <definition>int128_t to_int128</definition>
-        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
-        <name>to_int128</name>
-        <param>
-          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
-          <declname>sv</declname>
-        </param>
-        <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
-          <declname>idx</declname>
-          <defval>nullptr</defval>
-        </param>
-        <param>
-          <type>const int</type>
-          <declname>base</declname>
-          <defval>10</defval>
-        </param>
-        <briefdescription>
-<para>将字符串转换为128位有符号整数 </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>sv</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>要转换的字符串视图 </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>idx</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>可选参数，存储转换结束位置索引 </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>base</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>进制基数（0表示自动检测） </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>转换后的128位有符号整数 </para>
-</simplesect>
-<parameterlist kind="exception"><parameteritem>
-<parameternamelist>
-<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
-</parameternamelist>
-<parameterdescription>
-<para>转换失败时 </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="813" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="813" bodyend="823"/>
-        <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
-        <referencedby refid="structint128__t_1a6b3a3a9bf9163a0c10b46cc40663c73a" compoundref="int128_8hpp" startline="829" endline="829">int128_t::int128_t</referencedby>
-      </memberdef>
       <memberdef kind="function" id="group___string_converts_1gaa1f68db77c97cbc3d24338ff12fcff6d" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___core_types_1ga3068631062aaf7da4cc0371da9e7a377" kindref="member">float32_t</ref></type>
         <definition>float32_t to_float32</definition>
@@ -237,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="507" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="507" bodyend="517"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="509" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="509" bodyend="519"/>
         <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
       </memberdef>
       <memberdef kind="function" id="group___string_converts_1ga40976a040eb582de9dbf0f62f3142e5b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -290,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="526" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="526" bodyend="536"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="528" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="528" bodyend="538"/>
         <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
       </memberdef>
       <memberdef kind="function" id="group___string_converts_1ga2e4ce025d09685beadde1f58d4b35d3b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -343,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="545" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="545" bodyend="555"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="547" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="547" bodyend="557"/>
         <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
       </memberdef>
       <memberdef kind="function" id="group___string_converts_1gae3c7ad350b2eb68272c0c675ee08e407" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -409,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="565" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="565" bodyend="575"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="567" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="567" bodyend="577"/>
         <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
       </memberdef>
       <memberdef kind="function" id="group___string_converts_1ga90ef149c10ceb59efd1c49976fd10cd1" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -475,7 +340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="585" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="585" bodyend="595"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="587" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="587" bodyend="597"/>
         <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
       </memberdef>
       <memberdef kind="function" id="group___string_converts_1ga7a8e36ad94481517ba622c58f8b889c2" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -541,11 +406,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="605" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="605" bodyend="615"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="607" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="607" bodyend="617"/>
         <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
-        <referencedby refid="structboolean_1ab4f0cdffb3c8131444b2cfee89bd1a5d" compoundref="packages_8hpp" startline="74" endline="90">boolean::parse</referencedby>
-        <referencedby refid="group___string_converts_1ga2175c6ed7018faf56f36c6546ea4e839" compoundref="to__numerics_8hpp" startline="645" endline="652">to_int16</referencedby>
-        <referencedby refid="group___string_converts_1gaadf6a1509fb317e4ae5ea0a3d4ae3304" compoundref="to__numerics_8hpp" startline="678" endline="685">to_int8</referencedby>
+        <referencedby refid="structboolean_1ab4f0cdffb3c8131444b2cfee89bd1a5d" compoundref="packages_8hpp" startline="75" endline="91">boolean::parse</referencedby>
+        <referencedby refid="group___string_converts_1ga2175c6ed7018faf56f36c6546ea4e839" compoundref="to__numerics_8hpp" startline="647" endline="654">to_int16</referencedby>
+        <referencedby refid="group___string_converts_1gaadf6a1509fb317e4ae5ea0a3d4ae3304" compoundref="to__numerics_8hpp" startline="680" endline="687">to_int8</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___string_converts_1ga95817e742b1adc1ce899d377ea72154b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
@@ -610,10 +475,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="625" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="625" bodyend="635"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="627" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="627" bodyend="637"/>
         <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
-        <referencedby refid="group___string_converts_1gadb486964bb86e1d9a09107c38bb99237" compoundref="to__numerics_8hpp" startline="662" endline="668">to_uint16</referencedby>
-        <referencedby refid="group___string_converts_1gaeb63c00ebfec192aaadccdd92cb62fee" compoundref="to__numerics_8hpp" startline="695" endline="701">to_uint8</referencedby>
+        <referencedby refid="group___string_converts_1gadb486964bb86e1d9a09107c38bb99237" compoundref="to__numerics_8hpp" startline="664" endline="670">to_uint16</referencedby>
+        <referencedby refid="group___string_converts_1gaeb63c00ebfec192aaadccdd92cb62fee" compoundref="to__numerics_8hpp" startline="697" endline="703">to_uint8</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___string_converts_1ga2175c6ed7018faf56f36c6546ea4e839" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___core_types_1ga8b23aa936eec66c1c69ecd7b399ddf19" kindref="member">int16_t</ref></type>
@@ -678,10 +543,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="645" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="645" bodyend="652"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="647" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="647" bodyend="654"/>
         <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
         <references refid="classnumeric__traits_1a99eaefc81fd6d3d71d414384b8964511" compoundref="numeric__traits_8hpp" startline="148" endline="148">numeric_traits&lt; T, Dummy &gt;::min</references>
-        <references refid="group___string_converts_1ga7a8e36ad94481517ba622c58f8b889c2" compoundref="to__numerics_8hpp" startline="605" endline="615">to_int32</references>
+        <references refid="group___string_converts_1ga7a8e36ad94481517ba622c58f8b889c2" compoundref="to__numerics_8hpp" startline="607" endline="617">to_int32</references>
       </memberdef>
       <memberdef kind="function" id="group___string_converts_1gadb486964bb86e1d9a09107c38bb99237" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
@@ -746,9 +611,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="662" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="662" bodyend="668"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="664" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="664" bodyend="670"/>
         <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
-        <references refid="group___string_converts_1ga95817e742b1adc1ce899d377ea72154b" compoundref="to__numerics_8hpp" startline="625" endline="635">to_uint32</references>
+        <references refid="group___string_converts_1ga95817e742b1adc1ce899d377ea72154b" compoundref="to__numerics_8hpp" startline="627" endline="637">to_uint32</references>
       </memberdef>
       <memberdef kind="function" id="group___string_converts_1gaadf6a1509fb317e4ae5ea0a3d4ae3304" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___core_types_1gaef0a181fd471ee04962c9ce581a83ca0" kindref="member">int8_t</ref></type>
@@ -813,10 +678,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="678" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="678" bodyend="685"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="680" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="680" bodyend="687"/>
         <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
         <references refid="classnumeric__traits_1a99eaefc81fd6d3d71d414384b8964511" compoundref="numeric__traits_8hpp" startline="148" endline="148">numeric_traits&lt; T, Dummy &gt;::min</references>
-        <references refid="group___string_converts_1ga7a8e36ad94481517ba622c58f8b889c2" compoundref="to__numerics_8hpp" startline="605" endline="615">to_int32</references>
+        <references refid="group___string_converts_1ga7a8e36ad94481517ba622c58f8b889c2" compoundref="to__numerics_8hpp" startline="607" endline="617">to_int32</references>
       </memberdef>
       <memberdef kind="function" id="group___string_converts_1gaeb63c00ebfec192aaadccdd92cb62fee" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
@@ -881,9 +746,147 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="695" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="695" bodyend="701"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="697" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="697" bodyend="703"/>
         <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
-        <references refid="group___string_converts_1ga95817e742b1adc1ce899d377ea72154b" compoundref="to__numerics_8hpp" startline="625" endline="635">to_uint32</references>
+        <references refid="group___string_converts_1ga95817e742b1adc1ce899d377ea72154b" compoundref="to__numerics_8hpp" startline="627" endline="637">to_uint32</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga00110fd2113bf3df11fe4fd12c7f4843" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structuint128__t" kindref="compound">uint128_t</ref></type>
+        <definition>uint128_t to_uint128</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_uint128</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为128位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的128位无符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="713" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="713" bodyend="724"/>
+        <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
+        <referencedby refid="group___user_literals_1gaa40d57935d274a75859089b3f959cebf" compoundref="to__numerics_8hpp" startline="764" endline="766">operator&quot;&quot;_u128</referencedby>
+        <referencedby refid="structuinteger128_1a0affbc760d331a95825529b587dcfc2f" compoundref="packages_8hpp" startline="330" endline="332">uinteger128::parse</referencedby>
+        <referencedby refid="group___packages_1gafae20155fcd78ad421123fa1657d70b1" compoundref="packages_8hpp" startline="456" endline="458">uinteger128::uinteger128</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1gafde0106c7b3946708cbc9a6ecfb70607" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structint128__t" kindref="compound">int128_t</ref></type>
+        <definition>int128_t to_int128</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_int128</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为128位有符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的128位有符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="734" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="734" bodyend="745"/>
+        <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
+        <referencedby refid="group___packages_1ga765b3f316083ec15809d917572d12c24" compoundref="packages_8hpp" startline="460" endline="462">integer128::integer128</referencedby>
+        <referencedby refid="group___user_literals_1gaa437921a519a6a246a539dc02ec81ba6" compoundref="to__numerics_8hpp" startline="775" endline="777">operator&quot;&quot;_i128</referencedby>
+        <referencedby refid="structinteger128_1a4d96d294ec281a64a463bb38ee3ea22d" compoundref="packages_8hpp" startline="431" endline="433">integer128::parse</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___string_converts_1gaf299c1a15ebd7e7d84110e86eda3180c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

@@ -1,0 +1,466 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: compare.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('simd_2compare_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">simd/compare.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="simd_2compare_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_SIMD_COMPARE_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_SIMD_COMPARE_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="simd_2types_8hpp.html">NeForce/core/simd/types.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>NEFORCE_BEGIN_SIMD__</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gaa9ae757752d1dcde722885b42476190b">   28</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> <a class="code hl_function" href="group___s_i_m_d.html#gaa9ae757752d1dcde722885b42476190b">cmpeq_i8</a>(<a class="code hl_struct" href="structvec128__t.html">vec128_t</a> a, <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    return ::_mm_cmpeq_epi8(a, b);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    return ::vceqq_s8(::vreinterpretq_s8_u8(a), ::vreinterpretq_s8_u8(b));</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> result;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 16; ++i) {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        result.data[i] = (a.data[i] == b.data[i]) ? 0xFF : 0x00;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
+</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gae7b8e4501f0b4b50b95e6f59a4d0aba4">   48</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> <a class="code hl_function" href="group___s_i_m_d.html#gae7b8e4501f0b4b50b95e6f59a4d0aba4">cmpeq_i16</a>(<a class="code hl_struct" href="structvec128__t.html">vec128_t</a> a, <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    return ::_mm_cmpeq_epi16(a, b);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    return ::vceqq_s16(::vreinterpretq_s16_u8(a), ::vreinterpretq_s16_u8(b));</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sa = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga8b23aa936eec66c1c69ecd7b399ddf19">int16_t</a>*<span class="keyword">&gt;</span>(a.data);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sb = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga8b23aa936eec66c1c69ecd7b399ddf19">int16_t</a>*<span class="keyword">&gt;</span>(b.data);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> result;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">auto</span>* rd = <span class="keyword">reinterpret_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a>*<span class="keyword">&gt;</span>(result.data);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 8; ++i) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        rd[i] = (sa[i] == sb[i]) ? 0xFFFF : 0;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
+</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span></div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gab53c30ec98cb62fa1a340d08c01698d8">   71</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> <a class="code hl_function" href="group___s_i_m_d.html#gab53c30ec98cb62fa1a340d08c01698d8">cmpeq_i32</a>(<a class="code hl_struct" href="structvec128__t.html">vec128_t</a> a, <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    return ::_mm_cmpeq_epi32(a, b);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    return ::vceqq_s32(::vreinterpretq_s32_u8(a), ::vreinterpretq_s32_u8(b));</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sa = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a>*<span class="keyword">&gt;</span>(a.data);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sb = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a>*<span class="keyword">&gt;</span>(b.data);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> result;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">auto</span>* rd = <span class="keyword">reinterpret_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>*<span class="keyword">&gt;</span>(result.data);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; ++i) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        rd[i] = (sa[i] == sb[i]) ? 0xFFFFFFFF : 0;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}</div>
+</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span></div>
+<div class="foldopen" id="foldopen00094" data-start="{" data-end="}">
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gaba15235908972d8876a2b3e7bcb94f8d">   94</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> <a class="code hl_function" href="group___s_i_m_d.html#gaba15235908972d8876a2b3e7bcb94f8d">cmpeq_i64</a>(<a class="code hl_struct" href="structvec128__t.html">vec128_t</a> a, <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">#if defined(__SSE4_1__) || defined(NEFORCE_SIMD_AVX2)</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    return ::_mm_cmpeq_epi64(a, b);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_SSE2)</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    const ::__m128i eq_lo = ::_mm_cmpeq_epi32(a, b);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    const ::__m128i eq_hi = ::_mm_cmpeq_epi32(_mm_shuffle_epi32(a, _MM_SHUFFLE(2, 3, 0, 1)),</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                                              _mm_shuffle_epi32(b, _MM_SHUFFLE(2, 3, 0, 1)));</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    return ::_mm_and_si128(eq_lo, eq_hi);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    return ::vceqq_s64(::vreinterpretq_s64_u8(a), ::vreinterpretq_s64_u8(b));</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sa = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>*<span class="keyword">&gt;</span>(a.data);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sb = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>*<span class="keyword">&gt;</span>(b.data);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> result;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keyword">auto</span>* rd = <span class="keyword">reinterpret_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>*<span class="keyword">&gt;</span>(result.data);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 2; ++i) {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        rd[i] = (sa[i] == sb[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>}</div>
+</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span></div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga7385cc4587b5efb18387701844bdaa68">  122</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> <a class="code hl_function" href="group___s_i_m_d.html#ga7385cc4587b5efb18387701844bdaa68">cmpgt_i8</a>(<a class="code hl_struct" href="structvec128__t.html">vec128_t</a> a, <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    return ::_mm_cmpgt_epi8(a, b);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    return ::vcgtq_s8(::vreinterpretq_s8_u8(a), ::vreinterpretq_s8_u8(b));</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> result;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 16; ++i) {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        result.data[i] = (<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#gaef0a181fd471ee04962c9ce581a83ca0">int8_t</a><span class="keyword">&gt;</span>(a.data[i]) &gt; <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#gaef0a181fd471ee04962c9ce581a83ca0">int8_t</a><span class="keyword">&gt;</span>(b.data[i])) ? 0xFF : 0x00;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}</div>
+</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span></div>
+<div class="foldopen" id="foldopen00142" data-start="{" data-end="}">
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga80ca4c8ffb2147dc62fdf147577149fe">  142</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> <a class="code hl_function" href="group___s_i_m_d.html#ga80ca4c8ffb2147dc62fdf147577149fe">cmpgt_i16</a>(<a class="code hl_struct" href="structvec128__t.html">vec128_t</a> a, <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    return ::_mm_cmpgt_epi16(a, b);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    return ::vcgtq_s16(::vreinterpretq_s16_u8(a), ::vreinterpretq_s16_u8(b));</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sa = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga8b23aa936eec66c1c69ecd7b399ddf19">int16_t</a>*<span class="keyword">&gt;</span>(a.data);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sb = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga8b23aa936eec66c1c69ecd7b399ddf19">int16_t</a>*<span class="keyword">&gt;</span>(b.data);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> result;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keyword">auto</span>* rd = <span class="keyword">reinterpret_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a>*<span class="keyword">&gt;</span>(result.data);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 8; ++i) {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        rd[i] = (sa[i] &gt; sb[i]) ? 0xFFFF : 0;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>}</div>
+</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span></div>
+<div class="foldopen" id="foldopen00165" data-start="{" data-end="}">
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gad78e0042a0fca0db8e5fac547bb96b00">  165</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> <a class="code hl_function" href="group___s_i_m_d.html#gad78e0042a0fca0db8e5fac547bb96b00">cmpgt_i32</a>(<a class="code hl_struct" href="structvec128__t.html">vec128_t</a> a, <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    return ::_mm_cmpgt_epi32(a, b);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    return ::vcgtq_s32(::vreinterpretq_s32_u8(a), ::vreinterpretq_s32_u8(b));</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sa = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a>*<span class="keyword">&gt;</span>(a.data);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sb = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a>*<span class="keyword">&gt;</span>(b.data);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> result;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keyword">auto</span>* rd = <span class="keyword">reinterpret_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>*<span class="keyword">&gt;</span>(result.data);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; ++i) {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        rd[i] = (sa[i] &gt; sb[i]) ? 0xFFFFFFFF : 0;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    }</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>}</div>
+</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span></div>
+<div class="foldopen" id="foldopen00188" data-start="{" data-end="}">
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gae38e8a08d88d57eeb71406bf2bedbf7f">  188</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> <a class="code hl_function" href="group___s_i_m_d.html#gae38e8a08d88d57eeb71406bf2bedbf7f">cmpgt_i64</a>(<a class="code hl_struct" href="structvec128__t.html">vec128_t</a> a, <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="preprocessor">#if defined(__SSE4_2__) || defined(NEFORCE_SIMD_AVX2)</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    return ::_mm_cmpgt_epi64(a, b);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_SSE2)</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sa = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>*<span class="keyword">&gt;</span>(&amp;a);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sb = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>*<span class="keyword">&gt;</span>(&amp;b);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keyword">alignas</span>(16) <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> rd[2];</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    rd[0] = sa[0] &gt; sb[0] ? -1LL : 0LL;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    rd[1] = sa[1] &gt; sb[1] ? -1LL : 0LL;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    return ::_mm_load_si128(<span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>::__m128i*<span class="keyword">&gt;</span>(rd));</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    return ::vcgtq_s64(::vreinterpretq_s64_u8(a), ::vreinterpretq_s64_u8(b));</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sa = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>*<span class="keyword">&gt;</span>(a.data);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* sb = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>*<span class="keyword">&gt;</span>(b.data);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <a class="code hl_struct" href="structvec128__t.html">vec128_t</a> result;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keyword">auto</span>* rd = <span class="keyword">reinterpret_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>*<span class="keyword">&gt;</span>(result.data);</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 2; ++i) {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        rd[i] = (sa[i] &gt; sb[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>}</div>
+</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span></div>
+<div class="foldopen" id="foldopen00218" data-start="{" data-end="}">
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga75db173ccad55a31c52982bb83ab5e65">  218</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> <a class="code hl_function" href="group___s_i_m_d.html#ga75db173ccad55a31c52982bb83ab5e65">cmpeq_f32</a>(<a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> a, <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    return ::_mm_cmpeq_ps(a, b);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    return ::vceqq_f32(a, b);</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> result;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; ++i) {</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        result.data[i] = (a.data[i] == b.data[i]) ? 0xFFFFFFFF : 0;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>}</div>
+</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span></div>
+<div class="foldopen" id="foldopen00238" data-start="{" data-end="}">
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga061da0d379494bfcb1b468e19ef91fa8">  238</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> <a class="code hl_function" href="group___s_i_m_d.html#ga061da0d379494bfcb1b468e19ef91fa8">cmpgt_f32</a>(<a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> a, <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    return ::_mm_cmpgt_ps(a, b);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    return ::vcgtq_f32(a, b);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> result;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; ++i) {</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        result.data[i] = (a.data[i] &gt; b.data[i]) ? 0xFFFFFFFF : 0;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    }</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>}</div>
+</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span></div>
+<div class="foldopen" id="foldopen00258" data-start="{" data-end="}">
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga99e69143e7d11b674a3ac0b610301928">  258</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> <a class="code hl_function" href="group___s_i_m_d.html#ga99e69143e7d11b674a3ac0b610301928">cmpge_f32</a>(<a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> a, <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    return ::_mm_cmpge_ps(a, b);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    return ::vcgeq_f32(a, b);</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> result;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; ++i) {</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        result.data[i] = (a.data[i] &gt;= b.data[i]) ? 0xFFFFFFFF : 0;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    }</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>}</div>
+</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span></div>
+<div class="foldopen" id="foldopen00278" data-start="{" data-end="}">
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gabbad8167f1d73b83439f7aeb6f690c41">  278</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> <a class="code hl_function" href="group___s_i_m_d.html#gabbad8167f1d73b83439f7aeb6f690c41">cmplt_f32</a>(<a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> a, <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    return ::_mm_cmplt_ps(a, b);</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    return ::vcltq_f32(a, b);</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> result;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; ++i) {</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        result.data[i] = (a.data[i] &lt; b.data[i]) ? 0xFFFFFFFF : 0;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    }</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>}</div>
+</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span></div>
+<div class="foldopen" id="foldopen00298" data-start="{" data-end="}">
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gaaeac68df0673e664d421f0a0d121f71d">  298</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> <a class="code hl_function" href="group___s_i_m_d.html#gaaeac68df0673e664d421f0a0d121f71d">cmple_f32</a>(<a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> a, <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    return ::_mm_cmple_ps(a, b);</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    return ::vcleq_f32(a, b);</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> result;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; ++i) {</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        result.data[i] = (a.data[i] &lt;= b.data[i]) ? 0xFFFFFFFF : 0;</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    }</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>}</div>
+</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span></div>
+<div class="foldopen" id="foldopen00318" data-start="{" data-end="}">
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga7713dc347388ce7f9cbc1182e0aeff71">  318</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> <a class="code hl_function" href="group___s_i_m_d.html#ga7713dc347388ce7f9cbc1182e0aeff71">cmpeq_f64</a>(<a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> a, <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    return ::_mm_cmpeq_pd(a, b);</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    return ::vceqq_f64(a, b);</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> result;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 2; ++i) {</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        result.data[i] = (a.data[i] == b.data[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    }</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>}</div>
+</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span></div>
+<div class="foldopen" id="foldopen00338" data-start="{" data-end="}">
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga636822fc30da94b30fa5ee735dc137f5">  338</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> <a class="code hl_function" href="group___s_i_m_d.html#ga636822fc30da94b30fa5ee735dc137f5">cmpgt_f64</a>(<a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> a, <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    return ::_mm_cmpgt_pd(a, b);</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    return ::vcgtq_f64(a, b);</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> result;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 2; ++i) {</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        result.data[i] = (a.data[i] &gt; b.data[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    }</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>}</div>
+</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span></div>
+<div class="foldopen" id="foldopen00358" data-start="{" data-end="}">
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gac45064ea668ca0d807e03c77707b0585">  358</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> <a class="code hl_function" href="group___s_i_m_d.html#gac45064ea668ca0d807e03c77707b0585">cmpge_f64</a>(<a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> a, <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    return ::_mm_cmpge_pd(a, b);</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    return ::vcgeq_f64(a, b);</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> result;</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 2; ++i) {</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        result.data[i] = (a.data[i] &gt;= b.data[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    }</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>}</div>
+</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span></div>
+<div class="foldopen" id="foldopen00378" data-start="{" data-end="}">
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga99d8092e0534dd297144b29ebd6906e7">  378</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> <a class="code hl_function" href="group___s_i_m_d.html#ga99d8092e0534dd297144b29ebd6906e7">cmplt_f64</a>(<a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> a, <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    return ::_mm_cmplt_pd(a, b);</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    return ::vcltq_f64(a, b);</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> result;</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 2; ++i) {</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>        result.data[i] = (a.data[i] &lt; b.data[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    }</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>}</div>
+</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span></div>
+<div class="foldopen" id="foldopen00398" data-start="{" data-end="}">
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gaf4872a7aaa45388763934eeda1aa35f5">  398</a></span>NEFORCE_ALWAYS_INLINE_INLINE <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> <a class="code hl_function" href="group___s_i_m_d.html#gaf4872a7aaa45388763934eeda1aa35f5">cmple_f64</a>(<a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> a, <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>    return ::_mm_cmple_pd(a, b);</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>    return ::vcleq_f64(a, b);</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>    <a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> result;</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 2; ++i) {</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        result.data[i] = (a.data[i] &lt;= b.data[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    }</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>}</div>
+</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span> <span class="comment">// SIMD</span></div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>NEFORCE_END_SIMD__</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_SIMD_COMPARE_HPP__</span></div>
+<div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00109">typeinfo/types.hpp:109</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00086">typeinfo/types.hpp:86</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga64be82add362de7c99ce6671d7f4f0a6"><div class="ttname"><a href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></div><div class="ttdeci">unsigned short uint16_t</div><div class="ttdoc">16位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00103">typeinfo/types.hpp:103</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga785d1fff9ad28a98e121ba9f90b3a3ca"><div class="ttname"><a href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></div><div class="ttdeci">unsigned long long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00117">typeinfo/types.hpp:117</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga8b23aa936eec66c1c69ecd7b399ddf19"><div class="ttname"><a href="group___core_types.html#ga8b23aa936eec66c1c69ecd7b399ddf19">int16_t</a></div><div class="ttdeci">short int16_t</div><div class="ttdoc">16位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00072">typeinfo/types.hpp:72</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga9f99c01571d1afadb9d8d2e48ec532bb"><div class="ttname"><a href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a></div><div class="ttdeci">int int32_t</div><div class="ttdoc">32位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00078">typeinfo/types.hpp:78</a></div></div>
+<div class="ttc" id="agroup___core_types_html_gaef0a181fd471ee04962c9ce581a83ca0"><div class="ttname"><a href="group___core_types.html#gaef0a181fd471ee04962c9ce581a83ca0">int8_t</a></div><div class="ttdeci">signed char int8_t</div><div class="ttdoc">8位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00066">typeinfo/types.hpp:66</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga061da0d379494bfcb1b468e19ef91fa8"><div class="ttname"><a href="group___s_i_m_d.html#ga061da0d379494bfcb1b468e19ef91fa8">cmpgt_f32</a></div><div class="ttdeci">vec128f_t cmpgt_f32(vec128f_t a, vec128f_t b) noexcept</div><div class="ttdoc">4 路单精度浮点大于比较</div><div class="ttdef"><b>定义</b> <a href="#l00238">simd/compare.hpp:238</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga636822fc30da94b30fa5ee735dc137f5"><div class="ttname"><a href="group___s_i_m_d.html#ga636822fc30da94b30fa5ee735dc137f5">cmpgt_f64</a></div><div class="ttdeci">vec128d_t cmpgt_f64(vec128d_t a, vec128d_t b) noexcept</div><div class="ttdoc">2 路双精度浮点大于比较</div><div class="ttdef"><b>定义</b> <a href="#l00338">simd/compare.hpp:338</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga7385cc4587b5efb18387701844bdaa68"><div class="ttname"><a href="group___s_i_m_d.html#ga7385cc4587b5efb18387701844bdaa68">cmpgt_i8</a></div><div class="ttdeci">vec128_t cmpgt_i8(vec128_t a, vec128_t b) noexcept</div><div class="ttdoc">16 路 8-bit 有符号大于比较</div><div class="ttdef"><b>定义</b> <a href="#l00122">simd/compare.hpp:122</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga75db173ccad55a31c52982bb83ab5e65"><div class="ttname"><a href="group___s_i_m_d.html#ga75db173ccad55a31c52982bb83ab5e65">cmpeq_f32</a></div><div class="ttdeci">vec128f_t cmpeq_f32(vec128f_t a, vec128f_t b) noexcept</div><div class="ttdoc">4 路单精度浮点相等比较</div><div class="ttdef"><b>定义</b> <a href="#l00218">simd/compare.hpp:218</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga7713dc347388ce7f9cbc1182e0aeff71"><div class="ttname"><a href="group___s_i_m_d.html#ga7713dc347388ce7f9cbc1182e0aeff71">cmpeq_f64</a></div><div class="ttdeci">vec128d_t cmpeq_f64(vec128d_t a, vec128d_t b) noexcept</div><div class="ttdoc">2 路双精度浮点相等比较</div><div class="ttdef"><b>定义</b> <a href="#l00318">simd/compare.hpp:318</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga80ca4c8ffb2147dc62fdf147577149fe"><div class="ttname"><a href="group___s_i_m_d.html#ga80ca4c8ffb2147dc62fdf147577149fe">cmpgt_i16</a></div><div class="ttdeci">vec128_t cmpgt_i16(vec128_t a, vec128_t b) noexcept</div><div class="ttdoc">8 路 16-bit 有符号大于比较</div><div class="ttdef"><b>定义</b> <a href="#l00142">simd/compare.hpp:142</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga99d8092e0534dd297144b29ebd6906e7"><div class="ttname"><a href="group___s_i_m_d.html#ga99d8092e0534dd297144b29ebd6906e7">cmplt_f64</a></div><div class="ttdeci">vec128d_t cmplt_f64(vec128d_t a, vec128d_t b) noexcept</div><div class="ttdoc">2 路双精度浮点小于比较</div><div class="ttdef"><b>定义</b> <a href="#l00378">simd/compare.hpp:378</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga99e69143e7d11b674a3ac0b610301928"><div class="ttname"><a href="group___s_i_m_d.html#ga99e69143e7d11b674a3ac0b610301928">cmpge_f32</a></div><div class="ttdeci">vec128f_t cmpge_f32(vec128f_t a, vec128f_t b) noexcept</div><div class="ttdoc">4 路单精度浮点大于等于比较</div><div class="ttdef"><b>定义</b> <a href="#l00258">simd/compare.hpp:258</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gaa9ae757752d1dcde722885b42476190b"><div class="ttname"><a href="group___s_i_m_d.html#gaa9ae757752d1dcde722885b42476190b">cmpeq_i8</a></div><div class="ttdeci">vec128_t cmpeq_i8(vec128_t a, vec128_t b) noexcept</div><div class="ttdoc">16 路 8-bit 相等比较</div><div class="ttdef"><b>定义</b> <a href="#l00028">simd/compare.hpp:28</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gaaeac68df0673e664d421f0a0d121f71d"><div class="ttname"><a href="group___s_i_m_d.html#gaaeac68df0673e664d421f0a0d121f71d">cmple_f32</a></div><div class="ttdeci">vec128f_t cmple_f32(vec128f_t a, vec128f_t b) noexcept</div><div class="ttdoc">4 路单精度浮点小于等于比较</div><div class="ttdef"><b>定义</b> <a href="#l00298">simd/compare.hpp:298</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gab53c30ec98cb62fa1a340d08c01698d8"><div class="ttname"><a href="group___s_i_m_d.html#gab53c30ec98cb62fa1a340d08c01698d8">cmpeq_i32</a></div><div class="ttdeci">vec128_t cmpeq_i32(vec128_t a, vec128_t b) noexcept</div><div class="ttdoc">4 路 32-bit 相等比较</div><div class="ttdef"><b>定义</b> <a href="#l00071">simd/compare.hpp:71</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gaba15235908972d8876a2b3e7bcb94f8d"><div class="ttname"><a href="group___s_i_m_d.html#gaba15235908972d8876a2b3e7bcb94f8d">cmpeq_i64</a></div><div class="ttdeci">vec128_t cmpeq_i64(vec128_t a, vec128_t b) noexcept</div><div class="ttdoc">2 路 64-bit 相等比较</div><div class="ttdef"><b>定义</b> <a href="#l00094">simd/compare.hpp:94</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gabbad8167f1d73b83439f7aeb6f690c41"><div class="ttname"><a href="group___s_i_m_d.html#gabbad8167f1d73b83439f7aeb6f690c41">cmplt_f32</a></div><div class="ttdeci">vec128f_t cmplt_f32(vec128f_t a, vec128f_t b) noexcept</div><div class="ttdoc">4 路单精度浮点小于比较</div><div class="ttdef"><b>定义</b> <a href="#l00278">simd/compare.hpp:278</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gac45064ea668ca0d807e03c77707b0585"><div class="ttname"><a href="group___s_i_m_d.html#gac45064ea668ca0d807e03c77707b0585">cmpge_f64</a></div><div class="ttdeci">vec128d_t cmpge_f64(vec128d_t a, vec128d_t b) noexcept</div><div class="ttdoc">2 路双精度浮点大于等于比较</div><div class="ttdef"><b>定义</b> <a href="#l00358">simd/compare.hpp:358</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gad78e0042a0fca0db8e5fac547bb96b00"><div class="ttname"><a href="group___s_i_m_d.html#gad78e0042a0fca0db8e5fac547bb96b00">cmpgt_i32</a></div><div class="ttdeci">vec128_t cmpgt_i32(vec128_t a, vec128_t b) noexcept</div><div class="ttdoc">4 路 32-bit 有符号大于比较</div><div class="ttdef"><b>定义</b> <a href="#l00165">simd/compare.hpp:165</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gae38e8a08d88d57eeb71406bf2bedbf7f"><div class="ttname"><a href="group___s_i_m_d.html#gae38e8a08d88d57eeb71406bf2bedbf7f">cmpgt_i64</a></div><div class="ttdeci">vec128_t cmpgt_i64(vec128_t a, vec128_t b) noexcept</div><div class="ttdoc">2 路 64-bit 有符号大于比较</div><div class="ttdef"><b>定义</b> <a href="#l00188">simd/compare.hpp:188</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gae7b8e4501f0b4b50b95e6f59a4d0aba4"><div class="ttname"><a href="group___s_i_m_d.html#gae7b8e4501f0b4b50b95e6f59a4d0aba4">cmpeq_i16</a></div><div class="ttdeci">vec128_t cmpeq_i16(vec128_t a, vec128_t b) noexcept</div><div class="ttdoc">8 路 16-bit 相等比较</div><div class="ttdef"><b>定义</b> <a href="#l00048">simd/compare.hpp:48</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gaf4872a7aaa45388763934eeda1aa35f5"><div class="ttname"><a href="group___s_i_m_d.html#gaf4872a7aaa45388763934eeda1aa35f5">cmple_f64</a></div><div class="ttdeci">vec128d_t cmple_f64(vec128d_t a, vec128d_t b) noexcept</div><div class="ttdoc">2 路双精度浮点小于等于比较</div><div class="ttdef"><b>定义</b> <a href="#l00398">simd/compare.hpp:398</a></div></div>
+<div class="ttc" id="asimd_2types_8hpp_html"><div class="ttname"><a href="simd_2types_8hpp.html">types.hpp</a></div><div class="ttdoc">SIMD 向量类型定义</div></div>
+<div class="ttc" id="astructvec128__t_html"><div class="ttname"><a href="structvec128__t.html">vec128_t</a></div><div class="ttdoc">128-bit 整型向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="simd_2types_8hpp_source.html#l00052">simd/types.hpp:52</a></div></div>
+<div class="ttc" id="astructvec128d__t_html"><div class="ttname"><a href="structvec128d__t.html">vec128d_t</a></div><div class="ttdoc">128-bit 双精度浮点向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="simd_2types_8hpp_source.html#l00060">simd/types.hpp:60</a></div></div>
+<div class="ttc" id="astructvec128f__t_html"><div class="ttname"><a href="structvec128f__t.html">vec128f_t</a></div><div class="ttdoc">128-bit 单精度浮点向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="simd_2types_8hpp_source.html#l00056">simd/types.hpp:56</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>simd</b></li><li class="navelem"><a href="simd_2compare_8hpp.html">compare.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -540,7 +540,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="588" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="588" bodyend="590"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="655" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="655" bodyend="657"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a1551b4f412c7e6b9430ec74540200f32" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
@@ -558,7 +558,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="591" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="591" bodyend="593"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="658" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="658" bodyend="660"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -786,7 +786,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="407" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="407" bodyend="467"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="407" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="407" bodyend="508"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1ad718505001ba62e29a09b50fdd42dca0" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -855,7 +855,36 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="477" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="477" bodyend="482"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="518" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="518" bodyend="523"/>
+      </memberdef>
+      <memberdef kind="function" id="classflat__hashtable_1a4a72755cd2bac293214e96aa77fc6937" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::shift_make_room</definition>
+        <argsstring>(const size_t pos) noexcept</argsstring>
+        <name>shift_make_room</name>
+        <qualifiedname>flat_hashtable::shift_make_room</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>移动元素以在指定位置腾出空槽 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>需要腾空的位置索引</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+从 pos 开始向后找到第一个 EMPTY 或 DELETED 槽， 将 [pos, end) 的元素向后移动一位，使 pos 空闲。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="532" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="532" bodyend="548"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1aaa792090630320b69c79a5453b468457" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -884,7 +913,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="488" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="488" bodyend="507"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="554" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="554" bodyend="573"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a47a7420a3bf54e63121df611a8cb4bf6" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -902,7 +931,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="509" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="509" bodyend="522"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="575" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="575" bodyend="588"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a5b47a43acea45ad7669c7a98b01c5216" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -920,7 +949,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="524" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="524" bodyend="586"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="590" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="590" bodyend="653"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -952,7 +981,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="600" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="600" bodyend="607"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="667" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="667" bodyend="674"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a96f87a270340d8a508cf0a5807215734" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -993,7 +1022,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="614" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="614" bodyend="622"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="681" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="681" bodyend="689"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1ad3812ccf5f38c1659fc4748e7da57ce4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -1046,7 +1075,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="630" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="630" bodyend="639"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="697" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="697" bodyend="706"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a7031b30b4f5e8c3135b14064110f1059" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -1111,7 +1140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="648" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="648" bodyend="658"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="715" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="715" bodyend="725"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1aaa971f0d52a49fd2391d0956b93535b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -1140,7 +1169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="664" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="664" bodyend="670"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="731" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="731" bodyend="737"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a2151010dc8f254cc34b067ea17d3057b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
@@ -1171,7 +1200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="677" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="677" bodyend="688"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="744" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="744" bodyend="755"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a0a716dd28e1d980e2cc54fa1f80e795b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -1200,7 +1229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="694" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="694" bodyend="709"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="761" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="761" bodyend="776"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a716b8d5cf397cb025d6f49e5f92ffe1b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref> &amp;</type>
@@ -1231,7 +1260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="716" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="716" bodyend="723"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="783" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="783" bodyend="790"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a0de6765034f2106ee54595c5f477db26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -1246,7 +1275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="728" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="728" bodyend="728"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="795" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="795" bodyend="795"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a141488637aa6cd99065058a566c2a95a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
@@ -1264,7 +1293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="734" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="734" bodyend="742"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="801" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="801" bodyend="809"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a9408156c455037f16a3c46020f8893e2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
@@ -1282,12 +1311,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="748" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="748" bodyend="748"/>
-        <referencedby refid="classflat__hashtable_1a141488637aa6cd99065058a566c2a95a" compoundref="flat__hashtable_8hpp" startline="734" endline="742">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin</referencedby>
-        <referencedby refid="classflat__hashtable_1a6c97ec8f8928137b91478f90124052dc" compoundref="flat__hashtable_8hpp" startline="1249" endline="1292">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range</referencedby>
-        <referencedby refid="classflat__hashtable_1a76a68cf3a97cf416de5f57eb420cc993" compoundref="flat__hashtable_8hpp" startline="1076" endline="1098">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classflat__hashtable_1a220837676e2e6aef18144840731ab307" compoundref="flat__hashtable_8hpp" startline="1106" endline="1123">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classflat__hashtable_1aa8146447cabc045187899cc09ac14967" compoundref="flat__hashtable_8hpp" startline="1163" endline="1182">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="815" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="815" bodyend="815"/>
+        <referencedby refid="classflat__hashtable_1a141488637aa6cd99065058a566c2a95a" compoundref="flat__hashtable_8hpp" startline="801" endline="809">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin</referencedby>
+        <referencedby refid="classflat__hashtable_1a6c97ec8f8928137b91478f90124052dc" compoundref="flat__hashtable_8hpp" startline="1337" endline="1380">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range</referencedby>
+        <referencedby refid="classflat__hashtable_1a76a68cf3a97cf416de5f57eb420cc993" compoundref="flat__hashtable_8hpp" startline="1164" endline="1186">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classflat__hashtable_1a220837676e2e6aef18144840731ab307" compoundref="flat__hashtable_8hpp" startline="1194" endline="1211">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classflat__hashtable_1aa8146447cabc045187899cc09ac14967" compoundref="flat__hashtable_8hpp" startline="1251" endline="1270">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a406429621a2c6af5d4ea8e029297481b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
@@ -1305,7 +1334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="754" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="754" bodyend="754"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="821" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="821" bodyend="821"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a2147f254d3f831e0d7aec15de1f5b43f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
@@ -1323,7 +1352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="760" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="760" bodyend="760"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="827" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="827" bodyend="827"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1affc978b4ed5004125f397ba1d7bdd2fb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
@@ -1341,9 +1370,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="766" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="766" bodyend="774"/>
-        <referencedby refid="classflat__hashtable_1a406429621a2c6af5d4ea8e029297481b" compoundref="flat__hashtable_8hpp" startline="754" endline="754">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin</referencedby>
-        <referencedby refid="classflat__hashtable_1a5b072cc21b4f82e47bf3293929b6fbcf" compoundref="flat__hashtable_8hpp" startline="1387" endline="1390">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="833" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="833" bodyend="841"/>
+        <referencedby refid="classflat__hashtable_1a406429621a2c6af5d4ea8e029297481b" compoundref="flat__hashtable_8hpp" startline="821" endline="821">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin</referencedby>
+        <referencedby refid="classflat__hashtable_1a5b072cc21b4f82e47bf3293929b6fbcf" compoundref="flat__hashtable_8hpp" startline="1475" endline="1478">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1aa5369fb5de21e5cb6902c52400f14a13" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
@@ -1361,13 +1390,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="780" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="780" bodyend="780"/>
-        <referencedby refid="classflat__hashtable_1affc978b4ed5004125f397ba1d7bdd2fb" compoundref="flat__hashtable_8hpp" startline="766" endline="774">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::cbegin</referencedby>
-        <referencedby refid="classflat__hashtable_1a59a27686b1fe1e1da0ab36ff978493fa" compoundref="flat__hashtable_8hpp" startline="1242" endline="1242">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
-        <referencedby refid="classflat__hashtable_1a2147f254d3f831e0d7aec15de1f5b43f" compoundref="flat__hashtable_8hpp" startline="760" endline="760">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::end</referencedby>
-        <referencedby refid="classflat__hashtable_1aab6f8fc9cfd67ba460451cea48d5759f" compoundref="flat__hashtable_8hpp" startline="1299" endline="1340">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range</referencedby>
-        <referencedby refid="classflat__hashtable_1a793f5d5d87120990a91a69ba1223dc3f" compoundref="flat__hashtable_8hpp" startline="1189" endline="1208">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
-        <referencedby refid="classflat__hashtable_1a5b072cc21b4f82e47bf3293929b6fbcf" compoundref="flat__hashtable_8hpp" startline="1387" endline="1390">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="847" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="847" bodyend="847"/>
+        <referencedby refid="classflat__hashtable_1affc978b4ed5004125f397ba1d7bdd2fb" compoundref="flat__hashtable_8hpp" startline="833" endline="841">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::cbegin</referencedby>
+        <referencedby refid="classflat__hashtable_1a59a27686b1fe1e1da0ab36ff978493fa" compoundref="flat__hashtable_8hpp" startline="1330" endline="1330">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
+        <referencedby refid="classflat__hashtable_1a2147f254d3f831e0d7aec15de1f5b43f" compoundref="flat__hashtable_8hpp" startline="827" endline="827">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::end</referencedby>
+        <referencedby refid="classflat__hashtable_1aab6f8fc9cfd67ba460451cea48d5759f" compoundref="flat__hashtable_8hpp" startline="1387" endline="1428">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range</referencedby>
+        <referencedby refid="classflat__hashtable_1a793f5d5d87120990a91a69ba1223dc3f" compoundref="flat__hashtable_8hpp" startline="1277" endline="1296">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
+        <referencedby refid="classflat__hashtable_1a5b072cc21b4f82e47bf3293929b6fbcf" compoundref="flat__hashtable_8hpp" startline="1475" endline="1478">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1ab0467fd90b6ad79d56e068a75249d33b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
@@ -1385,7 +1414,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="786" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="786" bodyend="786"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="853" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="853" bodyend="853"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1aa6d17354d1a6f4bfc6176ea93bf08d2a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
@@ -1403,7 +1432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="792" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="792" bodyend="792"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="859" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="859" bodyend="859"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a86578a458341d5b056ea84d77dcddd03" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1421,7 +1450,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="798" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="798" bodyend="798"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="865" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="865" bodyend="865"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1ae4151641106dc9924ce4fd6d2c923c08" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
@@ -1439,7 +1468,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="804" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="804" bodyend="804"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="871" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="871" bodyend="871"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1af44801a9515893279d229d2a490f4dfe" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; hasher &gt;" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1af737cc8e4d5093189e019e9af2652843" kindref="member">hasher</ref></type>
@@ -1457,7 +1486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="810" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="810" bodyend="810"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="877" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="877" bodyend="877"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1ad3a4ca09b3ed1c3c5e5afde93ea13439" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; key_equal &gt;" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1a6ab4688b006581c1f6428d6c8b25a35f" kindref="member">key_equal</ref></type>
@@ -1475,7 +1504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="816" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="816" bodyend="816"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="883" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="883" bodyend="883"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1ab8852ca9b927e2dc334bbd3ab17df96d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -1493,7 +1522,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="822" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="822" bodyend="824"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="889" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="889" bodyend="891"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a81f3f7a1b06950c99c097316cf078b08" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -1511,17 +1540,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="830" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="830" bodyend="830"/>
-        <referencedby refid="classflat__hashtable_1a9a52179a3d869dd5be9c3379f08e1da0" compoundref="flat__hashtable_8hpp" startline="1147" endline="1156">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::clear</referencedby>
-        <referencedby refid="classflat__hashtable_1aba830f935eacbb5c9bac9b5c040ded65" compoundref="flat__hashtable_8hpp" startline="905" endline="938">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_equal</referencedby>
-        <referencedby refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" compoundref="flat__hashtable_8hpp" startline="868" endline="896">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
-        <referencedby refid="classflat__hashtable_1a96f87a270340d8a508cf0a5807215734" compoundref="flat__hashtable_8hpp" startline="614" endline="622">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
-        <referencedby refid="classflat__hashtable_1ad3812ccf5f38c1659fc4748e7da57ce4" compoundref="flat__hashtable_8hpp" startline="630" endline="639">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
-        <referencedby refid="classflat__hashtable_1a7031b30b4f5e8c3135b14064110f1059" compoundref="flat__hashtable_8hpp" startline="648" endline="658">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
-        <referencedby refid="classflat__hashtable_1ae779ef34587d03c03ea3f7de8669bbeb" compoundref="flat__hashtable_8hpp" startline="600" endline="607">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
-        <referencedby refid="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" compoundref="flat__hashtable_8hpp" startline="1011" endline="1019">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
-        <referencedby refid="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" compoundref="flat__hashtable_8hpp" startline="975" endline="983">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
-        <referencedby refid="classflat__hashtable_1a1e03ab971a293d2e8c539241302483a0" compoundref="flat__hashtable_8hpp" startline="854" endline="859">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="897" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="897" bodyend="897"/>
+        <referencedby refid="classflat__hashtable_1a9a52179a3d869dd5be9c3379f08e1da0" compoundref="flat__hashtable_8hpp" startline="1235" endline="1244">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::clear</referencedby>
+        <referencedby refid="classflat__hashtable_1aba830f935eacbb5c9bac9b5c040ded65" compoundref="flat__hashtable_8hpp" startline="971" endline="1026">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_equal</referencedby>
+        <referencedby refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" compoundref="flat__hashtable_8hpp" startline="935" endline="962">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1a96f87a270340d8a508cf0a5807215734" compoundref="flat__hashtable_8hpp" startline="681" endline="689">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
+        <referencedby refid="classflat__hashtable_1ad3812ccf5f38c1659fc4748e7da57ce4" compoundref="flat__hashtable_8hpp" startline="697" endline="706">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
+        <referencedby refid="classflat__hashtable_1a7031b30b4f5e8c3135b14064110f1059" compoundref="flat__hashtable_8hpp" startline="715" endline="725">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
+        <referencedby refid="classflat__hashtable_1ae779ef34587d03c03ea3f7de8669bbeb" compoundref="flat__hashtable_8hpp" startline="667" endline="674">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::flat_hashtable</referencedby>
+        <referencedby refid="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" compoundref="flat__hashtable_8hpp" startline="1099" endline="1107">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" compoundref="flat__hashtable_8hpp" startline="1063" endline="1071">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1a1e03ab971a293d2e8c539241302483a0" compoundref="flat__hashtable_8hpp" startline="921" endline="926">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a64605a3dbdec47ab51c0f2f70d712e3c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -1550,7 +1579,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="836" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="836" bodyend="840"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="903" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="903" bodyend="907"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a98bad05939c8e221a69d9dd7fe7e9ee3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1579,12 +1608,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="846" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="846" bodyend="846"/>
-        <referencedby refid="classflat__hashtable_1aba830f935eacbb5c9bac9b5c040ded65" compoundref="flat__hashtable_8hpp" startline="905" endline="938">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_equal</referencedby>
-        <referencedby refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" compoundref="flat__hashtable_8hpp" startline="868" endline="896">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
-        <referencedby refid="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" compoundref="flat__hashtable_8hpp" startline="1011" endline="1019">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
-        <referencedby refid="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" compoundref="flat__hashtable_8hpp" startline="975" endline="983">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
-        <referencedby refid="classflat__hashtable_1a1e03ab971a293d2e8c539241302483a0" compoundref="flat__hashtable_8hpp" startline="854" endline="859">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="913" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="913" bodyend="913"/>
+        <referencedby refid="classflat__hashtable_1aba830f935eacbb5c9bac9b5c040ded65" compoundref="flat__hashtable_8hpp" startline="971" endline="1026">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_equal</referencedby>
+        <referencedby refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" compoundref="flat__hashtable_8hpp" startline="935" endline="962">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" compoundref="flat__hashtable_8hpp" startline="1099" endline="1107">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" compoundref="flat__hashtable_8hpp" startline="1063" endline="1071">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1a1e03ab971a293d2e8c539241302483a0" compoundref="flat__hashtable_8hpp" startline="921" endline="926">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a1e03ab971a293d2e8c539241302483a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1613,7 +1642,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="854" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="854" bodyend="859"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="921" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="921" bodyend="926"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1660,9 +1689,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="868" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="868" bodyend="896"/>
-        <referencedby refid="classflat__hashtable_1a3b969ee6cd6d80a14d2b0d508c4e8cb0" compoundref="flat__hashtable_8hpp" startline="945" endline="945">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
-        <referencedby refid="classflat__hashtable_1a7d6d9aed0b78189b40452f2dd9a6ac7b" compoundref="flat__hashtable_8hpp" startline="952" endline="952">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="935" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="935" bodyend="962"/>
+        <referencedby refid="classflat__hashtable_1a3b969ee6cd6d80a14d2b0d508c4e8cb0" compoundref="flat__hashtable_8hpp" startline="1033" endline="1033">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classflat__hashtable_1a7d6d9aed0b78189b40452f2dd9a6ac7b" compoundref="flat__hashtable_8hpp" startline="1040" endline="1040">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1aba830f935eacbb5c9bac9b5c040ded65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1709,9 +1738,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="905" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="905" bodyend="938"/>
-        <referencedby refid="classflat__hashtable_1a8cd1df5f574362a27e95ed3fda162c37" compoundref="flat__hashtable_8hpp" startline="959" endline="959">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
-        <referencedby refid="classflat__hashtable_1add4dcd3885f4d73e87e8f7e0a53174b7" compoundref="flat__hashtable_8hpp" startline="966" endline="966">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="971" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="971" bodyend="1026"/>
+        <referencedby refid="classflat__hashtable_1aba830f935eacbb5c9bac9b5c040ded65" compoundref="flat__hashtable_8hpp" startline="971" endline="1026">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_equal</referencedby>
+        <referencedby refid="classflat__hashtable_1a8cd1df5f574362a27e95ed3fda162c37" compoundref="flat__hashtable_8hpp" startline="1047" endline="1047">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classflat__hashtable_1add4dcd3885f4d73e87e8f7e0a53174b7" compoundref="flat__hashtable_8hpp" startline="1054" endline="1054">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a3b969ee6cd6d80a14d2b0d508c4e8cb0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref>, bool &gt;</type>
@@ -1742,8 +1772,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="945" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="945" bodyend="945"/>
-        <referencedby refid="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" compoundref="flat__hashtable_8hpp" startline="975" endline="983">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1033" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1033" bodyend="1033"/>
+        <referencedby refid="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" compoundref="flat__hashtable_8hpp" startline="1063" endline="1071">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a7d6d9aed0b78189b40452f2dd9a6ac7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref>, bool &gt;</type>
@@ -1774,7 +1804,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="952" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="952" bodyend="952"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1040" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1040" bodyend="1040"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a8cd1df5f574362a27e95ed3fda162c37" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
@@ -1805,8 +1835,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="959" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="959" bodyend="959"/>
-        <referencedby refid="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" compoundref="flat__hashtable_8hpp" startline="1011" endline="1019">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1047" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1047" bodyend="1047"/>
+        <referencedby refid="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" compoundref="flat__hashtable_8hpp" startline="1099" endline="1107">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1add4dcd3885f4d73e87e8f7e0a53174b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
@@ -1837,7 +1867,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="966" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="966" bodyend="966"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1054" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1054" bodyend="1054"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1892,7 +1922,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="975" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="975" bodyend="983"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1063" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1063" bodyend="1071"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1ac33af62483732c2aa9bf5200f62bec85" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1947,7 +1977,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="992" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="992" bodyend="996"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1080" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1080" bodyend="1084"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a9f1d5524a9e7218845aca229b45809da" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1976,8 +2006,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1002" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1002" bodyend="1002"/>
-        <referencedby refid="classflat__hashtable_1a9f1d5524a9e7218845aca229b45809da" compoundref="flat__hashtable_8hpp" startline="1002" endline="1002">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1090" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1090" bodyend="1090"/>
+        <referencedby refid="classflat__hashtable_1a9f1d5524a9e7218845aca229b45809da" compoundref="flat__hashtable_8hpp" startline="1090" endline="1090">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -2032,7 +2062,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1011" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1011" bodyend="1019"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1099" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1099" bodyend="1107"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1ae238260a30b8b0bc7c55a42b77ee7ef4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -2087,7 +2117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1028" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1028" bodyend="1032"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1116" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1116" bodyend="1120"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a30d68b0780b63462324378b5afc49197" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -2116,8 +2146,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1038" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1038" bodyend="1038"/>
-        <referencedby refid="classflat__hashtable_1a30d68b0780b63462324378b5afc49197" compoundref="flat__hashtable_8hpp" startline="1038" endline="1038">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1126" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1126" bodyend="1126"/>
+        <referencedby refid="classflat__hashtable_1a30d68b0780b63462324378b5afc49197" compoundref="flat__hashtable_8hpp" startline="1126" endline="1126">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1af622d43d66e9d76cf0b04751ba2c84b7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
@@ -2148,9 +2178,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1045" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1045" bodyend="1069"/>
-        <referencedby refid="classflat__hashtable_1a89f423ae8251f001917eda49ebf26ba5" compoundref="flat__hashtable_8hpp" startline="1130" endline="1132">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classflat__hashtable_1aa32438d119ee9f88cc2edbbc5c859327" compoundref="flat__hashtable_8hpp" startline="1140" endline="1142">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1133" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1133" bodyend="1157"/>
+        <referencedby refid="classflat__hashtable_1a89f423ae8251f001917eda49ebf26ba5" compoundref="flat__hashtable_8hpp" startline="1218" endline="1220">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classflat__hashtable_1aa32438d119ee9f88cc2edbbc5c859327" compoundref="flat__hashtable_8hpp" startline="1228" endline="1230">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a76a68cf3a97cf416de5f57eb420cc993" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
@@ -2181,7 +2211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1076" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1076" bodyend="1098"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1164" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1164" bodyend="1186"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a220837676e2e6aef18144840731ab307" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
@@ -2224,7 +2254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1106" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1106" bodyend="1123"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1194" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1194" bodyend="1211"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a89f423ae8251f001917eda49ebf26ba5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
@@ -2255,7 +2285,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1130" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1130" bodyend="1132"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1218" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1218" bodyend="1220"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1aa32438d119ee9f88cc2edbbc5c859327" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
@@ -2298,7 +2328,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1140" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1140" bodyend="1142"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1228" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1228" bodyend="1230"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a9a52179a3d869dd5be9c3379f08e1da0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -2313,9 +2343,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1147" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1147" bodyend="1156"/>
-        <referencedby refid="classflat__hashtable_1a2151010dc8f254cc34b067ea17d3057b" compoundref="flat__hashtable_8hpp" startline="677" endline="688">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
-        <referencedby refid="classflat__hashtable_1a716b8d5cf397cb025d6f49e5f92ffe1b" compoundref="flat__hashtable_8hpp" startline="716" endline="723">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1235" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1235" bodyend="1244"/>
+        <referencedby refid="classflat__hashtable_1a2151010dc8f254cc34b067ea17d3057b" compoundref="flat__hashtable_8hpp" startline="744" endline="755">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classflat__hashtable_1a716b8d5cf397cb025d6f49e5f92ffe1b" compoundref="flat__hashtable_8hpp" startline="783" endline="790">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1aa8146447cabc045187899cc09ac14967" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref></type>
@@ -2346,8 +2376,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1163" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1163" bodyend="1182"/>
-        <referencedby refid="classflat__hashtable_1a59a27686b1fe1e1da0ab36ff978493fa" compoundref="flat__hashtable_8hpp" startline="1242" endline="1242">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1251" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1251" bodyend="1270"/>
+        <referencedby refid="classflat__hashtable_1a59a27686b1fe1e1da0ab36ff978493fa" compoundref="flat__hashtable_8hpp" startline="1330" endline="1330">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a793f5d5d87120990a91a69ba1223dc3f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref></type>
@@ -2378,7 +2408,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1189" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1189" bodyend="1208"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1277" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1277" bodyend="1296"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a7b336e16875ae331a7a4e16067ba18e0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classflat__hashtable_1ad3bfd047fc8a2e763cff5d040f819645" kindref="member">size_type</ref></type>
@@ -2409,7 +2439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1215" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1215" bodyend="1235"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1303" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1303" bodyend="1323"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a59a27686b1fe1e1da0ab36ff978493fa" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -2440,7 +2470,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1242" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1242" bodyend="1242"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1330" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1330" bodyend="1330"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a6c97ec8f8928137b91478f90124052dc" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref>, <ref refid="classflat__hashtable_1aa8dfbb52fac37f0a2991e77de4566fdc" kindref="member">iterator</ref> &gt;</type>
@@ -2471,7 +2501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1249" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1249" bodyend="1292"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1337" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1337" bodyend="1380"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1aab6f8fc9cfd67ba460451cea48d5759f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref>, <ref refid="classflat__hashtable_1afd05540a5593f8f4a203c03b057ba0fb" kindref="member">const_iterator</ref> &gt;</type>
@@ -2502,7 +2532,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1299" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1299" bodyend="1340"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1387" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1387" bodyend="1428"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a893f08ecfe8d460d9fd456a30089a9cd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -2531,7 +2561,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1346" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1346" bodyend="1359"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1434" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1434" bodyend="1447"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a9ad934a4d890b7888b55c94b9ccb1fe7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -2562,7 +2592,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1366" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1366" bodyend="1380"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1454" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1454" bodyend="1468"/>
       </memberdef>
       <memberdef kind="function" id="classflat__hashtable_1a5b072cc21b4f82e47bf3293929b6fbcf" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))" virt="non-virtual">
         <type>bool</type>
@@ -2593,7 +2623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1387" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1387" bodyend="1390"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="1475" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="1475" bodyend="1478"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -2687,7 +2717,7 @@
         <link refid="structicomparable"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="166" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="179" bodyend="1391"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" line="166" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_hashtable.hpp" bodystart="179" bodyend="1479"/>
     <listofallmembers>
       <member refid="classflat__hashtable_1a801e2986ab572a2a6b687c6663d14dce" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>alloc_arrays</name></member>
       <member refid="classflat__hashtable_1a0b989f4541e74627ee22396ef2fc87b8" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>alloc_lf_</name></member>
@@ -2781,6 +2811,7 @@
       <member refid="classflat__hashtable_1a98bad05939c8e221a69d9dd7fe7e9ee3" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>rehash</name></member>
       <member refid="classflat__hashtable_1a66db2374096c800571f4a2ab4e00439a" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>rehash_impl</name></member>
       <member refid="classflat__hashtable_1a1e03ab971a293d2e8c539241302483a0" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>reserve</name></member>
+      <member refid="classflat__hashtable_1a4a72755cd2bac293214e96aa77fc6937" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>shift_make_room</name></member>
       <member refid="classflat__hashtable_1a057b04417ddf4713b8dd63c5360be04e" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>should_rehash</name></member>
       <member refid="classflat__hashtable_1ab0467fd90b6ad79d56e068a75249d33b" prot="public" virt="non-virtual"><scope>flat_hashtable</scope><name>size</name></member>
       <member refid="classflat__hashtable_1ace1035228fbc9a225be84b99add136ba" prot="private" virt="non-virtual"><scope>flat_hashtable</scope><name>size_</name></member>

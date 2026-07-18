@@ -162,7 +162,7 @@ var group___bit_manipulation =
     [ "parity64", "group___bit_manipulation.html#gad461513877b3292f946cc0a44c51c2b5", null ],
     [ "popcount", "group___bit_manipulation.html#ga7493eb3d8ac54b313025c16119a3e9df", null ],
     [ "popcount32", "group___bit_manipulation.html#ga2e8de9ca6e14827b422486dc3ed35706", null ],
-    [ "popcount64", "group___bit_manipulation.html#ga824e509947a5b48a2eb51434220ac36c", null ],
+    [ "popcount64", "group___bit_manipulation.html#ga7c5ea7c223e91008f9420f8bcde1e42a", null ],
     [ "reverse_bits", "group___bit_manipulation.html#ga6d479a2f9fba29a8fc0109f60c2b4254", null ],
     [ "reverse_bits32", "group___bit_manipulation.html#ga33f5ab85ce3ed7465cd322531be22da8", null ],
     [ "reverse_bits64", "group___bit_manipulation.html#ga05405071aca5d5c25ae95d577b64713f", null ],
@@ -172,6 +172,5 @@ var group___bit_manipulation =
     [ "rotate_r", "group___bit_manipulation.html#ga6694e2c0fc7a1c12e1c65be17f497214", null ],
     [ "rotate_r32", "group___bit_manipulation.html#gaad69f02054843142dcb4b4cea73e1196", null ],
     [ "rotate_r64", "group___bit_manipulation.html#ga0469cd16a5d8dc2d419d3bb2a0d66801", null ],
-    [ "BITMAP_WORD_SIZE", "group___bit_manipulation.html#ga45675aed4ef445165de713ad3eca03d6", null ],
-    [ "POPCOUNT_TABLE", "group___bit_manipulation.html#gabe329559203f4fb8435a04120412513d", null ]
+    [ "BITMAP_WORD_SIZE", "group___bit_manipulation.html#ga45675aed4ef445165de713ad3eca03d6", null ]
 ];

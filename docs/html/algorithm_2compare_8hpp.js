@@ -1,0 +1,27 @@
+var algorithm_2compare_8hpp =
+[
+    [ "clamp", "group___compare_algorithms.html#gae335939dbe758563e37614c7c39e54aa", null ],
+    [ "clamp", "group___compare_algorithms.html#ga5a3267d0bee58dc5e314113452cf2a9e", null ],
+    [ "equal", "group___compare_algorithms.html#ga9a48a261b8916c8b904f59544e904cbf", null ],
+    [ "equal", "group___compare_algorithms.html#ga9cf760161111d0bfae4928ad951ed9e6", null ],
+    [ "equal_range", "group___compare_algorithms.html#gac30be768f6bc7c5ca6d488a61f2335ba", null ],
+    [ "equal_range", "group___compare_algorithms.html#ga396286e554573557c1781c8b3bae3860", null ],
+    [ "lexicographical_compare", "group___compare_algorithms.html#ga7f28c6e08419c494bbfe697cd51d7202", null ],
+    [ "lexicographical_compare", "group___compare_algorithms.html#ga852d6f970d2af419ffe467715fb10b01", null ],
+    [ "max", "group___compare_algorithms.html#ga153f43401447b5e3e172c42e6461b926", null ],
+    [ "max", "group___compare_algorithms.html#ga01c48c11cc5d3222cb2e3adf0f843f3e", null ],
+    [ "max", "group___compare_algorithms.html#ga21bf5779df2939ac7e9bbf2fa016798c", null ],
+    [ "max_element", "group___compare_algorithms.html#gaa226ea8eefb93332e43e44ab173c650e", null ],
+    [ "max_element", "group___compare_algorithms.html#gae047220bf13f52d30732510ec976bf5c", null ],
+    [ "median", "group___compare_algorithms.html#ga8aee46794e9f8496b1f138664cbaf048", null ],
+    [ "median", "group___compare_algorithms.html#gae010167b986f808bc3f8bd37fa199040", null ],
+    [ "min", "group___compare_algorithms.html#gaf9b881461c8e7da079e090bf6760a6d1", null ],
+    [ "min", "group___compare_algorithms.html#gabf4803a4eaf181e17a6893b2aea9a4c5", null ],
+    [ "min", "group___compare_algorithms.html#ga69a55cc167f3341fffddaffc0686dc2a", null ],
+    [ "min_element", "group___compare_algorithms.html#ga4ee266bd70d4abf25afc39fe5eb8ac53", null ],
+    [ "min_element", "group___compare_algorithms.html#gaab4025164d755b851a1282e3cfbc3d1a", null ],
+    [ "minmax_element", "group___compare_algorithms.html#ga4bf98caed4f28cf09092e830792d143a", null ],
+    [ "minmax_element", "group___compare_algorithms.html#gaafcb422504addb63d771b9061f7533a9", null ],
+    [ "mismatch", "group___compare_algorithms.html#ga16ccb89e351ec10651b7c27d3bdc9c37", null ],
+    [ "mismatch", "group___compare_algorithms.html#ga879896fd048c11390116bfa1701cdafa", null ]
+];

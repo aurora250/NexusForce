@@ -11,13 +11,11 @@
 </ulink> <ulink url="https://cmake.org"><image type="html" name="https://img.shields.io/badge/CMake-3.19+-064C8B?style=flat-square&amp;logo=cmake&amp;logoColor=white" alt="CMake" inline="yes"></image>
 </ulink> <ulink url="https://isocpp.org"><image type="html" name="https://img.shields.io/badge/C++-14/17/20-00599C?style=flat-square&amp;logo=cplusplus&amp;logoColor=white" alt="C++" inline="yes"></image>
 </ulink> <ulink url="https://github.com/aurora250/NexusForce/actions/workflows/codeql.yml"><image type="html" name="https://github.com/aurora250/NexusForce/workflows/CodeQL%20Analysis/badge.svg" alt="CodeQL" inline="yes"></image>
-</ulink> [<image type="html" name="https://img.shields.io/badge/Quality%20Gate-Passed-success?style=flat-square&amp;logo=sonarqube&amp;logoColor=white" alt="Quality Gate" inline="yes"></image>
-]() <ulink url="https://clang.llvm.org/docs/ClangFormat.html"><image type="html" name="https://img.shields.io/badge/Clang--Format-19.0-blue?style=flat-square&amp;logo=llvm&amp;logoColor=white" alt="Clang Format" inline="yes"></image>
+</ulink> <ulink url="https://clang.llvm.org/docs/ClangFormat.html"><image type="html" name="https://img.shields.io/badge/Clang--Format-19.0-blue?style=flat-square&amp;logo=llvm&amp;logoColor=white" alt="Clang Format" inline="yes"></image>
 </ulink> <ulink url="https://clang.llvm.org/extra/clang-tidy/"><image type="html" name="https://img.shields.io/badge/Clang--Tidy-Passed-brightgreen?style=flat-square&amp;logo=llvm&amp;logoColor=white" alt="Clang Tidy" inline="yes"></image>
 </ulink> <ulink url="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines"><image type="html" name="https://img.shields.io/badge/C%2B%2B%20Core%20Guidelines-Checked-00599C?style=flat-square&amp;logo=cplusplus&amp;logoColor=white" alt="C++ Core Guidelines" inline="yes"></image>
-</ulink> <ulink url="https://valgrind.org"><image type="html" name="https://img.shields.io/badge/Valgrind-Tested-2E8B57?style=flat-square&amp;logo=valgrind&amp;logoColor=white" alt="Valgrind" inline="yes"></image>
-</ulink> [<image type="html" name="https://img.shields.io/badge/Memory%20Leak-None-00C853?style=flat-square" alt="Memory Leak" inline="yes"></image>
-](valgrind) <ulink url="https://opensource.org/licenses/MIT"><image type="html" name="https://img.shields.io/badge/License-MIT-F9A825?style=flat-square" alt="License" inline="yes"></image>
+</ulink> <ulink url="https://valgrind.org"><image type="html" name="https://img.shields.io/badge/Valgrind-Passed-2E8B57?style=flat-square&amp;logo=valgrind&amp;logoColor=white" alt="Valgrind" inline="yes"></image>
+</ulink> <ulink url="https://opensource.org/licenses/MIT"><image type="html" name="https://img.shields.io/badge/License-MIT-F9A825?style=flat-square" alt="License" inline="yes"></image>
 </ulink> <ulink url="https://nexusforce.org.cn"><image type="html" name="https://img.shields.io/badge/Docs-Website-1565C0?style=flat-square&amp;logo=readthedocs&amp;logoColor=white" alt="Docs" inline="yes"></image>
 </ulink> <ulink url="https://github.com/aurora250/NexusForce/pulls"><image type="html" name="https://img.shields.io/badge/PRs-Welcome-4CAF50?style=flat-square&amp;logo=git&amp;logoColor=white" alt="PRs Welcome" inline="yes"></image>
 </ulink></para>
@@ -111,8 +109,8 @@
 </entry></row>
 <row>
 <entry thead="no"><para><bold>HTTP 与 WebSocket</bold>  </para>
-</entry><entry thead="no"><para><ulink url="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110</ulink> / <ulink url="https://www.rfc-editor.org/rfc/rfc9112.html">RFC 9112</ulink> (HTTP/1.1), <ulink url="https://www.rfc-editor.org/rfc/rfc6265.html">RFC 6265</ulink> (Cookie), <ulink url="https://www.rfc-editor.org/rfc/rfc6455.html">RFC 6455</ulink> (WebSocket), <ulink url="https://fetch.spec.whatwg.org/#http-cors-protocol">W3C Fetch CORS</ulink>  </para>
-</entry><entry thead="no"><para>HTTP 语义与路由、Cookie 管理、CORS 跨域策略、WebSocket 升级与帧协议  </para>
+</entry><entry thead="no"><para><ulink url="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110</ulink> / <ulink url="https://www.rfc-editor.org/rfc/rfc9112.html">RFC 9112</ulink> (HTTP/1.1), <ulink url="https://www.rfc-editor.org/rfc/rfc7540.html">RFC 7540</ulink> / <ulink url="https://www.rfc-editor.org/rfc/rfc7541.html">RFC 7541</ulink> (HTTP/2, HPACK), <ulink url="https://www.rfc-editor.org/rfc/rfc6265.html">RFC 6265</ulink> (Cookie), <ulink url="https://www.rfc-editor.org/rfc/rfc6455.html">RFC 6455</ulink> / <ulink url="https://www.rfc-editor.org/rfc/rfc7692.html">RFC 7692</ulink> (WebSocket, permessage-deflate), <ulink url="https://www.rfc-editor.org/rfc/rfc6066.html">RFC 6066</ulink> (SNI), <ulink url="https://fetch.spec.whatwg.org/#http-cors-protocol">W3C Fetch CORS</ulink>  </para>
+</entry><entry thead="no"><para>HTTP/1.1 语义与路由、HTTP/2 帧层与 HPACK 头部压缩、Range 请求、响应压缩、CONNECT 隧道、Cookie 与 CSRF、CORS 跨域策略、WebSocket 升级/帧协议/permessage-deflate 压缩、SNI 多证书  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><bold>DNS 客户端</bold>  </para>
@@ -182,7 +180,7 @@
 </para>
 </sect2>
 <sect2 id="md__m_a_i_n_p_a_g_e_1autotoc_md11">
-<title>🔐 密码学与安全算法</title><para><table rows="6" cols="3"><row>
+<title>🔐 密码学与安全算法</title><para><table rows="7" cols="3"><row>
 <entry thead="yes"><para>组件  </para>
 </entry><entry thead="yes"><para>遵循标准  </para>
 </entry><entry thead="yes"><para>说明  </para>
@@ -191,6 +189,11 @@
 <entry thead="no"><para><bold>AES-256 加密</bold>  </para>
 </entry><entry thead="no"><para><ulink url="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf">NIST FIPS 197</ulink>, <ulink url="https://www.iso.org/standard/54531.html">ISO/IEC 18033-3</ulink>  </para>
 </entry><entry thead="no"><para>高级加密标准，支持 ECB/CBC/GCM 模式（<ulink url="https://csrc.nist.gov/pubs/sp/800/38/a/final">NIST SP 800-38A</ulink> / <ulink url="https://csrc.nist.gov/pubs/sp/800/38/d/final">SP 800-38D</ulink>）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><bold>ChaCha20-Poly1305 AEAD</bold>  </para>
+</entry><entry thead="no"><para><ulink url="https://www.rfc-editor.org/rfc/rfc8439.html">IETF RFC 8439</ulink>  </para>
+</entry><entry thead="no"><para>ChaCha20 流密码 + Poly1305 认证器，AEAD 认证加密，支持关联数据（AAD）  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><bold>SHA-256 哈希</bold>  </para>
@@ -330,8 +333,6 @@
 </entry></row>
 </table>
 </para>
-<para><blockquote><para>📖 **文档完整性**：所有涉及上述标准的类与函数，均在其 API 注释（Doxygen 格式）中标注了具体的标准章节号与官方链接，开发者可随时溯源验证。 </para>
-</blockquote></para>
 <para><hruler/>
 </para>
 </sect2>
@@ -339,11 +340,16 @@
 <sect1 id="md__m_a_i_n_p_a_g_e_1autotoc_md17">
 <title>🚀 特性</title><sect2 id="md__m_a_i_n_p_a_g_e_1autotoc_md18">
 <title>🔄 并发与异步 (Async)</title><para><itemizedlist>
-<listitem><para><bold><computeroutput><ref refid="classthread__pool" kindref="compound">thread_pool</ref></computeroutput></bold> - 基于任务窃取的多策略线程池</para>
-</listitem><listitem><para><bold><computeroutput><ref refid="classtimer__scheduler" kindref="compound">timer_scheduler</ref></computeroutput>/<computeroutput><ref refid="classbasic__timer" kindref="compound">basic_timer</ref></computeroutput></bold> - 基于红黑树的定时任务调度</para>
+<listitem><para><bold><computeroutput><ref refid="classthread__pool" kindref="compound">thread_pool</ref></computeroutput></bold> - 基于 NUMA 感知任务窃取与多策略定制的高性能线程池，性能测试详见 线程池性能测试记录</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classio__context" kindref="compound">io_context</ref></computeroutput></bold> - 异步 I/O 执行上下文，统一事件循环、定时器与取消模型</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref></computeroutput></bold> - 支持 <computeroutput>async_connect</computeroutput> / <computeroutput><ref refid="group___async_compose_1gaa3a471689038b117d43614e9ac8f5618" kindref="member">async_read</ref></computeroutput> / <computeroutput><ref refid="group___async_compose_1ga180357bbe23447c41b8492b51a1be1fa" kindref="member">async_write</ref></computeroutput> 可中断异步 I/O</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classtimer__scheduler" kindref="compound">timer_scheduler</ref></computeroutput>/<computeroutput><ref refid="classbasic__timer" kindref="compound">basic_timer</ref></computeroutput></bold> - 基于红黑树的定时任务调度，支持任务取消标志</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classasync__stream" kindref="compound">async_stream</ref></computeroutput></bold> - 异步流抽象接口，统一读写协议</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="group___async_compose_1gaa3a471689038b117d43614e9ac8f5618" kindref="member">async_read()</ref></computeroutput> / <computeroutput><ref refid="group___async_compose_1ga180357bbe23447c41b8492b51a1be1fa" kindref="member">async_write()</ref></computeroutput></bold> - 自由函数组合器，基于 <computeroutput>shared_from_this</computeroutput> 自动处理部分读写重试</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="structthread__pool__executor" kindref="compound">thread_pool_executor</ref></computeroutput></bold> - 将 <computeroutput><ref refid="classthread__pool_1a4269d4f0985eeb9e6f38bb9aeae9e67a" kindref="member">thread_pool::submit_task()</ref></computeroutput> 适配为标准 executor 接口</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="classgenerator" kindref="compound">generator</ref></computeroutput>/<computeroutput><ref refid="classtask" kindref="compound">task</ref></computeroutput></bold> - 协程原语和任务生成器</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="classvirtual__thread" kindref="compound">virtual_thread</ref></computeroutput></bold> - C#风格的轻量级协程</para>
-</listitem><listitem><para><bold><computeroutput><ref refid="classconnection" kindref="compound">connection</ref></computeroutput>/<computeroutput><ref refid="structsignal" kindref="compound">signal</ref></computeroutput></bold> - 观察者模式的信号槽</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classconnection" kindref="compound">connection</ref></computeroutput>/<computeroutput><ref refid="structsignal" kindref="compound">signal</ref></computeroutput>/<computeroutput><ref refid="classsignal__base" kindref="compound">signal_base</ref></computeroutput></bold> - 观察者模式的信号槽，<computeroutput><ref refid="classsignal__base" kindref="compound">signal_base</ref></computeroutput> 提供类型擦除基类支持反射驱动的动态连接</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="group___call_once_1ga6b72113ff3b073878b5fc971d6fe1026" kindref="member">call_once</ref></computeroutput></bold> - 基于FUTEX的多线程单次调用实现</para>
 </listitem><listitem><para><bold>停止令牌</bold> - 可取消的异步操作 <computeroutput><ref refid="classstop__token" kindref="compound">stop_token</ref></computeroutput>/<computeroutput><ref refid="classstop__source" kindref="compound">stop_source</ref></computeroutput>/<computeroutput><ref refid="classstop__callback" kindref="compound">stop_callback</ref></computeroutput></para>
 </listitem><listitem><para><bold>同步原语</bold> - 互斥锁 <computeroutput><ref refid="classmutex" kindref="compound">mutex</ref></computeroutput>、读写锁 <computeroutput><ref refid="classshared__mutex" kindref="compound">shared_mutex</ref></computeroutput>、信号量 <computeroutput><ref refid="classsemaphore" kindref="compound">semaphore</ref></computeroutput>/<computeroutput><ref refid="classatomic__semaphore" kindref="compound">atomic_semaphore</ref></computeroutput>、线程屏障 <computeroutput><ref refid="classbarrier" kindref="compound">barrier</ref></computeroutput>与闩锁 <computeroutput><ref refid="classlatch" kindref="compound">latch</ref></computeroutput></para>
@@ -356,11 +362,14 @@
 </sect2>
 <sect2 id="md__m_a_i_n_p_a_g_e_1autotoc_md19">
 <title>📦 容器 (Container)</title><para><itemizedlist>
-<listitem><para><bold>标准容器</bold> - <computeroutput><ref refid="classarray" kindref="compound">array</ref></computeroutput>/<computeroutput><ref refid="classvector" kindref="compound">vector</ref></computeroutput>/<computeroutput><ref refid="classlist" kindref="compound">list</ref></computeroutput>/<computeroutput><ref refid="classdeque" kindref="compound">deque</ref></computeroutput>/<computeroutput><ref refid="classmap" kindref="compound">map</ref></computeroutput>/<computeroutput><ref refid="classset" kindref="compound">set</ref></computeroutput>/<computeroutput><ref refid="classunordered__map" kindref="compound">unordered_map</ref></computeroutput>/<computeroutput><ref refid="classunordered__set" kindref="compound">unordered_set</ref></computeroutput> 等</para>
+<listitem><para><bold>标准容器</bold> - <computeroutput><ref refid="classarray" kindref="compound">array</ref></computeroutput>/<computeroutput><ref refid="classvector" kindref="compound">vector</ref></computeroutput>/<computeroutput><ref refid="classlist" kindref="compound">list</ref></computeroutput>/<computeroutput><ref refid="classdeque" kindref="compound">deque</ref></computeroutput>/<computeroutput><ref refid="classmap" kindref="compound">map</ref></computeroutput>/<computeroutput><ref refid="classset" kindref="compound">set</ref></computeroutput>/<computeroutput><ref refid="classunordered__map" kindref="compound">unordered_map</ref></computeroutput>/<computeroutput><ref refid="classunordered__set" kindref="compound">unordered_set</ref></computeroutput>/<computeroutput><ref refid="classsparse__map" kindref="compound">sparse_map</ref></computeroutput>/<computeroutput><ref refid="classsparse__set" kindref="compound">sparse_set</ref></computeroutput>/<computeroutput><ref refid="classflat__unordered__map" kindref="compound">flat_unordered_map</ref></computeroutput>/<computeroutput><ref refid="classflat__unordered__set" kindref="compound">flat_unordered_set</ref></computeroutput> 等</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="classrb__tree" kindref="compound">rb_tree</ref></computeroutput></bold> - 自平衡二叉搜索树实现</para>
-</listitem><listitem><para><bold><computeroutput><ref refid="classhashtable" kindref="compound">hashtable</ref></computeroutput></bold> - 开放寻址哈希表</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classhashtable" kindref="compound">hashtable</ref></computeroutput></bold> - 链地址法哈希表</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classflat__hashtable" kindref="compound">flat_hashtable</ref></computeroutput></bold> - SwissTable 开放寻址平坦哈希表，H2 预过滤 + SIMD 批量探测</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="classbloom__filter" kindref="compound">bloom_filter</ref></computeroutput></bold> - 概率性数据结构</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="classlru__cache" kindref="compound">lru_cache</ref></computeroutput>/<computeroutput><ref refid="classttl__cache" kindref="compound">ttl_cache</ref></computeroutput></bold> - 基于最近最少使用/过期时间的缓存策略</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classbuffer__chain" kindref="compound">buffer_chain</ref></computeroutput></bold> - 零拷贝链式缓冲区，支持 writev 聚合输出</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classsparse__vector" kindref="compound">sparse_vector</ref></computeroutput></bold> - 基于排序扁平数组的关联容器，O(log n) 二分查找，O(1) 缓存友好迭代</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="classbitmap" kindref="compound">bitmap</ref></computeroutput>/<computeroutput><ref refid="classbitset" kindref="compound">bitset</ref></computeroutput></bold> - 高效位操作容器</para>
 </listitem></itemizedlist>
 </para>
@@ -368,6 +377,7 @@
 <sect2 id="md__m_a_i_n_p_a_g_e_1autotoc_md20">
 <title>🔐 加密与安全 (Encrypt)</title><para><itemizedlist>
 <listitem><para><bold><computeroutput><ref refid="struct_a_e_s256" kindref="compound">AES256</ref></computeroutput></bold> - 高级加密标准实现</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="group___cha_cha20_poly1305" kindref="compound">ChaCha20-Poly1305</ref></computeroutput></bold> - ChaCha20-Poly1305 AEAD 认证加密，支持 AAD</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="struct_s_h_a1" kindref="compound">SHA1</ref></computeroutput>/<computeroutput><ref refid="struct_s_h_a256" kindref="compound">SHA256</ref></computeroutput></bold> - 安全哈希算法</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="struct_m_d5" kindref="compound">MD5</ref></computeroutput></bold> - 消息摘要算法</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="structbase64" kindref="compound">base64</ref></computeroutput></bold> - 二进制数据编码</para>
@@ -377,6 +387,7 @@
 <sect2 id="md__m_a_i_n_p_a_g_e_1autotoc_md21">
 <title>📁 文件系统 (File)</title><para><itemizedlist>
 <listitem><para><bold>路径/文件操作</bold> - 路径/文件系统操作 <computeroutput><ref refid="classpath" kindref="compound">path</ref></computeroutput>/<computeroutput><ref refid="classpath__tree" kindref="compound">path_tree</ref></computeroutput>/<computeroutput><ref refid="classfile" kindref="compound">file</ref></computeroutput>/<computeroutput><ref refid="classfile__async" kindref="compound">file_async</ref></computeroutput>/<computeroutput><ref refid="classfile__diff" kindref="compound">file_diff</ref></computeroutput>/<computeroutput><ref refid="classfile__locker" kindref="compound">file_locker</ref></computeroutput>/<computeroutput><ref refid="classfile__mapper" kindref="compound">file_mapper</ref></computeroutput></para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classfile__async" kindref="compound">file_async</ref></computeroutput></bold> - 基于 <computeroutput><ref refid="classio__context" kindref="compound">io_context</ref></computeroutput> 的异步文件 I/O，支持指定偏移量与取消槽</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="classfile__watcher" kindref="compound">file_watcher</ref></computeroutput></bold> - 实时文件系统变更监控</para>
 </listitem><listitem><para><bold>配置文件解析</bold> - JSON/TOML/YAML/INI/ENV 值系统、格式解析与流式构建</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="classtemp__file" kindref="compound">temp_file</ref></computeroutput></bold> - 安全的临时文件管理</para>
@@ -385,11 +396,23 @@
 </sect2>
 <sect2 id="md__m_a_i_n_p_a_g_e_1autotoc_md22">
 <title>🌐 网络库 (Network)</title><para><itemizedlist>
-<listitem><para><bold>WebSocket</bold> - 全双工通信协议 <computeroutput><ref refid="classwebsocket__session" kindref="compound">websocket_session</ref></computeroutput> / <computeroutput><ref refid="classwebsocket__server" kindref="compound">websocket_server</ref></computeroutput></para>
-</listitem><listitem><para><bold>TCP/UDP 套接字</bold> - 高性能网络通信 <computeroutput><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref></computeroutput> / <computeroutput><ref refid="classudp__socket" kindref="compound">udp_socket</ref></computeroutput></para>
-</listitem><listitem><para><bold>SSL/TLS</bold> - 加密网络传输 <computeroutput><ref refid="classssl__context" kindref="compound">ssl_context</ref></computeroutput> / <computeroutput><ref refid="classssl__stream" kindref="compound">ssl_stream</ref></computeroutput></para>
-</listitem><listitem><para><bold>HTTP 客户端/服务器</bold> - HTTP 协议实现，包含路由器、过滤器 <computeroutput><ref refid="classhttp__filter" kindref="compound">http_filter</ref></computeroutput> / <computeroutput><ref refid="classhttp__router" kindref="compound">http_router</ref></computeroutput> / <computeroutput><ref refid="classhttp__server" kindref="compound">http_server</ref></computeroutput> / <computeroutput><ref refid="classhttp__client" kindref="compound">http_client</ref></computeroutput></para>
-</listitem><listitem><para><bold><computeroutput><ref refid="classdns__client" kindref="compound">dns_client</ref></computeroutput></bold> - 域名解析</para>
+<listitem><para><bold>HTTP/1.1 服务器</bold> - 完整协议实现：<computeroutput><ref refid="classhttp__server" kindref="compound">http_server</ref></computeroutput> / <computeroutput><ref refid="classhttp__router" kindref="compound">http_router</ref></computeroutput> / <computeroutput><ref refid="classhttp__filter" kindref="compound">http_filter</ref></computeroutput> 中间件链</para>
+</listitem><listitem><para><bold>HTTP/2 支持</bold> - 帧层与 HPACK 头部压缩（RFC 7540/7541），9 种帧类型，流状态机，流量控制，TLS+ALPN 协商</para>
+</listitem><listitem><para><bold>Radix Tree 路由</bold> - 基于压缩前缀树的 O(k) 路由匹配，支持静态路径、:param 参数、* 通配符、正则回退</para>
+</listitem><listitem><para><bold>HTTP 高级特性</bold> - Range 请求（206 单/多范围）、gzip/deflate 响应压缩、Chunked 分块传输、CONNECT 隧道</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classmultipart__parser" kindref="compound">multipart_parser</ref></computeroutput> / <computeroutput>chunked_reader</computeroutput></bold> - 多部分表单解析与分块传输读取</para>
+</listitem><listitem><para><bold>会话管理</bold> - 可插拔 session_store（内存/Redis），CSRF Double-Submit Cookie 防护，Session Fixation 防护</para>
+</listitem><listitem><para><bold>安全中间件</bold> - <computeroutput><ref refid="classcsrf__filter" kindref="compound">csrf_filter</ref></computeroutput> CSRF 防护、<computeroutput>http_security</computeroutput> 安全响应头、<computeroutput>http_cache</computeroutput> HTTP 缓存策略</para>
+</listitem><listitem><para><bold>WebSocket</bold> - RFC 6455/7692 全双工通信 <computeroutput><ref refid="classwebsocket__session" kindref="compound">websocket_session</ref></computeroutput> / <computeroutput><ref refid="classwebsocket__server" kindref="compound">websocket_server</ref></computeroutput>，事件驱动零线程模式</para>
+</listitem><listitem><para><bold>WebSocket 压缩</bold> - permessage-deflate（RFC 7692），窗口比特位协商与上下文接管控制</para>
+</listitem><listitem><para><bold>HTTP 客户端</bold> - <computeroutput><ref refid="classhttp__client" kindref="compound">http_client</ref></computeroutput> scheme 感知模式（https 自动 SSL），请求/响应处理</para>
+</listitem><listitem><para><bold>TCP/UDP 套接字</bold> - 高性能网络通信 <computeroutput><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref></computeroutput> / <computeroutput><ref refid="classudp__socket" kindref="compound">udp_socket</ref></computeroutput>，支持 <computeroutput>async_connect()</computeroutput> / <computeroutput><ref refid="group___async_compose_1gaa3a471689038b117d43614e9ac8f5618" kindref="member">async_read()</ref></computeroutput> / <computeroutput><ref refid="group___async_compose_1ga180357bbe23447c41b8492b51a1be1fa" kindref="member">async_write()</ref></computeroutput> 异步操作</para>
+</listitem><listitem><para><bold>SSL/TLS</bold> - 加密网络传输 <computeroutput><ref refid="classssl__context" kindref="compound">ssl_context</ref></computeroutput> / <computeroutput><ref refid="classssl__stream" kindref="compound">ssl_stream</ref></computeroutput>，SNI 多证书管理 <computeroutput><ref refid="classsni__manager" kindref="compound">sni_manager</ref></computeroutput>，ALPN 协议协商</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classdns__client" kindref="compound">dns_client</ref></computeroutput></bold> - 域名解析，per-operation 异步状态对象架构，completion-token 异步 API（回调/取消槽/future/awaitable）</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classio__context" kindref="compound">io_context</ref></computeroutput></bold> - 统一事件循环（Linux epoll 边缘触发 + min-heap 定时器），异步 I/O 回调驱动，取消模型</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classasync__filter" kindref="compound">async_filter</ref></computeroutput></bold> - 异步 pre/post 过滤链框架</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classbyte__cursor" kindref="compound">byte_cursor</ref></computeroutput></bold> - 无拷贝字节级协议解析游标，带边界检查与位级缓冲</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classload__balancer" kindref="compound">load_balancer</ref></computeroutput></bold> - 连接池 + 轮询负载均衡</para>
 </listitem><listitem><para><bold>FTP</bold> - FTP 服务器与客户端</para>
 </listitem><listitem><para><bold>ICMP/SMTP</bold> - ICMP 和 SMTP 协议操作</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="classarp" kindref="compound">arp</ref></computeroutput>/<computeroutput><ref refid="classmac__address" kindref="compound">mac_address</ref></computeroutput>/<computeroutput><ref refid="classip__address" kindref="compound">ip_address</ref></computeroutput>/<computeroutput><ref refid="structports" kindref="compound">ports</ref></computeroutput>/<computeroutput><ref refid="structurl" kindref="compound">url</ref></computeroutput></bold> - 网络编程工具</para>
@@ -398,8 +421,10 @@
 </sect2>
 <sect2 id="md__m_a_i_n_p_a_g_e_1autotoc_md23">
 <title>🗄️ 数据库 (DB)</title><para><itemizedlist>
-<listitem><para><bold><computeroutput><ref refid="classdatabase__pool" kindref="compound">database_pool</ref></computeroutput></bold> - 数据库连接复用与管理</para>
-</listitem><listitem><para><bold><computeroutput><ref refid="classsql__builder" kindref="compound">sql_builder</ref></computeroutput></bold> - 标准 SQL 语句流式构建</para>
+<listitem><para><bold><computeroutput><ref refid="classdatabase__pool" kindref="compound">database_pool</ref></computeroutput></bold> - 数据库连接复用与管理，支持 <computeroutput>warm_up()</computeroutput> 预热 / <computeroutput>active_count()</computeroutput> 活跃查询 / <computeroutput>get_tb_connect_for()</computeroutput> 自定义超时</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classsql__builder" kindref="compound">sql_builder</ref></computeroutput></bold> - 标准 SQL 语句流式构建，支持**方言感知占位符**（Generic <computeroutput>?</computeroutput> / PgSQL <computeroutput>$N</computeroutput> / Oracle <computeroutput>:N</computeroutput>）和**方言感知 DDL**（AUTO_INCREMENT / SERIAL / IDENTITY 自动适配）</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classsql__mapper" kindref="compound">sql_mapper</ref>&lt;T&gt;</computeroutput></bold> - 反射驱动 ORM SQL 生成器，自动生成 DDL/DML 语句，支持方言感知</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classrepository" kindref="compound">repository</ref>&lt;T, Connect&gt;</computeroutput></bold> - 泛型 CRUD 仓库模板（find_all / find_by_pk / find_where / find_page / insert / update / remove / count）</para>
 </listitem><listitem><para><bold>多数据库支持</bold>:<itemizedlist>
 <listitem><para>MySQL 客户端</para>
 </listitem><listitem><para>PostgreSQL 客户端</para>
@@ -409,6 +434,7 @@
 </para>
 </listitem><listitem><para><bold>预处理语句</bold> - 防止 SQL 注入</para>
 </listitem><listitem><para><bold>结果集封装</bold> - 统一结果访问接口</para>
+</listitem><listitem><para><bold>DB 属性注解</bold> - <computeroutput><ref refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a425a6f7b9bbb9f23b39e5ff80c43ee22" kindref="member">PROP_PRIMARY_KEY</ref></computeroutput> / <computeroutput><ref refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a99b60c66761cf68cc2bf6b3a23ed8a55" kindref="member">PROP_AUTO_INC</ref></computeroutput> / <computeroutput><ref refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a4b3d7192079a01db1431c11f0614ce4a" kindref="member">PROP_UNIQUE</ref></computeroutput> / <computeroutput><ref refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a49799facf119e51b38ec7b586411691a" kindref="member">PROP_INDEX</ref></computeroutput> / <computeroutput><ref refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a9beac021644986b0446a8bd13cc4e110" kindref="member">PROP_FOREIGN_KEY</ref></computeroutput>，反射系统与 ORM 共享元数据</para>
 </listitem></itemizedlist>
 </para>
 </sect2>
@@ -416,19 +442,19 @@
 <title>📝 日志系统 (Logging)</title><para><itemizedlist>
 <listitem><para><bold><computeroutput><ref refid="classlog__sink" kindref="compound">log_sink</ref></computeroutput></bold> - 可扩展的日志输出目标</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="classfile__sink" kindref="compound">file_sink</ref></computeroutput></bold> - 日志文件管理与轮转</para>
-</listitem><listitem><para><bold>多级别日志</bold> - 支持不同日志级别</para>
 </listitem><listitem><para><bold><computeroutput><ref refid="classlog__formatter" kindref="compound">log_formatter</ref></computeroutput></bold> - 自定义日志格式</para>
-</listitem><listitem><para><bold><computeroutput><ref refid="classlogger" kindref="compound">logger</ref></computeroutput></bold> - 灵活可配置的日志器</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classlogger" kindref="compound">logger</ref></computeroutput></bold> - 线程池驱动的异步日志，支持 <computeroutput>block</computeroutput>/<computeroutput>discard</computeroutput>/<computeroutput>overrun_oldest</computeroutput> 三种溢出策略，有界环形队列、自动 drain 调度</para>
 </listitem></itemizedlist>
 </para>
 </sect2>
 <sect2 id="md__m_a_i_n_p_a_g_e_1autotoc_md25">
 <title>🔤 字符串处理 (String)</title><para><itemizedlist>
-<listitem><para><bold>PCRE2 正则表达式</bold> - 支持 JIT 的高效正则匹配 <computeroutput><ref refid="classregex" kindref="compound">regex</ref></computeroutput>/<computeroutput><ref refid="classmatch__result" kindref="compound">match_result</ref></computeroutput>/<computeroutput><ref refid="classregex__iterator" kindref="compound">regex_iterator</ref></computeroutput>/<computeroutput><ref refid="classregex__token__iterator" kindref="compound">regex_token_iterator</ref></computeroutput></para>
-</listitem><listitem><para><bold>Unicode 支持</bold> - UTF 转换系统、码点操作类 <computeroutput><ref refid="classcodepoint" kindref="compound">codepoint</ref></computeroutput></para>
-</listitem><listitem><para><bold><computeroutput><ref refid="structformatter" kindref="compound">formatter</ref></computeroutput>/<computeroutput><ref refid="group___format_1gac0f4499364ec899fcdfaae1f7acbda76" kindref="member">format</ref></computeroutput></bold> - 类型安全的格式化输出</para>
+<listitem><para><bold>PCRE2 正则表达式</bold> - 支持 JIT 的高效正则匹配 <computeroutput><ref refid="classregex" kindref="compound">regex</ref></computeroutput>/<computeroutput><ref refid="classmatch__result" kindref="compound">match_result</ref></computeroutput>/<computeroutput><ref refid="classregex__iterator" kindref="compound">regex_iterator</ref></computeroutput>/<computeroutput><ref refid="classregex__token__iterator" kindref="compound">regex_token_iterator</ref></computeroutput>，支持拷贝</para>
+</listitem><listitem><para><bold>Unicode 支持</bold> - UTF 转换系统、码点操作类 <computeroutput><ref refid="classcodepoint" kindref="compound">codepoint</ref></computeroutput>、UTF-8 码点迭代器 <computeroutput><ref refid="classutf8__iterator" kindref="compound">utf8_iterator</ref></computeroutput> / <computeroutput><ref refid="group___utf_iterator_1ga799e6a55dd599abbbb987c78b0cfdfcb" kindref="member">utf8_view</ref></computeroutput></para>
+</listitem><listitem><para><bold><computeroutput><ref refid="structformatter" kindref="compound">formatter</ref></computeroutput>/<computeroutput><ref refid="group___format_1gac0f4499364ec899fcdfaae1f7acbda76" kindref="member">format</ref></computeroutput></bold> - 类型安全的格式化输出，支持位置参数 <computeroutput>{0}</computeroutput> <computeroutput>{1}</computeroutput> 和命名参数 <computeroutput><ref refid="group___format_1ga401d7fa93048e25a6f79fc746b2a09fe" kindref="member">format_named()</ref></computeroutput></para>
 </listitem><listitem><para><bold><computeroutput><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></computeroutput></bold> - 大量使用字符串视图优化操作</para>
 </listitem><listitem><para><bold>数值转换</bold> - 可扩展的字符串与数值互转体系</para>
+</listitem><listitem><para><bold>Boyer-Moore-Horspool</bold> - 窄字符子串搜索加速</para>
 </listitem></itemizedlist>
 </para>
 </sect2>
@@ -477,8 +503,19 @@
 </sect2>
 <sect2 id="md__m_a_i_n_p_a_g_e_1autotoc_md29">
 <title>🔍 反射系统 (Reflection)</title><para><itemizedlist>
-<listitem><para><bold><computeroutput><ref refid="classregistry" kindref="compound">registry</ref></computeroutput></bold> - 类型反射与元信息管理</para>
-</listitem><listitem><para><bold><computeroutput><ref refid="classmeta__type" kindref="compound">meta_type</ref></computeroutput> / <computeroutput><ref refid="classmeta__property" kindref="compound">meta_property</ref></computeroutput> / <computeroutput><ref refid="classmeta__function" kindref="compound">meta_function</ref></computeroutput></bold> - 运行时类型查询</para>
+<listitem><para><bold><computeroutput>NFRS</computeroutput></bold> - 预编译代码生成器，扫描 <computeroutput>NEFORCE_REFLECT_*</computeroutput> 标记自动生成类型注册代码，支持增量扫描</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classmeta__any" kindref="compound">meta_any</ref></computeroutput></bold> - 类型擦除容器，支持 <computeroutput>emplace&lt;T&gt;()</computeroutput> 原地构造</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classregistry" kindref="compound">registry</ref></computeroutput></bold> - 全局类型反射注册表，支持名称/type_id 双重查找、线程安全注册、动态信号槽连接 <computeroutput>connect_signal_to_slot()</computeroutput></para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classmeta__type" kindref="compound">meta_type</ref></computeroutput></bold> - 运行时类型元数据：基类列表、属性/函数映射、构造/克隆工厂、枚举/容器信息、信号名称列表、动态属性注册 <computeroutput>add_property()</computeroutput></para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classmeta__property" kindref="compound">meta_property</ref></computeroutput></bold> - 属性反射描述符，支持 getter/setter、注解标志（transient/required/readonly/optional/versioned/primary_key/auto_inc/unique/index/foreign_key）、变更通知信号 <computeroutput>notify_signal()</computeroutput></para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classmeta__function" kindref="compound">meta_function</ref></computeroutput></bold> - 成员函数/静态函数反射描述符，支持重载、参数提示与运行时 <computeroutput><ref refid="group___invoke_function_1ga4c75921ddce62eae2409105dc92d6da5" kindref="member">invoke()</ref></computeroutput> 调用</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classmeta__enum" kindref="compound">meta_enum</ref></computeroutput></bold> - 枚举反射：名称↔值双向查找、条目遍历</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classtype__builder" kindref="compound">type_builder</ref></computeroutput></bold> - 链式API 类型构建器：基类注册、属性/函数/信号注册、构造/克隆/容器配置</para>
+</listitem><listitem><para><bold><computeroutput><ref refid="classsignal__base" kindref="compound">signal_base</ref></computeroutput></bold> - <computeroutput><ref refid="structsignal" kindref="compound">signal</ref>&lt;T...&gt;</computeroutput> 的类型擦除基类，提供 <computeroutput>connect_dynamic()</computeroutput> / <computeroutput>emit_dynamic()</computeroutput> 实现运行时反射驱动的信号槽连接</para>
+</listitem><listitem><para><bold>JSON 序列化器</bold> - 反射驱动的对象↔JSON 序列化与反序列化，递归处理嵌套类型与容器</para>
+</listitem><listitem><para><bold>二进制序列化器</bold> - 大端格式（Magic &quot;NEBF&quot; + 类型表 + 数据段），属性注解控制序列化行为</para>
+</listitem><listitem><para><bold>类型识别</bold> - 基于 <ref refid="structtype__name" kindref="compound">type_name</ref> 特化 + 编译器函数签名的 hash-based type_id，非侵入式类型注册</para>
+</listitem><listitem><para><bold>反射宏</bold> - <computeroutput><ref refid="group___reflection_1ga8e300ceae3db692c23e28487a0d79756" kindref="member">NEFORCE_REFLECT_OBJ</ref></computeroutput> / <computeroutput>PROP</computeroutput> / <computeroutput>FUNC</computeroutput> / <computeroutput>SIGNAL</computeroutput> / <computeroutput>ENUM</computeroutput> / <computeroutput>ENUM_VAL</computeroutput> 类体内标记，供 NFRS 扫描器识别</para>
 </listitem></itemizedlist>
 </para>
 </sect2>
@@ -532,7 +569,7 @@
 </listitem><listitem><para><bold>并行算法</bold> - 并行执行策略</para>
 </listitem><listitem><para><bold>数值算法</bold> - 数值计算与累加</para>
 </listitem><listitem><para><bold>堆算法</bold> - 堆操作与优先级队列</para>
-</listitem><listitem><para><bold>范围操作</bold> - ranges 库支持</para>
+</listitem><listitem><para><bold>范围操作</bold> - ranges 支持</para>
 </listitem><listitem><para><bold>哈希算法</bold> - 多种哈希函数实现</para>
 </listitem></itemizedlist>
 </para>

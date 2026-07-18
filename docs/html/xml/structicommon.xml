@@ -32,6 +32,8 @@
     <derivedcompoundref refid="structipackage" prot="public" virt="non-virtual">ipackage&lt; uinteger16, uint16_t &gt;</derivedcompoundref>
     <derivedcompoundref refid="structipackage" prot="public" virt="non-virtual">ipackage&lt; uinteger32, uint32_t &gt;</derivedcompoundref>
     <derivedcompoundref refid="structipackage" prot="public" virt="non-virtual">ipackage&lt; uinteger64, uint64_t &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structipackage" prot="public" virt="non-virtual">ipackage&lt; uinteger128, uint128_t &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structipackage" prot="public" virt="non-virtual">ipackage&lt; integer128, int128_t &gt;</derivedcompoundref>
     <derivedcompoundref refid="structipackage" prot="public" virt="non-virtual">ipackage&lt; float32, float32_t &gt;</derivedcompoundref>
     <derivedcompoundref refid="structipackage" prot="public" virt="non-virtual">ipackage&lt; float64, float64_t &gt;</derivedcompoundref>
     <derivedcompoundref refid="structipackage" prot="public" virt="non-virtual">ipackage&lt; decimal, decimal_t &gt;</derivedcompoundref>
@@ -63,7 +65,7 @@
 这是一个便利类，同时继承自icomparable和ihashable， 为派生类提供完整的比较和哈希支持。派生类需实现三个核心方法： <ref refid="structequal__to" kindref="compound">equal_to(const T&amp;)</ref>, less_than(const T&amp;) 和 to_hash()。 </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="50">
+      <node id="54">
         <label>basic_string&lt; CharT, Traits, Alloc &gt;</label>
         <link refid="classbasic__string"/>
         <childnode refid="1" relation="public-inheritance">
@@ -135,10 +137,10 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="54">
+      <node id="58">
         <label>character</label>
         <link refid="structcharacter"/>
-        <childnode refid="53" relation="public-inheritance">
+        <childnode refid="57" relation="public-inheritance">
         </childnode>
       </node>
       <node id="22">
@@ -183,7 +185,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="51">
+      <node id="55">
         <label>compressed_pair&lt; IfEmpty, T, Compressed &gt;</label>
         <link refid="structcompressed__pair"/>
         <childnode refid="1" relation="public-inheritance">
@@ -201,58 +203,58 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="45">
+      <node id="49">
         <label>decimal</label>
         <link refid="structdecimal"/>
+        <childnode refid="48" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>float32</label>
+        <link refid="structfloat32"/>
         <childnode refid="44" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="41">
-        <label>float32</label>
-        <link refid="structfloat32"/>
-        <childnode refid="40" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="43">
+      <node id="47">
         <label>float64</label>
         <link refid="structfloat64"/>
-        <childnode refid="42" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="47">
-        <label>icharacter&lt; T, CharT &gt;</label>
-        <link refid="structicharacter"/>
         <childnode refid="46" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="53">
-        <label>icharacter&lt; character, char &gt;</label>
+      <node id="51">
+        <label>icharacter&lt; T, CharT &gt;</label>
         <link refid="structicharacter"/>
-        <childnode refid="52" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="59">
-        <label>icharacter&lt; u16character, char16_t &gt;</label>
-        <link refid="structicharacter"/>
-        <childnode refid="52" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="61">
-        <label>icharacter&lt; u32character, char32_t &gt;</label>
-        <link refid="structicharacter"/>
-        <childnode refid="52" relation="public-inheritance">
+        <childnode refid="50" relation="public-inheritance">
         </childnode>
       </node>
       <node id="57">
-        <label>icharacter&lt; u8character, char8_t &gt;</label>
+        <label>icharacter&lt; character, char &gt;</label>
         <link refid="structicharacter"/>
-        <childnode refid="52" relation="public-inheritance">
+        <childnode refid="56" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="55">
+      <node id="63">
+        <label>icharacter&lt; u16character, char16_t &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="56" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>icharacter&lt; u32character, char32_t &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="56" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>icharacter&lt; u8character, char8_t &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="56" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="59">
         <label>icharacter&lt; wcharacter, wchar_t &gt;</label>
         <link refid="structicharacter"/>
-        <childnode refid="52" relation="public-inheritance">
+        <childnode refid="56" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -270,6 +272,12 @@
       <node id="3">
         <label>ihashable&lt; T &gt;</label>
         <link refid="structihashable"/>
+      </node>
+      <node id="43">
+        <label>integer128</label>
+        <link refid="structinteger128"/>
+        <childnode refid="42" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="27">
         <label>integer16</label>
@@ -295,32 +303,38 @@
         <childnode refid="24" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="52">
+      <node id="56">
         <label>ipackage&lt; T, PackageT &gt;</label>
         <link refid="structipackage"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="46">
+      <node id="50">
         <label>ipackage&lt; T, CharT &gt;</label>
         <link refid="structipackage"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="44">
+      <node id="48">
         <label>ipackage&lt; decimal, decimal_t &gt;</label>
         <link refid="structipackage"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="40">
+      <node id="44">
         <label>ipackage&lt; float32, float32_t &gt;</label>
         <link refid="structipackage"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="42">
+      <node id="46">
         <label>ipackage&lt; float64, float64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>ipackage&lt; integer128, int128_t &gt;</label>
         <link refid="structipackage"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
@@ -349,6 +363,12 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="40">
+        <label>ipackage&lt; uinteger128, uint128_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="34">
         <label>ipackage&lt; uinteger16, uint16_t &gt;</label>
         <link refid="structipackage"/>
@@ -373,34 +393,40 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="48">
+      <node id="52">
         <label>pair&lt; Key, T &gt;</label>
         <link refid="structpair"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="49">
+      <node id="53">
         <label>pair&lt; const Key, T &gt;</label>
         <link refid="structpair"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="60">
+      <node id="64">
         <label>u16character</label>
         <link refid="structu16character"/>
-        <childnode refid="59" relation="public-inheritance">
+        <childnode refid="63" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>u32character</label>
+        <link refid="structu32character"/>
+        <childnode refid="65" relation="public-inheritance">
         </childnode>
       </node>
       <node id="62">
-        <label>u32character</label>
-        <link refid="structu32character"/>
+        <label>u8character</label>
+        <link refid="structu8character"/>
         <childnode refid="61" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="58">
-        <label>u8character</label>
-        <link refid="structu8character"/>
-        <childnode refid="57" relation="public-inheritance">
+      <node id="41">
+        <label>uinteger128</label>
+        <link refid="structuinteger128"/>
+        <childnode refid="40" relation="public-inheritance">
         </childnode>
       </node>
       <node id="35">
@@ -427,10 +453,10 @@
         <childnode refid="32" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="56">
+      <node id="60">
         <label>wcharacter</label>
         <link refid="structwcharacter"/>
-        <childnode refid="55" relation="public-inheritance">
+        <childnode refid="59" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>

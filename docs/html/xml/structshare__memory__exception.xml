@@ -17,9 +17,9 @@
           <defval>&quot;Share Memory Operation Failed.&quot;</defval>
         </param>
         <param>
-          <type>const error_code</type>
+          <type>const <ref refid="classerror__code" kindref="compound">error_code</ref></type>
           <declname>code</declname>
-          <defval>last_error()</defval>
+          <defval><ref refid="group___error_code_1ga6b25836281d33e8dad1b0440801e2ace" kindref="member">last_error</ref>()</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -105,9 +105,31 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
+      <node id="4">
+        <label>error_code</label>
+        <link refid="classerror__code"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="3">
         <label>exception</label>
         <link refid="structexception"/>
+      </node>
+      <node id="5">
+        <label>icommon&lt; error_code &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>icomparable&lt; error_code &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="7">
+        <label>ihashable&lt; error_code &gt;</label>
+        <link refid="structihashable"/>
       </node>
       <node id="1">
         <label>share_memory_exception</label>
@@ -119,6 +141,9 @@
         <label>system_exception</label>
         <link refid="structsystem__exception"/>
         <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>code_</edgelabel>
         </childnode>
       </node>
     </collaborationgraph>

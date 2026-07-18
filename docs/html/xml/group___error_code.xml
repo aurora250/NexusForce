@@ -3,6 +3,12 @@
   <compounddef id="group___error_code" kind="group">
     <compoundname>ErrorCode</compoundname>
     <title>错误码</title>
+    <innerclass refid="classerror__category" prot="public">error_category</innerclass>
+    <innerclass refid="classgeneric__error__category" prot="public">generic_error_category</innerclass>
+    <innerclass refid="classsystem__error__category" prot="public">system_error_category</innerclass>
+    <innerclass refid="classerror__code" prot="public">error_code</innerclass>
+    <innerclass refid="classerror__condition" prot="public">error_condition</innerclass>
+    <innerclass refid="classssl__error__category" prot="public">ssl_error_category</innerclass>
     <sectiondef kind="enum">
       <memberdef kind="enum" id="group___error_code_1gaf82e70cdc0af1c3132fe6f20443944e6" prot="public" static="no" strong="yes">
         <type><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
@@ -700,6 +706,195 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/errc.hpp" line="29" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/errc.hpp" bodystart="29" bodyend="116"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___error_code_1ga44686197784a7bc703b8eb62ba7cb064" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
+        <definition>const error_category &amp; generic_category</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>generic_category</name>
+        <briefdescription>
+<para>获取通用错误类别单例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>通用错误类别引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="121" column="23" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" declline="121" declcolumn="23"/>
+        <references refid="group___error_code_1ga93e09becd8af3be0dc0fa5711a338861" compoundref="error__code_8hpp" startline="151" endline="151">make_error_code</references>
+        <references refid="group___error_code_1gacb51295502c634e06aa45c9dfdc302f9" compoundref="error__condition_8hpp" startline="121" endline="121">make_error_condition</references>
+        <referencedby refid="classerror__condition_1a0b33f88d934d984f6e78bf211f90fb3d" compoundref="error__condition_8hpp" startline="73" endline="76">error_condition::clear</referencedby>
+        <referencedby refid="group___error_code_1ga4f790ec0995fecd48182d4d9431b6b73" compoundref="error__category_8hpp" startline="126" endline="126">error_category::generic</referencedby>
+        <referencedby refid="group___error_code_1ga93e09becd8af3be0dc0fa5711a338861" compoundref="error__code_8hpp" startline="151" endline="151">make_error_code</referencedby>
+        <referencedby refid="group___error_code_1gacb51295502c634e06aa45c9dfdc302f9" compoundref="error__condition_8hpp" startline="121" endline="121">make_error_condition</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___error_code_1ga93e09becd8af3be0dc0fa5711a338861" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerror__code" kindref="compound">error_code</ref></type>
+        <definition>error_code make_error_code</definition>
+        <argsstring>(errc e) noexcept</argsstring>
+        <name>make_error_code</name>
+        <param>
+          <type><ref refid="group___error_code_1gaf82e70cdc0af1c3132fe6f20443944e6" kindref="member">errc</ref></type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+<para>从 errc 枚举创建错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误码枚举值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>关联 <ref refid="group___error_code_1ga44686197784a7bc703b8eb62ba7cb064" kindref="member">generic_category()</ref> 的错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="151" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" bodystart="151" bodyend="151" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" declline="123" declcolumn="19"/>
+        <references refid="group___error_code_1ga44686197784a7bc703b8eb62ba7cb064">generic_category</references>
+        <referencedby refid="classerror__code_1afce46bf9d74d1b9f4cb181aaf2d4c972" compoundref="error__code_8hpp" startline="54" endline="54">error_code::error_code</referencedby>
+        <referencedby refid="group___error_code_1ga44686197784a7bc703b8eb62ba7cb064">generic_category</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___error_code_1gacb51295502c634e06aa45c9dfdc302f9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerror__condition" kindref="compound">error_condition</ref></type>
+        <definition>error_condition make_error_condition</definition>
+        <argsstring>(errc e) noexcept</argsstring>
+        <name>make_error_condition</name>
+        <param>
+          <type><ref refid="group___error_code_1gaf82e70cdc0af1c3132fe6f20443944e6" kindref="member">errc</ref></type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+<para>从 errc 枚举创建错误条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误码枚举值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>关联 <ref refid="group___error_code_1ga44686197784a7bc703b8eb62ba7cb064" kindref="member">generic_category()</ref> 的错误条件 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_condition.hpp" line="121" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_condition.hpp" bodystart="121" bodyend="121" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" declline="124" declcolumn="24"/>
+        <references refid="group___error_code_1ga44686197784a7bc703b8eb62ba7cb064">generic_category</references>
+        <referencedby refid="classerror__condition_1a3533d7c1bf9dda46ef0e6b917e4a62bb" compoundref="error__condition_8hpp" startline="56" endline="56">error_condition::error_condition</referencedby>
+        <referencedby refid="group___error_code_1ga44686197784a7bc703b8eb62ba7cb064">generic_category</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___error_code_1ga0a43b58885d603f4ee012cee3debd9f9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
+        <definition>const error_category &amp; system_category</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>system_category</name>
+        <briefdescription>
+<para>获取系统错误类别单例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>系统错误类别引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="148" column="23" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" declline="148" declcolumn="23"/>
+        <referencedby refid="classerror__code_1af691b8796439dd5a84dffde7c885df49" compoundref="error__code_8hpp" startline="71" endline="74">error_code::clear</referencedby>
+        <referencedby refid="structsocket__exception_1ac120faa4a48b9c05bb4e0632ce707a38">socket_exception::is_would_block</referencedby>
+        <referencedby refid="group___error_code_1gaf683d20ab9b827279a2c044a78ae5fbf" compoundref="error__category_8hpp" startline="150" endline="150">error_category::system</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___error_code_1ga6b25836281d33e8dad1b0440801e2ace" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerror__code" kindref="compound">error_code</ref></type>
+        <definition>error_code last_error</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>last_error</name>
+        <briefdescription>
+<para>获取当前系统错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>关联 <ref refid="group___error_code_1ga0a43b58885d603f4ee012cee3debd9f9" kindref="member">system_category()</ref> 的当前 errno 值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" line="157" column="13" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_code.hpp" declline="157" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group___error_code_1gaaacfb67aaf96e9281c59499eeb838522" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
+        <definition>const error_category &amp; ssl_category</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ssl_category</name>
+        <briefdescription>
+<para>获取SSL错误类别单例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SSL错误类别引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" line="46" column="23" declfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" declline="46" declcolumn="23"/>
+        <referencedby refid="structssl__exception_1a7056dadbbeea56eb8ef71ae6d6b113fd" compoundref="ssl__exception_8hpp" startline="80" endline="82">ssl_exception::ssl_exception</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___error_code_1ga4f790ec0995fecd48182d4d9431b6b73" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
+        <definition>const error_category &amp; error_category::generic</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>generic</name>
+        <qualifiedname>error_category::generic</qualifiedname>
+        <briefdescription>
+<para>获取通用错误类别单例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>通用错误类别引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="92" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" bodystart="126" bodyend="126"/>
+        <references refid="group___error_code_1ga4f790ec0995fecd48182d4d9431b6b73" compoundref="error__category_8hpp" startline="126" endline="126">error_category::generic</references>
+        <references refid="group___error_code_1ga44686197784a7bc703b8eb62ba7cb064">generic_category</references>
+        <referencedby refid="group___error_code_1ga4f790ec0995fecd48182d4d9431b6b73" compoundref="error__category_8hpp" startline="126" endline="126">error_category::generic</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___error_code_1gaf683d20ab9b827279a2c044a78ae5fbf" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerror__category" kindref="compound">error_category</ref> &amp;</type>
+        <definition>const error_category &amp; error_category::system</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>system</name>
+        <qualifiedname>error_category::system</qualifiedname>
+        <briefdescription>
+<para>获取系统错误类别单例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>系统错误类别引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="98" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" bodystart="150" bodyend="150"/>
+        <references refid="group___error_code_1gaf683d20ab9b827279a2c044a78ae5fbf" compoundref="error__category_8hpp" startline="150" endline="150">error_category::system</references>
+        <references refid="group___error_code_1ga0a43b58885d603f4ee012cee3debd9f9">system_category</references>
+        <referencedby refid="group___cancellation_1ga3a179486651d3a45f216cf216c6fe628" compoundref="cancellation__slot_8hpp" startline="26" endline="28">make_operation_aborted</referencedby>
+        <referencedby refid="group___error_code_1gaf683d20ab9b827279a2c044a78ae5fbf" compoundref="error__category_8hpp" startline="150" endline="150">error_category::system</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

@@ -25,5 +25,5 @@ var searchData=
   ['type_2ehpp_22',['type.hpp',['../type_8hpp.html',1,'']]],
   ['type_5ferase_2ehpp_23',['type_erase.hpp',['../type__erase_8hpp.html',1,'']]],
   ['type_5ftraits_2ehpp_24',['type_traits.hpp',['../type__traits_8hpp.html',1,'']]],
-  ['types_2ehpp_25',['types.hpp',['../types_8hpp.html',1,'']]]
+  ['typeinfo_2ftypes_2ehpp_25',['types.hpp',['../typeinfo_2types_8hpp.html',1,'']]]
 ];

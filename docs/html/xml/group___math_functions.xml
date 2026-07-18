@@ -300,6 +300,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="271" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="271" bodyend="273"/>
         <referencedby refid="group___math_functions_1ga743363ff679412699ab9b01b052cba93" compoundref="math_8hpp" startline="295" endline="297">average</referencedby>
+        <referencedby refid="group___s_i_m_d_1gae8bea998735e930a78078476388d8a24" compoundref="arithmetic_8hpp" startline="411" endline="430">saturated_add_u16</referencedby>
         <referencedby refid="group___math_functions_1ga3c4715923b8f3d77ce1826e960a405dc" compoundref="math_8hpp" startline="284" endline="286">sum</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___math_functions_1ga3c4715923b8f3d77ce1826e960a405dc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -471,7 +472,13 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="306" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="306" bodyend="316"/>
         <references refid="group___base_type_properties_1gabf2224be65b8fb8794372d049a1d37d9" compoundref="type__traits_8hpp" startline="927">is_arithmetic_v</references>
+        <referencedby refid="group___s_i_m_d_1ga801e04507fe0106340fab56f8a55e254" compoundref="arithmetic_8hpp" startline="771" endline="788">max_i8</referencedby>
+        <referencedby refid="group___s_i_m_d_1gae84e844f0e4c8ae579e355765df079b9" compoundref="arithmetic_8hpp" startline="893" endline="912">max_u32</referencedby>
+        <referencedby refid="group___s_i_m_d_1gaa197981c4c00a449e6ccd025c214fbc8" compoundref="arithmetic_8hpp" startline="621" endline="640">min_i8</referencedby>
+        <referencedby refid="group___s_i_m_d_1ga64dc48f0d5f1d52e14228129f7df56c8" compoundref="arithmetic_8hpp" startline="744" endline="763">min_u32</referencedby>
         <referencedby refid="classdatetime_1ae9f455af8bdb838b497501bfbec4e9d8" compoundref="datetime_8hpp" startline="1233" endline="1274">datetime::parse_RFC3339</referencedby>
+        <referencedby refid="group___s_i_m_d_1gae8bea998735e930a78078476388d8a24" compoundref="arithmetic_8hpp" startline="411" endline="430">saturated_add_u16</referencedby>
+        <referencedby refid="group___s_i_m_d_1ga5adaf9f6ea8e6561113978e79ba0e309" compoundref="arithmetic_8hpp" startline="516" endline="535">saturated_sub_u16</referencedby>
         <referencedby refid="classdatetime_1a4f3a9b577cfed5171c2fdcd50cbb6177" compoundref="datetime_8hpp" startline="1167" endline="1180">datetime::to_offset_string</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___math_functions_1ga7129f0b3cf184e0836aea549d9ce89ca" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -1062,7 +1069,7 @@
         <references refid="group___numeric_type_checks_1gabc3f4202a4c893e260ce8b5154845022" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</references>
         <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
         <references refid="group___math_functions_1gabc4196c327c7a6784316819881ec3c3d" compoundref="math_8hpp" startline="173" endline="180">safe_decimal_to_uint64</references>
-        <referencedby refid="group___bit_manipulation_1ga153ce92edb2a29fe0261b05609191cf6" compoundref="bit_8hpp" startline="307" endline="313">bit_ceil</referencedby>
+        <referencedby refid="group___bit_manipulation_1ga153ce92edb2a29fe0261b05609191cf6" compoundref="bit_8hpp" startline="294" endline="300">bit_ceil</referencedby>
         <referencedby refid="group___math_functions_1ga23f47f970cc36873ba044bd696ed0923" compoundref="math_8hpp" startline="617" endline="620">floor</referencedby>
         <referencedby refid="group___math_functions_1ga31898ebdefe256c9d96a2c06a58e8c77" compoundref="math_8hpp" startline="704" endline="707">floor_bit</referencedby>
         <referencedby refid="group___math_functions_1gaedd5856ca6e41f0174b5d9bd91b8995c" compoundref="math_8hpp" startline="674" endline="695">round</referencedby>
@@ -1763,7 +1770,8 @@
         <references refid="classnumeric__traits_1a4a365e1002991e6c6873abaa78e3fb06" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
         <references refid="group___math_functions_1gaedd5856ca6e41f0174b5d9bd91b8995c" compoundref="math_8hpp" startline="674" endline="695">round</references>
         <referencedby refid="group___m_s_v_c_compiler_intrinsics_1ga951c4f0a3d64d7bb2ba9254a988074ec" compoundref="msvc__intrinsic_8hpp" startline="113" endline="201">_udiv128</referencedby>
-        <referencedby refid="structuint128__t_1aa2dcb9a61a14880b87a0944b4b6e39f1">uint128_t::div64</referencedby>
+        <referencedby refid="structuint128__t_1a81e9f179d4eb213d378e5aae33911bf8" compoundref="int128_8hpp" startline="313" endline="330">uint128_t::div64</referencedby>
+        <referencedby refid="group___int128_1ga69509dd7c99156f370da7052970acdf7" compoundref="int128_8hpp" startline="714" endline="757">uint128_t::divmod128</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___math_functions_1ga81807acce94bc973bf39e6b15929156d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>

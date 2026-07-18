@@ -92,63 +92,87 @@ $(function(){initNavTree('error__condition_8hpp_source.html','',''); });
   <div class="headertitle"><div class="title">error_condition.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_EXCEPTION_ERROR_CONDITION_HPP__</span></div>
+<a href="error__condition_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_EXCEPTION_ERROR_CONDITION_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_EXCEPTION_ERROR_CONDITION_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;NeForce/core/exception/error_category.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>NEFORCE_BEGIN_NAMESPACE__</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">class </span>error_condition : <span class="keyword">public</span> <a class="code hl_struct" href="structicomparable.html">icomparable</a>&lt;error_condition&gt; {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keywordtype">int</span> value_;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">const</span> error_category* category_;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    error_condition() noexcept :</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    value_(0),</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    category_(&amp;generic_category()) {}</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    error_condition(<span class="keywordtype">int</span> val, <span class="keyword">const</span> error_category&amp; cat) noexcept :</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    value_(val),</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    category_(&amp;cat) {}</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">explicit</span> error_condition(<a class="code hl_enumeration" href="group___error_code.html#gaf82e70cdc0af1c3132fe6f20443944e6">errc</a> e) <span class="keyword">noexcept</span> { *<span class="keyword">this</span> = make_error_condition(e); }</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> assign(<span class="keywordtype">int</span> val, <span class="keyword">const</span> error_category&amp; cat) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        value_ = val;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        category_ = &amp;cat;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    }</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> clear() noexcept {</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        value_ = 0;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        category_ = &amp;generic_category();</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    }</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> value() const noexcept { <span class="keywordflow">return</span> value_; }</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    NEFORCE_NODISCARD <span class="keyword">const</span> error_category&amp; category() const noexcept { <span class="keywordflow">return</span> *category_; }</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> message()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> category_-&gt;message(value_); }</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept { <span class="keywordflow">return</span> value_ != 0; }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> equal_to(<span class="keyword">const</span> error_condition&amp; rhs) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">return</span> category_ == rhs.category_ &amp;&amp; value_ == rhs.value_;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> less_than(<span class="keyword">const</span> error_condition&amp; rhs) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">if</span> (*category_ &lt; *rhs.category_) {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">if</span> (*rhs.category_ &lt; *category_) {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        }</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">return</span> value_ &lt; rhs.value_;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>};</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">inline</span> error_condition make_error_condition(<a class="code hl_enumeration" href="group___error_code.html#gaf82e70cdc0af1c3132fe6f20443944e6">errc</a> e) <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> {<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(e), generic_category()}; }</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_EXCEPTION_ERROR_CONDITION_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="error__category_8hpp.html">NeForce/core/exception/error_category.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classerror__condition.html">   28</a></span><span class="keyword">class </span><a class="code hl_function" href="classerror__condition.html#aedbf29684f577fe28b4a0aabc8147d03">error_condition</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structicomparable.html">icomparable</a>&lt;error_condition&gt; {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">int</span> value_{0};                                        </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">const</span> <a class="code hl_class" href="classerror__category.html">error_category</a>* category_{&amp;<a class="code hl_function" href="group___error_code.html#ga44686197784a7bc703b8eb62ba7cb064">generic_category</a>()}; </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classerror__condition.html#aedbf29684f577fe28b4a0aabc8147d03">   39</a></span>    <a class="code hl_function" href="classerror__condition.html#aedbf29684f577fe28b4a0aabc8147d03">error_condition</a>() noexcept = default;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span></div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classerror__condition.html#a05a115f5029827946276f3b8f6d4a4b7">   46</a></span>    <a class="code hl_function" href="classerror__condition.html#aedbf29684f577fe28b4a0aabc8147d03">error_condition</a>(<span class="keywordtype">int</span> val, const <a class="code hl_class" href="classerror__category.html">error_category</a>&amp; cat) noexcept :</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    value_(val),</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    category_(&amp;cat) {}</div>
+</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classerror__condition.html#a3533d7c1bf9dda46ef0e6b917e4a62bb">   56</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classerror__condition.html#a3533d7c1bf9dda46ef0e6b917e4a62bb">error_condition</a>(<a class="code hl_enumeration" href="group___error_code.html#gaf82e70cdc0af1c3132fe6f20443944e6">errc</a> e) <span class="keyword">noexcept</span> { *<span class="keyword">this</span> = <a class="code hl_function" href="group___error_code.html#gacb51295502c634e06aa45c9dfdc302f9">make_error_condition</a>(e); }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classerror__condition.html#a45dddb5870e637af64939893a6840f37">   63</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classerror__condition.html#a45dddb5870e637af64939893a6840f37">assign</a>(<span class="keywordtype">int</span> val, <span class="keyword">const</span> <a class="code hl_class" href="classerror__category.html">error_category</a>&amp; cat) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        value_ = val;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        category_ = &amp;cat;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
+</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
+<div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classerror__condition.html#a0b33f88d934d984f6e78bf211f90fb3d">   73</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classerror__condition.html#a0b33f88d934d984f6e78bf211f90fb3d">clear</a>() noexcept {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        value_ = 0;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        category_ = &amp;<a class="code hl_function" href="group___error_code.html#ga44686197784a7bc703b8eb62ba7cb064">generic_category</a>();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
+</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classerror__condition.html#adcc4fddf78f05e65c0694dbb8fb482ad">   82</a></span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> <a class="code hl_function" href="classerror__condition.html#adcc4fddf78f05e65c0694dbb8fb482ad">value</a>() const noexcept { <span class="keywordflow">return</span> value_; }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classerror__condition.html#abeb932834f1beabf47cf3d67802d6139">   88</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classerror__category.html">error_category</a>&amp; <a class="code hl_function" href="classerror__condition.html#abeb932834f1beabf47cf3d67802d6139">category</a>() const noexcept { <span class="keywordflow">return</span> *category_; }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classerror__condition.html#a1f2e0f00b4ebf01ce7705bcc03a08382">   94</a></span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="classerror__condition.html#a1f2e0f00b4ebf01ce7705bcc03a08382">message</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> category_-&gt;message(value_); }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classerror__condition.html#a5c0575ed85927734159c162727c3ef22">  100</a></span>    <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept { <span class="keywordflow">return</span> value_ != 0; }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_struct" href="structequal__to.html">equal_to</a>(<span class="keyword">const</span> <a class="code hl_class" href="classerror__condition.html">error_condition</a>&amp; rhs) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">return</span> category_ == rhs.category_ &amp;&amp; value_ == rhs.value_;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> less_than(<span class="keyword">const</span> <a class="code hl_function" href="classerror__condition.html#aedbf29684f577fe28b4a0aabc8147d03">error_condition</a>&amp; rhs) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">if</span> (*category_ &lt; *rhs.category_) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">if</span> (*rhs.category_ &lt; *category_) {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">return</span> value_ &lt; rhs.value_;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>};</div>
+</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="group___error_code.html#gacb51295502c634e06aa45c9dfdc302f9">  121</a></span><span class="keyword">inline</span> <a class="code hl_class" href="classerror__condition.html">error_condition</a> <a class="code hl_function" href="group___error_code.html#gacb51295502c634e06aa45c9dfdc302f9">make_error_condition</a>(<a class="code hl_enumeration" href="group___error_code.html#gaf82e70cdc0af1c3132fe6f20443944e6">errc</a> e) <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> {<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(e), <a class="code hl_function" href="group___error_code.html#ga44686197784a7bc703b8eb62ba7cb064">generic_category</a>()}; }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> <span class="comment">// ErrorCode</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_EXCEPTION_ERROR_CONDITION_HPP__</span></div>
+<div class="ttc" id="aclasserror__category_html"><div class="ttname"><a href="classerror__category.html">error_category</a></div><div class="ttdoc">错误类别抽象基类</div><div class="ttdef"><b>定义</b> <a href="error__category_8hpp_source.html#l00037">error_category.hpp:37</a></div></div>
+<div class="ttc" id="aclasserror__condition_html"><div class="ttname"><a href="classerror__condition.html">error_condition</a></div><div class="ttdoc">错误条件</div><div class="ttdef"><b>定义</b> <a href="#l00028">error_condition.hpp:28</a></div></div>
+<div class="ttc" id="aclasserror__condition_html_a0b33f88d934d984f6e78bf211f90fb3d"><div class="ttname"><a href="classerror__condition.html#a0b33f88d934d984f6e78bf211f90fb3d">error_condition::clear</a></div><div class="ttdeci">void clear() noexcept</div><div class="ttdoc">清空错误条件</div><div class="ttdef"><b>定义</b> <a href="#l00073">error_condition.hpp:73</a></div></div>
+<div class="ttc" id="aclasserror__condition_html_a1f2e0f00b4ebf01ce7705bcc03a08382"><div class="ttname"><a href="classerror__condition.html#a1f2e0f00b4ebf01ce7705bcc03a08382">error_condition::message</a></div><div class="ttdeci">string message() const</div><div class="ttdoc">获取错误描述信息</div><div class="ttdef"><b>定义</b> <a href="#l00094">error_condition.hpp:94</a></div></div>
+<div class="ttc" id="aclasserror__condition_html_a3533d7c1bf9dda46ef0e6b917e4a62bb"><div class="ttname"><a href="classerror__condition.html#a3533d7c1bf9dda46ef0e6b917e4a62bb">error_condition::error_condition</a></div><div class="ttdeci">error_condition(errc e) noexcept</div><div class="ttdoc">从 errc 枚举构造</div><div class="ttdef"><b>定义</b> <a href="#l00056">error_condition.hpp:56</a></div></div>
+<div class="ttc" id="aclasserror__condition_html_a45dddb5870e637af64939893a6840f37"><div class="ttname"><a href="classerror__condition.html#a45dddb5870e637af64939893a6840f37">error_condition::assign</a></div><div class="ttdeci">void assign(int val, const error_category &amp;cat) noexcept</div><div class="ttdoc">赋值错误条件值和类别</div><div class="ttdef"><b>定义</b> <a href="#l00063">error_condition.hpp:63</a></div></div>
+<div class="ttc" id="aclasserror__condition_html_abeb932834f1beabf47cf3d67802d6139"><div class="ttname"><a href="classerror__condition.html#abeb932834f1beabf47cf3d67802d6139">error_condition::category</a></div><div class="ttdeci">const error_category &amp; category() const noexcept</div><div class="ttdoc">获取错误类别</div><div class="ttdef"><b>定义</b> <a href="#l00088">error_condition.hpp:88</a></div></div>
+<div class="ttc" id="aclasserror__condition_html_adcc4fddf78f05e65c0694dbb8fb482ad"><div class="ttname"><a href="classerror__condition.html#adcc4fddf78f05e65c0694dbb8fb482ad">error_condition::value</a></div><div class="ttdeci">int value() const noexcept</div><div class="ttdoc">获取错误条件值</div><div class="ttdef"><b>定义</b> <a href="#l00082">error_condition.hpp:82</a></div></div>
+<div class="ttc" id="aclasserror__condition_html_aedbf29684f577fe28b4a0aabc8147d03"><div class="ttname"><a href="classerror__condition.html#aedbf29684f577fe28b4a0aabc8147d03">error_condition::error_condition</a></div><div class="ttdeci">error_condition() noexcept=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="aerror__category_8hpp_html"><div class="ttname"><a href="error__category_8hpp.html">error_category.hpp</a></div><div class="ttdoc">错误类别体系</div></div>
+<div class="ttc" id="agroup___error_code_html_ga44686197784a7bc703b8eb62ba7cb064"><div class="ttname"><a href="group___error_code.html#ga44686197784a7bc703b8eb62ba7cb064">generic_category</a></div><div class="ttdeci">const error_category &amp; generic_category() noexcept</div><div class="ttdoc">获取通用错误类别单例</div></div>
+<div class="ttc" id="agroup___error_code_html_gacb51295502c634e06aa45c9dfdc302f9"><div class="ttname"><a href="group___error_code.html#gacb51295502c634e06aa45c9dfdc302f9">make_error_condition</a></div><div class="ttdeci">error_condition make_error_condition(errc e) noexcept</div><div class="ttdoc">从 errc 枚举创建错误条件</div><div class="ttdef"><b>定义</b> <a href="#l00121">error_condition.hpp:121</a></div></div>
 <div class="ttc" id="agroup___error_code_html_gaf82e70cdc0af1c3132fe6f20443944e6"><div class="ttname"><a href="group___error_code.html#gaf82e70cdc0af1c3132fe6f20443944e6">errc</a></div><div class="ttdeci">errc</div><div class="ttdoc">系统错误码枚举</div><div class="ttdef"><b>定义</b> <a href="errc_8hpp_source.html#l00029">errc.hpp:29</a></div></div>
+<div class="ttc" id="astructequal__to_html"><div class="ttname"><a href="structequal__to.html">equal_to</a></div><div class="ttdoc">相等比较仿函数</div><div class="ttdef"><b>定义</b> <a href="functor_8hpp_source.html#l00261">functor.hpp:261</a></div></div>
 <div class="ttc" id="astructicomparable_html"><div class="ttname"><a href="structicomparable.html">icomparable</a></div><div class="ttdoc">可比较对象接口模板</div><div class="ttdef"><b>定义</b> <a href="icommon_8hpp_source.html#l00080">icommon.hpp:80</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -156,7 +180,7 @@ $(function(){initNavTree('error__condition_8hpp_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>exception</b></li><li class="navelem"><b>error_condition.hpp</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>exception</b></li><li class="navelem"><a href="error__condition_8hpp.html">error_condition.hpp</a></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
   </ul>
 </div>

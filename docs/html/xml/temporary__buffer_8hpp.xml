@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
   <compounddef id="temporary__buffer_8hpp" kind="file" language="C++">
     <compoundname>temporary_buffer.hpp</compoundname>
-    <includes refid="compare_8hpp" local="yes">NeForce/core/algorithm/compare.hpp</includes>
+    <includes refid="algorithm_2compare_8hpp" local="yes">NeForce/core/algorithm/compare.hpp</includes>
     <includes refid="standard__allocator_8hpp" local="yes">NeForce/core/memory/standard_allocator.hpp</includes>
     <includes refid="uninitialized_8hpp" local="yes">NeForce/core/memory/uninitialized.hpp</includes>
     <includes refid="numeric__traits_8hpp" local="yes">NeForce/core/numeric/numeric_traits.hpp</includes>
@@ -10,7 +10,7 @@
     <incdepgraph>
       <node id="2">
         <label>NeForce/core/algorithm/compare.hpp</label>
-        <link refid="compare_8hpp"/>
+        <link refid="algorithm_2compare_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
@@ -36,14 +36,14 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="27">
+      <node id="29">
         <label>NeForce/core/algorithm/shift.hpp</label>
         <link refid="shift_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="31" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -64,7 +64,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="25">
+      <node id="27">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
         <childnode refid="16" relation="include">
@@ -79,13 +79,15 @@
       <node id="19">
         <label>NeForce/core/functional/hash.hpp</label>
         <link refid="hash_8hpp"/>
-        <childnode refid="6" relation="include">
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="28">
+      <node id="30">
         <label>NeForce/core/functional/invoke.hpp</label>
         <link refid="invoke_8hpp"/>
-        <childnode refid="21" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="18">
@@ -106,26 +108,38 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="32">
+      <node id="20">
+        <label>NeForce/core/memory/bit.hpp</label>
+        <link refid="bit_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
         <label>NeForce/core/memory/construct.hpp</label>
         <link refid="construct_8hpp"/>
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="16">
-        <label>NeForce/core/memory/memory.hpp</label>
-        <link refid="memory_8hpp"/>
+      <node id="21">
+        <label>NeForce/core/memory/endian.hpp</label>
+        <link refid="endian_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="23">
+      <node id="16">
+        <label>NeForce/core/memory/memory.hpp</label>
+        <link refid="memory_2memory_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
         <label>NeForce/core/memory/standard_allocator.hpp</label>
         <link refid="standard__allocator_8hpp"/>
-        <childnode refid="24" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -133,41 +147,41 @@
         <link refid="temporary__buffer_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="28">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>NeForce/core/numeric/math.hpp</label>
+        <link refid="math_8hpp"/>
         <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
       </node>
-      <node id="29">
-        <label>NeForce/core/numeric/math.hpp</label>
-        <link refid="math_8hpp"/>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
-      </node>
-      <node id="31">
+      <node id="33">
         <label>NeForce/core/numeric/numeric_traits.hpp</label>
         <link refid="numeric__traits_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="30">
+      <node id="32">
         <label>NeForce/core/numeric/numeric_types.hpp</label>
         <link refid="numeric__types_8hpp"/>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
       </node>
       <node id="14">
@@ -184,11 +198,11 @@
       </node>
       <node id="7">
         <label>NeForce/core/typeinfo/types.hpp</label>
-        <link refid="types_8hpp"/>
+        <link refid="typeinfo_2types_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="20">
+      <node id="22">
         <label>NeForce/core/utility/integer_sequence.hpp</label>
         <link refid="integer__sequence_8hpp"/>
         <childnode refid="6" relation="include">
@@ -199,14 +213,14 @@
         <link refid="pair_8hpp"/>
         <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
         <childnode refid="22" relation="include">
         </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
       </node>
-      <node id="21">
+      <node id="23">
         <label>NeForce/core/utility/reference_wrapper.hpp</label>
         <link refid="reference__wrapper_8hpp"/>
         <childnode refid="6" relation="include">
@@ -218,10 +232,10 @@
       <node id="3">
         <label>initializer_list</label>
       </node>
-      <node id="24">
+      <node id="26">
         <label>new</label>
       </node>
-      <node id="22">
+      <node id="24">
         <label>utility</label>
       </node>
     </incdepgraph>
@@ -905,7 +919,7 @@
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_MEMORY_TEMPORARY_BUFFER_HPP__</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="compare_8hpp" kindref="compound">NeForce/core/algorithm/compare.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="algorithm_2compare_8hpp" kindref="compound">NeForce/core/algorithm/compare.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="standard__allocator_8hpp" kindref="compound">NeForce/core/memory/standard_allocator.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="uninitialized_8hpp" kindref="compound">NeForce/core/memory/uninitialized.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="numeric__traits_8hpp" kindref="compound">NeForce/core/numeric/numeric_traits.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>

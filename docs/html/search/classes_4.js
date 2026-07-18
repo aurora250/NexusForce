@@ -32,11 +32,14 @@ var searchData=
   ['equal_5fto_3c_20uintptr_5ft_20_3e_29',['equal_to&lt; uintptr_t &gt;',['../structequal__to.html',1,'']]],
   ['equal_5fto_3c_20value_20_3e_30',['equal_to&lt; Value &gt;',['../structequal__to.html',1,'']]],
   ['equal_5fto_3c_20void_20_3e_31',['equal_to&lt; void &gt;',['../structequal__to_3_01void_01_4.html',1,'']]],
-  ['exact_5farg_5fconstruct_5ftag_32',['exact_arg_construct_tag',['../structexact__arg__construct__tag.html',1,'']]],
-  ['exception_33',['exception',['../structexception.html',1,'']]],
-  ['exception_5fptr_34',['exception_ptr',['../classexception__ptr.html',1,'']]],
-  ['exception_5fwrapper_35',['exception_wrapper',['../classexception__wrapper.html',1,'']]],
-  ['executor_36',['executor',['../classexecutor.html',1,'executor'],['../classio__context_1_1executor.html',1,'io_context::executor']]],
-  ['executor_5fbase_37',['executor_base',['../structexecutor_1_1executor__base.html',1,'executor']]],
-  ['extent_38',['extent',['../structextent.html',1,'']]]
+  ['error_5fcategory_32',['error_category',['../classerror__category.html',1,'']]],
+  ['error_5fcode_33',['error_code',['../classerror__code.html',1,'']]],
+  ['error_5fcondition_34',['error_condition',['../classerror__condition.html',1,'']]],
+  ['exact_5farg_5fconstruct_5ftag_35',['exact_arg_construct_tag',['../structexact__arg__construct__tag.html',1,'']]],
+  ['exception_36',['exception',['../structexception.html',1,'']]],
+  ['exception_5fptr_37',['exception_ptr',['../classexception__ptr.html',1,'']]],
+  ['exception_5fwrapper_38',['exception_wrapper',['../classexception__wrapper.html',1,'']]],
+  ['executor_39',['executor',['../classexecutor.html',1,'executor'],['../classio__context_1_1executor.html',1,'io_context::executor']]],
+  ['executor_5fbase_40',['executor_base',['../structexecutor_1_1executor__base.html',1,'executor']]],
+  ['extent_41',['extent',['../structextent.html',1,'']]]
 ];

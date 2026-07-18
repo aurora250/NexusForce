@@ -447,6 +447,12 @@ var hierarchy =
       [ "ipackage< uinteger64, uint64_t >", "structipackage.html", [
         [ "uinteger64", "structuinteger64.html", null ]
       ] ],
+      [ "ipackage< uinteger128, uint128_t >", "structipackage.html", [
+        [ "uinteger128", "structuinteger128.html", null ]
+      ] ],
+      [ "ipackage< integer128, int128_t >", "structipackage.html", [
+        [ "integer128", "structinteger128.html", null ]
+      ] ],
       [ "ipackage< float32, float32_t >", "structipackage.html", [
         [ "float32", "structfloat32.html", null ]
       ] ],
@@ -507,6 +513,8 @@ var hierarchy =
       [ "ipackage< uinteger16, uint16_t >", "structipackage.html", null ],
       [ "ipackage< uinteger32, uint32_t >", "structipackage.html", null ],
       [ "ipackage< uinteger64, uint64_t >", "structipackage.html", null ],
+      [ "ipackage< uinteger128, uint128_t >", "structipackage.html", null ],
+      [ "ipackage< integer128, int128_t >", "structipackage.html", null ],
       [ "ipackage< float32, float32_t >", "structipackage.html", null ],
       [ "ipackage< float64, float64_t >", "structipackage.html", null ],
       [ "ipackage< decimal, decimal_t >", "structipackage.html", null ],
@@ -673,6 +681,8 @@ var hierarchy =
         [ "ipackage< uinteger16, uint16_t >", "structipackage.html", null ],
         [ "ipackage< uinteger32, uint32_t >", "structipackage.html", null ],
         [ "ipackage< uinteger64, uint64_t >", "structipackage.html", null ],
+        [ "ipackage< uinteger128, uint128_t >", "structipackage.html", null ],
+        [ "ipackage< integer128, int128_t >", "structipackage.html", null ],
         [ "ipackage< float32, float32_t >", "structipackage.html", null ],
         [ "ipackage< float64, float64_t >", "structipackage.html", null ],
         [ "ipackage< decimal, decimal_t >", "structipackage.html", null ],
@@ -807,11 +817,21 @@ var hierarchy =
         [ "deque_iterator< false, deque, 0 >", "structdeque__iterator.html", null ]
       ] ]
     ] ],
-    [ "icomparable&lt; error_category &gt;", "structicomparable.html", null ],
-    [ "icomparable&lt; error_code &gt;", "structicomparable.html", [
-      [ "icommon< error_code >", "structicommon.html", null ]
+    [ "icomparable&lt; error_category &gt;", "structicomparable.html", [
+      [ "error_category", "classerror__category.html", [
+        [ "generic_error_category", "classgeneric__error__category.html", null ],
+        [ "ssl_error_category", "classssl__error__category.html", null ],
+        [ "system_error_category", "classsystem__error__category.html", null ]
+      ] ]
     ] ],
-    [ "icomparable&lt; error_condition &gt;", "structicomparable.html", null ],
+    [ "icomparable&lt; error_code &gt;", "structicomparable.html", [
+      [ "icommon< error_code >", "structicommon.html", [
+        [ "error_code", "classerror__code.html", null ]
+      ] ]
+    ] ],
+    [ "icomparable&lt; error_condition &gt;", "structicomparable.html", [
+      [ "error_condition", "classerror__condition.html", null ]
+    ] ],
     [ "icomparable&lt; flat_hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;", "structicomparable.html", [
       [ "icollector< flat_hashtable< Value, Key, HashFcn, ExtractKey, EqualKey, Alloc > >", "structicollector.html", [
         [ "flat_hashtable< Value, Key, HashFcn, ExtractKey, EqualKey, Alloc >", "classflat__hashtable.html", null ]
@@ -2125,9 +2145,9 @@ var hierarchy =
         [ "ini_section", "classini__section.html", null ]
       ] ]
     ] ],
-    [ "istringify&lt; int128_t &gt;", "structistringify.html", [
-      [ "iobject< int128_t >", "structiobject.html", [
-        [ "int128_t", "structint128__t.html", null ]
+    [ "istringify&lt; integer128 &gt;", "structistringify.html", [
+      [ "iobject< integer128 >", "structiobject.html", [
+        [ "integer128", "structinteger128.html", null ]
       ] ]
     ] ],
     [ "istringify&lt; integer16 &gt;", "structistringify.html", [
@@ -2204,9 +2224,9 @@ var hierarchy =
         [ "toml_table", "classtoml__table.html", null ]
       ] ]
     ] ],
-    [ "istringify&lt; uint128_t &gt;", "structistringify.html", [
-      [ "iobject< uint128_t >", "structiobject.html", [
-        [ "uint128_t", "structuint128__t.html", null ]
+    [ "istringify&lt; uinteger128 &gt;", "structistringify.html", [
+      [ "iobject< uinteger128 >", "structiobject.html", [
+        [ "uinteger128", "structuinteger128.html", null ]
       ] ]
     ] ],
     [ "istringify&lt; uinteger16 &gt;", "structistringify.html", [
@@ -2647,6 +2667,14 @@ var hierarchy =
     [ "variant_alternative&lt; Variant, Idx &gt;", "structvariant__alternative.html", null ],
     [ "variant_index&lt; Variant, T &gt;", "structvariant__index.html", null ],
     [ "vec128_t", "structvec128__t.html", null ],
+    [ "vec128d_t", "structvec128d__t.html", null ],
+    [ "vec128f_t", "structvec128f__t.html", null ],
+    [ "vec256_t", "structvec256__t.html", null ],
+    [ "vec256d_t", "structvec256d__t.html", null ],
+    [ "vec256f_t", "structvec256f__t.html", null ],
+    [ "vec512_t", "structvec512__t.html", null ],
+    [ "vec512d_t", "structvec512d__t.html", null ],
+    [ "vec512f_t", "structvec512f__t.html", null ],
     [ "vector&lt; atomic&lt; worker_context * &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; basic_string&lt; char &gt; &gt;", "classvector.html", null ],
     [ "vector&lt; basic_string_view&lt; char &gt; &gt;", "classvector.html", null ],

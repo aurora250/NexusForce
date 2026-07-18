@@ -121,13 +121,14 @@ Public 成员函数</h2></td></tr>
 <div class="textblock"><p>自适应扩容的动态缓冲区 </p>
 <p>适用于异步读取场景：prepare() 获取可写区域，commit() 标记已填充， <a class="el" href="#a27ba6fcc4aeaf27dd964629057c18c32" title="移除已消费的数据">consume()</a> 移除已处理数据。内部自动扩容。</p>
 <p>使用示例： </p><div class="fragment"><div class="line"><a class="code hl_class" href="classdynamic__buffer.html">dynamic_buffer</a> buf;</div>
-<div class="line">sock.async_read(ctx, buf.<a class="code hl_function" href="#a5e2f38eaf7fc7350ca912eeda10f9c58">prepare</a>(1024), [&amp;](error_code ec, <span class="keywordtype">size_t</span> n) {</div>
+<div class="line">sock.async_read(ctx, buf.<a class="code hl_function" href="#a5e2f38eaf7fc7350ca912eeda10f9c58">prepare</a>(1024), [&amp;](<a class="code hl_class" href="classerror__code.html">error_code</a> ec, <span class="keywordtype">size_t</span> n) {</div>
 <div class="line">    buf.commit(n);</div>
 <div class="line">    process(buf.data(), buf.size());</div>
 <div class="line">    buf.consume(processed);</div>
 <div class="line">});</div>
 <div class="ttc" id="aclassdynamic__buffer_html"><div class="ttname"><a href="classdynamic__buffer.html">dynamic_buffer</a></div><div class="ttdoc">自适应扩容的动态缓冲区</div><div class="ttdef"><b>定义</b> <a href="buffer_8hpp_source.html#l00228">buffer.hpp:228</a></div></div>
 <div class="ttc" id="aclassdynamic__buffer_html_a5e2f38eaf7fc7350ca912eeda10f9c58"><div class="ttname"><a href="#a5e2f38eaf7fc7350ca912eeda10f9c58">dynamic_buffer::prepare</a></div><div class="ttdeci">mutable_buffers prepare(size_t n)</div><div class="ttdoc">准备写入区域</div><div class="ttdef"><b>定义</b> <a href="buffer_8hpp_source.html#l00244">buffer.hpp:244</a></div></div>
+<div class="ttc" id="aclasserror__code_html"><div class="ttname"><a href="classerror__code.html">error_code</a></div><div class="ttdoc">错误码</div><div class="ttdef"><b>定义</b> <a href="error__code_8hpp_source.html#l00026">error_code.hpp:26</a></div></div>
 </div><!-- fragment --><dl class="section note"><dt>注解</dt><dd>prepare/commit/consume 操作不保证线程安全，调用者负责同步。 </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00228">228</a> 行定义.</p>
@@ -235,7 +236,7 @@ Public 成员函数</h2></td></tr>
 
 <p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00269">269</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="memory_8hpp_source.html#l00169">memory_move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory_2memory_8hpp_source.html#l00169">memory_move()</a>.</p>
 
 </div>
 </div>

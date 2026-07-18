@@ -28,6 +28,8 @@
         <link refid="hash_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
       </node>
       <node id="3">
         <label>NeForce/core/interface/icommon.hpp</label>
@@ -36,6 +38,18 @@
         </childnode>
       </node>
       <node id="5">
+        <label>NeForce/core/memory/bit.hpp</label>
+        <link refid="bit_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>NeForce/core/memory/endian.hpp</label>
+        <link refid="endian_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
         <label>NeForce/core/typeinfo/type_traits.hpp</label>
         <link refid="type__traits_8hpp"/>
         <childnode refid="6" relation="include">
@@ -43,14 +57,14 @@
       </node>
       <node id="6">
         <label>NeForce/core/typeinfo/types.hpp</label>
-        <link refid="types_8hpp"/>
+        <link refid="typeinfo_2types_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="12">
         <label>NeForce/core/utility/integer_sequence.hpp</label>
         <link refid="integer__sequence_8hpp"/>
-        <childnode refid="5" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -58,17 +72,17 @@
         <link refid="pair_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
       </node>
-      <node id="11">
+      <node id="13">
         <label>NeForce/core/utility/reference_wrapper.hpp</label>
         <link refid="reference__wrapper_8hpp"/>
-        <childnode refid="5" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -80,7 +94,7 @@
       <node id="8">
         <label>cassert</label>
       </node>
-      <node id="12">
+      <node id="14">
         <label>utility</label>
       </node>
     </incdepgraph>
@@ -1469,58 +1483,27 @@
 <codeline lineno="881"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="882"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Tuple</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="884"><highlight class="normal"></highlight></codeline>
-<codeline lineno="885"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>!defined(NEFORCE_STANDARD_17)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="887"><highlight class="normal">NEFORCE_BEGIN_INNER__</highlight></codeline>
-<codeline lineno="888"><highlight class="normal"></highlight></codeline>
-<codeline lineno="889"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Tuple,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Index&gt;</highlight></codeline>
-<codeline lineno="890"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__broadern_tuple_hash_aux<sp/>{</highlight></codeline>
-<codeline lineno="891"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>hash(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Tuple&amp;<sp/>tup)<sp/>{</highlight></codeline>
-<codeline lineno="892"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ElementType<sp/>=<sp/><ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt;<ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t</ref>&lt;Index<sp/>-<sp/>1,<sp/>Tuple&gt;&gt;;</highlight></codeline>
-<codeline lineno="893"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>__broadern_tuple_hash_aux&lt;Tuple,<sp/>Index<sp/>-<sp/>1&gt;::hash(tup)<sp/>^</highlight></codeline>
-<codeline lineno="894"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/>hash&lt;ElementType&gt;()(_NEFORCE<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>&lt;Index<sp/>-<sp/>1&gt;(tup));</highlight></codeline>
-<codeline lineno="895"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="896"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="897"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Tuple&gt;</highlight></codeline>
-<codeline lineno="898"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__broadern_tuple_hash_aux&lt;Tuple,<sp/>1&gt;<sp/>{</highlight></codeline>
-<codeline lineno="899"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>hash(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Tuple&amp;<sp/>tup)<sp/>{</highlight></codeline>
-<codeline lineno="900"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ElementType<sp/>=<sp/><ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t&lt;tuple_element_t&lt;0, Tuple&gt;</ref>&gt;;</highlight></codeline>
-<codeline lineno="901"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/>hash&lt;ElementType&gt;()(_NEFORCE<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get&lt;0&gt;</ref>(tup));</highlight></codeline>
-<codeline lineno="902"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="903"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="904"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Tuple&gt;</highlight></codeline>
-<codeline lineno="905"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__broadern_tuple_hash_aux&lt;Tuple,<sp/>0&gt;<sp/>{</highlight></codeline>
-<codeline lineno="906"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>hash(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Tuple&amp;<sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;<sp/>}</highlight></codeline>
-<codeline lineno="907"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="908"><highlight class="normal"></highlight></codeline>
-<codeline lineno="909"><highlight class="normal">NEFORCE_END_INNER__</highlight></codeline>
-<codeline lineno="911"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>!NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="912"><highlight class="normal"></highlight></codeline>
-<codeline lineno="913"><highlight class="normal"></highlight></codeline>
-<codeline lineno="914"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>This,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Rest&gt;</highlight></codeline>
-<codeline lineno="915"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Tuple,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">...<sp/>Idx&gt;</highlight></codeline>
-<codeline lineno="916"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>tuple&lt;This,<sp/>Rest...&gt;::__broaden_tuple(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Tuple&amp;<sp/>tup,<sp/><ref refid="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" kindref="member">index_sequence&lt;Idx...&gt;</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="917"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="918"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<ref refid="structhash" kindref="compound">hash</ref>&lt;<ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt;<ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t&lt;Idx, Tuple&gt;</ref>&gt;&gt;()(_NEFORCE<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get&lt;Idx&gt;</ref>(tup))<sp/>^<sp/>...);</highlight></codeline>
-<codeline lineno="919"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="920"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inner::__broadern_tuple_hash_aux&lt;Tuple,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Idx)&gt;<ref refid="structhash" kindref="compound">::hash</ref>(tup);</highlight></codeline>
-<codeline lineno="921"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="922"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="923"><highlight class="normal"></highlight></codeline>
-<codeline lineno="924"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="925"><highlight class="normal"></highlight></codeline>
-<codeline lineno="926"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="927"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">std<sp/>{</highlight></codeline>
-<codeline lineno="928"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Types&gt;</highlight></codeline>
-<codeline lineno="929"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">tuple_size&lt;_NEFORCE<sp/>tuple&lt;Types...&gt;&gt;<sp/>:<sp/>_NEFORCE<sp/>integral_constant&lt;_NEFORCE<sp/>size_t,<sp/>sizeof...(Types)&gt;<sp/>{};</highlight></codeline>
-<codeline lineno="930"><highlight class="normal"></highlight></codeline>
-<codeline lineno="931"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;_NEFORCE<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>I,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Types&gt;</highlight></codeline>
-<codeline lineno="932"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">tuple_element&lt;I,<sp/>_NEFORCE<sp/>tuple&lt;Types...&gt;&gt;<sp/>{</highlight></codeline>
-<codeline lineno="933"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t</ref>&lt;I,<sp/>_NEFORCE<sp/>tuple&lt;Types...&gt;&gt;;</highlight></codeline>
-<codeline lineno="934"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="935"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>std</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="936"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="937"><highlight class="normal"></highlight></codeline>
-<codeline lineno="938"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_UTILITY_TUPLE_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="885"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>This,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Rest&gt;</highlight></codeline>
+<codeline lineno="886"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Tuple,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">...<sp/>Idx&gt;</highlight></codeline>
+<codeline lineno="887"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>tuple&lt;This,<sp/>Rest...&gt;::__broaden_tuple(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Tuple&amp;<sp/>tup,<sp/><ref refid="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" kindref="member">index_sequence&lt;Idx...&gt;</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="888"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="hash_8hpp_1ada0179e2ceb52916b0009f805dbb58c8" kindref="member">hash_combine_all</ref>(_NEFORCE<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get&lt;Idx&gt;</ref>(tup)...);</highlight></codeline>
+<codeline lineno="889"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="890"><highlight class="normal"></highlight></codeline>
+<codeline lineno="891"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="892"><highlight class="normal"></highlight></codeline>
+<codeline lineno="893"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="894"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">std<sp/>{</highlight></codeline>
+<codeline lineno="895"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Types&gt;</highlight></codeline>
+<codeline lineno="896"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">tuple_size&lt;_NEFORCE<sp/>tuple&lt;Types...&gt;&gt;<sp/>:<sp/>_NEFORCE<sp/>integral_constant&lt;_NEFORCE<sp/>size_t,<sp/>sizeof...(Types)&gt;<sp/>{};</highlight></codeline>
+<codeline lineno="897"><highlight class="normal"></highlight></codeline>
+<codeline lineno="898"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;_NEFORCE<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>I,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Types&gt;</highlight></codeline>
+<codeline lineno="899"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">tuple_element&lt;I,<sp/>_NEFORCE<sp/>tuple&lt;Types...&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="900"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t</ref>&lt;I,<sp/>_NEFORCE<sp/>tuple&lt;Types...&gt;&gt;;</highlight></codeline>
+<codeline lineno="901"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="902"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>std</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="903"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="904"><highlight class="normal"></highlight></codeline>
+<codeline lineno="905"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_UTILITY_TUPLE_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp"/>
   </compounddef>
