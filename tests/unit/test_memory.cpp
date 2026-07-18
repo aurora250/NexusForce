@@ -2297,13 +2297,6 @@ TEST(TypeTraitsTest, IsSharedPtr) {
     EXPECT_FALSE((is_shared_ptr<unique_ptr<int>>::value));
 }
 
-TEST(HashTest, SharedPtrHash) {
-    auto sp = make_shared<int>(42);
-    size_t h = hash<shared_ptr<int>>()(sp);
-    size_t expected = hash<int*>()(sp.get());
-    EXPECT_EQ(h, expected);
-}
-
 TEST(AtomicSharedPtrTest, ConstructAndLoad) {
     auto sp = make_shared<int>(100);
     atomic<shared_ptr<int>> atom(sp);

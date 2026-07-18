@@ -11,14 +11,6 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-error_code last_error() noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    return {static_cast<int32_t>(::GetLastError()), system_category()};
-#else
-    return {errno, system_category()};
-#endif
-}
-
 error_condition error_category::default_error_condition(const int32_t ev) const noexcept { return {ev, *this}; }
 
 bool error_category::equivalent(const int code, const error_condition& condition) const noexcept {

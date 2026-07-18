@@ -2311,7 +2311,7 @@ TEST(VirtualThreadTask, MoveAssignToNonEmpty) {
     EXPECT_EQ(task2.get_result(), 42);
 }
 
-TEST(VirtualThreadTask, MoveAssignToNonEmptyWithYield) {
+TEST(VirtualThreadTask, MoveAssignToNonEmptyWithYield) { // may block
     auto task1 = virtual_thread::start([]() -> virtual_thread_task<int> {
         co_await virtual_thread::yield();
         co_return 77;

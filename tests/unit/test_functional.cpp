@@ -1,6 +1,7 @@
 #include <NeForce/core/functional/apply.hpp>
 #include <NeForce/core/functional/bind.hpp>
 #include <NeForce/core/functional/function.hpp>
+#include <NeForce/core/functional/hash.hpp>
 #include <NeForce/core/memory/shared_ptr.hpp>
 #include <NeForce/core/string/string.hpp>
 #include <NeForce/core/container/vector.hpp>
@@ -1617,3 +1618,177 @@ TEST_F(BindTest, BinderFrontTypeAlias) {
     auto bound = BinderType(0, free_add, 10);
     EXPECT_EQ(bound(20), 30);
 }
+
+class HashTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(HashTest, IntegerHashDeterministic) {
+    EXPECT_EQ(hash<int>()(42), hash<int>()(42));
+    EXPECT_EQ(hash<unsigned long long>()(123456789ULL), hash<unsigned long long>()(123456789ULL));
+}
+
+TEST_F(HashTest, IntegerHashNonZero) {
+    EXPECT_NE(hash<int>()(0), static_cast<size_t>(0));
+    EXPECT_NE(hash<char>()(0), static_cast<size_t>(0));
+    EXPECT_NE(hash<unsigned short>()(0), static_cast<size_t>(0));
+}
+
+TEST_F(HashTest, FloatHashDeterministic) {
+    EXPECT_EQ(hash<double>()(3.14), hash<double>()(3.14));
+    EXPECT_EQ(hash<float>()(1.5f), hash<float>()(1.5f));
+}
+
+TEST_F(HashTest, FloatHashZero) {
+    EXPECT_EQ(hash<float>()(0.0f), static_cast<size_t>(0));
+    EXPECT_EQ(hash<double>()(0.0), static_cast<size_t>(0));
+}
+
+TEST_F(HashTest, BoolHashDifferent) {
+    EXPECT_NE(hash<bool>()(true), hash<bool>()(false));
+    EXPECT_EQ(hash<bool>()(true), 0x9e3779b9);
+    EXPECT_EQ(hash<bool>()(false), 0x7f4a7c15);
+}
+
+TEST_F(HashTest, PointerHashIdentity) {
+    int x = 0;
+    EXPECT_EQ(hash<int*>()(&x), reinterpret_cast<size_t>(&x));
+}
+
+TEST_F(HashTest, EnumHashDelegates) {
+    enum class Color {
+        Red,
+        Green,
+        Blue
+    };
+    EXPECT_EQ(hash<Color>()(Color::Red), hash<int>()(static_cast<int>(Color::Red)));
+}
+
+TEST_F(HashTest, LowLevelHashAvalanche) { EXPECT_NE(low_level_hash(static_cast<size_t>(0)), static_cast<size_t>(0)); }
+
+TEST_F(HashTest, LowLevelHashDeterministic) {
+    EXPECT_EQ(low_level_hash(static_cast<size_t>(42)), low_level_hash(static_cast<size_t>(42)));
+    EXPECT_NE(low_level_hash(static_cast<size_t>(1)), low_level_hash(static_cast<size_t>(2)));
+}
+
+TEST_F(HashTest, HashCombineDeterministic) {
+    size_t seed1 = 0;
+    size_t seed2 = 0;
+    hash_combine(seed1, 42);
+    hash_combine(seed2, 42);
+    EXPECT_EQ(seed1, seed2);
+}
+
+TEST_F(HashTest, HashCombineOrderMatters) {
+    size_t seed1 = 0;
+    size_t seed2 = 0;
+    hash_combine(seed1, 1);
+    hash_combine(seed1, 2);
+    hash_combine(seed2, 2);
+    hash_combine(seed2, 1);
+    EXPECT_NE(seed1, seed2);
+}
+
+TEST_F(HashTest, HashCombineAll) {
+    size_t h1 = hash_combine_all(1, 2, 3);
+    size_t h2 = hash_combine_all(1, 2, 3);
+    size_t h3 = hash_combine_all(3, 2, 1);
+    EXPECT_EQ(h1, h2);
+    EXPECT_NE(h1, h3);
+}
+
+TEST_F(HashTest, XXH32Empty) { EXPECT_EQ(XXH32("", 0, 0), 0x02CC5D05U); }
+
+TEST_F(HashTest, XXH32Deterministic) {
+    const char data[] = "test data for xxh32";
+    EXPECT_EQ(XXH32(data, sizeof(data) - 1, 0), XXH32(data, sizeof(data) - 1, 0));
+}
+
+TEST_F(HashTest, FNVHashPreserved) {
+    EXPECT_EQ(FNV_hash(nullptr, 0), constants::FNV_OFFSET_BASIS);
+    EXPECT_EQ(FNV_hash_string("", 0), constants::FNV_OFFSET_BASIS);
+}
+
+TEST_F(HashTest, DJB2HashPreserved) { EXPECT_EQ(DJB2_hash("", 0), static_cast<size_t>(5381)); }
+
+TEST_F(HashTest, MurmurHashX32Empty) { EXPECT_EQ(murmur_hash32("", 0, 0), 0U); }
+
+TEST_F(HashTest, MurmurHashX32Deterministic) {
+    const char data[] = "murmur test";
+    uint32_t h1 = murmur_hash32(data, sizeof(data) - 1, 42);
+    uint32_t h2 = murmur_hash32(data, sizeof(data) - 1, 42);
+    EXPECT_EQ(h1, h2);
+}
+
+TEST_F(HashTest, AllAlgorithmsDeterministic) {
+    const byte_t data[] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77,
+                           0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF};
+    const size_t len = sizeof(data);
+
+    EXPECT_EQ(XXH32(data, len, 0), XXH32(data, len, 0));
+    EXPECT_EQ(murmur_hash32(data, len, 0), murmur_hash32(data, len, 0));
+}
+
+#ifdef NEFORCE_ARCH_BITS_64
+
+TEST_F(HashTest, XXH64Empty) { EXPECT_EQ(XXH64("", 0, 0), 0xEF46DB3751D8E999ULL); }
+
+TEST_F(HashTest, XXH64Deterministic) {
+    const char data[] = "test data for xxh64";
+    EXPECT_EQ(XXH64(data, sizeof(data) - 1, 0), XXH64(data, sizeof(data) - 1, 0));
+}
+
+TEST_F(HashTest, XXH3Empty) {
+    uint64_t h1 = XXH3_64("", 0);
+    uint64_t h2 = XXH3_64("", 0);
+    EXPECT_EQ(h1, h2);
+    EXPECT_NE(h1, static_cast<uint64_t>(0));
+}
+
+TEST_F(HashTest, XXH3Deterministic) {
+    const char data[] = "xxh3 test data";
+    EXPECT_EQ(XXH3_64(data, sizeof(data) - 1), XXH3_64(data, sizeof(data) - 1));
+}
+
+TEST_F(HashTest, WyhashEmpty) { EXPECT_NE(wyhash("", 0, 0), static_cast<uint64_t>(0)); }
+
+TEST_F(HashTest, WyhashDeterministic) {
+    const char data[] = "wyhash test data";
+    EXPECT_EQ(wyhash(data, sizeof(data) - 1, 42), wyhash(data, sizeof(data) - 1, 42));
+}
+
+TEST_F(HashTest, CityHash64Empty) { EXPECT_EQ(city_hash64("", 0), static_cast<size_t>(0x9ae16a3b2f90404fULL)); }
+
+TEST_F(HashTest, CityHash64Deterministic) {
+    const char data[] = "cityhash test data";
+    EXPECT_EQ(city_hash64(data, sizeof(data) - 1), city_hash64(data, sizeof(data) - 1));
+}
+
+TEST_F(HashTest, MurmurHashX64Empty) {
+    murmur_hash h = murmur_hash64("", 0, 0);
+    EXPECT_EQ(h.low, static_cast<size_t>(0));
+    EXPECT_EQ(h.high, static_cast<size_t>(0));
+}
+
+TEST_F(HashTest, MurmurHashX64Deterministic) {
+    const char data[] = "murmur x64 test";
+    murmur_hash h1 = murmur_hash64(data, sizeof(data) - 1, 42);
+    murmur_hash h2 = murmur_hash64(data, sizeof(data) - 1, 42);
+    EXPECT_EQ(h1.low, h2.low);
+    EXPECT_EQ(h1.high, h2.high);
+}
+
+TEST_F(HashTest, All64BitAlgorithmsDeterministic) {
+    const byte_t data[] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77,
+                           0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF};
+    const size_t len = sizeof(data);
+
+    EXPECT_EQ(XXH64(data, len, 0), XXH64(data, len, 0));
+    EXPECT_EQ(wyhash(data, len, 0), wyhash(data, len, 0));
+    EXPECT_EQ(city_hash64(data, len), city_hash64(data, len));
+    EXPECT_EQ(XXH3_64(data, len), XXH3_64(data, len));
+}
+
+#endif

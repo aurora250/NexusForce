@@ -58,10 +58,9 @@ NEFORCE_MACRO_RANGE_ARITHMETIC(__NEFORCE_SPECIALIZE_TYPE_NAME)
  */
 template <typename T>
 NEFORCE_NODISCARD constexpr type_id type_id_for() noexcept {
-    NEFORCE_IF_CONSTEXPR(type_name_v<T>.to_hash() != string_view("unknown").to_hash()) {
+    if (type_name_v<T>.to_hash() != string_view("unknown").to_hash()) {
         return type_name_v<T>.to_hash();
-    }
-    else {
+    } else {
 #ifdef NEFORCE_COMPILER_MSVC
         return FNV_hash_string(__FUNCSIG__, sizeof(__FUNCSIG__) - 1);
 #else

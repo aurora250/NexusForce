@@ -2933,7 +2933,12 @@ public:
 
     /// 计算哈希值
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_t to_hash() const noexcept {
-        return _NEFORCE FNV_hash_string(data(), size());
+        const size_t byte_len = length() * sizeof(CharT);
+#ifdef NEFORCE_ARCH_BITS_64
+        return static_cast<size_t>(_NEFORCE XXH64(data(), byte_len));
+#else
+        return static_cast<size_t>(_NEFORCE XXH32(data(), byte_len));
+#endif
     }
 };
 

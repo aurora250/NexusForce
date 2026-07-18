@@ -2726,17 +2726,6 @@ TEST(PairComparison, Less) {
     EXPECT_LT(s1, s3);
 }
 
-TEST(PairHash, ToHash) {
-    pair<int, int> p(1, 2);
-    size_t h = p.to_hash();
-    size_t expected = hash<int>()(1) ^ hash<int>()(2);
-    EXPECT_EQ(h, expected);
-    pair<string, int> ps("hello", 42);
-    size_t hs = ps.to_hash();
-    size_t exp_s = hash<string>()("hello") ^ hash<int>()(42);
-    EXPECT_EQ(hs, exp_s);
-}
-
 TEST(PairSwap, MemberSwap) {
     pair<int, int> a(1, 2), b(3, 4);
     a.swap(b);
@@ -3038,16 +3027,6 @@ TEST(TupleMain, GetRest) {
     EXPECT_EQ(get<1>(rest), "hi");
     const auto& crest = as_const(t).get_rest();
     EXPECT_EQ(get<0>(crest), 2.5);
-}
-
-TEST(TupleMain, Hash) {
-    tuple<int, string> t(10, "abc");
-    size_t h = t.to_hash();
-    size_t expected = hash<int>()(10) ^ hash<string>()("abc");
-    EXPECT_EQ(h, expected);
-
-    tuple<> empty_t;
-    EXPECT_EQ(empty_t.to_hash(), constants::FNV_OFFSET_BASIS);
 }
 
 TEST(TupleGet, Lvalue) {

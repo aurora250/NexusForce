@@ -296,14 +296,46 @@
 #    if defined(__SSE2__) || defined(_M_X64) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_SIMD_SSE2 1 ///< SSE2指令集可用
 #    endif
+#    if defined(__AVX__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_AVX 1 ///< AVX指令集可用
+#    endif
 #    if defined(__AVX2__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_SIMD_AVX2 1 ///< AVX2指令集可用
+#    endif
+#    if defined(__AVX512F__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_AVX512F 1 ///< AVX-512F指令集可用
+#    endif
+#    if (defined(NEFORCE_COMPILER_MSVC) && (defined(__AVX__) || defined(__AVX2__) || defined(__AVX512F__))) || \
+            defined(__SSSE3__)
+#        define NEFORCE_SIMD_SSSE3 1 ///< SSSE3指令集可用
 #    endif
 #elif (defined(NEFORCE_ARCH_ARM) && defined(__ARM_NEON)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #    define NEFORCE_SIMD_NEON 1 ///< ARM NEON指令集可用
 #endif
 
+#if defined(NEFORCE_SIMD_SSE2) || defined(NEFORCE_SIMD_AVX2) || defined(NEFORCE_SIMD_NEON)
+#    define NEFORCE_SUPPORT_SIMD 1 ///< SIMD 指令集可用
+#endif
+
 /** @} */ // SimdDetection
+
+/**
+ * @defgroup AesniDetection AES指令集检测
+ * @brief 检测硬件 AES 指令集支持
+ * @{
+ */
+
+#if defined(NEFORCE_ARCH_X86)
+#    if defined(__AES__) || defined(_MSC_VER) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_AES_NI 1 ///< Intel AES-NI指令集可用
+#    endif
+#elif defined(NEFORCE_ARCH_ARM)
+#    if defined(__ARM_FEATURE_AES) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_AES_ARM 1 ///< ARM AES指令集可用
+#    endif
+#endif
+
+/** @} */ // AesniDetection
 
 /**
  * @defgroup DataBusWidth 数据总线宽度

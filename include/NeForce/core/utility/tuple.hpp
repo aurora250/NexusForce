@@ -882,43 +882,10 @@ NEFORCE_NODISCARD constexpr typename inner::tuple_cat_bind_t<Tuples...>::Ret tup
 
 /** @} */ // Tuple
 
-#if !defined(NEFORCE_STANDARD_17)
-/// @cond
-NEFORCE_BEGIN_INNER__
-
-template <typename Tuple, size_t Index>
-struct __broadern_tuple_hash_aux {
-    static constexpr size_t hash(const Tuple& tup) {
-        using ElementType = remove_cvref_t<tuple_element_t<Index - 1, Tuple>>;
-        return __broadern_tuple_hash_aux<Tuple, Index - 1>::hash(tup) ^
-               _NEFORCE hash<ElementType>()(_NEFORCE get<Index - 1>(tup));
-    }
-};
-template <typename Tuple>
-struct __broadern_tuple_hash_aux<Tuple, 1> {
-    static constexpr size_t hash(const Tuple& tup) {
-        using ElementType = remove_cvref_t<tuple_element_t<0, Tuple>>;
-        return _NEFORCE hash<ElementType>()(_NEFORCE get<0>(tup));
-    }
-};
-template <typename Tuple>
-struct __broadern_tuple_hash_aux<Tuple, 0> {
-    static constexpr size_t hash(const Tuple& /*unused*/) { return 0; }
-};
-
-NEFORCE_END_INNER__
-/// @endcond
-#endif // !NEFORCE_STANDARD_17
-
-
 template <typename This, typename... Rest>
 template <typename Tuple, size_t... Idx>
 constexpr size_t tuple<This, Rest...>::__broaden_tuple(const Tuple& tup, index_sequence<Idx...> /*unused*/) noexcept {
-#ifdef NEFORCE_STANDARD_17
-    return (hash<remove_cvref_t<tuple_element_t<Idx, Tuple>>>()(_NEFORCE get<Idx>(tup)) ^ ...);
-#else
-    return inner::__broadern_tuple_hash_aux<Tuple, sizeof...(Idx)>::hash(tup);
-#endif // NEFORCE_STANDARD_17
+    return _NEFORCE hash_combine_all(_NEFORCE get<Idx>(tup)...);
 }
 
 NEFORCE_END_NAMESPACE__

@@ -1031,7 +1031,12 @@ public:
      * @return 哈希值
      */
     NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept {
-        return _NEFORCE FNV_hash_string(this->data(), this->length());
+        const size_t byte_len = length() * sizeof(CharT);
+#ifdef NEFORCE_ARCH_BITS_64
+        return static_cast<size_t>(_NEFORCE XXH64(data(), byte_len));
+#else
+        return static_cast<size_t>(_NEFORCE XXH32(data(), byte_len));
+#endif
     }
 };
 

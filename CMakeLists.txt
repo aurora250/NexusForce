@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.21)
 
 
 file(READ "config.json" JSON_CONTENT)
@@ -209,16 +209,18 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY  "${CMAKE_BINARY_DIR}/lib/$<CONFIG>")
 set(NEXUSFORCE_SQLCIPHER_LINKED FALSE)
 
 
-add_subdirectory(src)
-add_subdirectory(tests)
-add_subdirectory(examples)
-add_subdirectory(tools)
-add_subdirectory(benchmark)
-add_subdirectory(docs)
-
-
+include(cmake/NexusForceReflectScanner.cmake)
+include(cmake/NexusForceRuntime.cmake)
 include(cmake/NexusForceClangFormat.cmake)
 include(cmake/NexusForceClangTidy.cmake)
+
+
+add_subdirectory(src)
+add_subdirectory(tools)
+add_subdirectory(tests)
+add_subdirectory(examples)
+add_subdirectory(benchmark)
+add_subdirectory(docs)
 
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/NeForce/
@@ -271,6 +273,8 @@ install(FILES
 
 install(FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/cmake/NexusForceCompilerOptions.cmake
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/NexusForceReflectScanner.cmake
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/NexusForceRuntime.cmake
         DESTINATION ${INSTALL_CONFIGDIR}
 )
 

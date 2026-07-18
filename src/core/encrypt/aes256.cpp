@@ -1,6 +1,11 @@
 #include <NeForce/core/encrypt/aes256.hpp>
 #include <NeForce/core/memory/endian.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
+#if defined(NEFORCE_SIMD_AES_NI)
+#    include <wmmintrin.h>
+#elif defined(NEFORCE_SIMD_AES_ARM)
+#    include <arm_neon.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -177,7 +182,45 @@ namespace {
         }
     }
 
-    void encrypt_block(byte_t block[16], const byte_t* expanded_key) {
+#if defined(NEFORCE_SIMD_AES_NI) && defined(NEFORCE_COMPILER_CLANG)
+    __attribute__((target("aes,sse2")))
+#elif defined(NEFORCE_SIMD_AES_NI) && defined(NEFORCE_COMPILER_GCC)
+    __attribute__((target("aes,sse2")))
+#endif
+    void
+    encrypt_block(byte_t block[16], const byte_t* expanded_key) noexcept {
+#if defined(NEFORCE_SIMD_AES_NI)
+        ::__m128i state = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(block));
+
+        state = ::_mm_xor_si128(state, ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(expanded_key)));
+
+        for (int round = 1; round < 14; ++round) {
+            state = _mm_aesenc_si128(state, ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(
+                                                    expanded_key + static_cast<ptrdiff_t>(round * 16))));
+        }
+
+        state = ::_mm_aesenclast_si128(state, ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(
+                                                      expanded_key + static_cast<ptrdiff_t>(14 * 16))));
+
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(block), state);
+
+#elif defined(NEFORCE_SIMD_AES_ARM)
+        ::uint8x16_t state = ::vld1q_u8(block);
+
+        state = ::veorq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key)));
+
+        for (int round = 1; round < 14; ++round) {
+            state = ::vaeseq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(
+                                               expanded_key + static_cast<ptrdiff_t>(round * 16))));
+            state = ::vaesmcq_u8(state);
+        }
+
+        state = ::vaeseq_u8(
+                state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key + static_cast<ptrdiff_t>(14 * 16))));
+
+        ::vst1q_u8(block, state);
+
+#else
         AES256_add_round_key(block, expanded_key);
 
         for (int round = 1; round < 14; ++round) {
@@ -190,9 +233,50 @@ namespace {
         AES256_sub_bytes(block);
         AES256_shift_rows(block);
         AES256_add_round_key(block, expanded_key + static_cast<ptrdiff_t>(14 * 16));
+#endif
     }
 
-    void decrypt_block(byte_t block[16], const byte_t* expanded_key) {
+#if defined(NEFORCE_SIMD_AES_NI) && defined(NEFORCE_COMPILER_CLANG)
+    __attribute__((target("aes,sse2")))
+#elif defined(NEFORCE_SIMD_AES_NI) && defined(NEFORCE_COMPILER_GCC)
+    __attribute__((target("aes,sse2")))
+#endif
+    void
+    decrypt_block(byte_t block[16], const byte_t* expanded_key) noexcept {
+#if defined(NEFORCE_SIMD_AES_NI)
+        ::__m128i state = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(block));
+
+        state = ::_mm_xor_si128(state, ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(
+                                               expanded_key + static_cast<ptrdiff_t>(14 * 16))));
+
+        for (int round = 13; round >= 1; --round) {
+            ::__m128i rk = ::_mm_loadu_si128(
+                    reinterpret_cast<const ::__m128i*>(expanded_key + static_cast<ptrdiff_t>(round * 16)));
+            rk = ::_mm_aesimc_si128(rk);
+            state = ::_mm_aesdec_si128(state, rk);
+        }
+
+        state = ::_mm_aesdeclast_si128(state, ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(expanded_key)));
+
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(block), state);
+
+#elif defined(NEFORCE_SIMD_AES_ARM)
+        ::uint8x16_t state = ::vld1q_u8(block);
+
+        state = ::veorq_u8(
+                state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key + static_cast<ptrdiff_t>(14 * 16))));
+
+        for (int round = 13; round >= 1; --round) {
+            state = ::vaesdq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(
+                                               expanded_key + static_cast<ptrdiff_t>(round * 16))));
+            state = ::vaesimcq_u8(state);
+        }
+
+        state = ::vaesdq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key)));
+
+        ::vst1q_u8(block, state);
+
+#else
         AES256_add_round_key(block, expanded_key + static_cast<ptrdiff_t>(14 * 16));
 
         for (int round = 13; round >= 1; --round) {
@@ -205,6 +289,7 @@ namespace {
         AES256_inv_shift_rows(block);
         AES256_inv_sub_bytes(block);
         AES256_add_round_key(block, expanded_key);
+#endif
     }
 
     void xor_block(byte_t* dst, const byte_t* src) {
@@ -224,7 +309,8 @@ namespace {
     void gf128_multiply(uint64_t& hi, uint64_t& lo, const uint64_t H_hi, const uint64_t H_lo) {
         uint64_t Z_hi = 0, Z_lo = 0;
         uint64_t V_hi = H_hi, V_lo = H_lo;
-        uint64_t X_hi = hi, X_lo = lo;
+        const uint64_t X_hi = hi;
+        const uint64_t X_lo = lo;
 
         for (int i = 63; i >= 0; --i) {
             if (((X_hi >> i) & 1) != 0U) {
@@ -285,8 +371,8 @@ namespace {
         }
     }
 
-    void ghash_final(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo, size_t a_len, size_t c_len,
-                     byte_t out_tag[16]) {
+    void ghash_final(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo, const size_t a_len,
+                     const size_t c_len, byte_t out_tag[16]) {
         byte_t len_block[16] = {0};
         endian::write_be64(len_block, a_len * 8);
         endian::write_be64(len_block + 8, c_len * 8);

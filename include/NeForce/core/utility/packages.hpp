@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/core/interface/iobject.hpp"
+#include "NeForce/core/numeric/int128.hpp"
 #include "NeForce/core/string/format.hpp"
 #include "NeForce/core/string/to_numerics.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -248,6 +249,237 @@ struct package<unsigned long> {
     using type = uinteger32;
 };
 #endif
+
+
+/**
+ * @struct uinteger128
+ * @brief 128位无符号整数包装类
+ *
+ * 提供128位无符号整数的包装，支持类型转换、字符串表示、解析等功能。
+ */
+struct uinteger128 : iobject<uinteger128>, ipackage<uinteger128, uint128_t> {
+    using value_type = uint128_t;
+    using base = ipackage<uinteger128, uint128_t>;
+
+    constexpr uinteger128() noexcept = default;
+    NEFORCE_CONSTEXPR20 ~uinteger128() = default;
+
+    constexpr uinteger128(const uinteger128&) noexcept = default;
+    constexpr uinteger128(uinteger128&&) noexcept = default;
+
+    constexpr uinteger128& operator=(const uinteger128& other) noexcept = default;
+    constexpr uinteger128& operator=(uinteger128&& other) noexcept = default;
+
+    /**
+     * @brief 从基础类型构造
+     * @param value 128位无符号整数值
+     */
+    explicit constexpr uinteger128(const value_type value) noexcept :
+    base(value) {}
+
+    /**
+     * @brief 从基础类型赋值
+     * @param value 128位无符号整数值
+     * @return 自身引用
+     */
+    constexpr uinteger128& operator=(const value_type value) noexcept {
+        value_ = value;
+        return *this;
+    }
+
+    /**
+     * @brief 从字符串构造
+     * @param str 数字字符串
+     * @param base 进制基数（默认10）
+     * @throws typecast_exception 字符串格式无效时抛出
+     */
+    explicit NEFORCE_CONSTEXPR20 uinteger128(const string& str, const int base = 10) :
+    uinteger128(str.view(), base) {}
+
+    /**
+     * @brief 从字符串视图构造
+     * @param str 数字字符串视图
+     * @param base 进制基数（默认10）
+     * @throws typecast_exception 字符串格式无效时抛出
+     */
+    explicit constexpr uinteger128(string_view str, int base = 10);
+
+    NEFORCE_NODISCARD constexpr explicit operator bool() const noexcept { return value_ != value_type(); }
+
+    /**
+     * @brief 将基础类型值转换为字符串
+     * @param value 基础类型值
+     * @return 字符串表示
+     */
+    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 string to_string(const value_type value) {
+        return inner::__int_to_string_dispatch(value);
+    }
+
+    /**
+     * @brief 将当前对象转换为字符串
+     * @return 字符串表示
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return inner::__int_to_string_dispatch(value_); }
+
+    /**
+     * @brief 从字符串解析
+     * @param str 字符串视图
+     * @return 解析结果
+     * @throws typecast_exception 字符串格式无效时抛出
+     */
+    NEFORCE_NODISCARD static constexpr uinteger128 parse(const string_view str) {
+        return uinteger128{_NEFORCE to_uint128(str)};
+    }
+
+    /**
+     * @brief 重写左移赋值以支持128位移位
+     * @param shift 移位量
+     * @return 自身引用
+     */
+    constexpr uinteger128& operator<<=(const uint32_t shift) noexcept {
+        value_ <<= shift;
+        return *this;
+    }
+
+    /**
+     * @brief 重写右移赋值以支持128位移位
+     * @param shift 移位量
+     * @return 自身引用
+     */
+    constexpr uinteger128& operator>>=(const uint32_t shift) noexcept {
+        value_ >>= shift;
+        return *this;
+    }
+};
+
+/**
+ * @struct integer128
+ * @brief 128位有符号整数包装类
+ *
+ * 提供128位有符号整数的包装，支持类型转换、字符串表示、解析等功能。
+ */
+struct integer128 : iobject<integer128>, ipackage<integer128, int128_t> {
+    using value_type = int128_t;
+    using base = ipackage<integer128, int128_t>;
+
+    constexpr integer128() noexcept = default;
+    NEFORCE_CONSTEXPR20 ~integer128() = default;
+
+    constexpr integer128(const integer128&) noexcept = default;
+    constexpr integer128(integer128&&) noexcept = default;
+
+    constexpr integer128& operator=(const integer128& other) noexcept = default;
+    constexpr integer128& operator=(integer128&& other) noexcept = default;
+
+    /**
+     * @brief 从基础类型构造
+     * @param value 128位有符号整数值
+     */
+    explicit constexpr integer128(const value_type value) noexcept :
+    base(value) {}
+
+    /**
+     * @brief 从基础类型赋值
+     * @param value 128位有符号整数值
+     * @return 自身引用
+     */
+    constexpr integer128& operator=(const value_type value) noexcept {
+        value_ = value;
+        return *this;
+    }
+
+    /**
+     * @brief 从字符串构造
+     * @param str 数字字符串
+     * @param base 进制基数（默认10）
+     * @throws typecast_exception 字符串格式无效时抛出
+     */
+    explicit NEFORCE_CONSTEXPR20 integer128(const string& str, const int base = 10) :
+    integer128(str.view(), base) {}
+
+    /**
+     * @brief 从字符串视图构造
+     * @param str 数字字符串视图
+     * @param base 进制基数（默认10）
+     * @throws typecast_exception 字符串格式无效时抛出
+     */
+    explicit constexpr integer128(const string_view str, const int base = 10);
+
+    NEFORCE_NODISCARD constexpr explicit operator bool() const noexcept { return value_ != value_type(); }
+
+    /**
+     * @brief 将基础类型值转换为字符串
+     * @param value 基础类型值
+     * @return 字符串表示
+     */
+    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 string to_string(const value_type value) {
+        return inner::__int_to_string_dispatch(value);
+    }
+
+    /**
+     * @brief 将当前对象转换为字符串
+     * @return 字符串表示
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return inner::__int_to_string_dispatch(value_); }
+
+    /**
+     * @brief 从字符串解析
+     * @param str 字符串视图
+     * @return 解析结果
+     * @throws typecast_exception 字符串格式无效时抛出
+     */
+    NEFORCE_NODISCARD static constexpr integer128 parse(const string_view str) {
+        return integer128{_NEFORCE to_int128(str)};
+    }
+
+    /**
+     * @brief 重写左移赋值以支持128位移位
+     * @param shift 移位量
+     * @return 自身引用
+     */
+    constexpr integer128& operator<<=(const uint32_t shift) noexcept {
+        ignore = value_ <<= shift;
+        return *this;
+    }
+
+    /**
+     * @brief 重写右移赋值以支持128位移位（算术右移）
+     * @param shift 移位量
+     * @return 自身引用
+     */
+    constexpr integer128& operator>>=(const uint32_t shift) noexcept {
+        ignore = value_ >>= shift;
+        return *this;
+    }
+};
+
+constexpr uinteger128::uinteger128(const string_view str, const int base) {
+    *this = uinteger128{to_uint128(str, nullptr, base)};
+}
+
+constexpr integer128::integer128(const string_view str, const int base) {
+    *this = integer128{to_int128(str, nullptr, base)};
+}
+
+template <>
+struct package<uint128_t> {
+    using type = uinteger128;
+};
+
+template <>
+struct unpackage<uinteger128> {
+    using type = uint128_t;
+};
+
+template <>
+struct package<int128_t> {
+    using type = integer128;
+};
+
+template <>
+struct unpackage<integer128> {
+    using type = int128_t;
+};
 
 
 /**

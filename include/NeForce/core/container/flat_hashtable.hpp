@@ -17,7 +17,7 @@
 #include "NeForce/core/interface/iiterator.hpp"
 #include "NeForce/core/memory/construct.hpp"
 #include "NeForce/core/memory/bit.hpp"
-#include "NeForce/core/simd/simd_util.hpp"
+#include "NeForce/core/simd/bytes.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -435,7 +435,48 @@ private:
                     const size_t h1 = (hash >> 7) & (new_capacity - 1);
 
                     size_t new_idx = h1;
-                    while (new_metadata[new_idx] != FLAT_HT_EMPTY) {
+                    bool placed = false;
+                    for (size_t j = 0; j < new_capacity; ++j) {
+                        const byte_t nm = new_metadata[new_idx];
+                        if (nm == FLAT_HT_EMPTY) {
+                            break;
+                        }
+                        if (nm == h2 && equals_(extracter_(new_data[new_idx]), key)) {
+                            size_t run_end = new_idx;
+                            for (size_t k = j + 1; k < new_capacity; ++k) {
+                                run_end = (run_end + 1) & (new_capacity - 1);
+                                const byte_t rmn = new_metadata[run_end];
+                                if (rmn == FLAT_HT_EMPTY) {
+                                    new_idx = run_end;
+                                    placed = true;
+                                    break;
+                                }
+                                if (rmn == h2 && equals_(extracter_(new_data[run_end]), key)) {
+                                    continue;
+                                }
+                                size_t shift_end = run_end;
+                                for (size_t m = 0; m < new_capacity; ++m) {
+                                    shift_end = (shift_end + 1) & (new_capacity - 1);
+                                    if (new_metadata[shift_end] == FLAT_HT_EMPTY) {
+                                        break;
+                                    }
+                                }
+                                while (shift_end != run_end) {
+                                    const size_t prev = (shift_end - 1) & (new_capacity - 1);
+                                    _NEFORCE construct(&new_data[shift_end], _NEFORCE move(new_data[prev]));
+                                    _NEFORCE destroy(&new_data[prev]);
+                                    new_metadata[shift_end] = new_metadata[prev];
+                                    shift_end = prev;
+                                }
+                                new_idx = run_end;
+                                placed = true;
+                                break;
+                            }
+                            if (!placed) {
+                                new_idx = run_end;
+                            }
+                            break;
+                        }
                         new_idx = (new_idx + 1) & (new_capacity - 1);
                     }
                     _NEFORCE construct(&new_data[new_idx], _NEFORCE move(old_data[i]));
@@ -479,6 +520,31 @@ private:
         metadata_[idx] = h2;
         ++size_;
         --growth_left_;
+    }
+
+    /**
+     * @brief 移动元素以在指定位置腾出空槽
+     * @param pos 需要腾空的位置索引
+     *
+     * 从 pos 开始向后找到第一个 EMPTY 或 DELETED 槽，
+     * 将 [pos, end) 的元素向后移动一位，使 pos 空闲。
+     */
+    void shift_make_room(const size_t pos) noexcept {
+        size_t end = pos;
+        for (size_t i = 0; i < capacity_; ++i) {
+            end = (end + 1) & (capacity_ - 1);
+            const byte_t m = metadata_[end];
+            if (m == FLAT_HT_EMPTY || m == FLAT_HT_DELETED) {
+                break;
+            }
+        }
+        while (end != pos) {
+            const size_t prev = (end - 1) & (capacity_ - 1);
+            _NEFORCE construct(&data_[end], _NEFORCE move(data_[prev]));
+            _NEFORCE destroy(&data_[prev]);
+            metadata_[end] = metadata_[prev];
+            end = prev;
+        }
     }
 
     /**
@@ -550,7 +616,8 @@ private:
             if (!equals_(key_l, key_r)) {
                 return false;
             }
-            size_type i_start = i, j_start = j;
+            const size_type i_start = i;
+            const size_type j_start = j;
             while (i < n && equals_(extracter_(*ptrs_lhs[i]), key_l)) {
                 ++i;
             }
@@ -876,11 +943,10 @@ public:
         const size_t hash = hasher_(key);
         const byte_t h2 = hash_to_h2(hash);
 
-        pair<size_t, bool> probe_result;
 #ifdef NEFORCE_SIMD_SSE2
-        probe_result = probe_find_or_insert_simd(key, h2);
+        pair<size_t, bool> probe_result = probe_find_or_insert_simd(key, h2);
 #else
-        probe_result = probe_find_or_insert(key, h2);
+        pair<size_t, bool> probe_result = probe_find_or_insert(key, h2);
 #endif
 
         if (probe_result.second) {
@@ -925,6 +991,28 @@ public:
             }
             if (meta == FLAT_HT_DELETED && first_deleted == npos) {
                 first_deleted = idx;
+            } else if (meta == h2 && equals_(extracter_(data_[idx]), key)) {
+                size_t run_end = idx;
+                for (size_t j = i + 1; j < capacity_; ++j) {
+                    run_end = (run_end + 1) & (capacity_ - 1);
+                    if (run_end == 0) {
+                        const size_type new_cap = capacity_ * 2;
+                        rehash(max(new_cap, static_cast<size_t>(static_cast<double>(size_ + 1) / max_load_factor())));
+                        return emplace_equal(_NEFORCE move(tmp));
+                    }
+                    const byte_t rm = metadata_[run_end];
+                    if (rm == FLAT_HT_EMPTY || rm == FLAT_HT_DELETED) {
+                        construct_at(run_end, h2, _NEFORCE move(tmp));
+                        return iterator(run_end, this);
+                    }
+                    if (rm == h2 && equals_(extracter_(data_[run_end]), key)) {
+                        continue;
+                    }
+                    shift_make_room(run_end);
+                    construct_at(run_end, h2, _NEFORCE move(tmp));
+                    return iterator(run_end, this);
+                }
+                NEFORCE_THROW_EXCEPTION(value_exception("flat_hashtable: no available slot for insert_equal"));
             }
             idx = (idx + 1) & (capacity_ - 1);
         }

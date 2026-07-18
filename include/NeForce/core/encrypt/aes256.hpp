@@ -75,8 +75,6 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 提供静态方法进行AES-256加密和解密操作。
  * 支持 ECB / CBC / GCM 模式和PKCS7填充。
- *
- * TODO: AES-NI optimization
  */
 struct NEFORCE_API AES256 {
     /**

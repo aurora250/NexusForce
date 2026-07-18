@@ -9,6 +9,7 @@
  */
 
 #include "NeForce/network/tcp/tcp_socket.hpp"
+#include "NeForce/network/ssl/ssl_exception.hpp"
 #include "NeForce/network/ssl/ssl_stream.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

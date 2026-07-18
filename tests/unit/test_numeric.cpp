@@ -1,7 +1,7 @@
 #include <NeForce/core/container/vector.hpp>
-#include <NeForce/core/numeric/int128.hpp>
 #include <NeForce/core/numeric/math.hpp>
 #include <NeForce/core/numeric/random.hpp>
+#include <NeForce/core/utility/packages.hpp>
 #include <gtest/gtest.h>
 #include <limits>
 using namespace neforce;
@@ -1172,20 +1172,19 @@ TEST(Uint128ConstructionTest, MoveAssignment) {
 }
 
 TEST(Uint128ConstructionTest, StringConstructorDecimal) {
-    uint128_t a("123456789012345678901234567890"_s);
-    EXPECT_EQ(a.to_string(), "123456789012345678901234567890");
+    uint128_t a = to_uint128("123456789012345678901234567890");
+    EXPECT_EQ(uinteger128::to_string(a), "123456789012345678901234567890");
 }
 
 TEST(Uint128ConstructionTest, StringConstructorHex) {
-    uint128_t a("0x1A2B3C4D5E6F7890"_s, 0);
-    string s = a.to_string();
+    uint128_t a = to_uint128("0x1A2B3C4D5E6F7890", nullptr, 0);
     EXPECT_EQ(a, uint128_t(0x1A2B3C4D5E6F7890ULL));
 }
 
 TEST(Uint128ConstructionTest, StringViewConstructor) {
-    string s = "99999999999999999999";
-    uint128_t a(s);
-    EXPECT_EQ(a.to_string(), s);
+    string_view s = "99999999999999999999";
+    uint128_t a = to_uint128(s);
+    EXPECT_EQ(uinteger128::to_string(a), s);
 }
 
 TEST(Uint128ConversionTest, ToBool) {
@@ -1292,11 +1291,11 @@ TEST(Uint128ComparisonTest, GreaterOrEqual) {
 
 TEST(Uint128UnaryOperatorsTest, Negate) {
     uint128_t a(0ULL, 1ULL);
-    uint128_t b = -a;
+    uint128_t b = a.negation();
     EXPECT_EQ(b.hi, 0xFFFFFFFFFFFFFFFFULL);
     EXPECT_EQ(b.lo, 0xFFFFFFFFFFFFFFFFULL);
     uint128_t c(0ULL, 0ULL);
-    uint128_t d = -c;
+    uint128_t d = c.negation();
     EXPECT_EQ(d.hi, 0u);
     EXPECT_EQ(d.lo, 0u);
 }
@@ -1460,15 +1459,15 @@ TEST(Uint128StaticMethodsTest, MinMax) {
 }
 
 TEST(Uint128StaticMethodsTest, Parse) {
-    auto a = uint128_t::parse("12345678901234567890");
+    auto a = uinteger128::parse("12345678901234567890");
     EXPECT_EQ(a.to_string(), "12345678901234567890");
 }
 
 TEST(Uint128StaticMethodsTest, ToString) {
     uint128_t a(0xFFFFFFFFFFFFFFFFULL, 0xFFFFFFFFFFFFFFFFULL);
-    string s = a.to_string();
+    string s = uinteger128::to_string(a);
     EXPECT_FALSE(s.empty());
-    uint128_t b(s);
+    uint128_t b = to_uint128(s.view());
     EXPECT_EQ(a, b);
 }
 
@@ -1496,7 +1495,7 @@ TEST(Uint128ExceptionTest, DivisionByZero) {
     EXPECT_THROW(a %= uint128_t(0), math_exception);
 }
 
-TEST(Uint128ExceptionTest, InvalidString) { EXPECT_THROW(uint128_t("not_a_number"_s), typecast_exception); }
+TEST(Uint128ExceptionTest, InvalidString) { EXPECT_THROW(uinteger128("not_a_number"_s), typecast_exception); }
 
 TEST(Int128ConstructionTest, DefaultConstructor) {
     int128_t a;
@@ -1557,7 +1556,7 @@ TEST(Int128ConstructionTest, AssignmentFromUint128) {
 }
 
 TEST(Int128ConstructionTest, StringConstructor) {
-    int128_t a("-12345678901234567890"_s);
+    integer128 a("-12345678901234567890"_s);
     string s = a.to_string();
     EXPECT_EQ(s, "-12345678901234567890"_s);
 }
@@ -1642,10 +1641,10 @@ TEST(Int128ComparisonTest, GreaterOrEqual) {
 
 TEST(Int128UnaryOperatorsTest, Negate) {
     int128_t a(50);
-    int128_t b = -a;
+    int128_t b = a.negation();
     EXPECT_EQ(b, int128_t(-50));
     int128_t c(-0x7FFFFFFFFFFFFFFFLL);
-    int128_t d = -c;
+    int128_t d = c.negation();
     EXPECT_EQ(d.lo, 0x7FFFFFFFFFFFFFFFULL);
     EXPECT_EQ(d.hi, 0u);
 }
@@ -1788,15 +1787,15 @@ TEST(Int128StaticMethodsTest, MinMax) {
 }
 
 TEST(Int128StaticMethodsTest, Parse) {
-    auto a = int128_t::parse("-12345");
-    EXPECT_EQ(a, int128_t(-12345));
+    auto a = integer128::parse("-12345");
+    EXPECT_EQ(a, integer128(int128_t(-12345)));
 }
 
 TEST(Int128StaticMethodsTest, ToString) {
-    int128_t a(0x8000000000000000ULL, static_cast<uint64_t>(0ULL));
-    string s = a.to_string();
+    int128_t a = int128_t::min();
+    string s = integer128::to_string(a);
     EXPECT_FALSE(s.empty());
-    int128_t b(s);
+    int128_t b = to_int128(s.view());
     EXPECT_EQ(a, b);
 }
 
@@ -1824,7 +1823,7 @@ TEST(Int128ExceptionTest, DivisionByZero) {
     EXPECT_THROW(a %= int128_t(0), math_exception);
 }
 
-TEST(Int128ExceptionTest, InvalidString) { EXPECT_THROW(int128_t("abc"_s), typecast_exception); }
+TEST(Int128ExceptionTest, InvalidString) { EXPECT_THROW(integer128("abc"_s), typecast_exception); }
 
 TEST(GlobalConvertersTest, ToUint128) {
     auto val = to_uint128("42");

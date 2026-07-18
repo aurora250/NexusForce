@@ -437,10 +437,7 @@ struct pair : icommon<pair<T1, T2>> {
      *
      * 使用两个元素的hash值进行异或操作
      */
-    NEFORCE_NODISCARD constexpr size_t to_hash() const
-            noexcept(noexcept(hash<remove_cvref_t<T1>>()(first) ^ hash<remove_cvref_t<T2>>()(second))) {
-        return hash<remove_cvref_t<T1>>()(first) ^ hash<remove_cvref_t<T2>>()(second);
-    }
+    NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept { return _NEFORCE hash_combine_all(first, second); }
 
     /**
      * @brief 交换两个pair的内容

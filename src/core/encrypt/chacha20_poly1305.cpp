@@ -1,6 +1,7 @@
 #include <NeForce/core/encrypt/chacha20_poly1305.hpp>
 #include <NeForce/core/memory/endian.hpp>
 #include <NeForce/core/memory/memory.hpp>
+#include <NeForce/core/simd/types.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -58,6 +59,64 @@ namespace {
         }
     }
 
+#ifdef NEFORCE_SIMD_SSE2
+    NEFORCE_ALWAYS_INLINE_INLINE ::__m128i chacha20_rotl32(__m128i v, const int bits) {
+        return ::_mm_or_si128(::_mm_slli_epi32(v, bits), ::_mm_srli_epi32(v, 32 - bits));
+    }
+
+    void chacha20_quarter_round_simd(::__m128i& a, ::__m128i& b, ::__m128i& c, ::__m128i& d) {
+        a = ::_mm_add_epi32(a, b);
+        d = ::_mm_xor_si128(d, a);
+        d = chacha20_rotl32(d, 16);
+        c = ::_mm_add_epi32(c, d);
+        b = ::_mm_xor_si128(b, c);
+        b = chacha20_rotl32(b, 12);
+        a = ::_mm_add_epi32(a, b);
+        d = ::_mm_xor_si128(d, a);
+        d = chacha20_rotl32(d, 8);
+        c = ::_mm_add_epi32(c, d);
+        b = ::_mm_xor_si128(b, c);
+        b = chacha20_rotl32(b, 7);
+    }
+
+    void chacha20_block_simd(const byte_t* key, const uint32_t counter, const byte_t* nonce, byte_t* output) {
+        ::__m128i v0 = ::_mm_set_epi32(endian::read_le32(CHACHA_CONST + 12), endian::read_le32(CHACHA_CONST + 8),
+                                       endian::read_le32(CHACHA_CONST + 4), endian::read_le32(CHACHA_CONST + 0));
+        ::__m128i v1 = ::_mm_set_epi32(endian::read_le32(key + 12), endian::read_le32(key + 8),
+                                       endian::read_le32(key + 4), endian::read_le32(key + 0));
+        ::__m128i v2 = ::_mm_set_epi32(endian::read_le32(key + 28), endian::read_le32(key + 24),
+                                       endian::read_le32(key + 20), endian::read_le32(key + 16));
+        ::__m128i v3 = ::_mm_set_epi32(endian::read_le32(nonce + 8), endian::read_le32(nonce + 4),
+                                       endian::read_le32(nonce + 0), counter);
+
+        ::__m128i w0 = v0, w1 = v1, w2 = v2, w3 = v3;
+
+        for (int i = 0; i < 10; ++i) {
+            chacha20_quarter_round_simd(w0, w1, w2, w3);
+
+            w1 = _mm_shuffle_epi32(w1, _MM_SHUFFLE(0, 3, 2, 1));
+            w2 = _mm_shuffle_epi32(w2, _MM_SHUFFLE(1, 0, 3, 2));
+            w3 = _mm_shuffle_epi32(w3, _MM_SHUFFLE(2, 1, 0, 3));
+
+            chacha20_quarter_round_simd(w0, w1, w2, w3);
+
+            w1 = _mm_shuffle_epi32(w1, _MM_SHUFFLE(2, 1, 0, 3));
+            w2 = _mm_shuffle_epi32(w2, _MM_SHUFFLE(1, 0, 3, 2));
+            w3 = _mm_shuffle_epi32(w3, _MM_SHUFFLE(0, 3, 2, 1));
+        }
+
+        w0 = ::_mm_add_epi32(w0, v0);
+        w1 = ::_mm_add_epi32(w1, v1);
+        w2 = ::_mm_add_epi32(w2, v2);
+        w3 = ::_mm_add_epi32(w3, v3);
+
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(output + 0), w0);
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(output + 16), w1);
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(output + 32), w2);
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(output + 48), w3);
+    }
+#endif
+
     byte_vector chacha20_encrypt(const byte_t* key, const uint32_t counter, const byte_t* nonce, const byte_t* data,
                                  const size_t len) {
         byte_vector out;
@@ -67,11 +126,30 @@ namespace {
         uint32_t blk_ctr = counter;
 
         for (size_t offset = 0; offset < len; offset += 64) {
+#ifdef NEFORCE_SIMD_SSE2
+            chacha20_block_simd(key, blk_ctr, nonce, keystream);
+#else
             chacha20_block(key, blk_ctr, nonce, keystream);
+#endif
             const size_t chunk = (len - offset > 64) ? 64 : len - offset;
+#ifdef NEFORCE_SIMD_SSE2
+            size_t j = 0;
+            for (; j + 16 <= chunk; j += 16) {
+                const ::__m128i d = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(data + offset + j));
+                const ::__m128i k = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(keystream + j));
+                const ::__m128i r = ::_mm_xor_si128(d, k);
+                alignas(16) byte_t buf[16];
+                ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(buf), r);
+                out.insert(out.end(), buf, buf + 16);
+            }
+            for (; j < chunk; ++j) {
+                out.push_back(data[offset + j] ^ keystream[j]);
+            }
+#else
             for (size_t j = 0; j < chunk; ++j) {
                 out.push_back(data[offset + j] ^ keystream[j]);
             }
+#endif
             ++blk_ctr;
         }
 

@@ -1,10 +1,34 @@
 #include <NeForce/core/file/json/json_parser.hpp>
+#include <NeForce/core/memory/bit.hpp>
+#include <NeForce/core/simd/types.hpp>
 #include <NeForce/core/string/codepoint.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+// TODO: SIMD structural index — detect all {}[]:,"\ in one pass for token-level acceleration
+// TODO: SIMD digit scanning in parse_number() — classify 16 digits at once for faster number token extraction
+
+
 void json_parser::skip_space() noexcept {
+#ifdef NEFORCE_SIMD_SSE2
+    while (pos_ + 16 <= len_) {
+        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
+        ::__m128i ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\t')));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\v')));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\f')));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
+        const int mask = ::_mm_movemask_epi8(ws);
+        if (mask == 0xFFFF) {
+            pos_ += 16;
+        } else {
+            pos_ += static_cast<size_t>(countr_zero(static_cast<uintptr_t>(~mask)));
+            return;
+        }
+    }
+#endif
     while (pos_ < len_ && is_space(text_[pos_])) {
         pos_++;
     }
@@ -24,6 +48,30 @@ unique_ptr<json_string> json_parser::parse_string() {
     string result;
 
     while (pos_ < len_) {
+#ifdef NEFORCE_SIMD_SSE2
+        while (pos_ + 16 <= len_) {
+            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
+            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
+            const ::__m128i is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
+            const ::__m128i is_ctrl = ::_mm_cmpgt_epi8(::_mm_set1_epi8(0x1F), v);
+            const ::__m128i special = ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), is_ctrl);
+            const int mask = ::_mm_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(text_.data() + pos_, 16);
+                pos_ += 16;
+            } else {
+                const int advance = countr_zero(static_cast<uintptr_t>(mask));
+                if (advance > 0) {
+                    result.append(text_.data() + pos_, static_cast<size_t>(advance));
+                    pos_ += static_cast<size_t>(advance);
+                }
+                break;
+            }
+        }
+        if (pos_ >= len_) {
+            break;
+        }
+#endif
         const char c = text_[pos_++];
         if (c == '"') {
             return make_unique<json_string>(move(result));

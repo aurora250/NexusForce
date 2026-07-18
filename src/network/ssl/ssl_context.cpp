@@ -1,6 +1,6 @@
 #include <NeForce/network/ssl/ssl_context.hpp>
+#include <NeForce/network/ssl/ssl_exception.hpp>
 #include <NeForce/core/system/pipe.hpp>
-#include <openssl/err.h>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <wincrypt.h>
 #endif
@@ -160,18 +160,6 @@ namespace {
 #endif
 } // namespace
 
-
-int ssl_exception::last_error() noexcept { return static_cast<int>(::ERR_peek_last_error()); }
-
-string ssl_exception::last_error_message() {
-    char buf[256];
-    const auto err = ::ERR_peek_last_error();
-    if (err == 0) {
-        return "";
-    }
-    ::ERR_error_string_n(err, static_cast<char*>(buf), sizeof(buf));
-    return {static_cast<char*>(buf)};
-}
 
 ssl_context::ssl_context(const ssl_method method) :
 method_(method) {

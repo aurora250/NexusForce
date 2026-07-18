@@ -129,10 +129,7 @@ TEST_F(SslContextTest, AlpnProtosValidList) {
 }
 
 TEST_F(SslContextTest, ServerContextDoesNotVerifyPeerByDefault) {
-    // Server contexts should NOT enforce peer verification by default
     ssl_context ctx(ssl_method::TLS_SERVER);
-    // require_client_certificate sets SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT
-    // but the default constructor for server should not have SSL_VERIFY_PEER
     EXPECT_NO_THROW(ctx.require_client_certificate());
 }
 
@@ -951,42 +948,6 @@ TEST_F(SslClientTest, LoadCaPathCreatesContext) {
     EXPECT_TRUE(client.has_ssl_context());
 }
 
-class SslExceptionTest : public ::testing::Test {
-protected:
-    void SetUp() override {}
-    void TearDown() override {}
-};
-
-TEST_F(SslExceptionTest, ConstructWithInfo) {
-    ssl_exception ex("test error");
-    EXPECT_NE(ex.what(), nullptr);
-}
-
-TEST_F(SslExceptionTest, ConstructWithCode) {
-    ssl_exception ex(0);
-    EXPECT_NE(ex.what(), nullptr);
-}
-
-TEST_F(SslExceptionTest, ConstructFromException) {
-    exception base("base error");
-    ssl_exception ex(base);
-    EXPECT_NE(ex.what(), nullptr);
-}
-
-TEST_F(SslExceptionTest, LastErrorReturnsInteger) {
-    int err = ssl_exception::last_error();
-    EXPECT_GE(err, 0);
-}
-
-TEST_F(SslExceptionTest, LastErrorMessageReturnsString) {
-    auto msg = ssl_exception::last_error_message();
-    EXPECT_TRUE(msg.empty() || !msg.empty());
-}
-
-// ============================================================================
-// ALPN 协商测试
-// ============================================================================
-
 class SslAlpnNegotiateTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -1001,7 +962,6 @@ TEST_F(SslAlpnNegotiateTest, StreamWithoutSslReturnsEmpty) {
 TEST_F(SslAlpnNegotiateTest, StreamBeforeHandshakeReturnsEmpty) {
     ssl_context ctx(ssl_method::TLS_SERVER);
     ssl_stream stream(ctx);
-    // SSL object exists but no handshake → ALPN should be empty
     auto alpn = stream.get_alpn_negotiated();
     EXPECT_TRUE(alpn.empty());
 }
@@ -1011,7 +971,7 @@ TEST_F(SslAlpnNegotiateTest, StreamWithClientContextNoHandshake) {
     ctx.set_alpn_protos({"h2", "http/1.1"});
     ssl_stream stream(ctx);
     auto alpn = stream.get_alpn_negotiated();
-    EXPECT_TRUE(alpn.empty()); // no handshake yet
+    EXPECT_TRUE(alpn.empty());
 }
 
 TEST_F(SslAlpnNegotiateTest, SocketWithoutSslReturnsEmpty) {
@@ -1022,7 +982,6 @@ TEST_F(SslAlpnNegotiateTest, SocketWithoutSslReturnsEmpty) {
 TEST_F(SslAlpnNegotiateTest, SocketWithSslNoHandshakeReturnsEmpty) {
     ssl_context ctx(ssl_method::TLS_SERVER);
     ssl_socket sock;
-    // 即使构造了ssl_context, 但未执行init_server_ssl → ssl_未初始化
     EXPECT_TRUE(sock.get_alpn_negotiated().empty());
 }
 

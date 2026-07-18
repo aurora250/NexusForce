@@ -420,6 +420,57 @@ sudo make install
 python ./scripts/install_nexusforce.py --release
 ```
 
+### 🔗 在你的项目中使用 NexusForce
+
+安装完成后，在你的 CMake 项目中通过 `find_package` 引入 NexusForce，并使用提供的配置函数完成编译选项、反射扫描和运行时部署。
+
+#### 基础链接
+
+```cmake
+cmake_minimum_required(VERSION 3.19)
+project(my_app)
+
+find_package(NexusForce REQUIRED)
+
+add_executable(my_app main.cpp)
+target_link_libraries(my_app PRIVATE NexusForce::NexusForce)
+nexusforce_compiler_options(my_app)
+```
+
+#### 反射代码生成（NFRS）
+
+如果你的代码中使用了 `NEFORCE_REFLECT_OBJ` 等反射标记宏，通过 `nexusforce_reflect_scan()` 一键集成 NFRS 预编译扫描：
+
+```cmake
+# 扫描 src/ 目录下的头文件，自动生成反射注册代码并注入到目标
+nexusforce_reflect_scan(
+    TARGET  my_app
+    HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+```
+
+函数会在构建时运行 NFRS 扫描指定目录中的 `.hpp` / `.h` 文件，生成 `_nfrs_gen_<target>.cpp` 并自动添加到目标源文件列表。
+
+参数说明：
+
+| 参数 | 必填 | 说明 |
+|------|------|------|
+| `TARGET` | 是 | 要注入生成代码的目标 |
+| `HEADERS` | 是 | 要扫描的头文件目录 |
+| `OUTPUT` | 否 | 生成文件路径，默认 `${CMAKE_CURRENT_BINARY_DIR}/_nfrs_gen_<target>.cpp` |
+| `EXCLUDES` | 否 | 排除的路径片段（传递给 NFRS 的 `-e` 选项） |
+| `DEPENDS` | 否 | 额外的 CMake 级依赖文件 |
+
+#### 运行时 DLL 部署
+
+在 Windows 上，链接共享库后需要将 DLL 部署到可执行文件所在目录才能直接运行。使用 `nexusforce_deploy_runtime()` 自动完成：
+
+```cmake
+nexusforce_deploy_runtime(my_app)
+```
+
+该函数在 Windows 上通过 `POST_BUILD` 将 `NexusForce.dll` 复制到目标输出目录。Linux 上此函数为空操作（由 RPATH 机制处理）。
+
 ---
 
 ---

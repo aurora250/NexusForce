@@ -28,6 +28,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/xor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/breakpoint.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/error_category.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/error_code.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/terminate.cpp
@@ -58,7 +59,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/int128.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/binary_serializer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/json_serializer.cpp
@@ -145,6 +145,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_acceptor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/sni_manager.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_context.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_stream.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_acceptor.cpp
@@ -167,6 +168,10 @@ add_library(NexusForce::NexusForce ALIAS NexusForce)
 target_compile_definitions(NexusForce
         PUBLIC
         $<$<CONFIG:Debug>:NEFORCE_STATE_DEBUG>
+        NEXUSFORCE_VERSION_MAJOR=${NEXUSFORCE_VERSION_MAJOR}
+        NEXUSFORCE_VERSION_MINOR=${NEXUSFORCE_VERSION_MINOR}
+        NEXUSFORCE_VERSION_PATCH=${NEXUSFORCE_VERSION_PATCH}
+        NEXUSFORCE_VERSION="${NEXUSFORCE_VERSION}"
 )
 
 if(NEXUSFORCE_USING_SSO)

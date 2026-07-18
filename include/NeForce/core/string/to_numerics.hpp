@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/core/numeric/math.hpp"
+#include "NeForce/core/numeric/int128.hpp"
 #include "NeForce/core/string/string_view.hpp"
 #ifdef max
 #    undef max
@@ -252,7 +253,8 @@ constexpr enable_if_t<is_unsigned_v<T>, T> str_to_uints(const string_view sv, ch
         // for unsigned, negative sign yields two's complement wrap,
         // but we follow C standard: strtoul("-1", ...) returns ULLONG_MAX.
         // So just cast via signed negation then to unsigned.
-        return static_cast<T>(-static_cast<typename make_signed<T>::type>(result));
+        return static_cast<T>(static_cast<typename make_signed<T>::type>(0) -
+                              static_cast<typename make_signed<T>::type>(result));
     }
     return result;
 }
@@ -700,7 +702,83 @@ NEFORCE_NODISCARD constexpr uint8_t to_uint8(const string_view sv, size_t* idx =
     return static_cast<uint8_t>(val);
 }
 
+/**
+ * @brief 将字符串转换为128位无符号整数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的128位无符号整数
+ * @throws typecast_exception 转换失败时
+ */
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 uint128_t to_uint128(const string_view sv, size_t* idx = nullptr,
+                                                           const int base = 10) {
+    char* endptr = nullptr;
+    const uint128_t num = inner::str_to_uints<uint128_t>(sv, &endptr, base);
+    if (sv.data() == endptr) {
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
+    }
+    if (idx != nullptr) {
+        *idx = static_cast<size_t>(endptr - sv.data());
+    }
+    return num;
+}
+
+/**
+ * @brief 将字符串转换为128位有符号整数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的128位有符号整数
+ * @throws typecast_exception 转换失败时
+ */
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int128_t to_int128(const string_view sv, size_t* idx = nullptr,
+                                                         const int base = 10) {
+    char* endptr = nullptr;
+    const int128_t num = inner::str_to_ints<int128_t>(sv, &endptr, base);
+    if (sv.data() == endptr) {
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
+    }
+    if (idx != nullptr) {
+        *idx = static_cast<size_t>(endptr - sv.data());
+    }
+    return num;
+}
+
 /** @} */ // StringConverts
+
+NEFORCE_BEGIN_LITERALS__
+
+/**
+ * @defgroup UserLiterals 字面量
+ * @brief 用户定义字面量支持
+ * @{
+ */
+
+/**
+ * @brief 128位无符号整数字符串字面量
+ * @param str 字符串
+ * @param len 字符串长度
+ * @return uint128_t对象
+ * @throws typecast_exception 字符串格式无效时抛出
+ */
+NEFORCE_NODISCARD constexpr uint128_t operator""_u128(const char* str, const size_t len) {
+    return to_uint128(string_view{str, len});
+}
+
+/**
+ * @brief 128位有符号整数字符串字面量
+ * @param str 字符串
+ * @param len 字符串长度
+ * @return int128_t对象
+ * @throws typecast_exception 字符串格式无效时抛出
+ */
+NEFORCE_NODISCARD constexpr int128_t operator""_i128(const char* str, const size_t len) {
+    return to_int128(string_view{str, len});
+}
+
+/** @} */ // UserLiterals
+
+NEFORCE_END_LITERALS__
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_STRING_TO_NUMERICS_HPP__

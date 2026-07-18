@@ -20,3 +20,6 @@ endif()
 function(nexusforce_apply_compiler_options target)
     nexusforce_compiler_options(${target})
 endfunction()
+
+include("${NEXUSFORCE_CMAKE_DIR}/NexusForceReflectScanner.cmake")
+include("${NEXUSFORCE_CMAKE_DIR}/NexusForceRuntime.cmake")

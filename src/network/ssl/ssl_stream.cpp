@@ -1,4 +1,5 @@
 #include <NeForce/network/socket_base.hpp>
+#include <NeForce/network/ssl/ssl_exception.hpp>
 #include <NeForce/network/ssl/ssl_stream.hpp>
 #include <openssl/err.h>
 NEFORCE_BEGIN_NAMESPACE__
@@ -38,17 +39,14 @@ void ssl_stream::handle_ssl_error(const int ret, const char* operation) {
                 last_error_ = string(operation) + " system call error";
                 NEFORCE_THROW_EXCEPTION(ssl_exception("System call error in SSL operation"));
             }
-            char buf[256];
-            ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
-            last_error_ = string(operation) + " syscall error: " + static_cast<char*>(buf);
-            NEFORCE_THROW_EXCEPTION(ssl_exception(buf, static_cast<int>(ssl_err)));
+            last_error_ = string(operation) + " syscall error: " + ssl_category().message(static_cast<int>(ssl_err));
+            NEFORCE_THROW_EXCEPTION(ssl_exception(static_cast<int>(ssl_err)));
         }
         case SSL_ERROR_SSL: {
             const unsigned long ssl_err = ::ERR_get_error();
-            char buf[256];
-            ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
-            last_error_ = string(operation) + " SSL protocol error: " + static_cast<char*>(buf);
-            NEFORCE_THROW_EXCEPTION(ssl_exception(buf, static_cast<int>(ssl_err)));
+            last_error_ =
+                    string(operation) + " SSL protocol error: " + ssl_category().message(static_cast<int>(ssl_err));
+            NEFORCE_THROW_EXCEPTION(ssl_exception(static_cast<int>(ssl_err)));
         }
         default: {
             last_error_ = string(operation) + " unknown error";
@@ -173,9 +171,7 @@ ssize_t ssl_stream::read(void* buffer, const size_t size) {
             return -1;
         }
         if (ssl_err != 0) {
-            char buf[256];
-            ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
-            last_error_ = string("SSL_read error: ") + static_cast<char*>(buf);
+            last_error_ = "SSL_read error: " + ssl_category().message(static_cast<int>(ssl_err));
         } else {
             last_error_ = "SSL_read error";
         }
@@ -217,9 +213,7 @@ ssize_t ssl_stream::write(const void* buffer, const size_t size) {
             return -1;
         }
         if (ssl_err != 0) {
-            char buf[256];
-            ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
-            last_error_ = string("SSL_write error: ") + static_cast<char*>(buf);
+            last_error_ = "SSL_write error: " + ssl_category().message(static_cast<int>(ssl_err));
         } else {
             last_error_ = "SSL_write error";
         }
@@ -317,12 +311,9 @@ void ssl_stream::set_sni_hostname(const string& hostname) {
 
     if (::SSL_set_tlsext_host_name(ssl_.get(), hostname.data()) != 1) {
         const auto err = ::ERR_get_error();
-        char buf[256];
-        ::ERR_error_string_n(err, static_cast<char*>(buf), sizeof(buf));
-
         string error_msg = "SSL_set_tlsext_host_name failed: ";
-        error_msg += static_cast<char*>(buf);
-        NEFORCE_THROW_EXCEPTION(ssl_exception(error_msg.data()));
+        error_msg += ssl_category().message(static_cast<int>(err));
+        NEFORCE_THROW_EXCEPTION(ssl_exception(error_msg));
     }
 
 #if OPENSSL_VERSION_NUMBER >= 0x10002000L
@@ -431,9 +422,7 @@ namespace {
                 ctx->add_fd(fd_, epoll_out,
                             [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_fd_ready(ec); });
             } else {
-                char err_buf[256] = {};
-                ::ERR_error_string_n(static_cast<unsigned long>(err), err_buf, sizeof(err_buf));
-                handler(error_code(err, error_category::system()));
+                handler(error_code(err, ssl_category()));
             }
         }
 
@@ -512,7 +501,7 @@ namespace {
             } else if (err == SSL_ERROR_ZERO_RETURN) {
                 handler(error_code{make_error_code(errc::connection_reset)}, 0);
             } else {
-                handler(error_code(err, error_category::system()), 0);
+                handler(error_code(err, ssl_category()), 0);
             }
         }
 
@@ -592,7 +581,7 @@ namespace {
                 ctx->add_fd(fd, epoll_in,
                             [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_ready(ec); });
             } else {
-                handler(error_code(err, error_category::system()), 0);
+                handler(error_code(err, ssl_category()), 0);
             }
         }
 

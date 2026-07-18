@@ -6,39 +6,10 @@
  * @brief 位操作函数
  *
  * 此文件提供了各种位操作函数的实现，包括位计数、前导零计数、位旋转、位反转等。
- * 支持32位和64位平台，使用查表法和位运算技巧优化性能。
  */
 
 #include "NeForce/core/typeinfo/types.hpp"
 NEFORCE_BEGIN_NAMESPACE__
-
-NEFORCE_BEGIN_CONSTANTS__
-
-/**
- * @defgroup BitManipulation 位操作
- * @brief 位操作类与函数的实现
- * @{
- */
-
-/**
- * @var POPCOUNT_TABLE
- * @brief popcount查找表
- *
- * 预计算的popcount表，用于快速计算字节中1的个数。
- * 包含0-255所有可能字节值的popcount值。
- */
-NEFORCE_INLINE17 constexpr byte_t POPCOUNT_TABLE[256] = {
-        0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 1, 2, 2, 3, 2,
-        3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3,
-        3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5,
-        6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4,
-        3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4,
-        5, 5, 6, 5, 6, 6, 7, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6,
-        6, 7, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8};
-
-/** @} */ // BitManipulation
-
-NEFORCE_END_CONSTANTS__
 
 /**
  * @defgroup BitManipulation 位操作
@@ -50,53 +21,48 @@ NEFORCE_END_CONSTANTS__
  * @brief 计算64位整数中1的个数
  * @param x 64位无符号整数
  * @return x中1的个数
- *
- * 使用查表法分别计算8个字节的popcount，然后求和。
  */
-constexpr int popcount64(const uint64_t x) noexcept {
-    return constants::POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFULL)] +
-           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFULL)] +
-           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFULL)] +
-           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFULL)] +
-           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 32) & 0xFFULL)] +
-           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 40) & 0xFFULL)] +
-           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 48) & 0xFFULL)] +
-           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 56) & 0xFFULL)];
+constexpr int popcount64(uint64_t x) noexcept {
+    x = x - ((x >> 1) & 0x5555555555555555ULL);
+    x = (x & 0x3333333333333333ULL) + ((x >> 2) & 0x3333333333333333ULL);
+    x = (x + (x >> 4)) & 0x0F0F0F0F0F0F0F0FULL;
+    x = x + (x >> 8);
+    x = x + (x >> 16);
+    x = x + (x >> 32);
+    return static_cast<int>(x & 0x7FULL);
 }
 
 /**
  * @brief 计算64位整数前导零的个数
  * @param x 64位无符号整数
  * @return x中前导零的个数，如果x为0则返回64
- *
- * 使用二分查找法优化前导零计数。
  */
 NEFORCE_CONSTEXPR14 int clz64(uint64_t x) noexcept {
     if (x == 0) {
         return 64;
     }
     int n = 0;
-    if (x <= 0x00000000FFFFFFFFULL) {
+    if ((x >> 32) == 0) {
         n += 32;
         x <<= 32;
     }
-    if (x <= 0x0000FFFFFFFFFFFFULL) {
+    if ((x >> 48) == 0) {
         n += 16;
         x <<= 16;
     }
-    if (x <= 0x00FFFFFFFFFFFFFFULL) {
+    if ((x >> 56) == 0) {
         n += 8;
         x <<= 8;
     }
-    if (x <= 0x0FFFFFFFFFFFFFFFULL) {
+    if ((x >> 60) == 0) {
         n += 4;
         x <<= 4;
     }
-    if (x <= 0x3FFFFFFFFFFFFFFFULL) {
+    if ((x >> 62) == 0) {
         n += 2;
         x <<= 2;
     }
-    if (x <= 0x7FFFFFFFFFFFFFFFULL) {
+    if ((x >> 63) == 0) {
         n += 1;
     }
     return n;
@@ -106,45 +72,44 @@ NEFORCE_CONSTEXPR14 int clz64(uint64_t x) noexcept {
  * @brief 计算32位整数中1的个数
  * @param x 32位无符号整数
  * @return x中1的个数
- *
- * 使用查表法分别计算4个字节的popcount，然后求和。
  */
 constexpr int popcount32(const uint32_t x) noexcept {
-    return constants::POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFU)] +
-           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFU)] +
-           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFU)] +
-           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFU)];
+    auto v = x;
+    v = v - ((v >> 1) & 0x55555555U);
+    v = (v & 0x33333333U) + ((v >> 2) & 0x33333333U);
+    v = (v + (v >> 4)) & 0x0F0F0F0FU;
+    v = v + (v >> 8);
+    v = v + (v >> 16);
+    return static_cast<int>(v & 0x3FU);
 }
 
 /**
  * @brief 计算32位整数前导零的个数
  * @param x 32位无符号整数
  * @return x中前导零的个数，如果x为0则返回32
- *
- * 使用二分查找法优化前导零计数。
  */
 NEFORCE_CONSTEXPR14 int clz32(uint32_t x) noexcept {
     if (x == 0) {
         return 32;
     }
     int n = 0;
-    if (x <= 0x0000FFFFU) {
+    if ((x >> 16) == 0) {
         n += 16;
         x <<= 16;
     }
-    if (x <= 0x00FFFFFFU) {
+    if ((x >> 24) == 0) {
         n += 8;
         x <<= 8;
     }
-    if (x <= 0x0FFFFFFFU) {
+    if ((x >> 28) == 0) {
         n += 4;
         x <<= 4;
     }
-    if (x <= 0x3FFFFFFFU) {
+    if ((x >> 30) == 0) {
         n += 2;
         x <<= 2;
     }
-    if (x <= 0x7FFFFFFFU) {
+    if ((x >> 31) == 0) {
         n += 1;
     }
     return n;
@@ -154,8 +119,6 @@ NEFORCE_CONSTEXPR14 int clz32(uint32_t x) noexcept {
  * @brief 计算整数中1的个数
  * @param x 无符号整数
  * @return x中1的个数
- *
- * 根据平台位数调用相应的popcount函数。
  */
 constexpr int popcount(const uintptr_t x) noexcept {
 #ifdef NEFORCE_ARCH_BITS_64
@@ -169,8 +132,6 @@ constexpr int popcount(const uintptr_t x) noexcept {
  * @brief 计算整数前导零的个数
  * @param x 无符号整数
  * @return x中前导零的个数
- *
- * 根据平台位数调用相应的clz函数。
  */
 constexpr int countl_zero(const uintptr_t x) noexcept {
 #ifdef NEFORCE_ARCH_BITS_64
@@ -184,26 +145,56 @@ constexpr int countl_zero(const uintptr_t x) noexcept {
  * @brief 计算整数前导1的个数
  * @param x 无符号整数
  * @return x中前导1的个数
- *
- * 通过对x按位取反后计算前导零个数。
  */
 constexpr int countl_one(const uintptr_t x) noexcept { return countl_zero(~x); }
 
 /**
  * @brief 计算整数尾随零的个数
  * @param x 无符号整数
- * @return x中尾随零的个数
- *
- * 使用位运算技巧得到最低有效位的掩码。
+ * @return x中尾随零的个数，如果x为0则返回类型位宽
  */
-constexpr int countr_zero(const uintptr_t x) noexcept { return popcount((x & (~x + 1)) - 1); }
+constexpr int countr_zero(const uintptr_t x) noexcept {
+    if (x == 0) {
+#ifdef NEFORCE_ARCH_BITS_64
+        return 64;
+#else
+        return 32;
+#endif
+    }
+    int n = 0;
+    uintptr_t v = x;
+#ifdef NEFORCE_ARCH_BITS_64
+    if ((v & 0xFFFFFFFFULL) == 0) {
+        n += 32;
+        v >>= 32;
+    }
+#endif
+    if ((v & 0xFFFFU) == 0) {
+        n += 16;
+        v >>= 16;
+    }
+    if ((v & 0xFFU) == 0) {
+        n += 8;
+        v >>= 8;
+    }
+    if ((v & 0xFU) == 0) {
+        n += 4;
+        v >>= 4;
+    }
+    if ((v & 0x3U) == 0) {
+        n += 2;
+        v >>= 2;
+    }
+    if ((v & 0x1U) == 0) {
+        n += 1;
+    }
+    return n;
+}
 
 /**
  * @brief 计算整数尾随1的个数
  * @param x 无符号整数
  * @return x中尾随1的个数
- *
- * 通过对x按位取反后计算尾随零个数。
  */
 constexpr int countr_one(const uintptr_t x) noexcept { return countr_zero(~x); }
 
@@ -236,8 +227,6 @@ NEFORCE_CONSTEXPR14 int highest_set_bit_pos(const intptr_t x) noexcept {
  * @brief 计算32位整数的奇偶性
  * @param x 32位无符号整数
  * @return 如果x中1的个数为奇数返回true，否则返回false
- *
- * 使用分治法计算奇偶性。
  */
 NEFORCE_CONSTEXPR14 bool parity32(uint32_t x) noexcept {
     x ^= x >> 16;
@@ -267,8 +256,6 @@ NEFORCE_CONSTEXPR14 bool parity64(uint64_t x) noexcept {
  * @brief 计算整数的奇偶性
  * @param x 无符号整数
  * @return 如果x中1的个数为奇数返回true，否则返回false
- *
- * 根据平台位数调用相应的奇偶性计算函数。
  */
 constexpr bool parity(const uintptr_t x) noexcept {
 #ifdef NEFORCE_ARCH_BITS_64
@@ -326,12 +313,8 @@ constexpr bool has_single_bit(const uintptr_t x) noexcept { return x != 0 && (x 
  * @return 循环左移后的结果
  */
 NEFORCE_CONSTEXPR14 uint32_t rotate_l32(const uint32_t x, const int s) noexcept {
-    constexpr int bits = 32;
-    const int shift = ((s % bits) + bits) % bits;
-    if (shift == 0) {
-        return x;
-    }
-    return (x << shift) | (x >> (bits - shift));
+    const unsigned shift = static_cast<unsigned>(s) & 31U;
+    return (x << shift) | (x >> ((0U - shift) & 31U));
 }
 
 /**
@@ -349,12 +332,8 @@ NEFORCE_CONSTEXPR14 uint32_t rotate_r32(const uint32_t x, const int s) noexcept 
  * @return 循环左移后的结果
  */
 NEFORCE_CONSTEXPR14 uint64_t rotate_l64(const uint64_t x, const int s) noexcept {
-    constexpr int bits = 64;
-    const int shift = ((s % bits) + bits) % bits;
-    if (shift == 0) {
-        return x;
-    }
-    return (x << shift) | (x >> (bits - shift));
+    const unsigned shift = static_cast<unsigned>(s) & 63U;
+    return (x << shift) | (x >> ((0U - shift) & 63U));
 }
 
 /**
@@ -370,8 +349,6 @@ NEFORCE_CONSTEXPR14 uint64_t rotate_r64(const uint64_t x, const int s) noexcept 
  * @param x 无符号整数
  * @param s 旋转位数
  * @return 循环左移后的结果
- *
- * 根据平台位数调用相应的循环左移函数。
  */
 NEFORCE_CONSTEXPR14 uintptr_t rotate_l(const uintptr_t x, const int s) noexcept {
 #ifdef NEFORCE_ARCH_BITS_64
@@ -386,8 +363,6 @@ NEFORCE_CONSTEXPR14 uintptr_t rotate_l(const uintptr_t x, const int s) noexcept 
  * @param x 无符号整数
  * @param s 旋转位数
  * @return 循环右移后的结果
- *
- * 根据平台位数调用相应的循环右移函数。
  */
 NEFORCE_CONSTEXPR14 uintptr_t rotate_r(const uintptr_t x, const int s) noexcept {
 #ifdef NEFORCE_ARCH_BITS_64
@@ -457,8 +432,6 @@ NEFORCE_CONSTEXPR14 uint64_t reverse_bits64(uint64_t x) noexcept {
  * @brief 反转整数的位顺序
  * @param x 无符号整数
  * @return 位反转后的整数
- *
- * 根据平台位数调用相应的位反转函数。
  */
 constexpr uintptr_t reverse_bits(const uintptr_t x) noexcept {
 #ifdef NEFORCE_ARCH_BITS_64

@@ -79,7 +79,7 @@ void token_bucket_limiter::cleanup_expired(const seconds max_age) {
 
     lock<mutex> lk(mutex_);
     for (auto it = buckets_.begin(); it != buckets_.end();) {
-        if (now - it->second.last_access_ms > threshold) {
+        if (now - it->second.last_access_ms >= threshold) {
             it = buckets_.erase(it);
         } else {
             ++it;
