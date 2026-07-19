@@ -13,3 +13,5 @@ endmacro()
 add_subdirectory(db)
 add_subdirectory(logging)
 add_subdirectory(network)
+
+add_subdirectory(integration)

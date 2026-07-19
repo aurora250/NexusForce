@@ -11,6 +11,7 @@
 
 #include "NeForce/core/string/string.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
+#include "NeForce/network/ssl/ssl_exception.hpp"
 #include <openssl/ssl.h>
 NEFORCE_BEGIN_NAMESPACE__
 
