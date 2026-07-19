@@ -521,6 +521,15 @@ NEFORCE_CONSTEXPR14 uint64_t XXH64(const void* input, size_t len, uint64_t seed 
         }
 
         hash = rotate_l64(acc1, 1) + rotate_l64(acc2, 7) + rotate_l64(acc3, 12) + rotate_l64(acc4, 18);
+
+        hash ^= rotate_l64(acc1 * PRIME64_2, 31) * PRIME64_1;
+        hash = hash * PRIME64_1 + PRIME64_4;
+        hash ^= rotate_l64(acc2 * PRIME64_2, 31) * PRIME64_1;
+        hash = hash * PRIME64_1 + PRIME64_4;
+        hash ^= rotate_l64(acc3 * PRIME64_2, 31) * PRIME64_1;
+        hash = hash * PRIME64_1 + PRIME64_4;
+        hash ^= rotate_l64(acc4 * PRIME64_2, 31) * PRIME64_1;
+        hash = hash * PRIME64_1 + PRIME64_4;
     } else {
         hash = seed + PRIME64_5;
     }

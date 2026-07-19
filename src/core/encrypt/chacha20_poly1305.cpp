@@ -82,12 +82,15 @@ namespace {
     void chacha20_block_simd(const byte_t* key, const uint32_t counter, const byte_t* nonce, byte_t* output) {
         ::__m128i v0 = ::_mm_set_epi32(endian::read_le32(CHACHA_CONST + 12), endian::read_le32(CHACHA_CONST + 8),
                                        endian::read_le32(CHACHA_CONST + 4), endian::read_le32(CHACHA_CONST + 0));
-        ::__m128i v1 = ::_mm_set_epi32(endian::read_le32(key + 12), endian::read_le32(key + 8),
-                                       endian::read_le32(key + 4), endian::read_le32(key + 0));
-        ::__m128i v2 = ::_mm_set_epi32(endian::read_le32(key + 28), endian::read_le32(key + 24),
-                                       endian::read_le32(key + 20), endian::read_le32(key + 16));
-        ::__m128i v3 = ::_mm_set_epi32(endian::read_le32(nonce + 8), endian::read_le32(nonce + 4),
-                                       endian::read_le32(nonce + 0), counter);
+        ::__m128i v1 = ::_mm_set_epi32(
+                static_cast<int>(endian::read_le32(key + 12)), static_cast<int>(endian::read_le32(key + 8)),
+                static_cast<int>(endian::read_le32(key + 4)), static_cast<int>(endian::read_le32(key + 0)));
+        ::__m128i v2 = ::_mm_set_epi32(
+                static_cast<int>(endian::read_le32(key + 28)), static_cast<int>(endian::read_le32(key + 24)),
+                static_cast<int>(endian::read_le32(key + 20)), static_cast<int>(endian::read_le32(key + 16)));
+        ::__m128i v3 = ::_mm_set_epi32(static_cast<int>(endian::read_le32(nonce + 8)),
+                                       static_cast<int>(endian::read_le32(nonce + 4)),
+                                       static_cast<int>(endian::read_le32(nonce + 0)), static_cast<int>(counter));
 
         ::__m128i w0 = v0, w1 = v1, w2 = v2, w3 = v3;
 

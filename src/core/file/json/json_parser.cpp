@@ -24,6 +24,7 @@ void json_parser::skip_space() noexcept {
         if (mask == 0xFFFF) {
             pos_ += 16;
         } else {
+            // NOLINTNEXTLINE(bugprone-misplaced-widening-cast)
             pos_ += static_cast<size_t>(countr_zero(static_cast<uintptr_t>(~mask)));
             return;
         }

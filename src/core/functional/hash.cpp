@@ -2,6 +2,7 @@
 #include <NeForce/core/memory/bit.hpp>
 #include <NeForce/core/numeric/int128.hpp>
 #include <NeForce/core/simd/types.hpp>
+#include <NeForce/core/utility/pair.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -204,7 +205,7 @@ namespace {
     }
 
     uint64_t city_hash_len0to16(const byte_t* s, const size_t len) noexcept {
-        if (len >= 8) {
+        if (len > 8) {
             const uint64_t mul = CITY_K2 + len * 2;
             const uint64_t a = endian::read_le64(s) + CITY_K2;
             const uint64_t b = endian::read_le64(s + len - 8);
@@ -215,9 +216,7 @@ namespace {
         if (len >= 4) {
             const uint64_t mul = CITY_K2 + len * 2;
             const uint64_t a = endian::read_le32(s);
-            const uint64_t b = endian::read_le32(s + len - 4);
-            const uint64_t c = a | ((b + static_cast<uint64_t>(s[0]) * len) << 32);
-            return city_hash_len16(c, len, mul);
+            return city_hash_len16(static_cast<uint64_t>(len) + (a << 3), endian::read_le32(s + len - 4), mul);
         }
         if (len > 0) {
             const uint8_t a = s[0];
@@ -253,61 +252,85 @@ namespace {
         const uint64_t h = (z + endian::read_le64(s + len - 24)) * mul;
         return city_hash_len16(rotate_l64(e + f, 43) + rotate_l64(g, 30) + h, e + rotate_l64(f + a, 18) + g, mul);
     }
+
+    pair<uint64_t, uint64_t> city_weak_hash32_with_seeds(const uint64_t w, const uint64_t x, const uint64_t y,
+                                                         const uint64_t z, uint64_t a, uint64_t b) noexcept {
+        a += w;
+        b = rotate_l64(b + a + z, 21);
+        const uint64_t c = a;
+        a += x;
+        a += y;
+        b += rotate_l64(a, 44);
+        return {a + z, b + c};
+    }
+
+    pair<uint64_t, uint64_t> city_weak_hash32_with_seeds(const byte_t* s, const uint64_t a, const uint64_t b) noexcept {
+        return city_weak_hash32_with_seeds(endian::read_le64(s), endian::read_le64(s + 8), endian::read_le64(s + 16),
+                                           endian::read_le64(s + 24), a, b);
+    }
 } // namespace
 
 
-uint64_t wyhash(const void* key, const size_t len, const uint64_t seed) noexcept {
+uint64_t wyhash(const void* key, const size_t len, uint64_t seed) noexcept {
     const auto* p = static_cast<const byte_t*>(key);
-    const uint64_t secret0 = seed ^ 0xa3b195354a39b70dULL;
-    const uint64_t secret1 = seed ^ 0x1b03738712fad5c9ULL;
-    const uint64_t secret2 = seed ^ 0x60bec20cf2e92253ULL;
-    const uint64_t secret3 = seed ^ 0x56e6c6f1eb84fdcbULL;
-    constexpr uint64_t secret4 = 0x3a7dbd58c8c44253ULL;
+    constexpr uint64_t WYHASH_P0 = 0xa0761d6478bd642fULL;
+    constexpr uint64_t WYHASH_P1 = 0xe7037ed1a0b428dbULL;
+    constexpr uint64_t WYHASH_P2 = 0x8ebc6af09c88c6a3ULL;
+    constexpr uint64_t WYHASH_P3 = 0x589965cc75374cc3ULL;
+    constexpr uint64_t WYHASH_P4 = 0x1d8e4e27c8d1ed8bULL;
 
-    uint64_t a = secret0;
-    uint64_t b = secret1;
+    auto a = static_cast<uint64_t>(len);
+    uint64_t b = seed ^ WYHASH_P0;
 
-    if (len >= 32) {
-        const byte_t* limit = p + (len & ~static_cast<size_t>(31));
-        for (; p < limit; p += 32) {
-            const uint64_t v0 = endian::read_le64(p);
-            const uint64_t v1 = endian::read_le64(p + 8);
-            const uint64_t v2 = endian::read_le64(p + 16);
-            const uint64_t v3 = endian::read_le64(p + 24);
+    const auto wymix = [](const uint64_t lhs, const uint64_t rhs) noexcept {
+        const uint128_t r = uint128_t::mul64(lhs, rhs);
+        return r.lo ^ r.hi;
+    };
 
-            const uint128_t ma = uint128_t::mul64(v0 ^ secret1, v2 ^ secret2);
-            const uint128_t mb = uint128_t::mul64(v1 ^ a, v3 ^ b);
-            a = ma.lo ^ ma.hi;
-            b = mb.lo ^ mb.hi;
+    if (len <= 16) {
+        if (len >= 4) {
+            const size_t half_offset = (len >> 3) << 2;
+            a = (endian::read_le64(p) << 32) | endian::read_le64(p + half_offset);
+            b = (endian::read_le64(p + len - 4) << 32) | endian::read_le64(p + len - 4 - half_offset);
+        } else if (len > 0) {
+            const uint8_t c1 = p[0];
+            const uint8_t c2 = p[len >> 1];
+            const uint8_t c3 = p[len - 1];
+            a = static_cast<uint64_t>(c1) | (static_cast<uint64_t>(c2) << 8) | (static_cast<uint64_t>(c3) << 16) |
+                (static_cast<uint64_t>(len) << 24);
         }
+    } else {
+        uint64_t see1 = seed;
+        uint64_t see2 = seed;
+        size_t i = 0;
+
+        if (len > 48) {
+            do {
+                see1 = wymix(endian::read_le64(p + i) ^ WYHASH_P1, endian::read_le64(p + i + 8) ^ see1);
+                see2 = wymix(endian::read_le64(p + i + 16) ^ WYHASH_P3, endian::read_le64(p + i + 24) ^ see2);
+                i += 32;
+            } while (i + 32 <= len);
+        }
+        if (len > 16) {
+            while (i + 16 <= len) {
+                see1 = wymix(endian::read_le64(p + i) ^ WYHASH_P1, endian::read_le64(p + i + 8) ^ see1);
+                i += 16;
+            }
+        }
+        a = endian::read_le64(p + len - 16);
+        b = endian::read_le64(p + len - 8);
     }
 
-    if ((len & 16) != 0U) {
-        a ^= endian::read_le64(p);
-        b ^= endian::read_le64(p + 8);
-        p += 16;
-    }
+    uint64_t c = static_cast<uint64_t>(len) ^ WYHASH_P2;
+    a ^= WYHASH_P1;
+    c ^= WYHASH_P3;
+    b ^= seed;
+    seed = wymix(seed ^ WYHASH_P1, WYHASH_P2);
 
-    if ((len & 8) != 0U) {
-        a ^= endian::read_le64(p);
-        p += 8;
-    }
-    if ((len & 4) != 0U) {
-        b ^= static_cast<uint64_t>(endian::read_le32(p)) << 32;
-        p += 4;
-    }
-    if ((len & 2) != 0U) {
-        b ^= static_cast<uint64_t>(endian::read_le16(p)) << 16;
-        p += 2;
-    }
-    if ((len & 1) != 0U) {
-        a ^= static_cast<uint64_t>(*p);
-    }
-
-    const uint128_t m = uint128_t::mul64(a ^ secret1, b ^ secret2);
-    a = m.lo ^ m.hi;
-
-    return a ^ secret4;
+    const uint64_t d = wymix(a ^ WYHASH_P1, seed);
+    a = wymix(d ^ b, c);
+    b = wymix(a ^ static_cast<uint64_t>(len), WYHASH_P4);
+    return wymix(b ^ a, a);
 }
 
 size_t city_hash64(const void* key, const size_t len) noexcept {
@@ -326,73 +349,26 @@ size_t city_hash64(const void* key, const size_t len) noexcept {
     uint64_t x = endian::read_le64(s + len - 40);
     uint64_t y = endian::read_le64(s + len - 16) + endian::read_le64(s + len - 56);
     uint64_t z = city_hash_len16(endian::read_le64(s + len - 48) + len, endian::read_le64(s + len - 24));
-    uint64_t v_lo = 0, v_hi = 0;
+    auto v = city_weak_hash32_with_seeds(s + len - 64, static_cast<uint64_t>(len), z);
+    auto w = city_weak_hash32_with_seeds(s + len - 32, y + CITY_K1, x);
+    x = x * CITY_K1 + endian::read_le64(s);
 
-    uint64_t u_lo = 0, u_hi = 0;
-    {
-        const uint64_t a = endian::read_le64(s);
-        const uint64_t b = endian::read_le64(s + 8);
-        const uint64_t c = endian::read_le64(s + len - 40);
-        const uint64_t d = endian::read_le64(s + len - 32);
-        u_lo = city_hash_len16(a, b);
-        u_hi = city_hash_len16(c, d);
-    }
-    v_lo = endian::read_le64(s + 16);
-    v_hi = endian::read_le64(s + len - 64);
+    size_t remaining = (len - 1) & ~static_cast<size_t>(63);
+    do {
+        x = rotate_l64(x + y + v.first + endian::read_le64(s + 8), 37) * CITY_K1;
+        y = rotate_l64(y + v.second + endian::read_le64(s + 48), 42) * CITY_K1;
+        x ^= w.second;
+        y += v.first + endian::read_le64(s + 40);
+        z = rotate_l64(z + w.first, 33) * CITY_K1;
+        v = city_weak_hash32_with_seeds(s, v.second * CITY_K1, x + w.first);
+        w = city_weak_hash32_with_seeds(s + 32, z + w.second, y + endian::read_le64(s + 16));
+        _NEFORCE swap(z, x);
+        s += 64;
+        remaining -= 64;
+    } while (remaining != 0);
 
-    size_t offset = 24;
-    const size_t tail_offset = len - 56;
-
-    {
-        uint64_t a = v_lo;
-        uint64_t b = v_hi;
-        constexpr uint64_t mul = CITY_K0 + 16;
-        a += u_lo;
-        b += u_hi;
-        a += CITY_K0;
-        b += CITY_K0;
-        a = rotate_l64(a + u_lo, 16);
-        a *= mul;
-        b = rotate_l64(b + u_hi, 17);
-        b *= mul;
-        u_lo = a ^ b;
-        u_hi = rotate_l64(b, 16);
-    }
-
-    {
-        v_lo = endian::read_le64(s + offset);
-        offset += 8;
-        v_hi = endian::read_le64(s + tail_offset + (offset - 24));
-    }
-
-    while (offset < tail_offset) {
-        uint64_t a = v_lo, b = v_hi;
-        constexpr uint64_t mul = CITY_K0 + 16;
-        a += u_lo;
-        b += u_hi;
-        a += CITY_K0;
-        b += CITY_K0;
-        a = rotate_l64(a + u_lo, 16);
-        a *= mul;
-        b = rotate_l64(b + u_hi, 17);
-        b *= mul;
-        u_lo = a ^ b;
-        u_hi = rotate_l64(b, 16);
-
-        v_lo = endian::read_le64(s + offset);
-        offset += 8;
-        v_hi = endian::read_le64(s + tail_offset + (offset - 24));
-    }
-
-    x += rotate_l64(u_lo + v_lo, 51) * CITY_K0;
-    y += u_hi + v_hi;
-    z += u_lo + v_lo;
-
-    x = city_shift_mix(x) * CITY_K0;
-    y = city_shift_mix(y);
-    z = city_shift_mix(z);
-
-    return static_cast<size_t>(city_hash_len16(x + y + z, len * 8 + z, CITY_K1));
+    return static_cast<size_t>(city_hash_len16(city_hash_len16(v.first, w.first) + city_shift_mix(y) * CITY_K1 + z,
+                                               city_hash_len16(v.second, w.second) + x));
 }
 
 
@@ -404,9 +380,17 @@ namespace {
     constexpr uint64_t XXH3_PRIME64_5 = 0x27D4EB2F165667C5ULL;
     constexpr size_t XXH3_SECRET_DEFAULT_SIZE = 192;
     constexpr size_t XXH3_STRIPE_LEN = 64;
+    constexpr size_t XXH3_SECRET_CONSUME_RATE = 8;
     constexpr size_t XXH3_ACC_NB = 8;
+    constexpr size_t XXH3_MIDSIZE_STARTOFFSET = 3;
+    constexpr size_t XXH3_SECRET_LASTACC_START = 7;
+    constexpr size_t XXH3_SECRET_MERGEACCS_START = 11;
 
-    constexpr uint8_t XXH3_kSecret[192] = {
+    constexpr size_t XXH3_SECRET_SIZE_WITH_PADDING =
+            XXH3_SECRET_DEFAULT_SIZE +
+            XXH3_STRIPE_LEN * ((XXH3_SECRET_DEFAULT_SIZE - XXH3_STRIPE_LEN) / XXH3_SECRET_CONSUME_RATE + 1);
+
+    constexpr uint8_t XXH3_kSecret[XXH3_SECRET_SIZE_WITH_PADDING] = {
             0xb8, 0xfe, 0x6c, 0x39, 0x23, 0xa4, 0x4b, 0xbe, 0x7c, 0x01, 0x81, 0x2c, 0xf7, 0x21, 0xad, 0x1c, 0xde, 0xd4,
             0x6d, 0xe9, 0x83, 0x90, 0x97, 0xdb, 0x72, 0x40, 0xa4, 0xa4, 0xb7, 0xb3, 0x67, 0x1f, 0xcb, 0x4a, 0x8c, 0x4f,
             0xc9, 0x71, 0x0e, 0x74, 0x41, 0xfe, 0xb7, 0xec, 0xca, 0x23, 0x44, 0xdb, 0x01, 0x19, 0x92, 0x2c, 0x7f, 0x3a,
@@ -444,45 +428,82 @@ namespace {
         return XXH3_rrmxmx(rotate_l64(lo ^ sl, 35) + rotate_l64(hi ^ sh, 3), 16);
     }
 
+    uint64_t XXH3_mul128_fold64(const uint64_t lhs, const uint64_t rhs) noexcept {
+        const uint128_t product = uint128_t::mul64(lhs, rhs);
+        return product.hi ^ product.lo;
+    }
+
+    uint64_t XXH3_len_1to3(const byte_t* data, const size_t len, const byte_t* secret, const uint64_t seed) noexcept {
+        const uint8_t c1 = data[0];
+        const uint8_t c2 = data[len >> 1];
+        const uint8_t c3 = data[len - 1];
+        const uint32_t combined = (static_cast<uint32_t>(c1) << 16) | (static_cast<uint32_t>(c2) << 24) |
+                                  static_cast<uint32_t>(c3) | (static_cast<uint32_t>(len) << 8);
+        const uint64_t bitflip = (static_cast<uint64_t>(endian::read_le32(secret)) ^
+                                  static_cast<uint64_t>(endian::read_le32(secret + 4))) +
+                                 seed;
+        const uint64_t keyed = static_cast<uint64_t>(combined) ^ bitflip;
+        return XXH3_avalanche(keyed);
+    }
+
+    uint64_t XXH3_len_4to8(const byte_t* data, const size_t len, const byte_t* secret, const uint64_t seed) noexcept {
+        const uint64_t seed1 = seed ^ (static_cast<uint64_t>(endian::swap_endian(static_cast<uint32_t>(seed))) << 32);
+        const uint32_t input1 = endian::read_le32(data);
+        const uint32_t input2 = endian::read_le32(data + len - 4);
+        const uint64_t bitflip = (endian::read_le64(secret + 8) ^ endian::read_le64(secret + 16)) - seed1;
+        const uint64_t input64 = static_cast<uint64_t>(input2) + (static_cast<uint64_t>(input1) << 32);
+        const uint64_t keyed = input64 ^ bitflip;
+        return XXH3_rrmxmx(keyed, static_cast<uint64_t>(len));
+    }
+
+    uint64_t XXH3_len_9to16(const byte_t* data, const size_t len, const byte_t* secret, const uint64_t seed) noexcept {
+        const uint64_t bitflipl = (endian::read_le64(secret + 32) ^ endian::read_le64(secret + 40)) - seed;
+        const uint64_t bitfliph = (endian::read_le64(secret + 48) ^ endian::read_le64(secret + 56)) + seed;
+        const uint64_t input_lo = endian::read_le64(data);
+        const uint64_t input_hi = endian::read_le64(data + len - 8);
+        uint64_t acc =
+                XXH3_mul128_fold64(input_lo ^ (endian::read_le64(secret + 24) ^ endian::read_le64(secret + 32)),
+                                   input_hi ^ (endian::read_le64(secret + 40) ^ endian::read_le64(secret + 48))) ^
+                ((XXH3_len_1to3(data, len, secret, seed)) ^ (input_lo + input_hi)) * XXH3_PRIME64_1;
+        acc += (static_cast<uint64_t>(len) - 1) * XXH3_PRIME64_2;
+        acc = XXH3_avalanche(acc ^ (acc >> 23));
+        acc ^= bitfliph;
+        acc += XXH3_mul128_fold64(input_lo ^ bitflipl, input_hi);
+        return XXH3_avalanche(acc);
+    }
+
     uint64_t XXH3_len_0to16(const byte_t* data, const size_t len, const byte_t* secret, const uint64_t seed) noexcept {
         if (len > 8) {
-            return XXH3_mix16B(data, secret, seed);
+            return XXH3_len_9to16(data, len, secret, seed);
         }
         if (len >= 4) {
-            const uint64_t lo = endian::read_le32(data);
-            const uint64_t hi = endian::read_le32(data + len - 4);
-            const uint64_t sl = (endian::read_le32(secret) ^ static_cast<uint32_t>(seed)) & 0xFFFFFFFFULL;
-            const uint64_t sh = (endian::read_le32(secret + 4) ^ static_cast<uint32_t>(seed >> 32)) & 0xFFFFFFFFULL;
-            return XXH3_rrmxmx(rotate_l64(lo ^ sl, 35) + rotate_l64(hi ^ sh, 3), static_cast<uint64_t>(len));
+            return XXH3_len_4to8(data, len, secret, seed);
         }
         if (len > 0) {
-            const uint8_t a = data[0];
-            const uint8_t b = data[len >> 1];
-            const uint8_t c = data[len - 1];
-            const uint32_t combined = (static_cast<uint32_t>(a) << 16) | (static_cast<uint32_t>(b) << 24) |
-                                      static_cast<uint32_t>(c) | (static_cast<uint32_t>(len) << 8);
-            const uint64_t key = static_cast<uint64_t>(endian::read_le32(secret)) ^
-                                 static_cast<uint64_t>(endian::read_le32(secret + 4));
-            return XXH3_rrmxmx(rotate_l64(combined ^ key, 17), static_cast<uint64_t>(len));
+            return XXH3_len_1to3(data, len, secret, seed);
         }
-        {
-            const uint64_t bitflipl = endian::read_le64(secret + 64) ^ endian::read_le64(secret + 72);
-            const uint64_t bitfliph = endian::read_le64(secret + 80) ^ endian::read_le64(secret + 88);
-            return XXH3_avalanche(seed ^ bitflipl ^ bitfliph);
-        }
+        const uint64_t bitflipl = endian::read_le64(secret + 56) ^ endian::read_le64(secret + 64);
+        const uint64_t bitfliph = endian::read_le64(secret + 72) ^ endian::read_le64(secret + 80);
+        return XXH3_avalanche(seed ^ bitflipl ^ bitfliph);
     }
 
     uint64_t XXH3_len_17to128(const byte_t* data, const size_t len, const byte_t* secret, const size_t secret_size,
                               const uint64_t seed) noexcept {
-        uint64_t acc = len * XXH3_PRIME64_1;
-        const size_t nb_rounds = len / 16;
-        for (size_t i = 0; i < nb_rounds; ++i) {
-            acc += XXH3_mix16B(data + 16 * i, secret + 16 * i, seed);
-            acc = rotate_l64(acc, 47);
-            acc *= XXH3_PRIME64_1;
+        uint64_t acc = static_cast<uint64_t>(len) * XXH3_PRIME64_1;
+        if (len > 32) {
+            if (len > 64) {
+                if (len > 96) {
+                    acc += XXH3_mix16B(data + 48, secret + 96, seed);
+                    acc += XXH3_mix16B(data + len - 64, secret + 112, seed);
+                }
+                acc += XXH3_mix16B(data + 32, secret + 64, seed);
+                acc += XXH3_mix16B(data + len - 48, secret + 80, seed);
+            }
+            acc += XXH3_mix16B(data + 16, secret + 32, seed);
+            acc += XXH3_mix16B(data + len - 32, secret + 48, seed);
         }
-        const size_t tail_offset = len - 16;
-        acc += XXH3_mix16B(data + tail_offset, secret + secret_size - 17 + (tail_offset % 16), seed);
+        acc += XXH3_mix16B(data, secret, seed);
+        acc += XXH3_mix16B(data + len - 16, secret + secret_size - XXH3_MIDSIZE_STARTOFFSET, seed);
         return XXH3_avalanche(acc);
     }
 
@@ -544,7 +565,7 @@ namespace {
 #endif
     }
 
-    void XXH3_scrambleAcc_scalar(uint64_t* acc, const byte_t* secret) noexcept {
+    void XXH3_scrambleAcc(uint64_t* acc, const byte_t* secret) noexcept {
         for (size_t i = 0; i < XXH3_ACC_NB; ++i) {
             const uint64_t key = endian::read_le64(secret + i * 8);
             acc[i] ^= acc[i] >> 47;
@@ -553,45 +574,55 @@ namespace {
         }
     }
 
+    void XXH3_accumulate(uint64_t* acc, const byte_t* data, const byte_t* secret, const size_t nbStripes) noexcept {
+        for (size_t s = 0; s < nbStripes; ++s) {
+            const byte_t* const data_stripe = data + s * XXH3_STRIPE_LEN;
+            for (size_t j = 0; j < XXH3_STRIPE_LEN; j += XXH3_ACC_NB * 8) {
+                const size_t secret_offset = (s * XXH3_STRIPE_LEN + j) % XXH3_SECRET_DEFAULT_SIZE;
+                XXH3_accumulate_512(acc, data_stripe + j, secret + secret_offset);
+            }
+        }
+    }
+
+    uint64_t XXH3_mergeAccs(const uint64_t* acc, const byte_t* secret, const uint64_t start) noexcept {
+        uint64_t result = start;
+        for (size_t i = 0; i < XXH3_ACC_NB; ++i) {
+            const uint64_t data_val = acc[i] ^ endian::read_le64(secret + i * 8);
+            result = XXH3_rrmxmx(rotate_l64(data_val, 11) + result, 4);
+        }
+        return XXH3_avalanche(result);
+    }
+
     uint64_t XXH3_hashLong_64b(const byte_t* data, const size_t len, const byte_t* secret,
                                const size_t secret_size) noexcept {
         uint64_t acc[XXH3_ACC_NB] = {
                 XXH3_PRIME64_3, XXH3_PRIME64_1, XXH3_PRIME64_2, XXH3_PRIME64_4,
                 XXH3_PRIME64_1, XXH3_PRIME64_2, XXH3_PRIME64_3, XXH3_PRIME64_4,
         };
+        const size_t nbStripesPerBlock = (secret_size - XXH3_STRIPE_LEN) / XXH3_SECRET_CONSUME_RATE;
+        const size_t block_len = XXH3_STRIPE_LEN * nbStripesPerBlock;
+        const size_t nb_blocks = (len - 1) / block_len;
 
-        const size_t nb_blocks = (len - 1) / XXH3_STRIPE_LEN;
         for (size_t b = 0; b < nb_blocks; ++b) {
-            for (size_t j = 0; j < XXH3_STRIPE_LEN; j += XXH3_ACC_NB * 8) {
-                XXH3_accumulate_512(acc, data + b * XXH3_STRIPE_LEN + j, secret + j % secret_size);
-            }
-            XXH3_scrambleAcc_scalar(acc, secret + secret_size - XXH3_STRIPE_LEN);
+            XXH3_accumulate(acc, data + b * block_len, secret, nbStripesPerBlock);
+            XXH3_scrambleAcc(acc, secret + secret_size - XXH3_STRIPE_LEN);
         }
 
-        const size_t last_stripe_offset = (nb_blocks - 1) * XXH3_STRIPE_LEN;
-        for (size_t j = 0; j < secret_size - XXH3_STRIPE_LEN; j += XXH3_ACC_NB * 8) {
-            const size_t data_offset = last_stripe_offset + j;
-            if (data_offset + XXH3_ACC_NB * 8 > len) {
-                break;
-            }
-            XXH3_accumulate_512(acc, data + data_offset, secret + j + XXH3_STRIPE_LEN);
-        }
+        const size_t last_stripe_count = ((len - 1) - (block_len * nb_blocks)) / XXH3_STRIPE_LEN;
+        XXH3_accumulate(acc, data + nb_blocks * block_len, secret, last_stripe_count);
 
-        {
-            const size_t tail_offset = len - 1;
-            const byte_t* tail = data + tail_offset;
-            const size_t secret_offset = tail_offset % secret_size;
-            for (size_t i = 0; i < XXH3_ACC_NB; ++i) {
-                const uint64_t data_val = endian::read_le64(tail + i * 8);
-                const uint64_t key = endian::read_le64(secret + secret_offset + i * 8);
-                acc[i] += data_val ^ key;
-                acc[i] *= XXH3_PRIME64_1;
-            }
-        }
+        const byte_t* const p = data + len - XXH3_STRIPE_LEN;
+        XXH3_accumulate_512(acc, p, secret + secret_size - XXH3_STRIPE_LEN - XXH3_SECRET_LASTACC_START);
 
-        return XXH3_avalanche(rotate_l64(acc[0], 11) + rotate_l64(acc[1], 19) + rotate_l64(acc[2], 27) +
-                              rotate_l64(acc[3], 35) + rotate_l64(acc[4], 43) + rotate_l64(acc[5], 51) +
-                              rotate_l64(acc[6], 59) + rotate_l64(acc[7], 3));
+        byte_t secret_result[XXH3_SECRET_DEFAULT_SIZE];
+        constexpr size_t converge_nbStripes = (XXH3_SECRET_DEFAULT_SIZE - XXH3_STRIPE_LEN) / XXH3_SECRET_CONSUME_RATE;
+        constexpr size_t converge_block_len = XXH3_STRIPE_LEN * converge_nbStripes;
+        XXH3_accumulate(reinterpret_cast<uint64_t*>(secret_result), secret, secret, converge_nbStripes);
+        XXH3_accumulate_512(reinterpret_cast<uint64_t*>(secret_result), secret + converge_block_len - XXH3_STRIPE_LEN,
+                            secret + secret_size - XXH3_STRIPE_LEN - XXH3_SECRET_LASTACC_START);
+
+        return XXH3_mergeAccs(acc, secret_result + XXH3_SECRET_MERGEACCS_START,
+                              static_cast<uint64_t>(len) * XXH3_PRIME64_1);
     }
 } // namespace
 

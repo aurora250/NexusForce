@@ -281,7 +281,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t load_stream(const void* ptr) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE void prefetch_read(const void* ptr) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
-    ::_mm_prefetch(static_cast<const char*>(ptr), _MM_HINT_T0);
+    _mm_prefetch(static_cast<const char*>(ptr), _MM_HINT_T0);
 #elif defined(NEFORCE_SIMD_NEON)
     __builtin_prefetch(ptr, 0, 3);
 #endif
@@ -293,7 +293,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void prefetch_read(const void* ptr) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE void prefetch_write(const void* ptr) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
-    ::_mm_prefetch(static_cast<const char*>(ptr), _MM_HINT_T0);
+    _mm_prefetch(static_cast<const char*>(ptr), _MM_HINT_T0);
 #elif defined(NEFORCE_SIMD_NEON)
     __builtin_prefetch(ptr, 1, 3);
 #endif
@@ -305,7 +305,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void prefetch_write(const void* ptr) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE void prefetch_l1(const void* ptr) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
-    ::_mm_prefetch(static_cast<const char*>(ptr), _MM_HINT_T0);
+    _mm_prefetch(static_cast<const char*>(ptr), _MM_HINT_T0);
 #elif defined(NEFORCE_SIMD_NEON)
     __builtin_prefetch(ptr, 0, 3);
 #else
@@ -319,7 +319,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void prefetch_l1(const void* ptr) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE void prefetch_l2(const void* ptr) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
-    ::_mm_prefetch(static_cast<const char*>(ptr), _MM_HINT_T1);
+    _mm_prefetch(static_cast<const char*>(ptr), _MM_HINT_T1);
 #elif defined(NEFORCE_SIMD_NEON)
     __builtin_prefetch(ptr, 0, 2);
 #else
@@ -334,7 +334,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void prefetch_l2(const void* ptr) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE void prefetch_nta(const void* ptr) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
-    ::_mm_prefetch(static_cast<const char*>(ptr), _MM_HINT_NTA);
+    _mm_prefetch(static_cast<const char*>(ptr), _MM_HINT_NTA);
 #elif defined(NEFORCE_SIMD_NEON)
     __builtin_prefetch(ptr, 0, 0);
 #else

@@ -10,9 +10,7 @@
  */
 
 #include "NeForce/core/simd/types.hpp"
-#ifdef NEFORCE_SIMD_SSE2
-#    include <intrin.h>
-#endif
+#include "NeForce/core/memory/bit.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
 
@@ -148,13 +146,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int find_first_byte(vec128_t v, byte_t c) noexcept 
     if (mask == 0) {
         return -1;
     }
-#    ifdef NEFORCE_COMPILER_MSVC
-    unsigned long idx = 0;
-    ::_BitScanForward(&idx, static_cast<unsigned long>(mask));
-    return static_cast<int>(idx);
-#    else
-    return __builtin_ctz(mask);
-#    endif
+    return countr_zero(mask);
 #elif defined(NEFORCE_SIMD_NEON)
     const uint8x16_t match = ::vceqq_u8(v, ::vdupq_n_u8(c));
     const auto* bytes = reinterpret_cast<const byte_t*>(&match);
