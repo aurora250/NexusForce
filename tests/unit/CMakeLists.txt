@@ -29,6 +29,7 @@ add_executable(NexusForceUnitTests
         test_string_utils.cpp
         test_system.cpp
         test_time.cpp
+        test_tui.cpp
         test_util_container.cpp
         test_utility.cpp
 )

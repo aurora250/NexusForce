@@ -75,7 +75,7 @@ int main() {
 
         smtp.disconnect();
     } catch (const ssl_exception& e) {
-        eprintfln("SSL error: {} ({})", e.what(), e.code());
+        eprintfln("SSL error: {} ({})", e.what(), e.code().value());
         return 1;
     } catch (const smtp_exception& e) {
         eprintfln("SMTP error: {} ({})", e.what(), e.code().value());

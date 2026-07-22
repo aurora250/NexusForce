@@ -474,6 +474,10 @@
 #define NEFORCE_BEGIN_HTTP__ namespace __NEFORCE_HTTP_NAMESPACE__ {
 #define NEFORCE_END_HTTP__ }
 
+#define __NEFORCE_TUI_NAMESPACE__ tui
+#define NEFORCE_BEGIN_TUI__ namespace __NEFORCE_TUI_NAMESPACE__ {
+#define NEFORCE_END_TUI__ }
+
 
 #ifdef NEFORCE_STANDARD_11
 #    define NEFORCE_CONSTEXPR11 constexpr

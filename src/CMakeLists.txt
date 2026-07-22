@@ -88,6 +88,13 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/hexadecimal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/uuid.cpp
 
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/style.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/element.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/layout.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/reconciler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/input.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/app.cpp
+
         ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/sql_builder.cpp
