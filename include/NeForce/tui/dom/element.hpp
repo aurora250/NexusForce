@@ -76,7 +76,7 @@ public:
     NEFORCE_NODISCARD size_t key() const noexcept;
     NEFORCE_NODISCARD const vector<element>& children() const;
     NEFORCE_NODISCARD vector<element>& children();
-    NEFORCE_NODISCARD const style& style() const;
+    NEFORCE_NODISCARD const tui::style& style() const;
     NEFORCE_NODISCARD const box_props& layout() const;
     NEFORCE_NODISCARD const string& text() const;
     NEFORCE_NODISCARD const function<void()>& on_click() const;
@@ -180,7 +180,7 @@ private:
     shared_ptr<node> node_;
 
     void ensure_node();
-    void init_kind(enum class kind k);
+    void init_kind(enum kind k);
     void reserve_children(size_t n);
     void add_child(element child);
 };
@@ -337,7 +337,7 @@ inline decorator bgcolor(_NEFORCE color c) {
 
 /// @brief 边框装饰器
 /// @param b 边框样式
-inline decorator border(enum class style::border b) {
+inline decorator border(enum style::border b) {
     return [b](element e) {
         style s;
         s.border = b;

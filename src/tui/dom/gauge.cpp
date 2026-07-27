@@ -6,7 +6,7 @@ element gauge(const float progress, const int width) {
     return gauge_direction(progress, gauge_direction::right, width);
 }
 
-element gauge_direction(const float progress, const enum class gauge_direction direction, const int size) {
+element gauge_direction(const float progress, const enum gauge_direction direction, const int size) {
     const float clamped = (progress < 0.0F) ? 0.0F : ((progress > 1.0F) ? 1.0F : progress);
     const int filled = static_cast<int>(clamped) * size;
     const int empty = size - filled;

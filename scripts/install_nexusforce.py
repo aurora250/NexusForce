@@ -43,9 +43,10 @@ def load_config() -> dict:
 
     with open(CONFIG_FILE, encoding="utf-8") as f:
         return json.load(f)
+    return None
 
 
-def detect_vcpkg_toolchain(cfg: dict) -> Path | None:
+def detect_vcpkg_toolchain(cfg: dict) -> Path:
     """根据平台从 config.json 或环境变量中解析 vcpkg toolchain 路径"""
     env_root = os.environ.get("VCPKG_ROOT")
     if env_root:

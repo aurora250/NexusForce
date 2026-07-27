@@ -5,8 +5,9 @@ add_executable(NexusForceIntegrationTest
         test_http.cpp
         test_network.cpp
         test_network_socket.cpp
-        test_tcp_socket.cpp
         test_ssl_socket.cpp
+        test_tcp_socket.cpp
+        test_tui.cpp
 )
 
 target_link_libraries(NexusForceIntegrationTest PRIVATE NexusForce::NexusForce)

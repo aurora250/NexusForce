@@ -158,7 +158,7 @@ private:
     void apply_clear(int x, int y, int w, int h);
     void apply_text(int x, int y, const string& text, const style& style);
     void apply_text(int x, int y, const string& text, const style& style, int max_x);
-    void apply_border(int x, int y, int w, int h, enum class style::border border, const _NEFORCE color& c);
+    void apply_border(int x, int y, int w, int h, enum style::border border, const _NEFORCE color& c);
     void apply_style_to_cell(cell& cell, const style& style);
 
     void render_button(int x, int y, int w, int h, const string& label, const style& style, const tui::theme& theme,

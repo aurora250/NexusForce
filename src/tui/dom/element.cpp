@@ -4,7 +4,7 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 struct element::node {
-    enum class kind kind = kind::empty;
+    enum kind kind = kind::empty;
     size_t key = 0;
 
     string text;
@@ -68,7 +68,7 @@ element& element::with_key(size_t k) {
     return *this;
 }
 
-enum class element::kind element::kind() const noexcept { return node_->kind; }
+enum element::kind element::kind() const noexcept { return node_->kind; }
 
 size_t element::key() const noexcept { return node_->key; }
 
@@ -144,7 +144,7 @@ void element::ensure_node() {
     }
 }
 
-void element::init_kind(enum class kind k) {
+void element::init_kind(enum kind k) {
     ensure_node();
     node_->kind = k;
 }

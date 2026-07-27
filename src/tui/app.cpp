@@ -4,6 +4,10 @@
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
+application::application() = default;
+
+application::~application() = default;
+
 application& application::with_theme(const theme& theme) {
     theme_ = theme;
     return *this;

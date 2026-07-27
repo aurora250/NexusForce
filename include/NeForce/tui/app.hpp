@@ -42,8 +42,8 @@ class component_base;
  */
 class NEFORCE_API application {
 public:
-    application() = default;
-    ~application() = default;
+    application();
+    ~application();
 
     application(const application&) = delete;
     application& operator=(const application&) = delete;

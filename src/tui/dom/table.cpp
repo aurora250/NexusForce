@@ -63,7 +63,7 @@ table& table::select_rectangle(const int col_min, const int col_max, const int r
     return *this;
 }
 
-table& table::border(const enum class style::border border) {
+table& table::border(const enum style::border border) {
     selection_border_ = border;
     return *this;
 }

@@ -56,8 +56,8 @@ namespace {
         return lines;
     }
 
-    string pad_line(const string& line, int max_width, enum class style::align align) {
-        if (static_cast<int>(line.size()) >= max_width) {
+    string pad_line(const string& line, int max_width, enum style::align align) {
+        if (line.size() >= max_width) {
             return line;
         }
 
@@ -72,7 +72,7 @@ namespace {
         }
     }
 
-    element paragraph_impl(string content, int max_width, enum class style::align align) {
+    element paragraph_impl(string content, int max_width, enum style::align align) {
         auto lines = wrap_text(content, max_width);
         elements elements;
         for (auto& line: lines) {

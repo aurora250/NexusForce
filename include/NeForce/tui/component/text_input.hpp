@@ -21,11 +21,11 @@ NEFORCE_BEGIN_TUI__
  * @brief 文本输入组件配置
  */
 struct text_input_option {
-    state<string>* text = nullptr;                  ///< 文本状态
-    string placeholder;                             ///< 占位提示
-    function<void()> on_enter;                      ///< 回车回调
-    style style;                                    ///< 样式
-    style::wrap_mode wrap = style::wrap_mode::word; ///< 文本换行模式
+    state<string>* text = nullptr;                            ///< 文本状态
+    string placeholder;                                       ///< 占位提示
+    function<void()> on_enter;                                ///< 回车回调
+    tui::style style;                                         ///< 样式
+    tui::style::wrap_mode wrap = tui::style::wrap_mode::word; ///< 文本换行模式
 };
 
 /**

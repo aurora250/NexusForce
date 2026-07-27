@@ -473,7 +473,7 @@ void reconciler::render_subtree(const element& el, const vector<layout_rect>& la
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 ++idx;
                 const style& sv_style = el.style();
-                const enum class style::border sv_border = sv_style.border.value_or(style::border::single);
+                const enum style::border sv_border = sv_style.border.value_or(style::border::single);
                 apply_border(rect.x, rect.y, rect.w, rect.h, sv_border, theme_.border);
                 if (!el.children().empty() && rect.w > 2 && rect.h > 2) {
                     using padding = struct style::padding;
@@ -821,7 +821,7 @@ void reconciler::apply_text(int x, int y, const string& text, const style& style
     }
 }
 
-void reconciler::apply_border(int x, int y, int w, int h, enum class style::border border, const _NEFORCE color& c) {
+void reconciler::apply_border(int x, int y, int w, int h, enum style::border border, const _NEFORCE color& c) {
     if (border == style::border::none || w < 2 || h < 2) {
         return;
     }

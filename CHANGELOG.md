@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.0.0-rc] - 2026-07-18
+## [1.0.0-rc] - 2026-07-22
 
 ### 🚀 New Features
 
@@ -47,6 +47,12 @@
 - 添加 `flat_hashtable` 开放寻址平坦哈希表，采用 SwissTable 风格元数据控制块 + H2 预过滤 + SIMD 批量探测，延迟分配策略
 - 添加 `flat_unordered_map` / `flat_unordered_set` / `flat_unordered_multimap` / `flat_unordered_multiset` 平坦无序关联容器
 - 添加 ChaCha20-Poly1305 AEAD 认证加密算法（RFC 8439），支持关联数据（AAD）认证和常量时间标签验证
+- 添加终端 UI 框架 `tui`，提供声明式、响应式的现代终端用户界面开发能力
+- 添加 TUI 核心引擎：`application`（应用入口，Builder 模式）、`reconciler`（声明式渲染引擎，Cell 级终端帧差分）、`screen`（终端帧缓冲，增量 ANSI 转义序列生成）、`input_driver`（跨平台终端输入驱动，ANSI 转义序列 / SGR 鼠标 / UTF-8 多字节解析）
+- 添加 TUI DOM 层：`element`（虚拟元素树，14+ 节点类型）、Flexbox 布局引擎（direction / wrap / justify / align / gap / flex_grow / flex_shrink）、Gridbox 网格布局、`style` 样式系统与 `theme` 主题系统、`state<T>` 响应式状态管理（自动脏标记 + strand 调度）、`ref<T>` 持有或借用适配器
+- 添加 TUI DOM 辅助元素：`gauge` 进度条、`graph` 折线/柱状图、`paragraph` 自动换行文本、`spinner` 加载动画、`scroll_indicator` 滚动条、`linear_gradient` 多色渐变、`table` 声明式表格构建器
+- 添加 TUI 组件系统：`component_base` / `component<P>` 基类（焦点管理 / 上下文注入 / 子组件树）、`container` 容器（垂直 / 水平 / 层叠）、`menu` 菜单列表、`dropdown` 下拉选择、`radiobox` 单选组、`toggle` 切换开关、`slider` 滑块、`text_input` 文本输入（UTF-8 感知光标 + 闪烁）、`scroll_view` 滚动视图、`window` 浮动窗口、`modal` 模态覆盖层、`collapsible` 折叠面板、`hoverable` 鼠标悬停检测、`resizable_split` 可拖拽分割面板、`renderer` 渲染辅助（含 `catch_event` / `maybe` 条件渲染）
+- 添加 TUI 动画系统：`animator` 属性动画器 + `easing` 缓动函数（linear / quadratic / cubic / sine / elastic / bounce）
 
 ### 🔧 Improvements
 

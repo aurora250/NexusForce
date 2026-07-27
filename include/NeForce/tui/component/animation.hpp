@@ -75,7 +75,9 @@ namespace easing {
             if (t == 0.0F || t == 1.0F) {
                 return t;
             }
-            return static_cast<float>(power(2.0F, static_cast<uint32_t>(-10.0F * t)) * sine((t - 0.075F) * 6.2831853F / 0.3F)) + 1.0F;
+            return static_cast<float>(power(2.0F, static_cast<uint32_t>(-10.0F * t)) *
+                                      sine((t - 0.075F) * 6.2831853F / 0.3F)) +
+                   1.0F;
         };
     }
 

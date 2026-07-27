@@ -79,7 +79,7 @@ public:
      * @param border 边框样式
      * @return 自身引用
      */
-    table& border(enum class style::border border);
+    table& border(enum style::border border);
 
     /**
      * @brief 对当前选择添加分隔线（行之间）
@@ -113,7 +113,7 @@ private:
     int rows_ = 0;
     int cols_ = 0;
     vector<vector<bool>> selected_;
-    enum class style::border selection_border_ = style::border::none;
+    enum style::border selection_border_ = style::border::none;
     bool separator_ = false;
     decorator decorator_;
     decorator even_decorator_;

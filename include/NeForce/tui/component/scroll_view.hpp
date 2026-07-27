@@ -5,7 +5,7 @@
  * @file scroll_view.hpp
  * @brief 滚动视图组件
  *
- * 为 ScrollView 元素提供交互式滚动条支持。
+ * 为 scroll_view 元素提供交互式滚动条支持。
  * 支持鼠标拖拽滚动条滑块和滚轮滚动。
  */
 
@@ -23,7 +23,7 @@ NEFORCE_BEGIN_TUI__
  */
 struct scroll_view_option {
     function<element()> content; ///< 内容渲染回调
-    style style;                 ///< 样式（边框、padding 等）
+    tui::style style;            ///< 样式（边框、padding 等）
 };
 
 /**

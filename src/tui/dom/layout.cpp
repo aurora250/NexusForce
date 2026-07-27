@@ -170,7 +170,7 @@ namespace {
             const int child_alloc_w = is_row ? child_sizes[i] : content_w;
             const int child_alloc_h = is_row ? line_cross_size : child_sizes[i];
 
-            const enum class style::align child_align = cs.align.value_or(lp.align);
+            const enum style::align child_align = cs.align.value_or(lp.align);
             const bool is_stretch = (child_align == style::align::stretch);
             int cross_x = content_x;
             int cross_y = line_cross_pos;
@@ -769,7 +769,7 @@ namespace {
                     const int child_alloc_w = is_row ? child_sizes[i] : content_w;
                     const int child_alloc_h = is_row ? content_h : child_sizes[i];
 
-                    const enum class style::align child_align = cs.align.value_or(lp.align);
+                    const enum style::align child_align = cs.align.value_or(lp.align);
                     bool is_stretch = (child_align == style::align::stretch);
                     int cross_x = content_x;
                     int cross_y = content_y;

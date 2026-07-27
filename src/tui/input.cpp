@@ -4,7 +4,8 @@
 #    include <termios.h>
 #    include <unistd.h>
 #    include <csignal>
-#elif defined(NEFORCE_PLATFORM_WINDOWS)
+#endif
+#ifdef NEFORCE_PLATFORM_WINDOWS
 #    ifdef NEFORCE_COMPILER_MSVC
 #        include <consoleapi.h>
 #        include <consoleapi2.h>
@@ -56,7 +57,7 @@ void input_driver::start() {
     ::tcgetattr(STDIN_FILENO, &old_termios_);
     term_saved_ = true;
     ::termios raw = old_termios_;
-    cfmakeraw(&raw);
+    ::cfmakeraw(&raw);
     raw.c_cc[VMIN] = 0;
     raw.c_cc[VTIME] = 0;
     ::tcsetattr(STDIN_FILENO, TCSANOW, &raw);
@@ -124,7 +125,7 @@ void input_driver::drain_stdin(int /*fd*/, uint32_t /*events*/, error_code /*ec*
 
     if (esc_active_ && !accum_.empty() && accum_[0] == '\x1B' && accum_.size() == 1) {
         key_event ke;
-        ke.key = key_event::key::escape;
+        ke.key = key_event::type::escape;
         dispatch_key(ke);
     }
 
@@ -467,7 +468,7 @@ bool input_driver::parse_mouse_sequence() {
         me.action = mouse_action::wheel;
         me.button = (btn_code == 0)   ? mouse_button::wheelup
                     : (btn_code == 1) ? mouse_button::wheeldown
-                                     : mouse_button::none;
+                                      : mouse_button::none;
     } else if (is_release) {
         me.action = mouse_action::release;
         switch (btn_code) {

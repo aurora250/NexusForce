@@ -787,7 +787,7 @@ void sys_console::enable_virtual_terminal_processing(const bool enable) {
     }
     ::SetConsoleMode(out_, mode);
 #else
-    ignore = enable;
+    _NEFORCE ignore = enable;
 #endif
 }
 

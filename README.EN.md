@@ -296,6 +296,20 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Type Identification** - Hash-based type_id via type_name specialization + compiler function signature, non-intrusive type registration
 - **Reflection Macros** - `NEFORCE_REFLECT_OBJ` / `PROP` / `FUNC` / `SIGNAL` / `ENUM` / `ENUM_VAL` in-class markers for NFRS scanner recognition
 
+### 🖥️ Terminal UI Framework (TUI)
+- **`application`** - Application entry point, Builder pattern config (theme/FPS/title), drives event loop and animation timer
+- **`reconciler`** - Declarative rendering engine, cell-level terminal frame diffing with incremental ANSI output, focus chain traversal (Tab/Shift+Tab), mouse hit-testing and scrollbar interaction
+- **`screen`** - Terminal frame buffer, per-cell diffing to produce minimal ANSI escape sequences
+- **`input_driver`** - Cross-platform terminal input driver (Linux epoll / Windows background thread), parses ANSI/mouse/UTF-8 sequences
+- **`element`** - Immutable virtual element tree, 14+ node kinds (vbox/hbox/zstack/flexbox/gridbox/text/button/text_input/checkbox/scroll_view/canvas etc.), decorator chaining composition
+- **Flexbox / Gridbox Layout** - Full Flexbox (direction/wrap/justify/align/gap/flex_grow/flex_shrink) + Gridbox layout engine
+- **`style` / `theme`** - Style system (fg/bg/bold/italic/underline/border/padding/margin/align) + semantic theming (primary/secondary/danger etc.), dark theme preset
+- **`state<T>`** - Reactive state management, auto dirty-marking on write + strand-coalesced re-render scheduling
+- **DOM Helpers** - `gauge` progress bar / `graph` chart / `paragraph` word-wrapped text / `spinner` loading animation / `scroll_indicator` scrollbar / `linear_gradient` multi-stop gradient / `table` declarative table builder
+- **`component_base` / `component<P>`** - Component base class, focus management, context injection (`provide_context`/`context`, walks up parent chain), reactive state factory
+- **Interactive Components** - `container` directional containers / `menu` menu list / `dropdown` dropdown select / `radiobox` radio group / `toggle` toggle switch / `slider` value slider / `text_input` text input (UTF-8 aware cursor) / `scroll_view` scroll view / `window` floating window / `modal` modal overlay / `collapsible` collapsible panel / `hoverable` hover detection / `resizable_split` draggable split pane / `renderer` render helpers (`catch_event`/`maybe` conditional)
+- **`animator` / `easing`** - Property animator + easing functions (linear/quadratic/cubic/sine/elastic/bounce)
+
 ### 🧬 Type Traits & Concepts
 - **Type Traits** - Comprehensive compile-time type judgments
 - **Concept Constraints** - Concept set support

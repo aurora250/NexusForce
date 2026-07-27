@@ -42,7 +42,7 @@ element NEFORCE_API gauge(float progress, int width = 20);
  * @param size 长度
  * @return Gauge 元素
  */
-element NEFORCE_API gauge_direction(float progress, enum class gauge_direction direction, int size = 20);
+element NEFORCE_API gauge_direction(float progress, enum gauge_direction direction, int size = 20);
 
 /** @} */ // TUI
 

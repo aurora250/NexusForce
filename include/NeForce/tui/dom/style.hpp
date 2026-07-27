@@ -158,10 +158,10 @@ struct NEFORCE_API style {
  * @brief 布局容器属性
  */
 struct box_props {
-    style::direction dir = style::direction::column;             ///< 排列方向
-    style::justify justify = style::justify::start;              ///< 主轴对齐
-    enum class style::align align = style::align::start;         ///< 交叉轴对齐
-    enum class style::align align_content = style::align::start; ///< 多行/列时交叉轴内容对齐
+    style::direction dir = style::direction::column;       ///< 排列方向
+    style::justify justify = style::justify::start;        ///< 主轴对齐
+    enum style::align align = style::align::start;         ///< 交叉轴对齐
+    enum style::align align_content = style::align::start; ///< 多行/列时交叉轴内容对齐
 
     int gap = 0;                     ///< 子元素间距
     int cross_gap = 0;               ///< 换行时交叉轴间距
