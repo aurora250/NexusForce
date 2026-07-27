@@ -960,25 +960,25 @@ constexpr size_t char_traits_rfind_not_char(const char_traits_ptr_t<Traits> dest
     template <>                                                                             \
     struct hash<OPT*> {                                                                     \
         NEFORCE_NODISCARD constexpr size_t operator()(const OPT* str) const noexcept {      \
-            return FNV_hash_string(str, char_traits<OPT>::length(str));                     \
+            return XXH64(str, char_traits<OPT>::length(str) * sizeof(OPT));                 \
         }                                                                                   \
     };                                                                                      \
     template <>                                                                             \
     struct hash<const OPT*> {                                                               \
         NEFORCE_NODISCARD constexpr size_t operator()(const OPT* str) const noexcept {      \
-            return FNV_hash_string(str, char_traits<OPT>::length(str));                     \
+            return XXH64(str, char_traits<OPT>::length(str) * sizeof(OPT));                 \
         }                                                                                   \
     };                                                                                      \
     template <size_t N>                                                                     \
     struct hash<OPT[N]> {                                                                   \
         NEFORCE_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
-            return FNV_hash_string(str, N - 1);                                             \
+            return XXH64(str, (N - 1) * sizeof(OPT));                                       \
         }                                                                                   \
     };                                                                                      \
     template <size_t N>                                                                     \
     struct hash<const OPT[N]> {                                                             \
         NEFORCE_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
-            return FNV_hash_string(str, N - 1);                                             \
+            return XXH64(str, (N - 1) * sizeof(OPT));                                       \
         }                                                                                   \
     };
 

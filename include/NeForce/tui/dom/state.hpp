@@ -19,7 +19,7 @@ NEFORCE_BEGIN_TUI__
  */
 
 /// @cond
-class ComponentBase;
+class component_base;
 /// @endcond
 
 
@@ -30,13 +30,13 @@ class ComponentBase;
  * 写入时自动通过 strand 调度组件重渲染，
  * 支持读取、整值替换、就地修改和批量静默更新四种模式。
  *
- * @note 必须在 Component::createState() 中创建，通过组件生命周期管理。
+ * @note 必须在 component::create_state() 中创建，通过组件生命周期管理。
  */
 template <typename T>
-class State {
+class state {
 public:
     /// @brief 值变化信号类型
-    using ChangedSignal = signal<T>;
+    using changed_signal = signal<T>;
 
     /**
      * @brief 构造函数
@@ -44,17 +44,17 @@ public:
      * @param s 串行执行器引用
      * @param initial 初始值
      */
-    State(ComponentBase* owner, strand& s, T initial) :
+    state(component_base* owner, strand& s, T initial) :
     value_(_NEFORCE move(initial)),
     strand_(&s),
     owner_(owner) {}
 
-    ~State() = default;
+    ~state() = default;
 
-    State(const State&) = delete;
-    State& operator=(const State&) = delete;
-    State(State&&) = delete;
-    State& operator=(State&&) = delete;
+    state(const state&) = delete;
+    state& operator=(const state&) = delete;
+    state(state&&) = delete;
+    state& operator=(state&&) = delete;
 
     /**
      * @brief 读取当前值
@@ -79,9 +79,9 @@ public:
      * @param v 新值
      * @return 自身引用
      */
-    State& operator=(T v) {
+    state& operator=(T v) {
         value_ = _NEFORCE move(v);
-        notifyChanged();
+        notify_changed();
         return *this;
     }
 
@@ -91,7 +91,7 @@ public:
      */
     void modify(function<void(T&)> fn) {
         fn(value_);
-        notifyChanged();
+        notify_changed();
     }
 
     /**
@@ -100,9 +100,9 @@ public:
      *
      * 用于批量操作场景，最后手动调用 notify()。
      */
-    void setQuiet(T v) {
+    void set_quiet(T v) {
         value_ = _NEFORCE move(v);
-        onChanged_.emit(value_);
+        on_changed_.emit(value_);
         dirty_ = true;
     }
 
@@ -114,7 +114,7 @@ public:
     void notify() {
         if (dirty_) {
             dirty_ = false;
-            scheduleRender();
+            schedule_render();
         }
     }
 
@@ -123,23 +123,23 @@ public:
      * @param fn 回调函数，接收新值常量引用
      * @return 连接句柄
      */
-    connection onChange(function<void(const T&)> fn) {
-        return onChanged_.connect([fn = _NEFORCE move(fn)](const T& val) { fn(val); });
+    connection on_change(function<void(const T&)> fn) {
+        return on_changed_.connect([fn = _NEFORCE move(fn)](const T& val) { fn(val); });
     }
 
 private:
     T value_;
-    ChangedSignal onChanged_;
+    changed_signal on_changed_;
     strand* strand_;
-    ComponentBase* owner_;
+    component_base* owner_;
     bool dirty_ = false;
 
-    void notifyChanged() {
-        onChanged_.emit(value_);
-        scheduleRender();
+    void notify_changed() {
+        on_changed_.emit(value_);
+        schedule_render();
     }
 
-    void scheduleRender();
+    void schedule_render();
 };
 
 /** @} */ // TUI

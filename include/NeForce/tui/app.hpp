@@ -10,7 +10,7 @@
 
 #include "NeForce/core/async/strand.hpp"
 #include "NeForce/core/system/console.hpp"
-#include "NeForce/tui/style.hpp"
+#include "NeForce/tui/dom/style.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
@@ -20,9 +20,9 @@ NEFORCE_BEGIN_TUI__
  */
 
 /// @cond
-class Reconciler;
-class InputDriver;
-class ComponentBase;
+class reconciler;
+class input_driver;
+class component_base;
 /// @endcond
 
 /**
@@ -32,23 +32,23 @@ class ComponentBase;
  *
  * @code
  * int main() {
- *     return Application()
- *         .withComponent<MyRootComponent>()
- *         .withTheme(kDarkTheme)
- *         .withFps(60)
+ *     return application()
+ *         .with_component<my_root_component>()
+ *         .with_theme(dark_theme)
+ *         .with_fps(60)
  *         .run();
  * }
  * @endcode
  */
-class Application {
+class NEFORCE_API application {
 public:
-    Application();
-    ~Application();
+    application() = default;
+    ~application() = default;
 
-    Application(const Application&) = delete;
-    Application& operator=(const Application&) = delete;
-    Application(Application&&) = delete;
-    Application& operator=(Application&&) = delete;
+    application(const application&) = delete;
+    application& operator=(const application&) = delete;
+    application(application&&) = delete;
+    application& operator=(application&&) = delete;
 
     /**
      * @brief 设置根组件
@@ -58,8 +58,8 @@ public:
      * @return 自身引用
      */
     template <typename RootComponent, typename... Args>
-    Application& withComponent(Args&&... args) {
-        root_ = make_unique<RootComponent>(std::forward<Args>(args)...);
+    application& with_component(Args&&... args) {
+        root_ = _NEFORCE make_unique<RootComponent>(_NEFORCE forward<Args>(args)...);
         return *this;
     }
 
@@ -68,14 +68,21 @@ public:
      * @param theme 主题
      * @return 自身引用
      */
-    Application& withTheme(const Theme& theme);
+    application& with_theme(const theme& theme);
 
     /**
      * @brief 设置最大刷新帧率
      * @param fps 帧率（0 表示仅事件驱动刷新）
      * @return 自身引用
      */
-    Application& withFps(int fps);
+    application& with_fps(int fps);
+
+    /**
+     * @brief 设置程序名
+     * @param title 程序名
+     * @return 自身引用
+     */
+    application& with_title(string title);
 
     /**
      * @brief 阻塞运行事件循环
@@ -85,20 +92,21 @@ public:
 
     /**
      * @brief 请求退出应用
-     * @param exitCode 退出码
+     * @param exit_code 退出码
      */
-    void quit(int exitCode = 0);
+    void quit(int exit_code = 0);
 
 private:
     io_context ctx_;
-    strand renderStrand_{ctx_};
-    sys_console& console_;
-    unique_ptr<Reconciler> reconiler_;
-    unique_ptr<InputDriver> input_;
-    unique_ptr<ComponentBase> root_;
-    Theme theme_{dark_theme};
+    strand render_strand_{ctx_};
+    sys_console& console_{sys_console::instance()};
+    unique_ptr<reconciler> reconiler_;
+    unique_ptr<input_driver> input_;
+    unique_ptr<component_base> root_;
+    theme theme_{dark_theme};
     int fps_{60};
-    int exitCode_ = 0;
+    int exit_code_ = 0;
+    string title_;
     bool running_ = false;
 };
 

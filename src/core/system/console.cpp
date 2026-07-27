@@ -27,7 +27,7 @@ NEFORCE_BEGIN_NAMESPACE__
 void sys_console::print_string_unsafe(const string_view str) const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD written = 0;
-    ::WriteConsoleA(out_, str.data(), static_cast<::DWORD>(str.length()), &written, nullptr);
+    ::WriteFile(out_, str.data(), static_cast<::DWORD>(str.length()), &written, nullptr);
 #elif defined(NEFORCE_PLATFORM_LINUX)
     size_t total = 0;
     while (total < str.length()) {
@@ -764,11 +764,32 @@ void sys_console::enable_alternate_screen_buffer(const bool enable) {
     if (enable == alt_buffer_active_) {
         return;
     }
-    print_string_unsafe(enable ? "\033[?1049h" : "\033[?1049l");
+    const char* control = enable ? "\033[?1049h" : "\033[?1049l";
+    print_string_unsafe(control);
     alt_buffer_active_ = enable;
 }
 
-void sys_console::disable_alternate_screen_buffer() { enable_alternate_screen_buffer(false); }
+void sys_console::set_output_utf8() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::SetConsoleOutputCP(CP_UTF8);
+#endif
+}
+
+void sys_console::enable_virtual_terminal_processing(const bool enable) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    lock<mutex> lock(mutex_);
+    ::DWORD mode = 0;
+    ::GetConsoleMode(out_, &mode);
+    if (enable) {
+        mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN;
+    } else {
+        mode &= ~(ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN);
+    }
+    ::SetConsoleMode(out_, mode);
+#else
+    ignore = enable;
+#endif
+}
 
 void sys_console::set_scroll_region(const int top, const int bottom) {
     lock<mutex> lock(mutex_);
@@ -785,11 +806,10 @@ void sys_console::enable_mouse(const bool enable) {
     if (enable == mouse_enabled_) {
         return;
     }
-    print_string_unsafe(enable ? "\033[?1000h\033[?1006h" : "\033[?1006l\033[?1000l");
+    const char* control = enable ? "\033[?1000h\033[?1003h\033[?1006h" : "\033[?1006l\033[?1003l\033[?1000l";
+    print_string_unsafe(control);
     mouse_enabled_ = enable;
 }
-
-void sys_console::disable_mouse() { enable_mouse(false); }
 
 bool sys_console::is_mouse_enabled() const {
     lock<mutex> lock(mutex_);
@@ -937,27 +957,16 @@ void sys_console::restore_cursor_position() {
 #endif
 }
 
-void sys_console::hide_cursor() {
+void sys_console::hide_cursor(const bool enable) {
     lock<mutex> lock(mutex_);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::CONSOLE_CURSOR_INFO cursor_info{};
     ::GetConsoleCursorInfo(out_, &cursor_info);
-    cursor_info.bVisible = FALSE;
+    cursor_info.bVisible = static_cast<::BOOL>(enable);
     ::SetConsoleCursorInfo(out_, &cursor_info);
 #else
-    print_string_unsafe("\033[?25l");
-#endif
-}
-
-void sys_console::show_cursor() {
-    lock<mutex> lock(mutex_);
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    ::CONSOLE_CURSOR_INFO cursor_info{};
-    ::GetConsoleCursorInfo(out_, &cursor_info);
-    cursor_info.bVisible = TRUE;
-    ::SetConsoleCursorInfo(out_, &cursor_info);
-#else
-    print_string_unsafe("\033[?25h");
+    const char* control = enable ? "\033[?25l" : "\033[?25h";
+    print_string_unsafe(control);
 #endif
 }
 

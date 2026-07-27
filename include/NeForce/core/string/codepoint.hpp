@@ -237,10 +237,12 @@ public:
      *
      * UTF-32编码直接对应Unicode码点值。
      */
-    static constexpr codepoint from_utf32(char32_t value) noexcept { return codepoint(static_cast<uint32_t>(value)); }
+    static constexpr codepoint from_utf32(const char32_t value) noexcept {
+        return codepoint(static_cast<uint32_t>(value));
+    }
 
 private:
-    uint32_t value_; ///< 存储的码点值
+    uint32_t value_{0}; ///< 存储的码点值
 
 private:
     template <typename T>
@@ -286,8 +288,7 @@ public:
      * @brief 默认构造函数
      * @brief 构造空字符U+0000
      */
-    constexpr codepoint() noexcept :
-    value_(0) {}
+    constexpr codepoint() noexcept = default;
 
     /**
      * @brief 从uint32_t构造码点
@@ -295,14 +296,23 @@ public:
      *
      * 如果值非法，自动替换为U+FFFD。
      */
-    constexpr explicit codepoint(uint32_t value) noexcept :
+    constexpr explicit codepoint(const uint32_t value) noexcept :
     value_(is_valid_codepoint(value) ? value : REPLACEMENT_VALUE) {}
+
+    /**
+     * @brief 从int32_t构造码点
+     * @param value 原始码点值
+     *
+     * 如果值非法，自动替换为U+FFFD。
+     */
+    constexpr explicit codepoint(const int32_t value) noexcept :
+    codepoint(static_cast<uint32_t>(value)) {}
 
     /**
      * @brief 从char32_t构造码点
      * @param value UTF-32字符
      */
-    constexpr explicit codepoint(const char32_t value) noexcept :
+    constexpr codepoint(const char32_t value) noexcept :
     codepoint(static_cast<uint32_t>(value)) {}
 
     constexpr codepoint(const codepoint&) noexcept = default;
@@ -315,6 +325,13 @@ public:
      * @return 码点数值
      */
     NEFORCE_NODISCARD constexpr uint32_t value() const noexcept { return value_; }
+
+    /**
+     * @brief 获取码点在终端中的显示宽度
+     * @return 宽度值：0（不可见/零宽）、1（半角）、2（全角）
+     * @note 参照 East Asian Width 标准及常见零宽字符规则。
+     */
+    NEFORCE_NODISCARD int display_width() const noexcept;
 
     /**
      * @brief 获取码点的char32_t值

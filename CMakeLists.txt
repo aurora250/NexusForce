@@ -213,6 +213,7 @@ include(cmake/NexusForceReflectScanner.cmake)
 include(cmake/NexusForceRuntime.cmake)
 include(cmake/NexusForceClangFormat.cmake)
 include(cmake/NexusForceClangTidy.cmake)
+include(cmake/NexusForceClean.cmake)
 
 
 add_subdirectory(src)

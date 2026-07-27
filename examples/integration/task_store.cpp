@@ -26,7 +26,7 @@ bool TaskStore::initialize() {
         return false;
     }
 
-    repository<Task, idb_tb_connect> repo{*conn};
+    repository<task, idb_tb_connect> repo{*conn};
     if (!repo.create_table()) {
         return false;
     }
@@ -48,21 +48,21 @@ shared_ptr<idb_tb_connect> TaskStore::get_connection() {
     return pool_->get_tb_connect();
 }
 
-vector<Task> TaskStore::find_all() {
+vector<task> TaskStore::find_all() {
     auto conn = get_connection();
     if (!conn) {
         return {};
     }
-    repository<Task, idb_tb_connect> repo{*conn};
+    repository<task, idb_tb_connect> repo{*conn};
     return repo.find_all();
 }
 
-optional<Task> TaskStore::find_by_id(const string& id) {
+optional<task> TaskStore::find_by_id(const string& id) {
     auto conn = get_connection();
     if (!conn) {
         return none;
     }
-    repository<Task, idb_tb_connect> repo{*conn};
+    repository<task, idb_tb_connect> repo{*conn};
     auto tasks = repo.find_where("id = '" + id + "'");
     if (tasks.empty()) {
         return none;
@@ -70,18 +70,18 @@ optional<Task> TaskStore::find_by_id(const string& id) {
     return tasks[0];
 }
 
-void TaskStore::insert(idb_tb_connect& conn, Task& task) {
-    repository<Task, idb_tb_connect> repo{conn};
+void TaskStore::insert(idb_tb_connect& conn, task& task) {
+    repository<task, idb_tb_connect> repo{conn};
     repo.insert(task);
 }
 
-void TaskStore::update(idb_tb_connect& conn, const Task& task) {
-    repository<Task, idb_tb_connect> repo{conn};
+void TaskStore::update(idb_tb_connect& conn, const task& task) {
+    repository<task, idb_tb_connect> repo{conn};
     repo.update(task);
 }
 
-void TaskStore::remove(idb_tb_connect& conn, const Task& task) {
-    repository<Task, idb_tb_connect> repo{conn};
+void TaskStore::remove(idb_tb_connect& conn, const task& task) {
+    repository<task, idb_tb_connect> repo{conn};
     repo.remove(task);
 }
 

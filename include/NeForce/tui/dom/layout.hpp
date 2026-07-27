@@ -9,8 +9,7 @@
  * 输入元素树和终端尺寸，输出每个叶子节点的布局矩形。
  */
 
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/tui/element.hpp"
+#include "NeForce/tui/dom/element.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
@@ -22,7 +21,7 @@ NEFORCE_BEGIN_TUI__
 /**
  * @brief 布局矩形
  */
-struct LayoutRect {
+struct layout_rect {
     int x = 0; ///< 列坐标
     int y = 0; ///< 行坐标
     int w = 0; ///< 宽度
@@ -32,13 +31,11 @@ struct LayoutRect {
 /**
  * @brief Flexbox 布局计算
  * @param element 元素树根节点
- * @param constraintW 可用宽度
- * @param constraintH 可用高度
+ * @param constraint_w 可用宽度
+ * @param constraint_h 可用高度
  * @returns 每个叶子节点的布局矩形
- *
- * 支持 gap、padding、Flex(Fill) 弹性分配。
  */
-vector<LayoutRect> computeLayout(const Element& element, int constraintW, int constraintH);
+vector<layout_rect> NEFORCE_API compute_layout(const element& element, int constraint_w, int constraint_h);
 
 /** @} */ // TuiLayout
 

@@ -465,15 +465,21 @@ public:
     void set_window_title(string_view title);
 
     /**
+     * @brief 设置控制台输出代码页为 UTF-8
+     */
+    void set_output_utf8();
+
+    /**
+     * @brief 启用虚拟终端处理
+     * @param enable 是否启用
+     */
+    void enable_virtual_terminal_processing(bool enable = true);
+
+    /**
      * @brief 启用或禁用交替屏幕缓冲区
      * @param enable 是否启用交替屏幕缓冲区
      */
     void enable_alternate_screen_buffer(bool enable = true);
-
-    /**
-     * @brief 禁用交替屏幕缓冲区
-     */
-    void disable_alternate_screen_buffer();
 
     /**
      * @brief 设置滚动区域
@@ -493,11 +499,6 @@ public:
      * @note 鼠标事件序列以 ESC [< 开头，需通过 read() 或 getch() 自行解析
      */
     void enable_mouse(bool enable = true);
-
-    /**
-     * @brief 禁用鼠标输入捕获
-     */
-    void disable_mouse();
 
     /**
      * @brief 检测当前是否已启用鼠标输入
@@ -547,13 +548,9 @@ public:
 
     /**
      * @brief 隐藏光标
+     * @param enable 是否隐藏光标
      */
-    void hide_cursor();
-
-    /**
-     * @brief 显示光标
-     */
-    void show_cursor();
+    void hide_cursor(bool enable = true);
 
     /**
      * @brief 获取控制台尺寸

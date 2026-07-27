@@ -23,29 +23,29 @@ NEFORCE_BEGIN_TUI__
  */
 
 /// @cond
-class Reconciler;
+class reconciler;
 /// @endcond
 
 /**
  * @brief 终端输入驱动
  *
- * 监听输入，解析为 KeyEvent 或 MouseEvent 后分发到 Reconciler。
+ * 监听输入，解析为 key_event 或 mouse_event 后分发到 reconciler。
  */
-class InputDriver {
+class NEFORCE_API input_driver {
 public:
     /**
      * @brief 构造函数
      * @param ctx 事件循环上下文
-     * @param r Reconciler 引用
+     * @param r reconciler 引用
      * @param s 串行执行器
      */
-    InputDriver(io_context& ctx, Reconciler& r, strand& s);
-    ~InputDriver();
+    input_driver(io_context& ctx, reconciler& r, strand& s);
+    ~input_driver();
 
-    InputDriver(const InputDriver&) = delete;
-    InputDriver& operator=(const InputDriver&) = delete;
-    InputDriver(InputDriver&&) = delete;
-    InputDriver& operator=(InputDriver&&) = delete;
+    input_driver(const input_driver&) = delete;
+    input_driver& operator=(const input_driver&) = delete;
+    input_driver(input_driver&&) = delete;
+    input_driver& operator=(input_driver&&) = delete;
 
     /**
      * @brief 启动 stdin 监听
@@ -61,43 +61,45 @@ public:
      * @brief 检查并清除终端尺寸变更标记
      * @return true 表示终端尺寸已改变
      */
-    static bool checkResizeFlag();
+    static bool check_resize_flag();
 
 private:
 #ifdef NEFORCE_PLATFORM_LINUX
-    void drainStdin(int fd, uint32_t events, error_code ec);
+    void drain_stdin(int fd, uint32_t events, error_code ec);
+#else
+    static unsigned long WINAPI input_thread_proc(void* selfp);
 #endif
 
-    void processByte(byte_t byte);
-    bool parseEscapeSequence();
-    bool parseUtf8Sequence();
-    bool parseMouseSequence();
-    void dispatchKey(const KeyEvent& e);
-    void dispatchMouse(const MouseEvent& e);
-    void processAccumulatedBytes(const byte_t* data, size_t len);
+    void process_byte(byte_t byte);
+    bool parse_escape_sequence();
+    bool parse_utf8_sequence();
+    bool parse_mouse_sequence();
+    void dispatch_key(const key_event& e);
+    void dispatch_mouse(const mouse_event& e);
+    void process_accumulated_bytes(const byte_t* data, size_t len);
 
     io_context& ctx_;
-    Reconciler& reconiler_;
+    reconciler& reconiler_;
     strand& strand_;
     sys_console& console_;
 
-    string accum_;             ///< 转义序列 / UTF-8 累积缓冲
-    bool escActive_ = false;   ///< 是否在处理 ESC 序列
-    bool mouseActive_ = false; ///< 是否在处理鼠标序列
-    bool listening_ = false;   ///< 是否已启动监听
+    string accum_;              ///< 转义序列 / UTF-8 累积缓冲
+    bool esc_active_ = false;   ///< 是否在处理 ESC 序列
+    bool mouse_active_ = false; ///< 是否在处理鼠标序列
+    bool utf8_active_ = false;  ///< 是否在处理 UTF-8 多字节序列
+    bool listening_ = false;    ///< 是否已启动监听
 
+    bool term_saved_ = false; ///< 是否已保存原始终端属性
 #ifdef NEFORCE_PLATFORM_LINUX
-    bool termSaved_ = false; ///< 是否已保存原始终端属性
-    ::termios oldTermios_;   ///< 原始终端属性
+    ::termios old_termios_{}; ///< 原始终端属性
 #elif defined(NEFORCE_PLATFORM_WINDOWS)
-    void* stdinHandle_ = nullptr;
-    void* inputThread_ = nullptr; ///< 后台输入线程句柄
-    unsigned long oldInMode_ = 0; ///< 原始控制台输入模式
-    bool termSaved_ = false;      ///< 是否已保存控制台模式
+    void* stdin_handle_ = nullptr;
+    void* input_thread_ = nullptr;  ///< 后台输入线程句柄
+    unsigned long old_in_mode_ = 0; ///< 原始控制台输入模式
 #endif
 };
 
-/** @} */ // TuiInput
+/** @} */ // TUI
 
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

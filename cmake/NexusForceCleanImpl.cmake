@@ -1,0 +1,25 @@
+if(NOT BUILD_DIR)
+    message(FATAL_ERROR "BUILD_DIR not defined")
+endif()
+
+if(NOT EXISTS "${BUILD_DIR}")
+    message(FATAL_ERROR "Build directory does not exist: ${BUILD_DIR}")
+endif()
+
+file(GLOB items LIST_DIRECTORIES true "${BUILD_DIR}/*")
+
+foreach(item ${items})
+    get_filename_component(name "${item}" NAME)
+    if(name STREQUAL "vcpkg_installed")
+        message(STATUS "  Preserving: ${name}")
+    else()
+        message(STATUS "  Removing:  ${name}")
+        if(IS_DIRECTORY "${item}")
+            file(REMOVE_RECURSE "${item}")
+        else()
+            file(REMOVE "${item}")
+        endif()
+    endif()
+endforeach()
+
+message(STATUS "Build cache cleaned")

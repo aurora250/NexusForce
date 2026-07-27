@@ -161,20 +161,6 @@ public:
     NEFORCE_NODISCARD utf8_iterator end() const noexcept { return {nullptr, 0}; }
 };
 
-/**
- * @brief 创建UTF-8码点遍历范围
- * @param sv 字符串视图
- * @return UTF-8码点范围对象
- *
- * 用法示例：
- * @code
- * for (codepoint cp : utf8_view("Hello 世界")) {
- *     if (cp.is_ascii()) { ... }
- * }
- * @endcode
- */
-NEFORCE_NODISCARD inline utf8_range utf8_view(const string_view sv) noexcept { return utf8_range(sv); }
-
 /** @} */ // UtfIterator
 
 NEFORCE_END_NAMESPACE__

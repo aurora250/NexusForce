@@ -1,4 +1,4 @@
-#include <NeForce/tui/style.hpp>
+#include <NeForce/tui/dom/style.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
@@ -12,14 +12,18 @@ namespace {
 } // namespace
 
 
-Style Style::merge(const Style& base, const Style& over) {
-    Style result = base;
+style style::merge(const style& base, const style& over) {
+    style result = base;
     mergeOptional(result.fg, over.fg);
     mergeOptional(result.bg, over.bg);
     mergeOptional(result.bold, over.bold);
+    mergeOptional(result.dim, over.dim);
     mergeOptional(result.underline, over.underline);
+    mergeOptional(result.underlined_double, over.underlined_double);
     mergeOptional(result.italic, over.italic);
     mergeOptional(result.reverse, over.reverse);
+    mergeOptional(result.blink, over.blink);
+    mergeOptional(result.strikethrough, over.strikethrough);
     mergeOptional(result.padding, over.padding);
     mergeOptional(result.margin, over.margin);
     mergeOptional(result.border, over.border);
@@ -27,51 +31,54 @@ Style Style::merge(const Style& base, const Style& over) {
     mergeOptional(result.width, over.width);
     mergeOptional(result.height, over.height);
     mergeOptional(result.align, over.align);
+    mergeOptional(result.flex_grow, over.flex_grow);
+    mergeOptional(result.flex_shrink, over.flex_shrink);
+    mergeOptional(result.text_wrap, over.text_wrap);
     return result;
 }
 
-Style Theme::buttonStyle(Variant v) const {
-    Style s;
+style theme::button_style(style::variant v) const {
+    style s;
     s.fg = fg;
     s.padding = {0, 2, 0, 2};
     switch (v) {
-        case Variant::Primary:
+        case style::variant::primary:
             s.bg = primary;
             s.bold = true;
             break;
-        case Variant::Secondary:
+        case style::variant::secondary:
             s.bg = secondary;
             break;
-        case Variant::Danger:
+        case style::variant::danger:
             s.fg = danger;
             s.bold = true;
             break;
-        case Variant::Success:
+        case style::variant::success:
             s.fg = success;
             s.bold = true;
             break;
-        case Variant::Default:
+        case style::variant::default_:
         default:
             break;
     }
     return s;
 }
 
-Style Theme::textStyle() const {
-    Style s;
+style theme::text_style() const {
+    style s;
     s.fg = fg;
     return s;
 }
 
-Style Theme::inputStyle(bool focused) const {
-    Style s;
+style theme::input_style(bool focused) const {
+    style s;
     s.fg = fg;
     s.bg = bg;
     if (focused) {
-        s.border = Border::Single;
+        s.border = style::border::single;
         s.borderColor = primary;
     } else {
-        s.border = Border::Single;
+        s.border = style::border::single;
         s.borderColor = border;
     }
     s.padding = {0, 1, 0, 1};

@@ -88,13 +88,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/hexadecimal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/uuid.cpp
 
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/style.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/element.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/layout.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/reconciler.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/input.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/app.cpp
-
         ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/sql_builder.cpp
@@ -166,6 +159,35 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/util/url.cpp
 
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/animation.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/collapsible.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/containers.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/dropdown.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/menu.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/hoverable.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/modal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/radiobox.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/renderer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/resizable_split.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/scroll_view.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/slider.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_input.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/toggle.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/window.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/element.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/gauge.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/graph.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/layout.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/paragraph.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/scroll_indicator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/spinner.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/style.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/table.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/app.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/input.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/reconciler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/screen.cpp
 )
 
 # 编译为动态库

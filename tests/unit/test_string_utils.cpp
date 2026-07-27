@@ -1869,7 +1869,7 @@ TEST_F(RegexCopyTest, CopyAssignmentEmptyPatternToValid) {
 
 TEST_F(UTF8IteratorTest, EmptyRange) {
     size_t count = 0;
-    for (codepoint cp: utf8_view("")) {
+    for (codepoint cp: utf8_range("")) {
         ignore = cp;
         ++count;
     }
@@ -1878,7 +1878,7 @@ TEST_F(UTF8IteratorTest, EmptyRange) {
 
 TEST_F(UTF8IteratorTest, AsciiOnly) {
     vector<uint32_t> values;
-    for (codepoint cp: utf8_view("ABC")) {
+    for (codepoint cp: utf8_range("ABC")) {
         values.push_back(cp.value());
     }
     ASSERT_EQ(values.size(), 3u);
@@ -1890,7 +1890,7 @@ TEST_F(UTF8IteratorTest, AsciiOnly) {
 TEST_F(UTF8IteratorTest, CJKCharacters) {
     string_view sv("\xE4\xB8\x96\xE7\x95\x8C");
     vector<uint32_t> values;
-    for (codepoint cp: utf8_view(sv)) {
+    for (codepoint cp: utf8_range(sv)) {
         values.push_back(cp.value());
     }
     ASSERT_EQ(values.size(), 2u);
@@ -1901,7 +1901,7 @@ TEST_F(UTF8IteratorTest, CJKCharacters) {
 TEST_F(UTF8IteratorTest, MixedAsciiAndMultiByte) {
     string hello_world = "Hello \xE4\xB8\x96\xE7\x95\x8C";
     vector<uint32_t> values;
-    for (codepoint cp: utf8_view(hello_world.view())) {
+    for (codepoint cp: utf8_range(hello_world.view())) {
         values.push_back(cp.value());
     }
     ASSERT_EQ(values.size(), 8u);
@@ -1936,7 +1936,7 @@ TEST_F(UTF8IteratorTest, TruncatedSequence) {
 }
 
 TEST_F(UTF8IteratorTest, IteratorComparison) {
-    auto range = utf8_view("AB");
+    auto range = utf8_range("AB");
     auto it = range.begin();
     auto end = range.end();
     EXPECT_NE(it, end);
@@ -1947,7 +1947,7 @@ TEST_F(UTF8IteratorTest, IteratorComparison) {
 }
 
 TEST_F(UTF8IteratorTest, PostfixIncrement) {
-    auto range = utf8_view("AB");
+    auto range = utf8_range("AB");
     auto it = range.begin();
     auto prev = it++;
     EXPECT_EQ(prev->value(), 0x41u);
@@ -1955,7 +1955,7 @@ TEST_F(UTF8IteratorTest, PostfixIncrement) {
 }
 
 TEST_F(UTF8IteratorTest, ArrowOperator) {
-    auto range = utf8_view("X");
+    auto range = utf8_range("X");
     auto it = range.begin();
     EXPECT_EQ(it->value(), 0x58u);
     EXPECT_TRUE(it->is_ascii());

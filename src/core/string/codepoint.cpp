@@ -1,7 +1,72 @@
+#include <NeForce/core/container/array.hpp>
 #include <NeForce/core/string/codepoint.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
+    constexpr size_t BLOCK_BITS = 64;
+    constexpr size_t BLOCK_COUNT = (codepoint::MAX_VALUE + BLOCK_BITS) / BLOCK_BITS;
+
+    constexpr void set_bit(array<uint64_t, BLOCK_COUNT>& bitmap, const uint32_t cp) noexcept {
+        if (cp <= codepoint::MAX_VALUE) {
+            const size_t idx = cp / BLOCK_BITS;
+            const size_t off = cp % BLOCK_BITS;
+            bitmap[idx] |= (1ULL << off);
+        }
+    }
+
+    constexpr void set_range(array<uint64_t, BLOCK_COUNT>& bitmap, const uint32_t start, const uint32_t end) noexcept {
+        for (uint32_t cp = start; cp <= end; ++cp) {
+            set_bit(bitmap, cp);
+        }
+    }
+
+    constexpr array<uint64_t, BLOCK_COUNT> build_wide_bitmap() {
+        array<uint64_t, BLOCK_COUNT> bitmap{};
+        set_range(bitmap, 0x1100, 0x115F);   // Hangul Jamo
+        set_range(bitmap, 0x2329, 0x232A);   // angle brackets
+        set_range(bitmap, 0x2E80, 0x303F);   // CJK Radicals
+        set_range(bitmap, 0x3040, 0x33BF);   // Hiragana, Katakana, Bopomofo, CJK Symbols
+        set_range(bitmap, 0x3400, 0x4DBF);   // CJK Ext-A
+        set_range(bitmap, 0x4E00, 0x9FFF);   // CJK Unified
+        set_range(bitmap, 0xA000, 0xA4CF);   // Yi
+        set_range(bitmap, 0xAC00, 0xD7AF);   // Hangul Syllables
+        set_range(bitmap, 0xF900, 0xFAFF);   // CJK Compatibility
+        set_range(bitmap, 0xFE10, 0xFE19);   // Vertical forms
+        set_range(bitmap, 0xFE30, 0xFE6F);   // CJK Compatibility Forms
+        set_range(bitmap, 0xFF01, 0xFF60);   // Fullwidth Forms
+        set_range(bitmap, 0xFFE0, 0xFFE6);   // Fullwidth Signs
+        set_range(bitmap, 0x1F004, 0x1F9FF); // Emoji / Misc Symbols
+        set_range(bitmap, 0x20000, 0x2FFFD); // CJK Ext-B ~
+        set_range(bitmap, 0x30000, 0x3FFFD); // CJK Ext-G ~
+        return bitmap;
+    }
+
+    constexpr array<uint64_t, BLOCK_COUNT> build_zero_bitmap() {
+        array<uint64_t, BLOCK_COUNT> bitmap{};
+        // C0 (0x00~0x1F)
+        set_range(bitmap, 0x0000, 0x001F);
+        // C1 (0x7F~0x9F)
+        set_range(bitmap, 0x007F, 0x009F);
+        // (ZWJ, ZWNJ)
+        set_bit(bitmap, 0x200D); // ZWJ
+        set_bit(bitmap, 0x200C); // ZWNJ
+        set_bit(bitmap, 0x200E); // LRM
+        set_bit(bitmap, 0x200F); // RLM
+        //Combining Diacritical Marks
+        set_range(bitmap, 0x0300, 0x036F);
+        set_range(bitmap, 0x1AB0, 0x1AFF);
+        set_range(bitmap, 0x1DC0, 0x1DFF);
+        set_range(bitmap, 0x20D0, 0x20FF);
+        // Variation Selectors
+        set_range(bitmap, 0xFE00, 0xFE0F);
+        return bitmap;
+    }
+
+    // TODO: use simd build bitmap (runtime)
+    auto WIDE_BITMAP = build_wide_bitmap();
+    auto ZERO_BITMAP = build_zero_bitmap();
+
+
     template <typename T>
     void append_utf8_char_aux(T& /*unused*/) {}
 
@@ -130,6 +195,25 @@ namespace {
     }
 } // namespace
 
+
+int codepoint::display_width() const noexcept {
+    const uint32_t cp = value_;
+    if (cp > MAX_VALUE) {
+        return 0;
+    }
+
+    const size_t block = cp / BLOCK_BITS;
+    const size_t offset = cp % BLOCK_BITS;
+    const uint64_t mask = 1ULL << offset;
+
+    if ((ZERO_BITMAP[block] & mask) != 0U) {
+        return 0;
+    }
+    if ((WIDE_BITMAP[block] & mask) != 0U) {
+        return 2;
+    }
+    return 1;
+}
 
 codepoint codepoint::decode_utf8(const byte_t* data, size_t& i, const size_t len) noexcept {
     uint32_t raw = 0;
