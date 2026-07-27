@@ -156,5 +156,6 @@ var topics =
     [ "TCP", "group___t_c_p.html", "group___t_c_p" ],
     [ "UDP", "group___u_d_p.html", "group___u_d_p" ],
     [ "网络工具", "group___network_util.html", "group___network_util" ],
-    [ "插件", "group___plugin.html", "group___plugin" ]
+    [ "插件", "group___plugin.html", "group___plugin" ],
+    [ "TUI", "group___t_u_i.html", "group___t_u_i" ]
 ];

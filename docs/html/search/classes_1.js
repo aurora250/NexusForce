@@ -63,9 +63,10 @@ var searchData=
   ['boolean_60',['boolean',['../structboolean.html',1,'']]],
   ['bounded_5fqueue_61',['bounded_queue',['../classbounded__queue.html',1,'']]],
   ['bounded_5fqueue_3c_20log_5fevent_20_3e_62',['bounded_queue&lt; log_event &gt;',['../classbounded__queue.html',1,'']]],
-  ['buffer_5fchain_63',['buffer_chain',['../classbuffer__chain.html',1,'']]],
-  ['build_5findex_5ftuple_64',['build_index_tuple',['../structbuild__index__tuple.html',1,'']]],
-  ['byte_5fcursor_65',['byte_cursor',['../classbyte__cursor.html',1,'']]],
-  ['byte_5frange_66',['byte_range',['../structbyte__range.html',1,'']]],
-  ['byte_5fsize_67',['byte_size',['../classbyte__size.html',1,'']]]
+  ['box_5fprops_63',['box_props',['../structbox__props.html',1,'']]],
+  ['buffer_5fchain_64',['buffer_chain',['../classbuffer__chain.html',1,'']]],
+  ['build_5findex_5ftuple_65',['build_index_tuple',['../structbuild__index__tuple.html',1,'']]],
+  ['byte_5fcursor_66',['byte_cursor',['../classbyte__cursor.html',1,'']]],
+  ['byte_5frange_67',['byte_range',['../structbyte__range.html',1,'']]],
+  ['byte_5fsize_68',['byte_size',['../classbyte__size.html',1,'']]]
 ];

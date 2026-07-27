@@ -1,5 +1,8 @@
 var namespaces_dup =
 [
+    [ "easing", "namespaceeasing.html", [
+      [ "function", "namespaceeasing.html#a5d1dbed7989c1a4163523c4b2d8e6688", null ]
+    ] ],
     [ "edns", "namespaceedns.html", [
       [ "DEFAULT_UDP_PAYLOAD", "namespaceedns.html#af389633c2659ce56089ac80bc1581fa9", null ],
       [ "DO_BIT", "namespaceedns.html#a4c36762d5b9406f61e0c82265eee9313", null ],

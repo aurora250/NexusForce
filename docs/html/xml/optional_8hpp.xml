@@ -16,8 +16,10 @@
     <includedby refid="ini__parser_8hpp" local="yes">ini_parser.hpp</includedby>
     <includedby refid="ip__address_8hpp" local="yes">ip_address.hpp</includedby>
     <includedby refid="json__parser_8hpp" local="yes">json_parser.hpp</includedby>
+    <includedby refid="linear__gradient_8hpp" local="yes">linear_gradient.hpp</includedby>
     <includedby refid="lru__cache_8hpp" local="yes">lru_cache.hpp</includedby>
     <includedby refid="session__store_8hpp" local="yes">session_store.hpp</includedby>
+    <includedby refid="style_8hpp" local="yes">style.hpp</includedby>
     <includedby refid="thread__pool_8hpp" local="yes">thread_pool.hpp</includedby>
     <includedby refid="toml__parser_8hpp" local="yes">toml_parser.hpp</includedby>
     <includedby refid="url_8hpp" local="yes">url.hpp</includedby>
@@ -153,19 +155,19 @@
         <label>generator.hpp</label>
         <link refid="generator_8hpp"/>
       </node>
-      <node id="44">
+      <node id="71">
         <label>thread_pool.hpp</label>
         <link refid="thread__pool_8hpp"/>
-        <childnode refid="45" relation="include">
-        </childnode>
-      </node>
-      <node id="40">
-        <label>lru_cache.hpp</label>
-        <link refid="lru__cache_8hpp"/>
-        <childnode refid="41" relation="include">
+        <childnode refid="72" relation="include">
         </childnode>
       </node>
       <node id="41">
+        <label>lru_cache.hpp</label>
+        <link refid="lru__cache_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
         <label>ttl_cache.hpp</label>
         <link refid="ttl__cache_8hpp"/>
       </node>
@@ -181,11 +183,11 @@
         <label>json_parser.hpp</label>
         <link refid="json__parser_8hpp"/>
       </node>
-      <node id="46">
+      <node id="73">
         <label>toml_parser.hpp</label>
         <link refid="toml__parser_8hpp"/>
       </node>
-      <node id="49">
+      <node id="76">
         <label>yaml_parser.hpp</label>
         <link refid="yaml__parser_8hpp"/>
       </node>
@@ -214,24 +216,28 @@
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="71" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="73" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="75">
         <label>uuid.hpp</label>
         <link refid="uuid_8hpp"/>
       </node>
-      <node id="45">
+      <node id="72">
         <label>logger.hpp</label>
         <link refid="logger_8hpp"/>
       </node>
@@ -341,15 +347,15 @@
         <label>reverse_proxy.hpp</label>
         <link refid="reverse__proxy_8hpp"/>
       </node>
-      <node id="42">
+      <node id="43">
         <label>session_store.hpp</label>
         <link refid="session__store_8hpp"/>
         <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="43" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>session_store_redis.hpp</label>
         <link refid="session__store__redis_8hpp"/>
       </node>
@@ -463,11 +469,171 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="74">
         <label>url.hpp</label>
         <link refid="url_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
+      </node>
+      <node id="46">
+        <label>app.hpp</label>
+        <link refid="app_8hpp"/>
+      </node>
+      <node id="49">
+        <label>collapsible.hpp</label>
+        <link refid="collapsible_8hpp"/>
+      </node>
+      <node id="48">
+        <label>component.hpp</label>
+        <link refid="component_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>containers.hpp</label>
+        <link refid="containers_8hpp"/>
+      </node>
+      <node id="51">
+        <label>dropdown.hpp</label>
+        <link refid="dropdown_8hpp"/>
+      </node>
+      <node id="52">
+        <label>hoverable.hpp</label>
+        <link refid="hoverable_8hpp"/>
+      </node>
+      <node id="53">
+        <label>menu.hpp</label>
+        <link refid="menu_8hpp"/>
+      </node>
+      <node id="54">
+        <label>modal.hpp</label>
+        <link refid="modal_8hpp"/>
+      </node>
+      <node id="55">
+        <label>radiobox.hpp</label>
+        <link refid="radiobox_8hpp"/>
+      </node>
+      <node id="57">
+        <label>renderer.hpp</label>
+        <link refid="renderer_8hpp"/>
+      </node>
+      <node id="58">
+        <label>resizable_split.hpp</label>
+        <link refid="resizable__split_8hpp"/>
+      </node>
+      <node id="59">
+        <label>scroll_view.hpp</label>
+        <link refid="scroll__view_8hpp"/>
+      </node>
+      <node id="60">
+        <label>slider.hpp</label>
+        <link refid="slider_8hpp"/>
+      </node>
+      <node id="61">
+        <label>text_input.hpp</label>
+        <link refid="text__input_8hpp"/>
+      </node>
+      <node id="62">
+        <label>toggle.hpp</label>
+        <link refid="toggle_8hpp"/>
+      </node>
+      <node id="63">
+        <label>window.hpp</label>
+        <link refid="window_8hpp"/>
+      </node>
+      <node id="47">
+        <label>element.hpp</label>
+        <link refid="element_8hpp"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>gauge.hpp</label>
+        <link refid="gauge_8hpp"/>
+      </node>
+      <node id="65">
+        <label>graph.hpp</label>
+        <link refid="graph_8hpp"/>
+      </node>
+      <node id="66">
+        <label>layout.hpp</label>
+        <link refid="layout_8hpp"/>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>linear_gradient.hpp</label>
+        <link refid="linear__gradient_8hpp"/>
+      </node>
+      <node id="67">
+        <label>paragraph.hpp</label>
+        <link refid="paragraph_8hpp"/>
+      </node>
+      <node id="68">
+        <label>scroll_indicator.hpp</label>
+        <link refid="scroll__indicator_8hpp"/>
+      </node>
+      <node id="69">
+        <label>spinner.hpp</label>
+        <link refid="spinner_8hpp"/>
+      </node>
+      <node id="45">
+        <label>style.hpp</label>
+        <link refid="style_8hpp"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>table.hpp</label>
+        <link refid="table_8hpp"/>
+      </node>
+      <node id="56">
+        <label>reconciler.hpp</label>
+        <link refid="reconciler_8hpp"/>
       </node>
     </invincdepgraph>
     <innerclass refid="structoptional__exception" prot="public">optional_exception</innerclass>

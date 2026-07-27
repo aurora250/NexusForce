@@ -1,13 +1,13 @@
 var indexSectionsWithContent =
 {
   0: "128_abcdefghijklmnopqrstuvwxyz~⏰⚖⚙✨❗三与串临事二互交代任仿会传位作使信修值停元共典兼内函分删加动区十协单压原参双反变可合同命哈响唯图地基堆复头字学守安完定实家容密对局属工布平并序延建异弃引弱性执扩持指排探控插操支数整文方无日旧时最有未条构架查标树校核格桶概模正比消混灰版特状独环百相码硬稀稳空端符算管类系索红线组终绑缓编网色莱虚表视解计认记误请调负边进连迭适选遵邮部配量错键险随集静非项预颜🌐🎨💾📁📊📐📖📝📡📦🔄🔌🔍🔐🔤🖥🗄🚀🛠🧬",
-  1: "abcdefghijlmnopqrstuvwxyz",
+  1: "abcdefghijklmnopqrstuvwxyz",
   2: "elpr",
   3: "abcdefghijlmnopqrstuvwxyz",
   4: "_abcdefghijklmnopqrstuvwxyz~",
-  5: "abcdefghijklmnopqrstuvwz",
+  5: "abcdefghijklmnopqrstuvwxyz",
   6: "abcdefghiklmnprstuvwy",
-  7: "acdefghilmnopqrstuvw",
+  7: "abcdefghijklmnopqrstuvw",
   8: "abcdefghiklmnopqrstuvwxz",
   9: "cgmor",
   10: "n",

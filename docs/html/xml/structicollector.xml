@@ -24,6 +24,7 @@
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">iterator&lt; const_buffer &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">const_iterator&lt; const_buffer &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">const_iterator&lt; string &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; element &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; segment &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; cmdline::option &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; cmdline::option_dependency &gt;</derivedcompoundref>
@@ -38,6 +39,7 @@
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; route_entry &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; thread &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; timer_entry &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; color_stop &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; lb_backend &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; part &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; log_event &gt;</derivedcompoundref>
@@ -46,6 +48,10 @@
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt;::MYSQL_BIND &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; const char * &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; int &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; component_base * &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; layout_rect &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; clip_rect &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; scrollbar_hit &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; proxy_backend &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; node &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; slot_entry &gt;</derivedcompoundref>
@@ -53,6 +59,7 @@
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; sql_builder::cte_entry &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; sql_builder::column_definition &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; stacktrace::frame &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; cell &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; sysinfo::numa_node_info &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; uint32_t &gt;</derivedcompoundref>
     <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; pending_signal &gt;</derivedcompoundref>
@@ -158,7 +165,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="61">
+      <node id="68">
         <label>deque&lt; T, Alloc, BufSize &gt;</label>
         <link refid="classdeque"/>
         <childnode refid="1" relation="public-inheritance">
@@ -182,13 +189,13 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="62">
+      <node id="69">
         <label>flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;</label>
         <link refid="classflat__unordered__multiset"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="63">
+      <node id="70">
         <label>flat_unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;</label>
         <link refid="classflat__unordered__set"/>
         <childnode refid="1" relation="public-inheritance">
@@ -216,7 +223,7 @@
         <label>icomparable&lt; T &gt;</label>
         <link refid="structicomparable"/>
       </node>
-      <node id="64">
+      <node id="71">
         <label>priority_queue&lt; T, Sequence, Compare &gt;</label>
         <link refid="classpriority__queue"/>
         <childnode refid="1" relation="public-inheritance">
@@ -234,7 +241,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="65">
+      <node id="72">
         <label>queue&lt; T, Sequence &gt;</label>
         <link refid="classqueue"/>
         <childnode refid="1" relation="public-inheritance">
@@ -252,13 +259,13 @@
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="66">
+      <node id="73">
         <label>sparse_multiset&lt; Key, Compare, Alloc &gt;</label>
         <link refid="classsparse__multiset"/>
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="67">
+      <node id="74">
         <label>sparse_set&lt; Key, Compare, Alloc &gt;</label>
         <link refid="classsparse__set"/>
         <childnode refid="1" relation="public-inheritance">
@@ -276,7 +283,7 @@
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="68">
+      <node id="75">
         <label>sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;</label>
         <link refid="classsparse__vector"/>
         <childnode refid="1" relation="private-inheritance">
@@ -288,7 +295,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="69">
+      <node id="76">
         <label>stack&lt; T, Sequence &gt;</label>
         <link refid="classstack"/>
         <childnode refid="1" relation="public-inheritance">
@@ -306,31 +313,55 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="29">
+      <node id="59">
+        <label>vector&lt; cell &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
         <label>vector&lt; char &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="25">
-        <label>vector&lt; cmdline::option &gt;</label>
-        <link refid="classvector"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>vector&lt; cmdline::option_conflict &gt;</label>
+      <node id="50">
+        <label>vector&lt; clip_rect &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="26">
+        <label>vector&lt; cmdline::option &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>vector&lt; cmdline::option_conflict &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
         <label>vector&lt; cmdline::option_dependency &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="44">
+      <node id="39">
+        <label>vector&lt; color_stop &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>vector&lt; component_base * &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="46">
         <label>vector&lt; const char * &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
@@ -348,85 +379,97 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="57">
+      <node id="64">
         <label>vector&lt; context &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="28">
+      <node id="29">
         <label>vector&lt; dns_record &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="41">
+      <node id="24">
+        <label>vector&lt; element &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="43">
         <label>vector&lt; enum_entry &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="34">
+      <node id="35">
         <label>vector&lt; filter_entry &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="59">
+      <node id="66">
         <label>vector&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="58">
+      <node id="65">
         <label>vector&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="31">
+      <node id="32">
         <label>vector&lt; hpack_header_field &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="32">
+      <node id="33">
         <label>vector&lt; http2_settings_entry &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="33">
+      <node id="34">
         <label>vector&lt; http_cookie &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="60">
+      <node id="67">
         <label>vector&lt; indent_context &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="45">
+      <node id="47">
         <label>vector&lt; int &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="38">
-        <label>vector&lt; lb_backend &gt;</label>
+      <node id="49">
+        <label>vector&lt; layout_rect &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="40">
-        <label>vector&lt; log_event &gt;</label>
+        <label>vector&lt; lb_backend &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="42">
+        <label>vector&lt; log_event &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="44">
         <label>vector&lt; meta_type * &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
@@ -444,31 +487,31 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="47">
+      <node id="53">
         <label>vector&lt; node &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="39">
+      <node id="41">
         <label>vector&lt; part &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="55">
+      <node id="62">
         <label>vector&lt; pending_signal &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="56">
+      <node id="63">
         <label>vector&lt; priority_task &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="46">
+      <node id="52">
         <label>vector&lt; proxy_backend &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
@@ -480,43 +523,49 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="35">
+      <node id="36">
         <label>vector&lt; route_entry &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="24">
+      <node id="51">
+        <label>vector&lt; scrollbar_hit &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
         <label>vector&lt; segment &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="48">
+      <node id="54">
         <label>vector&lt; slot_entry &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="51">
+      <node id="57">
         <label>vector&lt; sql_builder::column_definition &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="50">
+      <node id="56">
         <label>vector&lt; sql_builder::cte_entry &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="49">
+      <node id="55">
         <label>vector&lt; sql_builder::set_op_entry &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="52">
+      <node id="58">
         <label>vector&lt; stacktrace::frame &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
@@ -528,43 +577,43 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="53">
+      <node id="60">
         <label>vector&lt; sysinfo::numa_node_info &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="30">
+      <node id="31">
         <label>vector&lt; table_entry &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="36">
+      <node id="37">
         <label>vector&lt; thread &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="37">
+      <node id="38">
         <label>vector&lt; timer_entry &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="54">
+      <node id="61">
         <label>vector&lt; uint32_t &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="70">
+      <node id="77">
         <label>vector&lt; T, Alloc &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="43">
+      <node id="45">
         <label>vector&lt;::MYSQL_BIND &gt;</label>
         <link refid="classvector"/>
         <childnode refid="1" relation="public-inheritance">

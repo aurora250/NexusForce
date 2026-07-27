@@ -12,6 +12,6 @@ var dir_f60a351298f7b324933b211de7c0eb02 =
     [ "to_numerics.hpp", "to__numerics_8hpp.html", "to__numerics_8hpp" ],
     [ "to_string.hpp", "to__string_8hpp.html", "to__string_8hpp" ],
     [ "utf.hpp", "utf_8hpp.html", null ],
-    [ "utf_iterator.hpp", "utf__iterator_8hpp.html", "utf__iterator_8hpp" ],
+    [ "utf_iterator.hpp", "utf__iterator_8hpp.html", null ],
     [ "vsprintf.hpp", "vsprintf_8hpp.html", "vsprintf_8hpp" ]
 ];

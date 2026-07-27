@@ -1,0 +1,405 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="class_component" kind="class" language="C++" prot="public">
+    <compoundname>Component</compoundname>
+    <basecompoundref refid="class_component_base" prot="public" virt="non-virtual">ComponentBase</basecompoundref>
+    <includes refid="component_8hpp" local="no">component.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename P</type>
+        <defval><ref refid="struct_empty_props" kindref="compound">EmptyProps</ref></defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="class_component_1aed09df08980f178858b40d3c3c1834f8" prot="public" static="no">
+        <type>P</type>
+        <definition>using Component&lt; P &gt;::Props = P</definition>
+        <argsstring></argsstring>
+        <name>Props</name>
+        <qualifiedname>Component::Props</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="209" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" bodystart="209" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="class_component_1a94f8435ca2a45f4010adba80e1465ea6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Reconciler</definition>
+        <argsstring></argsstring>
+        <name>Reconciler</name>
+        <qualifiedname>Component::Reconciler</qualifiedname>
+        <param>
+          <type><ref refid="class_reconciler" kindref="compound">Reconciler</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="249" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="class_component_1a23f25bcc02a0e94c2f5a4188496b04d0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Application</definition>
+        <argsstring></argsstring>
+        <name>Application</name>
+        <qualifiedname>Component::Application</qualifiedname>
+        <param>
+          <type><ref refid="class_application" kindref="compound">Application</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="250" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" bodystart="250" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_component_1a696e4241dffd93c36b967f126e87ff9e" prot="private" static="no" mutable="no">
+        <type>Props</type>
+        <definition>Props Component&lt; P &gt;::props_</definition>
+        <argsstring></argsstring>
+        <name>props_</name>
+        <qualifiedname>Component::props_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="252" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" bodystart="252" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_component_1a49b280f4fd02e1bd5952c88f55f1d515" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; void &gt; &gt;</type>
+        <definition>vector&lt;shared_ptr&lt;void&gt; &gt; Component&lt; P &gt;::states_</definition>
+        <argsstring></argsstring>
+        <name>states_</name>
+        <qualifiedname>Component::states_</qualifiedname>
+        <briefdescription>
+<para>类型擦除的状态列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="253" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" bodystart="253" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_component_1a99c8542332f8bd0858e5fc7e762e8180" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Component&lt; P &gt;::Component</definition>
+        <argsstring>()=default</argsstring>
+        <name>Component</name>
+        <qualifiedname>Component::Component</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="211" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="class_component_1ad09323725f39db31a81e5af9b429575f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Component&lt; P &gt;::~Component</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~Component</name>
+        <qualifiedname>Component::~Component</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="212" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="class_component_1a2cf0f5c810acb33344c54ebad70333bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Component&lt; P &gt;::Component</definition>
+        <argsstring>(const Component &amp;)=delete</argsstring>
+        <name>Component</name>
+        <qualifiedname>Component::Component</qualifiedname>
+        <param>
+          <type>const <ref refid="class_component" kindref="compound">Component</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="213" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="class_component_1aef4742911253dfbc100fe8f615be43d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_component" kindref="compound">Component</ref> &amp;</type>
+        <definition>Component &amp; Component&lt; P &gt;::operator=</definition>
+        <argsstring>(const Component &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Component::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_component" kindref="compound">Component</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="214" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_component_1a59b31a7cff5389792390099f9f717211" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Component&lt; P &gt;::Component</definition>
+        <argsstring>(Component &amp;&amp;)=delete</argsstring>
+        <name>Component</name>
+        <qualifiedname>Component::Component</qualifiedname>
+        <param>
+          <type><ref refid="class_component" kindref="compound">Component</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="215" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="class_component_1aaddd977e0a69f2af0b67ff5b9cde31fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_component" kindref="compound">Component</ref> &amp;</type>
+        <definition>Component &amp; Component&lt; P &gt;::operator=</definition>
+        <argsstring>(Component &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Component::operator=</qualifiedname>
+        <param>
+          <type><ref refid="class_component" kindref="compound">Component</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="216" column="15"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_component_1a5e8eeb87f6b55268ec8036b8a7934ac4" prot="protected" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const Props &amp;</type>
+        <definition>const Props &amp; Component&lt; P &gt;::props</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>props</name>
+        <qualifiedname>Component::props</qualifiedname>
+        <briefdescription>
+<para>获取父组件传入的属性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>属性常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="223" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" bodystart="223" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="class_component_1a7604c17621e88ddb1ac2de4ae48dbb39" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="class_state" kindref="compound">State</ref>&lt; T &gt; &amp;</type>
+        <definition>State&lt; T &gt; &amp; Component&lt; P &gt;::createState</definition>
+        <argsstring>(T initial)</argsstring>
+        <name>createState</name>
+        <qualifiedname>Component::createState</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>initial</declname>
+        </param>
+        <briefdescription>
+<para>创建响应式状态变量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>initial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>状态变量引用</para>
+</simplesect>
+状态变量生命周期绑定到组件——组件析构时自动清理。</para>
+<para><simplesect kind="note"><para>必须在构造函数或 <ref refid="class_component_base_1af19d4f08ca67a8c3fc032bb6c2ee466f" kindref="member">setup()</ref> 中调用，禁止在 <ref refid="class_component_base_1a2a3d24eff514480e68198c966ceb96a9" kindref="member">render()</ref> 中动态创建。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="236" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" bodystart="236" bodyend="240"/>
+        <references refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" compoundref="shared__ptr_8hpp" startline="849" endline="877">make_shared</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="class_component_base_1a7f8517bf49c3b7b3532332d614b583d4" compoundref="component_8hpp" startline="179">ComponentBase::strand_</references>
+      </memberdef>
+      <memberdef kind="function" id="class_component_1a6cda507ffecabdb82afd0451894a1045" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Component&lt; P &gt;::setProps</definition>
+        <argsstring>(Props p)</argsstring>
+        <name>setProps</name>
+        <qualifiedname>Component::setProps</qualifiedname>
+        <param>
+          <type>Props</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>注入属性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="246" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" bodystart="246" bodyend="246"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>组件模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>P</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性类型，父组件向子组件传递的只读参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+所有 TUI 组件应继承此类并实现 <ref refid="class_component_base_1a2a3d24eff514480e68198c966ceb96a9" kindref="member">render()</ref>。 Props 通过 <ref refid="class_component_1a6cda507ffecabdb82afd0451894a1045" kindref="member">setProps()</ref> 注入，在组件生命周期内保持不变。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Component&lt; P &gt;</label>
+        <link refid="class_component"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ComponentBase</label>
+        <link refid="class_component_base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Component&lt; P &gt;</label>
+        <link refid="class_component"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ComponentBase</label>
+        <link refid="class_component_base"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>parent_</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>strand_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ctx_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>children_</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="4">
+        <label>io_context</label>
+        <link refid="classio__context"/>
+      </node>
+      <node id="3">
+        <label>strand</label>
+        <link refid="classstrand"/>
+      </node>
+      <node id="5">
+        <label>vector&lt; ComponentBase * &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" line="207" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component.hpp" bodystart="207" bodyend="254"/>
+    <listofallmembers>
+      <member refid="class_component_base_1ad3f9d006f8e792b3984364ba91c4b11e" prot="public" virt="non-virtual"><scope>Component</scope><name>addChild</name></member>
+      <member refid="class_component_base_1a78a91b450d111db9a3d8958a8a9b9fa1" prot="protected" virt="non-virtual"><scope>Component</scope><name>children_</name></member>
+      <member refid="class_component_base_1a4d3bca997d3a671950e899b7151dd6a9" prot="public" virt="virtual"><scope>Component</scope><name>cleanup</name></member>
+      <member refid="class_component_base_1acef4f338d9c331f8a06d3e03573f7f68" prot="protected" virt="virtual"><scope>Component</scope><name>collectFocusable</name></member>
+      <member refid="class_component_1a99c8542332f8bd0858e5fc7e762e8180" prot="public" virt="non-virtual"><scope>Component</scope><name>Component</name></member>
+      <member refid="class_component_1a2cf0f5c810acb33344c54ebad70333bc" prot="public" virt="non-virtual"><scope>Component</scope><name>Component</name></member>
+      <member refid="class_component_1a59b31a7cff5389792390099f9f717211" prot="public" virt="non-virtual"><scope>Component</scope><name>Component</name></member>
+      <member refid="class_component_base_1aa69958b8842380721f2ad7e2f2c64485" prot="public" virt="non-virtual"><scope>Component</scope><name>context</name></member>
+      <member refid="class_component_1a7604c17621e88ddb1ac2de4ae48dbb39" prot="protected" virt="non-virtual"><scope>Component</scope><name>createState</name></member>
+      <member refid="class_component_base_1a3f6f4b640dd08c0265d363b158b8eee1" prot="protected" virt="non-virtual"><scope>Component</scope><name>ctx_</name></member>
+      <member refid="class_component_base_1a144843e9d7ad656edb9ae346f25843cf" prot="public" virt="virtual"><scope>Component</scope><name>isFocusable</name></member>
+      <member refid="class_component_base_1a8367ff5a6256d78ee86df13e378daa78" prot="public" virt="virtual"><scope>Component</scope><name>onKey</name></member>
+      <member refid="class_component_base_1aeabbd56d01ac616179eaf56d13fd8d7a" prot="public" virt="virtual"><scope>Component</scope><name>onMouse</name></member>
+      <member refid="class_component_1aef4742911253dfbc100fe8f615be43d6" prot="public" virt="non-virtual"><scope>Component</scope><name>operator=</name></member>
+      <member refid="class_component_1aaddd977e0a69f2af0b67ff5b9cde31fb" prot="public" virt="non-virtual"><scope>Component</scope><name>operator=</name></member>
+      <member refid="class_component_base_1a9166f16b6b5c18cc630b7fa005248677" prot="public" virt="non-virtual"><scope>Component</scope><name>parent</name></member>
+      <member refid="class_component_base_1aaee30ae24fc24d4ff1c6c273ab49429e" prot="protected" virt="non-virtual"><scope>Component</scope><name>parent_</name></member>
+      <member refid="class_component_1aed09df08980f178858b40d3c3c1834f8" prot="public" virt="non-virtual"><scope>Component</scope><name>Props</name></member>
+      <member refid="class_component_1a5e8eeb87f6b55268ec8036b8a7934ac4" prot="protected" virt="non-virtual"><scope>Component</scope><name>props</name></member>
+      <member refid="class_component_1a696e4241dffd93c36b967f126e87ff9e" prot="private" virt="non-virtual"><scope>Component</scope><name>props_</name></member>
+      <member refid="class_component_base_1a7af608e6b1bb71aeed41ca06d701ad8e" prot="public" virt="non-virtual"><scope>Component</scope><name>provideContext</name></member>
+      <member refid="class_component_base_1a8bdb8d186b075d88a271b30d7f8b89cd" prot="public" virt="non-virtual"><scope>Component</scope><name>removeChild</name></member>
+      <member refid="class_component_base_1a2a3d24eff514480e68198c966ceb96a9" prot="public" virt="pure-virtual"><scope>Component</scope><name>render</name></member>
+      <member refid="class_component_base_1afe30368e15ab1b16dcbad82cfbff7af1" prot="public" virt="non-virtual"><scope>Component</scope><name>scheduleRender</name></member>
+      <member refid="class_component_1a6cda507ffecabdb82afd0451894a1045" prot="protected" virt="non-virtual"><scope>Component</scope><name>setProps</name></member>
+      <member refid="class_component_base_1af19d4f08ca67a8c3fc032bb6c2ee466f" prot="public" virt="virtual"><scope>Component</scope><name>setup</name></member>
+      <member refid="class_component_base_1a0d21efce7427659a131129524ce45294" prot="public" virt="virtual"><scope>Component</scope><name>shouldUpdate</name></member>
+      <member refid="class_component_1a49b280f4fd02e1bd5952c88f55f1d515" prot="private" virt="non-virtual"><scope>Component</scope><name>states_</name></member>
+      <member refid="class_component_base_1a7f8517bf49c3b7b3532332d614b583d4" prot="protected" virt="non-virtual"><scope>Component</scope><name>strand_</name></member>
+      <member refid="class_component_1ad09323725f39db31a81e5af9b429575f" prot="public" virt="non-virtual"><scope>Component</scope><name>~Component</name></member>
+      <member refid="class_component_base_1a07bed7cce2c67ca53ca08640a871323f" prot="public" virt="virtual"><scope>Component</scope><name>~ComponentBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

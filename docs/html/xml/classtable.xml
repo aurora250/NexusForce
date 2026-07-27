@@ -1,0 +1,560 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classtable" kind="class" language="C++" prot="public">
+    <compoundname>table</compoundname>
+    <includes refid="table_8hpp" local="no">table.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classtable_1a5eef37c887543e2b434595f3bde3dfcc" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classelement" kindref="compound">element</ref> &gt; &gt;</type>
+        <definition>vector&lt;vector&lt;element&gt; &gt; table::cells_</definition>
+        <argsstring></argsstring>
+        <name>cells_</name>
+        <qualifiedname>table::cells_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="112" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtable_1ae830e8fc4dd4fc03c4ee7e82ae7165ac" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int table::rows_</definition>
+        <argsstring></argsstring>
+        <name>rows_</name>
+        <qualifiedname>table::rows_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="113" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtable_1a256ed3d08d200351179dfc09b1a06848" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int table::cols_</definition>
+        <argsstring></argsstring>
+        <name>cols_</name>
+        <qualifiedname>table::cols_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="114" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtable_1a483de3c7c48d4f052a26475f0a5d471d" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classvector" kindref="compound">vector</ref>&lt; bool &gt; &gt;</type>
+        <definition>vector&lt;vector&lt;bool&gt; &gt; table::selected_</definition>
+        <argsstring></argsstring>
+        <name>selected_</name>
+        <qualifiedname>table::selected_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="115" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtable_1a569f4e049971540d441a776485f2b268" prot="private" static="no" mutable="no">
+        <type>enum <ref refid="structstyle_1ae88cb9941be72e4e00568ad4da72e921" kindref="member">style::border</ref></type>
+        <definition>enum style::border table::selection_border_</definition>
+        <argsstring></argsstring>
+        <name>selection_border_</name>
+        <qualifiedname>table::selection_border_</qualifiedname>
+        <initializer>= <ref refid="structstyle_1ae88cb9941be72e4e00568ad4da72e921a334c4a4c42fdb79d7ebc3e73b517e6f8" kindref="member">style::border::none</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="116" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtable_1a5ea599f0dfd853903ce88f936a3a4b43" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool table::separator_</definition>
+        <argsstring></argsstring>
+        <name>separator_</name>
+        <qualifiedname>table::separator_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="117" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtable_1a4ff2f8fca42f51d7ee1b315d6414ebc3" prot="private" static="no" mutable="no">
+        <type><ref refid="group___t_u_i_1ga898adc8dcc620bb02e5b25e31b4e5990" kindref="member">decorator</ref></type>
+        <definition>decorator table::decorator_</definition>
+        <argsstring></argsstring>
+        <name>decorator_</name>
+        <qualifiedname>table::decorator_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="118" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtable_1ae425aa1e6c0582ecc349c296e9edabfc" prot="private" static="no" mutable="no">
+        <type><ref refid="group___t_u_i_1ga898adc8dcc620bb02e5b25e31b4e5990" kindref="member">decorator</ref></type>
+        <definition>decorator table::even_decorator_</definition>
+        <argsstring></argsstring>
+        <name>even_decorator_</name>
+        <qualifiedname>table::even_decorator_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="119" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtable_1aa343c1c4c40b0b888659399516266330" prot="private" static="no" mutable="no">
+        <type><ref refid="group___t_u_i_1ga898adc8dcc620bb02e5b25e31b4e5990" kindref="member">decorator</ref></type>
+        <definition>decorator table::odd_decorator_</definition>
+        <argsstring></argsstring>
+        <name>odd_decorator_</name>
+        <qualifiedname>table::odd_decorator_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="120" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtable_1a51a00fbe66556236a4eca149c0bcaf5e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool table::alt_row_</definition>
+        <argsstring></argsstring>
+        <name>alt_row_</name>
+        <qualifiedname>table::alt_row_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="121" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtable_1ac6db7481032cba66b5ff70bef0de41c8" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>table::table</definition>
+        <argsstring>(vector&lt; vector&lt; string &gt; &gt; data)</argsstring>
+        <name>table</name>
+        <qualifiedname>table::table</qualifiedname>
+        <param>
+          <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &gt;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>从二维字符串构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表格数据 [row][col] </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="39" column="14"/>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <referencedby refid="classtable_1acb5b6e7779e066e2869e8ce82ed9edd2">border</referencedby>
+        <referencedby refid="classtable_1aea1cbd1862d37a020ec97508ff0917c6">decorate</referencedby>
+        <referencedby refid="classtable_1ab4faf5b1516c850e602ec358b4a8f8dd">decorate_alternate_row</referencedby>
+        <referencedby refid="classtable_1a6bac83b2496122137d24f98ada9e3887">select_all</referencedby>
+        <referencedby refid="classtable_1afa327e52b7bff56e897faa0291258cf3">select_column</referencedby>
+        <referencedby refid="classtable_1a39beda3467c99e4fa098be7360cb6015">select_rectangle</referencedby>
+        <referencedby refid="classtable_1a8f1618e4d81dfc9714cd32860f532fc7">select_row</referencedby>
+        <referencedby refid="classtable_1a3eaff4464b6d212ba02819a408a8eb11">separator</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtable_1a5a5c8de199f6d617ae16707b35d14d46" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>table::table</definition>
+        <argsstring>(vector&lt; vector&lt; element &gt; &gt; data)</argsstring>
+        <name>table</name>
+        <qualifiedname>table::table</qualifiedname>
+        <param>
+          <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classelement" kindref="compound">element</ref> &gt; &gt;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>从二维 element 构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表格数据 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="45" column="14"/>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="classtable_1a6bac83b2496122137d24f98ada9e3887" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtable" kindref="compound">table</ref> &amp;</type>
+        <definition>table &amp; table::select_all</definition>
+        <argsstring>()</argsstring>
+        <name>select_all</name>
+        <qualifiedname>table::select_all</qualifiedname>
+        <briefdescription>
+<para>全选所有单元格 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="51" column="11"/>
+        <references refid="classtable_1ac6db7481032cba66b5ff70bef0de41c8">table</references>
+      </memberdef>
+      <memberdef kind="function" id="classtable_1a8f1618e4d81dfc9714cd32860f532fc7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtable" kindref="compound">table</ref> &amp;</type>
+        <definition>table &amp; table::select_row</definition>
+        <argsstring>(int row)</argsstring>
+        <name>select_row</name>
+        <qualifiedname>table::select_row</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>row</declname>
+        </param>
+        <briefdescription>
+<para>选择指定行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="58" column="11"/>
+        <references refid="classtable_1ac6db7481032cba66b5ff70bef0de41c8">table</references>
+      </memberdef>
+      <memberdef kind="function" id="classtable_1afa327e52b7bff56e897faa0291258cf3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtable" kindref="compound">table</ref> &amp;</type>
+        <definition>table &amp; table::select_column</definition>
+        <argsstring>(int column)</argsstring>
+        <name>select_column</name>
+        <qualifiedname>table::select_column</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>column</declname>
+        </param>
+        <briefdescription>
+<para>选择指定列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>column</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="65" column="11"/>
+        <references refid="classtable_1ac6db7481032cba66b5ff70bef0de41c8">table</references>
+      </memberdef>
+      <memberdef kind="function" id="classtable_1a39beda3467c99e4fa098be7360cb6015" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtable" kindref="compound">table</ref> &amp;</type>
+        <definition>table &amp; table::select_rectangle</definition>
+        <argsstring>(int col_min, int col_max, int row_min, int row_max)</argsstring>
+        <name>select_rectangle</name>
+        <qualifiedname>table::select_rectangle</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>col_min</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>col_max</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>row_min</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>row_max</declname>
+        </param>
+        <briefdescription>
+<para>选择矩形区域 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>col_min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>col_max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>row_min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始行 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>row_max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束行 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="75" column="11"/>
+        <references refid="classtable_1ac6db7481032cba66b5ff70bef0de41c8">table</references>
+      </memberdef>
+      <memberdef kind="function" id="classtable_1acb5b6e7779e066e2869e8ce82ed9edd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtable" kindref="compound">table</ref> &amp;</type>
+        <definition>table &amp; table::border</definition>
+        <argsstring>(enum class style::border border)</argsstring>
+        <name>border</name>
+        <qualifiedname>table::border</qualifiedname>
+        <param>
+          <type>enum class <ref refid="structstyle_1ae88cb9941be72e4e00568ad4da72e921" kindref="member">style::border</ref></type>
+          <declname>border</declname>
+        </param>
+        <briefdescription>
+<para>对当前选择应用边框 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>border</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>边框样式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="82" column="11"/>
+        <references refid="classtable_1acb5b6e7779e066e2869e8ce82ed9edd2">border</references>
+        <references refid="classtable_1ac6db7481032cba66b5ff70bef0de41c8">table</references>
+        <referencedby refid="classtable_1acb5b6e7779e066e2869e8ce82ed9edd2">border</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtable_1a3eaff4464b6d212ba02819a408a8eb11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtable" kindref="compound">table</ref> &amp;</type>
+        <definition>table &amp; table::separator</definition>
+        <argsstring>()</argsstring>
+        <name>separator</name>
+        <qualifiedname>table::separator</qualifiedname>
+        <briefdescription>
+<para>对当前选择添加分隔线（行之间） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="88" column="11"/>
+        <references refid="classtable_1ac6db7481032cba66b5ff70bef0de41c8">table</references>
+      </memberdef>
+      <memberdef kind="function" id="classtable_1aea1cbd1862d37a020ec97508ff0917c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtable" kindref="compound">table</ref> &amp;</type>
+        <definition>table &amp; table::decorate</definition>
+        <argsstring>(const decorator &amp;decorator)</argsstring>
+        <name>decorate</name>
+        <qualifiedname>table::decorate</qualifiedname>
+        <param>
+          <type>const <ref refid="group___t_u_i_1ga898adc8dcc620bb02e5b25e31b4e5990" kindref="member">decorator</ref> &amp;</type>
+          <declname>decorator</declname>
+        </param>
+        <briefdescription>
+<para>对当前选择应用装饰器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>decorator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>装饰器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="95" column="11"/>
+        <references refid="classtable_1ac6db7481032cba66b5ff70bef0de41c8">table</references>
+      </memberdef>
+      <memberdef kind="function" id="classtable_1ab4faf5b1516c850e602ec358b4a8f8dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtable" kindref="compound">table</ref> &amp;</type>
+        <definition>table &amp; table::decorate_alternate_row</definition>
+        <argsstring>(const decorator &amp;even, const decorator &amp;odd)</argsstring>
+        <name>decorate_alternate_row</name>
+        <qualifiedname>table::decorate_alternate_row</qualifiedname>
+        <param>
+          <type>const <ref refid="group___t_u_i_1ga898adc8dcc620bb02e5b25e31b4e5990" kindref="member">decorator</ref> &amp;</type>
+          <declname>even</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___t_u_i_1ga898adc8dcc620bb02e5b25e31b4e5990" kindref="member">decorator</ref> &amp;</type>
+          <declname>odd</declname>
+        </param>
+        <briefdescription>
+<para>隔行应用装饰器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>even</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>偶数行装饰器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>odd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>奇数行装饰器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="103" column="11"/>
+        <references refid="classtable_1ac6db7481032cba66b5ff70bef0de41c8">table</references>
+      </memberdef>
+      <memberdef kind="function" id="classtable_1a7d5a9768844af8d611fa852608a4c5e6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classelement" kindref="compound">element</ref></type>
+        <definition>element table::render</definition>
+        <argsstring>() const</argsstring>
+        <name>render</name>
+        <qualifiedname>table::render</qualifiedname>
+        <briefdescription>
+<para>构建表格元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>element </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="109" column="14"/>
+        <references refid="structstyle_1ae88cb9941be72e4e00568ad4da72e921a334c4a4c42fdb79d7ebc3e73b517e6f8" compoundref="style_8hpp" startline="50">style::none</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>声明式表格构建器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><programlisting><codeline><highlight class="normal"><ref refid="classtable_1ac6db7481032cba66b5ff70bef0de41c8" kindref="member">table</ref><sp/>t({</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Name&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Age&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;City&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Alice&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;30&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;NYC&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Bob&quot;</highlight><highlight class="normal">,<sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;25&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;LA&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal">t.select_all().border(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>border::single).separator();</highlight></codeline>
+<codeline><highlight class="normal">element<sp/>table_el<sp/>=<sp/>t.render();</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/table.hpp" bodystart="33" bodyend="122"/>
+    <listofallmembers>
+      <member refid="classtable_1a51a00fbe66556236a4eca149c0bcaf5e" prot="private" virt="non-virtual"><scope>table</scope><name>alt_row_</name></member>
+      <member refid="classtable_1acb5b6e7779e066e2869e8ce82ed9edd2" prot="public" virt="non-virtual"><scope>table</scope><name>border</name></member>
+      <member refid="classtable_1a5eef37c887543e2b434595f3bde3dfcc" prot="private" virt="non-virtual"><scope>table</scope><name>cells_</name></member>
+      <member refid="classtable_1a256ed3d08d200351179dfc09b1a06848" prot="private" virt="non-virtual"><scope>table</scope><name>cols_</name></member>
+      <member refid="classtable_1aea1cbd1862d37a020ec97508ff0917c6" prot="public" virt="non-virtual"><scope>table</scope><name>decorate</name></member>
+      <member refid="classtable_1ab4faf5b1516c850e602ec358b4a8f8dd" prot="public" virt="non-virtual"><scope>table</scope><name>decorate_alternate_row</name></member>
+      <member refid="classtable_1a4ff2f8fca42f51d7ee1b315d6414ebc3" prot="private" virt="non-virtual"><scope>table</scope><name>decorator_</name></member>
+      <member refid="classtable_1ae425aa1e6c0582ecc349c296e9edabfc" prot="private" virt="non-virtual"><scope>table</scope><name>even_decorator_</name></member>
+      <member refid="classtable_1aa343c1c4c40b0b888659399516266330" prot="private" virt="non-virtual"><scope>table</scope><name>odd_decorator_</name></member>
+      <member refid="classtable_1a7d5a9768844af8d611fa852608a4c5e6" prot="public" virt="non-virtual"><scope>table</scope><name>render</name></member>
+      <member refid="classtable_1ae830e8fc4dd4fc03c4ee7e82ae7165ac" prot="private" virt="non-virtual"><scope>table</scope><name>rows_</name></member>
+      <member refid="classtable_1a6bac83b2496122137d24f98ada9e3887" prot="public" virt="non-virtual"><scope>table</scope><name>select_all</name></member>
+      <member refid="classtable_1afa327e52b7bff56e897faa0291258cf3" prot="public" virt="non-virtual"><scope>table</scope><name>select_column</name></member>
+      <member refid="classtable_1a39beda3467c99e4fa098be7360cb6015" prot="public" virt="non-virtual"><scope>table</scope><name>select_rectangle</name></member>
+      <member refid="classtable_1a8f1618e4d81dfc9714cd32860f532fc7" prot="public" virt="non-virtual"><scope>table</scope><name>select_row</name></member>
+      <member refid="classtable_1a483de3c7c48d4f052a26475f0a5d471d" prot="private" virt="non-virtual"><scope>table</scope><name>selected_</name></member>
+      <member refid="classtable_1a569f4e049971540d441a776485f2b268" prot="private" virt="non-virtual"><scope>table</scope><name>selection_border_</name></member>
+      <member refid="classtable_1a3eaff4464b6d212ba02819a408a8eb11" prot="public" virt="non-virtual"><scope>table</scope><name>separator</name></member>
+      <member refid="classtable_1a5ea599f0dfd853903ce88f936a3a4b43" prot="private" virt="non-virtual"><scope>table</scope><name>separator_</name></member>
+      <member refid="classtable_1ac6db7481032cba66b5ff70bef0de41c8" prot="public" virt="non-virtual"><scope>table</scope><name>table</name></member>
+      <member refid="classtable_1a5a5c8de199f6d617ae16707b35d14d46" prot="public" virt="non-virtual"><scope>table</scope><name>table</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

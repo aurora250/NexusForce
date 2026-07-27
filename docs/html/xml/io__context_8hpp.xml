@@ -3,7 +3,7 @@
   <compounddef id="io__context_8hpp" kind="file" language="C++">
     <compoundname>io_context.hpp</compoundname>
     <includes refid="lock__free__queue_8hpp" local="yes">NeForce/core/async/lock_free_queue.hpp</includes>
-    <includes refid="unordered__map_8hpp" local="yes">NeForce/core/container/unordered_map.hpp</includes>
+    <includes refid="flat__unordered__map_8hpp" local="yes">NeForce/core/container/flat_unordered_map.hpp</includes>
     <includes refid="vector_8hpp" local="yes">NeForce/core/container/vector.hpp</includes>
     <includes refid="error__code_8hpp" local="yes">NeForce/core/exception/error_code.hpp</includes>
     <includes refid="functional_2function_8hpp" local="yes">NeForce/core/functional/function.hpp</includes>
@@ -139,11 +139,11 @@
         </childnode>
         <childnode refid="66" relation="include">
         </childnode>
-        <childnode refid="72" relation="include">
-        </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
         <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -253,16 +253,26 @@
         </childnode>
       </node>
       <node id="45">
-        <label>NeForce/core/container/hashtable.hpp</label>
-        <link refid="hashtable_8hpp"/>
+        <label>NeForce/core/container/flat_hashtable.hpp</label>
+        <link refid="flat__hashtable_8hpp"/>
         <childnode refid="46" relation="include">
         </childnode>
         <childnode refid="66" relation="include">
         </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
       </node>
       <node id="44">
-        <label>NeForce/core/container/unordered_map.hpp</label>
-        <link refid="unordered__map_8hpp"/>
+        <label>NeForce/core/container/flat_unordered_map.hpp</label>
+        <link refid="flat__unordered__map_8hpp"/>
         <childnode refid="45" relation="include">
         </childnode>
       </node>
@@ -282,32 +292,32 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="75">
+      <node id="77">
         <label>NeForce/core/exception/errc.hpp</label>
         <link refid="errc_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="76" relation="include">
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>NeForce/core/exception/error_category.hpp</label>
+        <link refid="error__category_8hpp"/>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
         </childnode>
       </node>
       <node id="74">
-        <label>NeForce/core/exception/error_category.hpp</label>
-        <link refid="error__category_8hpp"/>
-        <childnode refid="75" relation="include">
-        </childnode>
-        <childnode refid="77" relation="include">
-        </childnode>
-      </node>
-      <node id="72">
         <label>NeForce/core/exception/error_code.hpp</label>
         <link refid="error__code_8hpp"/>
-        <childnode refid="73" relation="include">
+        <childnode refid="75" relation="include">
         </childnode>
       </node>
-      <node id="73">
+      <node id="75">
         <label>NeForce/core/exception/error_condition.hpp</label>
         <link refid="error__condition_8hpp"/>
-        <childnode refid="74" relation="include">
+        <childnode refid="76" relation="include">
         </childnode>
       </node>
       <node id="26">
@@ -324,10 +334,10 @@
         <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="84">
+      <node id="86">
         <label>NeForce/core/functional/function.hpp</label>
         <link refid="functional_2function_8hpp"/>
-        <childnode refid="85" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
@@ -390,7 +400,7 @@
         <childnode refid="51" relation="include">
         </childnode>
       </node>
-      <node id="79">
+      <node id="81">
         <label>NeForce/core/memory/allocator_traits.hpp</label>
         <link refid="allocator__traits_8hpp"/>
         <childnode refid="64" relation="include">
@@ -438,7 +448,7 @@
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="86">
+      <node id="88">
         <label>NeForce/core/memory/shared_ptr.hpp</label>
         <link refid="shared__ptr_8hpp"/>
         <childnode refid="62" relation="include">
@@ -449,7 +459,7 @@
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
@@ -518,31 +528,45 @@
         <childnode refid="59" relation="include">
         </childnode>
       </node>
-      <node id="78">
+      <node id="72">
+        <label>NeForce/core/simd/bytes.hpp</label>
+        <link refid="bytes_8hpp"/>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>NeForce/core/simd/types.hpp</label>
+        <link refid="simd_2types_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
         <label>NeForce/core/string/basic_string.hpp</label>
         <link refid="basic__string_8hpp"/>
         <childnode refid="56" relation="include">
         </childnode>
         <childnode refid="66" relation="include">
         </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
-        <childnode refid="80" relation="include">
+        <childnode refid="82" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="81">
+      <node id="83">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="70" relation="include">
         </childnode>
-        <childnode refid="82" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="85" relation="include">
         </childnode>
       </node>
-      <node id="82">
+      <node id="84">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="47" relation="include">
@@ -550,22 +574,22 @@
         <childnode refid="59" relation="include">
         </childnode>
       </node>
-      <node id="83">
+      <node id="85">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="77">
+      <node id="79">
         <label>NeForce/core/string/string.hpp</label>
         <link refid="string_8hpp"/>
-        <childnode refid="78" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
-      <node id="80">
+      <node id="82">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="81" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
       </node>
       <node id="52">
@@ -631,7 +655,7 @@
       <node id="10">
         <label>cassert</label>
       </node>
-      <node id="76">
+      <node id="78">
         <label>cerrno</label>
       </node>
       <node id="17">
@@ -661,7 +685,7 @@
       <node id="15">
         <label>synchapi.h</label>
       </node>
-      <node id="85">
+      <node id="87">
         <label>typeinfo</label>
       </node>
       <node id="37">
@@ -704,7 +728,7 @@
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
@@ -712,6 +736,12 @@
       <node id="26">
         <label>strand.hpp</label>
         <link refid="strand_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
       </node>
       <node id="23">
         <label>file.hpp</label>
@@ -853,11 +883,119 @@
         <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="27">
+      <node id="46">
         <label>udp_socket.hpp</label>
         <link refid="udp__socket_8hpp"/>
         <childnode refid="21" relation="include">
         </childnode>
+      </node>
+      <node id="27">
+        <label>app.hpp</label>
+        <link refid="app_8hpp"/>
+      </node>
+      <node id="31">
+        <label>collapsible.hpp</label>
+        <link refid="collapsible_8hpp"/>
+      </node>
+      <node id="30">
+        <label>component.hpp</label>
+        <link refid="component_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>containers.hpp</label>
+        <link refid="containers_8hpp"/>
+      </node>
+      <node id="33">
+        <label>dropdown.hpp</label>
+        <link refid="dropdown_8hpp"/>
+      </node>
+      <node id="34">
+        <label>hoverable.hpp</label>
+        <link refid="hoverable_8hpp"/>
+      </node>
+      <node id="35">
+        <label>menu.hpp</label>
+        <link refid="menu_8hpp"/>
+      </node>
+      <node id="36">
+        <label>modal.hpp</label>
+        <link refid="modal_8hpp"/>
+      </node>
+      <node id="37">
+        <label>radiobox.hpp</label>
+        <link refid="radiobox_8hpp"/>
+      </node>
+      <node id="39">
+        <label>renderer.hpp</label>
+        <link refid="renderer_8hpp"/>
+      </node>
+      <node id="40">
+        <label>resizable_split.hpp</label>
+        <link refid="resizable__split_8hpp"/>
+      </node>
+      <node id="41">
+        <label>scroll_view.hpp</label>
+        <link refid="scroll__view_8hpp"/>
+      </node>
+      <node id="42">
+        <label>slider.hpp</label>
+        <link refid="slider_8hpp"/>
+      </node>
+      <node id="43">
+        <label>text_input.hpp</label>
+        <link refid="text__input_8hpp"/>
+      </node>
+      <node id="44">
+        <label>toggle.hpp</label>
+        <link refid="toggle_8hpp"/>
+      </node>
+      <node id="45">
+        <label>window.hpp</label>
+        <link refid="window_8hpp"/>
+      </node>
+      <node id="29">
+        <label>state.hpp</label>
+        <link refid="state_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>input.hpp</label>
+        <link refid="input_8hpp"/>
+      </node>
+      <node id="38">
+        <label>reconciler.hpp</label>
+        <link refid="reconciler_8hpp"/>
       </node>
     </invincdepgraph>
     <innerclass refid="classio__context" prot="public">io_context</innerclass>
@@ -890,7 +1028,7 @@
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="lock__free__queue_8hpp" kindref="compound">NeForce/core/async/lock_free_queue.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="unordered__map_8hpp" kindref="compound">NeForce/core/container/unordered_map.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="flat__unordered__map_8hpp" kindref="compound">NeForce/core/container/flat_unordered_map.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="vector_8hpp" kindref="compound">NeForce/core/container/vector.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="error__code_8hpp" kindref="compound">NeForce/core/exception/error_code.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="functional_2function_8hpp" kindref="compound">NeForce/core/functional/function.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
@@ -981,7 +1119,7 @@
 <codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>atomic&lt;size_t&gt;<sp/>outstanding_work_{0};</highlight></codeline>
 <codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>next_timer_id_{1};</highlight></codeline>
 <codeline lineno="234"><highlight class="normal"></highlight></codeline>
-<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>unordered_map&lt;native_handle_type,<sp/>fd_info&gt;<sp/>fd_map_;</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>flat_unordered_map&lt;native_handle_type,<sp/>fd_info&gt;<sp/>fd_map_;</highlight></codeline>
 <codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>vector&lt;timer_entry&gt;<sp/>timer_heap_;</highlight></codeline>
 <codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>mutex<sp/>timer_mutex_;</highlight></codeline>
 <codeline lineno="241"><highlight class="normal"></highlight></codeline>
@@ -991,12 +1129,12 @@
 <codeline lineno="247"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>iocp_handle_;</highlight></codeline>
 <codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>wake_event_;</highlight></codeline>
-<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/>unordered_map&lt;native_handle_type,<sp/>void*&gt;<sp/>fd_events_;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/>flat_unordered_map&lt;native_handle_type,<sp/>void*&gt;<sp/>fd_events_;</highlight></codeline>
 <codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/>mutex<sp/>fd_mutex_;</highlight></codeline>
 <codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/>thread<sp/>monitor_thread_;</highlight></codeline>
 <codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/>atomic&lt;bool&gt;<sp/>monitor_running_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};</highlight></codeline>
 <codeline lineno="260"><highlight class="normal"></highlight></codeline>
-<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>unordered_map&lt;uintptr_t,<sp/>file_completion_cb&gt;<sp/>file_completions_;</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>flat_unordered_map&lt;uintptr_t,<sp/>file_completion_cb&gt;<sp/>file_completions_;</highlight></codeline>
 <codeline lineno="263"><highlight class="normal"></highlight></codeline>
 <codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>monitor_loop();</highlight></codeline>
 <codeline lineno="265"><highlight class="normal"></highlight></codeline>

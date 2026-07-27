@@ -114,8 +114,8 @@ $(function(){initNavTree('sql__connect__base_8hpp_source.html','',''); });
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structsql__connect__base.html#aa0b6741b0c883b61f956a4797b121eff">   48</a></span>    NEFORCE_NODISCARD <span class="keywordtype">void</span>* <a class="code hl_function" href="structsql__connect__base.html#aa0b6741b0c883b61f956a4797b121eff">native_handle</a>() noexcept final { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Derived*<span class="keyword">&gt;</span>(<span class="keyword">this</span>)-&gt;link_; }</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> table_exists(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; table)<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keyword">auto</span> result = derived().query(derived().table_exists_query(table));</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> table_exists(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_class" href="classtable.html">table</a>)<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keyword">auto</span> result = derived().query(derived().table_exists_query(<a class="code hl_class" href="classtable.html">table</a>));</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">return</span> result != <span class="keyword">nullptr</span> &amp;&amp; result-&gt;row_count() &gt; 0;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
@@ -124,6 +124,7 @@ $(function(){initNavTree('sql__connect__base_8hpp_source.html','',''); });
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_DATABASE_SQL_CONNECT_BASE_HPP__</span></div>
+<div class="ttc" id="aclasstable_html"><div class="ttname"><a href="classtable.html">table</a></div><div class="ttdoc">声明式表格构建器</div><div class="ttdef"><b>定义</b> <a href="table_8hpp_source.html#l00033">table.hpp:33</a></div></div>
 <div class="ttc" id="adb__interface_8hpp_html"><div class="ttname"><a href="db__interface_8hpp.html">db_interface.hpp</a></div><div class="ttdoc">数据库抽象接口层</div></div>
 <div class="ttc" id="astructidb__tb__connect_html"><div class="ttname"><a href="structidb__tb__connect.html">idb_tb_connect</a></div><div class="ttdoc">关系型数据库连接抽象基类</div><div class="ttdef"><b>定义</b> <a href="db__interface_8hpp_source.html#l00287">db_interface.hpp:287</a></div></div>
 <div class="ttc" id="astructsql__connect__base_html"><div class="ttname"><a href="structsql__connect__base.html">sql_connect_base</a></div><div class="ttdoc">SQL连接CRTP基类</div><div class="ttdef"><b>定义</b> <a href="#l00038">sql_connect_base.hpp:38</a></div></div>

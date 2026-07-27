@@ -111,6 +111,108 @@
       <node id="3">
         <label>signals.hpp</label>
         <link refid="signals_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>collapsible.hpp</label>
+        <link refid="collapsible_8hpp"/>
+      </node>
+      <node id="5">
+        <label>component.hpp</label>
+        <link refid="component_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>containers.hpp</label>
+        <link refid="containers_8hpp"/>
+      </node>
+      <node id="8">
+        <label>dropdown.hpp</label>
+        <link refid="dropdown_8hpp"/>
+      </node>
+      <node id="9">
+        <label>hoverable.hpp</label>
+        <link refid="hoverable_8hpp"/>
+      </node>
+      <node id="10">
+        <label>menu.hpp</label>
+        <link refid="menu_8hpp"/>
+      </node>
+      <node id="11">
+        <label>modal.hpp</label>
+        <link refid="modal_8hpp"/>
+      </node>
+      <node id="12">
+        <label>radiobox.hpp</label>
+        <link refid="radiobox_8hpp"/>
+      </node>
+      <node id="14">
+        <label>renderer.hpp</label>
+        <link refid="renderer_8hpp"/>
+      </node>
+      <node id="15">
+        <label>resizable_split.hpp</label>
+        <link refid="resizable__split_8hpp"/>
+      </node>
+      <node id="16">
+        <label>scroll_view.hpp</label>
+        <link refid="scroll__view_8hpp"/>
+      </node>
+      <node id="17">
+        <label>slider.hpp</label>
+        <link refid="slider_8hpp"/>
+      </node>
+      <node id="18">
+        <label>text_input.hpp</label>
+        <link refid="text__input_8hpp"/>
+      </node>
+      <node id="19">
+        <label>toggle.hpp</label>
+        <link refid="toggle_8hpp"/>
+      </node>
+      <node id="20">
+        <label>window.hpp</label>
+        <link refid="window_8hpp"/>
+      </node>
+      <node id="4">
+        <label>state.hpp</label>
+        <link refid="state_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>reconciler.hpp</label>
+        <link refid="reconciler_8hpp"/>
       </node>
     </invincdepgraph>
     <sectiondef kind="func">
@@ -216,7 +318,7 @@
 <codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>old_size<sp/>=<sp/>cont.size();</highlight></codeline>
 <codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>=<sp/>cont.end();</highlight></codeline>
 <codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>removed<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" kindref="member">remove_if</ref>(</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cont.begin(),<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>,<sp/>[ref_pred<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___reference_wrapper_1ga25754a3cc3c12b294f51a704b7d93d0c" kindref="member">ref</ref>(pred)](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>value_type&amp;<sp/>iter)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ref_pred(iter);<sp/>});</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cont.begin(),<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>,<sp/>[ref_pred<sp/>=<sp/>_NEFORCE<sp/><ref refid="classref" kindref="compound">ref</ref>(pred)](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>value_type&amp;<sp/>iter)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ref_pred(iter);<sp/>});</highlight></codeline>
 <codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>cont.erase(removed,<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>);</highlight></codeline>
 <codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>old_size<sp/>-<sp/>cont.size();</highlight></codeline>
 <codeline lineno="196"><highlight class="normal">}</highlight></codeline>

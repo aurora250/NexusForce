@@ -311,7 +311,7 @@ $(function(){initNavTree('simd_2memory_8hpp_source.html','',''); });
 <div class="foldopen" id="foldopen00282" data-start="{" data-end="}">
 <div class="line"><a id="l00282" name="l00282"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gaaf557ee60cc070156cd6e284450160e0">  282</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">void</span> <a class="code hl_function" href="group___s_i_m_d.html#gaaf557ee60cc070156cd6e284450160e0">prefetch_read</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* ptr) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    ::_mm_prefetch(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(ptr), _MM_HINT_T0);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    _mm_prefetch(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(ptr), _MM_HINT_T0);</div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    __builtin_prefetch(ptr, 0, 3);</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span><span class="preprocessor">#endif</span></div>
@@ -321,7 +321,7 @@ $(function(){initNavTree('simd_2memory_8hpp_source.html','',''); });
 <div class="foldopen" id="foldopen00294" data-start="{" data-end="}">
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga67909ab81c47d0c477b83e7501bb9384">  294</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">void</span> <a class="code hl_function" href="group___s_i_m_d.html#ga67909ab81c47d0c477b83e7501bb9384">prefetch_write</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* ptr) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    ::_mm_prefetch(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(ptr), _MM_HINT_T0);</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    _mm_prefetch(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(ptr), _MM_HINT_T0);</div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    __builtin_prefetch(ptr, 1, 3);</div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="preprocessor">#endif</span></div>
@@ -331,7 +331,7 @@ $(function(){initNavTree('simd_2memory_8hpp_source.html','',''); });
 <div class="foldopen" id="foldopen00306" data-start="{" data-end="}">
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga02fe2e7bf960725528d625aed9a9dfc8">  306</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">void</span> <a class="code hl_function" href="group___s_i_m_d.html#ga02fe2e7bf960725528d625aed9a9dfc8">prefetch_l1</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* ptr) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    ::_mm_prefetch(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(ptr), _MM_HINT_T0);</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    _mm_prefetch(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(ptr), _MM_HINT_T0);</div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    __builtin_prefetch(ptr, 0, 3);</div>
 <div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="preprocessor">#else</span></div>
@@ -343,7 +343,7 @@ $(function(){initNavTree('simd_2memory_8hpp_source.html','',''); });
 <div class="foldopen" id="foldopen00320" data-start="{" data-end="}">
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga62a5da3a988781807bed430d3ea24f84">  320</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">void</span> <a class="code hl_function" href="group___s_i_m_d.html#ga62a5da3a988781807bed430d3ea24f84">prefetch_l2</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* ptr) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    ::_mm_prefetch(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(ptr), _MM_HINT_T1);</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    _mm_prefetch(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(ptr), _MM_HINT_T1);</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    __builtin_prefetch(ptr, 0, 2);</div>
 <div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="preprocessor">#else</span></div>
@@ -355,7 +355,7 @@ $(function(){initNavTree('simd_2memory_8hpp_source.html','',''); });
 <div class="foldopen" id="foldopen00335" data-start="{" data-end="}">
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga9158181d1c5a66702d9a33e1b9e309ed">  335</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">void</span> <a class="code hl_function" href="group___s_i_m_d.html#ga9158181d1c5a66702d9a33e1b9e309ed">prefetch_nta</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* ptr) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    ::_mm_prefetch(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(ptr), _MM_HINT_NTA);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    _mm_prefetch(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(ptr), _MM_HINT_NTA);</div>
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    __builtin_prefetch(ptr, 0, 0);</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span><span class="preprocessor">#else</span></div>

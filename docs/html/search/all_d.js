@@ -23,5 +23,6 @@ var searchData=
   ['json_5fserializer_2ehpp_20',['json_serializer.hpp',['../json__serializer_8hpp.html',1,'']]],
   ['json_5fstring_21',['json_string',['../classjson__string.html',1,'json_string'],['../classjson__string.html#aa3e92a19904830b49f9455631a39abdc',1,'json_string::json_string()']]],
   ['json_5fvalue_22',['json_value',['../classjson__value.html',1,'']]],
-  ['json_5fvalue_2ehpp_23',['json_value.hpp',['../json__value_8hpp.html',1,'']]]
+  ['json_5fvalue_2ehpp_23',['json_value.hpp',['../json__value_8hpp.html',1,'']]],
+  ['justify_24',['justify',['../structstyle.html#a88aecb781cfd4f95f62a4ae92f6e0e30',1,'style::justify'],['../structbox__props.html#a4b2bdea5c3c9eff9547c701f08baf423',1,'box_props::justify']]]
 ];

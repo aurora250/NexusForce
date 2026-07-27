@@ -7,6 +7,9 @@
     <includes refid="lock__free__queue_8hpp" local="yes">NeForce/core/async/lock_free_queue.hpp</includes>
     <includes refid="functional_2function_8hpp" local="yes">NeForce/core/functional/function.hpp</includes>
     <includes refid="shared__ptr_8hpp" local="yes">NeForce/core/memory/shared_ptr.hpp</includes>
+    <includedby refid="app_8hpp" local="yes">app.hpp</includedby>
+    <includedby refid="input_8hpp" local="yes">input.hpp</includedby>
+    <includedby refid="state_8hpp" local="yes">state.hpp</includedby>
     <incdepgraph>
       <node id="48">
         <label>NeForce/core/algorithm/compare.hpp</label>
@@ -127,11 +130,11 @@
         </childnode>
         <childnode refid="67" relation="include">
         </childnode>
-        <childnode refid="73" relation="include">
-        </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="75" relation="include">
         </childnode>
         <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
         </childnode>
       </node>
       <node id="23">
@@ -175,9 +178,9 @@
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
-        </childnode>
         <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
         </childnode>
       </node>
       <node id="11">
@@ -255,16 +258,26 @@
         </childnode>
       </node>
       <node id="46">
-        <label>NeForce/core/container/hashtable.hpp</label>
-        <link refid="hashtable_8hpp"/>
+        <label>NeForce/core/container/flat_hashtable.hpp</label>
+        <link refid="flat__hashtable_8hpp"/>
         <childnode refid="47" relation="include">
         </childnode>
         <childnode refid="67" relation="include">
         </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
       </node>
       <node id="45">
-        <label>NeForce/core/container/unordered_map.hpp</label>
-        <link refid="unordered__map_8hpp"/>
+        <label>NeForce/core/container/flat_unordered_map.hpp</label>
+        <link refid="flat__unordered__map_8hpp"/>
         <childnode refid="46" relation="include">
         </childnode>
       </node>
@@ -284,32 +297,32 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="76">
+      <node id="78">
         <label>NeForce/core/exception/errc.hpp</label>
         <link refid="errc_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>NeForce/core/exception/error_category.hpp</label>
+        <link refid="error__category_8hpp"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
       <node id="75">
-        <label>NeForce/core/exception/error_category.hpp</label>
-        <link refid="error__category_8hpp"/>
-        <childnode refid="76" relation="include">
-        </childnode>
-        <childnode refid="78" relation="include">
-        </childnode>
-      </node>
-      <node id="73">
         <label>NeForce/core/exception/error_code.hpp</label>
         <link refid="error__code_8hpp"/>
-        <childnode refid="74" relation="include">
+        <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="74">
+      <node id="76">
         <label>NeForce/core/exception/error_condition.hpp</label>
         <link refid="error__condition_8hpp"/>
-        <childnode refid="75" relation="include">
+        <childnode refid="77" relation="include">
         </childnode>
       </node>
       <node id="27">
@@ -326,10 +339,10 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="85">
+      <node id="87">
         <label>NeForce/core/functional/function.hpp</label>
         <link refid="functional_2function_8hpp"/>
-        <childnode refid="86" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
@@ -392,7 +405,7 @@
         <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="80">
+      <node id="82">
         <label>NeForce/core/memory/allocator_traits.hpp</label>
         <link refid="allocator__traits_8hpp"/>
         <childnode refid="65" relation="include">
@@ -440,7 +453,7 @@
         <childnode refid="41" relation="include">
         </childnode>
       </node>
-      <node id="87">
+      <node id="89">
         <label>NeForce/core/memory/shared_ptr.hpp</label>
         <link refid="shared__ptr_8hpp"/>
         <childnode refid="63" relation="include">
@@ -451,7 +464,7 @@
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="80" relation="include">
+        <childnode refid="82" relation="include">
         </childnode>
         <childnode refid="39" relation="include">
         </childnode>
@@ -520,31 +533,45 @@
         <childnode refid="60" relation="include">
         </childnode>
       </node>
-      <node id="79">
+      <node id="73">
+        <label>NeForce/core/simd/bytes.hpp</label>
+        <link refid="bytes_8hpp"/>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>NeForce/core/simd/types.hpp</label>
+        <link refid="simd_2types_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
         <label>NeForce/core/string/basic_string.hpp</label>
         <link refid="basic__string_8hpp"/>
         <childnode refid="57" relation="include">
         </childnode>
         <childnode refid="67" relation="include">
         </childnode>
-        <childnode refid="80" relation="include">
+        <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="81" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
       </node>
-      <node id="82">
+      <node id="84">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="71" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="85" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
-      <node id="83">
+      <node id="85">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="48" relation="include">
@@ -552,22 +579,22 @@
         <childnode refid="60" relation="include">
         </childnode>
       </node>
-      <node id="84">
+      <node id="86">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="78">
+      <node id="80">
         <label>NeForce/core/string/string.hpp</label>
         <link refid="string_8hpp"/>
-        <childnode refid="79" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
       </node>
-      <node id="81">
+      <node id="83">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="82" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
       </node>
       <node id="53">
@@ -633,7 +660,7 @@
       <node id="9">
         <label>cassert</label>
       </node>
-      <node id="77">
+      <node id="79">
         <label>cerrno</label>
       </node>
       <node id="16">
@@ -663,13 +690,133 @@
       <node id="14">
         <label>synchapi.h</label>
       </node>
-      <node id="86">
+      <node id="88">
         <label>typeinfo</label>
       </node>
       <node id="38">
         <label>utility</label>
       </node>
     </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>strand.hpp</label>
+        <link refid="strand_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>app.hpp</label>
+        <link refid="app_8hpp"/>
+      </node>
+      <node id="6">
+        <label>collapsible.hpp</label>
+        <link refid="collapsible_8hpp"/>
+      </node>
+      <node id="5">
+        <label>component.hpp</label>
+        <link refid="component_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>containers.hpp</label>
+        <link refid="containers_8hpp"/>
+      </node>
+      <node id="8">
+        <label>dropdown.hpp</label>
+        <link refid="dropdown_8hpp"/>
+      </node>
+      <node id="9">
+        <label>hoverable.hpp</label>
+        <link refid="hoverable_8hpp"/>
+      </node>
+      <node id="10">
+        <label>menu.hpp</label>
+        <link refid="menu_8hpp"/>
+      </node>
+      <node id="11">
+        <label>modal.hpp</label>
+        <link refid="modal_8hpp"/>
+      </node>
+      <node id="12">
+        <label>radiobox.hpp</label>
+        <link refid="radiobox_8hpp"/>
+      </node>
+      <node id="14">
+        <label>renderer.hpp</label>
+        <link refid="renderer_8hpp"/>
+      </node>
+      <node id="15">
+        <label>resizable_split.hpp</label>
+        <link refid="resizable__split_8hpp"/>
+      </node>
+      <node id="16">
+        <label>scroll_view.hpp</label>
+        <link refid="scroll__view_8hpp"/>
+      </node>
+      <node id="17">
+        <label>slider.hpp</label>
+        <link refid="slider_8hpp"/>
+      </node>
+      <node id="18">
+        <label>text_input.hpp</label>
+        <link refid="text__input_8hpp"/>
+      </node>
+      <node id="19">
+        <label>toggle.hpp</label>
+        <link refid="toggle_8hpp"/>
+      </node>
+      <node id="20">
+        <label>window.hpp</label>
+        <link refid="window_8hpp"/>
+      </node>
+      <node id="4">
+        <label>state.hpp</label>
+        <link refid="state_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>input.hpp</label>
+        <link refid="input_8hpp"/>
+      </node>
+      <node id="13">
+        <label>reconciler.hpp</label>
+        <link refid="reconciler_8hpp"/>
+      </node>
+    </invincdepgraph>
     <innerclass refid="classstrand" prot="public">strand</innerclass>
     <innerclass refid="structstrand_1_1impl" prot="private">strand::impl</innerclass>
     <briefdescription>

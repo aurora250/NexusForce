@@ -1,0 +1,459 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="class_application" kind="class" language="C++" prot="public">
+    <compoundname>Application</compoundname>
+    <includes refid="app_8hpp" local="no">app.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_application_1ad2a27742daad8a4d6a141c5ce1ab5683" prot="private" static="no" mutable="no">
+        <type><ref refid="classio__context" kindref="compound">io_context</ref></type>
+        <definition>io_context Application::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>Application::ctx_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="93" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_application_1a4f2149a69cbda8b4266f5c8d325acb13" prot="private" static="no" mutable="no">
+        <type><ref refid="classstrand" kindref="compound">strand</ref></type>
+        <definition>strand Application::renderStrand_</definition>
+        <argsstring></argsstring>
+        <name>renderStrand_</name>
+        <qualifiedname>Application::renderStrand_</qualifiedname>
+        <initializer>{ctx_}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="94" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="94" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_application_1ab1935f6fb6faa7b16774a13483db8151" prot="private" static="no" mutable="no">
+        <type><ref refid="classsys__console" kindref="compound">sys_console</ref> &amp;</type>
+        <definition>sys_console&amp; Application::console_</definition>
+        <argsstring></argsstring>
+        <name>console_</name>
+        <qualifiedname>Application::console_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="95" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_application_1a500b19ef2ef965b330cc446d1142901e" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="class_reconciler" kindref="compound">Reconciler</ref> &gt;</type>
+        <definition>unique_ptr&lt;Reconciler&gt; Application::reconiler_</definition>
+        <argsstring></argsstring>
+        <name>reconiler_</name>
+        <qualifiedname>Application::reconiler_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="96" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_application_1a6f9c1c2d1288af27777e53bde36b00b1" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="class_input_driver" kindref="compound">InputDriver</ref> &gt;</type>
+        <definition>unique_ptr&lt;InputDriver&gt; Application::input_</definition>
+        <argsstring></argsstring>
+        <name>input_</name>
+        <qualifiedname>Application::input_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="97" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_application_1a499a3f89dd9f7e8fc26a7c9783b76c60" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="class_component_base" kindref="compound">ComponentBase</ref> &gt;</type>
+        <definition>unique_ptr&lt;ComponentBase&gt; Application::root_</definition>
+        <argsstring></argsstring>
+        <name>root_</name>
+        <qualifiedname>Application::root_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="98" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_application_1a1fe21872ce8e19801415ad881f127fd1" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_theme" kindref="compound">Theme</ref></type>
+        <definition>Theme Application::theme_</definition>
+        <argsstring></argsstring>
+        <name>theme_</name>
+        <qualifiedname>Application::theme_</qualifiedname>
+        <initializer>{<ref refid="group___t_u_i_1ga1100ae36defedfec8314b2dde23d35b6" kindref="member">dark_theme</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="99" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_application_1a7f6e2a2b7da2d16f1b7197fb37b18942" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Application::fps_</definition>
+        <argsstring></argsstring>
+        <name>fps_</name>
+        <qualifiedname>Application::fps_</qualifiedname>
+        <initializer>{60}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="100" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_application_1a9e145307559f90a4e034868cc6d43fbf" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Application::exitCode_</definition>
+        <argsstring></argsstring>
+        <name>exitCode_</name>
+        <qualifiedname>Application::exitCode_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="101" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_application_1a58cac65e6bda7312f9cbff0f368e6b99" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Application::running_</definition>
+        <argsstring></argsstring>
+        <name>running_</name>
+        <qualifiedname>Application::running_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="102" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_application_1afa8cc05ce6b6092be5ecdfdae44e05f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Application::Application</definition>
+        <argsstring>()</argsstring>
+        <name>Application</name>
+        <qualifiedname>Application::Application</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="45" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="class_application_1a748bca84fefb9c12661cfaa2f623748d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Application::~Application</definition>
+        <argsstring>()</argsstring>
+        <name>~Application</name>
+        <qualifiedname>Application::~Application</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="46" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="class_application_1afaeec66a8591b6d88049b260133d13fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Application::Application</definition>
+        <argsstring>(const Application &amp;)=delete</argsstring>
+        <name>Application</name>
+        <qualifiedname>Application::Application</qualifiedname>
+        <param>
+          <type>const <ref refid="class_application" kindref="compound">Application</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="48" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="class_application_1a4bddd891168e3adc56dfd505ac41af7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_application" kindref="compound">Application</ref> &amp;</type>
+        <definition>Application &amp; Application::operator=</definition>
+        <argsstring>(const Application &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Application::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_application" kindref="compound">Application</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="49" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_application_1a7b5be0a8e4df05ca7ceb2d3d7d275278" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Application::Application</definition>
+        <argsstring>(Application &amp;&amp;)=delete</argsstring>
+        <name>Application</name>
+        <qualifiedname>Application::Application</qualifiedname>
+        <param>
+          <type><ref refid="class_application" kindref="compound">Application</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="50" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="class_application_1aa909176412a911bcedb36005049c7bcf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_application" kindref="compound">Application</ref> &amp;</type>
+        <definition>Application &amp; Application::operator=</definition>
+        <argsstring>(Application &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Application::operator=</qualifiedname>
+        <param>
+          <type><ref refid="class_application" kindref="compound">Application</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="51" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_application_1ad83bd1422dedcf7152d43c0991007594" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename RootComponent</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="class_application" kindref="compound">Application</ref> &amp;</type>
+        <definition>Application &amp; Application::withComponent</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>withComponent</name>
+        <qualifiedname>Application::withComponent</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>设置根组件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>RootComponent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>根组件类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="61" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="61" bodyend="64"/>
+        <references refid="group___unique_pointer_1ga20caa9b68a94ba614667d6ec6585c044" compoundref="unique__ptr_8hpp" startline="973" endline="975">make_unique</references>
+      </memberdef>
+      <memberdef kind="function" id="class_application_1a99b1537d25e38728040904a02cbea518" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_application" kindref="compound">Application</ref> &amp;</type>
+        <definition>Application &amp; Application::withTheme</definition>
+        <argsstring>(const Theme &amp;theme)</argsstring>
+        <name>withTheme</name>
+        <qualifiedname>Application::withTheme</qualifiedname>
+        <param>
+          <type>const <ref refid="struct_theme" kindref="compound">Theme</ref> &amp;</type>
+          <declname>theme</declname>
+        </param>
+        <briefdescription>
+<para>设置主题 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>theme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主题 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="71" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_application_1ad5861d2c6ce436714eaa9911e4316792" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_application" kindref="compound">Application</ref> &amp;</type>
+        <definition>Application &amp; Application::withFps</definition>
+        <argsstring>(int fps)</argsstring>
+        <name>withFps</name>
+        <qualifiedname>Application::withFps</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>fps</declname>
+        </param>
+        <briefdescription>
+<para>设置最大刷新帧率 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>帧率（0 表示仅事件驱动刷新） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="78" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_application_1a8cf8941c8db90117d3735bce5ae1fdf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int Application::run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <qualifiedname>Application::run</qualifiedname>
+        <briefdescription>
+<para>阻塞运行事件循环 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>退出码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="84" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_application_1a39cfcb8450c43b2294f7bb7927baf05b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Application::quit</definition>
+        <argsstring>(int exitCode=0)</argsstring>
+        <name>quit</name>
+        <qualifiedname>Application::quit</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>exitCode</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>请求退出应用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>exitCode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>退出码 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="90" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>TUI应用程序入口 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>驱动主事件循环。</para>
+<para><programlisting><codeline><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>main()<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Application()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.withComponent&lt;MyRootComponent&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="class_application_1a99b1537d25e38728040904a02cbea518" kindref="member">withTheme</ref>(kDarkTheme)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="class_application_1ad5861d2c6ce436714eaa9911e4316792" kindref="member">withFps</ref>(60)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="class_application_1a8cf8941c8db90117d3735bce5ae1fdf4" kindref="member">run</ref>();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" line="43" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/app.hpp" bodystart="43" bodyend="103"/>
+    <listofallmembers>
+      <member refid="class_application_1afa8cc05ce6b6092be5ecdfdae44e05f8" prot="public" virt="non-virtual"><scope>Application</scope><name>Application</name></member>
+      <member refid="class_application_1afaeec66a8591b6d88049b260133d13fc" prot="public" virt="non-virtual"><scope>Application</scope><name>Application</name></member>
+      <member refid="class_application_1a7b5be0a8e4df05ca7ceb2d3d7d275278" prot="public" virt="non-virtual"><scope>Application</scope><name>Application</name></member>
+      <member refid="class_application_1ab1935f6fb6faa7b16774a13483db8151" prot="private" virt="non-virtual"><scope>Application</scope><name>console_</name></member>
+      <member refid="class_application_1ad2a27742daad8a4d6a141c5ce1ab5683" prot="private" virt="non-virtual"><scope>Application</scope><name>ctx_</name></member>
+      <member refid="class_application_1a9e145307559f90a4e034868cc6d43fbf" prot="private" virt="non-virtual"><scope>Application</scope><name>exitCode_</name></member>
+      <member refid="class_application_1a7f6e2a2b7da2d16f1b7197fb37b18942" prot="private" virt="non-virtual"><scope>Application</scope><name>fps_</name></member>
+      <member refid="class_application_1a6f9c1c2d1288af27777e53bde36b00b1" prot="private" virt="non-virtual"><scope>Application</scope><name>input_</name></member>
+      <member refid="class_application_1a4bddd891168e3adc56dfd505ac41af7f" prot="public" virt="non-virtual"><scope>Application</scope><name>operator=</name></member>
+      <member refid="class_application_1aa909176412a911bcedb36005049c7bcf" prot="public" virt="non-virtual"><scope>Application</scope><name>operator=</name></member>
+      <member refid="class_application_1a39cfcb8450c43b2294f7bb7927baf05b" prot="public" virt="non-virtual"><scope>Application</scope><name>quit</name></member>
+      <member refid="class_application_1a500b19ef2ef965b330cc446d1142901e" prot="private" virt="non-virtual"><scope>Application</scope><name>reconiler_</name></member>
+      <member refid="class_application_1a4f2149a69cbda8b4266f5c8d325acb13" prot="private" virt="non-virtual"><scope>Application</scope><name>renderStrand_</name></member>
+      <member refid="class_application_1a499a3f89dd9f7e8fc26a7c9783b76c60" prot="private" virt="non-virtual"><scope>Application</scope><name>root_</name></member>
+      <member refid="class_application_1a8cf8941c8db90117d3735bce5ae1fdf4" prot="public" virt="non-virtual"><scope>Application</scope><name>run</name></member>
+      <member refid="class_application_1a58cac65e6bda7312f9cbff0f368e6b99" prot="private" virt="non-virtual"><scope>Application</scope><name>running_</name></member>
+      <member refid="class_application_1a1fe21872ce8e19801415ad881f127fd1" prot="private" virt="non-virtual"><scope>Application</scope><name>theme_</name></member>
+      <member refid="class_application_1ad83bd1422dedcf7152d43c0991007594" prot="public" virt="non-virtual"><scope>Application</scope><name>withComponent</name></member>
+      <member refid="class_application_1ad5861d2c6ce436714eaa9911e4316792" prot="public" virt="non-virtual"><scope>Application</scope><name>withFps</name></member>
+      <member refid="class_application_1a99b1537d25e38728040904a02cbea518" prot="public" virt="non-virtual"><scope>Application</scope><name>withTheme</name></member>
+      <member refid="class_application_1a748bca84fefb9c12661cfaa2f623748d" prot="public" virt="non-virtual"><scope>Application</scope><name>~Application</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

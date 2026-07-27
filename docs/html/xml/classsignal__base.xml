@@ -2,6 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
   <compounddef id="classsignal__base" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>signal_base</compoundname>
+    <derivedcompoundref refid="structsignal" prot="public" virt="non-virtual">signal&lt; T &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structsignal" prot="public" virt="non-virtual">signal&lt; basic_string&lt; char &gt; &gt;</derivedcompoundref>
     <derivedcompoundref refid="structsignal" prot="public" virt="non-virtual">signal&lt; Types &gt;</derivedcompoundref>
     <includes refid="signals_8hpp" local="no">signals.hpp</includes>
     <sectiondef kind="public-func">
@@ -26,6 +28,8 @@
         <name>disconnect_all</name>
         <qualifiedname>signal_base::disconnect_all</qualifiedname>
         <reimplementedby refid="structsignal_1ae3217170355c3d43113f7f2def934498">disconnect_all</reimplementedby>
+        <reimplementedby refid="structsignal_1ae3217170355c3d43113f7f2def934498">disconnect_all</reimplementedby>
+        <reimplementedby refid="structsignal_1ae3217170355c3d43113f7f2def934498">disconnect_all</reimplementedby>
         <briefdescription>
 <para>断开所有连接 </para>
         </briefdescription>
@@ -41,6 +45,8 @@
         <argsstring>()=0</argsstring>
         <name>block</name>
         <qualifiedname>signal_base::block</qualifiedname>
+        <reimplementedby refid="structsignal_1ab5b8f70321febb0591eefa1886c358f3">block</reimplementedby>
+        <reimplementedby refid="structsignal_1ab5b8f70321febb0591eefa1886c358f3">block</reimplementedby>
         <reimplementedby refid="structsignal_1ab5b8f70321febb0591eefa1886c358f3">block</reimplementedby>
         <briefdescription>
 <para>阻塞信号触发 </para>
@@ -58,6 +64,8 @@
         <name>unblock</name>
         <qualifiedname>signal_base::unblock</qualifiedname>
         <reimplementedby refid="structsignal_1af989e5a12cffd2256fa5930fe1284e6d">unblock</reimplementedby>
+        <reimplementedby refid="structsignal_1af989e5a12cffd2256fa5930fe1284e6d">unblock</reimplementedby>
+        <reimplementedby refid="structsignal_1af989e5a12cffd2256fa5930fe1284e6d">unblock</reimplementedby>
         <briefdescription>
 <para>解除阻塞 </para>
         </briefdescription>
@@ -73,6 +81,8 @@
         <argsstring>() const =0</argsstring>
         <name>is_blocked</name>
         <qualifiedname>signal_base::is_blocked</qualifiedname>
+        <reimplementedby refid="structsignal_1ac737b7d0cefcb75ae32cd73b4b803bca">is_blocked</reimplementedby>
+        <reimplementedby refid="structsignal_1ac737b7d0cefcb75ae32cd73b4b803bca">is_blocked</reimplementedby>
         <reimplementedby refid="structsignal_1ac737b7d0cefcb75ae32cd73b4b803bca">is_blocked</reimplementedby>
         <briefdescription>
 <para>是否处于阻塞状态 </para>
@@ -90,6 +100,8 @@
         <name>slot_count</name>
         <qualifiedname>signal_base::slot_count</qualifiedname>
         <reimplementedby refid="structsignal_1a7ec78011b2800f95681511c9d36a3eb6">slot_count</reimplementedby>
+        <reimplementedby refid="structsignal_1a7ec78011b2800f95681511c9d36a3eb6">slot_count</reimplementedby>
+        <reimplementedby refid="structsignal_1a7ec78011b2800f95681511c9d36a3eb6">slot_count</reimplementedby>
         <briefdescription>
 <para>获取已连接槽数量 </para>
         </briefdescription>
@@ -105,6 +117,8 @@
         <argsstring>(const vector&lt; reflect::meta_any &gt; &amp;args)=0</argsstring>
         <name>emit_dynamic</name>
         <qualifiedname>signal_base::emit_dynamic</qualifiedname>
+        <reimplementedby refid="structsignal_1a3c50879c54ffd0306d6e964aa6b2b667">emit_dynamic</reimplementedby>
+        <reimplementedby refid="structsignal_1a3c50879c54ffd0306d6e964aa6b2b667">emit_dynamic</reimplementedby>
         <reimplementedby refid="structsignal_1a3c50879c54ffd0306d6e964aa6b2b667">emit_dynamic</reimplementedby>
         <param>
           <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; reflect::meta_any &gt; &amp;</type>
@@ -135,6 +149,8 @@
         <argsstring>(function&lt; void(const vector&lt; reflect::meta_any &gt; &amp;)&gt; callback)=0</argsstring>
         <name>connect_dynamic</name>
         <qualifiedname>signal_base::connect_dynamic</qualifiedname>
+        <reimplementedby refid="structsignal_1a3535f92357a2d2637950d4dfe4603e6d">connect_dynamic</reimplementedby>
+        <reimplementedby refid="structsignal_1a3535f92357a2d2637950d4dfe4603e6d">connect_dynamic</reimplementedby>
         <reimplementedby refid="structsignal_1a3535f92357a2d2637950d4dfe4603e6d">connect_dynamic</reimplementedby>
         <param>
           <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(const <ref refid="classvector" kindref="compound">vector</ref>&lt; reflect::meta_any &gt; &amp;)&gt;</type>
@@ -167,8 +183,20 @@
 <para>所有 <ref refid="structsignal" kindref="compound">signal&lt;Types...&gt;</ref> 的公共非模板基类，提供类型擦除操作。 反射系统通过此基类操作异质信号实例。 </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="2">
+      <node id="4">
         <label>signal&lt; Types &gt;</label>
+        <link refid="structsignal"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>signal&lt; T &gt;</label>
+        <link refid="structsignal"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>signal&lt; basic_string&lt; char &gt; &gt;</label>
         <link refid="structsignal"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>

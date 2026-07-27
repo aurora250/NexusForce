@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: app.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('app_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">app.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="app_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_TUI_APP_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_TUI_APP_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="strand_8hpp.html">NeForce/core/async/strand.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="console_8hpp.html">NeForce/core/system/console.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="style_8hpp.html">NeForce/tui/dom/style.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>NEFORCE_BEGIN_TUI__</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">class </span><a class="code hl_class" href="classreconciler.html">reconciler</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">class </span><a class="code hl_class" href="classinput__driver.html">input_driver</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">class </span><a class="code hl_class" href="classcomponent__base.html">component_base</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="};">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classapplication.html">   43</a></span><span class="keyword">class </span>NEFORCE_API application {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    application() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    ~application() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    application(<span class="keyword">const</span> application&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    application&amp; operator=(<span class="keyword">const</span> application&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    application(application&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    application&amp; operator=(application&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> RootComponent, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classapplication.html#a7a36bb3104fb5aa180695b7232ab2110">   61</a></span>    application&amp; <a class="code hl_function" href="classapplication.html#a7a36bb3104fb5aa180695b7232ab2110">with_component</a>(Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        root_ = _NEFORCE <a class="code hl_function" href="group___unique_pointer.html#ga20caa9b68a94ba614667d6ec6585c044">make_unique&lt;RootComponent&gt;</a>(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classapplication.html#ad180bc91f9f5069cd056df4b98f32687">   71</a></span>    application&amp; <a class="code hl_function" href="classapplication.html#ad180bc91f9f5069cd056df4b98f32687">with_theme</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structtheme.html">theme</a>&amp; <a class="code hl_struct" href="structtheme.html">theme</a>);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classapplication.html#a8f56e6068ffc56da441e541252edf834">   78</a></span>    application&amp; <a class="code hl_function" href="classapplication.html#a8f56e6068ffc56da441e541252edf834">with_fps</a>(<span class="keywordtype">int</span> fps);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classapplication.html#a6ca026876273df948c83005223ab16f8">   85</a></span>    application&amp; <a class="code hl_function" href="classapplication.html#a6ca026876273df948c83005223ab16f8">with_title</a>(<span class="keywordtype">string</span> title);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classapplication.html#ac2f322c15c3ba05577cf5b8115a24a47">   91</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classapplication.html#ac2f322c15c3ba05577cf5b8115a24a47">run</a>();</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classapplication.html#abf996be03856043c049a7217dde7fe25">   97</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classapplication.html#abf996be03856043c049a7217dde7fe25">quit</a>(<span class="keywordtype">int</span> exit_code = 0);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_class" href="classio__context.html">io_context</a> ctx_;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_class" href="classstrand.html">strand</a> render_strand_{ctx_};</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <a class="code hl_class" href="classsys__console.html">sys_console</a>&amp; console_{<a class="code hl_function" href="classsys__console.html#aa83eec104732f721db38b3d7ed38b2f4">sys_console::instance</a>()};</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    unique_ptr&lt;reconciler&gt; reconiler_;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    unique_ptr&lt;input_driver&gt; input_;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    unique_ptr&lt;component_base&gt; root_;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    theme theme_{<a class="code hl_variable" href="group___t_u_i.html#ga68a47e3ac97263e866521b06fa87f3c1">dark_theme</a>};</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">int</span> fps_{60};</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">int</span> exit_code_ = 0;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">string</span> title_;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordtype">bool</span> running_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>};</div>
+</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> <span class="comment">// TUI</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>NEFORCE_END_TUI__</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_TUI_APP_HPP__</span></div>
+<div class="ttc" id="aclassapplication_html_a6ca026876273df948c83005223ab16f8"><div class="ttname"><a href="classapplication.html#a6ca026876273df948c83005223ab16f8">application::with_title</a></div><div class="ttdeci">application &amp; with_title(string title)</div><div class="ttdoc">设置程序名</div></div>
+<div class="ttc" id="aclassapplication_html_a7a36bb3104fb5aa180695b7232ab2110"><div class="ttname"><a href="classapplication.html#a7a36bb3104fb5aa180695b7232ab2110">application::with_component</a></div><div class="ttdeci">application &amp; with_component(Args &amp;&amp;... args)</div><div class="ttdoc">设置根组件</div><div class="ttdef"><b>定义</b> <a href="#l00061">app.hpp:61</a></div></div>
+<div class="ttc" id="aclassapplication_html_a8f56e6068ffc56da441e541252edf834"><div class="ttname"><a href="classapplication.html#a8f56e6068ffc56da441e541252edf834">application::with_fps</a></div><div class="ttdeci">application &amp; with_fps(int fps)</div><div class="ttdoc">设置最大刷新帧率</div></div>
+<div class="ttc" id="aclassapplication_html_abf996be03856043c049a7217dde7fe25"><div class="ttname"><a href="classapplication.html#abf996be03856043c049a7217dde7fe25">application::quit</a></div><div class="ttdeci">void quit(int exit_code=0)</div><div class="ttdoc">请求退出应用</div></div>
+<div class="ttc" id="aclassapplication_html_ac2f322c15c3ba05577cf5b8115a24a47"><div class="ttname"><a href="classapplication.html#ac2f322c15c3ba05577cf5b8115a24a47">application::run</a></div><div class="ttdeci">int run()</div><div class="ttdoc">阻塞运行事件循环</div></div>
+<div class="ttc" id="aclassapplication_html_ad180bc91f9f5069cd056df4b98f32687"><div class="ttname"><a href="classapplication.html#ad180bc91f9f5069cd056df4b98f32687">application::with_theme</a></div><div class="ttdeci">application &amp; with_theme(const theme &amp;theme)</div><div class="ttdoc">设置主题</div></div>
+<div class="ttc" id="aclasscomponent__base_html"><div class="ttname"><a href="classcomponent__base.html">component_base</a></div><div class="ttdoc">组件基类</div><div class="ttdef"><b>定义</b> <a href="component_8hpp_source.html#l00036">component.hpp:36</a></div></div>
+<div class="ttc" id="aclassinput__driver_html"><div class="ttname"><a href="classinput__driver.html">input_driver</a></div><div class="ttdoc">终端输入驱动</div><div class="ttdef"><b>定义</b> <a href="input_8hpp_source.html#l00034">input.hpp:34</a></div></div>
+<div class="ttc" id="aclassio__context_html"><div class="ttname"><a href="classio__context.html">io_context</a></div><div class="ttdoc">统一异步操作核心</div><div class="ttdef"><b>定义</b> <a href="io__context_8hpp_source.html#l00064">io_context.hpp:64</a></div></div>
+<div class="ttc" id="aclassreconciler_html"><div class="ttname"><a href="classreconciler.html">reconciler</a></div><div class="ttdoc">差分渲染引擎</div><div class="ttdef"><b>定义</b> <a href="reconciler_8hpp_source.html#l00029">reconciler.hpp:29</a></div></div>
+<div class="ttc" id="aclassstrand_html"><div class="ttname"><a href="classstrand.html">strand</a></div><div class="ttdoc">串行化执行器</div><div class="ttdef"><b>定义</b> <a href="strand_8hpp_source.html#l00030">strand.hpp:30</a></div></div>
+<div class="ttc" id="aclasssys__console_html"><div class="ttname"><a href="classsys__console.html">sys_console</a></div><div class="ttdoc">系统控制台单例类</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00061">console.hpp:61</a></div></div>
+<div class="ttc" id="aclasssys__console_html_aa83eec104732f721db38b3d7ed38b2f4"><div class="ttname"><a href="classsys__console.html#aa83eec104732f721db38b3d7ed38b2f4">sys_console::instance</a></div><div class="ttdeci">static sys_console &amp; instance() noexcept</div><div class="ttdoc">获取单例实例</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00145">console.hpp:145</a></div></div>
+<div class="ttc" id="aconsole_8hpp_html"><div class="ttname"><a href="console_8hpp.html">console.hpp</a></div><div class="ttdoc">控制台输入输出工具</div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_gadbaa877478c57b027d5be364ca1585be"><div class="ttname"><a href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward</a></div><div class="ttdeci">constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03028">type_traits.hpp:3028</a></div></div>
+<div class="ttc" id="agroup___t_u_i_html_ga68a47e3ac97263e866521b06fa87f3c1"><div class="ttname"><a href="group___t_u_i.html#ga68a47e3ac97263e866521b06fa87f3c1">dark_theme</a></div><div class="ttdeci">constexpr theme dark_theme</div><div class="ttdoc">预置暗色主题</div><div class="ttdef"><b>定义</b> <a href="style_8hpp_source.html#l00215">style.hpp:215</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga20caa9b68a94ba614667d6ec6585c044"><div class="ttname"><a href="group___unique_pointer.html#ga20caa9b68a94ba614667d6ec6585c044">make_unique</a></div><div class="ttdeci">constexpr unique_ptr&lt; T &gt; make_unique(Args &amp;&amp;... args)</div><div class="ttdoc">创建unique_ptr</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00973">unique_ptr.hpp:973</a></div></div>
+<div class="ttc" id="astrand_8hpp_html"><div class="ttname"><a href="strand_8hpp.html">strand.hpp</a></div><div class="ttdoc">串行化执行器</div></div>
+<div class="ttc" id="astructtheme_html"><div class="ttname"><a href="structtheme.html">theme</a></div><div class="ttdoc">主题</div><div class="ttdef"><b>定义</b> <a href="style_8hpp_source.html#l00180">style.hpp:180</a></div></div>
+<div class="ttc" id="astyle_8hpp_html"><div class="ttname"><a href="style_8hpp.html">style.hpp</a></div><div class="ttdoc">TUI样式与主题系统</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>tui</b></li><li class="navelem"><a href="app_8hpp.html">app.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

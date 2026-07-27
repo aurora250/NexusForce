@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: element类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classelement.html','','classelement-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">element类 参考<div class="ingroups"><a class="el" href="group___t_u_i.html">TUI</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>虚拟UI元素  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="element_8hpp_source.html">element.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:ae3b4aaf2c62b324301af48441ecf07bc" id="r_ae3b4aaf2c62b324301af48441ecf07bc"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bc">kind</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bcaa2e4822a98337283e39f7b60acf85ec9">empty</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bcafad9b4ea6fda50ab90f21ab8d4b6b70c">vbox</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bca3d85a8c42a57d5fc2496061270e2352d">hbox</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bca0c137be244ebcbb621ab70cf2990ac15">zstack</a>
+, <br />
+&#160;&#160;<a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bca1cb251ec0d568de6a929b520c4aed8d1">text</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bcadddd37dfc736f0674611c500f7f82bbd">spacer</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bcaa0f0bc95016c862498bbad29d1f4d9d4">separator</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bcace50a09343724eb82df11390e2c1de18">button</a>
+, <br />
+&#160;&#160;<a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bcae1ba83437c55caa1b29b1d3228f2591a">text_input</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bca9fced129522f128b2445a41fb0b6ef9f">checkbox</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bcacbe37624b189158daf38db177cd53324">scroll_view</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bcafcc790c72a86190de1b549d0ddc6f55c">canvas</a>
+, <br />
+&#160;&#160;<a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bcadf491a4de50739fa9cffdbd4e3f4b4bb">when</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bca933dd8674c563081260867dfa95b5e74">each</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bca7f3d565c67f89f27a31d03d795b41530">flexbox</a>
+, <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bca695c8ad88359bae9ccfa9053c2f122cb">gridbox</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:ae3b4aaf2c62b324301af48441ecf07bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">元素类型枚举  <a href="#ae3b4aaf2c62b324301af48441ecf07bc">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a264d8ba88bfdaeab07f717750bfc796a" id="r_a264d8ba88bfdaeab07f717750bfc796a"><td class="memItemLeft"><a class="el" href="classelement.html">element</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a264d8ba88bfdaeab07f717750bfc796a">with_key</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> k)</td></tr>
+<tr class="memdesc:a264d8ba88bfdaeab07f717750bfc796a"><td class="mdescLeft">&#160;</td><td class="mdescRight">分配列表 key，帮助 Reconciler 追踪元素身份  <br /></td></tr>
+<tr class="memitem:ac51f0415ffa363f443e9edba266172d9" id="r_ac51f0415ffa363f443e9edba266172d9"><td class="memItemLeft"><a class="el" href="classelement.html">element</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac51f0415ffa363f443e9edba266172d9">with_style</a> (const tui::style &amp;s)</td></tr>
+<tr class="memdesc:ac51f0415ffa363f443e9edba266172d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">合并样式  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:ae6e2b46bc524f66a8f8efc64fcb49c39" id="r_ae6e2b46bc524f66a8f8efc64fcb49c39"><td class="memItemLeft"><a id="ae6e2b46bc524f66a8f8efc64fcb49c39" name="ae6e2b46bc524f66a8f8efc64fcb49c39"></a>
+static <a class="el" href="classelement.html">element</a>&#160;</td><td class="memItemRight"><b>canvas</b> (<a class="el" href="classfunction.html">function</a>&lt; void(int, int, int, int)&gt; draw_function, tui::style <a class="el" href="structstyle.html">style</a>={})</td></tr>
+<tr class="memdesc:ae6e2b46bc524f66a8f8efc64fcb49c39"><td class="mdescLeft">&#160;</td><td class="mdescRight">自定义绘制区域 <br /></td></tr>
+<tr class="memitem:a0f0254539f3959c2d95acc685629aa7f" id="r_a0f0254539f3959c2d95acc685629aa7f"><td class="memItemLeft">static <a class="el" href="classelement.html">element</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0f0254539f3959c2d95acc685629aa7f">flexbox</a> (<a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="classelement.html">element</a> &gt; children, <a class="el" href="structbox__props.html">box_props</a> config={})</td></tr>
+<tr class="memdesc:a0f0254539f3959c2d95acc685629aa7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">CSS-flexbox 弹性容器  <br /></td></tr>
+<tr class="memitem:ad0b4442758337f3a4c44773003526303" id="r_ad0b4442758337f3a4c44773003526303"><td class="memItemLeft">static <a class="el" href="classelement.html">element</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad0b4442758337f3a4c44773003526303">gridbox</a> (<a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="classelement.html">element</a> &gt; &gt; grid)</td></tr>
+<tr class="memdesc:ad0b4442758337f3a4c44773003526303"><td class="mdescLeft">&#160;</td><td class="mdescRight">网格布局容器  <br /></td></tr>
+<tr class="memitem:ada1fc535f61ef18d861468991a4f5c5f" id="r_ada1fc535f61ef18d861468991a4f5c5f"><td class="memItemLeft">static <a class="el" href="classelement.html">element</a>&#160;</td><td class="memItemRight"><a class="el" href="#ada1fc535f61ef18d861468991a4f5c5f">when</a> (bool cond, <a class="el" href="classfunction.html">function</a>&lt; <a class="el" href="classelement.html">element</a>()&gt; then, <a class="el" href="classfunction.html">function</a>&lt; <a class="el" href="classelement.html">element</a>()&gt; otherwise=[]() { return element::empty();})</td></tr>
+<tr class="memdesc:ada1fc535f61ef18d861468991a4f5c5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">条件渲染  <br /></td></tr>
+<tr class="memitem:aaff7db365ec170faf3248634d62c9a66" id="r_aaff7db365ec170faf3248634d62c9a66"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:aaff7db365ec170faf3248634d62c9a66 template"><td class="memItemLeft">static <a class="el" href="classelement.html">element</a>&#160;</td><td class="memItemRight"><a class="el" href="#aaff7db365ec170faf3248634d62c9a66">each</a> (const <a class="el" href="classvector.html">vector</a>&lt; T &gt; &amp;items, <a class="el" href="classfunction.html">function</a>&lt; <a class="el" href="classelement.html">element</a>(const T &amp;, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>)&gt; render)</td></tr>
+<tr class="memdesc:aaff7db365ec170faf3248634d62c9a66"><td class="mdescLeft">&#160;</td><td class="mdescRight">列表渲染  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>虚拟UI元素 </p>
+<p>纯值类型，描述 UI 树的一个节点。</p>
+<dl class="section note"><dt>注解</dt><dd>列表元素应通过 <a class="el" href="#a264d8ba88bfdaeab07f717750bfc796a" title="分配列表 key，帮助 Reconciler 追踪元素身份">with_key()</a> 分配 key 以帮助 reconciler 追踪身份。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="element_8hpp_source.html">element.hpp</a> 第 <a class="el" href="element_8hpp_source.html#l00036">36</a> 行定义.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="ae3b4aaf2c62b324301af48441ecf07bc" name="ae3b4aaf2c62b324301af48441ecf07bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3b4aaf2c62b324301af48441ecf07bc">&#9670;&#160;</a></span>kind</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#ae3b4aaf2c62b324301af48441ecf07bc">element::kind</a> : <a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>元素类型枚举 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bcaa2e4822a98337283e39f7b60acf85ec9" name="ae3b4aaf2c62b324301af48441ecf07bcaa2e4822a98337283e39f7b60acf85ec9"></a>empty&#160;</td><td class="fielddoc"><p>空元素 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bcafad9b4ea6fda50ab90f21ab8d4b6b70c" name="ae3b4aaf2c62b324301af48441ecf07bcafad9b4ea6fda50ab90f21ab8d4b6b70c"></a>vbox&#160;</td><td class="fielddoc"><p>垂直布局容器 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bca3d85a8c42a57d5fc2496061270e2352d" name="ae3b4aaf2c62b324301af48441ecf07bca3d85a8c42a57d5fc2496061270e2352d"></a>hbox&#160;</td><td class="fielddoc"><p>水平布局容器 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bca0c137be244ebcbb621ab70cf2990ac15" name="ae3b4aaf2c62b324301af48441ecf07bca0c137be244ebcbb621ab70cf2990ac15"></a>zstack&#160;</td><td class="fielddoc"><p>层叠容器 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bca1cb251ec0d568de6a929b520c4aed8d1" name="ae3b4aaf2c62b324301af48441ecf07bca1cb251ec0d568de6a929b520c4aed8d1"></a>text&#160;</td><td class="fielddoc"><p>文本节点 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bcadddd37dfc736f0674611c500f7f82bbd" name="ae3b4aaf2c62b324301af48441ecf07bcadddd37dfc736f0674611c500f7f82bbd"></a>spacer&#160;</td><td class="fielddoc"><p>弹性占位 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bcaa0f0bc95016c862498bbad29d1f4d9d4" name="ae3b4aaf2c62b324301af48441ecf07bcaa0f0bc95016c862498bbad29d1f4d9d4"></a>separator&#160;</td><td class="fielddoc"><p>分割线 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bcace50a09343724eb82df11390e2c1de18" name="ae3b4aaf2c62b324301af48441ecf07bcace50a09343724eb82df11390e2c1de18"></a>button&#160;</td><td class="fielddoc"><p>按钮 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bcae1ba83437c55caa1b29b1d3228f2591a" name="ae3b4aaf2c62b324301af48441ecf07bcae1ba83437c55caa1b29b1d3228f2591a"></a>text_input&#160;</td><td class="fielddoc"><p>文本输入框 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bca9fced129522f128b2445a41fb0b6ef9f" name="ae3b4aaf2c62b324301af48441ecf07bca9fced129522f128b2445a41fb0b6ef9f"></a>checkbox&#160;</td><td class="fielddoc"><p>复选框 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bcacbe37624b189158daf38db177cd53324" name="ae3b4aaf2c62b324301af48441ecf07bcacbe37624b189158daf38db177cd53324"></a>scroll_view&#160;</td><td class="fielddoc"><p>滚动区域 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bcafcc790c72a86190de1b549d0ddc6f55c" name="ae3b4aaf2c62b324301af48441ecf07bcafcc790c72a86190de1b549d0ddc6f55c"></a>canvas&#160;</td><td class="fielddoc"><p>自定义绘制 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bcadf491a4de50739fa9cffdbd4e3f4b4bb" name="ae3b4aaf2c62b324301af48441ecf07bcadf491a4de50739fa9cffdbd4e3f4b4bb"></a>when&#160;</td><td class="fielddoc"><p>条件渲染 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bca933dd8674c563081260867dfa95b5e74" name="ae3b4aaf2c62b324301af48441ecf07bca933dd8674c563081260867dfa95b5e74"></a>each&#160;</td><td class="fielddoc"><p>列表渲染 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bca7f3d565c67f89f27a31d03d795b41530" name="ae3b4aaf2c62b324301af48441ecf07bca7f3d565c67f89f27a31d03d795b41530"></a>flexbox&#160;</td><td class="fielddoc"><p>CSS-flexbox 弹性容器 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae3b4aaf2c62b324301af48441ecf07bca695c8ad88359bae9ccfa9053c2f122cb" name="ae3b4aaf2c62b324301af48441ecf07bca695c8ad88359bae9ccfa9053c2f122cb"></a>gridbox&#160;</td><td class="fielddoc"><p>网格布局容器 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="element_8hpp_source.html">element.hpp</a> 第 <a class="el" href="element_8hpp_source.html#l00041">41</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="aaff7db365ec170faf3248634d62c9a66" name="aaff7db365ec170faf3248634d62c9a66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaff7db365ec170faf3248634d62c9a66">&#9670;&#160;</a></span>each()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classelement.html">element</a> element::each </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classvector.html">vector</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>items</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfunction.html">function</a>&lt; <a class="el" href="classelement.html">element</a>(const T &amp;, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>)&gt;</td>          <td class="paramname"><span class="paramname"><em>render</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>列表渲染 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>列表元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">items</td><td>数据列表 </td></tr>
+    <tr><td class="paramname">render</td><td>渲染回调，接收 (item引用, index) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>Each 元素 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>列表元素应通过 withKey() 分配唯一 key。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="element_8hpp_source.html">element.hpp</a> 第 <a class="el" href="element_8hpp_source.html#l00168">168</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="element_8hpp_source.html#l00055">each</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00666">vector&lt; T, Alloc &gt;::size()</a>.</p>
+
+</div>
+</div>
+<a id="a0f0254539f3959c2d95acc685629aa7f" name="a0f0254539f3959c2d95acc685629aa7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f0254539f3959c2d95acc685629aa7f">&#9670;&#160;</a></span>flexbox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classelement.html">element</a> element::flexbox </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="classelement.html">element</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>children</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structbox__props.html">box_props</a></td>          <td class="paramname"><span class="paramname"><em>config</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>CSS-flexbox 弹性容器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">children</td><td>子元素列表 </td></tr>
+    <tr><td class="paramname">config</td><td>布局配置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>FlexBox 元素 </dd></dl>
+
+</div>
+</div>
+<a id="ad0b4442758337f3a4c44773003526303" name="ad0b4442758337f3a4c44773003526303"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0b4442758337f3a4c44773003526303">&#9670;&#160;</a></span>gridbox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classelement.html">element</a> element::gridbox </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="classelement.html">element</a> &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em>grid</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>网格布局容器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">grid</td><td>二维子元素网格 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>GridBox 元素 </dd></dl>
+
+</div>
+</div>
+<a id="ada1fc535f61ef18d861468991a4f5c5f" name="ada1fc535f61ef18d861468991a4f5c5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada1fc535f61ef18d861468991a4f5c5f">&#9670;&#160;</a></span>when()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classelement.html">element</a> element::when </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>cond</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfunction.html">function</a>&lt; <a class="el" href="classelement.html">element</a>()&gt;</td>          <td class="paramname"><span class="paramname"><em>then</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfunction.html">function</a>&lt; <a class="el" href="classelement.html">element</a>()&gt;</td>          <td class="paramname"><span class="paramname"><em>otherwise</em></span><span class="paramdefsep"> = </span><span class="paramdefval">[]()&#160;{&#160;return&#160;element::empty();}</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>条件渲染 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cond</td><td>条件 </td></tr>
+    <tr><td class="paramname">then</td><td>条件为真时的渲染函数 </td></tr>
+    <tr><td class="paramname">otherwise</td><td>条件为假时的渲染函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>When 元素 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="element_8hpp_source.html#l00042">empty</a>.</p>
+
+</div>
+</div>
+<a id="a264d8ba88bfdaeab07f717750bfc796a" name="a264d8ba88bfdaeab07f717750bfc796a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a264d8ba88bfdaeab07f717750bfc796a">&#9670;&#160;</a></span>with_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classelement.html">element</a> &amp; element::with_key </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>k</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>分配列表 key，帮助 Reconciler 追踪元素身份 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">k</td><td>唯一标识 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+</div>
+</div>
+<a id="ac51f0415ffa363f443e9edba266172d9" name="ac51f0415ffa363f443e9edba266172d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac51f0415ffa363f443e9edba266172d9">&#9670;&#160;</a></span>with_style()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classelement.html">element</a> &amp; element::with_style </td>
+          <td>(</td>
+          <td class="paramtype">const tui::style &amp;</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>合并样式 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>要合并的样式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="element_8hpp_source.html">element.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classelement.html">element</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

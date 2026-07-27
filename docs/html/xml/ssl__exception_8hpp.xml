@@ -3,6 +3,7 @@
   <compounddef id="ssl__exception_8hpp" kind="file" language="C++">
     <compoundname>ssl_exception.hpp</compoundname>
     <includes refid="error__code_8hpp" local="yes">NeForce/core/exception/error_code.hpp</includes>
+    <includedby refid="ssl__context_8hpp" local="yes">ssl_context.hpp</includedby>
     <includedby refid="ssl__socket_8hpp" local="yes">ssl_socket.hpp</includedby>
     <incdepgraph>
       <node id="32">
@@ -385,29 +386,63 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="7">
-        <label>http_client.hpp</label>
-        <link refid="http__client_8hpp"/>
+        <label>ftp_client.hpp</label>
+        <link refid="ftp__client_8hpp_source"/>
+      </node>
+      <node id="6">
+        <label>ftp_protocol.hpp</label>
+        <link refid="ftp__protocol_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="5">
+      <node id="8">
+        <label>ftp_server.hpp</label>
+        <link refid="ftp__server_8hpp_source"/>
+      </node>
+      <node id="14">
+        <label>http_client.hpp</label>
+        <link refid="http__client_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
         <label>http_server.hpp</label>
         <link refid="http__server_8hpp"/>
       </node>
-      <node id="8">
+      <node id="15">
         <label>reverse_proxy.hpp</label>
         <link refid="reverse__proxy_8hpp"/>
       </node>
-      <node id="9">
+      <node id="16">
         <label>websocket.hpp</label>
         <link refid="websocket_8hpp"/>
-        <childnode refid="5" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
+      <node id="9">
+        <label>smtp_socket.hpp</label>
+        <link refid="smtp__socket_8hpp"/>
+      </node>
       <node id="3">
+        <label>sni_manager.hpp</label>
+        <link refid="sni__manager_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
         <label>ssl_acceptor.hpp</label>
         <link refid="ssl__acceptor_8hpp"/>
-        <childnode refid="4" relation="include">
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ssl_context.hpp</label>
+        <link refid="ssl__context_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -415,27 +450,39 @@
         <link refid="ssl__exception_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
       </node>
-      <node id="2">
+      <node id="10">
         <label>ssl_socket.hpp</label>
         <link refid="ssl__socket_8hpp"/>
-        <childnode refid="3" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>ssl_stream.hpp</label>
+        <link refid="ssl__stream_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-      </node>
-      <node id="6">
-        <label>tcp_client.hpp</label>
-        <link refid="tcp__client_8hpp"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="4">
+      <node id="13">
+        <label>tcp_client.hpp</label>
+        <link refid="tcp__client_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
         <label>tcp_server.hpp</label>
         <link refid="tcp__server_8hpp"/>
-        <childnode refid="5" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

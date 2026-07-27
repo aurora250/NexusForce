@@ -1,0 +1,37 @@
+var struct_key_event =
+[
+    [ "Key", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6", [
+      [ "Unknown", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a88183b946cc5f0e8c96b2e66e1c74a7e", null ],
+      [ "Up", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a258f49887ef8d14ac268c92b02503aaa", null ],
+      [ "Down", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a08a38277b0309070706f6652eeae9a53", null ],
+      [ "Left", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a945d5e233cf7d6240f6b783b36a374ff", null ],
+      [ "Right", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a92b09c7c48c520c3c55e497875da437c", null ],
+      [ "Home", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a8cf04a9734132302f96da8e113e80ce5", null ],
+      [ "End", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a87557f11575c0ad78e4e28abedc13b6e", null ],
+      [ "PageUp", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a9b869c510c75c5827ac82e49d4340927", null ],
+      [ "PageDown", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6aee3677bcca83ece9384b01e43952bf33", null ],
+      [ "Insert", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6aa458be0f08b7e4ff3c0f633c100176c0", null ],
+      [ "Delete", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6af2a6c498fb90ee345d997f888fce3b18", null ],
+      [ "Enter", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6af1851d5600eae616ee802a31ac74701b", null ],
+      [ "Tab", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a5c6ba25104401c9ee0650230fc6ba413", null ],
+      [ "Escape", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a013ec032d3460d4be4431c6ab1f8f224", null ],
+      [ "Backspace", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6acd7d13ceea728b08555f7c818cfb13ef", null ],
+      [ "F1", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6ae1dffc8709f31a4987c8a88334107e89", null ],
+      [ "F2", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6afe5c3684dce76cdd9f7f42430868aa74", null ],
+      [ "F3", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a4b6bf4b531770872d4328ce69bef5627", null ],
+      [ "F4", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6ae7e0e72401a9f2718ed0f39f2861d702", null ],
+      [ "F5", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a37f438df6a6d5ba4c17ef8ca58562f00", null ],
+      [ "F6", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a1faf42f2823f184eb2c9f0dffe5d73f2", null ],
+      [ "F7", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a47489eb597b7db34caa24b1fc78fc839", null ],
+      [ "F8", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a4787509ad9f9d747a81a30e9dde3d4a7", null ],
+      [ "F9", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a892a245e287c163080b23db737d3c4c9", null ],
+      [ "F10", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6ab213ce22ca6ad4eda8db82966b9b6e5a", null ],
+      [ "F11", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a643b0662422d1d0dffa3fca2e2bf28a8", null ],
+      [ "F12", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6ae902674982fc99aa343cdd94da7476c3", null ],
+      [ "Printable", "struct_key_event.html#a404b4d08ed7bcbae5b99c5da4950c4b6a5a95cfed068976221a07f312018cd741", null ]
+    ] ],
+    [ "isPrintable", "struct_key_event.html#a79626f42bf1953b0b0edd530c4aacf82", null ],
+    [ "ch", "struct_key_event.html#a234d644b5528993ab9b27c0e0e7659a7", null ],
+    [ "key", "struct_key_event.html#a9d7325c14dc059f654f43d72723dfe0d", null ],
+    [ "mods", "struct_key_event.html#a401d041fb2d77de84cac65935d223d1d", null ]
+];

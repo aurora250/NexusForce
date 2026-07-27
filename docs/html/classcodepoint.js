@@ -1,13 +1,15 @@
 var classcodepoint =
 [
-    [ "codepoint", "classcodepoint.html#a930add221646e2ffc4cfc77b55512587", null ],
-    [ "codepoint", "classcodepoint.html#a8e4935210659a78ac5df4e07e6274c2e", null ],
+    [ "codepoint", "classcodepoint.html#ac1d376afed57c718685d023345867c65", null ],
+    [ "codepoint", "classcodepoint.html#adf7d8944816347ba3aefcca692ae21e8", null ],
+    [ "codepoint", "classcodepoint.html#abf3fd638a4436db6800bafe9f543b16d", null ],
     [ "codepoint", "classcodepoint.html#abf29fb9b124b0a0f54afbb3b7b74844d", null ],
     [ "append_to", "classcodepoint.html#ad5ec860f3407adf538aac80106f4a13b", null ],
     [ "append_to", "classcodepoint.html#aec04440229dbf33585649a017be1dae9", null ],
     [ "append_to", "classcodepoint.html#ae92078f825d07e7989a9350cf3251321", null ],
     [ "append_to", "classcodepoint.html#a7314fbb0bd0caf0852ff3b434d4bc6a5", null ],
     [ "append_to", "classcodepoint.html#a7d9fdbda25dae744df0fac4b49444e66", null ],
+    [ "display_width", "classcodepoint.html#abb9133971053d48bae097210f36a6315", null ],
     [ "is_ascii", "classcodepoint.html#a7876f9adc0c922f3991e081ac01716c7", null ],
     [ "is_bmp", "classcodepoint.html#ac2541988a6b948b7496d1b39628c81fd", null ],
     [ "is_replacement", "classcodepoint.html#a1cdc351eeb5a0c03f7cc2a7f4a34dfec", null ],

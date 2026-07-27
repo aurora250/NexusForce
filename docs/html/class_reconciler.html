@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: Reconciler类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('class_reconciler.html','','class_reconciler-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Reconciler类 参考<div class="ingroups"><a class="el" href="group___t_u_i.html">TUI</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>差分渲染引擎  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="reconciler_8hpp_source.html">reconciler.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a27549021e4de7ee93e096d69b54e4108" id="r_a27549021e4de7ee93e096d69b54e4108"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a27549021e4de7ee93e096d69b54e4108">Reconciler</a> (<a class="el" href="classsys__console.html">sys_console</a> &amp;<a class="el" href="group___console_i_o.html#gab80c18dffdb3640ae4a389dd9fb4929e">console</a>, <a class="el" href="classstrand.html">strand</a> &amp;s, <a class="el" href="classio__context.html">io_context</a> &amp;ctx)</td></tr>
+<tr class="memdesc:a27549021e4de7ee93e096d69b54e4108"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a2fdb90df17116c150a5a6aa00ca8a74d" id="r_a2fdb90df17116c150a5a6aa00ca8a74d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2fdb90df17116c150a5a6aa00ca8a74d">mount</a> (<a class="el" href="class_component_base.html">ComponentBase</a> *root)</td></tr>
+<tr class="memdesc:a2fdb90df17116c150a5a6aa00ca8a74d"><td class="mdescLeft">&#160;</td><td class="mdescRight">挂载根组件  <br /></td></tr>
+<tr class="memitem:a9c7b4ab1ac8820f13cc29d430c80fba9" id="r_a9c7b4ab1ac8820f13cc29d430c80fba9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9c7b4ab1ac8820f13cc29d430c80fba9">scheduleUpdate</a> (<a class="el" href="class_component_base.html">ComponentBase</a> *comp)</td></tr>
+<tr class="memdesc:a9c7b4ab1ac8820f13cc29d430c80fba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">调度组件更新  <br /></td></tr>
+<tr class="memitem:a1f325f8907632f8de18640b80fabb267" id="r_a1f325f8907632f8de18640b80fabb267"><td class="memItemLeft"><a id="a1f325f8907632f8de18640b80fabb267" name="a1f325f8907632f8de18640b80fabb267"></a>
+void&#160;</td><td class="memItemRight"><b>markDirty</b> ()</td></tr>
+<tr class="memdesc:a1f325f8907632f8de18640b80fabb267"><td class="mdescLeft">&#160;</td><td class="mdescRight">强制全量重绘 <br /></td></tr>
+<tr class="memitem:a0599361a558cbee3b3db84fc27df8306" id="r_a0599361a558cbee3b3db84fc27df8306"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a0599361a558cbee3b3db84fc27df8306">dispatchKey</a> (const <a class="el" href="struct_key_event.html">KeyEvent</a> &amp;e)</td></tr>
+<tr class="memdesc:a0599361a558cbee3b3db84fc27df8306"><td class="mdescLeft">&#160;</td><td class="mdescRight">分发键盘事件到焦点组件  <br /></td></tr>
+<tr class="memitem:ab40a5341eddec295cb131c140b6a9327" id="r_ab40a5341eddec295cb131c140b6a9327"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab40a5341eddec295cb131c140b6a9327">dispatchMouse</a> (const <a class="el" href="struct_mouse_event.html">MouseEvent</a> &amp;e)</td></tr>
+<tr class="memdesc:ab40a5341eddec295cb131c140b6a9327"><td class="mdescLeft">&#160;</td><td class="mdescRight">分发鼠标事件  <br /></td></tr>
+<tr class="memitem:a391f29f1efae0aff0734a300707b3d4b" id="r_a391f29f1efae0aff0734a300707b3d4b"><td class="memItemLeft"><a id="a391f29f1efae0aff0734a300707b3d4b" name="a391f29f1efae0aff0734a300707b3d4b"></a>
+void&#160;</td><td class="memItemRight"><b>flush</b> ()</td></tr>
+<tr class="memdesc:a391f29f1efae0aff0734a300707b3d4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">有脏标记则执行 diff + 渲染 <br /></td></tr>
+<tr class="memitem:a107037e201c47c43665c429543878ce1" id="r_a107037e201c47c43665c429543878ce1"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a107037e201c47c43665c429543878ce1">isDirty</a> () const noexcept</td></tr>
+<tr class="memdesc:a107037e201c47c43665c429543878ce1"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否有待渲染的脏标记  <br /></td></tr>
+<tr class="memitem:aec5002a254144d7c5cf34b04e2003867" id="r_aec5002a254144d7c5cf34b04e2003867"><td class="memItemLeft"><a id="aec5002a254144d7c5cf34b04e2003867" name="aec5002a254144d7c5cf34b04e2003867"></a>
+<a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="class_component_base.html">ComponentBase</a> *)&gt;&#160;</td><td class="memItemRight"><b>scheduleRenderCallback</b> ()</td></tr>
+<tr class="memdesc:aec5002a254144d7c5cf34b04e2003867"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取组件调度回调 <br /></td></tr>
+<tr class="memitem:a3b8e95496bb0b1413baaf383cb902d7f" id="r_a3b8e95496bb0b1413baaf383cb902d7f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3b8e95496bb0b1413baaf383cb902d7f">setTheme</a> (const <a class="el" href="struct_theme.html">Theme</a> &amp;theme)</td></tr>
+<tr class="memdesc:a3b8e95496bb0b1413baaf383cb902d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">应用主题  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>差分渲染引擎 </p>
+<p>调用 root_-&gt;render() 获取新元素树，与旧树 diff， 最小化 ANSI 写入操作，仅更新变化区域。 </p>
+
+<p class="definition">在文件 <a class="el" href="reconciler_8hpp_source.html">reconciler.hpp</a> 第 <a class="el" href="reconciler_8hpp_source.html#l00030">30</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a27549021e4de7ee93e096d69b54e4108" name="a27549021e4de7ee93e096d69b54e4108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27549021e4de7ee93e096d69b54e4108">&#9670;&#160;</a></span>Reconciler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Reconciler::Reconciler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classsys__console.html">sys_console</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>console</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classstrand.html">strand</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classio__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">console</td><td>控制台渲染后端 </td></tr>
+    <tr><td class="paramname">s</td><td>串行执行器 </td></tr>
+    <tr><td class="paramname">ctx</td><td>事件循环上下文 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="group___console_i_o.html#gab80c18dffdb3640ae4a389dd9fb4929e">console</a> , 以及 <a class="el" href="#a27549021e4de7ee93e096d69b54e4108">Reconciler()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a27549021e4de7ee93e096d69b54e4108">Reconciler()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a0599361a558cbee3b3db84fc27df8306" name="a0599361a558cbee3b3db84fc27df8306"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0599361a558cbee3b3db84fc27df8306">&#9670;&#160;</a></span>dispatchKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Reconciler::dispatchKey </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_key_event.html">KeyEvent</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>e</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>分发键盘事件到焦点组件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>键盘事件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true 表示事件已被处理 </dd></dl>
+
+</div>
+</div>
+<a id="ab40a5341eddec295cb131c140b6a9327" name="ab40a5341eddec295cb131c140b6a9327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab40a5341eddec295cb131c140b6a9327">&#9670;&#160;</a></span>dispatchMouse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Reconciler::dispatchMouse </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_mouse_event.html">MouseEvent</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>e</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>分发鼠标事件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>鼠标事件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true 表示事件已被处理 </dd></dl>
+
+</div>
+</div>
+<a id="a107037e201c47c43665c429543878ce1" name="a107037e201c47c43665c429543878ce1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a107037e201c47c43665c429543878ce1">&#9670;&#160;</a></span>isDirty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Reconciler::isDirty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>是否有待渲染的脏标记 </p>
+<dl class="section return"><dt>返回</dt><dd>是否有脏标记 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="reconciler_8hpp_source.html">reconciler.hpp</a> 第 <a class="el" href="reconciler_8hpp_source.html#l00089">89</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2fdb90df17116c150a5a6aa00ca8a74d" name="a2fdb90df17116c150a5a6aa00ca8a74d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fdb90df17116c150a5a6aa00ca8a74d">&#9670;&#160;</a></span>mount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Reconciler::mount </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_component_base.html">ComponentBase</a> *</td>          <td class="paramname"><span class="paramname"><em>root</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>挂载根组件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">root</td><td>根组件指针</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>注入 scheduleRender 回调，调用 setup()，标记全量渲染。 </p>
+
+</div>
+</div>
+<a id="a9c7b4ab1ac8820f13cc29d430c80fba9" name="a9c7b4ab1ac8820f13cc29d430c80fba9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c7b4ab1ac8820f13cc29d430c80fba9">&#9670;&#160;</a></span>scheduleUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Reconciler::scheduleUpdate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_component_base.html">ComponentBase</a> *</td>          <td class="paramname"><span class="paramname"><em>comp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>调度组件更新 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">comp</td><td>需要重渲染的组件 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3b8e95496bb0b1413baaf383cb902d7f" name="a3b8e95496bb0b1413baaf383cb902d7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b8e95496bb0b1413baaf383cb902d7f">&#9670;&#160;</a></span>setTheme()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Reconciler::setTheme </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_theme.html">Theme</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>theme</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>应用主题 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">theme</td><td>主题 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="reconciler_8hpp_source.html">reconciler.hpp</a> 第 <a class="el" href="reconciler_8hpp_source.html#l00100">100</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="reconciler_8hpp_source.html">reconciler.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="class_reconciler.html">Reconciler</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

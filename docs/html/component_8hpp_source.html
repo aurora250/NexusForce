@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: component.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('component_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">component.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="component_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_TUI_COMPONENT_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_TUI_COMPONENT_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__map_8hpp.html">NeForce/core/container/unordered_map.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="unique__ptr_8hpp.html">NeForce/core/memory/unique_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="element_8hpp.html">NeForce/tui/dom/element.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="state_8hpp.html">NeForce/tui/dom/state.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="events_8hpp.html">NeForce/tui/events.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>NEFORCE_BEGIN_TUI__</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structempty__props.html">   31</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structempty__props.html">empty_props</a> {};</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classcomponent__base.html">   36</a></span><span class="keyword">class </span><a class="code hl_class" href="classcomponent__base.html">component_base</a> {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classcomponent__base.html">~component_base</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a0f1d98a9ad1c325b085ff1e5cc39a4e6">   49</a></span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classelement.html">element</a> <a class="code hl_function" href="classcomponent__base.html#a0f1d98a9ad1c325b085ff1e5cc39a4e6">render</a>() = 0;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a00c288170716843e7cbf3b5690b74066">   56</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcomponent__base.html#a00c288170716843e7cbf3b5690b74066">on_key</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structkey__event.html">key_event</a>&amp; e) {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        ignore = e;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span></div>
+<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classcomponent__base.html#acb6549b214ae4c2bd980ecfd0f6d68c2">   66</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcomponent__base.html#acb6549b214ae4c2bd980ecfd0f6d68c2">on_mouse</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structmouse__event.html">mouse_event</a>&amp; e) {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        ignore = e;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
+</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classcomponent__base.html#ab2a4fd9f25a5dad4e792e2a6d9e95612">   76</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#ab2a4fd9f25a5dad4e792e2a6d9e95612">on_mouse_leave</a>() {}</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classcomponent__base.html#acd6c4af519a8239ffa518a4df07ce11d">   85</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#acd6c4af519a8239ffa518a4df07ce11d">set_pass_through</a>(<span class="keywordtype">bool</span> v) <span class="keyword">noexcept</span> { <a class="code hl_variable" href="classcomponent__base.html#a106cc49fc9d8fc949318bb0dcfbdd94c">pass_through_</a> = v; }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classcomponent__base.html#ab3c6d3cc591f9336052a7c2c869fa2b7">   91</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classcomponent__base.html#ab3c6d3cc591f9336052a7c2c869fa2b7">pass_through</a>() const noexcept { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcomponent__base.html#a106cc49fc9d8fc949318bb0dcfbdd94c">pass_through_</a>; }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a555684eb928f1b4457e86707c952340c">   97</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classcomponent__base.html#a555684eb928f1b4457e86707c952340c">has_focus</a>() const noexcept { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcomponent__base.html#af411e78d447212477ff9a33bccf9dd3e">has_focus_</a>; }</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classcomponent__base.html#aa84c4b4a99055cc660e347c0e6597909">  103</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#aa84c4b4a99055cc660e347c0e6597909">set_has_focus</a>(<span class="keywordtype">bool</span> v) <span class="keyword">noexcept</span> { <a class="code hl_variable" href="classcomponent__base.html#af411e78d447212477ff9a33bccf9dd3e">has_focus_</a> = v; }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a87f67c7eaba25f3c0a43ae24e16059fa">  109</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#a87f67c7eaba25f3c0a43ae24e16059fa">on_animation</a>(<a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> delta) { ignore = delta; }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a9655dfc0c17dedb5cb7ea552df1b468d">  116</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#a9655dfc0c17dedb5cb7ea552df1b468d">setup</a>() {}</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classcomponent__base.html#afbdc2cbd4a3d5596e4892d975daa7a8a">  123</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#afbdc2cbd4a3d5596e4892d975daa7a8a">cleanup</a>() noexcept {}</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classcomponent__base.html#ab3397de0e56c2f0ddf3c54bab9c74eed">  132</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcomponent__base.html#ab3397de0e56c2f0ddf3c54bab9c74eed">should_update</a>() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a05d4ea71f561b9bb9ac27a8ef4b2636a">  138</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classcomponent__base.html">component_base</a>* <a class="code hl_function" href="classcomponent__base.html#a05d4ea71f561b9bb9ac27a8ef4b2636a">parent</a>() const noexcept { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a>; }</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a1b3605dc876fa0d9915ac51562dbd7b0">  144</a></span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="classcomponent__base.html#a1b3605dc876fa0d9915ac51562dbd7b0">child_count</a>() const noexcept { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">children_</a>.size(); }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a153c76f2bf589f144c9328581185b30f">  151</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classcomponent__base.html">component_base</a>* <a class="code hl_function" href="classcomponent__base.html#a153c76f2bf589f144c9328581185b30f">child_at</a>(<span class="keywordtype">size_t</span> i) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">children_</a>[i].get(); }</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span></div>
+<div class="foldopen" id="foldopen00157" data-start="{" data-end="}">
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a60a958ec661e4a397ef584146fdf58c2">  157</a></span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> <a class="code hl_function" href="classcomponent__base.html#a60a958ec661e4a397ef584146fdf58c2">index</a>() const noexcept {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a> == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        }</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a>-&gt;children_.size(); ++i) {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a>-&gt;children_[i].get() == <span class="keyword">this</span>) {</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(i);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        }</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    }</div>
+</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span></div>
+<div class="foldopen" id="foldopen00175" data-start="{" data-end="}">
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a6a9c513b610f4be12181b6b1ce2d610d">  175</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#a6a9c513b610f4be12181b6b1ce2d610d">add_child</a>(<a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;component_base&gt;</a> child) {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        child-&gt;parent_ = <span class="keyword">this</span>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        child-&gt;strand_ = <a class="code hl_variable" href="classcomponent__base.html#a869c80ee7ba78d370c447eeabdc4aee8">strand_</a>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        child-&gt;ctx_ = <a class="code hl_variable" href="classcomponent__base.html#a262ae55cca348a979c3de5124d023b84">ctx_</a>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        child-&gt;schedule_render_cb_ = schedule_render_cb_;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <span class="keyword">auto</span>* raw = child.<a class="code hl_function" href="classunique__ptr.html#a4b44f707540323eb24319b92c242d37a">get</a>();</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <a class="code hl_variable" href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">children_</a>.push_back(<a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(child));</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        raw-&gt;setup();</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    }</div>
+</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span></div>
+<div class="foldopen" id="foldopen00190" data-start="{" data-end="}">
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a2519cb1438917458b809302bb1b07726">  190</a></span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;component_base&gt;</a> <a class="code hl_function" href="classcomponent__base.html#a2519cb1438917458b809302bb1b07726">remove_child</a>(<a class="code hl_class" href="classcomponent__base.html">component_base</a>* child) {</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        child-&gt;<a class="code hl_function" href="classcomponent__base.html#afbdc2cbd4a3d5596e4892d975daa7a8a">cleanup</a>();</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        child-&gt;<a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">children_</a>.begin(); it != <a class="code hl_variable" href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">children_</a>.end(); ++it) {</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            <span class="keywordflow">if</span> (it-&gt;get() == child) {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                <span class="keyword">auto</span> owned = <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(*it);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                <a class="code hl_variable" href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">children_</a>.erase(it);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>                <span class="keywordflow">return</span> owned;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    }</div>
+</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span></div>
+<div class="foldopen" id="foldopen00207" data-start="{" data-end="}">
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno"><a class="line" href="classcomponent__base.html#aa86a55df3800279a87339a4a4e4fd47b">  207</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;component_base&gt;</a> <a class="code hl_function" href="classcomponent__base.html#aa86a55df3800279a87339a4a4e4fd47b">detach</a>() {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a> != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a>-&gt;remove_child(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        }</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    }</div>
+</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span></div>
+<div class="foldopen" id="foldopen00217" data-start="{" data-end="}">
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="classcomponent__base.html#ac6edc771dfac13ccf9a720d592419750">  217</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#ac6edc771dfac13ccf9a720d592419750">detach_all_children</a>() {</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keywordflow">while</span> (!<a class="code hl_variable" href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">children_</a>.empty()) {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            <a class="code hl_function" href="classcomponent__base.html#a2519cb1438917458b809302bb1b07726">remove_child</a>(<a class="code hl_variable" href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">children_</a>.back().get());</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        }</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    }</div>
+</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a813932efdd23d3f0b4667dd2106d7f68">  227</a></span>    NEFORCE_NODISCARD <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcomponent__base.html#a813932efdd23d3f0b4667dd2106d7f68">focusable</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a195ee0177f21046fef06bcae92303453">  233</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classcomponent__base.html">component_base</a>* <a class="code hl_function" href="classcomponent__base.html#a195ee0177f21046fef06bcae92303453">active_child</a>() noexcept { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcomponent__base.html#aaed311b7f5eb65add4663f503ff1f1d9">active_child_</a>; }</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno"><a class="line" href="classcomponent__base.html#ac772f2b3d153fd6a6679b7c77d22575d">  239</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classcomponent__base.html">component_base</a>* <a class="code hl_function" href="classcomponent__base.html#ac772f2b3d153fd6a6679b7c77d22575d">active_child</a>() const noexcept { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcomponent__base.html#aaed311b7f5eb65add4663f503ff1f1d9">active_child_</a>; }</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a094410db57386b7a90cd9221e014a574">  245</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#a094410db57386b7a90cd9221e014a574">set_active_child</a>(<a class="code hl_class" href="classcomponent__base.html">component_base</a>* child) <span class="keyword">noexcept</span> { <a class="code hl_variable" href="classcomponent__base.html#aaed311b7f5eb65add4663f503ff1f1d9">active_child_</a> = child; }</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a7a7bdc7bad126172b463155647e0e22a">  251</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classcomponent__base.html#a7a7bdc7bad126172b463155647e0e22a">active</a>() const noexcept { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a> == <span class="keyword">nullptr</span> || <a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a>-&gt;active_child() == <span class="keyword">this</span>; }</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span></div>
+<div class="foldopen" id="foldopen00257" data-start="{" data-end="}">
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="classcomponent__base.html#ae6eb5b681d73b91d0051e3d4114cfdfe">  257</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classcomponent__base.html#ae6eb5b681d73b91d0051e3d4114cfdfe">focused</a>() const noexcept {</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a> == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        }</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        <span class="keywordflow">if</span> (!<a class="code hl_function" href="classcomponent__base.html#a7a7bdc7bad126172b463155647e0e22a">active</a>()) {</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        }</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a>-&gt;focused();</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    }</div>
+</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span></div>
+<div class="foldopen" id="foldopen00270" data-start="{" data-end="}">
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a1d0d9707b7b7158151bbe2083567ff92">  270</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#a1d0d9707b7b7158151bbe2083567ff92">take_focus</a>() {</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        <span class="keyword">auto</span>* focus = <span class="keyword">this</span>;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>* p = <a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a>; p != <span class="keyword">nullptr</span>; p = p-&gt;parent_) {</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            p-&gt;set_active_child(focus);</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            focus = p;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        }</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    }</div>
+</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span></div>
+<div class="foldopen" id="foldopen00283" data-start="{" data-end="}">
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a04e501f80aa495c4c10dcdd386f01725">  283</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#a04e501f80aa495c4c10dcdd386f01725">schedule_render</a>() {</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <span class="keywordflow">if</span> (schedule_render_cb_) {</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            schedule_render_cb_(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        }</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    }</div>
+</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span></div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ctx&gt;</div>
+<div class="foldopen" id="foldopen00295" data-start="{" data-end="}">
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a1ff6fa5742995ffec8f10320b88d5659">  295</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent__base.html#a1ff6fa5742995ffec8f10320b88d5659">provide_context</a>(Ctx value) {</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        contexts_[<span class="keyword">typeid</span>(Ctx).hash_code()] = _NEFORCE <a class="code hl_function" href="group___shared_pointer.html#gab47fa86d2917e14f57f68dfa9e83495e">make_shared&lt;Ctx&gt;</a>(_NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(value));</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    }</div>
+</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ctx&gt;</div>
+<div class="foldopen" id="foldopen00305" data-start="{" data-end="}">
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a866c4fa7c4a1ec77ce352ce9d0c76972">  305</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> Ctx&amp; <a class="code hl_function" href="classcomponent__base.html#a866c4fa7c4a1ec77ce352ce9d0c76972">context</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>* p = <span class="keyword">this</span>; p != <span class="keyword">nullptr</span>; p = p-&gt;parent_) {</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>            <span class="keyword">auto</span> it = p-&gt;contexts_.find(<span class="keyword">typeid</span>(Ctx).hash_code());</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>            <span class="keywordflow">if</span> (it != p-&gt;contexts_.end()) {</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>                <span class="keywordflow">return</span> *<span class="keyword">static_cast&lt;</span><span class="keyword">const </span>Ctx*<span class="keyword">&gt;</span>(it-&gt;second.get());</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>            }</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        }</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        NEFORCE_THROW_EXCEPTION(<a class="code hl_struct" href="structvalue__exception.html">value_exception</a>(<span class="stringliteral">&quot;Context not found in component tree&quot;</span>));</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    }</div>
+</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classreconciler.html">reconciler</a>;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classapplication.html">application</a>;</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno"><a class="line" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">  319</a></span>    <a class="code hl_class" href="classcomponent__base.html">component_base</a>* <a class="code hl_variable" href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">parent_</a> = <span class="keyword">nullptr</span>;            </div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno"><a class="line" href="classcomponent__base.html#aaed311b7f5eb65add4663f503ff1f1d9">  320</a></span>    <a class="code hl_class" href="classcomponent__base.html">component_base</a>* <a class="code hl_variable" href="classcomponent__base.html#aaed311b7f5eb65add4663f503ff1f1d9">active_child_</a> = <span class="keyword">nullptr</span>;      </div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno"><a class="line" href="classcomponent__base.html#af411e78d447212477ff9a33bccf9dd3e">  321</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classcomponent__base.html#af411e78d447212477ff9a33bccf9dd3e">has_focus_</a> = <span class="keyword">false</span>;                      </div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a106cc49fc9d8fc949318bb0dcfbdd94c">  322</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classcomponent__base.html#a106cc49fc9d8fc949318bb0dcfbdd94c">pass_through_</a> = <span class="keyword">false</span>;                   </div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a869c80ee7ba78d370c447eeabdc4aee8">  323</a></span>    <a class="code hl_class" href="classstrand.html">strand</a>* <a class="code hl_variable" href="classcomponent__base.html#a869c80ee7ba78d370c447eeabdc4aee8">strand_</a> = <span class="keyword">nullptr</span>;                    </div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a262ae55cca348a979c3de5124d023b84">  324</a></span>    <a class="code hl_class" href="classio__context.html">io_context</a>* <a class="code hl_variable" href="classcomponent__base.html#a262ae55cca348a979c3de5124d023b84">ctx_</a> = <span class="keyword">nullptr</span>;                   </div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno"><a class="line" href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">  325</a></span>    <a class="code hl_class" href="classvector.html">vector&lt;unique_ptr&lt;component_base&gt;</a>&gt; <a class="code hl_variable" href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">children_</a>; </div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> collect_focusable(<a class="code hl_class" href="classvector.html">vector&lt;component_base*&gt;</a>&amp; out) {</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classcomponent__base.html#a813932efdd23d3f0b4667dd2106d7f68">focusable</a>()) {</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>            out.<a class="code hl_function" href="classvector.html#ac8d8b05ea55e928d9a4ccde8bf9bedcf">push_back</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>        }</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; child: <a class="code hl_variable" href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">children_</a>) {</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>            child-&gt;collect_focusable(out);</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        }</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    }</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    <a class="code hl_class" href="classfunction.html">function</a>&lt;void(<a class="code hl_class" href="classcomponent__base.html">component_base</a>*)&gt; schedule_render_cb_; </div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;size_t, shared_ptr&lt;void&gt;</a>&gt; contexts_;   </div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>};</div>
+</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span></div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> P = empty_props&gt;</div>
+<div class="foldopen" id="foldopen00348" data-start="{" data-end="};">
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno"><a class="line" href="classcomponent.html">  348</a></span><span class="keyword">class </span>component : <span class="keyword">public</span> <a class="code hl_class" href="classcomponent__base.html">component_base</a> {</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    <span class="keyword">using </span>props_type = P;</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span> </div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    component() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    ~component() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    component(<span class="keyword">const</span> component&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    component&amp; operator=(<span class="keyword">const</span> component&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    component(component&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    component&amp; operator=(component&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span> </div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno"><a class="line" href="classcomponent.html#a7e3457b57a085cb1f633c56962fefdf4">  364</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> props_type&amp; <a class="code hl_function" href="classcomponent.html#a7e3457b57a085cb1f633c56962fefdf4">props</a>() const noexcept { <span class="keywordflow">return</span> props_; }</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00377" data-start="{" data-end="}">
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno"><a class="line" href="classcomponent.html#a4534e70ac9076d04afc2f9d01f994203">  377</a></span>    <a class="code hl_class" href="classstate.html">state&lt;T&gt;</a>&amp; <a class="code hl_function" href="classcomponent.html#a4534e70ac9076d04afc2f9d01f994203">create_state</a>(T initial) {</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        <span class="keyword">auto</span> s = _NEFORCE <a class="code hl_function" href="group___shared_pointer.html#gab47fa86d2917e14f57f68dfa9e83495e">make_shared&lt;state&lt;T&gt;</a>&gt;(<span class="keyword">this</span>, *<a class="code hl_variable" href="classcomponent__base.html#a869c80ee7ba78d370c447eeabdc4aee8">strand_</a>, _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(initial));</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        states_.push_back(s);</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        <span class="keywordflow">return</span> *s;</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    }</div>
+</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span></div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno"><a class="line" href="classcomponent.html#a49013b0b3a1c81d97eeaff3bf5882fc2">  387</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcomponent.html#a49013b0b3a1c81d97eeaff3bf5882fc2">set_props</a>(props_type p) { props_ = _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(p); }</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classreconciler.html">reconciler</a>;</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classapplication.html">application</a>;</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    props_type props_;</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    <a class="code hl_class" href="classvector.html">vector&lt;shared_ptr&lt;void&gt;</a>&gt; states_; </div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>};</div>
+</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span></div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span><span class="keywordtype">void</span> state&lt;T&gt;::schedule_render() {</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>    <span class="keywordflow">if</span> (owner_ != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        owner_-&gt;schedule_render();</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>    }</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>}</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span> <span class="comment">// TUI</span></div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span> </div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>NEFORCE_END_TUI__</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_TUI_COMPONENT_HPP__</span></div>
+<div class="ttc" id="aclassapplication_html"><div class="ttname"><a href="classapplication.html">application</a></div><div class="ttdoc">TUI应用程序入口</div><div class="ttdef"><b>定义</b> <a href="app_8hpp_source.html#l00043">app.hpp:43</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html"><div class="ttname"><a href="classcomponent__base.html">component_base</a></div><div class="ttdoc">组件基类</div><div class="ttdef"><b>定义</b> <a href="#l00036">component.hpp:36</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a00c288170716843e7cbf3b5690b74066"><div class="ttname"><a href="classcomponent__base.html#a00c288170716843e7cbf3b5690b74066">component_base::on_key</a></div><div class="ttdeci">virtual bool on_key(const key_event &amp;e)</div><div class="ttdoc">键盘事件处理</div><div class="ttdef"><b>定义</b> <a href="#l00056">component.hpp:56</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a04e501f80aa495c4c10dcdd386f01725"><div class="ttname"><a href="classcomponent__base.html#a04e501f80aa495c4c10dcdd386f01725">component_base::schedule_render</a></div><div class="ttdeci">void schedule_render()</div><div class="ttdoc">调度重渲染</div><div class="ttdef"><b>定义</b> <a href="#l00283">component.hpp:283</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a05d4ea71f561b9bb9ac27a8ef4b2636a"><div class="ttname"><a href="classcomponent__base.html#a05d4ea71f561b9bb9ac27a8ef4b2636a">component_base::parent</a></div><div class="ttdeci">component_base * parent() const noexcept</div><div class="ttdoc">获取父组件</div><div class="ttdef"><b>定义</b> <a href="#l00138">component.hpp:138</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a094410db57386b7a90cd9221e014a574"><div class="ttname"><a href="classcomponent__base.html#a094410db57386b7a90cd9221e014a574">component_base::set_active_child</a></div><div class="ttdeci">void set_active_child(component_base *child) noexcept</div><div class="ttdoc">设置激活的子组件</div><div class="ttdef"><b>定义</b> <a href="#l00245">component.hpp:245</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a0f1d98a9ad1c325b085ff1e5cc39a4e6"><div class="ttname"><a href="classcomponent__base.html#a0f1d98a9ad1c325b085ff1e5cc39a4e6">component_base::render</a></div><div class="ttdeci">virtual element render()=0</div><div class="ttdoc">声明式渲染</div></div>
+<div class="ttc" id="aclasscomponent__base_html_a106cc49fc9d8fc949318bb0dcfbdd94c"><div class="ttname"><a href="classcomponent__base.html#a106cc49fc9d8fc949318bb0dcfbdd94c">component_base::pass_through_</a></div><div class="ttdeci">bool pass_through_</div><div class="ttdoc">事件穿透标志</div><div class="ttdef"><b>定义</b> <a href="#l00322">component.hpp:322</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a153c76f2bf589f144c9328581185b30f"><div class="ttname"><a href="classcomponent__base.html#a153c76f2bf589f144c9328581185b30f">component_base::child_at</a></div><div class="ttdeci">component_base * child_at(size_t i) const noexcept</div><div class="ttdoc">获取指定索引的子组件</div><div class="ttdef"><b>定义</b> <a href="#l00151">component.hpp:151</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a195ee0177f21046fef06bcae92303453"><div class="ttname"><a href="classcomponent__base.html#a195ee0177f21046fef06bcae92303453">component_base::active_child</a></div><div class="ttdeci">component_base * active_child() noexcept</div><div class="ttdoc">获取当前激活的子组件</div><div class="ttdef"><b>定义</b> <a href="#l00233">component.hpp:233</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a1b3605dc876fa0d9915ac51562dbd7b0"><div class="ttname"><a href="classcomponent__base.html#a1b3605dc876fa0d9915ac51562dbd7b0">component_base::child_count</a></div><div class="ttdeci">size_t child_count() const noexcept</div><div class="ttdoc">获取子组件数量</div><div class="ttdef"><b>定义</b> <a href="#l00144">component.hpp:144</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a1d0d9707b7b7158151bbe2083567ff92"><div class="ttname"><a href="classcomponent__base.html#a1d0d9707b7b7158151bbe2083567ff92">component_base::take_focus</a></div><div class="ttdeci">virtual void take_focus()</div><div class="ttdoc">请求焦点</div><div class="ttdef"><b>定义</b> <a href="#l00270">component.hpp:270</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a1ff6fa5742995ffec8f10320b88d5659"><div class="ttname"><a href="classcomponent__base.html#a1ff6fa5742995ffec8f10320b88d5659">component_base::provide_context</a></div><div class="ttdeci">void provide_context(Ctx value)</div><div class="ttdoc">设置上下文值</div><div class="ttdef"><b>定义</b> <a href="#l00295">component.hpp:295</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a2519cb1438917458b809302bb1b07726"><div class="ttname"><a href="classcomponent__base.html#a2519cb1438917458b809302bb1b07726">component_base::remove_child</a></div><div class="ttdeci">unique_ptr&lt; component_base &gt; remove_child(component_base *child)</div><div class="ttdoc">移除子组件</div><div class="ttdef"><b>定义</b> <a href="#l00190">component.hpp:190</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a262ae55cca348a979c3de5124d023b84"><div class="ttname"><a href="classcomponent__base.html#a262ae55cca348a979c3de5124d023b84">component_base::ctx_</a></div><div class="ttdeci">io_context * ctx_</div><div class="ttdoc">事件循环上下文</div><div class="ttdef"><b>定义</b> <a href="#l00324">component.hpp:324</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a555684eb928f1b4457e86707c952340c"><div class="ttname"><a href="classcomponent__base.html#a555684eb928f1b4457e86707c952340c">component_base::has_focus</a></div><div class="ttdeci">bool has_focus() const noexcept</div><div class="ttdoc">是否持有 Reconciler 键盘焦点</div><div class="ttdef"><b>定义</b> <a href="#l00097">component.hpp:97</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a60a958ec661e4a397ef584146fdf58c2"><div class="ttname"><a href="classcomponent__base.html#a60a958ec661e4a397ef584146fdf58c2">component_base::index</a></div><div class="ttdeci">int index() const noexcept</div><div class="ttdoc">获取自身在父组件中的索引</div><div class="ttdef"><b>定义</b> <a href="#l00157">component.hpp:157</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a6a9c513b610f4be12181b6b1ce2d610d"><div class="ttname"><a href="classcomponent__base.html#a6a9c513b610f4be12181b6b1ce2d610d">component_base::add_child</a></div><div class="ttdeci">void add_child(unique_ptr&lt; component_base &gt; child)</div><div class="ttdoc">注册子组件</div><div class="ttdef"><b>定义</b> <a href="#l00175">component.hpp:175</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a7a7bdc7bad126172b463155647e0e22a"><div class="ttname"><a href="classcomponent__base.html#a7a7bdc7bad126172b463155647e0e22a">component_base::active</a></div><div class="ttdeci">bool active() const noexcept</div><div class="ttdoc">是否处于激活状态</div><div class="ttdef"><b>定义</b> <a href="#l00251">component.hpp:251</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a813932efdd23d3f0b4667dd2106d7f68"><div class="ttname"><a href="classcomponent__base.html#a813932efdd23d3f0b4667dd2106d7f68">component_base::focusable</a></div><div class="ttdeci">virtual bool focusable() const</div><div class="ttdoc">是否可获取焦点</div><div class="ttdef"><b>定义</b> <a href="#l00227">component.hpp:227</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a8626471799671bbbdcaf87ed486b8715"><div class="ttname"><a href="classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715">component_base::children_</a></div><div class="ttdeci">vector&lt; unique_ptr&lt; component_base &gt; &gt; children_</div><div class="ttdoc">子组件列表</div><div class="ttdef"><b>定义</b> <a href="#l00325">component.hpp:325</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a866c4fa7c4a1ec77ce352ce9d0c76972"><div class="ttname"><a href="classcomponent__base.html#a866c4fa7c4a1ec77ce352ce9d0c76972">component_base::context</a></div><div class="ttdeci">const Ctx &amp; context() const</div><div class="ttdoc">获取上下文值</div><div class="ttdef"><b>定义</b> <a href="#l00305">component.hpp:305</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a869c80ee7ba78d370c447eeabdc4aee8"><div class="ttname"><a href="classcomponent__base.html#a869c80ee7ba78d370c447eeabdc4aee8">component_base::strand_</a></div><div class="ttdeci">strand * strand_</div><div class="ttdoc">串行执行器</div><div class="ttdef"><b>定义</b> <a href="#l00323">component.hpp:323</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a87f67c7eaba25f3c0a43ae24e16059fa"><div class="ttname"><a href="classcomponent__base.html#a87f67c7eaba25f3c0a43ae24e16059fa">component_base::on_animation</a></div><div class="ttdeci">virtual void on_animation(int64_t delta)</div><div class="ttdoc">动画帧回调</div><div class="ttdef"><b>定义</b> <a href="#l00109">component.hpp:109</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_a9655dfc0c17dedb5cb7ea552df1b468d"><div class="ttname"><a href="classcomponent__base.html#a9655dfc0c17dedb5cb7ea552df1b468d">component_base::setup</a></div><div class="ttdeci">virtual void setup()</div><div class="ttdoc">挂载回调</div><div class="ttdef"><b>定义</b> <a href="#l00116">component.hpp:116</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_aa84c4b4a99055cc660e347c0e6597909"><div class="ttname"><a href="classcomponent__base.html#aa84c4b4a99055cc660e347c0e6597909">component_base::set_has_focus</a></div><div class="ttdeci">void set_has_focus(bool v) noexcept</div><div class="ttdoc">设置 Reconciler 焦点状态（由 Reconciler 调用）</div><div class="ttdef"><b>定义</b> <a href="#l00103">component.hpp:103</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_aa86a55df3800279a87339a4a4e4fd47b"><div class="ttname"><a href="classcomponent__base.html#aa86a55df3800279a87339a4a4e4fd47b">component_base::detach</a></div><div class="ttdeci">unique_ptr&lt; component_base &gt; detach()</div><div class="ttdoc">从父组件中脱离自身</div><div class="ttdef"><b>定义</b> <a href="#l00207">component.hpp:207</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_aaed311b7f5eb65add4663f503ff1f1d9"><div class="ttname"><a href="classcomponent__base.html#aaed311b7f5eb65add4663f503ff1f1d9">component_base::active_child_</a></div><div class="ttdeci">component_base * active_child_</div><div class="ttdoc">当前激活的子组件</div><div class="ttdef"><b>定义</b> <a href="#l00320">component.hpp:320</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_ab2a4fd9f25a5dad4e792e2a6d9e95612"><div class="ttname"><a href="classcomponent__base.html#ab2a4fd9f25a5dad4e792e2a6d9e95612">component_base::on_mouse_leave</a></div><div class="ttdeci">virtual void on_mouse_leave()</div><div class="ttdoc">鼠标离开回调</div><div class="ttdef"><b>定义</b> <a href="#l00076">component.hpp:76</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_ab3397de0e56c2f0ddf3c54bab9c74eed"><div class="ttname"><a href="classcomponent__base.html#ab3397de0e56c2f0ddf3c54bab9c74eed">component_base::should_update</a></div><div class="ttdeci">virtual bool should_update()</div><div class="ttdoc">是否需要更新</div><div class="ttdef"><b>定义</b> <a href="#l00132">component.hpp:132</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_ab3c6d3cc591f9336052a7c2c869fa2b7"><div class="ttname"><a href="classcomponent__base.html#ab3c6d3cc591f9336052a7c2c869fa2b7">component_base::pass_through</a></div><div class="ttdeci">bool pass_through() const noexcept</div><div class="ttdoc">是否启用事件穿透</div><div class="ttdef"><b>定义</b> <a href="#l00091">component.hpp:91</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_ac6edc771dfac13ccf9a720d592419750"><div class="ttname"><a href="classcomponent__base.html#ac6edc771dfac13ccf9a720d592419750">component_base::detach_all_children</a></div><div class="ttdeci">void detach_all_children()</div><div class="ttdoc">移除所有子组件</div><div class="ttdef"><b>定义</b> <a href="#l00217">component.hpp:217</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_ac772f2b3d153fd6a6679b7c77d22575d"><div class="ttname"><a href="classcomponent__base.html#ac772f2b3d153fd6a6679b7c77d22575d">component_base::active_child</a></div><div class="ttdeci">const component_base * active_child() const noexcept</div><div class="ttdoc">获取当前激活的子组件</div><div class="ttdef"><b>定义</b> <a href="#l00239">component.hpp:239</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_acb6549b214ae4c2bd980ecfd0f6d68c2"><div class="ttname"><a href="classcomponent__base.html#acb6549b214ae4c2bd980ecfd0f6d68c2">component_base::on_mouse</a></div><div class="ttdeci">virtual bool on_mouse(const mouse_event &amp;e)</div><div class="ttdoc">鼠标事件处理</div><div class="ttdef"><b>定义</b> <a href="#l00066">component.hpp:66</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_acd6c4af519a8239ffa518a4df07ce11d"><div class="ttname"><a href="classcomponent__base.html#acd6c4af519a8239ffa518a4df07ce11d">component_base::set_pass_through</a></div><div class="ttdeci">void set_pass_through(bool v) noexcept</div><div class="ttdoc">设置事件穿透</div><div class="ttdef"><b>定义</b> <a href="#l00085">component.hpp:85</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_ae6eb5b681d73b91d0051e3d4114cfdfe"><div class="ttname"><a href="classcomponent__base.html#ae6eb5b681d73b91d0051e3d4114cfdfe">component_base::focused</a></div><div class="ttdeci">bool focused() const noexcept</div><div class="ttdoc">是否拥有焦点</div><div class="ttdef"><b>定义</b> <a href="#l00257">component.hpp:257</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_af411e78d447212477ff9a33bccf9dd3e"><div class="ttname"><a href="classcomponent__base.html#af411e78d447212477ff9a33bccf9dd3e">component_base::has_focus_</a></div><div class="ttdeci">bool has_focus_</div><div class="ttdoc">reconciler 焦点状态</div><div class="ttdef"><b>定义</b> <a href="#l00321">component.hpp:321</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_af9e779640d660bd18d4facd4cf8afeaa"><div class="ttname"><a href="classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa">component_base::parent_</a></div><div class="ttdeci">component_base * parent_</div><div class="ttdoc">父组件指针</div><div class="ttdef"><b>定义</b> <a href="#l00319">component.hpp:319</a></div></div>
+<div class="ttc" id="aclasscomponent__base_html_afbdc2cbd4a3d5596e4892d975daa7a8a"><div class="ttname"><a href="classcomponent__base.html#afbdc2cbd4a3d5596e4892d975daa7a8a">component_base::cleanup</a></div><div class="ttdeci">virtual void cleanup() noexcept</div><div class="ttdoc">卸载回调</div><div class="ttdef"><b>定义</b> <a href="#l00123">component.hpp:123</a></div></div>
+<div class="ttc" id="aclasscomponent_html_a4534e70ac9076d04afc2f9d01f994203"><div class="ttname"><a href="classcomponent.html#a4534e70ac9076d04afc2f9d01f994203">component::create_state</a></div><div class="ttdeci">state&lt; T &gt; &amp; create_state(T initial)</div><div class="ttdoc">创建响应式状态变量</div><div class="ttdef"><b>定义</b> <a href="#l00377">component.hpp:377</a></div></div>
+<div class="ttc" id="aclasscomponent_html_a49013b0b3a1c81d97eeaff3bf5882fc2"><div class="ttname"><a href="classcomponent.html#a49013b0b3a1c81d97eeaff3bf5882fc2">component::set_props</a></div><div class="ttdeci">void set_props(props_type p)</div><div class="ttdoc">注入属性</div><div class="ttdef"><b>定义</b> <a href="#l00387">component.hpp:387</a></div></div>
+<div class="ttc" id="aclasscomponent_html_a7e3457b57a085cb1f633c56962fefdf4"><div class="ttname"><a href="classcomponent.html#a7e3457b57a085cb1f633c56962fefdf4">component::props</a></div><div class="ttdeci">const props_type &amp; props() const noexcept</div><div class="ttdoc">获取父组件传入的属性</div><div class="ttdef"><b>定义</b> <a href="#l00364">component.hpp:364</a></div></div>
+<div class="ttc" id="aclasselement_html"><div class="ttname"><a href="classelement.html">element</a></div><div class="ttdoc">虚拟UI元素</div><div class="ttdef"><b>定义</b> <a href="element_8hpp_source.html#l00036">element.hpp:36</a></div></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00029">functional/function.hpp:29</a></div></div>
+<div class="ttc" id="aclassio__context_html"><div class="ttname"><a href="classio__context.html">io_context</a></div><div class="ttdoc">统一异步操作核心</div><div class="ttdef"><b>定义</b> <a href="io__context_8hpp_source.html#l00064">io_context.hpp:64</a></div></div>
+<div class="ttc" id="aclassreconciler_html"><div class="ttname"><a href="classreconciler.html">reconciler</a></div><div class="ttdoc">差分渲染引擎</div><div class="ttdef"><b>定义</b> <a href="reconciler_8hpp_source.html#l00029">reconciler.hpp:29</a></div></div>
+<div class="ttc" id="aclassstate_html"><div class="ttname"><a href="classstate.html">state</a></div><div class="ttdoc">响应式状态变量</div><div class="ttdef"><b>定义</b> <a href="state_8hpp_source.html#l00036">state.hpp:36</a></div></div>
+<div class="ttc" id="aclassstrand_html"><div class="ttname"><a href="classstrand.html">strand</a></div><div class="ttdoc">串行化执行器</div><div class="ttdef"><b>定义</b> <a href="strand_8hpp_source.html#l00030">strand.hpp:30</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00206">unique_ptr.hpp:206</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a4b44f707540323eb24319b92c242d37a"><div class="ttname"><a href="classunique__ptr.html#a4b44f707540323eb24319b92c242d37a">unique_ptr::get</a></div><div class="ttdeci">constexpr pointer get() const noexcept</div><div class="ttdoc">获取原始指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00320">unique_ptr.hpp:320</a></div></div>
+<div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="ttc" id="aclassvector_html_ac8d8b05ea55e928d9a4ccde8bf9bedcf"><div class="ttname"><a href="classvector.html#ac8d8b05ea55e928d9a4ccde8bf9bedcf">vector::push_back</a></div><div class="ttdeci">constexpr void push_back(const T &amp;value)</div><div class="ttdoc">在末尾拷贝插入元素</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00887">vector.hpp:887</a></div></div>
+<div class="ttc" id="aelement_8hpp_html"><div class="ttname"><a href="element_8hpp.html">element.hpp</a></div><div class="ttdoc">虚拟UI元素</div></div>
+<div class="ttc" id="aevents_8hpp_html"><div class="ttname"><a href="events_8hpp.html">events.hpp</a></div><div class="ttdoc">TUI输入事件类型定义</div></div>
+<div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00086">typeinfo/types.hpp:86</a></div></div>
+<div class="ttc" id="agroup___shared_pointer_html_gab47fa86d2917e14f57f68dfa9e83495e"><div class="ttname"><a href="group___shared_pointer.html#gab47fa86d2917e14f57f68dfa9e83495e">make_shared</a></div><div class="ttdeci">enable_if_t&lt;!is_unbounded_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, shared_ptr&lt; T &gt; &gt; make_shared(Args &amp;&amp;... args)</div><div class="ttdoc">融合分配创建共享指针</div><div class="ttdef"><b>定义</b> <a href="shared__ptr_8hpp_source.html#l00849">shared_ptr.hpp:849</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
+<div class="ttc" id="astate_8hpp_html"><div class="ttname"><a href="state_8hpp.html">state.hpp</a></div><div class="ttdoc">响应式状态变量</div></div>
+<div class="ttc" id="astructempty__props_html"><div class="ttname"><a href="structempty__props.html">empty_props</a></div><div class="ttdoc">空属性标签</div><div class="ttdef"><b>定义</b> <a href="#l00031">component.hpp:31</a></div></div>
+<div class="ttc" id="astructkey__event_html"><div class="ttname"><a href="structkey__event.html">key_event</a></div><div class="ttdoc">键盘事件</div><div class="ttdef"><b>定义</b> <a href="events_8hpp_source.html#l00047">events.hpp:47</a></div></div>
+<div class="ttc" id="astructmouse__event_html"><div class="ttname"><a href="structmouse__event.html">mouse_event</a></div><div class="ttdoc">鼠标事件</div><div class="ttdef"><b>定义</b> <a href="events_8hpp_source.html#l00134">events.hpp:134</a></div></div>
+<div class="ttc" id="astructvalue__exception_html"><div class="ttname"><a href="structvalue__exception.html">value_exception</a></div><div class="ttdoc">变量处理异常</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00192">exception.hpp:192</a></div></div>
+<div class="ttc" id="aunique__ptr_8hpp_html"><div class="ttname"><a href="unique__ptr_8hpp.html">unique_ptr.hpp</a></div><div class="ttdoc">独占智能指针</div></div>
+<div class="ttc" id="aunordered__map_8hpp_html"><div class="ttname"><a href="unordered__map_8hpp.html">unordered_map.hpp</a></div><div class="ttdoc">无序映射容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>tui</b></li><li class="navelem"><b>component</b></li><li class="navelem"><a href="component_8hpp.html">component.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

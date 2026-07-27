@@ -1,0 +1,508 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classstate" kind="class" language="C++" prot="public">
+    <compoundname>state</compoundname>
+    <includes refid="state_8hpp" local="no">state.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classstate_1a3f8e61cbd9d16e28ccb19d4c93b6d5fd" prot="public" static="no">
+        <type><ref refid="structsignal" kindref="compound">signal</ref>&lt; T &gt;</type>
+        <definition>using state&lt; T &gt;::changed_signal = signal&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>changed_signal</name>
+        <qualifiedname>state::changed_signal</qualifiedname>
+        <briefdescription>
+<para>值变化信号类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="39" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classstate_1a81df2e298483f55b67de2781d7481f0d" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T state&lt; T &gt;::value_</definition>
+        <argsstring></argsstring>
+        <name>value_</name>
+        <qualifiedname>state::value_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="131" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstate_1aef8a8ef6942adf8e2148006e9e6209da" prot="private" static="no" mutable="no">
+        <type><ref refid="classstate_1a3f8e61cbd9d16e28ccb19d4c93b6d5fd" kindref="member">changed_signal</ref></type>
+        <definition>changed_signal state&lt; T &gt;::on_changed_</definition>
+        <argsstring></argsstring>
+        <name>on_changed_</name>
+        <qualifiedname>state::on_changed_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="132" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstate_1aecadf0dc232632fc0e4a451b2b023132" prot="private" static="no" mutable="no">
+        <type><ref refid="classstrand" kindref="compound">strand</ref> *</type>
+        <definition>strand* state&lt; T &gt;::strand_</definition>
+        <argsstring></argsstring>
+        <name>strand_</name>
+        <qualifiedname>state::strand_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="133" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstate_1a857c39d6ee4e1e8066f125c71cc0fbb4" prot="private" static="no" mutable="no">
+        <type><ref refid="classcomponent__base" kindref="compound">component_base</ref> *</type>
+        <definition>component_base* state&lt; T &gt;::owner_</definition>
+        <argsstring></argsstring>
+        <name>owner_</name>
+        <qualifiedname>state::owner_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="134" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstate_1ab3ae11e5e2be8c1e4b4d00518c410c8b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool state&lt; T &gt;::dirty_</definition>
+        <argsstring></argsstring>
+        <name>dirty_</name>
+        <qualifiedname>state::dirty_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="135" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classstate_1a3226671639d654fc1cd77a7affba6f59" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>state&lt; T &gt;::state</definition>
+        <argsstring>(component_base *owner, strand &amp;s, T initial)</argsstring>
+        <name>state</name>
+        <qualifiedname>state::state</qualifiedname>
+        <param>
+          <type><ref refid="classcomponent__base" kindref="compound">component_base</ref> *</type>
+          <declname>owner</declname>
+        </param>
+        <param>
+          <type><ref refid="classstrand" kindref="compound">strand</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>initial</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>owner</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>所属组件 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>串行执行器引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>initial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="47" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="47" bodyend="50"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <referencedby refid="classstate_1a6e0fd6bab772ac3c9528ebd536f753e6" compoundref="state_8hpp" startline="82" endline="86">state&lt; T &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1a79cdccfca6659fa314233661930279eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>state&lt; T &gt;::~state</definition>
+        <argsstring>()=default</argsstring>
+        <name>~state</name>
+        <qualifiedname>state::~state</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="52" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1afc5ec4ecc4b9ce8bbd8e67807d7dbdbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>state&lt; T &gt;::state</definition>
+        <argsstring>(const state &amp;)=delete</argsstring>
+        <name>state</name>
+        <qualifiedname>state::state</qualifiedname>
+        <param>
+          <type>const <ref refid="classstate" kindref="compound">state</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="54" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1a54e3ace773adb3324b20537afe95a303" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classstate" kindref="compound">state</ref> &amp;</type>
+        <definition>state &amp; state&lt; T &gt;::operator=</definition>
+        <argsstring>(const state &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>state::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classstate" kindref="compound">state</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="55" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1a4477bbaf6a5249b185d2b69cf7295715" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>state&lt; T &gt;::state</definition>
+        <argsstring>(state &amp;&amp;)=delete</argsstring>
+        <name>state</name>
+        <qualifiedname>state::state</qualifiedname>
+        <param>
+          <type><ref refid="classstate" kindref="compound">state</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="56" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1a440becdb3ec9c8df536e55113a3323e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classstate" kindref="compound">state</ref> &amp;</type>
+        <definition>state &amp; state&lt; T &gt;::operator=</definition>
+        <argsstring>(state &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>state::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classstate" kindref="compound">state</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="57" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1adbbb129cd3257b53ff932dddefb1a5fc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; state&lt; T &gt;::value</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>value</name>
+        <qualifiedname>state::value</qualifiedname>
+        <briefdescription>
+<para>读取当前值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="63" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1aeed3b323b8656d82015b97055c8eb30f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; state&lt; T &gt;::operator*</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>state::operator*</qualifiedname>
+        <briefdescription>
+<para>读取当前值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="69" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1a7e309dba55b1332ce04c313cc42b1b12" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T *</type>
+        <definition>const T * state&lt; T &gt;::operator-&gt;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>state::operator-&gt;</qualifiedname>
+        <briefdescription>
+<para>成员访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>常量指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="75" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1a6e0fd6bab772ac3c9528ebd536f753e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classstate" kindref="compound">state</ref> &amp;</type>
+        <definition>state &amp; state&lt; T &gt;::operator=</definition>
+        <argsstring>(T v)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>state::operator=</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>整值替换 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="82" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="82" bodyend="86"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classstate_1a3226671639d654fc1cd77a7affba6f59" compoundref="state_8hpp" startline="47" endline="50">state&lt; T &gt;::state</references>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1aaba8ecf986464ac7fad35767fb7cf080" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void state&lt; T &gt;::modify</definition>
+        <argsstring>(function&lt; void(T &amp;)&gt; fn)</argsstring>
+        <name>modify</name>
+        <qualifiedname>state::modify</qualifiedname>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(T &amp;)&gt;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>就地修改 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>修改函数，接收 T&amp; 引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="92" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="92" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1a5b85ecf5af4eb288977d8e911a34b6c4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void state&lt; T &gt;::set_quiet</definition>
+        <argsstring>(T v)</argsstring>
+        <name>set_quiet</name>
+        <qualifiedname>state::set_quiet</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>静默写入 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+用于批量操作场景，最后手动调用 <ref refid="classstate_1ac2d076a9aec39c8f371185475df3965d" kindref="member">notify()</ref>。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="103" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="103" bodyend="107"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1ac2d076a9aec39c8f371185475df3965d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void state&lt; T &gt;::notify</definition>
+        <argsstring>()</argsstring>
+        <name>notify</name>
+        <qualifiedname>state::notify</qualifiedname>
+        <briefdescription>
+<para>手动触发重渲染 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>配合 setQuiet() 使用，在批量操作结束后调用一次。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="114" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="114" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1a7178235c90a19d868b7be6726e6af218" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classconnection" kindref="compound">connection</ref></type>
+        <definition>connection state&lt; T &gt;::on_change</definition>
+        <argsstring>(function&lt; void(const T &amp;)&gt; fn)</argsstring>
+        <name>on_change</name>
+        <qualifiedname>state::on_change</qualifiedname>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(const T &amp;)&gt;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>订阅值变化通知 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数，接收新值常量引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>连接句柄 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="126" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="126" bodyend="128"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classstate_1a771bb32324715b5705f574c10cc0e755" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void state&lt; T &gt;::notify_changed</definition>
+        <argsstring>()</argsstring>
+        <name>notify_changed</name>
+        <qualifiedname>state::notify_changed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="137" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="137" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="classstate_1a8c6f6dc34b2e87907cb4eb67bf4384fe" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void state&lt; T &gt;::schedule_render</definition>
+        <argsstring>()</argsstring>
+        <name>schedule_render</name>
+        <qualifiedname>state::schedule_render</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="142" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>响应式状态变量 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+写入时自动通过 strand 调度组件重渲染， 支持读取、整值替换、就地修改和批量静默更新四种模式。</para>
+<para><simplesect kind="note"><para>必须在 <ref refid="classcomponent_1a4534e70ac9076d04afc2f9d01f994203" kindref="member">component::create_state()</ref> 中创建，通过组件生命周期管理。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" line="36" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/state.hpp" bodystart="36" bodyend="143"/>
+    <listofallmembers>
+      <member refid="classstate_1a3f8e61cbd9d16e28ccb19d4c93b6d5fd" prot="public" virt="non-virtual"><scope>state</scope><name>changed_signal</name></member>
+      <member refid="classstate_1ab3ae11e5e2be8c1e4b4d00518c410c8b" prot="private" virt="non-virtual"><scope>state</scope><name>dirty_</name></member>
+      <member refid="classstate_1aaba8ecf986464ac7fad35767fb7cf080" prot="public" virt="non-virtual"><scope>state</scope><name>modify</name></member>
+      <member refid="classstate_1ac2d076a9aec39c8f371185475df3965d" prot="public" virt="non-virtual"><scope>state</scope><name>notify</name></member>
+      <member refid="classstate_1a771bb32324715b5705f574c10cc0e755" prot="private" virt="non-virtual"><scope>state</scope><name>notify_changed</name></member>
+      <member refid="classstate_1a7178235c90a19d868b7be6726e6af218" prot="public" virt="non-virtual"><scope>state</scope><name>on_change</name></member>
+      <member refid="classstate_1aef8a8ef6942adf8e2148006e9e6209da" prot="private" virt="non-virtual"><scope>state</scope><name>on_changed_</name></member>
+      <member refid="classstate_1aeed3b323b8656d82015b97055c8eb30f" prot="public" virt="non-virtual"><scope>state</scope><name>operator*</name></member>
+      <member refid="classstate_1a7e309dba55b1332ce04c313cc42b1b12" prot="public" virt="non-virtual"><scope>state</scope><name>operator-&gt;</name></member>
+      <member refid="classstate_1a54e3ace773adb3324b20537afe95a303" prot="public" virt="non-virtual"><scope>state</scope><name>operator=</name></member>
+      <member refid="classstate_1a440becdb3ec9c8df536e55113a3323e5" prot="public" virt="non-virtual"><scope>state</scope><name>operator=</name></member>
+      <member refid="classstate_1a6e0fd6bab772ac3c9528ebd536f753e6" prot="public" virt="non-virtual"><scope>state</scope><name>operator=</name></member>
+      <member refid="classstate_1a857c39d6ee4e1e8066f125c71cc0fbb4" prot="private" virt="non-virtual"><scope>state</scope><name>owner_</name></member>
+      <member refid="classstate_1a8c6f6dc34b2e87907cb4eb67bf4384fe" prot="private" virt="non-virtual"><scope>state</scope><name>schedule_render</name></member>
+      <member refid="classstate_1a5b85ecf5af4eb288977d8e911a34b6c4" prot="public" virt="non-virtual"><scope>state</scope><name>set_quiet</name></member>
+      <member refid="classstate_1a3226671639d654fc1cd77a7affba6f59" prot="public" virt="non-virtual"><scope>state</scope><name>state</name></member>
+      <member refid="classstate_1afc5ec4ecc4b9ce8bbd8e67807d7dbdbe" prot="public" virt="non-virtual"><scope>state</scope><name>state</name></member>
+      <member refid="classstate_1a4477bbaf6a5249b185d2b69cf7295715" prot="public" virt="non-virtual"><scope>state</scope><name>state</name></member>
+      <member refid="classstate_1aecadf0dc232632fc0e4a451b2b023132" prot="private" virt="non-virtual"><scope>state</scope><name>strand_</name></member>
+      <member refid="classstate_1adbbb129cd3257b53ff932dddefb1a5fc" prot="public" virt="non-virtual"><scope>state</scope><name>value</name></member>
+      <member refid="classstate_1a81df2e298483f55b67de2781d7481f0d" prot="private" virt="non-virtual"><scope>state</scope><name>value_</name></member>
+      <member refid="classstate_1a79cdccfca6659fa314233661930279eb" prot="public" virt="non-virtual"><scope>state</scope><name>~state</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

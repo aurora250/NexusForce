@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['open_5fmode_0',['open_mode',['../classshare__memory.html#a44ac8b8e6ff49cfe0f91b017ad68e23a',1,'share_memory']]],
-  ['overflow_5fpolicy_1',['overflow_policy',['../group___logging.html#ga35627212bfd2d281fb917509552af4cf',1,'log_event.hpp']]]
+  ['launch_0',['launch',['../group___async.html#ga9b3224d19f20667b3b24145a7b395a33',1,'future.hpp']]],
+  ['lb_5fstrategy_1',['lb_strategy',['../group___h_t_t_p.html#gadf2370a616d3d1bf1ef4152acc72e793',1,'load_balancer.hpp']]],
+  ['load_5fmode_2',['load_mode',['../classdynamic__library.html#abc379ef4c782709b6329f3f41fb2a1f4',1,'dynamic_library']]],
+  ['log_5flevel_3',['log_level',['../group___logging.html#ga837946c96acd6e9638773176147baba1',1,'log_event.hpp']]]
 ];

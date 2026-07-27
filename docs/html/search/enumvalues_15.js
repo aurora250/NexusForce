@@ -13,11 +13,16 @@ var searchData=
   ['warn_10',['WARN',['../group___logging.html#gga837946c96acd6e9638773176147baba1a32bd8a1db2275458673903bdb84cb277',1,'log_event.hpp']]],
   ['warning_11',['warning',['../classcmdline.html#a4c84557e04980e1051cc0589118e3126a7b83d3f08fa392b79e3f553b585971cd',1,'cmdline']]],
   ['weighted_12',['WEIGHTED',['../group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793ae9d8ebf89324671ee286fa7bf1a2c16c',1,'load_balancer.hpp']]],
-  ['window_5fupdate_13',['WINDOW_UPDATE',['../group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5a8930ff86ec057f61f21407e49bf82e6d',1,'http2_protocol.hpp']]],
-  ['write_14',['WRITE',['../group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfead4b9e47f65b6e79b010582f15785867e',1,'file_constants.hpp']]],
-  ['write_15',['write',['../classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee',1,'process']]],
-  ['write_5fthrough_16',['WRITE_THROUGH',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1',1,'file_constants.hpp']]],
-  ['wrong_5fprotocol_5ftype_17',['wrong_protocol_type',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a81cac28a38438710de9856af4a8bcd0b',1,'errc.hpp']]],
-  ['ws_18',['WS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8abda72ed8541710980b8ec46af261a740',1,'ports']]],
-  ['wss_19',['WSS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8af285b1726d9a5c79c618622a8e2d5bce',1,'ports']]]
+  ['wheel_13',['wheel',['../group___t_u_i.html#gga8fda71d62f1efe9e2f76ad018833d037a5eda0ea98768e91b815fa6667e4f0178',1,'events.hpp']]],
+  ['wheeldown_14',['wheeldown',['../group___t_u_i.html#ggaf798e894dc9edcb17ec3660896a890baad6028dde0a2dcdfcc018cc7f0797804d',1,'events.hpp']]],
+  ['wheelup_15',['wheelup',['../group___t_u_i.html#ggaf798e894dc9edcb17ec3660896a890baa800f2d07b62bbc15176bbcc4f49bbd36',1,'events.hpp']]],
+  ['when_16',['when',['../classelement.html#ae3b4aaf2c62b324301af48441ecf07bcadf491a4de50739fa9cffdbd4e3f4b4bb',1,'element']]],
+  ['window_5fupdate_17',['WINDOW_UPDATE',['../group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5a8930ff86ec057f61f21407e49bf82e6d',1,'http2_protocol.hpp']]],
+  ['word_18',['word',['../structstyle.html#a8c62373eef9123ce93b67f9b57a9c77eac47d187067c6cf953245f128b5fde62a',1,'style']]],
+  ['write_19',['WRITE',['../group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfead4b9e47f65b6e79b010582f15785867e',1,'file_constants.hpp']]],
+  ['write_20',['write',['../classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee',1,'process']]],
+  ['write_5fthrough_21',['WRITE_THROUGH',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1',1,'file_constants.hpp']]],
+  ['wrong_5fprotocol_5ftype_22',['wrong_protocol_type',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a81cac28a38438710de9856af4a8bcd0b',1,'errc.hpp']]],
+  ['ws_23',['WS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8abda72ed8541710980b8ec46af261a740',1,'ports']]],
+  ['wss_24',['WSS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8af285b1726d9a5c79c618622a8e2d5bce',1,'ports']]]
 ];

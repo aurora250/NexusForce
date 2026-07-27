@@ -97,7 +97,7 @@ $(function(){initNavTree('io__context_8hpp_source.html','',''); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="lock__free__queue_8hpp.html">NeForce/core/async/lock_free_queue.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__map_8hpp.html">NeForce/core/container/unordered_map.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="flat__unordered__map_8hpp.html">NeForce/core/container/flat_unordered_map.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="error__code_8hpp.html">NeForce/core/exception/error_code.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="functional_2function_8hpp.html">NeForce/core/functional/function.hpp</a>&quot;</span></div>
@@ -189,7 +189,7 @@ $(function(){initNavTree('io__context_8hpp_source.html','',''); });
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    atomic&lt;size_t&gt; outstanding_work_{0};</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keywordtype">size_t</span> next_timer_id_{1};</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span></div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    unordered_map&lt;native_handle_type, fd_info&gt; fd_map_;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    flat_unordered_map&lt;native_handle_type, fd_info&gt; fd_map_;</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    vector&lt;timer_entry&gt; timer_heap_;</div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="keyword">mutable</span> mutex timer_mutex_;</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span></div>
@@ -199,12 +199,12 @@ $(function(){initNavTree('io__context_8hpp_source.html','',''); });
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="keywordtype">void</span>* iocp_handle_;</div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    <span class="keywordtype">void</span>* wake_event_;</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    unordered_map&lt;native_handle_type, void*&gt; fd_events_;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    flat_unordered_map&lt;native_handle_type, void*&gt; fd_events_;</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    mutex fd_mutex_;</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    thread monitor_thread_;</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    atomic&lt;bool&gt; monitor_running_{<span class="keyword">false</span>};</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span></div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    unordered_map&lt;uintptr_t, file_completion_cb&gt; file_completions_;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    flat_unordered_map&lt;uintptr_t, file_completion_cb&gt; file_completions_;</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keywordtype">void</span> monitor_loop();</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
@@ -311,6 +311,7 @@ $(function(){initNavTree('io__context_8hpp_source.html','',''); });
 <div class="ttc" id="aclassio__context_html_afca39a74d8a33916fd0b75682d7bc749"><div class="ttname"><a href="classio__context.html#afca39a74d8a33916fd0b75682d7bc749">io_context::schedule_timer</a></div><div class="ttdeci">size_t schedule_timer(uint64_t delay_ms, timer_callback handler)</div><div class="ttdoc">调度一次性定时器</div></div>
 <div class="ttc" id="aclassnumeric__traits_html_a43c99621a2fec69a3fb258505fcf7ce9"><div class="ttname"><a href="classnumeric__traits.html#a43c99621a2fec69a3fb258505fcf7ce9">numeric_traits::max</a></div><div class="ttdeci">static constexpr T max() noexcept</div><div class="ttdoc">获取类型的最大值</div><div class="ttdef"><b>定义</b> <a href="numeric__traits_8hpp_source.html#l00153">numeric_traits.hpp:153</a></div></div>
 <div class="ttc" id="aerror__code_8hpp_html"><div class="ttname"><a href="error__code_8hpp.html">error_code.hpp</a></div><div class="ttdoc">错误码</div></div>
+<div class="ttc" id="aflat__unordered__map_8hpp_html"><div class="ttname"><a href="flat__unordered__map_8hpp.html">flat_unordered_map.hpp</a></div><div class="ttdoc">平坦无序映射容器</div></div>
 <div class="ttc" id="afunctional_2function_8hpp_html"><div class="ttname"><a href="functional_2function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
 <div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00109">typeinfo/types.hpp:109</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga785d1fff9ad28a98e121ba9f90b3a3ca"><div class="ttname"><a href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></div><div class="ttdeci">unsigned long long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00117">typeinfo/types.hpp:117</a></div></div>
@@ -327,7 +328,6 @@ $(function(){initNavTree('io__context_8hpp_source.html','',''); });
 <div class="ttc" id="agroup___thread_html_gaab371a4a36c3866d2f8bdd3e2be27f11"><div class="ttname"><a href="group___thread.html#gaab371a4a36c3866d2f8bdd3e2be27f11">id</a></div><div class="ttdeci">thread::id id() noexcept</div><div class="ttdoc">获取当前线程标识符</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00449">thread.hpp:449</a></div></div>
 <div class="ttc" id="alock__free__queue_8hpp_html"><div class="ttname"><a href="lock__free__queue_8hpp.html">lock_free_queue.hpp</a></div><div class="ttdoc">无锁队列</div></div>
 <div class="ttc" id="ashared__ptr_8hpp_html"><div class="ttname"><a href="shared__ptr_8hpp.html">shared_ptr.hpp</a></div><div class="ttdoc">共享智能指针实现</div></div>
-<div class="ttc" id="aunordered__map_8hpp_html"><div class="ttname"><a href="unordered__map_8hpp.html">unordered_map.hpp</a></div><div class="ttdoc">无序映射容器</div></div>
 <div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

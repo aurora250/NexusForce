@@ -14,10 +14,11 @@ var searchData=
   ['node_5fid_11',['node_id',['../structsysinfo_1_1numa__node__info.html#af0c493c1bb00aa7d9a6b284668f6cadd',1,'sysinfo::numa_node_info']]],
   ['nonblocking_5f_12',['nonblocking_',['../classsocket__base.html#a3b85c967d07f91b5e45349495e2a1481',1,'socket_base']]],
   ['none_13',['none',['../group___none.html#gab3f528d10c290b48a6035929470622c0',1,'none.hpp']]],
-  ['not_5fnull_14',['not_null',['../structsql__builder_1_1column__definition.html#a81e1393d1d3416bc0092ce9f933f488e',1,'sql_builder::column_definition']]],
-  ['npos_15',['npos',['../classvector.html#af8940e662b91f12edadd1e7d30f8b3aa',1,'vector::npos'],['../classbasic__string.html#addc40fa63f885bb692988057be4798a6',1,'basic_string::npos'],['../classbasic__string__view.html#a3579ddc83a12f6cc5e8950d4a65bbd07',1,'basic_string_view::npos']]],
-  ['nscount_16',['nscount',['../structdns__header.html#ab59defbc4f2602673c85b1ff32c988c0',1,'dns_header']]],
-  ['nullable_17',['nullable',['../structcolumn__meta.html#a3000bd379c9fe06859103945b1dfc138',1,'column_meta']]],
-  ['num_18',['num',['../structratio.html#a6a632753060062f1dbfa49cc5999cddb',1,'ratio']]],
-  ['numa_5fnode_19',['numa_node',['../structworker__context.html#ad18304a27a3cae32a78163fb9375fff1',1,'worker_context']]]
+  ['normal_5fstyle_14',['normal_style',['../structmenu__option.html#a1a5af0b473972a3b44131ddea18b6e3b',1,'menu_option']]],
+  ['not_5fnull_15',['not_null',['../structsql__builder_1_1column__definition.html#a81e1393d1d3416bc0092ce9f933f488e',1,'sql_builder::column_definition']]],
+  ['npos_16',['npos',['../classvector.html#af8940e662b91f12edadd1e7d30f8b3aa',1,'vector::npos'],['../classbasic__string.html#addc40fa63f885bb692988057be4798a6',1,'basic_string::npos'],['../classbasic__string__view.html#a3579ddc83a12f6cc5e8950d4a65bbd07',1,'basic_string_view::npos']]],
+  ['nscount_17',['nscount',['../structdns__header.html#ab59defbc4f2602673c85b1ff32c988c0',1,'dns_header']]],
+  ['nullable_18',['nullable',['../structcolumn__meta.html#a3000bd379c9fe06859103945b1dfc138',1,'column_meta']]],
+  ['num_19',['num',['../structratio.html#a6a632753060062f1dbfa49cc5999cddb',1,'ratio']]],
+  ['numa_5fnode_20',['numa_node',['../structworker__context.html#ad18304a27a3cae32a78163fb9375fff1',1,'worker_context']]]
 ];
