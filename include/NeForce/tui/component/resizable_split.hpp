@@ -11,9 +11,15 @@
 #include "NeForce/tui/component/component.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 /**
  * @addtogroup TUI TUI
+ * @{
+ */
+
+/**
+ * @addtogroup Components 用户组件
  * @{
  */
 
@@ -57,8 +63,11 @@ unique_ptr<component_base> NEFORCE_API resizable_split_top(unique_ptr<component_
 unique_ptr<component_base> NEFORCE_API resizable_split_bottom(unique_ptr<component_base> main,
                                                               unique_ptr<component_base> back, int* main_size);
 
+/** @} */ // Components
+
 /** @} */ // TUI
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_TUI_RESIZABLE_SPLIT_HPP__

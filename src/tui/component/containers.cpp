@@ -1,6 +1,7 @@
 #include <NeForce/tui/component/containers.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
     class container_impl final : public component_base {
@@ -115,5 +116,6 @@ unique_ptr<component_base> container::stacked(vector<unique_ptr<component_base>>
     return make_unique<container_impl>(move(children), selected, container_impl::layout_mode::stacked);
 }
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

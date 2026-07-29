@@ -1,6 +1,7 @@
 #include <NeForce/tui/component/menu.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
     class menu_component final : public component_base {
@@ -84,5 +85,6 @@ namespace {
 
 unique_ptr<component_base> menu(menu_option option) { return make_unique<menu_component>(move(option)); }
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

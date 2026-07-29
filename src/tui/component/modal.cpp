@@ -1,6 +1,7 @@
 #include <NeForce/tui/component/modal.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
     class modal_component final : public component_base {
@@ -55,5 +56,6 @@ unique_ptr<component_base> modal(unique_ptr<component_base> main, unique_ptr<com
     return make_unique<modal_component>(move(main), move(overlay), show_modal);
 }
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

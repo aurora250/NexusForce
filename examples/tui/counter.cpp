@@ -10,7 +10,7 @@
  * - application 入口组装
  */
 
-#include <NeForce/tui/app.hpp>
+#include <NeForce/tui/application.hpp>
 #include <NeForce/tui/component/component.hpp>
 
 using namespace neforce;

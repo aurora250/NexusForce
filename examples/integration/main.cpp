@@ -132,7 +132,7 @@ void setup_routes(http_router& router) {
         }
 
         scope_transaction tx{*conn};
-        task t;
+        Task t;
         t.id = uuid::v4().to_string();
         t.title = string(title);
         t.status = string(status_val);

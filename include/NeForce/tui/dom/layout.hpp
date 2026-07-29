@@ -7,6 +7,7 @@
  *
  * 纯函数式 Flexbox 布局计算。
  * 输入元素树和终端尺寸，输出每个叶子节点的布局矩形。
+ * 布局结果会缓存到元素树中，仅脏子树重算。
  */
 
 #include "NeForce/tui/dom/element.hpp"
@@ -19,21 +20,12 @@ NEFORCE_BEGIN_TUI__
  */
 
 /**
- * @brief 布局矩形
- */
-struct layout_rect {
-    int x = 0; ///< 列坐标
-    int y = 0; ///< 行坐标
-    int w = 0; ///< 宽度
-    int h = 0; ///< 高度
-};
-
-/**
  * @brief Flexbox 布局计算
  * @param element 元素树根节点
  * @param constraint_w 可用宽度
  * @param constraint_h 可用高度
  * @returns 每个叶子节点的布局矩形
+ * @note 布局结果会缓存到元素树节点中
  */
 vector<layout_rect> NEFORCE_API compute_layout(const element& element, int constraint_w, int constraint_h);
 

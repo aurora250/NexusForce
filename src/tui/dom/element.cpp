@@ -1,4 +1,4 @@
-#include <NeForce/tui/dom/element.hpp>
+#include <NeForce/tui/dom/layout.hpp>
 #include <NeForce/tui/dom/state.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -26,6 +26,11 @@ struct element::node {
     size_t cursor_pos = 0;
     void* scroll_x_state = nullptr;
     void* scroll_y_state = nullptr;
+
+    mutable bool layout_dirty_ = true;
+    mutable vector<layout_rect> cached_layout_;
+    mutable int cached_constraint_w_ = -1;
+    mutable int cached_constraint_h_ = -1;
 
     node() = default;
     ~node() = default;
@@ -159,6 +164,7 @@ void element::add_child(element child) { node_->children.push_back(move(child));
 element& element::with_style(const tui::style& s) {
     ensure_node();
     node_->style = style::merge(node_->style, s);
+    node_->layout_dirty_ = true;
     return *this;
 }
 
@@ -229,6 +235,9 @@ element element::text_input(state<string>& text, tui::style style, string placeh
     el.node_->style = move(style);
     el.node_->text = text.value();
     el.node_->placeholder = move(placeholder);
+    if (!el.node_->style.text_wrap.has_value()) {
+        el.node_->style.text_wrap = style::wrap_mode::word;
+    }
     return el;
 }
 
@@ -297,6 +306,23 @@ element element::when(bool cond, function<element()> then, function<element()> o
     el.node_->children.push_back(cond ? then() : otherwise());
     return el;
 }
+
+bool element::is_layout_dirty() const noexcept { return node_->layout_dirty_; }
+
+void element::set_layout_dirty(bool dirty) { node_->layout_dirty_ = dirty; }
+
+const vector<layout_rect>& element::cached_layout() const noexcept { return node_->cached_layout_; }
+
+void element::set_cached_layout(const vector<layout_rect>& layout, int constraint_w, int constraint_h) const {
+    node_->cached_layout_ = layout;
+    node_->cached_constraint_w_ = constraint_w;
+    node_->cached_constraint_h_ = constraint_h;
+    node_->layout_dirty_ = false;
+}
+
+int element::cached_constraint_w() const noexcept { return node_->cached_constraint_w_; }
+
+int element::cached_constraint_h() const noexcept { return node_->cached_constraint_h_; }
 
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

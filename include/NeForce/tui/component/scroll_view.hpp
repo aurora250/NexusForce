@@ -12,6 +12,7 @@
 #include "NeForce/tui/component/component.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 /**
  * @addtogroup TUI TUI
@@ -19,11 +20,17 @@ NEFORCE_BEGIN_TUI__
  */
 
 /**
+ * @addtogroup Components 用户组件
+ * @{
+ */
+
+/**
  * @brief 滚动视图配置
  */
 struct scroll_view_option {
-    function<element()> content; ///< 内容渲染回调
-    tui::style style;            ///< 样式（边框、padding 等）
+    function<element()> content;             ///< 内容渲染回调
+    tui::style style;                        ///< 样式
+    state<int>* external_scroll_y = nullptr; ///< 外部滚动状态
 };
 
 /**
@@ -33,8 +40,11 @@ struct scroll_view_option {
  */
 unique_ptr<component_base> NEFORCE_API scroll_view(scroll_view_option opt);
 
+/** @} */ // Components
+
 /** @} */ // TUI
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_TUI_COMPONENT_SCROLL_VIEW_HPP__

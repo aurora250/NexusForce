@@ -1,6 +1,7 @@
 #include <NeForce/tui/component/slider.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
     class slider_component final : public component_base {
@@ -59,5 +60,6 @@ namespace {
 
 unique_ptr<component_base> slider(slider_options options) { return make_unique<slider_component>(move(options)); }
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

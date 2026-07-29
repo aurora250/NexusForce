@@ -13,12 +13,13 @@
  * - 按钮按下动画反馈
  */
 
-#include <NeForce/tui/app.hpp>
+#include <NeForce/tui/application.hpp>
 #include <NeForce/tui/component/scroll_view.hpp>
 #include <NeForce/tui/component/text_input.hpp>
 
 using namespace neforce;
 using namespace neforce::tui;
+using namespace neforce::tui::components;
 
 class todo_component final : public component<> {
 public:
@@ -33,6 +34,7 @@ private:
     state<string>* input_ = nullptr;
     state<size_t>* selected_ = nullptr;
     state<int>* btn_flash_ = nullptr;
+    state<int>* scroll_y_ = nullptr;
     component_base* input_comp_ = nullptr;
     component_base* sv_comp_ = nullptr;
     size_t next_id_ = 1;
@@ -43,6 +45,7 @@ public:
         input_ = &create_state<string>("");
         selected_ = &create_state<size_t>(0);
         btn_flash_ = &create_state<int>(0);
+        scroll_y_ = &create_state<int>(0);
 
         text_input_option input_opt;
         input_opt.text = input_;
@@ -62,6 +65,7 @@ public:
         sv_opt.style.height = style::size_hint{style::size_hint::fixed, list_height};
         using padding = struct style::padding;
         sv_opt.style.padding = padding{0, 1};
+        sv_opt.external_scroll_y = scroll_y_;
         auto sv = scroll_view(sv_opt);
         sv_comp_ = sv.get();
         add_child(move(sv));
@@ -186,6 +190,10 @@ public:
             const size_t selected = selected_->value();
             if (selected > 0) {
                 *selected_ = selected - 1;
+                const int list_h = max(5, sys_console::instance().get_console_size().height - 7);
+                if (static_cast<int>(selected - 1) < scroll_y_->value()) {
+                    *scroll_y_ = static_cast<int>(selected - 1);
+                }
             }
             return true;
         }
@@ -194,6 +202,11 @@ public:
             const auto& v = tasks_->value();
             if (!v.empty() && selected + 1 < v.size()) {
                 *selected_ = selected + 1;
+                const int list_h = max(5, sys_console::instance().get_console_size().height - 7);
+                const int visible_h = max(1, list_h - 2);
+                if (static_cast<int>(selected + 1) >= scroll_y_->value() + visible_h) {
+                    *scroll_y_ = static_cast<int>(selected + 1) - visible_h + 1;
+                }
             }
             return true;
         }

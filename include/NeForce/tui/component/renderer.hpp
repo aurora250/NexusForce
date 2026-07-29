@@ -1,5 +1,5 @@
-#ifndef NEFORCE_TUI_RENDERER_HPP__
-#define NEFORCE_TUI_RENDERER_HPP__
+#ifndef NEFORCE_TUI_COMPONENT_RENDERER_HPP__
+#define NEFORCE_TUI_COMPONENT_RENDERER_HPP__
 
 /**
  * @file renderer.hpp
@@ -12,9 +12,15 @@
 #include "NeForce/tui/component/component.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 /**
  * @addtogroup TUI TUI
+ * @{
+ */
+
+/**
+ * @addtogroup Components 用户组件
  * @{
  */
 
@@ -61,8 +67,11 @@ unique_ptr<component_base> NEFORCE_API catch_event(unique_ptr<component_base> ch
  */
 unique_ptr<component_base> NEFORCE_API maybe(unique_ptr<component_base> child, const bool* show);
 
+/** @} */ // Components
+
 /** @} */ // TUI
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_TUI_RENDERER_HPP__
+#endif // NEFORCE_TUI_COMPONENT_RENDERER_HPP__

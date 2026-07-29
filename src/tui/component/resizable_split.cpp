@@ -1,7 +1,7 @@
 #include <NeForce/tui/component/resizable_split.hpp>
-#include <algorithm>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
     enum class split_direction {
@@ -109,5 +109,6 @@ unique_ptr<component_base> resizable_split_bottom(unique_ptr<component_base> mai
     return make_unique<resizable_split_component>(move(main), move(back), main_size, split_direction::bottom);
 }
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

@@ -1,6 +1,7 @@
 #include <NeForce/tui/component/scroll_view.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
     class scroll_view_component final : public component<> {
@@ -10,7 +11,11 @@ namespace {
 
         void setup() override {
             scroll_x_ = &create_state<int>(0);
-            scroll_y_ = &create_state<int>(0);
+            if (opt_.external_scroll_y != nullptr) {
+                scroll_y_ = opt_.external_scroll_y;
+            } else {
+                scroll_y_ = &create_state<int>(0);
+            }
         }
 
         element render() override {
@@ -34,5 +39,6 @@ namespace {
 
 unique_ptr<component_base> scroll_view(scroll_view_option opt) { return make_unique<scroll_view_component>(move(opt)); }
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

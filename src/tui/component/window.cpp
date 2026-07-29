@@ -1,6 +1,7 @@
 #include <NeForce/tui/component/window.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
     class window_component final : public component_base {
@@ -137,5 +138,6 @@ namespace {
 
 unique_ptr<component_base> window(window_options options) { return make_unique<window_component>(move(options)); }
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

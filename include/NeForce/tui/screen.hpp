@@ -214,6 +214,14 @@ public:
     NEFORCE_NODISCARD string to_string(const screen& prev) const;
 
     /**
+     * @brief 导出为纯文本（无 ANSI 转义）
+     * @return 纯文本字符串，行尾去除空白，行间换行符分隔
+     *
+     * 用于快照测试。样式信息不保留，仅输出字符内容。
+     */
+    NEFORCE_NODISCARD string to_plaintext() const;
+
+    /**
      * @brief 重置光标位置跟踪
      * @param clear 同时清空 cell 内容
      */

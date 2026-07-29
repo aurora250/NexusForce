@@ -11,9 +11,16 @@
 #include "NeForce/tui/component/component.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 /**
  * @addtogroup TUI TUI
+ * @{
+ */
+
+/**
+ * @defgroup Components 用户组件
+ * @brief 用户组件集合
  * @{
  */
 
@@ -27,8 +34,11 @@ NEFORCE_BEGIN_TUI__
 unique_ptr<component_base> NEFORCE_API collapsible(const string& title, unique_ptr<component_base> child,
                                                    bool* show = nullptr);
 
+/** @} */ // Components
+
 /** @} */ // TUI
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_TUI_COMPONENT_COLLAPSIBLE_HPP__

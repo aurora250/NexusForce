@@ -11,9 +11,15 @@
 #include "NeForce/tui/component/component.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 /**
  * @addtogroup TUI TUI
+ * @{
+ */
+
+/**
+ * @addtogroup Components 用户组件
  * @{
  */
 
@@ -31,10 +37,13 @@ struct radiobox_option {
  * @param option 配置
  * @return 组件指针
  */
-unique_ptr<component_base> NEFORCE_API Radiobox(radiobox_option option);
+unique_ptr<component_base> NEFORCE_API radiobox(radiobox_option option);
+
+/** @} */ // Components
 
 /** @} */ // TUI
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_TUI_RADIOBOX_HPP__

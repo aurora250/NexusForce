@@ -11,9 +11,15 @@
 #include "NeForce/tui/component/component.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 /**
  * @addtogroup TUI TUI
+ * @{
+ */
+
+/**
+ * @addtogroup Components 用户组件
  * @{
  */
 
@@ -38,8 +44,11 @@ struct text_input_option {
  */
 unique_ptr<component_base> NEFORCE_API text_input(text_input_option opt);
 
+/** @} */ // Components
+
 /** @} */ // TUI
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_TUI_COMPONENT_TEXT_INPUT_HPP__

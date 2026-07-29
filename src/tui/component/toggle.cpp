@@ -1,6 +1,7 @@
 #include <NeForce/tui/component/toggle.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
     class toggle_component final : public component_base {
@@ -74,5 +75,6 @@ namespace {
 
 unique_ptr<component_base> toggle(toggle_option option) { return make_unique<toggle_component>(move(option)); }
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

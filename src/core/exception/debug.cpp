@@ -1,4 +1,4 @@
-#include <NeForce/core/exception/breakpoint.hpp>
+#include <NeForce/core/exception/debug.hpp>
 #include <NeForce/core/system/console.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <debugapi.h>
@@ -34,7 +34,7 @@ bool is_debugger_present() {
 
 void debug_assert(bool condition, const char* message) {
     if (!condition) {
-        println(color::red(), "Debug assertion failed:", message);
+        eprintln("Debug assertion failed:", message);
         breakpoint_if_debugging();
     }
 }

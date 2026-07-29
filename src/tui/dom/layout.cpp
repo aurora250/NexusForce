@@ -367,9 +367,14 @@ namespace {
             }
             case element::kind::text_input: {
                 const style::wrap_mode wm = el.style().text_wrap.value_or(style::wrap_mode::none);
-                if (wm != style::wrap_mode::none && allocated_width > 0) {
-                    const int wrapped = compute_wrapped_height(el.text(), allocated_width, wm);
-                    content_h = (wrapped > 1) ? wrapped + 2 : 1;
+                if (wm != style::wrap_mode::none) {
+                    int effective_w = allocated_width > 0 ? allocated_width : measure_element_width(el);
+                    if (effective_w > 0) {
+                        const int wrapped = compute_wrapped_height(el.text(), effective_w, wm);
+                        content_h = (wrapped > 1) ? wrapped + 2 : 1;
+                    } else {
+                        content_h = 1;
+                    }
                 } else {
                     content_h = 1;
                 }
@@ -423,8 +428,8 @@ namespace {
                         total_child_h += ch;
                     }
                 } else {
-                    const int child_w_ctx = is_row ? -1 : allocated_width;
                     for (const auto& child: children) {
+                        const int child_w_ctx = is_row ? measure_element_width(child) : allocated_width;
                         int ch = measure_element_height(child, child_w_ctx);
                         max_child_h = max(max_child_h, ch);
                         total_child_h += ch;
@@ -537,8 +542,7 @@ namespace {
             }
             case element::kind::text:
             case element::kind::button:
-            case element::kind::checkbox:
-            case element::kind::text_input: {
+            case element::kind::checkbox: {
                 const int content_w = measure_element_width(el);
                 const int content_h = measure_element_height(el);
                 if (content_w > 0 && content_w < rect.w) {
@@ -551,13 +555,22 @@ namespace {
                 const style::wrap_mode wm = k == element::kind::text
                                                     ? el.wrap_mode()
                                                     : el.style().text_wrap.value_or(style::wrap_mode::none);
-                if (wm != style::wrap_mode::none && rect.w > 0) {
+                if (wm != style::wrap_mode::none && rect.w > 0 && k == element::kind::text) {
                     const int wrapped_h = compute_wrapped_height(el.text(), rect.w, wm);
-                    if (k == element::kind::text_input && wrapped_h > 1) {
-                        rect.h = max(rect.h, wrapped_h + 2);
-                    } else {
-                        rect.h = max(rect.h, wrapped_h);
-                    }
+                    rect.h = max(rect.h, wrapped_h);
+                }
+
+                out.push_back(rect);
+                return;
+            }
+            case element::kind::text_input: {
+                const int content_w = measure_element_width(el);
+                const int content_h = measure_element_height(el, rect.w);
+                if (content_w > 0 && content_w < rect.w) {
+                    rect.w = content_w;
+                }
+                if (content_h > 0 && content_h < rect.h) {
+                    rect.h = content_h;
                 }
 
                 out.push_back(rect);
@@ -925,11 +938,18 @@ namespace {
 
 
 vector<layout_rect> compute_layout(const element& element, int constraint_w, int constraint_h) {
+    if (!element.is_layout_dirty() && element.cached_constraint_w() == constraint_w &&
+        element.cached_constraint_h() == constraint_h) {
+        return element.cached_layout();
+    }
+
     vector<layout_rect> result;
     if (element.kind() == element::kind::empty) {
+        element.set_cached_layout(result, constraint_w, constraint_h);
         return result;
     }
     assign_layout(element, result, 0, 0, constraint_w, constraint_h);
+    element.set_cached_layout(result, constraint_w, constraint_h);
     return result;
 }
 

@@ -9,7 +9,7 @@
  * 包括获取迭代器特性、指针转换、前进/后退、距离计算等辅助函数。
  */
 
-#include "NeForce/core/exception/breakpoint.hpp"
+#include "NeForce/core/exception/debug.hpp"
 #include "NeForce/core/typeinfo/concepts.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

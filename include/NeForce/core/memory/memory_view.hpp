@@ -11,7 +11,7 @@
  */
 
 #include "NeForce/core/container/array.hpp"
-#include "NeForce/core/exception/breakpoint.hpp"
+#include "NeForce/core/exception/debug.hpp"
 #include "NeForce/core/iterator/normal_iterator.hpp"
 #include "NeForce/core/iterator/reverse_iterator.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"

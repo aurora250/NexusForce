@@ -11,9 +11,15 @@
 #include "NeForce/tui/component/component.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 /**
  * @addtogroup TUI TUI
+ * @{
+ */
+
+/**
+ * @addtogroup Components 用户组件
  * @{
  */
 
@@ -48,8 +54,11 @@ struct window_options {
  */
 unique_ptr<component_base> NEFORCE_API window(window_options options);
 
+/** @} */ // Components
+
 /** @} */ // TUI
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_TUI_COMPONENT_WINDOW_HPP__

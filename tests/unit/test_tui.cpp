@@ -15,14 +15,18 @@
 #include <NeForce/tui/dom/gauge.hpp>
 #include <NeForce/tui/dom/spinner.hpp>
 #include <NeForce/tui/dom/paragraph.hpp>
+#include <NeForce/tui/event_dispatcher.hpp>
+#include <NeForce/tui/focus_manager.hpp>
+#include <NeForce/tui/renderer.hpp>
 #include <NeForce/tui/screen.hpp>
 #include <NeForce/tui/events.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 using namespace neforce::tui;
+using namespace neforce::tui::components;
 
 namespace {
-    struct TestComponent : component<empty_props> {
+    struct TestComponent : component<> {
         int renderCount = 0;
 
         element render() override {
@@ -884,12 +888,14 @@ TEST(TuiContainerTest, TabWithExternalSelector) {
 }
 
 TEST(TuiRendererTest, StandaloneRenderer) {
+    using components::renderer;
     auto r = renderer([] { return element::text("custom"); });
     auto el = r->render();
     EXPECT_EQ(el.text(), "custom");
 }
 
 TEST(TuiRendererTest, RendererWithChild) {
+    using components::renderer;
     auto child = make_unique<FocusTestComp>();
     auto r = renderer(move(child), [] { return element::text("wrapped"); });
     auto el = r->render();
@@ -901,7 +907,7 @@ TEST(TuiMenuTest, RendersAllEntries) {
     opt.entries = {"Alice", "Bob", "Charlie"};
     int sel = 0;
     opt.selected = &sel;
-    auto menu = tui::menu(opt);
+    auto menu = components::menu(opt);
     auto el = menu->render();
     EXPECT_EQ(el.kind(), element::kind::vbox);
     EXPECT_EQ(el.children().size(), 3u);
@@ -915,7 +921,7 @@ TEST(TuiMenuTest, NavigateDown) {
 
     io_context ctx;
     strand s{ctx};
-    auto menu = tui::menu(opt);
+    auto menu = components::menu(opt);
 
     key_event down;
     down.key = key_event::type::down;
@@ -929,7 +935,7 @@ TEST(TuiMenuTest, NavigateUpWraps) {
     int sel = 0;
     opt.selected = &sel;
 
-    auto menu = tui::menu(opt);
+    auto menu = components::menu(opt);
 
     key_event up;
     up.key = key_event::type::up;
@@ -940,7 +946,7 @@ TEST(TuiMenuTest, NavigateUpWraps) {
 TEST(TuiRadioboxTest, RendersEntries) {
     radiobox_option opt;
     opt.entries = {"One", "Two", "Three"};
-    auto rb = Radiobox(opt);
+    auto rb = components::radiobox(opt);
     auto el = rb->render();
     EXPECT_EQ(el.children().size(), 3u);
 }
@@ -950,7 +956,7 @@ TEST(TuiToggleTest, CycleForward) {
     opt.entries = {"On", "Off"};
     int sel = 0;
     opt.selected = &sel;
-    auto tog = toggle(opt);
+    auto tog = components::toggle(opt);
 
     key_event enter;
     enter.key = key_event::type::enter;
@@ -963,7 +969,7 @@ TEST(TuiDropdownTest, InitiallyCollapsed) {
     opt.entries = {"A", "B", "C"};
     bool open = false;
     opt.open = &open;
-    auto dd = dropdown(opt);
+    auto dd = components::dropdown(opt);
     EXPECT_TRUE(dd->focusable());
 }
 
@@ -973,7 +979,7 @@ TEST(TuiModalTest, ShowsMainWhenClosed) {
     auto overlay = make_unique<FocusTestComp>();
     auto* main_raw = main.get();
     auto* overlay_raw = overlay.get();
-    auto modal = tui::modal(move(main), move(overlay), &show);
+    auto modal = components::modal(move(main), move(overlay), &show);
 
     EXPECT_EQ(modal->child_count(), 2u);
     EXPECT_EQ(modal->child_at(0), main_raw);
@@ -1052,4 +1058,396 @@ TEST(TuiAnimationTest, AnimatorReset) {
     anim.reset(100.0f, 200_ms);
     EXPECT_EQ(anim.to(), 100.0f);
     EXPECT_FALSE(anim.is_done());
+}
+
+TEST(TuiScreenPlaintextTest, EmptyScreen) {
+    screen s(10, 5);
+    s.clear();
+    string plain = s.to_plaintext();
+    EXPECT_TRUE(plain.find_first_not_of('\n') == string::npos);
+}
+
+TEST(TuiScreenPlaintextTest, SingleChar) {
+    screen s(10, 3);
+    s.clear();
+    s.fast_cell_at(0, 0).character = "X";
+    string plain = s.to_plaintext();
+    EXPECT_EQ(plain, "X");
+}
+
+TEST(TuiScreenPlaintextTest, MultiLine) {
+    screen s(10, 4);
+    s.clear();
+    s.fast_cell_at(2, 0).character = "A";
+    s.fast_cell_at(5, 2).character = "B";
+    string plain = s.to_plaintext();
+    EXPECT_NE(plain.find("A"), string::npos);
+    EXPECT_NE(plain.find("B"), string::npos);
+}
+
+TEST(TuiScreenPlaintextTest, TrailingSpacesTrimmed) {
+    screen s(20, 2);
+    s.clear();
+    s.fast_cell_at(0, 0).character = "H";
+    s.fast_cell_at(1, 0).character = "i";
+    string plain = s.to_plaintext();
+    EXPECT_EQ(plain, "Hi");
+}
+
+TEST(TuiScreenPlaintextTest, AutomergedCellsSkipped) {
+    screen s(10, 2);
+    s.clear();
+    s.fast_cell_at(0, 0).character = "\xe4\xb8\xad";
+    s.fast_cell_at(1, 0).automerge = true;
+    string plain = s.to_plaintext();
+    EXPECT_EQ(plain, "\xe4\xb8\xad");
+}
+
+TEST(TuiRendererTest, RenderSingleText) {
+    using tui::renderer;
+    screen scr(80, 24);
+    scr.clear();
+    renderer r(scr, dark_theme, 80, 24);
+    auto tree = element::text("hello");
+    auto layout = compute_layout(tree, 80, 24);
+    r.render(tree, layout, false);
+    EXPECT_EQ(scr.fast_cell_at(0, 0).character, "h");
+    EXPECT_EQ(scr.fast_cell_at(1, 0).character, "e");
+}
+
+TEST(TuiRendererTest, RenderTextBlockNoWrap) {
+    using tui::renderer;
+    screen scr(40, 10);
+    scr.clear();
+    renderer r(scr, dark_theme, 40, 10);
+    int end_x = 0, end_y = 0;
+    r.render_text_block(0, 0, 10, 2, "hello world", style{}, style::wrap_mode::none, &end_x, &end_y);
+    EXPECT_GT(end_x, 0);
+    EXPECT_EQ(end_y, 0);
+}
+
+TEST(TuiRendererTest, RenderTextBlockCharWrap) {
+    using tui::renderer;
+    screen scr(40, 10);
+    scr.clear();
+    renderer r(scr, dark_theme, 40, 10);
+    int end_y = 0;
+    r.render_text_block(0, 0, 3, 10, "abcdef", style{}, style::wrap_mode::character, nullptr, &end_y);
+    EXPECT_GT(end_y, 0);
+}
+
+TEST(TuiRendererTest, RenderTextBlockWordWrap) {
+    using tui::renderer;
+    screen scr(40, 10);
+    scr.clear();
+    renderer r(scr, dark_theme, 40, 10);
+    int end_y = 0;
+    r.render_text_block(0, 0, 5, 10, "hello world foo", style{}, style::wrap_mode::word, nullptr, &end_y);
+    EXPECT_GT(end_y, 0);
+}
+
+TEST(TuiRendererTest, ApplyBorderSingle) {
+    using tui::renderer;
+    screen scr(20, 10);
+    scr.clear();
+    renderer r(scr, dark_theme, 20, 10);
+    r.apply_border(0, 0, 5, 3, style::border::single, color::white());
+    EXPECT_NE(scr.fast_cell_at(0, 0).character, " ");
+    EXPECT_NE(scr.fast_cell_at(4, 2).character, " ");
+}
+
+TEST(TuiRendererTest, ApplyBorderDouble) {
+    using tui::renderer;
+    screen scr(20, 10);
+    scr.clear();
+    renderer r(scr, dark_theme, 20, 10);
+    r.apply_border(0, 0, 5, 3, style::border::double_, color::white());
+    EXPECT_NE(scr.fast_cell_at(0, 0).character, " ");
+}
+
+TEST(TuiRendererTest, ApplyBorderRounded) {
+    using tui::renderer;
+    screen scr(20, 10);
+    scr.clear();
+    renderer r(scr, dark_theme, 20, 10);
+    r.apply_border(0, 0, 5, 3, style::border::rounded, color::white());
+    EXPECT_NE(scr.fast_cell_at(0, 0).character, " ");
+}
+
+TEST(TuiRendererTest, ApplyBorderNoneNoop) {
+    using tui::renderer;
+    screen scr(20, 10);
+    scr.clear();
+    renderer r(scr, dark_theme, 20, 10);
+    r.apply_border(0, 0, 5, 3, style::border::none, color::white());
+    EXPECT_EQ(scr.fast_cell_at(0, 0).character, " ");
+}
+
+TEST(TuiRendererTest, ApplyStyleToCellFg) {
+    using tui::renderer;
+    screen scr(1, 1);
+    cell c;
+    renderer r(scr, dark_theme, 1, 1);
+    style s;
+    s.fg = color::red();
+    r.apply_style_to_cell(c, s);
+    EXPECT_EQ(c.foreground, color::red());
+}
+
+TEST(TuiRendererTest, ApplyStyleToCellBold) {
+    using tui::renderer;
+    screen scr(1, 1);
+    cell c;
+    renderer r(scr, dark_theme, 1, 1);
+    style s;
+    s.bold = true;
+    r.apply_style_to_cell(c, s);
+    EXPECT_TRUE(c.bold);
+}
+
+TEST(TuiRendererTest, RenderButton) {
+    using tui::renderer;
+    screen scr(30, 10);
+    scr.clear();
+    renderer r(scr, dark_theme, 30, 10);
+    r.render_button(0, 0, 10, 3, "OK", style{}, dark_theme, style::variant::primary);
+    EXPECT_NE(scr.fast_cell_at(0, 0).character, " ");
+}
+
+TEST(TuiRendererTest, RenderCheckbox) {
+    using tui::renderer;
+    screen scr(20, 5);
+    scr.clear();
+    renderer r(scr, dark_theme, 20, 5);
+    r.render_checkbox(0, 0, 10, 1, "Option", true, style{});
+    string plain = scr.to_plaintext();
+    EXPECT_NE(plain.find("[x]"), string::npos);
+}
+
+TEST(TuiRendererTest, RenderSeparator) {
+    using tui::renderer;
+    screen scr(20, 5);
+    scr.clear();
+    renderer r(scr, dark_theme, 20, 5);
+    r.render_separator(0, 0, 10);
+    EXPECT_EQ(scr.fast_cell_at(0, 0).character, "-");
+    EXPECT_EQ(scr.fast_cell_at(5, 0).character, "-");
+}
+
+TEST(TuiRendererTest, RenderVBox) {
+    using tui::renderer;
+    screen scr(40, 10);
+    scr.clear();
+    renderer r(scr, dark_theme, 40, 10);
+    auto tree = element::vbox({element::text("A"), element::text("B")});
+    auto layout = compute_layout(tree, 40, 10);
+    r.render(tree, layout, false);
+    string plain = scr.to_plaintext();
+    EXPECT_NE(plain.find("A"), string::npos);
+    EXPECT_NE(plain.find("B"), string::npos);
+}
+
+TEST(TuiRendererTest, ScrollbarHitsCollected) {
+    using tui::renderer;
+    screen scr(40, 20);
+    scr.clear();
+    renderer r(scr, dark_theme, 40, 20);
+    auto inner = element::vbox({element::text(string(100, 'x'))});
+    auto sv = element::scroll_view(move(inner));
+    auto layout = compute_layout(sv, 40, 20);
+    r.render(sv, layout, false);
+    EXPECT_FALSE(r.scrollbar_hits().empty());
+}
+
+TEST(TuiRendererTest, EmptyTreeNoop) {
+    using tui::renderer;
+    screen scr(40, 10);
+    scr.clear();
+    renderer r(scr, dark_theme, 40, 10);
+    auto tree = element::empty();
+    auto layout = compute_layout(tree, 40, 10);
+    r.render(tree, layout, false);
+    string plain = scr.to_plaintext();
+    EXPECT_TRUE(plain.find_first_not_of('\n') == string::npos);
+}
+
+TEST(TuiFocusManagerTest, DefaultState) {
+    focus_manager fm;
+    EXPECT_EQ(fm.focused(), nullptr);
+    EXPECT_TRUE(fm.chain().empty());
+    EXPECT_TRUE(fm.is_chain_dirty());
+}
+
+TEST(TuiFocusManagerTest, SetFocus) {
+    focus_manager fm;
+    TestComponent comp;
+    fm.set_focus(&comp);
+    EXPECT_EQ(fm.focused(), &comp);
+}
+
+TEST(TuiFocusManagerTest, SetFocusSameNoop) {
+    focus_manager fm;
+    TestComponent comp;
+    fm.set_focus(&comp);
+    fm.set_focus(&comp);
+    EXPECT_EQ(fm.focused(), &comp);
+}
+
+TEST(TuiFocusManagerTest, SetFocusNull) {
+    focus_manager fm;
+    TestComponent comp;
+    fm.set_focus(&comp);
+    fm.set_focus(nullptr);
+    EXPECT_EQ(fm.focused(), nullptr);
+}
+
+TEST(TuiFocusManagerTest, MarkChainDirty) {
+    focus_manager fm;
+    EXPECT_TRUE(fm.is_chain_dirty());
+    fm.mark_chain_dirty();
+    EXPECT_TRUE(fm.is_chain_dirty());
+}
+
+TEST(TuiEventDispatcherTest, DispatchKeyTab) {
+    focus_manager fm;
+    event_dispatcher ed(fm);
+    TestComponent root;
+
+    bool dirty_marked = false;
+    ed.set_dirty_callback([&] { dirty_marked = true; });
+
+    key_event tab;
+    tab.key = key_event::type::tab;
+    bool handled = ed.dispatch_key(tab, &root);
+    EXPECT_TRUE(handled);
+    EXPECT_TRUE(dirty_marked);
+}
+
+TEST(TuiEventDispatcherTest, DispatchKeyShiftTab) {
+    focus_manager fm;
+    event_dispatcher ed(fm);
+    TestComponent root;
+
+    key_event stab;
+    stab.key = key_event::type::tab_reverse;
+    bool handled = ed.dispatch_key(stab, &root);
+    EXPECT_TRUE(handled);
+}
+
+TEST(TuiEventDispatcherTest, DispatchKeyNullRoot) {
+    focus_manager fm;
+    event_dispatcher ed(fm);
+    key_event ev;
+    ev.key = key_event::type::tab;
+    EXPECT_FALSE(ed.dispatch_key(ev, nullptr));
+}
+
+TEST(TuiEventDispatcherTest, DispatchMouseRelease) {
+    focus_manager fm;
+    event_dispatcher ed(fm);
+    mouse_event me;
+    me.action = mouse_action::release;
+    me.x = 0;
+    me.y = 0;
+    vector<layout_rect> layout;
+    element tree = element::empty();
+    vector<scrollbar_hit> hits;
+    EXPECT_FALSE(ed.dispatch_mouse(me, nullptr, layout, tree, hits));
+}
+
+TEST(TuiEventDispatcherTest, SetDirtyCallback) {
+    focus_manager fm;
+    event_dispatcher ed(fm);
+    bool called = false;
+    ed.set_dirty_callback([&] { called = true; });
+
+    TestComponent root;
+    key_event ev;
+    ev.key = key_event::type::tab;
+    ed.dispatch_key(ev, &root);
+    EXPECT_TRUE(called);
+}
+
+TEST(TuiLayoutCacheTest, InitialDirty) {
+    auto tree = element::text("hello");
+    EXPECT_TRUE(tree.is_layout_dirty());
+}
+
+TEST(TuiLayoutCacheTest, CacheAfterCompute) {
+    auto tree = element::text("hello");
+    auto result = compute_layout(tree, 80, 24);
+    EXPECT_FALSE(tree.is_layout_dirty());
+    EXPECT_EQ(tree.cached_constraint_w(), 80);
+    EXPECT_EQ(tree.cached_constraint_h(), 24);
+}
+
+TEST(TuiLayoutCacheTest, CacheReused) {
+    auto tree = element::text("hello");
+    auto r1 = compute_layout(tree, 80, 24);
+    auto r2 = compute_layout(tree, 80, 24);
+    EXPECT_EQ(r1.size(), r2.size());
+    EXPECT_FALSE(tree.is_layout_dirty());
+}
+
+TEST(TuiLayoutCacheTest, ConstraintChangeInvalidates) {
+    auto tree = element::text("hello");
+    auto r1 = compute_layout(tree, 80, 24);
+    EXPECT_FALSE(tree.is_layout_dirty());
+    EXPECT_EQ(tree.cached_constraint_w(), 80);
+    EXPECT_EQ(tree.cached_constraint_h(), 24);
+    auto r2 = compute_layout(tree, 40, 10);
+    EXPECT_FALSE(tree.is_layout_dirty());
+    EXPECT_EQ(tree.cached_constraint_w(), 40);
+    EXPECT_EQ(tree.cached_constraint_h(), 10);
+}
+
+TEST(TuiLayoutCacheTest, WithStyleMarksDirty) {
+    auto tree = element::text("hello");
+    compute_layout(tree, 80, 24);
+    EXPECT_FALSE(tree.is_layout_dirty());
+
+    style s;
+    s.bold = true;
+    tree = tree | bold();
+    EXPECT_TRUE(tree.is_layout_dirty());
+}
+
+TEST(TuiLayoutCacheTest, EmptyElementCache) {
+    auto tree = element::empty();
+    auto result = compute_layout(tree, 80, 24);
+    EXPECT_TRUE(result.empty());
+    EXPECT_FALSE(tree.is_layout_dirty());
+}
+
+TEST(TuiLayoutCacheTest, NestedLayoutCache) {
+    auto tree = element::vbox({element::text("A"), element::text("B")});
+    auto result = compute_layout(tree, 80, 24);
+    EXPECT_EQ(result.size(), 2u);
+    EXPECT_FALSE(tree.is_layout_dirty());
+}
+
+TEST(TuiRendererHitTest, FindElementAtText) {
+    auto tree = element::text("hello");
+    auto layout = compute_layout(tree, 80, 24);
+    int idx = 0;
+    auto* hit = find_element_at(layout, tree, 0, 0, idx);
+    EXPECT_NE(hit, nullptr);
+}
+
+TEST(TuiRendererHitTest, FindElementAtMiss) {
+    auto tree = element::text("hello");
+    auto layout = compute_layout(tree, 80, 24);
+    int idx = 0;
+    auto* hit = find_element_at(layout, tree, 100, 100, idx);
+    EXPECT_EQ(hit, nullptr);
+}
+
+TEST(TuiRendererHitTest, HitTestAtReturnsOwner) {
+    auto tree = element::text("hello");
+    TestComponent comp;
+    tree.set_owner(&comp);
+    auto layout = compute_layout(tree, 80, 24);
+    int idx = 0;
+    auto* hit = hit_test_at(layout, tree, 0, 0, idx, nullptr);
+    EXPECT_EQ(hit, &comp);
 }

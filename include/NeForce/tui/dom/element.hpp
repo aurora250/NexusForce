@@ -11,6 +11,7 @@
 
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
+#include "NeForce/tui/dom/layout_types.hpp"
 #include "NeForce/tui/dom/style.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -107,6 +108,14 @@ public:
     element& with_scroll_x_state(void* s);
     NEFORCE_NODISCARD void* scroll_y_state() const noexcept;
     element& with_scroll_y_state(void* s);
+
+    NEFORCE_NODISCARD bool is_layout_dirty() const noexcept;
+    void set_layout_dirty(bool dirty);
+
+    NEFORCE_NODISCARD const vector<layout_rect>& cached_layout() const noexcept;
+    void set_cached_layout(const vector<layout_rect>& layout, int constraint_w, int constraint_h) const;
+    NEFORCE_NODISCARD int cached_constraint_w() const noexcept;
+    NEFORCE_NODISCARD int cached_constraint_h() const noexcept;
 
     static element empty();
     static element vbox(vector<element> children, box_props props = {});

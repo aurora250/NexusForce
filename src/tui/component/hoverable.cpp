@@ -1,6 +1,7 @@
 #include <NeForce/tui/component/hoverable.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
     class hoverable_component final : public component_base {
@@ -69,5 +70,6 @@ unique_ptr<component_base> hoverable(unique_ptr<component_base> child, bool* hov
     return make_unique<hoverable_component>(move(child), nullptr, nullptr, hovered);
 }
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

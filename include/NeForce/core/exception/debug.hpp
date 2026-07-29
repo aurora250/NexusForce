@@ -1,8 +1,8 @@
-#ifndef NEFORCE_CORE_EXCEPTION_BREAKPOINT_HPP__
-#define NEFORCE_CORE_EXCEPTION_BREAKPOINT_HPP__
+#ifndef NEFORCE_CORE_EXCEPTION_DEBUG_HPP__
+#define NEFORCE_CORE_EXCEPTION_DEBUG_HPP__
 
 /**
- * @file breakpoint.hpp
+ * @file debug.hpp
  * @brief 调试断点和断言工具
  *
  * 此文件提供了跨平台的调试断点触发和调试断言功能。
@@ -13,8 +13,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup DebugBreakpointsAndAssertions 调试与断言
- * @brief 调试断点和断言工具
+ * @defgroup DebugAndAssertions 调试与断言
+ * @brief 调试和断言工具
  * @{
  */
 
@@ -140,7 +140,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void breakpoint_if_debugging() {
     }
 }
 
-/** @} */ // DebugBreakpointsAndAssertions
+/** @} */ // DebugAndAssertions
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_CORE_EXCEPTION_BREAKPOINT_HPP__
+#endif // NEFORCE_CORE_EXCEPTION_DEBUG_HPP__

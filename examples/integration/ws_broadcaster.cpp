@@ -12,7 +12,7 @@ void WsBroadcaster::add_session(websocket_server::session_ptr session) {
     sessions_.push_back(session);
 }
 
-void WsBroadcaster::broadcast(const string& event, const task& task) {
+void WsBroadcaster::broadcast(const string& event, const Task& task) {
     reflect::meta_any obj(task);
     auto json_str = serialize::json_serializer::serialize(obj);
 

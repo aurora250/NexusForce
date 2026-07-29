@@ -10,7 +10,7 @@
 
 #include "NeForce/core/async/atomic_wait.hpp"
 #include "NeForce/core/async/memory_order.hpp"
-#include "NeForce/core/exception/breakpoint.hpp"
+#include "NeForce/core/exception/debug.hpp"
 #ifdef NEFORCE_COMPILER_MSVC
 #    include <intrin.h>
 #endif

@@ -11,6 +11,7 @@
 
 #include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/exception/source_loc.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/core/time/datetime.hpp"
 #ifdef ERROR
@@ -98,22 +99,6 @@ NEFORCE_CONSTEXPR20 string to_string(const log_level level) {
             unreachable();
     }
 }
-
-/**
- * @struct source_loc
- * @brief 源码位置信息
- *
- * 使用 string_view 避免堆分配，由 NEFORCE_SOURCE_LOC() 宏自动构造。
- */
-struct source_loc {
-    string_view file; ///< 源文件名（__FILE__）
-    string_view func; ///< 函数名（__func__）
-    int line;         ///< 行号（__LINE__）
-};
-
-/** @brief 构造 source_loc 的便捷宏 */
-#define NEFORCE_SOURCE_LOC() \
-    _NEFORCE source_loc { __FILE__, __func__, __LINE__ }
 
 
 /**

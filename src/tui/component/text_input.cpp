@@ -1,6 +1,7 @@
 #include <NeForce/tui/component/text_input.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
     size_t utf8_next(const string& s, size_t pos) {
@@ -23,7 +24,6 @@ namespace {
         return pos + 1;
     }
 
-    // retreat byte position by one UTF-8 codepoint
     size_t utf8_prev(const string& s, size_t pos) {
         if (pos == 0) {
             return 0;
@@ -188,5 +188,6 @@ namespace {
 
 unique_ptr<component_base> text_input(text_input_option opt) { return make_unique<text_input_component>(move(opt)); }
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

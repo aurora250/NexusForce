@@ -1,8 +1,8 @@
-#ifndef NEFORCE_TUI_APP_HPP__
-#define NEFORCE_TUI_APP_HPP__
+#ifndef NEFORCE_TUI_APPLICATION_HPP__
+#define NEFORCE_TUI_APPLICATION_HPP__
 
 /**
- * @file app.hpp
+ * @file application.hpp
  * @brief TUI应用程序入口
  *
  * 驱动主事件循环。
@@ -114,4 +114,4 @@ private:
 
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_TUI_APP_HPP__
+#endif // NEFORCE_TUI_APPLICATION_HPP__

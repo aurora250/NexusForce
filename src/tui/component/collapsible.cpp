@@ -1,6 +1,7 @@
 #include <NeForce/tui/component/collapsible.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
     class collapsible_component final : public component_base {
@@ -50,5 +51,6 @@ unique_ptr<component_base> collapsible(const string& title, unique_ptr<component
     return make_unique<collapsible_component>(title, move(child), show);
 }
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

@@ -10,7 +10,7 @@
  */
 
 #include <new>
-#include "NeForce/core/exception/breakpoint.hpp"
+#include "NeForce/core/exception/debug.hpp"
 #include "NeForce/core/exception/exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

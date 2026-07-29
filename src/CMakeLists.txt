@@ -26,7 +26,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/sha1.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/sha256.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/xor.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/breakpoint.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/debug.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/error_category.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/error_code.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
@@ -184,9 +184,12 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/spinner.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/style.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/table.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/app.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/application.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/input.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/event_dispatcher.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/focus_manager.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/reconciler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/renderer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/screen.cpp
 )
 

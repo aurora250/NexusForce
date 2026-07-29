@@ -314,6 +314,7 @@ public:
 
 protected:
     friend class reconciler;
+    friend class focus_manager;
     friend class application;
 
     component_base* parent_ = nullptr;            ///< 父组件指针
@@ -388,6 +389,7 @@ protected:
 
 private:
     friend class reconciler;
+    friend class focus_manager;
     friend class application;
 
     props_type props_;

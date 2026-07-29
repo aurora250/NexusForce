@@ -12,9 +12,15 @@
 #include "NeForce/tui/dom/ref.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
+NEFORCE_BEGIN_COMPONENTS__
 
 /**
  * @addtogroup TUI TUI
+ * @{
+ */
+
+/**
+ * @addtogroup Components 用户组件
  * @{
  */
 
@@ -35,8 +41,11 @@ struct dropdown_option {
  */
 unique_ptr<component_base> NEFORCE_API dropdown(dropdown_option option);
 
+/** @} */ // Components
+
 /** @} */ // TUI
 
+NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_TUI_DROPDOWN_HPP__

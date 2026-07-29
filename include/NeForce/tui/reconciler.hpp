@@ -6,12 +6,16 @@
  * @brief 差分渲染引擎
  *
  * reconciler 是 TUI 框架的渲染调度核心——
- * 调用组件 render() 获取元素树，与旧树 diff，生成最小 ANSI 更新。
+ * 协调渲染器、焦点管理器、事件分发器，
+ * 调用组件 render() 获取元素树，计算布局，生成最小 ANSI 更新。
  */
 
 #include "NeForce/core/system/console.hpp"
 #include "NeForce/tui/component/component.hpp"
 #include "NeForce/tui/dom/layout.hpp"
+#include "NeForce/tui/event_dispatcher.hpp"
+#include "NeForce/tui/focus_manager.hpp"
+#include "NeForce/tui/renderer.hpp"
 #include "NeForce/tui/screen.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -24,6 +28,7 @@ NEFORCE_BEGIN_TUI__
 /**
  * @brief 差分渲染引擎
  *
+ * 编排渲染管线：组件树 → 元素树 → 布局 → 屏幕渲染 → ANSI 输出。
  * 最小化 ANSI 写入操作，仅更新变化区域。
  */
 class NEFORCE_API reconciler {
@@ -77,7 +82,7 @@ public:
     bool dispatch_mouse(const mouse_event& e);
 
     /**
-     * @brief 有脏标记则执行 diff + 渲染
+     * @brief 有脏标记则执行渲染管线
      */
     void flush();
 
@@ -94,81 +99,36 @@ public:
 
     /**
      * @brief 应用主题
-     * @param theme 主题
+     * @param t 主题
      */
-    void set_theme(const theme& theme) { theme_ = theme; }
+    void set_theme(const theme& t);
 
 private:
     sys_console& console_;
     strand& strand_;
     io_context& ctx_;
     component_base* root_ = nullptr;
-    component_base* focused_ = nullptr;
-    component_base* last_mouse_target_ = nullptr;
-    vector<component_base*> focus_chain_;
 
-    element prev_tree_;
-    vector<layout_rect> prev_layout_;
     int term_w_ = 80;
     int term_h_ = 24;
-    bool dirty_ = true;
-    bool mounted_ = false;
-    bool update_pending_ = false;
-    bool rendering_ = false;
     theme theme_{dark_theme};
-
-    struct clip_rect {
-        int x, y, w, h;
-    };
-    vector<clip_rect> clip_stack_;
-
-    struct scrollbar_hit {
-        void* scroll_state;
-        int track_x;
-        int track_y;
-        int track_h;
-        int thumb_pos;
-        int thumb_size;
-        int content_h;
-        int sv_x;
-        int sv_w;
-        bool vertical;
-    };
-    vector<scrollbar_hit> scrollbar_hits_;
-    void* dragging_scroll_state_ = nullptr;
-    int drag_anchor_y_ = 0;
-    int drag_anchor_scroll_ = 0;
 
     screen current_screen_{80, 24};
     screen prev_screen_{80, 24};
 
+    focus_manager focus_mgr_;
+    event_dispatcher event_dispatcher_;
+    renderer renderer_;
+
+    element prev_tree_;
+    vector<layout_rect> prev_layout_;
+    bool dirty_ = true;
+    bool mounted_ = false;
+    bool update_pending_ = false;
+    bool rendering_ = false;
+
     void refresh_term_size();
     void setup_tree(component_base* comp);
-    void build_focus_chain();
-
-    void focus_next();
-    void focus_prev();
-    void set_focus(component_base* comp);
-
-    void render_subtree(const element& el, const vector<layout_rect>& layout, int& idx);
-
-    void render_text_block(int x, int y, int w, int h, const string& text, const tui::style& style, style::wrap_mode wm,
-                           int* out_end_x = nullptr, int* out_end_y = nullptr);
-
-    void apply_clear(int x, int y, int w, int h);
-    void apply_text(int x, int y, const string& text, const style& style);
-    void apply_text(int x, int y, const string& text, const style& style, int max_x);
-    void apply_border(int x, int y, int w, int h, enum style::border border, const _NEFORCE color& c);
-    void apply_style_to_cell(cell& cell, const style& style);
-
-    void render_button(int x, int y, int w, int h, const string& label, const style& style, const tui::theme& theme,
-                       style::variant variant);
-    void render_checkbox(int x, int y, int w, int h, const string& label, bool checked, const style& style);
-    void render_separator(int x, int y, int w);
-
-    void clear_element_area(const element& el, const vector<layout_rect>& layout, int& idx);
-    const element* find_element_at(const vector<layout_rect>& layout, const element& tree, int mx, int my, int& idx);
-    component_base* hit_test_at(const vector<layout_rect>& layout, const element& tree, int mx, int my, int& idx);
 };
 
 /** @} */ // TUI
