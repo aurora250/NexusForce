@@ -53,6 +53,9 @@
 - 添加 TUI DOM 辅助元素：`gauge` 进度条、`graph` 折线/柱状图、`paragraph` 自动换行文本、`spinner` 加载动画、`scroll_indicator` 滚动条、`linear_gradient` 多色渐变、`table` 声明式表格构建器
 - 添加 TUI 组件系统：`component_base` / `component<P>` 基类（焦点管理 / 上下文注入 / 子组件树）、`container` 容器（垂直 / 水平 / 层叠）、`menu` 菜单列表、`dropdown` 下拉选择、`radiobox` 单选组、`toggle` 切换开关、`slider` 滑块、`text_input` 文本输入（UTF-8 感知光标 + 闪烁）、`scroll_view` 滚动视图、`window` 浮动窗口、`modal` 模态覆盖层、`collapsible` 折叠面板、`hoverable` 鼠标悬停检测、`resizable_split` 可拖拽分割面板、`renderer` 渲染辅助（含 `catch_event` / `maybe` 条件渲染）
 - 添加 TUI 动画系统：`animator` 属性动画器 + `easing` 缓动函数（linear / quadratic / cubic / sine / elastic / bounce）
+- 添加 `charset` 字符集工具类，支持集合运算与 ASCII 预定义字符集
+- 添加 `string_builder` 字符串构建器，延迟拼接策略实现单次分配输出，提供 `concatenate()` 自由函数
+- `basic_string` / `basic_string_view` 添加 `charset` 重载
 
 ### 🔧 Improvements
 

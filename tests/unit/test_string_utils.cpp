@@ -2,6 +2,8 @@
 #include <NeForce/core/string/regex.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/string/utf_iterator.hpp>
+#include <NeForce/core/string/charset.hpp>
+#include <NeForce/core/string/string_builder.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 
@@ -1959,4 +1961,553 @@ TEST_F(UTF8IteratorTest, ArrowOperator) {
     auto it = range.begin();
     EXPECT_EQ(it->value(), 0x58u);
     EXPECT_TRUE(it->is_ascii());
+}
+
+class CharsetTest : public ::testing::Test {};
+class StringBuilderTest : public ::testing::Test {};
+class CharsetIntegrationTest : public ::testing::Test {};
+
+TEST_F(CharsetTest, DefaultConstructor) {
+    charset cs;
+    EXPECT_TRUE(cs.empty());
+    for (int i = 0; i < 256; ++i) {
+        EXPECT_FALSE(cs.contains(static_cast<char>(i)));
+    }
+}
+
+TEST_F(CharsetTest, FromChar) {
+    auto cs = charset::from_char('A');
+    EXPECT_TRUE(cs.contains('A'));
+    EXPECT_FALSE(cs.contains('B'));
+    EXPECT_FALSE(cs.empty());
+}
+
+TEST_F(CharsetTest, FromCharBoundary) {
+    auto cs0 = charset::from_char(static_cast<char>(0));
+    EXPECT_TRUE(cs0.contains(static_cast<char>(0)));
+    EXPECT_FALSE(cs0.contains(static_cast<char>(1)));
+
+    auto cs255 = charset::from_char(static_cast<char>(255));
+    EXPECT_TRUE(cs255.contains(static_cast<char>(255)));
+    EXPECT_FALSE(cs255.contains(static_cast<char>(254)));
+}
+
+TEST_F(CharsetTest, Range) {
+    auto cs = charset::range('a', 'z');
+    for (int c = 'a'; c <= 'z'; ++c) {
+        EXPECT_TRUE(cs.contains(static_cast<char>(c)));
+    }
+    EXPECT_FALSE(cs.contains('A'));
+    EXPECT_FALSE(cs.contains('0'));
+    EXPECT_FALSE(cs.contains(static_cast<char>(0)));
+}
+
+TEST_F(CharsetTest, RangeSingle) {
+    auto cs = charset::range('X', 'X');
+    EXPECT_TRUE(cs.contains('X'));
+    EXPECT_FALSE(cs.contains('W'));
+    EXPECT_FALSE(cs.contains('Y'));
+}
+
+TEST_F(CharsetTest, RangeReversed) {
+    auto cs = charset::range('z', 'a');
+    EXPECT_TRUE(cs.empty());
+}
+
+TEST_F(CharsetTest, RangeFull) {
+    auto cs = charset::range(static_cast<char>(0), static_cast<char>(255));
+    for (int i = 0; i < 256; ++i) {
+        EXPECT_TRUE(cs.contains(static_cast<char>(i)));
+    }
+}
+
+TEST_F(CharsetTest, RangeBoundaryWords) {
+    {
+        auto cs = charset::range(static_cast<char>(63), static_cast<char>(64));
+        EXPECT_TRUE(cs.contains(static_cast<char>(63)));
+        EXPECT_TRUE(cs.contains(static_cast<char>(64)));
+        EXPECT_FALSE(cs.contains(static_cast<char>(62)));
+        EXPECT_FALSE(cs.contains(static_cast<char>(65)));
+    }
+    {
+        auto cs = charset::range(static_cast<char>(127), static_cast<char>(128));
+        EXPECT_TRUE(cs.contains(static_cast<char>(127)));
+        EXPECT_TRUE(cs.contains(static_cast<char>(128)));
+        EXPECT_FALSE(cs.contains(static_cast<char>(126)));
+        EXPECT_FALSE(cs.contains(static_cast<char>(129)));
+    }
+    {
+        auto cs = charset::range(static_cast<char>(191), static_cast<char>(192));
+        EXPECT_TRUE(cs.contains(static_cast<char>(191)));
+        EXPECT_TRUE(cs.contains(static_cast<char>(192)));
+        EXPECT_FALSE(cs.contains(static_cast<char>(190)));
+        EXPECT_FALSE(cs.contains(static_cast<char>(193)));
+    }
+}
+
+TEST_F(CharsetTest, Insert) {
+    charset cs;
+    cs.insert('!');
+    EXPECT_TRUE(cs.contains('!'));
+    EXPECT_FALSE(cs.empty());
+    cs.insert('!');
+    EXPECT_TRUE(cs.contains('!'));
+}
+
+TEST_F(CharsetTest, Erase) {
+    auto cs = charset::range('a', 'e');
+    cs.erase('c');
+    EXPECT_TRUE(cs.contains('a'));
+    EXPECT_TRUE(cs.contains('b'));
+    EXPECT_FALSE(cs.contains('c'));
+    EXPECT_TRUE(cs.contains('d'));
+    EXPECT_TRUE(cs.contains('e'));
+    cs.erase('z');
+    EXPECT_FALSE(cs.contains('z'));
+}
+
+TEST_F(CharsetTest, Union) {
+    auto a = charset::from_char('A');
+    auto b = charset::from_char('B');
+    auto u = a | b;
+    EXPECT_TRUE(u.contains('A'));
+    EXPECT_TRUE(u.contains('B'));
+    EXPECT_FALSE(u.contains('C'));
+}
+
+TEST_F(CharsetTest, Intersection) {
+    auto lower = charset::range('a', 'z');
+    auto vowels = charset::from_char('a') | charset::from_char('e') | charset::from_char('i') |
+                  charset::from_char('o') | charset::from_char('u');
+    auto result = lower & vowels;
+    EXPECT_TRUE(result.contains('a'));
+    EXPECT_TRUE(result.contains('e'));
+    EXPECT_FALSE(result.contains('b'));
+}
+
+TEST_F(CharsetTest, Complement) {
+    auto digits = charset::ascii_digit();
+    auto non_digits = ~digits;
+    EXPECT_FALSE(non_digits.contains('0'));
+    EXPECT_FALSE(non_digits.contains('9'));
+    EXPECT_TRUE(non_digits.contains('a'));
+    EXPECT_TRUE(non_digits.contains('!'));
+}
+
+TEST_F(CharsetTest, Difference) {
+    auto alnum = charset::ascii_alnum();
+    auto digits = charset::ascii_digit();
+    auto alpha = alnum - digits;
+    EXPECT_TRUE(alpha.contains('a'));
+    EXPECT_TRUE(alpha.contains('Z'));
+    EXPECT_FALSE(alpha.contains('0'));
+    EXPECT_FALSE(alpha.contains('9'));
+}
+
+TEST_F(CharsetTest, CompoundAssign) {
+    auto cs = charset::from_char('A');
+    cs |= charset::from_char('B');
+    EXPECT_TRUE(cs.contains('A'));
+    EXPECT_TRUE(cs.contains('B'));
+
+    cs &= charset::from_char('B');
+    EXPECT_FALSE(cs.contains('A'));
+    EXPECT_TRUE(cs.contains('B'));
+
+    cs -= charset::from_char('B');
+    EXPECT_TRUE(cs.empty());
+}
+
+TEST_F(CharsetTest, Equality) {
+    auto a = charset::range('0', '9');
+    auto b = charset::range('0', '9');
+    auto c = charset::range('a', 'z');
+    EXPECT_EQ(a, b);
+    EXPECT_NE(a, c);
+    EXPECT_EQ(a, a);
+}
+
+TEST_F(CharsetTest, PredefinedAlpha) {
+    auto cs = charset::ascii_alpha_lower();
+    EXPECT_TRUE(cs.contains('a'));
+    EXPECT_TRUE(cs.contains('z'));
+    EXPECT_FALSE(cs.contains('A'));
+    EXPECT_FALSE(cs.contains('Z'));
+    EXPECT_FALSE(cs.contains('0'));
+}
+
+TEST_F(CharsetTest, PredefinedAlphaUpper) {
+    auto cs = charset::ascii_alpha_upper();
+    EXPECT_TRUE(cs.contains('A'));
+    EXPECT_TRUE(cs.contains('Z'));
+    EXPECT_FALSE(cs.contains('a'));
+    EXPECT_FALSE(cs.contains('z'));
+}
+
+TEST_F(CharsetTest, PredefinedAlphaCombined) {
+    auto cs = charset::ascii_alpha();
+    EXPECT_TRUE(cs.contains('a'));
+    EXPECT_TRUE(cs.contains('z'));
+    EXPECT_TRUE(cs.contains('A'));
+    EXPECT_TRUE(cs.contains('Z'));
+    EXPECT_FALSE(cs.contains('0'));
+    EXPECT_FALSE(cs.contains('9'));
+}
+
+TEST_F(CharsetTest, PredefinedDigit) {
+    auto cs = charset::ascii_digit();
+    EXPECT_TRUE(cs.contains('0'));
+    EXPECT_TRUE(cs.contains('9'));
+    EXPECT_FALSE(cs.contains('a'));
+    EXPECT_FALSE(cs.contains('/'));
+    EXPECT_FALSE(cs.contains(':'));
+}
+
+TEST_F(CharsetTest, PredefinedAlnum) {
+    auto cs = charset::ascii_alnum();
+    EXPECT_TRUE(cs.contains('a'));
+    EXPECT_TRUE(cs.contains('Z'));
+    EXPECT_TRUE(cs.contains('0'));
+    EXPECT_TRUE(cs.contains('9'));
+    EXPECT_FALSE(cs.contains('!'));
+    EXPECT_FALSE(cs.contains(' '));
+}
+
+TEST_F(CharsetTest, PredefinedHexDigit) {
+    auto cs = charset::ascii_hex_digit();
+    EXPECT_TRUE(cs.contains('0'));
+    EXPECT_TRUE(cs.contains('9'));
+    EXPECT_TRUE(cs.contains('A'));
+    EXPECT_TRUE(cs.contains('F'));
+    EXPECT_TRUE(cs.contains('a'));
+    EXPECT_TRUE(cs.contains('f'));
+    EXPECT_FALSE(cs.contains('G'));
+    EXPECT_FALSE(cs.contains('g'));
+}
+
+TEST_F(CharsetTest, PredefinedBlank) {
+    auto cs = charset::ascii_blank();
+    EXPECT_TRUE(cs.contains(' '));
+    EXPECT_TRUE(cs.contains('\t'));
+    EXPECT_FALSE(cs.contains('\n'));
+    EXPECT_FALSE(cs.contains('a'));
+}
+
+TEST_F(CharsetTest, PredefinedSpace) {
+    auto cs = charset::ascii_space();
+    EXPECT_TRUE(cs.contains(' '));
+    EXPECT_TRUE(cs.contains('\t'));
+    EXPECT_TRUE(cs.contains('\n'));
+    EXPECT_TRUE(cs.contains('\v'));
+    EXPECT_TRUE(cs.contains('\f'));
+    EXPECT_TRUE(cs.contains('\r'));
+    EXPECT_FALSE(cs.contains('a'));
+    EXPECT_FALSE(cs.contains('0'));
+}
+
+TEST_F(CharsetTest, PredefinedPunct) {
+    auto cs = charset::ascii_punct();
+    EXPECT_TRUE(cs.contains('!'));
+    EXPECT_TRUE(cs.contains('@'));
+    EXPECT_TRUE(cs.contains('{'));
+    EXPECT_TRUE(cs.contains('~'));
+    EXPECT_FALSE(cs.contains('a'));
+    EXPECT_FALSE(cs.contains('0'));
+    EXPECT_FALSE(cs.contains(' '));
+}
+
+TEST_F(CharsetTest, PredefinedCntrl) {
+    auto cs = charset::ascii_cntrl();
+    EXPECT_TRUE(cs.contains(static_cast<char>(0)));
+    EXPECT_TRUE(cs.contains(static_cast<char>(31)));
+    EXPECT_TRUE(cs.contains(static_cast<char>(127)));
+    EXPECT_FALSE(cs.contains(' '));
+    EXPECT_FALSE(cs.contains('A'));
+}
+
+TEST_F(CharsetTest, PredefinedPrint) {
+    auto cs = charset::ascii_print();
+    EXPECT_TRUE(cs.contains(' '));
+    EXPECT_TRUE(cs.contains('~'));
+    EXPECT_TRUE(cs.contains('A'));
+    EXPECT_FALSE(cs.contains(static_cast<char>(0)));
+    EXPECT_FALSE(cs.contains(static_cast<char>(31)));
+    EXPECT_FALSE(cs.contains(static_cast<char>(127)));
+}
+
+TEST_F(CharsetTest, PredefinedGraph) {
+    auto cs = charset::ascii_graph();
+    EXPECT_TRUE(cs.contains('!'));
+    EXPECT_TRUE(cs.contains('~'));
+    EXPECT_TRUE(cs.contains('A'));
+    EXPECT_FALSE(cs.contains(' '));
+    EXPECT_FALSE(cs.contains('\t'));
+    EXPECT_FALSE(cs.contains(static_cast<char>(0)));
+}
+
+TEST_F(CharsetTest, PredefinedEmptySet) {
+    auto cs = charset::empty_set();
+    EXPECT_TRUE(cs.empty());
+    EXPECT_FALSE(cs.contains('A'));
+    EXPECT_FALSE(cs.contains(static_cast<char>(0)));
+}
+
+TEST_F(CharsetTest, PredefinedUniverse) {
+    auto cs = charset::universe();
+    EXPECT_FALSE(cs.empty());
+    for (int i = 0; i < 256; ++i) {
+        EXPECT_TRUE(cs.contains(static_cast<char>(i)));
+    }
+}
+
+TEST_F(CharsetTest, IdentityLaws) {
+    auto cs = charset::ascii_alpha();
+    EXPECT_EQ(cs | charset::empty_set(), cs);
+    EXPECT_EQ(cs & charset::universe(), cs);
+    EXPECT_EQ(cs & charset::empty_set(), charset::empty_set());
+    EXPECT_EQ(cs | charset::universe(), charset::universe());
+    EXPECT_EQ(~~cs, cs);
+}
+
+TEST_F(StringBuilderTest, Empty) {
+    string_builder sb;
+    EXPECT_TRUE(sb.empty());
+    EXPECT_EQ(sb.size(), 0u);
+    EXPECT_EQ(sb.build(), "");
+}
+
+TEST_F(StringBuilderTest, AppendStringView) {
+    string_builder sb;
+    sb.append(string_view("hello"));
+    EXPECT_EQ(sb.size(), 5u);
+    EXPECT_FALSE(sb.empty());
+    EXPECT_EQ(sb.build(), "hello");
+}
+
+TEST_F(StringBuilderTest, AppendString) {
+    string_builder sb;
+    string s = "world";
+    sb.append(s);
+    EXPECT_EQ(sb.build(), "world");
+}
+
+TEST_F(StringBuilderTest, AppendCharPtr) {
+    string_builder sb;
+    sb.append("test");
+    EXPECT_EQ(sb.build(), "test");
+}
+
+TEST_F(StringBuilderTest, AppendChar) {
+    string_builder sb;
+    sb.append('X');
+    EXPECT_EQ(sb.size(), 1u);
+    EXPECT_EQ(sb.build(), "X");
+}
+
+TEST_F(StringBuilderTest, AppendMultipleTypes) {
+    string_builder sb;
+    sb.append("Hello, ");
+    sb.append(string_view("this is "));
+    string s = "a test";
+    sb.append(s);
+    sb.append('.');
+    EXPECT_EQ(sb.build(), "Hello, this is a test.");
+}
+
+TEST_F(StringBuilderTest, BuildEmpty) {
+    string_builder sb;
+    string result = sb.build();
+    EXPECT_TRUE(result.empty());
+}
+
+TEST_F(StringBuilderTest, ImplicitConversion) {
+    string_builder sb;
+    sb.append("test");
+    string result = sb;
+    EXPECT_EQ(result, "test");
+}
+
+TEST_F(StringBuilderTest, SizeTracking) {
+    string_builder sb;
+    sb.append("abc");
+    EXPECT_EQ(sb.size(), 3u);
+    sb.append("def");
+    EXPECT_EQ(sb.size(), 6u);
+    sb.append('!');
+    EXPECT_EQ(sb.size(), 7u);
+}
+
+TEST_F(StringBuilderTest, Clear) {
+    string_builder sb;
+    sb.append("first");
+    sb.clear();
+    EXPECT_TRUE(sb.empty());
+    EXPECT_EQ(sb.size(), 0u);
+    sb.append("second");
+    EXPECT_EQ(sb.build(), "second");
+}
+
+TEST_F(StringBuilderTest, ReservePieces) {
+    string_builder sb;
+    sb.reserve_pieces(100);
+    for (int i = 0; i < 100; ++i) {
+        sb.append('.');
+    }
+    EXPECT_EQ(sb.size(), 100u);
+}
+
+TEST_F(StringBuilderTest, BuildWithReserveOutput) {
+    string_builder sb;
+    sb.reserve(1000);
+    sb.append("short");
+    string result = sb.build();
+    EXPECT_EQ(result, "short");
+}
+
+TEST_F(StringBuilderTest, LargeNumberOfPieces) {
+    string_builder sb;
+    string expected;
+    for (int i = 0; i < 1000; ++i) {
+        sb.append("a");
+        expected += "a";
+    }
+    EXPECT_EQ(sb.size(), 1000u);
+    EXPECT_EQ(sb.build(), expected);
+}
+
+TEST_F(StringBuilderTest, Concatenate) {
+    string result = concatenate("Hello, ", string_view("this is "), "a char");
+    EXPECT_EQ(result, "Hello, this is a char");
+}
+
+TEST_F(StringBuilderTest, ConcatenateWithChar) {
+    string result = concatenate("A", "B", "C");
+    EXPECT_EQ(result, "ABC");
+}
+
+TEST_F(StringBuilderTest, ConcatenateMixed) {
+    string s = "world";
+    string result = concatenate("hello", string_view(" "), s);
+    EXPECT_EQ(result, "hello world");
+}
+
+TEST_F(CharsetIntegrationTest, StringViewFindFirstOf) {
+    string_view sv = "hello123world";
+    EXPECT_EQ(sv.find_first_of(charset::ascii_digit()), 5u);
+}
+
+TEST_F(CharsetIntegrationTest, StringViewFindFirstOfNotFound) {
+    string_view sv = "hello world";
+    EXPECT_EQ(sv.find_first_of(charset::ascii_digit()), string_view::npos);
+}
+
+TEST_F(CharsetIntegrationTest, StringViewFindLastOf) {
+    string_view sv = "hello123world456";
+    EXPECT_EQ(sv.find_last_of(charset::ascii_digit()), 15u);
+}
+
+TEST_F(CharsetIntegrationTest, StringViewFindFirstNotOf) {
+    string_view sv = "123abc";
+    EXPECT_EQ(sv.find_first_not_of(charset::ascii_digit()), 3u);
+}
+
+TEST_F(CharsetIntegrationTest, StringViewFindLastNotOf) {
+    string_view sv = "abc123";
+    EXPECT_EQ(sv.find_last_not_of(charset::ascii_digit()), 2u);
+}
+
+TEST_F(CharsetIntegrationTest, StringViewTrimLeft) {
+    string_view sv = "  \t\nhello";
+    auto result = sv.trim_left();
+    EXPECT_EQ(result, "hello");
+}
+
+TEST_F(CharsetIntegrationTest, StringViewTrimRight) {
+    string_view sv = "hello  \t\n";
+    auto result = sv.trim_right();
+    EXPECT_EQ(result, "hello");
+}
+
+TEST_F(CharsetIntegrationTest, StringViewTrim) {
+    string_view sv = "  hello  ";
+    auto result = sv.trim();
+    EXPECT_EQ(result, "hello");
+}
+
+TEST_F(CharsetIntegrationTest, StringViewTrimLeftIfCharset) {
+    string_view sv = "!@#hello";
+    auto punct = charset::ascii_punct();
+    auto result = sv.trim_left_if(punct);
+    EXPECT_EQ(result, "hello");
+}
+
+TEST_F(CharsetIntegrationTest, StringViewTrimRightIfCharset) {
+    string_view sv = "hello!@#";
+    auto punct = charset::ascii_punct();
+    auto result = sv.trim_right_if(punct);
+    EXPECT_EQ(result, "hello");
+}
+
+TEST_F(CharsetIntegrationTest, StringViewTrimIfCharset) {
+    string_view sv = "!@hello!@";
+    auto punct = charset::ascii_punct();
+    auto result = sv.trim_if(punct);
+    EXPECT_EQ(result, "hello");
+}
+
+TEST_F(CharsetIntegrationTest, StringFindFirstOf) {
+    string s = "hello123world";
+    EXPECT_EQ(s.find_first_of(charset::ascii_digit()), 5u);
+}
+
+TEST_F(CharsetIntegrationTest, StringFindFirstNotOf) {
+    string s = "123abc";
+    EXPECT_EQ(s.find_first_not_of(charset::ascii_digit()), 3u);
+}
+
+TEST_F(CharsetIntegrationTest, StringTrim) {
+    string s = "  hello  ";
+    s.trim();
+    EXPECT_EQ(s, "hello");
+}
+
+TEST_F(CharsetIntegrationTest, StringTrimLeftIfCharset) {
+    string s = "!@#hello";
+    s.trim_left_if(charset::ascii_punct());
+    EXPECT_EQ(s, "hello");
+}
+
+TEST_F(CharsetIntegrationTest, StringTrimRightIfCharset) {
+    string s = "hello!@#";
+    s.trim_right_if(charset::ascii_punct());
+    EXPECT_EQ(s, "hello");
+}
+
+TEST_F(CharsetIntegrationTest, StringSplitCharset) {
+    string s = "alpha,beta;gamma|delta";
+    auto delim = charset::from_char(',') | charset::from_char(';') | charset::from_char('|');
+    auto parts = s.split(delim);
+    EXPECT_EQ(parts.size(), 4u);
+    EXPECT_EQ(parts[0], "alpha");
+    EXPECT_EQ(parts[1], "beta");
+    EXPECT_EQ(parts[2], "gamma");
+    EXPECT_EQ(parts[3], "delta");
+}
+
+TEST_F(CharsetIntegrationTest, StringSplitCharsetSkipEmpty) {
+    string s = "a,,b;;c";
+    auto delim = charset::from_char(',') | charset::from_char(';');
+    auto parts = s.split(delim, true);
+    EXPECT_EQ(parts.size(), 3u);
+    EXPECT_EQ(parts[0], "a");
+    EXPECT_EQ(parts[1], "b");
+    EXPECT_EQ(parts[2], "c");
+}
+
+TEST_F(CharsetIntegrationTest, StringSplitCharsetKeepEmpty) {
+    string s = "a,,b;;c";
+    auto delim = charset::from_char(',') | charset::from_char(';');
+    auto parts = s.split(delim, false);
+    EXPECT_EQ(parts.size(), 5u);
+    EXPECT_EQ(parts[2], "b");
 }

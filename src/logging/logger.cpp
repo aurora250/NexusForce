@@ -312,7 +312,7 @@ void logger::check_auto_flush() {
     }
 }
 
-void logger::log(const log_level level, string msg, const source_loc loc) {
+void logger::log(const log_level level, string msg, const source_location loc) {
     if (!should_log(level)) {
         return;
     }

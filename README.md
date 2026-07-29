@@ -296,17 +296,14 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 🖥️ 终端UI框架 (TUI)
 - **`application`** - 应用入口，Builder 模式配置（主题/FPS/标题），驱动事件循环与动画计时器
-- **`reconciler`** - 声明式渲染引擎，Cell 级终端帧差分与增量 ANSI 输出，焦点链遍历（Tab/Shift+Tab），鼠标命中测试与滚动条交互
+- **`reconciler`** - 声明式渲染引擎，Cell 级终端帧差分与增量 ANSI 输出，焦点链遍历，鼠标命中测试与滚动条交互
 - **`screen`** - 终端帧缓冲，逐 Cell 差分生成最小 ANSI 转义序列
-- **`input_driver`** - 跨平台终端输入驱动（Linux epoll / Windows 后台线程），解析 ANSI/鼠标/UTF-8 序列
-- **`element`** - 不可变虚拟元素树，14+ 节点类型（vbox/hbox/zstack/flexbox/gridbox/text/button/text_input/checkbox/scroll_view/canvas 等），装饰器链式组合
-- **Flexbox / Gridbox 布局** - 完整 Flexbox（direction/wrap/justify/align/gap/flex_grow/flex_shrink）+ Gridbox 网格布局
-- **`style` / `theme`** - 样式系统（fg/bg/bold/italic/underline/border/padding/margin/align）+ 语义化主题（primary/secondary/danger 等），预置暗色主题
+- **`input_driver`** - 跨平台终端输入驱动，解析 ANSI/鼠标/UTF-8 序列
+- **`element`** - 不可变虚拟元素树，14+ 节点类型，装饰器链式组合，完整 Flexbox + Gridbox 网格布局
+- **`style` / `theme`** - 样式系统 + 语义化主题，预置暗色主题
 - **`state<T>`** - 响应式状态管理，写操作自动脏标记 + strand 合并调度重渲染
-- **DOM 辅助** - `gauge` 进度条 / `graph` 图表 / `paragraph` 自动换行 / `spinner` 加载动画 / `scroll_indicator` 滚动条 / `linear_gradient` 多色渐变 / `table` 声明式表格
 - **`component_base` / `component<P>`** - 组件基类，焦点管理、上下文注入（`provide_context`/`context`，沿父链查找）、响应式状态工厂
-- **交互组件** - `container` 方向容器 / `menu` 菜单 / `dropdown` 下拉选择 / `radiobox` 单选组 / `toggle` 切换开关 / `slider` 滑块 / `text_input` 文本输入（UTF-8 感知光标）/ `scroll_view` 滚动视图 / `window` 浮动窗口 / `modal` 模态覆盖层 / `collapsible` 折叠面板 / `hoverable` 悬停检测 / `resizable_split` 可拖拽分割面板 / `renderer` 渲染辅助（`catch_event`/`maybe` 条件渲染）
-- **`animator` / `easing`** - 属性动画器 + 缓动函数（linear/quadratic/cubic/sine/elastic/bounce）
+- **`animator` / `easing`** - 属性动画器 + 缓动函数
 
 ### 🧬 类型与特性 (TypeInfo)
 - **类型萃取** - 完备的编译期类型判断

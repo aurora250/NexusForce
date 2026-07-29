@@ -1,5 +1,5 @@
-#ifndef NEFORCE_TUI_MODAL_HPP__
-#define NEFORCE_TUI_MODAL_HPP__
+#ifndef NEFORCE_TUI_COMPONENT_MODAL_HPP__
+#define NEFORCE_TUI_COMPONENT_MODAL_HPP__
 
 /**
  * @file modal.hpp
@@ -43,4 +43,4 @@ unique_ptr<component_base> NEFORCE_API modal(unique_ptr<component_base> main, un
 NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_TUI_MODAL_HPP__
+#endif // NEFORCE_TUI_COMPONENT_MODAL_HPP__

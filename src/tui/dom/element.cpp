@@ -4,33 +4,35 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 struct element::node {
-    enum kind kind = kind::empty;
-    size_t key = 0;
-
     string text;
     tui::style style;
     box_props layout;
-
     vector<element> children;
     function<void()> on_click;
     function<void(int, int, int, int)> draw_function;
-    void* state_ref = nullptr;
-    int flex = 0;
-    style::variant variant = style::variant::default_;
-    component_base* owner = nullptr;
-    int scroll_x = 0;
-    int scroll_y = 0;
-    int grid_columns = 0;
     string placeholder;
-    bool cursor_visible = false;
-    size_t cursor_pos = 0;
+    mutable vector<layout_rect> cached_layout_;
+
+    void* state_ref = nullptr;
+    component_base* owner = nullptr;
     void* scroll_x_state = nullptr;
     void* scroll_y_state = nullptr;
 
-    mutable bool layout_dirty_ = true;
-    mutable vector<layout_rect> cached_layout_;
+    size_t key = 0;
+    size_t cursor_pos = 0;
+
+    int flex = 0;
+    int scroll_x = 0;
+    int scroll_y = 0;
+    int grid_columns = 0;
     mutable int cached_constraint_w_ = -1;
     mutable int cached_constraint_h_ = -1;
+
+    enum kind kind = kind::empty;
+    style::variant variant = style::variant::default_;
+
+    bool cursor_visible = false;
+    mutable bool layout_dirty_ = true;
 
     node() = default;
     ~node() = default;

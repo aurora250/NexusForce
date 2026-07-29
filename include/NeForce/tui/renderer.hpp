@@ -201,7 +201,7 @@ private:
  * @param idx 当前布局索引
  * @return 命中的元素指针，未命中返回 nullptr
  */
-NEFORCE_NODISCARD const element* NEFORCE_API find_element_at(const vector<layout_rect>& layout, const element& tree,
+NEFORCE_NODISCARD NEFORCE_API const element* find_element_at(const vector<layout_rect>& layout, const element& tree,
                                                              int mx, int my, int& idx);
 
 /**
@@ -216,7 +216,7 @@ NEFORCE_NODISCARD const element* NEFORCE_API find_element_at(const vector<layout
  *
  * 找到鼠标坐标下的组件
  */
-NEFORCE_NODISCARD component_base* NEFORCE_API hit_test_at(const vector<layout_rect>& layout, const element& tree,
+NEFORCE_NODISCARD NEFORCE_API component_base* hit_test_at(const vector<layout_rect>& layout, const element& tree,
                                                           int mx, int my, int& idx, component_base* fallback);
 
 /** @} */ // TUI

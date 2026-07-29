@@ -178,13 +178,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int find_last_byte(vec128_t v, byte_t c) noexcept {
     if (mask == 0) {
         return -1;
     }
-#    ifdef NEFORCE_COMPILER_MSVC
-    unsigned long idx = 0;
-    ::_BitScanReverse(&idx, static_cast<unsigned long>(mask));
-    return static_cast<int>(idx);
-#    else
-    return 31 - __builtin_clz(mask);
-#    endif
+    return highest_set_bit_pos(static_cast<intptr_t>(mask));
 #elif defined(NEFORCE_SIMD_NEON)
     const uint8x16_t match = ::vceqq_u8(v, ::vdupq_n_u8(c));
     const auto* bytes = reinterpret_cast<const byte_t*>(&match);

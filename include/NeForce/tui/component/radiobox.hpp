@@ -1,5 +1,5 @@
-#ifndef NEFORCE_TUI_RADIOBOX_HPP__
-#define NEFORCE_TUI_RADIOBOX_HPP__
+#ifndef NEFORCE_TUI_COMPONENT_RADIOBOX_HPP__
+#define NEFORCE_TUI_COMPONENT_RADIOBOX_HPP__
 
 /**
  * @file radiobox.hpp
@@ -46,4 +46,4 @@ unique_ptr<component_base> NEFORCE_API radiobox(radiobox_option option);
 NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_TUI_RADIOBOX_HPP__
+#endif // NEFORCE_TUI_COMPONENT_RADIOBOX_HPP__

@@ -1,5 +1,5 @@
-#ifndef NEFORCE_TUI_STYLE_HPP__
-#define NEFORCE_TUI_STYLE_HPP__
+#ifndef NEFORCE_TUI_DOM_STYLE_HPP__
+#define NEFORCE_TUI_DOM_STYLE_HPP__
 
 /**
  * @file style.hpp
@@ -228,4 +228,4 @@ NEFORCE_INLINE17 constexpr theme dark_theme = {
 
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_TUI_STYLE_HPP__
+#endif // NEFORCE_TUI_DOM_STYLE_HPP__

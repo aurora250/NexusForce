@@ -1,5 +1,5 @@
-#ifndef NEFORCE_TUI_TOGGLE_HPP__
-#define NEFORCE_TUI_TOGGLE_HPP__
+#ifndef NEFORCE_TUI_COMPONENT_TOGGLE_HPP__
+#define NEFORCE_TUI_COMPONENT_TOGGLE_HPP__
 
 /**
  * @file toggle.hpp
@@ -47,4 +47,4 @@ unique_ptr<component_base> NEFORCE_API toggle(toggle_option option);
 NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_TUI_TOGGLE_HPP__
+#endif // NEFORCE_TUI_COMPONENT_TOGGLE_HPP__

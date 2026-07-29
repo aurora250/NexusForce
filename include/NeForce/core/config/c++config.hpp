@@ -505,8 +505,10 @@
 
 #ifdef NEFORCE_STANDARD_20
 #    define NEFORCE_CONSTEXPR20 constexpr
+#    define NEFORCE_CONSTEVAL20 consteval
 #else
 #    define NEFORCE_CONSTEXPR20 inline
+#    define NEFORCE_CONSTEVAL20 constexpr
 #endif // NEFORCE_STANDARD_20
 
 #ifdef NEFORCE_STANDARD_23

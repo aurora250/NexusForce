@@ -11,6 +11,7 @@
 #include "NeForce/core/algorithm/shift.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/memory/allocator_traits.hpp"
+#include "NeForce/core/string/charset.hpp"
 #include "NeForce/core/string/string_view.hpp"
 #include "NeForce/core/utility/compressed_pair.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -2585,6 +2586,30 @@ public:
         return (char_traits_find_last_not_of<Traits>) (data(), size(), off, view.data(), view.size());
     }
 
+    /// 查找第一个出现在 charset 中的字符
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_first_of(const charset& cs,
+                                                                  const size_type off = 0) const noexcept {
+        return (char_traits_find_first_of<Traits>) (data(), size(), off, cs);
+    }
+
+    /// 查找最后一个出现在 charset 中的字符
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_last_of(const charset& cs,
+                                                                 const size_type off = npos) const noexcept {
+        return (char_traits_find_last_of<Traits>) (data(), size(), off, cs);
+    }
+
+    /// 查找第一个不在 charset 中的字符
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_first_not_of(const charset& cs,
+                                                                      const size_type off = 0) const noexcept {
+        return (char_traits_find_first_not_of<Traits>) (data(), size(), off, cs);
+    }
+
+    /// 查找最后一个不在 charset 中的字符
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_last_not_of(const charset& cs,
+                                                                     const size_type off = npos) const noexcept {
+        return (char_traits_find_last_not_of<Traits>) (data(), size(), off, cs);
+    }
+
     /**
      * @brief 统计指定字符出现的次数
      * @param value 要统计的字符
@@ -2663,17 +2688,13 @@ public:
      * @brief 去除左侧空白字符
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 basic_string& trim_left() noexcept {
-        return trim_left_if([](value_type value) { return _NEFORCE is_space(value); });
-    }
+    NEFORCE_CONSTEXPR20 basic_string& trim_left() noexcept { return trim_left_if(charset::ascii_space()); }
 
     /**
      * @brief 去除右侧空白字符
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 basic_string& trim_right() noexcept {
-        return trim_right_if([](value_type value) { return _NEFORCE is_space(value); });
-    }
+    NEFORCE_CONSTEXPR20 basic_string& trim_right() noexcept { return trim_right_if(charset::ascii_space()); }
 
     /**
      * @brief 去除两侧空白字符
@@ -2728,6 +2749,55 @@ public:
     }
 
     /**
+     * @brief 根据 charset 去除左侧字符
+     * @param cs 要移除的字符集
+     * @return 自身引用
+     */
+    NEFORCE_CONSTEXPR20 basic_string& trim_left_if(const charset& cs) noexcept {
+        if (empty()) {
+            return *this;
+        }
+
+        iterator it = begin();
+        while (it != end() && cs.contains(*it)) {
+            ++it;
+        }
+        if (it != begin()) {
+            basic_string::erase(begin(), it - begin());
+        }
+
+        return *this;
+    }
+
+    /**
+     * @brief 根据 charset 去除右侧字符
+     * @param cs 要移除的字符集
+     * @return 自身引用
+     */
+    NEFORCE_CONSTEXPR20 basic_string& trim_right_if(const charset& cs) noexcept {
+        if (empty()) {
+            return *this;
+        }
+
+        reverse_iterator rit = rbegin();
+        while (rit != rend() && cs.contains(*rit)) {
+            ++rit;
+        }
+        if (rit != rbegin()) {
+            basic_string::erase(end() - (rit - rbegin()), end());
+        }
+
+        return *this;
+    }
+
+    /**
+     * @brief 根据 charset 去除两侧字符
+     * @param cs 要移除的字符集
+     * @return 自身引用
+     */
+    NEFORCE_CONSTEXPR20 basic_string& trim_if(const charset& cs) noexcept { return trim_left_if(cs).trim_right_if(cs); }
+
+    /**
      * @brief 根据谓词去除两侧字符
      * @tparam Predicate 谓词类型
      * @param pred 谓词函数
@@ -2746,7 +2816,8 @@ public:
      *
      * 使用指定的分隔符集合分割字符串，返回子串的字符串向量。
      */
-    NEFORCE_NODISCARD vector<basic_string> split(const view_type delimiters, const bool skip_empty = true) const {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 vector<basic_string> split(const view_type delimiters,
+                                                                     const bool skip_empty = true) const {
         vector<basic_string> tokens;
 
         if (empty()) {
@@ -2782,6 +2853,48 @@ public:
     }
 
     /**
+     * @brief 使用 charset 分割字符串
+     * @param delimiters 分隔符字符集
+     * @param skip_empty 是否跳过空字符串
+     * @return 分割后的字符串向量
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 vector<basic_string> split(const charset& delimiters,
+                                                                     const bool skip_empty = true) const {
+        vector<basic_string> tokens;
+
+        if (empty()) {
+            if (!skip_empty) {
+                tokens.push_back(basic_string());
+            }
+            return tokens;
+        }
+
+        if (delimiters.empty()) {
+            tokens.push_back(*this);
+            return tokens;
+        }
+
+        size_t start = 0;
+        size_t end = find_first_of(delimiters);
+
+        while (end != npos) {
+            view_type token = view(start, end - start);
+            if (!skip_empty || !token.empty()) {
+                tokens.push_back(token);
+            }
+            start = end + 1;
+            end = find_first_of(delimiters, start);
+        }
+
+        const auto last_token = tail(start);
+        if (!skip_empty || !last_token.empty()) {
+            tokens.push_back(move(last_token));
+        }
+
+        return tokens;
+    }
+
+    /**
      * @brief 连接字符串
      * @param vec 字符串向量
      * @param delimiter 连接符
@@ -2789,7 +2902,8 @@ public:
      *
      * 将字符串向量中的所有字符串用指定的连接符连接起来。
      */
-    NEFORCE_NODISCARD static basic_string join(const vector<basic_string>& vec, const view_type delimiter) {
+    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 basic_string join(const vector<basic_string>& vec,
+                                                                   const view_type delimiter) {
         if (vec.empty()) {
             return {};
         }
@@ -2821,7 +2935,8 @@ public:
      *
      * 将字符串视图向量中的所有字符串用指定的连接符连接起来。
      */
-    NEFORCE_NODISCARD static basic_string join(const vector<view_type>& vec, const view_type delimiter) {
+    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 basic_string join(const vector<view_type>& vec,
+                                                                   const view_type delimiter) {
         if (vec.empty()) {
             return {};
         }

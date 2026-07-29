@@ -1,5 +1,5 @@
-#ifndef NEFORCE_TUI_ELEMENT_HPP__
-#define NEFORCE_TUI_ELEMENT_HPP__
+#ifndef NEFORCE_TUI_DOM_ELEMENT_HPP__
+#define NEFORCE_TUI_DOM_ELEMENT_HPP__
 
 /**
  * @file element.hpp
@@ -400,4 +400,4 @@ inline decorator text_wrap(style::wrap_mode wm) {
 
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_TUI_ELEMENT_HPP__
+#endif // NEFORCE_TUI_DOM_ELEMENT_HPP__

@@ -11,7 +11,7 @@
 
 #include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
-#include "NeForce/core/exception/source_loc.hpp"
+#include "NeForce/core/exception/source_location.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/core/time/datetime.hpp"
 #ifdef ERROR
@@ -175,7 +175,7 @@ struct log_event {
     string message;                                    ///< 格式化后的日志消息
     string logger_name;                                ///< 产生此事件的 Logger 名称
     datetime dt;                                       ///< 事件时间戳
-    source_loc loc;                                    ///< 源码位置
+    source_location loc;                               ///< 源码位置
     thread::id thread_id;                              ///< 产生此事件的线程 ID
     log_level level;                                   ///< 日志级别
 };

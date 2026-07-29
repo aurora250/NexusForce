@@ -216,36 +216,6 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const tuple<Args...>& tup
 }
 
 
-#ifndef NEFORCE_STANDARD_17
-/// @cond
-NEFORCE_BEGIN_INNER__
-template <typename T>
-string to_string_concat(T&& t) {
-    return to_string(_NEFORCE forward<T>(t));
-}
-template <typename First, typename... Rest>
-string to_string_concat(First&& first, Rest&&... rest) {
-    return to_string(_NEFORCE forward<First>(first)) + to_string_concat(_NEFORCE forward<Rest>(rest)...);
-}
-NEFORCE_END_INNER__
-/// @endcond
-#endif
-
-/**
- * @brief 将多个参数转换为字符串并连接
- * @tparam Args 参数类型
- * @param args 参数
- * @return 连接后的字符串
- */
-template <typename... Args, enable_if_t<(sizeof...(Args) > 1), int> = 0>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(Args&&... args) {
-#ifdef NEFORCE_STANDARD_17
-    return (to_string(_NEFORCE forward<Args>(args)) + ...);
-#else
-    return inner::to_string_concat(_NEFORCE forward<Args>(args)...);
-#endif
-}
-
 /// @cond
 NEFORCE_BEGIN_INNER__
 

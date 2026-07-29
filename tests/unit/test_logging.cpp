@@ -33,7 +33,7 @@ TEST(LogFormatterTest, ParseBasicPattern) {
     ev.dt = datetime::now();
     ev.level = log_level::INFO;
     ev.message = "Hello";
-    ev.loc = source_loc{"test.cpp", "test_func", 42};
+    ev.loc = source_location{"test.cpp", "test_func", 42};
     ev.context = make_shared<unordered_map<string, string>>();
     string result = formatter.format(ev);
     EXPECT_NE(result.find("INFO"), string::npos);
@@ -46,7 +46,7 @@ TEST(LogFormatterTest, ContextPlaceholder) {
     ev.dt = datetime::now();
     ev.level = log_level::INFO;
     ev.message = "test";
-    ev.loc = source_loc{"test.cpp", "test_func", 42};
+    ev.loc = source_location{"test.cpp", "test_func", 42};
     auto ctx = make_shared<unordered_map<string, string>>();
     (*ctx)["user"] = "admin";
     ev.context = ctx;
@@ -60,7 +60,7 @@ TEST(LogFormatterTest, MissingContextKey) {
     ev.dt = datetime::now();
     ev.level = log_level::INFO;
     ev.message = "test";
-    ev.loc = source_loc{"test.cpp", "test_func", 42};
+    ev.loc = source_location{"test.cpp", "test_func", 42};
     ev.context = make_shared<unordered_map<string, string>>();
     string result = formatter.format(ev);
     EXPECT_EQ(result, "");
@@ -72,7 +72,7 @@ TEST(LogFormatterTest, UnknownPlaceholder) {
     ev.dt = datetime::now();
     ev.level = log_level::INFO;
     ev.message = "test";
-    ev.loc = source_loc{"test.cpp", "test_func", 42};
+    ev.loc = source_location{"test.cpp", "test_func", 42};
     ev.context = make_shared<unordered_map<string, string>>();
     string result = formatter.format(ev);
     EXPECT_EQ(result, "{unknown}");
@@ -84,7 +84,7 @@ TEST(LogFormatterTest, FileLineFuncThread) {
     ev.dt = datetime::now();
     ev.level = log_level::INFO;
     ev.message = "msg";
-    ev.loc = source_loc{"test.cpp", "main", 42};
+    ev.loc = source_location{"test.cpp", "main", 42};
     ev.thread_id = this_thread::id();
     ev.context = make_shared<unordered_map<string, string>>();
     string result = formatter.format(ev);
@@ -99,7 +99,7 @@ TEST(LogFormatterTest, FileOnlyBasename) {
     ev.dt = datetime::now();
     ev.level = log_level::INFO;
     ev.message = "msg";
-    ev.loc = source_loc{"/home/user/project/src/main.cpp", "main", 99};
+    ev.loc = source_location{"/home/user/project/src/main.cpp", "main", 99};
     ev.context = make_shared<unordered_map<string, string>>();
     string result = formatter.format(ev);
     EXPECT_EQ(result, "main.cpp");
@@ -112,7 +112,7 @@ TEST(LogFormatterTest, FilePathFull) {
     ev.dt = datetime::now();
     ev.level = log_level::INFO;
     ev.message = "msg";
-    ev.loc = source_loc{"/home/user/project/src/main.cpp", "main", 99};
+    ev.loc = source_location{"/home/user/project/src/main.cpp", "main", 99};
     ev.context = make_shared<unordered_map<string, string>>();
     string result = formatter.format(ev);
     EXPECT_NE(result.find("/home/user"), string::npos);
@@ -163,7 +163,7 @@ protected:
         ev.dt = datetime::now();
         ev.level = log_level::INFO;
         ev.message = move(msg);
-        ev.loc = source_loc{"test.cpp", "test", 1};
+        ev.loc = source_location{"test.cpp", "test", 1};
         ev.context = make_shared<unordered_map<string, string>>();
         return ev;
     }

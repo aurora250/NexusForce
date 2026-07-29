@@ -1,5 +1,6 @@
 #include <NeForce/core/async/thread_pool.hpp>
 #include <NeForce/core/exception/terminate.hpp>
+#include <NeForce/core/string/string_builder.hpp>
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -195,15 +196,15 @@ size_t thread_pool::max_thread_threshhold() noexcept {
 }
 
 string thread_pool::pool_statistics::to_string() const {
-    string result;
-    result += _NEFORCE to_string("total_threads:   ", total_threads, "\n");
-    result += _NEFORCE to_string("idle_threads:    ", idle_threads, "\n");
-    result += _NEFORCE to_string("busy_threads:    ", busy_threads, "\n");
-    result += _NEFORCE to_string("queue_size:      ", queue_size, "\n");
-    result += _NEFORCE to_string("total_submitted: ", total_submitted, "\n");
-    result += _NEFORCE to_string("total_stolen:    ", total_stolen, "\n");
-    result += _NEFORCE to_string("total_completed: ", total_completed);
-    return result;
+    string_builder result;
+    result.append(_NEFORCE concatenate("total_threads:   ", total_threads, "\n"));
+    result.append(_NEFORCE concatenate("idle_threads:    ", idle_threads, "\n"));
+    result.append(_NEFORCE concatenate("busy_threads:    ", busy_threads, "\n"));
+    result.append(_NEFORCE concatenate("queue_size:      ", queue_size, "\n"));
+    result.append(_NEFORCE concatenate("total_submitted: ", total_submitted, "\n"));
+    result.append(_NEFORCE concatenate("total_stolen:    ", total_stolen, "\n"));
+    result.append(_NEFORCE concatenate("total_completed: ", total_completed));
+    return result.build();
 }
 
 void thread_pool::thread_function(const id_type thread_id) {

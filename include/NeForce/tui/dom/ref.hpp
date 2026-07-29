@@ -1,5 +1,5 @@
-#ifndef NEFORCE_TUI_REF_HPP__
-#define NEFORCE_TUI_REF_HPP__
+#ifndef NEFORCE_TUI_DOM_REF_HPP__
+#define NEFORCE_TUI_DOM_REF_HPP__
 
 /**
  * @file ref.hpp
@@ -229,4 +229,4 @@ public:
 
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_TUI_REF_HPP__
+#endif // NEFORCE_TUI_DOM_REF_HPP__

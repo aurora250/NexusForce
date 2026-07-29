@@ -1,5 +1,5 @@
-#ifndef NEFORCE_TUI_LAYOUT_HPP__
-#define NEFORCE_TUI_LAYOUT_HPP__
+#ifndef NEFORCE_TUI_DOM_LAYOUT_HPP__
+#define NEFORCE_TUI_DOM_LAYOUT_HPP__
 
 /**
  * @file layout.hpp
@@ -33,4 +33,4 @@ vector<layout_rect> NEFORCE_API compute_layout(const element& element, int const
 
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_TUI_LAYOUT_HPP__
+#endif // NEFORCE_TUI_DOM_LAYOUT_HPP__

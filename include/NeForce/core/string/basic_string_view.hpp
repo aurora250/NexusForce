@@ -13,6 +13,7 @@
 #include "NeForce/core/interface/iiterator.hpp"
 #include "NeForce/core/string/char_traits.hpp"
 #include "NeForce/core/string/char_types.hpp"
+#include "NeForce/core/string/charset.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -517,7 +518,7 @@ public:
      * @param view 要比较的视图
      * @return 负值（*this < view）、0（相等）、正值（*this > view）
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int compare_ignore_case(const basic_string_view view) const noexcept {
+    NEFORCE_NODISCARD constexpr int compare_ignore_case(const basic_string_view view) const noexcept {
         const size_type min_len = _NEFORCE min(size_, view.size_);
         for (size_type i = 0; i < min_len; ++i) {
             const auto lc = _NEFORCE to_lowercase(data_[i]);
@@ -540,7 +541,7 @@ public:
      * @param str C风格字符串
      * @return 比较结果
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int compare_ignore_case(const_pointer str) const noexcept {
+    NEFORCE_NODISCARD constexpr int compare_ignore_case(const_pointer str) const noexcept {
         return this->compare_ignore_case(basic_string_view(str));
     }
 
@@ -806,12 +807,57 @@ public:
     }
 
     /**
+     * @brief 查找第一个出现在 charset 中的字符
+     * @param cs 字符集
+     * @param off 起始位置
+     * @return 第一个匹配字符的位置，未找到则返回 npos
+     * @note 仅适用于单字节字符类型，宽字符类型会截断。
+     */
+    NEFORCE_NODISCARD constexpr size_type find_first_of(const charset& cs, const size_type off = 0) const noexcept {
+        return (char_traits_find_first_of<Traits>) (data_, size_, off, cs);
+    }
+
+    /**
+     * @brief 查找最后一个出现在 charset 中的字符
+     * @param cs 字符集
+     * @param off 起始位置
+     * @return 最后一个匹配字符的位置，未找到则返回 npos
+     * @note 仅适用于单字节字符类型，宽字符类型会截断。
+     */
+    NEFORCE_NODISCARD constexpr size_type find_last_of(const charset& cs, const size_type off = npos) const noexcept {
+        return (char_traits_find_last_of<Traits>) (data_, size_, off, cs);
+    }
+
+    /**
+     * @brief 查找第一个不在 charset 中的字符
+     * @param cs 字符集
+     * @param off 起始位置
+     * @return 第一个不匹配字符的位置，未找到则返回 npos
+     * @note 仅适用于单字节字符类型，宽字符类型会截断。
+     */
+    NEFORCE_NODISCARD constexpr size_type find_first_not_of(const charset& cs, const size_type off = 0) const noexcept {
+        return (char_traits_find_first_not_of<Traits>) (data_, size_, off, cs);
+    }
+
+    /**
+     * @brief 查找最后一个不在 charset 中的字符
+     * @param cs 字符集
+     * @param off 起始位置
+     * @return 最后一个不匹配字符的位置，未找到则返回 npos
+     * @note 仅适用于单字节字符类型，宽字符类型会截断。
+     */
+    NEFORCE_NODISCARD constexpr size_type find_last_not_of(const charset& cs,
+                                                           const size_type off = npos) const noexcept {
+        return (char_traits_find_last_not_of<Traits>) (data_, size_, off, cs);
+    }
+
+    /**
      * @brief 统计指定字符出现的次数
      * @param chr 要统计的字符
      * @param position 起始位置
      * @return 字符出现的次数
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type count(value_type chr, const size_type position = 0) const noexcept {
+    NEFORCE_NODISCARD constexpr size_type count(value_type chr, const size_type position = 0) const noexcept {
         size_type n = 0;
         for (size_type idx = position; idx < size_; ++idx) {
             if (*(data() + idx) == chr) {
@@ -826,7 +872,7 @@ public:
      * @param view 要检查的视图
      * @return 是否以view开头
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool starts_with(const basic_string_view view) const noexcept {
+    NEFORCE_NODISCARD constexpr bool starts_with(const basic_string_view view) const noexcept {
         return view.size() <= size_ && traits_type::compare(data(), view.data(), view.size()) == 0;
     }
 
@@ -835,7 +881,7 @@ public:
      * @param chr 要检查的字符
      * @return 是否以chr开头
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool starts_with(value_type chr) const noexcept {
+    NEFORCE_NODISCARD constexpr bool starts_with(value_type chr) const noexcept {
         return !empty() && traits_type::eq(front(), chr);
     }
 
@@ -844,7 +890,7 @@ public:
      * @param str 要检查的字符串
      * @return 是否以str开头
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool starts_with(const_pointer str) const noexcept {
+    NEFORCE_NODISCARD constexpr bool starts_with(const_pointer str) const noexcept {
         return this->starts_with(basic_string_view(str));
     }
 
@@ -853,7 +899,7 @@ public:
      * @param view 要检查的视图
      * @return 是否以view结尾
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool ends_with(const basic_string_view view) const noexcept {
+    NEFORCE_NODISCARD constexpr bool ends_with(const basic_string_view view) const noexcept {
         const size_type view_size = view.size();
         return view_size <= size_ && traits_type::compare(data_ + size_ - view_size, view.data(), view_size) == 0;
     }
@@ -863,7 +909,7 @@ public:
      * @param chr 要检查的字符
      * @return 是否以chr结尾
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool ends_with(value_type chr) const noexcept {
+    NEFORCE_NODISCARD constexpr bool ends_with(value_type chr) const noexcept {
         return !empty() && traits_type::eq(back(), chr);
     }
 
@@ -872,7 +918,7 @@ public:
      * @param str 要检查的字符串
      * @return 是否以str结尾
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool ends_with(const_pointer str) const noexcept {
+    NEFORCE_NODISCARD constexpr bool ends_with(const_pointer str) const noexcept {
         return this->ends_with(basic_string_view(str));
     }
 
@@ -881,7 +927,7 @@ public:
      * @param view 要检查的视图
      * @return 是否包含view
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool contains(const basic_string_view view) const noexcept {
+    NEFORCE_NODISCARD constexpr bool contains(const basic_string_view view) const noexcept {
         return this->find(view) != npos;
     }
 
@@ -890,42 +936,36 @@ public:
      * @param chr 要检查的字符
      * @return 是否包含chr
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool contains(value_type chr) const noexcept {
-        return this->find(chr) != npos;
-    }
+    NEFORCE_NODISCARD constexpr bool contains(value_type chr) const noexcept { return this->find(chr) != npos; }
 
     /**
      * @brief 检查是否包含C风格字符串
      * @param str 要检查的字符串
      * @return 是否包含str
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool contains(const_pointer str) const noexcept {
-        return this->find(str) != npos;
-    }
+    NEFORCE_NODISCARD constexpr bool contains(const_pointer str) const noexcept { return this->find(str) != npos; }
 
     /**
      * @brief 去除左侧空白字符
      * @return 去除左侧空白后的新视图
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string_view trim_left() const noexcept {
-        return this->trim_left_if([](value_type ch) { return _NEFORCE is_space(ch); });
+    NEFORCE_NODISCARD constexpr basic_string_view trim_left() const noexcept {
+        return this->trim_left_if(charset::ascii_space());
     }
 
     /**
      * @brief 去除右侧空白字符
      * @return 去除右侧空白后的新视图
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string_view trim_right() const noexcept {
-        return this->trim_right_if([](value_type ch) { return _NEFORCE is_space(ch); });
+    NEFORCE_NODISCARD constexpr basic_string_view trim_right() const noexcept {
+        return this->trim_right_if(charset::ascii_space());
     }
 
     /**
      * @brief 去除两侧空白字符
      * @return 去除两侧空白后的新视图
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string_view trim() const noexcept {
-        return this->trim_left().trim_right();
-    }
+    NEFORCE_NODISCARD constexpr basic_string_view trim() const noexcept { return this->trim_left().trim_right(); }
 
     /**
      * @brief 根据谓词去除左侧字符
@@ -934,7 +974,7 @@ public:
      * @return 去除后的新视图
      */
     template <typename Predicate>
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string_view trim_left_if(Predicate pred) const
+    NEFORCE_NODISCARD constexpr basic_string_view trim_left_if(Predicate pred) const
             noexcept(noexcept(pred(*cbegin()))) {
         if (empty()) {
             return *this;
@@ -959,7 +999,7 @@ public:
      * @return 去除后的新视图
      */
     template <typename Predicate>
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string_view trim_right_if(Predicate pred) const
+    NEFORCE_NODISCARD constexpr basic_string_view trim_right_if(Predicate pred) const
             noexcept(noexcept(pred(*crbegin()))) {
         if (empty()) {
             return *this;
@@ -978,13 +1018,66 @@ public:
     }
 
     /**
+     * @brief 根据 charset 去除左侧字符
+     * @param cs 要移除的字符集
+     * @return 去除后的新视图
+     */
+    NEFORCE_NODISCARD constexpr basic_string_view trim_left_if(const charset& cs) const noexcept {
+        if (empty()) {
+            return *this;
+        }
+
+        const_iterator it = cbegin();
+        while (it != cend() && cs.contains(*it)) {
+            ++it;
+        }
+
+        if (it != cbegin()) {
+            return basic_string_view(data_ + (it - cbegin()), size_ - (it - cbegin()));
+        }
+
+        return *this;
+    }
+
+    /**
+     * @brief 根据 charset 去除右侧字符
+     * @param cs 要移除的字符集
+     * @return 去除后的新视图
+     */
+    NEFORCE_NODISCARD constexpr basic_string_view trim_right_if(const charset& cs) const noexcept {
+        if (empty()) {
+            return *this;
+        }
+
+        const_reverse_iterator rit = crbegin();
+        while (rit != crend() && cs.contains(*rit)) {
+            ++rit;
+        }
+
+        if (rit != crbegin()) {
+            return basic_string_view(data_, size_ - (rit - crbegin()));
+        }
+
+        return *this;
+    }
+
+    /**
+     * @brief 根据 charset 去除两侧字符
+     * @param cs 要移除的字符集
+     * @return 去除后的新视图
+     */
+    NEFORCE_NODISCARD constexpr basic_string_view trim_if(const charset& cs) const noexcept {
+        return this->trim_left_if(cs).trim_right_if(cs);
+    }
+
+    /**
      * @brief 根据谓词去除两侧字符
      * @tparam Predicate 谓词类型
      * @param pred 谓词函数，返回true表示要移除的字符
      * @return 去除后的新视图
      */
     template <typename Predicate>
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string_view trim_if(Predicate pred) const
+    NEFORCE_NODISCARD constexpr basic_string_view trim_if(Predicate pred) const
             noexcept(noexcept(this->trim_right_if(pred)) && noexcept(this->trim_left_if(pred))) {
         return this->trim_left_if(pred).trim_right_if(pred);
     }
@@ -994,7 +1087,7 @@ public:
      * @param str 要比较的字符串视图
      * @return 是否相等
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const basic_string_view str) const noexcept {
+    NEFORCE_NODISCARD constexpr bool equal_to(const basic_string_view str) const noexcept {
         return (char_traits_equal<Traits>) (data_, size_, str.data_, str.size_);
     }
 
@@ -1003,7 +1096,7 @@ public:
      * @param str C风格字符串
      * @return 是否相等
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const CharT* str) const noexcept {
+    NEFORCE_NODISCARD constexpr bool equal_to(const CharT* str) const noexcept {
         return equal_to(basic_string_view(str));
     }
 

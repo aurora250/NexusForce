@@ -1,5 +1,5 @@
-#ifndef NEFORCE_TUI_SLIDER_HPP__
-#define NEFORCE_TUI_SLIDER_HPP__
+#ifndef NEFORCE_TUI_COMPONENT_SLIDER_HPP__
+#define NEFORCE_TUI_COMPONENT_SLIDER_HPP__
 
 /**
  * @file slider.hpp
@@ -49,4 +49,4 @@ unique_ptr<component_base> NEFORCE_API slider(slider_options options);
 NEFORCE_END_COMPONENTS__
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_TUI_SLIDER_HPP__
+#endif // NEFORCE_TUI_COMPONENT_SLIDER_HPP__

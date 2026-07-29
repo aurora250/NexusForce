@@ -12,6 +12,7 @@
 
 #include "NeForce/core/algorithm/compare.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"
+#include "NeForce/core/string/charset.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -946,6 +947,102 @@ constexpr size_t char_traits_rfind_not_char(const char_traits_ptr_t<Traits> dest
                 return static_cast<size_t>(if_match - dest);
             }
 
+            if (if_match == dest) {
+                break;
+            }
+        }
+    }
+    return static_cast<size_t>(-1);
+}
+
+/**
+ * @brief 在字符序列中查找第一个出现在 charset 中的字符
+ * @tparam Traits 字符特征类型
+ * @param dest 目标序列
+ * @param dest_size 目标序列长度
+ * @param start 起始位置
+ * @param cs 字符集
+ * @return 第一个匹配字符的位置，未找到则返回-1
+ */
+template <typename Traits>
+constexpr size_t char_traits_find_first_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
+                                           const size_t start, const charset& cs) noexcept {
+    if (start < dest_size) {
+        const auto end = dest + dest_size;
+        for (auto if_match = dest + start; if_match < end; ++if_match) {
+            if (cs.contains(*if_match)) {
+                return static_cast<size_t>(if_match - dest);
+            }
+        }
+    }
+    return static_cast<size_t>(-1);
+}
+
+/**
+ * @brief 在字符序列中查找最后一个出现在 charset 中的字符
+ * @tparam Traits 字符特征类型
+ * @param dest 目标序列
+ * @param dest_size 目标序列长度
+ * @param start 起始位置
+ * @param cs 字符集
+ * @return 最后一个匹配字符的位置，未找到则返回-1
+ */
+template <typename Traits>
+constexpr size_t char_traits_find_last_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
+                                          const size_t start, const charset& cs) noexcept {
+    if (dest_size != 0) {
+        for (auto if_match = dest + _NEFORCE min(start, dest_size - 1);; --if_match) {
+            if (cs.contains(*if_match)) {
+                return static_cast<size_t>(if_match - dest);
+            }
+            if (if_match == dest) {
+                break;
+            }
+        }
+    }
+    return static_cast<size_t>(-1);
+}
+
+/**
+ * @brief 在字符序列中查找第一个不在 charset 中的字符
+ * @tparam Traits 字符特征类型
+ * @param dest 目标序列
+ * @param dest_size 目标序列长度
+ * @param start 起始位置
+ * @param cs 字符集
+ * @return 第一个不匹配字符的位置，未找到则返回-1
+ */
+template <typename Traits>
+constexpr size_t char_traits_find_first_not_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
+                                               const size_t start, const charset& cs) noexcept {
+    if (start < dest_size) {
+        const auto end = dest + dest_size;
+        for (auto if_match = dest + start; if_match < end; ++if_match) {
+            if (!cs.contains(*if_match)) {
+                return static_cast<size_t>(if_match - dest);
+            }
+        }
+    }
+    return static_cast<size_t>(-1);
+}
+
+/**
+ * @brief 在字符序列中查找最后一个不在 charset 中的字符
+ * @tparam Traits 字符特征类型
+ * @param dest 目标序列
+ * @param dest_size 目标序列长度
+ * @param start 起始位置
+ * @param cs 字符集
+ * @return 最后一个不匹配字符的位置，未找到则返回-1
+ */
+template <typename Traits>
+constexpr size_t char_traits_find_last_not_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
+                                              const size_t start, const charset& cs) noexcept {
+    if (dest_size != 0) {
+        for (auto if_match = dest + _NEFORCE min(start, dest_size - 1);; --if_match) {
+            if (!cs.contains(*if_match)) {
+                return static_cast<size_t>(if_match - dest);
+            }
             if (if_match == dest) {
                 break;
             }

@@ -260,18 +260,27 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 🔍 反射系统 (Reflection)
 - **`NFRS`** - 预编译代码生成器，扫描 `NEFORCE_REFLECT_*` 标记自动生成类型注册代码，支持增量扫描
-- **`meta_any`** - 类型擦除容器，支持 `emplace<T>()` 原地构造
 - **`registry`** - 全局类型反射注册表，支持名称/type_id 双重查找、线程安全注册、动态信号槽连接 `connect_signal_to_slot()`
 - **`meta_type`** - 运行时类型元数据：基类列表、属性/函数映射、构造/克隆工厂、枚举/容器信息、信号名称列表、动态属性注册 `add_property()`
-- **`meta_property`** - 属性反射描述符，支持 getter/setter、注解标志（transient/required/readonly/optional/versioned/primary_key/auto_inc/unique/index/foreign_key）、变更通知信号 `notify_signal()`
+- **`meta_property`** - 属性反射描述符，支持注解标志、变更通知信号
 - **`meta_function`** - 成员函数/静态函数反射描述符，支持重载、参数提示与运行时 `invoke()` 调用
 - **`meta_enum`** - 枚举反射：名称↔值双向查找、条目遍历
 - **`type_builder`** - 链式API 类型构建器：基类注册、属性/函数/信号注册、构造/克隆/容器配置
-- **`signal_base`** - `signal<T...>` 的类型擦除基类，提供 `connect_dynamic()` / `emit_dynamic()` 实现运行时反射驱动的信号槽连接
 - **JSON 序列化器** - 反射驱动的对象↔JSON 序列化与反序列化，递归处理嵌套类型与容器
 - **二进制序列化器** - 大端格式（Magic "NEBF" + 类型表 + 数据段），属性注解控制序列化行为
 - **类型识别** - 基于 type_name 特化 + 编译器函数签名的 hash-based type_id，非侵入式类型注册
 - **反射宏** - `NEFORCE_REFLECT_OBJ` / `PROP` / `FUNC` / `SIGNAL` / `ENUM` / `ENUM_VAL` 类体内标记，供 NFRS 扫描器识别
+
+### 🖥️ 终端UI框架 (TUI)
+- **`application`** - 应用入口，Builder 模式配置（主题/FPS/标题），驱动事件循环与动画计时器
+- **`reconciler`** - 声明式渲染引擎，Cell 级终端帧差分与增量 ANSI 输出，焦点链遍历，鼠标命中测试与滚动条交互
+- **`screen`** - 终端帧缓冲，逐 Cell 差分生成最小 ANSI 转义序列
+- **`input_driver`** - 跨平台终端输入驱动，解析 ANSI/鼠标/UTF-8 序列
+- **`element`** - 不可变虚拟元素树，14+ 节点类型，装饰器链式组合，完整 Flexbox + Gridbox 网格布局
+- **`style` / `theme`** - 样式系统 + 语义化主题，预置暗色主题
+- **`state<T>`** - 响应式状态管理，写操作自动脏标记 + strand 合并调度重渲染
+- **`component_base` / `component<P>`** - 组件基类，焦点管理、上下文注入（`provide_context`/`context`，沿父链查找）、响应式状态工厂
+- **`animator` / `easing`** - 属性动画器 + 缓动函数
 
 ### 🧬 类型与特性 (TypeInfo)
 - **类型萃取** - 完备的编译期类型判断

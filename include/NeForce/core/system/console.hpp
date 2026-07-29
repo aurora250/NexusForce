@@ -8,6 +8,7 @@
 
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/exception/system_exception.hpp"
+#include "NeForce/core/string/string_builder.hpp"
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/core/utility/color.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -219,7 +220,7 @@ public:
     template <typename... Args>
     void print(Args&&... args) {
         lock<mutex> lock(mutex_);
-        this->print_string_unsafe(_NEFORCE to_string(_NEFORCE forward<Args>(args)...));
+        this->print_string_unsafe(_NEFORCE concatenate(_NEFORCE forward<Args>(args)...));
     }
 
     /**
@@ -275,7 +276,7 @@ public:
     template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
     void println(Args&&... args) {
         lock<mutex> lock(mutex_);
-        this->print_string_unsafe(_NEFORCE to_string(_NEFORCE forward<Args>(args)...));
+        this->print_string_unsafe(_NEFORCE concatenate(_NEFORCE forward<Args>(args)...));
         this->print_string_unsafe("\n");
     }
 
@@ -302,7 +303,7 @@ public:
     void printcln(const color& color, Args&&... args) {
         lock<mutex> lock(mutex_);
         this->set_color_unsafe(color, false);
-        this->print_string_unsafe(_NEFORCE to_string(_NEFORCE forward<Args>(args)...));
+        this->print_string_unsafe(_NEFORCE concatenate(_NEFORCE forward<Args>(args)...));
         this->print_string_unsafe("\033[0m\n");
     }
 
@@ -357,7 +358,7 @@ public:
     template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
     void eprintln(Args&&... args) {
         lock<mutex> lock(mutex_);
-        this->print_error_unsafe(_NEFORCE to_string(_NEFORCE forward<Args>(args)...));
+        this->print_error_unsafe(_NEFORCE concatenate(_NEFORCE forward<Args>(args)...));
         this->print_error_unsafe("\n");
     }
 
