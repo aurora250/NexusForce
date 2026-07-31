@@ -343,7 +343,7 @@ constexpr size_t char_traits_find_bmh(const char_traits_ptr_t<Traits> dest, cons
         return _NEFORCE char_traits_find_char<Traits>(dest, dest_size, start, rsc[0]);
     }
 
-    size_t skip[256];
+    size_t skip[256] = {};
     for (auto& s: skip) {
         s = rsc_size;
     }
@@ -385,7 +385,7 @@ constexpr size_t char_traits_rfind_bmh(const char_traits_ptr_t<Traits> dest, con
         return _NEFORCE char_traits_rfind_char<Traits>(dest, dest_size, start, rsc[0]);
     }
 
-    size_t skip[256];
+    size_t skip[256] = {};
     for (auto& s: skip) {
         s = rsc_size;
     }

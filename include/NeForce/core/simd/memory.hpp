@@ -5,9 +5,7 @@
  * @file memory.hpp
  * @brief 跨平台 SIMD 内存操作
  *
- * 提供对齐/非对齐加载与存储、流式（非 temporal）访问及软件预取操作，
- * 覆盖 128-bit / 256-bit / 512-bit 向量宽度。
- * 自动派发至 SSE2 / AVX / AVX2 / AVX-512F / NEON 或标量回退。
+ * 提供对齐/非对齐加载与存储、流式访问及软件预取操作。
  */
 
 #include "NeForce/core/simd/types.hpp"
@@ -29,7 +27,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t load_aligned(const void* ptr) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
     return ::_mm_load_si128(static_cast<const vec128_t*>(ptr));
 #elif defined(NEFORCE_SIMD_NEON)
-    return ::vld1q_u8(static_cast<const uint8_t*>(ptr));
+    return vld1q_u8(static_cast<const uint8_t*>(ptr));
 #else
     vec128_t result;
     const auto* src = static_cast<const byte_t*>(ptr);
@@ -49,7 +47,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t loadu_si128(const void* ptr) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
     return ::_mm_loadu_si128(static_cast<const vec128_t*>(ptr));
 #elif defined(NEFORCE_SIMD_NEON)
-    return ::vld1q_u8(static_cast<const uint8_t*>(ptr));
+    return vld1q_u8(static_cast<const uint8_t*>(ptr));
 #else
     vec128_t result;
     const auto* src = static_cast<const byte_t*>(ptr);
@@ -105,7 +103,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128f_t loadu_ps(const void* ptr) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
     return ::_mm_loadu_ps(static_cast<const float*>(ptr));
 #elif defined(NEFORCE_SIMD_NEON)
-    return ::vld1q_f32(static_cast<const float*>(ptr));
+    return vld1q_f32(static_cast<const float*>(ptr));
 #else
     vec128f_t result;
     const auto* src = static_cast<const float*>(ptr);
@@ -125,8 +123,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128d_t loadu_pd(const void* ptr) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
     return ::_mm_loadu_pd(static_cast<const double*>(ptr));
 #elif defined(NEFORCE_SIMD_NEON)
-    // NEON does not have unaligned f64 load, use generic vld1
-    return ::vld1q_f64(static_cast<const double*>(ptr));
+    return vld1q_f64(static_cast<const double*>(ptr));
 #else
     vec128d_t result;
     const auto* src = static_cast<const double*>(ptr);
@@ -147,7 +144,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void store_aligned(void* ptr, vec128_t v) noexcept 
 #ifdef NEFORCE_SIMD_SSE2
     ::_mm_store_si128(static_cast<vec128_t*>(ptr), v);
 #elif defined(NEFORCE_SIMD_NEON)
-    ::vst1q_u8(static_cast<uint8_t*>(ptr), v);
+    vst1q_u8(static_cast<uint8_t*>(ptr), v);
 #else
     auto* dst = static_cast<byte_t*>(ptr);
     for (int i = 0; i < 16; ++i) {
@@ -165,7 +162,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void storeu_si128(void* ptr, vec128_t v) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
     ::_mm_storeu_si128(static_cast<vec128_t*>(ptr), v);
 #elif defined(NEFORCE_SIMD_NEON)
-    ::vst1q_u8(static_cast<uint8_t*>(ptr), v);
+    vst1q_u8(static_cast<uint8_t*>(ptr), v);
 #else
     auto* dst = static_cast<byte_t*>(ptr);
     for (int i = 0; i < 16; ++i) {
@@ -217,8 +214,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void store_stream(void* ptr, vec128_t v) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
     ::_mm_stream_si128(static_cast<vec128_t*>(ptr), v);
 #elif defined(NEFORCE_SIMD_NEON)
-    // NEON has no direct stream store; use plain store
-    ::vst1q_u8(static_cast<uint8_t*>(ptr), v);
+    vst1q_u8(static_cast<uint8_t*>(ptr), v);
 #else
     auto* dst = static_cast<byte_t*>(ptr);
     for (int i = 0; i < 16; ++i) {

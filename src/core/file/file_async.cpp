@@ -197,6 +197,23 @@ void file_async::do_async_read(io_context& ctx, string& buffer, size_type size, 
         h(error_code{}, static_cast<size_type>(bytes));
     }
 #else
+    if (!uring_) {
+        // fall back to synchronous pread and dispatch the completion handler via the event loop.
+        ctx_->post([this, handler = move(handler), &buffer, size, offset]() mutable {
+            const auto off =
+                    offset >= 0 ? static_cast<off_t>(offset) : static_cast<off_t>(::lseek64(handle_, 0, SEEK_CUR));
+            const auto n = ::pread64(handle_, buffer.data(), static_cast<size_t>(size), off);
+            if (n < 0) {
+                buffer.resize(0);
+                handler(last_error(), 0);
+            } else {
+                buffer.resize(static_cast<size_t>(n));
+                handler(error_code{}, static_cast<size_type>(n));
+            }
+        });
+        return;
+    }
+
     auto* op = new io_op{move(handler), &buffer, nullptr};
 
     auto* sqe = ::io_uring_get_sqe(&uring_->ring);
@@ -259,6 +276,20 @@ void file_async::do_async_write(io_context& ctx, string data, size_type size, di
 #else
     if (size == numeric_traits<size_type>::max()) {
         size = data.size();
+    }
+
+    if (!uring_) {
+        ctx_->post([this, handler = move(handler), write_data = move(data), size, offset]() mutable {
+            const auto off =
+                    offset >= 0 ? static_cast<off_t>(offset) : static_cast<off_t>(::lseek64(handle_, 0, SEEK_CUR));
+            const auto n = ::pwrite64(handle_, write_data.data(), static_cast<size_t>(size), off);
+            if (n < 0) {
+                handler(last_error(), 0);
+            } else {
+                handler(error_code{}, static_cast<size_type>(n));
+            }
+        });
+        return;
     }
 
     const auto write_data = make_shared<string>(move(data));

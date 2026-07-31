@@ -88,20 +88,7 @@ void screen::reset_position(const bool clear) {
 string screen::to_plaintext() const {
     string result;
     result.reserve(static_cast<size_t>(dimx_ + 1) * static_cast<size_t>(dimy_));
-    int last_non_empty = -1;
     for (int y = 0; y < dimy_; ++y) {
-        int last_non_space = -1;
-        for (int x = 0; x < dimx_; ++x) {
-            const auto& c = cells_[static_cast<size_t>(y) * static_cast<size_t>(dimx_) + static_cast<size_t>(x)];
-            if (c.character != " " || c.automerge) {
-                last_non_space = x;
-            }
-        }
-        if (last_non_space >= 0) {
-            last_non_empty = y;
-        }
-    }
-    for (int y = 0; y <= last_non_empty; ++y) {
         if (y > 0) {
             result += '\n';
         }
@@ -118,6 +105,9 @@ string screen::to_plaintext() const {
                 result += c.character;
             }
         }
+    }
+    while (!result.empty() && result.back() == '\n') {
+        result.pop_back();
     }
     return result;
 }

@@ -452,7 +452,15 @@ class numeric_traits<unsigned long> : public numeric_traits<uint32_t> {};
  * @brief char类型的数值特征特化
  */
 template <>
+class numeric_traits<char>;
+
+#if defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_LOONGARCH)
+template <>
 class numeric_traits<char> : public numeric_traits<int8_t> {};
+#else
+template <>
+class numeric_traits<char> : public numeric_traits<uint8_t> {};
+#endif
 
 #ifdef NEFORCE_STANDARD_20
 /**
@@ -485,8 +493,13 @@ class numeric_traits<wchar_t>;
 template <>
 class numeric_traits<wchar_t> : public numeric_traits<uint16_t> {};
 #elif defined(NEFORCE_PLATFORM_LINUX)
+#    ifdef NEFORCE_ARCH_ARM
+template <>
+class numeric_traits<wchar_t> : public numeric_traits<uint32_t> {};
+#    else
 template <>
 class numeric_traits<wchar_t> : public numeric_traits<int32_t> {};
+#    endif
 #endif
 
 
@@ -619,7 +632,13 @@ public:
     NEFORCE_NODISCARD static constexpr decimal_t max() noexcept { return max_posi(); }
 
     NEFORCE_NODISCARD static constexpr decimal_t lowest() noexcept { return min_nega(); }
-    NEFORCE_NODISCARD static constexpr decimal_t epsilon() noexcept { return 1.08420217248550443401e-19L; }
+    NEFORCE_NODISCARD static constexpr decimal_t epsilon() noexcept {
+#    ifdef NEFORCE_ARCH_X86
+        return 1.08420217248550443401e-19L;
+#    else
+        return 1.92592994438723585305597794258492732e-34L;
+#    endif
+    }
     NEFORCE_NODISCARD static constexpr decimal_t round_error() noexcept { return 0.5L; }
     NEFORCE_NODISCARD static constexpr decimal_t denorm_min() noexcept { return 3.64519953188247460253e-4951L; }
 
@@ -627,9 +646,15 @@ public:
     NEFORCE_NODISCARD static constexpr decimal_t quiet_nan() noexcept { return __builtin_nanl(""); }
     NEFORCE_NODISCARD static constexpr decimal_t signaling_nan() noexcept { return __builtin_nansl(""); }
 
+#    ifdef NEFORCE_ARCH_X86
     static constexpr int digits = 64;
     static constexpr int digits10 = 18;
     static constexpr int max_digits10 = 21;
+#    else
+    static constexpr int digits = 113;
+    static constexpr int digits10 = 33;
+    static constexpr int max_digits10 = 36;
+#    endif
     static constexpr int max_exponent = 16384;
     static constexpr int max_exponent10 = 4932;
     static constexpr int min_exponent = -16381;

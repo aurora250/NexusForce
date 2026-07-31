@@ -269,9 +269,7 @@ if(WIN32)
             SetupAPI Shell32 synchronization Wbemuuid ws2_32 wsock32
     )
 elseif(UNIX AND NOT APPLE)
-    target_link_libraries(NexusForce PUBLIC
-            atomic pthread uring
-    )
+    target_link_libraries(NexusForce PUBLIC atomic pthread uring)
 endif()
 
 

@@ -710,8 +710,7 @@ NEFORCE_NODISCARD constexpr uint8_t to_uint8(const string_view sv, size_t* idx =
  * @return 转换后的128位无符号整数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 uint128_t to_uint128(const string_view sv, size_t* idx = nullptr,
-                                                           const int base = 10) {
+NEFORCE_NODISCARD constexpr uint128_t to_uint128(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const uint128_t num = inner::str_to_uints<uint128_t>(sv, &endptr, base);
     if (sv.data() == endptr) {
@@ -731,8 +730,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 uint128_t to_uint128(const string_view sv,
  * @return 转换后的128位有符号整数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int128_t to_int128(const string_view sv, size_t* idx = nullptr,
-                                                         const int base = 10) {
+NEFORCE_NODISCARD constexpr int128_t to_int128(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const int128_t num = inner::str_to_ints<int128_t>(sv, &endptr, base);
     if (sv.data() == endptr) {

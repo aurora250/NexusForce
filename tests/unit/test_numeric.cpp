@@ -13,8 +13,12 @@ protected:
     using StdLimits = std::numeric_limits<T>;
 };
 
-using TestTypes = ::testing::Types<bool, int8_t, int16_t, int32_t, int64_t, uint8_t, uint16_t, uint32_t, uint64_t, char,
-                                   char16_t, char32_t, float32_t, float64_t, decimal_t>;
+using TestTypes = ::testing::Types<
+#ifdef NEFORCE_STANDARD_20
+        char8_t,
+#endif
+        char16_t, char32_t, wchar_t, bool, char, int8_t, int16_t, int32_t, int64_t, uint8_t, uint16_t, uint32_t,
+        uint64_t, long long, unsigned long long, float32_t, float64_t, decimal_t>;
 
 TYPED_TEST_SUITE(NumericTraitsConsistencyTest, TestTypes);
 
@@ -175,6 +179,36 @@ TYPED_TEST(NumericTraitsConsistencyTest, Digits10) {
     EXPECT_EQ(Traits::digits10, StdLimits::digits10);
 }
 
+TYPED_TEST(NumericTraitsConsistencyTest, MaxDigits10) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::max_digits10, StdLimits::max_digits10);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, MaxExponent) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::max_exponent, StdLimits::max_exponent);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, MaxExponent10) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::max_exponent10, StdLimits::max_exponent10);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, MinExponent) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::min_exponent, StdLimits::min_exponent);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, MinExponent10) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::min_exponent10, StdLimits::min_exponent10);
+}
+
 TYPED_TEST(NumericTraitsConsistencyTest, HasInfinity) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
@@ -205,6 +239,30 @@ TYPED_TEST(NumericTraitsConsistencyTest, Traps) {
     constexpr bool custom_traps = Traits::traps;
     constexpr bool std_traps = StdLimits::traps;
     EXPECT_EQ(custom_traps, std_traps);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, HasDenorm) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(static_cast<int>(Traits::has_denorm), static_cast<int>(StdLimits::has_denorm));
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, RoundStyle) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(static_cast<int>(Traits::round_style), static_cast<int>(StdLimits::round_style));
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, HasDenormLoss) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::has_denorm_loss, StdLimits::has_denorm_loss);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, TinynessBefore) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::tinyness_before, StdLimits::tinyness_before);
 }
 
 class Float32TraitsTest : public ::testing::Test {};
@@ -284,6 +342,84 @@ TEST_F(Float64TraitsTest, HasDenormLoss) {
 
 TEST_F(Float64TraitsTest, TinynessBefore) {
     EXPECT_EQ(numeric_traits<float64_t>::tinyness_before, std::numeric_limits<float64_t>::tinyness_before);
+}
+
+class Float32PosiNegaTest : public ::testing::Test {};
+
+TEST_F(Float32PosiNegaTest, MinPosiMatchesMin) {
+    EXPECT_FLOAT_EQ(numeric_traits<float32_t>::min_posi(), numeric_traits<float32_t>::min());
+}
+
+TEST_F(Float32PosiNegaTest, MaxPosiMatchesMax) {
+    EXPECT_FLOAT_EQ(numeric_traits<float32_t>::max_posi(), numeric_traits<float32_t>::max());
+}
+
+TEST_F(Float32PosiNegaTest, MinNegaMatchesLowest) {
+    EXPECT_FLOAT_EQ(numeric_traits<float32_t>::min_nega(), numeric_traits<float32_t>::lowest());
+}
+
+TEST_F(Float32PosiNegaTest, MaxNegaIsNegativeSmall) {
+    EXPECT_LE(numeric_traits<float32_t>::max_nega(), 0.0F);
+    EXPECT_GT(numeric_traits<float32_t>::max_nega(), -1.0F);
+}
+
+class Float64PosiNegaTest : public ::testing::Test {};
+
+TEST_F(Float64PosiNegaTest, MinPosiMatchesMin) {
+    EXPECT_DOUBLE_EQ(numeric_traits<float64_t>::min_posi(), numeric_traits<float64_t>::min());
+}
+
+TEST_F(Float64PosiNegaTest, MaxPosiMatchesMax) {
+    EXPECT_DOUBLE_EQ(numeric_traits<float64_t>::max_posi(), numeric_traits<float64_t>::max());
+}
+
+TEST_F(Float64PosiNegaTest, MinNegaMatchesLowest) {
+    EXPECT_DOUBLE_EQ(numeric_traits<float64_t>::min_nega(), numeric_traits<float64_t>::lowest());
+}
+
+TEST_F(Float64PosiNegaTest, MaxNegaIsNegativeSmall) {
+    EXPECT_LE(numeric_traits<float64_t>::max_nega(), 0.0);
+    EXPECT_GT(numeric_traits<float64_t>::max_nega(), -1.0);
+}
+
+class DecimalPosiNegaTest : public ::testing::Test {};
+
+TEST_F(DecimalPosiNegaTest, MinPosiMatchesMin) {
+    EXPECT_DOUBLE_EQ(static_cast<double>(numeric_traits<decimal_t>::min_posi()),
+                     static_cast<double>(numeric_traits<decimal_t>::min()));
+}
+
+TEST_F(DecimalPosiNegaTest, MaxPosiMatchesMax) {
+    EXPECT_DOUBLE_EQ(static_cast<double>(numeric_traits<decimal_t>::max_posi()),
+                     static_cast<double>(numeric_traits<decimal_t>::max()));
+}
+
+TEST_F(DecimalPosiNegaTest, MinNegaMatchesLowest) {
+    EXPECT_DOUBLE_EQ(static_cast<double>(numeric_traits<decimal_t>::min_nega()),
+                     static_cast<double>(numeric_traits<decimal_t>::lowest()));
+}
+
+TEST_F(DecimalPosiNegaTest, MaxNegaIsNegativeSmall) {
+    EXPECT_LE(static_cast<double>(numeric_traits<decimal_t>::max_nega()), 0.0);
+    EXPECT_GT(static_cast<double>(numeric_traits<decimal_t>::max_nega()), -1.0);
+}
+
+class LongLongConsistencyTest : public ::testing::Test {};
+
+TEST_F(LongLongConsistencyTest, MatchesInt64) {
+    EXPECT_EQ(numeric_traits<long long>::min(), numeric_traits<int64_t>::min());
+    EXPECT_EQ(numeric_traits<long long>::max(), numeric_traits<int64_t>::max());
+    EXPECT_EQ(numeric_traits<long long>::digits, numeric_traits<int64_t>::digits);
+    EXPECT_EQ(numeric_traits<long long>::is_signed, numeric_traits<int64_t>::is_signed);
+}
+
+class UnsignedLongLongConsistencyTest : public ::testing::Test {};
+
+TEST_F(UnsignedLongLongConsistencyTest, MatchesUint64) {
+    EXPECT_EQ(numeric_traits<unsigned long long>::min(), numeric_traits<uint64_t>::min());
+    EXPECT_EQ(numeric_traits<unsigned long long>::max(), numeric_traits<uint64_t>::max());
+    EXPECT_EQ(numeric_traits<unsigned long long>::digits, numeric_traits<uint64_t>::digits);
+    EXPECT_EQ(numeric_traits<unsigned long long>::is_signed, numeric_traits<uint64_t>::is_signed);
 }
 
 class SignedInt32RangeTest : public ::testing::Test {};
@@ -1894,3 +2030,142 @@ TEST(CrossTypeTest, ArithmeticMixedSign) {
     int128_t c = a + b.to_int128();
     EXPECT_EQ(c, int128_t(-5));
 }
+
+#ifdef NEFORCE_COMPILER_GCC
+
+#    define __NEFORCE_I128_EQ_PROP(trait_prop, std_prop, T, BT) \
+        EXPECT_EQ(numeric_traits<T>::trait_prop, std::numeric_limits<BT>::std_prop)
+
+class Int128BuiltinComparisonTest : public ::testing::Test {};
+
+TEST_F(Int128BuiltinComparisonTest, Min) {
+    const auto builtin = std::numeric_limits<__int128>::min();
+    const auto custom = numeric_traits<int128_t>::min();
+    EXPECT_EQ(custom.hi, static_cast<uint64_t>(static_cast<unsigned __int128>(builtin) >> 64));
+    EXPECT_EQ(custom.lo, static_cast<uint64_t>(builtin));
+}
+
+TEST_F(Int128BuiltinComparisonTest, Max) {
+    const auto builtin = std::numeric_limits<__int128>::max();
+    const auto custom = numeric_traits<int128_t>::max();
+    EXPECT_EQ(custom.hi, static_cast<uint64_t>(static_cast<unsigned __int128>(builtin) >> 64));
+    EXPECT_EQ(custom.lo, static_cast<uint64_t>(builtin));
+}
+
+TEST_F(Int128BuiltinComparisonTest, Lowest) {
+    const auto builtin = std::numeric_limits<__int128>::lowest();
+    const auto custom = numeric_traits<int128_t>::lowest();
+    EXPECT_EQ(custom.hi, static_cast<uint64_t>(static_cast<unsigned __int128>(builtin) >> 64));
+    EXPECT_EQ(custom.lo, static_cast<uint64_t>(builtin));
+}
+
+TEST_F(Int128BuiltinComparisonTest, Epsilon) { EXPECT_EQ(numeric_traits<int128_t>::epsilon(), int128_t(0)); }
+
+TEST_F(Int128BuiltinComparisonTest, RoundError) { EXPECT_EQ(numeric_traits<int128_t>::round_error(), int128_t(0)); }
+
+TEST_F(Int128BuiltinComparisonTest, Infinity) { EXPECT_EQ(numeric_traits<int128_t>::infinity(), int128_t(0)); }
+
+TEST_F(Int128BuiltinComparisonTest, QuietNaN) { EXPECT_EQ(numeric_traits<int128_t>::quiet_nan(), int128_t(0)); }
+
+TEST_F(Int128BuiltinComparisonTest, SignalingNaN) { EXPECT_EQ(numeric_traits<int128_t>::signaling_nan(), int128_t(0)); }
+
+TEST_F(Int128BuiltinComparisonTest, DenormMin) { EXPECT_EQ(numeric_traits<int128_t>::denorm_min(), int128_t(0)); }
+
+TEST_F(Int128BuiltinComparisonTest, StaticProperties) {
+    __NEFORCE_I128_EQ_PROP(is_specialized, is_specialized, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(is_signed, is_signed, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(is_integer, is_integer, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(is_exact, is_exact, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(is_bounded, is_bounded, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(is_modulo, is_modulo, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(radix, radix, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(digits, digits, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(digits10, digits10, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(max_digits10, max_digits10, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(min_exponent, min_exponent, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(min_exponent10, min_exponent10, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(max_exponent, max_exponent, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(max_exponent10, max_exponent10, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(has_infinity, has_infinity, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(has_quiet_nan, has_quiet_NaN, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(has_signaling_nan, has_signaling_NaN, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(is_iec559, is_iec559, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(traps, traps, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(has_denorm_loss, has_denorm_loss, int128_t, __int128);
+    __NEFORCE_I128_EQ_PROP(tinyness_before, tinyness_before, int128_t, __int128);
+    EXPECT_EQ(static_cast<int>(numeric_traits<int128_t>::has_denorm),
+              static_cast<int>(std::numeric_limits<__int128>::has_denorm));
+    EXPECT_EQ(static_cast<int>(numeric_traits<int128_t>::round_style),
+              static_cast<int>(std::numeric_limits<__int128>::round_style));
+}
+
+class Uint128BuiltinComparisonTest : public ::testing::Test {};
+
+TEST_F(Uint128BuiltinComparisonTest, Min) {
+    const auto builtin = std::numeric_limits<unsigned __int128>::min();
+    const auto custom = numeric_traits<uint128_t>::min();
+    EXPECT_EQ(custom.hi, static_cast<uint64_t>(builtin >> 64));
+    EXPECT_EQ(custom.lo, static_cast<uint64_t>(builtin));
+}
+
+TEST_F(Uint128BuiltinComparisonTest, Max) {
+    const auto builtin = std::numeric_limits<unsigned __int128>::max();
+    const auto custom = numeric_traits<uint128_t>::max();
+    EXPECT_EQ(custom.hi, static_cast<uint64_t>(builtin >> 64));
+    EXPECT_EQ(custom.lo, static_cast<uint64_t>(builtin));
+}
+
+TEST_F(Uint128BuiltinComparisonTest, Lowest) {
+    const auto builtin = std::numeric_limits<unsigned __int128>::lowest();
+    const auto custom = numeric_traits<uint128_t>::lowest();
+    EXPECT_EQ(custom.hi, static_cast<uint64_t>(builtin >> 64));
+    EXPECT_EQ(custom.lo, static_cast<uint64_t>(builtin));
+}
+
+TEST_F(Uint128BuiltinComparisonTest, Epsilon) { EXPECT_EQ(numeric_traits<uint128_t>::epsilon(), uint128_t(0ULL)); }
+
+TEST_F(Uint128BuiltinComparisonTest, RoundError) {
+    EXPECT_EQ(numeric_traits<uint128_t>::round_error(), uint128_t(0ULL));
+}
+
+TEST_F(Uint128BuiltinComparisonTest, Infinity) { EXPECT_EQ(numeric_traits<uint128_t>::infinity(), uint128_t(0ULL)); }
+
+TEST_F(Uint128BuiltinComparisonTest, QuietNaN) { EXPECT_EQ(numeric_traits<uint128_t>::quiet_nan(), uint128_t(0ULL)); }
+
+TEST_F(Uint128BuiltinComparisonTest, SignalingNaN) {
+    EXPECT_EQ(numeric_traits<uint128_t>::signaling_nan(), uint128_t(0ULL));
+}
+
+TEST_F(Uint128BuiltinComparisonTest, DenormMin) { EXPECT_EQ(numeric_traits<uint128_t>::denorm_min(), uint128_t(0ULL)); }
+
+TEST_F(Uint128BuiltinComparisonTest, StaticProperties) {
+    __NEFORCE_I128_EQ_PROP(is_specialized, is_specialized, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(is_signed, is_signed, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(is_integer, is_integer, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(is_exact, is_exact, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(is_bounded, is_bounded, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(is_modulo, is_modulo, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(radix, radix, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(digits, digits, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(digits10, digits10, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(max_digits10, max_digits10, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(min_exponent, min_exponent, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(min_exponent10, min_exponent10, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(max_exponent, max_exponent, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(max_exponent10, max_exponent10, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(has_infinity, has_infinity, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(has_quiet_nan, has_quiet_NaN, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(has_signaling_nan, has_signaling_NaN, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(is_iec559, is_iec559, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(traps, traps, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(has_denorm_loss, has_denorm_loss, uint128_t, unsigned __int128);
+    __NEFORCE_I128_EQ_PROP(tinyness_before, tinyness_before, uint128_t, unsigned __int128);
+    EXPECT_EQ(static_cast<int>(numeric_traits<uint128_t>::has_denorm),
+              static_cast<int>(std::numeric_limits<unsigned __int128>::has_denorm));
+    EXPECT_EQ(static_cast<int>(numeric_traits<uint128_t>::round_style),
+              static_cast<int>(std::numeric_limits<unsigned __int128>::round_style));
+}
+
+#    undef __NEFORCE_I128_EQ_PROP
+
+#endif // NEFORCE_COMPILER_GCC

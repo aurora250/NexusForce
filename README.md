@@ -48,7 +48,7 @@
 | 项目      | 详情                                                                           |
 |-----------|--------------------------------------------------------------------------------|
 | 平台      | 🪟 WINDOWS / 🐧 LINUX                                                          |
-| 指令集    | X86                                                                            |
+| 指令集    | X86 / ARM / RISC-V (LINUX) / LOONGARCH (LINUX)                                 |
 | 位宽      | 64位                                                                           |
 | 编译器    | MSVC (Windows) / LLVM-Clang (Windows, Linux) / ClangCL (Windows) / GCC (Linux) |
 | C++ 标准  | 14 / 17 / 20                                                                   |

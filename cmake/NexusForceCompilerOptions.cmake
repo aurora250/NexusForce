@@ -23,7 +23,7 @@ function(nexusforce_compiler_options target)
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         target_compile_options(${target} PRIVATE
                 -finput-charset=UTF-8 -fexec-charset=UTF-8
-                -Wno-unused-result
+                -Wno-unused-result -Wno-psabi
                 $<$<CONFIG:Debug>:-Werror -O0 -g -gdwarf-4>
                 $<$<CONFIG:Release>:-O2>
         )

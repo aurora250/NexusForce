@@ -242,8 +242,8 @@
 #endif
 
 
-#if defined(__arm__) || defined(__arm) || defined(_ARM_) || defined(_M_ARM) || defined(__ARM_ARCH) || \
-        defined(__TARGET_ARCH_ARM) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if (defined(__arm__) || defined(__arm) || defined(_ARM_) || defined(_M_ARM) || defined(__TARGET_ARCH_ARM)) && \
+        !defined(__aarch64__) && !defined(_M_ARM64) && !defined(__ARM64_ARCH_8__)
 #    define NEFORCE_ARCH_ARM32 1 ///< 32位ARM架构
 #endif
 
@@ -271,10 +271,10 @@
 #if defined(__loongarch__) || defined(__loongarch) || defined(__loongarch32) || defined(__loongarch64) || \
         defined(_LOONGARCH_SIM) || defined(_LOONGARCH) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #    define NEFORCE_ARCH_LOONGARCH 1 ///< LoongArch架构
-#    if defined(__loongarch32) || defined(_LOONGARCH_SIM == _ABILP32_SIM) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#    if defined(__loongarch32) || _LOONGARCH_SIM == _ABILP32_SIM || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_ARCH_LOONGARCH32 1 ///< 32位LoongArch
 #    endif
-#    if defined(__loongarch64) || defined(_LOONGARCH_SIM == _ABILP64_SIM) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#    if defined(__loongarch64) || _LOONGARCH_SIM == _ABILP64_SIM || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_ARCH_LOONGARCH64 1 ///< 64位LoongArch
 #    endif
 #endif

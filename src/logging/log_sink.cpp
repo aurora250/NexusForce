@@ -33,6 +33,50 @@ namespace {
         }
     }
 #endif
+
+    string resolve_placeholder(const string& ph, const log_event& event) {
+        if (ph.size() > 8 && ph.view(0, 8) == "context.") {
+            if (event.context) {
+                const auto it = event.context->find(ph.substr(8));
+                if (it != event.context->end()) {
+                    return it->second;
+                }
+            }
+            return "";
+        }
+
+        if (ph == "time") {
+            return event.dt.to_string();
+        } else if (ph == "level") {
+            return to_string(event.level);
+        } else if (ph == "file") {
+            const string_view f = event.loc.file_name();
+            if (!f.empty()) {
+                const char* last = f.data();
+                for (const char* p = f.data(); (*p) != 0; ++p) {
+                    if (*p == '/' || *p == '\\') {
+                        last = p + 1;
+                    }
+                }
+                return {last};
+            }
+            return "";
+        } else if (ph == "filepath") {
+            return event.loc.file_name();
+        } else if (ph == "line") {
+            return to_string(event.loc.line());
+        } else if (ph == "func") {
+            return event.loc.func_name();
+        } else if (ph == "thread") {
+            return to_string(event.thread_id.native_handle());
+        } else if (ph == "name") {
+            return event.logger_name;
+        } else if (ph == "message") {
+            return event.message;
+        }
+        return "{" + ph + "}";
+    }
+
 } // namespace
 
 log_formatter::log_formatter(string pattern) :
@@ -74,49 +118,6 @@ void log_formatter::parse_pattern() {
         parts_.emplace_back(true, placeholder);
         pos = end + 1;
     }
-}
-
-string log_formatter::resolve_placeholder(const string& ph, const log_event& event) const {
-    if (ph.size() > 8 && ph.view(0, 8) == "context.") {
-        if (event.context) {
-            const auto it = event.context->find(ph.substr(8));
-            if (it != event.context->end()) {
-                return it->second;
-            }
-        }
-        return "";
-    }
-
-    if (ph == "time") {
-        return event.dt.to_string();
-    } else if (ph == "level") {
-        return to_string(event.level);
-    } else if (ph == "file") {
-        const string_view f = event.loc.file;
-        if (!f.empty()) {
-            const char* last = f.data();
-            for (const char* p = f.data(); (*p) != 0; ++p) {
-                if (*p == '/' || *p == '\\') {
-                    last = p + 1;
-                }
-            }
-            return {last};
-        }
-        return "";
-    } else if (ph == "filepath") {
-        return (event.loc.file != nullptr) ? string(event.loc.file) : "";
-    } else if (ph == "line") {
-        return to_string(event.loc.line);
-    } else if (ph == "func") {
-        return !event.loc.func.empty() ? string(event.loc.func) : "";
-    } else if (ph == "thread") {
-        return to_string(event.thread_id.native_handle());
-    } else if (ph == "name") {
-        return event.logger_name;
-    } else if (ph == "message") {
-        return event.message;
-    }
-    return "{" + ph + "}";
 }
 
 void log_sink::set_formatter(unique_ptr<log_formatter> formatter) { formatter_ = move(formatter); }

@@ -1,5 +1,5 @@
 #include <NeForce/tui/event_dispatcher.hpp>
-#include <NeForce/tui/dom/state.hpp>
+#include <NeForce/tui/component/component.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 

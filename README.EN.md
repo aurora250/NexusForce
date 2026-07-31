@@ -48,7 +48,7 @@ This project aims to establish a **feature-complete, stylistically unified, high
 | Item            | Details                                                                        |
 |-----------------|--------------------------------------------------------------------------------|
 | Platform        | 🪟 WINDOWS / 🐧 LINUX                                                          |
-| Instruction Set | X86                                                                            |
+| Instruction Set | X86 / ARM / RISC-V (LINUX) / LOONGARCH (LINUX)                                 |
 | Bit Width       | 64-bit                                                                         |
 | Compiler        | MSVC (Windows) / LLVM-Clang (Windows, Linux) / ClangCL (Windows) / GCC (Linux) |
 | C++ Standard    | 14 / 17 / 20                                                                   |

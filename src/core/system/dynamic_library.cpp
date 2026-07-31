@@ -160,7 +160,7 @@ dynamic_library dynamic_library::load_self() {
 
 dynamic_library dynamic_library::load_by_name(const string& name, load_mode mode) {
     string resolved_name = name;
-    if (name.find('/') == string::npos && name.find('\\') == string::npos) {
+    if (!name.contains('/') && !name.contains('\\')) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         if (name.size() < 4 || !name.ends_with(".dll")) {
             resolved_name = name + ".dll";

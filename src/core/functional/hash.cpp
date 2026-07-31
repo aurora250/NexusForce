@@ -540,19 +540,19 @@ namespace {
         }
 #elif defined(NEFORCE_SIMD_NEON)
         for (size_t i = 0; i < 8; i += 2) {
-            ::uint64x2_t data_vec = vld1q_u64(reinterpret_cast<const uint64_t*>(data + i * 8));
-            ::uint64x2_t key_vec =
-                    ::veorq_u64(data_vec, ::vld1q_u64(reinterpret_cast<const uint64_t*>(secret + i * 8)));
+            const ::uint64x2_t data_vec = vld1q_u64(reinterpret_cast<const uint64_t*>(data + i * 8));
+            const ::uint64x2_t key_vec =
+                    ::veorq_u64(data_vec, vld1q_u64(reinterpret_cast<const uint64_t*>(secret + i * 8)));
 
-            ::uint64x2_t swapped = ::vextq_u64(data_vec, data_vec, 1);
-            ::uint64x2_t acc_vec = ::vld1q_u64(reinterpret_cast<const uint64_t*>(acc + i));
+            const ::uint64x2_t swapped = vextq_u64(data_vec, data_vec, 1);
+            ::uint64x2_t acc_vec = vld1q_u64(reinterpret_cast<const uint64_t*>(acc + i));
             acc_vec = ::vaddq_u64(acc_vec, swapped);
 
-            ::uint32x4_t key_u32 = ::vreinterpretq_u32_u64(key_vec);
-            ::uint64x2_t product = ::vmull_u32(vget_low_u32(key_u32), ::vget_high_u32(key_u32));
+            const ::uint32x4_t key_u32 = ::vreinterpretq_u32_u64(key_vec);
+            const ::uint64x2_t product = ::vmull_u32(vget_low_u32(key_u32), ::vget_high_u32(key_u32));
             acc_vec = ::vaddq_u64(acc_vec, product);
 
-            ::vst1q_u64(reinterpret_cast<uint64_t*>(acc + i), acc_vec);
+            vst1q_u64(reinterpret_cast<uint64_t*>(acc + i), acc_vec);
         }
 #else
         for (size_t i = 0; i < 8; ++i) {

@@ -87,6 +87,21 @@ jobs:
             config: no-compress
             cppstd: 20
 
+          - os: ubuntu-24.04-arm
+            compiler: gcc
+            config: full
+            cppstd: 20
+
+          - os: ubuntu-latest
+            compiler: gcc
+            config: cross-riscv64
+            cppstd: 20
+
+          - os: ubuntu-latest
+            compiler: gcc
+            config: cross-loongarch64
+            cppstd: 20
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -118,6 +133,28 @@ jobs:
           sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-19   100
           sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-19 100
           clang++ --version
+
+      - name: Install cross-compilation toolchains (Ubuntu)
+        if: startsWith(matrix.config, 'cross-')
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            g++-riscv64-linux-gnu        \
+            g++-14-loongarch64-linux-gnu \
+            qemu-user-static
+
+      - name: Setup LoongArch compiler symlinks + vcpkg patch
+        if: matrix.config == 'cross-loongarch64'
+        run: |
+          for tool in gcc g++ gfortran; do
+            sudo ln -sf loongarch64-linux-gnu-${tool}-14 /usr/bin/loongarch64-linux-gnu-${tool}
+          done
+          sudo rm -f /usr/bin/loongarch64-linux-gnu-ld
+          sudo ln -sf loongarch64-linux-gnu-ld.bfd /usr/bin/loongarch64-linux-gnu-ld
+          VCPKG_TC="/home/runner/vcpkg/scripts/toolchains/linux.cmake"
+          if [ -f "$VCPKG_TC" ] && ! grep -q 'loongarch64' "$VCPKG_TC"; then
+            sudo sed -i '/STREQUAL "riscv64"/a\    elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "loongarch64")\n      set(CMAKE_SYSTEM_PROCESSOR loongarch64 CACHE STRING "")' "$VCPKG_TC"
+          fi
 
       - name: Set vcpkg paths
         shell: bash
@@ -233,6 +270,25 @@ jobs:
                 -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
               )
               ;;
+            cross-riscv64)
+              FLAGS+=(
+                -DVCPKG_TARGET_TRIPLET=riscv64-linux
+                -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/riscv64-linux-gnu.cmake
+                -DNEXUSFORCE_BUILD_TESTS=OFF
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
+            cross-loongarch64)
+              FLAGS+=(
+                -DVCPKG_TARGET_TRIPLET=loongarch64-linux
+                -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/loongarch64-linux-gnu.cmake
+                -DNEXUSFORCE_ENABLE_MYSQL=OFF
+                -DNEXUSFORCE_BUILD_TESTS=OFF
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
           esac
 
           if [ "${{ runner.os }}" = "Windows" ]; then
@@ -248,7 +304,11 @@ jobs:
                 "${FLAGS[@]}"
             fi
           else
-            if [ "${{ matrix.compiler }}" = "clang" ]; then
+            if [[ "${{ matrix.config }}" == cross-* ]]; then
+              cmake -B build -G Ninja \
+                -DCMAKE_BUILD_TYPE=Release \
+                "${FLAGS[@]}"
+            elif [ "${{ matrix.compiler }}" = "clang" ]; then
               cmake -B build -G Ninja \
                 -DCMAKE_C_COMPILER=clang \
                 -DCMAKE_CXX_COMPILER=clang++ \

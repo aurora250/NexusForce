@@ -276,21 +276,21 @@ public:
 #define NEFORCE_LOG_GET_LOGGER() _NEFORCE logger_registry::instance().default_logger()
 
 /** @brief 日志宏主体：检查级别后调用 logger::log() */
-#define NEFORCE_LOG_BODY(level, msg)                        \
-    do {                                                    \
-        auto _l = NEFORCE_LOG_GET_LOGGER();                 \
-        if (_l->should_log(level)) {                        \
-            _l->log(level, msg, NEFORCE_SOURCE_LOCATION()); \
-        }                                                   \
+#define NEFORCE_LOG_BODY(level, msg)                                  \
+    do {                                                              \
+        auto _l = NEFORCE_LOG_GET_LOGGER();                           \
+        if (_l->should_log(level)) {                                  \
+            _l->log(level, msg, _NEFORCE source_location::current()); \
+        }                                                             \
     } while (false)
 
 /** @brief 格式化日志宏主体 */
-#define NEFORCE_LOGF_BODY(level, msg, ...)                                                \
-    do {                                                                                  \
-        auto _l = NEFORCE_LOG_GET_LOGGER();                                               \
-        if (_l->should_log(level)) {                                                      \
-            _l->log(level, _NEFORCE format(msg, __VA_ARGS__), NEFORCE_SOURCE_LOCATION()); \
-        }                                                                                 \
+#define NEFORCE_LOGF_BODY(level, msg, ...)                                                          \
+    do {                                                                                            \
+        auto _l = NEFORCE_LOG_GET_LOGGER();                                                         \
+        if (_l->should_log(level)) {                                                                \
+            _l->log(level, _NEFORCE format(msg, __VA_ARGS__), _NEFORCE source_location::current()); \
+        }                                                                                           \
     } while (false)
 
 /** @brief 命名 Logger 日志宏主体 */
@@ -298,17 +298,17 @@ public:
     do {                                                                 \
         auto _l = _NEFORCE logger_registry::instance().get_logger(name); \
         if (_l->should_log(level)) {                                     \
-            _l->log(level, msg, NEFORCE_SOURCE_LOCATION());              \
+            _l->log(level, msg, _NEFORCE source_location::current());    \
         }                                                                \
     } while (false)
 
 /** @brief 命名 Logger 格式化日志宏主体 */
-#define NEFORCE_LOGGER_LOGF_BODY(level, name, msg, ...)                                   \
-    do {                                                                                  \
-        auto _l = _NEFORCE logger_registry::instance().get_logger(name);                  \
-        if (_l->should_log(level)) {                                                      \
-            _l->log(level, _NEFORCE format(msg, __VA_ARGS__), NEFORCE_SOURCE_LOCATION()); \
-        }                                                                                 \
+#define NEFORCE_LOGGER_LOGF_BODY(level, name, msg, ...)                                             \
+    do {                                                                                            \
+        auto _l = _NEFORCE logger_registry::instance().get_logger(name);                            \
+        if (_l->should_log(level)) {                                                                \
+            _l->log(level, _NEFORCE format(msg, __VA_ARGS__), _NEFORCE source_location::current()); \
+        }                                                                                           \
     } while (false)
 
 /// @endcond

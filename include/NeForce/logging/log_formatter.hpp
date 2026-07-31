@@ -62,7 +62,6 @@ private:
     vector<part> parts_; ///< 解析后的片段列表
 
     void parse_pattern();
-    NEFORCE_NODISCARD string resolve_placeholder(const string& ph, const log_event& event) const;
 
 public:
     /**

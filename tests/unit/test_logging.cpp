@@ -126,7 +126,7 @@ TEST(ConsoleSinkTest, FormatAndOutput) {
     ev.dt = datetime::now();
     ev.level = log_level::WARN;
     ev.message = "console test";
-    ev.loc = source_loc{"test.cpp", "test", 1};
+    ev.loc = source_location{"test.cpp", "test", 1};
     ev.context = make_shared<unordered_map<string, string>>();
     testing::internal::CaptureStdout();
     sink.log(ev);
@@ -381,9 +381,9 @@ TEST_F(LoggerTest, SourceLocation) {
     NEFORCE_LOG_INFO("srcloc test");
     this_thread::sleep_for(50_ms);
     ASSERT_GE(mock_->events.size(), 1u);
-    EXPECT_NE(mock_->events[0].loc.file, nullptr);
-    EXPECT_NE(mock_->events[0].loc.func, nullptr);
-    EXPECT_GT(mock_->events[0].loc.line, 0);
+    EXPECT_NE(mock_->events[0].loc.file_name(), "");
+    EXPECT_NE(mock_->events[0].loc.func_name(), "");
+    EXPECT_GT(mock_->events[0].loc.line(), 0);
 }
 
 TEST_F(LoggerTest, CompileTimeFilteringDisabled) {
@@ -511,7 +511,7 @@ TEST(SyslogSinkTest, CreateAndLog) {
     ev.dt = datetime::now();
     ev.level = log_level::INFO;
     ev.message = "syslog test message";
-    ev.loc = source_loc{"test.cpp", "test", 1};
+    ev.loc = source_location{"test.cpp", "test", 1};
     ev.context = make_shared<unordered_map<string, string>>();
     EXPECT_NO_THROW(sink.log(ev));
     EXPECT_NO_THROW(sink.flush());
@@ -524,7 +524,7 @@ TEST(SyslogSinkTest, Formatting) {
     ev.dt = datetime::now();
     ev.level = log_level::ERROR;
     ev.message = "formatted syslog";
-    ev.loc = source_loc{"test.cpp", "test", 1};
+    ev.loc = source_location{"test.cpp", "test", 1};
     ev.context = make_shared<unordered_map<string, string>>();
     EXPECT_NO_THROW(sink.log(ev));
 }

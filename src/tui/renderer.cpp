@@ -1,10 +1,10 @@
 #include <NeForce/core/string/utf_iterator.hpp>
-#include <NeForce/tui/dom/state.hpp>
+#include <NeForce/tui/component/component.hpp>
 #include <NeForce/tui/renderer.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
-renderer::renderer(screen& target, const theme& t, const int& term_w, const int& term_h) :
+renderer::renderer(screen& target, const theme& t, int term_w, int term_h) :
 screen_(target),
 theme_(t),
 term_w_(term_w),

@@ -5,11 +5,10 @@
  * @file arithmetic.hpp
  * @brief 跨平台 SIMD 整型算术运算
  *
- * 提供 128-bit 向量上的加法、减法、乘法、饱和运算、绝对值、
- * 最大/最小值及平均等整型算术操作，覆盖 8/16/32/64 位元素宽度。
- * 自动派发至 SSE2 / SSE4.1 / SSSE3 / AVX2 / NEON 或标量回退。
+ * 提供加法、减法、乘法、饱和运算、绝对值、最大/最小值及平均等整型算术操作。
  */
 
+#include "NeForce/core/numeric/numeric_traits.hpp"
 #include "NeForce/core/simd/types.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
@@ -259,16 +258,16 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t mulhi_i16(vec128_t a, vec128_t b) noexcept
 #ifdef NEFORCE_SIMD_SSE2
     return ::_mm_mulhi_epi16(a, b);
 #elif defined(NEFORCE_SIMD_NEON)
-    const int16x8_t sa = ::vreinterpretq_s16_u8(a);
-    const int16x8_t sb = ::vreinterpretq_s16_u8(b);
-    const int16x4_t a_lo = ::vget_low_s16(sa);
-    const int16x4_t b_lo = ::vget_low_s16(sb);
-    const int16x4_t a_hi = ::vget_high_s16(sa);
-    const int16x4_t b_hi = ::vget_high_s16(sb);
-    int32x4_t prod_lo = ::vmull_s16(a_lo, b_lo);
-    int32x4_t prod_hi = ::vmull_s16(a_hi, b_hi);
-    int16x4_t hi_lo = ::vshrn_n_s32(prod_lo, 16);
-    int16x4_t hi_hi = ::vshrn_n_s32(prod_hi, 16);
+    const ::int16x8_t sa = ::vreinterpretq_s16_u8(a);
+    const ::int16x8_t sb = ::vreinterpretq_s16_u8(b);
+    const ::int16x4_t a_lo = ::vget_low_s16(sa);
+    const ::int16x4_t b_lo = ::vget_low_s16(sb);
+    const ::int16x4_t a_hi = ::vget_high_s16(sa);
+    const ::int16x4_t b_hi = ::vget_high_s16(sb);
+    const ::int32x4_t prod_lo = ::vmull_s16(a_lo, b_lo);
+    const ::int32x4_t prod_hi = ::vmull_s16(a_hi, b_hi);
+    const ::int16x4_t hi_lo = vshrn_n_s32(prod_lo, 16);
+    const ::int16x4_t hi_hi = vshrn_n_s32(prod_hi, 16);
     return ::vreinterpretq_u8_s16(::vcombine_s16(hi_lo, hi_hi));
 #else
     const auto* sa = reinterpret_cast<const int16_t*>(a.data);
@@ -304,10 +303,10 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t madds_i8x16(vec128_t a, vec128_t b) noexce
     }
     return ::_mm_load_si128(reinterpret_cast<const ::__m128i*>(result));
 #elif defined(NEFORCE_SIMD_NEON)
-    const int8x16_t sa = ::vreinterpretq_s8_u8(a);
-    const int8x16_t sb = ::vreinterpretq_s8_u8(b);
-    const int16x8_t prod = ::vmull_s8(::vget_low_s8(sa), ::vget_low_s8(sb));
-    const int16x8_t prod_hi = ::vmull_s8(::vget_high_s8(sa), ::vget_high_s8(sb));
+    const ::int8x16_t sa = ::vreinterpretq_s8_u8(a);
+    const ::int8x16_t sb = ::vreinterpretq_s8_u8(b);
+    const ::int16x8_t prod = ::vmull_s8(::vget_low_s8(sa), ::vget_low_s8(sb));
+    const ::int16x8_t prod_hi = ::vmull_s8(::vget_high_s8(sa), ::vget_high_s8(sb));
     return ::vreinterpretq_u8_s16(::vpaddq_s16(prod, prod_hi));
 #else
     const auto* sa = reinterpret_cast<const int8_t*>(a.data);
@@ -417,7 +416,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t saturated_add_u16(vec128_t a, vec128_t b) 
     const ::__m128i overflow = ::_mm_cmpgt_epi16(::_mm_xor_si128(a, sign), ::_mm_xor_si128(sum, sign));
     return ::_mm_or_si128(overflow, sum);
 #elif defined(NEFORCE_SIMD_NEON)
-    return ::vqaddq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b));
+    return ::vreinterpretq_u8_u16(::vqaddq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b)));
 #else
     vec128_t result;
     for (int i = 0; i < 8; ++i) {
@@ -522,7 +521,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t saturated_sub_u16(vec128_t a, vec128_t b) 
     const ::__m128i underflow = ::_mm_cmpgt_epi16(::_mm_xor_si128(b, sign), ::_mm_xor_si128(a, sign));
     return ::_mm_andnot_si128(underflow, sub);
 #elif defined(NEFORCE_SIMD_NEON)
-    return ::vqsubq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b));
+    return ::vreinterpretq_u8_u16(::vqsubq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b)));
 #else
     vec128_t result;
     for (int i = 0; i < 8; ++i) {
@@ -551,8 +550,11 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t abs_i8(vec128_t v) noexcept {
 #else
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        const int8_t val = static_cast<int8_t>(v.data[i]);
-        result.data[i] = static_cast<byte_t>(val < 0 ? (val == -128 ? 127 : -val) : val);
+        const auto val = static_cast<int8_t>(v.data[i]);
+        // Use unsigned negation to avoid UB, matches x86 PABSB wrap-around behavior
+        result.data[i] =
+                val < 0 ? static_cast<byte_t>(static_cast<int8_t>(-static_cast<unsigned>(static_cast<uint8_t>(val))))
+                        : static_cast<byte_t>(val);
     }
     return result;
 #endif
@@ -579,7 +581,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t abs_i16(vec128_t v) noexcept {
     auto* rd = reinterpret_cast<int16_t*>(result.data);
     for (int i = 0; i < 8; ++i) {
         const int16_t val = sv[i];
-        rd[i] = val < 0 ? static_cast<int16_t>(val == -32768 ? 32767 : static_cast<int16_t>(-val)) : val;
+        rd[i] = val < 0 ? static_cast<int16_t>(-static_cast<int>(static_cast<uint16_t>(val))) : val;
     }
     return result;
 #endif
@@ -606,7 +608,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t abs_i32(vec128_t v) noexcept {
     auto* rd = reinterpret_cast<int32_t*>(result.data);
     for (int i = 0; i < 4; ++i) {
         const int32_t val = sv[i];
-        rd[i] = val < 0 ? (val == INT32_MIN ? INT32_MAX : -val) : val;
+        rd[i] = val < 0 ? static_cast<int32_t>(-static_cast<int64_t>(static_cast<uint32_t>(val))) : val;
     }
     return result;
 #endif
@@ -722,7 +724,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t min_u16(vec128_t a, vec128_t b) noexcept {
     const ::__m128i mask = ::_mm_cmpgt_epi16(::_mm_sub_epi16(b, offset), ::_mm_sub_epi16(a, offset));
     return ::_mm_or_si128(::_mm_and_si128(mask, a), ::_mm_andnot_si128(mask, b));
 #elif defined(NEFORCE_SIMD_NEON)
-    return ::vminq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b));
+    return ::vreinterpretq_u8_u16(::vminq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b)));
 #else
     const auto* ua = reinterpret_cast<const uint16_t*>(a.data);
     const auto* ub = reinterpret_cast<const uint16_t*>(b.data);
@@ -749,7 +751,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t min_u32(vec128_t a, vec128_t b) noexcept {
     const ::__m128i mask = ::_mm_cmpgt_epi32(::_mm_xor_si128(b, sign), ::_mm_xor_si128(a, sign));
     return ::_mm_or_si128(::_mm_and_si128(mask, a), ::_mm_andnot_si128(mask, b));
 #elif defined(NEFORCE_SIMD_NEON)
-    return ::vminq_u32(::vreinterpretq_u32_u8(a), ::vreinterpretq_u32_u8(b));
+    return ::vreinterpretq_u8_u32(::vminq_u32(::vreinterpretq_u32_u8(a), ::vreinterpretq_u32_u8(b)));
 #else
     const auto* ua = reinterpret_cast<const uint32_t*>(a.data);
     const auto* ub = reinterpret_cast<const uint32_t*>(b.data);
@@ -871,7 +873,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t max_u16(vec128_t a, vec128_t b) noexcept {
                                                  ::_mm_xor_si128(b, ::_mm_set1_epi16(static_cast<short>(0x8000))));
     return ::_mm_or_si128(::_mm_and_si128(overflow, a), ::_mm_andnot_si128(overflow, b));
 #elif defined(NEFORCE_SIMD_NEON)
-    return ::vmaxq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b));
+    return ::vreinterpretq_u8_u16(::vmaxq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b)));
 #else
     const auto* ua = reinterpret_cast<const uint16_t*>(a.data);
     const auto* ub = reinterpret_cast<const uint16_t*>(b.data);
@@ -898,7 +900,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t max_u32(vec128_t a, vec128_t b) noexcept {
     const ::__m128i mask = ::_mm_cmpgt_epi32(::_mm_xor_si128(a, sign), ::_mm_xor_si128(b, sign));
     return ::_mm_or_si128(::_mm_and_si128(mask, a), ::_mm_andnot_si128(mask, b));
 #elif defined(NEFORCE_SIMD_NEON)
-    return ::vmaxq_u32(::vreinterpretq_u32_u8(a), ::vreinterpretq_u32_u8(b));
+    return ::vreinterpretq_u8_u32(::vmaxq_u32(::vreinterpretq_u32_u8(a), ::vreinterpretq_u32_u8(b)));
 #else
     const auto* ua = reinterpret_cast<const uint32_t*>(a.data);
     const auto* ub = reinterpret_cast<const uint32_t*>(b.data);
@@ -941,7 +943,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t avg_u16(vec128_t a, vec128_t b) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
     return ::_mm_avg_epu16(a, b);
 #elif defined(NEFORCE_SIMD_NEON)
-    return ::vrhaddq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b));
+    return ::vreinterpretq_u8_u16(::vrhaddq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b)));
 #else
     const auto* ua = reinterpret_cast<const uint16_t*>(a.data);
     const auto* ub = reinterpret_cast<const uint16_t*>(b.data);

@@ -196,7 +196,7 @@ public:
      * 支持的单位：B、KB/K、MB/M、GB/G、TB/T、PB/P、EB/E
      * 示例："1024", "1.5 MB", "2G", "500KB"
      */
-    NEFORCE_NODISCARD static constexpr byte_size parse(string_view str) { return parse(str, true); }
+    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 byte_size parse(string_view str) { return parse(str, true); }
 
     /**
      * @brief 从字符串解析字节大小（指定进制）
@@ -205,7 +205,7 @@ public:
      * @return 字节大小对象
      * @throws value_exception 解析失败时抛出
      */
-    NEFORCE_NODISCARD static constexpr byte_size parse(string_view str, bool binary);
+    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 byte_size parse(string_view str, bool binary);
 
     /**
      * @brief 获取字节数
@@ -432,7 +432,7 @@ constexpr byte_size::byte_size(decimal_t value, unit u, bool binary) {
     bytes_ = static_cast<uint64_t>(bytes + 0.5L);
 }
 
-constexpr byte_size byte_size::parse(string_view str, bool binary) {
+NEFORCE_CONSTEXPR20 byte_size byte_size::parse(string_view str, bool binary) {
     str = str.trim();
     if (str.empty()) {
         NEFORCE_THROW_EXCEPTION(value_exception("Empty memory size string"));

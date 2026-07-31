@@ -5,8 +5,7 @@
  * @file bitwise.hpp
  * @brief 跨平台 SIMD 位运算
  *
- * 提供 128-bit / 256-bit / 512-bit 向量上的按位与/或/异或/非、移位及 popcount 操作。
- * 自动派发至 SSE2 / AVX2 / AVX-512F / NEON 或标量回退。
+ * 提供按位与/或/异或/非、移位及 popcount 操作。
  */
 
 #include "NeForce/core/simd/types.hpp"
@@ -237,14 +236,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_left_bytes(vec128_t v) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
     return _mm_bslli_si128(v, Bytes);
 #elif defined(NEFORCE_SIMD_NEON)
-    if (Bytes == 0) {
-        return v;
-    }
-    return ::vextq_u8(::vdupq_n_u8(0), v, static_cast<int>(16 - Bytes));
+    return vextq_u8(::vdupq_n_u8(0), v, static_cast<int>(16 - Bytes));
 #else
-    if (Bytes == 0) {
-        return v;
-    }
     vec128_t result;
     for (int i = 0; i < Bytes; ++i) {
         result.data[i] = 0;
@@ -254,6 +247,11 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_left_bytes(vec128_t v) noexcept {
     }
     return result;
 #endif
+}
+
+template <>
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_left_bytes<0>(vec128_t v) noexcept {
+    return v;
 }
 
 /**
@@ -268,14 +266,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_right_bytes(vec128_t v) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
     return _mm_bsrli_si128(v, Bytes);
 #elif defined(NEFORCE_SIMD_NEON)
-    if (Bytes == 0) {
-        return v;
-    }
-    return ::vextq_u8(v, ::vdupq_n_u8(0), static_cast<int>(Bytes));
+    return vextq_u8(v, ::vdupq_n_u8(0), static_cast<int>(Bytes));
 #else
-    if (Bytes == 0) {
-        return v;
-    }
     vec128_t result;
     for (int i = 0; i < 16 - Bytes; ++i) {
         result.data[i] = v.data[i + Bytes];
@@ -285,6 +277,11 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_right_bytes(vec128_t v) noexcept {
     }
     return result;
 #endif
+}
+
+template <>
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_right_bytes<0>(vec128_t v) noexcept {
+    return v;
 }
 
 /**
@@ -312,11 +309,11 @@ NEFORCE_ALWAYS_INLINE_INLINE int popcount(vec128_t v) noexcept {
     }
     return total;
 #elif defined(NEFORCE_SIMD_NEON)
-    const uint8x16_t low_nibble = ::vandq_u8(v, ::vdupq_n_u8(0x0F));
-    const uint8x16_t high_nibble = ::vshrq_n_u8(v, 4);
-    const uint8x16_t lookup = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
-    uint8x16_t pop = ::vaddq_u8(::vqtbl1q_u8(lookup, low_nibble), ::vqtbl1q_u8(lookup, high_nibble));
-#    ifdef __aarch64__
+    const ::uint8x16_t low_nibble = ::vandq_u8(v, ::vdupq_n_u8(0x0F));
+    const ::uint8x16_t high_nibble = vshrq_n_u8(v, 4);
+    const ::uint8x16_t lookup = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
+    ::uint8x16_t pop = ::vaddq_u8(::vqtbl1q_u8(lookup, low_nibble), ::vqtbl1q_u8(lookup, high_nibble));
+#    ifdef NEFORCE_ARCH_ARM
     return static_cast<int>(::vaddvq_u8(pop));
 #    else
     int total = 0;

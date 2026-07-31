@@ -31,19 +31,30 @@ struct dimensions {
  * @brief 像素/字符单元
  */
 struct cell {
-    string character;                   ///< 显示的字符
-    _NEFORCE color foreground;          ///< 前景色
-    _NEFORCE color background;          ///< 背景色
-    bool bold : 1 = false;              ///< 粗体
-    bool dim : 1 = false;               ///< 暗色
-    bool italic : 1 = false;            ///< 斜体
-    bool inverted : 1 = false;          ///< 反色
-    bool underlined : 1 = false;        ///< 单下划线
-    bool underlined_double : 1 = false; ///< 双下划线
-    bool blink : 1 = false;             ///< 闪烁
-    bool strikethrough : 1 = false;     ///< 删除线
-    bool automerge : 1 = false;         ///< 相邻同内容自动融合
-    uint8_t hyperlink = 0;              ///< 超链接 ID（0 表示无链接）
+    string character;           ///< 显示的字符
+    _NEFORCE color foreground;  ///< 前景色
+    _NEFORCE color background;  ///< 背景色
+    bool bold : 1;              ///< 粗体
+    bool dim : 1;               ///< 暗色
+    bool italic : 1;            ///< 斜体
+    bool inverted : 1;          ///< 反色
+    bool underlined : 1;        ///< 单下划线
+    bool underlined_double : 1; ///< 双下划线
+    bool blink : 1;             ///< 闪烁
+    bool strikethrough : 1;     ///< 删除线
+    bool automerge : 1;         ///< 相邻同内容自动融合
+    uint8_t hyperlink = 0;      ///< 超链接 ID（0 表示无链接）
+
+    cell() noexcept :
+    bold(false),
+    dim(false),
+    italic(false),
+    inverted(false),
+    underlined(false),
+    underlined_double(false),
+    blink(false),
+    strikethrough(false),
+    automerge(false) {}
 
     /**
      * @brief 重置所有样式为默认值

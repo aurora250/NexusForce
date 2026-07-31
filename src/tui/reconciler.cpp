@@ -150,6 +150,7 @@ void reconciler::flush() {
     dirty_ = false;
 
     refresh_term_size();
+    renderer_.set_term_size(term_w_, term_h_);
 
     if (current_screen_.dimx() != term_w_ || current_screen_.dimy() != term_h_) {
         current_screen_.resize(term_w_, term_h_);

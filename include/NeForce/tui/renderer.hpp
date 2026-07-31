@@ -57,7 +57,7 @@ public:
      * @param term_w 终端宽度
      * @param term_h 终端高度
      */
-    renderer(screen& target, const theme& t, const int& term_w, const int& term_h);
+    renderer(screen& target, const theme& t, int term_w, int term_h);
 
     /**
      * @brief 渲染元素树
@@ -66,6 +66,16 @@ public:
      * @param has_focus 当前是否有焦点组件
      */
     void render(const element& tree, const vector<layout_rect>& layout, bool has_focus);
+
+    /**
+     * @brief 更新终端尺寸
+     * @param w 新宽度
+     * @param h 新高度
+     */
+    void set_term_size(int w, int h) {
+        term_w_ = w;
+        term_h_ = h;
+    }
 
     /**
      * @brief 获取本次渲染收集的滚动条命中信息
@@ -183,8 +193,8 @@ private:
 
     screen& screen_;
     const theme& theme_;
-    const int& term_w_;
-    const int& term_h_;
+    int term_w_;
+    int term_h_;
     vector<clip_rect> clip_stack_;
     vector<scrollbar_hit> scrollbar_hits_;
     bool has_focus_ = false;

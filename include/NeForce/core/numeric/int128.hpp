@@ -823,80 +823,54 @@ struct is_signed<int128_t> : true_type {};
  * @brief uint128_t类型的数值特征特化
  */
 template <>
-class numeric_traits<uint128_t> {
+class numeric_traits<uint128_t> : public inner::numeric_int_base {
 public:
-    static constexpr bool is_specialized = true;
-    static constexpr bool is_signed = false;
-    static constexpr bool is_integer = true;
-    static constexpr bool is_exact = true;
-    static constexpr bool has_infinity = false;
-    static constexpr bool has_quiet_NaN = false;
-    static constexpr bool has_signaling_NaN = false;
-    static constexpr auto has_denorm = float_denorm_type::ABSENT;
-    static constexpr bool has_denorm_loss = false;
-    static constexpr auto round_style = float_round_type::TOWARD_ZERO;
-    static constexpr bool is_iec559 = false;
-    static constexpr bool is_bounded = true;
-    static constexpr bool is_modulo = true;
-    static constexpr int digits = 128;
-    static constexpr int digits10 = 38;
-    static constexpr int max_digits10 = 0;
-    static constexpr int radix = 2;
-    static constexpr int min_exponent = 0;
-    static constexpr int min_exponent10 = 0;
-    static constexpr int max_exponent = 0;
-    static constexpr int max_exponent10 = 0;
-    static constexpr bool traps = true;
-    static constexpr bool tinyness_before = false;
     static constexpr uint128_t min() noexcept { return uint128_t::min(); }
     static constexpr uint128_t lowest() noexcept { return uint128_t::min(); }
     static constexpr uint128_t max() noexcept { return uint128_t::max(); }
     static constexpr uint128_t epsilon() noexcept { return uint128_t{0ULL}; }
     static constexpr uint128_t round_error() noexcept { return uint128_t{0ULL}; }
     static constexpr uint128_t infinity() noexcept { return uint128_t{0ULL}; }
-    static constexpr uint128_t quiet_NaN() noexcept { return uint128_t{0ULL}; }
-    static constexpr uint128_t signaling_NaN() noexcept { return uint128_t{0ULL}; }
+    static constexpr uint128_t quiet_nan() noexcept { return uint128_t{0ULL}; }
+    static constexpr uint128_t signaling_nan() noexcept { return uint128_t{0ULL}; }
     static constexpr uint128_t denorm_min() noexcept { return uint128_t{0ULL}; }
+
+    static constexpr bool is_signed = false;
+    static constexpr bool is_modulo = true;
+
+    static constexpr int digits = 128;
+    static constexpr int digits10 = 38;
+    static constexpr int max_digits10 = 0;
+    static constexpr int min_exponent = 0;
+    static constexpr int min_exponent10 = 0;
+    static constexpr int max_exponent = 0;
+    static constexpr int max_exponent10 = 0;
 };
 
 /**
  * @brief int128_t类型的数值特征特化
  */
 template <>
-class numeric_traits<int128_t> {
+class numeric_traits<int128_t> : public inner::numeric_int_base {
 public:
-    static constexpr bool is_specialized = true;
-    static constexpr bool is_signed = true;
-    static constexpr bool is_integer = true;
-    static constexpr bool is_exact = true;
-    static constexpr bool has_infinity = false;
-    static constexpr bool has_quiet_NaN = false;
-    static constexpr bool has_signaling_NaN = false;
-    static constexpr auto has_denorm = float_denorm_type::ABSENT;
-    static constexpr bool has_denorm_loss = false;
-    static constexpr auto round_style = float_round_type::TOWARD_ZERO;
-    static constexpr bool is_iec559 = false;
-    static constexpr bool is_bounded = true;
-    static constexpr bool is_modulo = false;
-    static constexpr int digits = 127;
-    static constexpr int digits10 = 38;
-    static constexpr int max_digits10 = 0;
-    static constexpr int radix = 2;
-    static constexpr int min_exponent = 0;
-    static constexpr int min_exponent10 = 0;
-    static constexpr int max_exponent = 0;
-    static constexpr int max_exponent10 = 0;
-    static constexpr bool traps = true;
-    static constexpr bool tinyness_before = false;
     static constexpr int128_t min() noexcept { return int128_t::min(); }
     static constexpr int128_t lowest() noexcept { return int128_t::min(); }
     static constexpr int128_t max() noexcept { return int128_t::max(); }
     static constexpr int128_t epsilon() noexcept { return int128_t{0}; }
     static constexpr int128_t round_error() noexcept { return int128_t{0}; }
     static constexpr int128_t infinity() noexcept { return int128_t{0}; }
-    static constexpr int128_t quiet_NaN() noexcept { return int128_t{0}; }
-    static constexpr int128_t signaling_NaN() noexcept { return int128_t{0}; }
+    static constexpr int128_t quiet_nan() noexcept { return int128_t{0}; }
+    static constexpr int128_t signaling_nan() noexcept { return int128_t{0}; }
     static constexpr int128_t denorm_min() noexcept { return int128_t{0}; }
+
+    static constexpr bool is_signed = true;
+    static constexpr int digits = 127;
+    static constexpr int digits10 = 38;
+    static constexpr int max_digits10 = 0;
+    static constexpr int min_exponent = 0;
+    static constexpr int min_exponent10 = 0;
+    static constexpr int max_exponent = 0;
+    static constexpr int max_exponent10 = 0;
 };
 
 /** @} */ // NumericTraits

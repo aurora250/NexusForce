@@ -46,11 +46,20 @@ function(nexusforce_reflect_scan)
         "${NFRS_HEADERS}/*.h"
     )
 
-    set(__nfrs_command
-        "$<TARGET_FILE:${__nfrs_target}>"
-        "${NFRS_HEADERS}"
-        -o "${NFRS_OUTPUT}"
-    )
+    if(CMAKE_CROSSCOMPILING_EMULATOR)
+        set(__nfrs_command
+            ${CMAKE_CROSSCOMPILING_EMULATOR}
+            "$<TARGET_FILE:${__nfrs_target}>"
+            "${NFRS_HEADERS}"
+            -o "${NFRS_OUTPUT}"
+        )
+    else()
+        set(__nfrs_command
+            "$<TARGET_FILE:${__nfrs_target}>"
+            "${NFRS_HEADERS}"
+            -o "${NFRS_OUTPUT}"
+        )
+    endif()
     foreach(__ex IN LISTS NFRS_EXCLUDES)
         list(APPEND __nfrs_command -e "${__ex}")
     endforeach()
