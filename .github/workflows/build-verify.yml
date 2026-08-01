@@ -102,6 +102,11 @@ jobs:
             config: cross-loongarch64
             cppstd: 20
 
+          - os: windows-latest
+            compiler: msvc
+            config: cross-arm64
+            cppstd: 20
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -169,18 +174,18 @@ jobs:
           path: |
             ${{ env.VCPKG_ROOT }}
             ${{ env.VCPKG_CACHE }}
-          key: ${{ runner.os }}-vcpkg-tools-${{ hashFiles('vcpkg.json', 'config.json') }}
+          key: ${{ runner.os }}-${{ runner.arch }}-vcpkg-tools-v2
           restore-keys: |
-            ${{ runner.os }}-vcpkg-tools-
+            ${{ runner.os }}-${{ runner.arch }}-vcpkg-tools-
 
       - name: Cache vcpkg installed packages
         uses: actions/cache@v4
         id: cache-vcpkg-pkgs
         with:
           path: ${{ github.workspace }}/build/vcpkg_installed
-          key: ${{ runner.os }}-${{ matrix.compiler }}-${{ matrix.config }}-vcpkg-pkgs-${{ hashFiles('vcpkg.json', 'config.json') }}
+          key: ${{ runner.os }}-${{ runner.arch }}-${{ matrix.compiler }}-${{ matrix.config }}-vcpkg-pkgs-${{ hashFiles('vcpkg.json', 'config.json') }}
           restore-keys: |
-            ${{ runner.os }}-${{ matrix.compiler }}-${{ matrix.config }}-vcpkg-pkgs-
+            ${{ runner.os }}-${{ runner.arch }}-${{ matrix.compiler }}-${{ matrix.config }}-vcpkg-pkgs-
 
       - name: Setup vcpkg
         if: steps.cache-vcpkg-tools.outputs.cache-hit != 'true'
@@ -207,10 +212,16 @@ jobs:
         run: echo "$VCPKG_ROOT" >> $GITHUB_PATH
 
       - name: Setup MSVC environment (Windows)
-        if: runner.os == 'Windows'
+        if: runner.os == 'Windows' && matrix.config != 'cross-arm64'
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: amd64
+
+      - name: Setup MSVC ARM64 cross-compile environment (Windows)
+        if: runner.os == 'Windows' && matrix.config == 'cross-arm64'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64_arm64
 
       - name: Install Ninja (Windows)
         if: runner.os == 'Windows'
@@ -287,6 +298,17 @@ jobs:
                 -DNEXUSFORCE_BUILD_TESTS=OFF
                 -DNEXUSFORCE_BUILD_EXAMPLES=OFF
                 -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
+            cross-arm64)
+              FLAGS+=(
+                -DVCPKG_TARGET_TRIPLET=arm64-windows
+                -DVCPKG_INSTALL_OPTIONS=--allow-unsupported
+                -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/arm64-windows-msvc.cmake
+                -DNEXUSFORCE_BUILD_TESTS=OFF
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+                -DNEXUSFORCE_BUILD_DOCS=OFF
               )
               ;;
           esac

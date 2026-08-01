@@ -20,7 +20,7 @@
 ## 📑 Table of Contents
 
 - [Project Overview](#-project-overview)
-- [Supported Environments](#️-supported-environments)
+- [Supported Environments](#-supported-environments)
 - [Engineering Quality](#-engineering-quality)
 - [Standards Compliance](#-standards-compliance)
 - [Features](#-features)
@@ -28,7 +28,7 @@
 - [Quick Start](#-quick-start)
 - [FAQ](#-faq)
 - [Documentation](#-documentation)
-- [License](#️-license)
+- [License](#-license)
 - [Changelog](#-changelog)
 - [Contributors](#-contributors)
 - [TODO](#-todo)
@@ -37,24 +37,28 @@
 
 ## 📖 Project Overview
 
-This project aims to establish a **feature-complete, stylistically unified, highly readable, community-driven, and cross-platform compatible** modern C++ development library. Through clear architectural design, standardized code implementation, and rich applications of design patterns, it provides a practical toolkit for project development while also serving as a practical learning resource for C++ learners to understand underlying principles, bridging the gap from learning to production.
+This project aims to establish a **feature-complete, stylistically unified, highly readable, community-driven, and cross-platform compatible** modern C++ development library. 
+Through clear architectural design, standardized code implementation, and rich applications of design patterns, 
+it provides a practical toolkit for project development while also serving as a practical learning resource 
+for C++ learners to understand underlying principles, bridging the gap from learning to production.
 
-💡 Please feel free to [submit Issues](https://github.com/aurora250/NexusForce/issues) to help improve this project. If there are any deficiencies, please don't hesitate to provide feedback.
+💡 Please feel free to [submit Issues](https://github.com/aurora250/NexusForce/issues) to help improve this project.
+If there are any deficiencies, please don't hesitate to provide feedback.
 
 ---
 
 ## 🖥️ Supported Environments
 
-| Item            | Details                                                                        |
-|-----------------|--------------------------------------------------------------------------------|
-| Platform        | 🪟 WINDOWS / 🐧 LINUX                                                          |
-| Instruction Set | X86 / ARM / RISC-V (LINUX) / LOONGARCH (LINUX)                                 |
-| Bit Width       | 64-bit                                                                         |
-| Compiler        | MSVC (Windows) / LLVM-Clang (Windows, Linux) / ClangCL (Windows) / GCC (Linux) |
-| C++ Standard    | 14 / 17 / 20                                                                   |
+| Item            | Details                                                                   |
+|-----------------|---------------------------------------------------------------------------|
+| Platform        | 🪟 WINDOWS / 🐧 LINUX                                                     |
+| Instruction Set | X86 / ARM / RISC-V (LINUX) / LOONGARCH (LINUX)                            |
+| Bit Width       | 64-bit                                                                    |
+| Compiler        | MSVC (Windows) / ClangCL (Windows) / Clang (Windows, Linux) / GCC (Linux) |
+| C++ Standard    | 14 / 17 / 20                                                              |
 
 > ℹ️ **Compatibility Note**  
-> This library welcomes developers to contribute compatibility with more compilers and operating systems. Your contributions are greatly appreciated.
+> This library welcomes developers to contribute compatibility with more environments. Your contributions are greatly appreciated.
 
 ---
 
@@ -62,21 +66,25 @@ This project aims to establish a **feature-complete, stylistically unified, high
 
 NexusForce strictly adheres to modern C++ engineering best practices, ensuring code robustness and readability through multi-layered automated checks.
 
-| Metric                            | Status                | Description                                                                                                                 |
-|-----------------------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| 📊 **Codebase Size**              | 160k+ Lines           | Core library source and headers 90k+ lines, test code 60k+ lines                                                            |
-| 🔒 **CodeQL Security Analysis**   | **0 Vulnerabilities** | Full `security-and-quality` suite, zero security alerts                                                                     |
-| 🔍 **Clang-Tidy Static Analysis** | **Zero Warnings**     | Full ruleset (`bugprone` / `cppcoreguidelines` / `hicpp` / `modernize` / `performance` / `readability`), warnings as errors |
-| 🎨 **Clang-Format Code Style**    | **Strictly Enforced** | 120 columns, 4 spaces, K&R variant braces, mandatory brace insertion, etc.                                                  |
-| 💧 **Dynamic Memory Check**       | **0 Leaks**           | Valgrind full test suite, zero memory leaks or out-of-bounds access                                                         |
+| Metric                            | Status                | Description                                                       |
+|-----------------------------------|-----------------------|-------------------------------------------------------------------|
+| 📊 **Codebase Size**              | 180k+ Lines           | Core library source and headers 110k+ lines, test code 60k+ lines |
+| 🔒 **CodeQL Security Analysis**   | **0 Vulnerabilities** | Full ruleset                                                      |
+| 🔍 **Clang-Tidy Static Analysis** | **Zero Warnings**     | Full ruleset                                                      |
+| 🎨 **Clang-Format Code Style**    | **Strictly Enforced** | Configuration strictly enforced, uniform formatting               |
+| 💧 **Dynamic Memory Check**       | **0 Leaks**           | Full test suite                                                   |
 
-> 📋 **Regarding Rule Exemptions**: [`.clang-tidy`](.clang-tidy) contains approximately 60 explicit exemptions, and [`.clang-format`](.clang-format) includes several style customizations. Each exemption addresses inherent requirements of low-level system programming, adhering to the principle of "strict by default, relaxed as needed."
+> 📋 **Regarding Rule Exemptions**: [`.clang-tidy`](.clang-tidy) contains approximately 60 explicit exemptions, 
+> and [`.clang-format`](.clang-format) includes several style customizations. 
+> Each exemption addresses inherent requirements of low-level system programming, adhering to the principle of "strict by default, relaxed as needed."
 
 ---
 
 ## 📡 Standards Compliance
 
-The core components of NexusForce strictly adhere to relevant international standards and industry specifications, ensuring predictable behavior, strong interoperability, and reliable security. The following table maps key components to their respective standards:
+The core components of NexusForce strictly adhere to relevant international standards and industry specifications, 
+ensuring predictable behavior, strong interoperability, and reliable security.
+The following table maps key components to their respective standards:
 
 ### 🌐 Network Protocols & Internet Standards
 
@@ -90,7 +98,6 @@ The core components of NexusForce strictly adhere to relevant international stan
 | **URL Parsing & Encoding**   | [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), [RFC 3987](https://www.rfc-editor.org/rfc/rfc3987), [WHATWG URL](https://url.spec.whatwg.org/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Generic URI syntax, percent-encoding, and Internationalized Resource Identifiers                                                                                                                                                                                            |
 | **Network Port Definitions** | [IANA Service Name and Transport Protocol Port Number Registry](https://www.iana.org/assignments/service-names-port-numbers/), [RFC 6335](https://www.rfc-editor.org/rfc/rfc6335)                                                                                                                                                                                                                                                                                                                                                                                                                                        | Well-known port assignments                                                                                                                                                                                                                                                 |
 | **UUID Generation**          | [RFC 4122](https://www.rfc-editor.org/rfc/rfc4122), [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | UUID v4 (random) and v7 (time-ordered) generation specifications                                                                                                                                                                                                            |
-| **Byte Size Units**          | [IEC 80000-13:2008](https://www.iso.org/standard/31898.html), [IEEE 1541-2021](https://standards.ieee.org/ieee/1541/10790/), [BIPM SI Brochure (9th Ed.)](https://www.bipm.org/en/publications/si-brochure)                                                                                                                                                                                                                                                                                                                                                                                                              | Binary prefixes (KiB/MiB/GiB) and decimal prefixes (kB/MB/GB)                                                                                                                                                                                                               |
 
 ### 📁 Configuration File Formats
 
@@ -99,6 +106,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 | **JSON RFC 8259** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404:2017](https://ecma-international.org/publications-and-standards/standards/ecma-404/)                                                                       | JSON six value types, UTF-8 encoding, IEEE 754-2019 double-precision numbers, and string escape sequences                                  |
 | **TOML 1.0.0**    | [TOML v1.0.0](https://toml.io/en/v1.0.0)                                                                                                                                                                                 | Includes date-time format following [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601                                          |
 | **YAML 1.2**      | [YAML 1.2.2](https://yaml.org/spec/1.2.2/), [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html), [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) | YAML 1.2 is a strict superset of JSON, supporting eight core value types, five string scalar styles, anchors and aliases, and a tag system |
+| **SQL**           | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 and later)                                                                                                                                               | Generates ANSI SQL compliant SELECT/INSERT/UPDATE/DELETE statements                                                                        |
 
 ### 🔐 Cryptography & Security Algorithms
 
@@ -117,6 +125,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 |----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
 | **UTF-8 / UTF-16 / UTF-32**      | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/), [ISO/IEC 10646](https://www.iso.org/standard/76835.html), [RFC 3629](https://www.rfc-editor.org/rfc/rfc3629) / [RFC 2781](https://www.rfc-editor.org/rfc/rfc2781) | Unicode codepoint operations, normalization, and encoding conversion with invalid sequence detection |
 | **Unicode Codepoint Processing** | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/) §2.4, §2.13                                                                                                                                                        | Surrogate pair handling, BOM detection, and replacement character (U+FFFD) rules                     |
+| **Byte Size Units**              | [IEC 80000-13:2008](https://www.iso.org/standard/31898.html), [IEEE 1541-2021](https://standards.ieee.org/ieee/1541/10790/), [BIPM SI Brochure (9th Ed.)](https://www.bipm.org/en/publications/si-brochure)                      | Binary prefixes (KiB/MiB/GiB) and decimal prefixes (kB/MB/GB)                                        |
 
 ### 📐 Data Structures & Algorithms
 
@@ -136,7 +145,6 @@ The core components of NexusForce strictly adhere to relevant international stan
 | **Atomic Memory Order**   | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §31.4                                                                                                                  | C++ memory model, includes hardware barrier equivalents and Intel TSX HLE support |
 | **Command-Line Parsing**  | [POSIX.1-2017 (IEEE 1003.1)](https://pubs.opengroup.org/onlinepubs/9699919799/) Chapter 12, [GNU getopt_long](https://man7.org/linux/man-pages/man3/getopt.3.html)                   | Supports short option grouping, long options, `--` delimiter, and optional values |
 | **Date & Time**           | [ISO 8601-1:2019](https://www.iso.org/standard/70907.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339), [POSIX Timestamp](https://pubs.opengroup.org/onlinepubs/9699919799/) | Gregorian calendar calculations, Julian day conversion, and Unix epoch handling   |
-| **SQL Statement Builder** | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 and later)                                                                                                           | Generates ANSI SQL compliant SELECT/INSERT/UPDATE/DELETE statements               |
 
 ### 🎨 Graphics, Color & Mathematics
 
@@ -154,10 +162,10 @@ The core components of NexusForce strictly adhere to relevant international stan
 ## 🚀 Features
 
 ### 🔄 Concurrency & Async
-- **`thread_pool`** - Multi-strategy thread pool based on work stealing, For detailed performance testing, see for [thread_pool performance test records](benchmark/async/PERFORMANCE.md)
+- **`thread_pool`** - NUMA-aware work stealing thread pool with multi-strategy customization; for detailed performance testing, see [thread_pool performance test records](benchmark/async/PERFORMANCE.md)
 - **`io_context`** - Async I/O execution context, unified event loop, timer and cancellation model
 - **`cancellation_slot`** - Supports `async_connect` / `async_read` / `async_write` interruptible async I/O
-- **`timer_scheduler` / `basic_timer`** - Timer task scheduling based on red-black tree
+- **`timer_scheduler` / `basic_timer`** - Timer task scheduling based on red-black tree, supports cancellation flag
 - **`async_stream`** - Async stream abstraction interface, unified read/write protocol
 - **`async_read()` / `async_write()`** - Free function combinators, automatic partial read/write retry via `shared_from_this`
 - **`thread_pool_executor`** - Adapts `thread_pool::submit_task()` to standard executor interface
@@ -173,14 +181,14 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Hazard Pointer** - Memory management for lock-free data structures `hazard_ptr` / `hazard_pointer_domain`
 
 ### 📦 Containers
-- **Standard Containers** - `array` / `vector` / `list` / `deque` / `map` / `set` / `unordered_map` / `unordered_set` / `flat_unordered_map` / `flat_unordered_set`, etc.
+- **Standard Containers** - `array` / `vector` / `list` / `deque` / `map` / `set` / `unordered_map` / `unordered_set` / `sparse_map` / `sparse_set` / `flat_unordered_map` / `flat_unordered_set`, etc.
 - **`rb_tree`** - Self-balancing binary search tree implementation
 - **`hashtable`** - Separate chaining hash table
-- **`flat_hashtable`** - SwissTable-style Open addressing flat hash table, H2 pre-filtering + SIMD group probing
+- **`flat_hashtable`** - SwissTable open addressing flat hash table, H2 pre-filtering + SIMD group probing
 - **`bloom_filter`** - Probabilistic data structure
 - **`lru_cache` / `ttl_cache`** - Cache policies based on Least Recently Used / Time-To-Live
 - **`buffer_chain`** - Zero-copy chained buffer, supports writev aggregated output
-- **`sparse_vector`** - Sorted flat-array based associative containers, O(log n) binary search, O(1) cache-friendly iteration
+- **`sparse_vector`** - Sorted flat-array based associative container, O(log n) binary search, O(1) cache-friendly iteration
 - **`bitmap` / `bitset`** - Efficient bit manipulation containers
 
 ### 🔐 Encryption & Security
@@ -282,15 +290,13 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`compressed_pair`** - EBCO memory optimization
 
 ### 🔍 Reflection System
-- **`NFRS`** - MOC-like pre-compile code generator, scans `NEFORCE_REFLECT_*` markers to auto-generate type registration code, with incremental scanning (file modification time cache)
-- **`meta_any`** - SBO-optimized + function-pointer dispatch type-erased container, supports `emplace<T>()` in-place construction (compatible with non-copyable/non-movable types)
+- **`NFRS`** - Pre-compile code generator, scans `NEFORCE_REFLECT_*` markers to auto-generate type registration code, with incremental scanning
 - **`registry`** - Global type reflection registry with name/type_id dual lookup, thread-safe registration, and dynamic signal-slot connection `connect_signal_to_slot()`
 - **`meta_type`** - Runtime type metadata: base class list, property/function maps, constructor/clone factory, enum/container info, signal name list, dynamic property registration `add_property()`
-- **`meta_property`** - Property reflection descriptor with getter/setter, annotation flags (transient/required/readonly/optional/versioned/primary_key/auto_inc/unique/index/foreign_key), and change notification signal `notify_signal()`
+- **`meta_property`** - Property reflection descriptor with annotation flags and change notification signal
 - **`meta_function`** - Member/static function reflection descriptor with overload support, parameter hints, and runtime `invoke()` call
 - **`meta_enum`** - Enum reflection: name↔value bidirectional lookup, entry iteration
 - **`type_builder`** - Fluent API type builder: base class registration, property/function/signal registration, constructor/clone/container configuration
-- **`signal_base`** - Type-erased base class for `signal<T...>`, providing `connect_dynamic()` / `emit_dynamic()` for runtime reflection-driven signal-slot connections
 - **JSON Serializer** - Reflection-driven object↔JSON serialization/deserialization, recursive nested types and containers
 - **Binary Serializer** - Big-endian format (Magic "NEBF" + type table + data segment), attribute-controlled serialization behavior
 - **Type Identification** - Hash-based type_id via type_name specialization + compiler function signature, non-intrusive type registration
@@ -298,17 +304,14 @@ The core components of NexusForce strictly adhere to relevant international stan
 
 ### 🖥️ Terminal UI Framework (TUI)
 - **`application`** - Application entry point, Builder pattern config (theme/FPS/title), drives event loop and animation timer
-- **`reconciler`** - Declarative rendering engine, cell-level terminal frame diffing with incremental ANSI output, focus chain traversal (Tab/Shift+Tab), mouse hit-testing and scrollbar interaction
+- **`reconciler`** - Declarative rendering engine, cell-level terminal frame diffing with incremental ANSI output, focus chain traversal, mouse hit-testing and scrollbar interaction
 - **`screen`** - Terminal frame buffer, per-cell diffing to produce minimal ANSI escape sequences
-- **`input_driver`** - Cross-platform terminal input driver (Linux epoll / Windows background thread), parses ANSI/mouse/UTF-8 sequences
-- **`element`** - Immutable virtual element tree, 14+ node kinds (vbox/hbox/zstack/flexbox/gridbox/text/button/text_input/checkbox/scroll_view/canvas etc.), decorator chaining composition
-- **Flexbox / Gridbox Layout** - Full Flexbox (direction/wrap/justify/align/gap/flex_grow/flex_shrink) + Gridbox layout engine
-- **`style` / `theme`** - Style system (fg/bg/bold/italic/underline/border/padding/margin/align) + semantic theming (primary/secondary/danger etc.), dark theme preset
+- **`input_driver`** - Cross-platform terminal input driver, parses ANSI/mouse/UTF-8 sequences
+- **`element`** - Immutable virtual element tree, 14+ node types, decorator chaining composition, full Flexbox + Gridbox layout
+- **`style` / `theme`** - Style system + semantic theming, dark theme preset
 - **`state<T>`** - Reactive state management, auto dirty-marking on write + strand-coalesced re-render scheduling
-- **DOM Helpers** - `gauge` progress bar / `graph` chart / `paragraph` word-wrapped text / `spinner` loading animation / `scroll_indicator` scrollbar / `linear_gradient` multi-stop gradient / `table` declarative table builder
 - **`component_base` / `component<P>`** - Component base class, focus management, context injection (`provide_context`/`context`, walks up parent chain), reactive state factory
-- **Interactive Components** - `container` directional containers / `menu` menu list / `dropdown` dropdown select / `radiobox` radio group / `toggle` toggle switch / `slider` value slider / `text_input` text input (UTF-8 aware cursor) / `scroll_view` scroll view / `window` floating window / `modal` modal overlay / `collapsible` collapsible panel / `hoverable` hover detection / `resizable_split` draggable split pane / `renderer` render helpers (`catch_event`/`maybe` conditional)
-- **`animator` / `easing`** - Property animator + easing functions (linear/quadratic/cubic/sine/elastic/bounce)
+- **`animator` / `easing`** - Property animator + easing functions
 
 ### 🧬 Type Traits & Concepts
 - **Type Traits** - Comprehensive compile-time type judgments
@@ -361,31 +364,32 @@ The core components of NexusForce strictly adhere to relevant international stan
 
 | Type                              | Dependency                                                          | Version Requirement |
 |-----------------------------------|---------------------------------------------------------------------|---------------------|
-| 🔨 Build Tool                     | [CMake](https://cmake.org/)                                         | 3.19+               |
+| 🔨 Build Tool                     | [CMake](https://cmake.org/)                                         | 3.21                |
 | 📦 Package Manager                | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest              |
-| 🎨 Code Formatter                 | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19+                 |
-| 🔍 Static Analyzer                | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19+                 |
-| ⚠️ Mandatory Dependencies (vcpkg) | [pcre2](https://www.pcre.org/)                                      | 10.47+              |
-|                                   | [icu](https://icu.unicode.org/)                                     | 78.2+               |
-|                                   | [OpenSSL](https://www.openssl.org/)                                 | 3.6.1+              |
-| 📦 Optional Dependencies (vcpkg)  | [libpq](https://www.postgresql.org/)                                | 16.9+               |
-|                                   | [libmysql](https://www.mysql.com/)                                  | 8.0.40+             |
-|                                   | [sqlite3](https://sqlite.org/index.html)                            | 3.51.2+             |
-|                                   | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+              |
-|                                   | [lz4](https://lz4.org/)                                             | 1.10.0+             |
-|                                   | [zlib](https://www.zlib.net/)                                       | 1.3.1+              |
-|                                   | [GTest](https://google.github.io/googletest/)                       | 1.17.0+             |
-|                                   | [benchmark](https://github.com/google/benchmark/)                   | 1.9.5+              |
+| 🎨 Code Formatter                 | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19.0                |
+| 🔍 Static Analyzer                | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19.0                |
+| ⚠️ Mandatory Dependencies (vcpkg) | [pcre2](https://www.pcre.org/)                                      | 10.0                |
+|                                   | [icu](https://icu.unicode.org/)                                     | 78.0                |
+|                                   | [OpenSSL](https://www.openssl.org/)                                 | 3.6.0               |
+| 📦 Optional Dependencies (vcpkg)  | [libpq](https://www.postgresql.org/)                                | 16.0                |
+|                                   | [libmysql](https://www.mysql.com/)                                  | 8.0                 |
+|                                   | [sqlite3](https://sqlite.org/index.html)                            | 3.0                 |
+|                                   | [sqlcipher](https://www.zetetic.net/sqlcipher/)                     | 4.0                 |
+|                                   | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0               |
+|                                   | [lz4](https://lz4.org/)                                             | 1.10.0              |
+|                                   | [zlib](https://www.zlib.net/)                                       | 1.3.0               |
+|                                   | [GTest](https://google.github.io/googletest/)                       | 1.17.0              |
+|                                   | [benchmark](https://github.com/google/benchmark/)                   | 1.9.0               |
 
 ### 🏗️ Build Steps
 
-Ensure that CMake, vcpkg, clang-format, and clang-tidy are correctly installed and configured before building.
+Ensure that you have correctly installed and configured the prerequisites before building.
 
 > 💡 You can modify the configuration items in `config.json` (build options) and `vcpkg.json` (package management configuration) in the project root directory for personalized builds.
 >
 > **This project additionally relies on liburing-dev on Linux systems; please ensure you have installed it before building**
 >
-> In actual testing, on Linux, VCPKG requires libtirpc-dev libraries to build libmysql, libpq requires bison, flex, and autoconf libraries, and these libraries are not installed by default by the package manager.
+> In actual testing, on Linux, vcpkg requires libtirpc-dev libraries to build libmysql, libpq requires bison, flex, and autoconf libraries, and these libraries are not installed by default by the package manager.
 > If you need corresponding dependencies, you can install them in advance using the package manager to prevent cmake build failures
 
 #### 🪟 Windows
@@ -406,6 +410,9 @@ cmake --build . --config Release
 
 # Install to system directory
 cmake --install . --config Release
+
+# Or use the script for quick installation, see install_nexusforce.py comments for more parameters
+python ./scripts/install_nexusforce.py --release
 ```
 
 #### 🐧 Linux
@@ -426,6 +433,57 @@ make -j$(nproc)
 
 # Install to system directory
 sudo make install
+
+# Or use the script for quick installation, see install_nexusforce.py comments for more parameters
+python ./scripts/install_nexusforce.py --release
+```
+
+### 🔗 Using NexusForce in Your Project
+
+After installation, use `find_package` in your CMake project to bring in NexusForce,
+and use the provided configuration functions to complete compiler options, reflection scanning, and runtime deployment.
+
+#### Basic Linking
+
+```cmake
+cmake_minimum_required(VERSION 3.19)
+project(my_app)
+
+find_package(NexusForce REQUIRED)
+
+add_executable(my_app main.cpp)
+target_link_libraries(my_app PRIVATE NexusForce::NexusForce)
+nexusforce_compiler_options(my_app)
+```
+
+#### Reflection Code Generation (NFRS)
+
+If your code uses reflection macros such as `NEFORCE_REFLECT_OBJ`, integrate NFRS pre-compile scanning with a single `nexusforce_reflect_scan()` call:
+
+```cmake
+# Scan headers in src/ directory, auto-generate reflection registration code and inject into target
+nexusforce_reflect_scan(
+    TARGET  my_app
+    HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+```
+
+Parameter description:
+
+| Parameter  | Required | Description                                                                       |
+|------------|----------|-----------------------------------------------------------------------------------|
+| `TARGET`   | Yes      | The target to inject generated code into                                          |
+| `HEADERS`  | Yes      | Directory of headers to scan                                                      |
+| `OUTPUT`   | No       | Generated file path, default `${CMAKE_CURRENT_BINARY_DIR}/_nfrs_gen_<target>.cpp` |
+| `EXCLUDES` | No       | Path fragments to exclude (passed to NFRS `-e` option)                            |
+| `DEPENDS`  | No       | Additional CMake-level dependency files                                           |
+
+#### Runtime DLL Deployment
+
+On Windows, after linking shared libraries, you need to deploy the DLLs to the executable directory to run directly. Use `nexusforce_deploy_runtime()` to automate this:
+
+```cmake
+nexusforce_deploy_runtime(my_app)
 ```
 
 ---
@@ -434,25 +492,13 @@ sudo make install
 
 Before you begin, ensure you have completed the installation steps in the Build Guide.
 
-Quick start example overview:
-
-| Example             | Recommended Scenario                    | Key Features                      |
-|---------------------|-----------------------------------------|-----------------------------------|
-| HTTP Server         | REST APIs, Microservices                | Routing, Middleware, SSL          |
-| Thread Pool         | CPU-intensive tasks, Batch processing   | Work Stealing, Load Balancing     |
-| Config Parsing      | Application configuration management    | Multi-format support, Type Safety |
-| Encryption          | Data encryption, Integrity verification | AES-256, SHA-256                  |
-| Database Operations | Data persistence                        | Connection Pool, SQL Builder      |
-| File Watcher        | Hot reload, Real-time sync              | Cross-platform, Event-driven      |
-
 For details, see [Quickly Build Common Features with NexusForce!](QUICK_START.md)
 
 ---
 
 ## ❓ FAQ
 
-For project positioning, comparisons with other frameworks (Boost / Qt / POCO / folly), design philosophy, feature selection guidance, etc.,
-please see [Q&A](Q&A.md).
+For project positioning, design philosophy, feature selection guidance, etc., please see [Q&A](Q&A.md).
 
 ---
 
@@ -482,6 +528,6 @@ Thanks to all the developers who have contributed to this project! See [CONTRIBU
 
 ## 📌 TODO
 
-The core ABI has been stabilized.
+The core API has been stabilized.
 
 For TODO items, see TODO comments within the code.

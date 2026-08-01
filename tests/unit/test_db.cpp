@@ -11,6 +11,11 @@
 using namespace neforce;
 using namespace neforce::reflect;
 
+#ifdef NEFORCE_COMPILER_CLANG_CL
+#    pragma clang diagnostic push
+#    pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 class SqlBuilderTest : public ::testing::Test {
 protected:
     sql_builder builder;
@@ -2811,3 +2816,7 @@ TEST_F(RepositoryProductTest, RemoveWithInt64Pk) {
     string sql = conn.last_sql();
     EXPECT_NE(sql.find("WHERE product_id = 200"), string::npos);
 }
+
+#ifdef NEFORCE_COMPILER_CLANG_CL
+#    pragma clang diagnostic pop
+#endif

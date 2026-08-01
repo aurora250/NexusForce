@@ -20,7 +20,7 @@
 ## 📑 目录
 
 - [项目简介](#-项目简介)
-- [支持环境](#️-支持环境)
+- [支持环境](#-支持环境)
 - [工程质量](#-工程质量)
 - [标准合规](#-标准合规)
 - [特性](#-特性)
@@ -28,7 +28,7 @@
 - [快速开始](#-快速开始)
 - [常见问题](#-常见问题)
 - [文档](#-文档)
-- [协议](#️-协议)
+- [协议](#-协议)
 - [更新日志](#-更新日志)
 - [贡献者](#-贡献者)
 - [TODO](#-todo)
@@ -45,16 +45,16 @@
 
 ## 🖥️ 支持环境
 
-| 项目      | 详情                                                                           |
-|-----------|--------------------------------------------------------------------------------|
-| 平台      | 🪟 WINDOWS / 🐧 LINUX                                                          |
-| 指令集    | X86 / ARM / RISC-V (LINUX) / LOONGARCH (LINUX)                                 |
-| 位宽      | 64位                                                                           |
-| 编译器    | MSVC (Windows) / LLVM-Clang (Windows, Linux) / ClangCL (Windows) / GCC (Linux) |
-| C++ 标准  | 14 / 17 / 20                                                                   |
+| 项目     | 详情                                                                      |
+|----------|---------------------------------------------------------------------------|
+| 操作系统 | 🪟 WINDOWS / 🐧 LINUX                                                     |
+| 架构     | X86 / ARM / RISC-V (LINUX) / LOONGARCH (LINUX)                            |
+| 位宽     | 64位                                                                      |
+| 编译器   | MSVC (Windows) / ClangCL (Windows) / Clang (Windows, Linux) / GCC (Linux) |
+| C++ 标准 | 14 / 17 / 20                                                              |
 
 > ℹ️ **兼容性说明**  
-> 本库欢迎开发者进行更多编译器与操作系统的兼容性开发，欢迎您进行贡献。
+> 本库欢迎开发者进行更多环境的兼容性开发，欢迎您进行贡献。
 
 ---
 
@@ -62,15 +62,16 @@
 
 NexusForce 严格遵循现代 C++ 工程最佳实践，通过多层次自动化检查确保代码健壮性与可读性。
 
-| 指标                           | 状态           | 说明                                                                                                               |
-|--------------------------------|----------------|--------------------------------------------------------------------------------------------------------------------|
-| 📊 **代码规模**                | 总计 16万+ 行  | 核心库源码与头文件 9万+ 行，测试代码 6万+ 行                                                                       |
-| 🔒 **CodeQL 安全分析**         | **0 漏洞**     | `security-and-quality` 全规则集，零安全告警                                                                        |
-| 🔍 **Clang-Tidy 静态检查**     | **零警告**     | 全量规则集（`bugprone` / `cppcoreguidelines` / `hicpp` / `modernize` / `performance` / `readability`），警告即错误 |
-| 🎨 **Clang-Format 代码风格**   | **强制统一**   | 120 列、4 空格、K&R 变体大括号、强制大括号插入等                                                                   |
-| 💧 **动态内存检查**            | **0 泄漏**     | Valgrind 全量测试，无内存泄漏与越界访问                                                                            |
+| 指标                         | 状态         | 说明                                          |
+|------------------------------|--------------|-----------------------------------------------|
+| 📊 **代码规模**              | 18万+ 行     | 核心库源码与头文件 11万+ 行，测试代码 6万+ 行 |
+| 🔒 **CodeQL 安全分析**       | **0 漏洞**   | 全规则集                                      |
+| 🔍 **Clang-Tidy 静态检查**   | **零警告**   | 全规则集                                      |
+| 🎨 **Clang-Format 代码风格** | **强制统一** | 配置严格，格式统一                            |
+| 💧 **动态内存检查**          | **0 泄漏**   | 全量测试                                      |
 
-> 📋 **关于规则豁免**：[`.clang-tidy`](.clang-tidy) 包含约 60 项显式豁免，[`.clang-format`](.clang-format) 包含多项风格定制。每一项均针对底层系统编程的固有需求，遵循"默认严格，按需放开"原则。
+> 📋 **关于规则豁免**：[`.clang-tidy`](.clang-tidy) 包含约 60 项显式豁免，
+> [`.clang-format`](.clang-format) 包含多项风格定制。每一项均针对底层系统编程的固有需求，遵循"默认严格，按需放开"原则。
 
 ---
 
@@ -90,15 +91,15 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 | **URL 解析与编码**    | [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), [RFC 3987](https://www.rfc-editor.org/rfc/rfc3987), [WHATWG URL](https://url.spec.whatwg.org/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | URI 通用语法、百分号编码及国际化资源标识符                                                                                                                                      |
 | **网络端口定义**      | [IANA 端口号注册表](https://www.iana.org/assignments/service-names-port-numbers/), [RFC 6335](https://www.rfc-editor.org/rfc/rfc6335)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 知名端口分配                                                                                                                                                                    |
 | **UUID 生成**         | [RFC 4122](https://www.rfc-editor.org/rfc/rfc4122), [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | UUID v4（随机）与 v7（时间有序）生成规范                                                                                                                                        |
-| **字节大小单位**      | [IEC 80000-13:2008](https://www.iso.org/standard/31898.html), [IEEE 1541-2021](https://standards.ieee.org/ieee/1541/10790/), [BIPM SI Brochure (9th Ed.)](https://www.bipm.org/en/publications/si-brochure)                                                                                                                                                                                                                                                                                                                                                                                                              | 二进制前缀 (KiB/MiB/GiB) 与十进制前缀 (kB/MB/GB)                                                                                                                                |
 
 ### 📁 配置文件格式
 
-| 组件                | 遵循标准                                                                                                                                                                                                                 | 说明                                                                                          |
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| **JSON RFC 8259**   | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404:2017](https://ecma-international.org/publications-and-standards/standards/ecma-404/)                                                                       | JSON 六种值类型、UTF-8 编码、IEEE 754-2019 双精度数字与字符串转义序列                         |
-| **TOML 1.0.0**      | [TOML v1.0.0](https://toml.io/en/v1.0.0)                                                                                                                                                                                 | 包含日期时间格式遵循 [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601            |
-| **YAML 1.2**        | [YAML 1.2.2](https://yaml.org/spec/1.2.2/), [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html), [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) | YAML 1.2 是 JSON 严格超集，支持八种核心值类型、五种字符串标量样式、锚点别名与标签系统         |
+| 组件              | 遵循标准                                                                                                                                                                                                                 | 说明                                                                                  |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| **JSON RFC 8259** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404:2017](https://ecma-international.org/publications-and-standards/standards/ecma-404/)                                                                       | JSON 六种值类型、UTF-8 编码、IEEE 754-2019 双精度数字与字符串转义序列                 |
+| **TOML 1.0.0**    | [TOML v1.0.0](https://toml.io/en/v1.0.0)                                                                                                                                                                                 | 包含日期时间格式遵循 [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601    |
+| **YAML 1.2**      | [YAML 1.2.2](https://yaml.org/spec/1.2.2/), [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html), [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) | YAML 1.2 是 JSON 严格超集，支持八种核心值类型、五种字符串标量样式、锚点别名与标签系统 |
+| **SQL**           | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 及后续版本)                                                                                                                                              | 生成符合 ANSI SQL 的 SELECT/INSERT/UPDATE/DELETE 语句                                 |
 
 ### 🔐 密码学与安全算法
 
@@ -113,30 +114,30 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 🔤 字符编码与国际化
 
-| 组件                          | 遵循标准                                                                                                                                                                                                                         | 说明                                               |
-|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
-| **UTF-8 / UTF-16 / UTF-32**   | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/), [ISO/IEC 10646](https://www.iso.org/standard/76835.html), [RFC 3629](https://www.rfc-editor.org/rfc/rfc3629) / [RFC 2781](https://www.rfc-editor.org/rfc/rfc2781) | Unicode 码点操作、规范化与编码转换，含无效序列检测 |
-| **Unicode 码点处理**          | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/) §2.4, §2.13                                                                                                                                                        | 代理对处理、BOM 检测与替换字符 (U+FFFD) 规则       |
+| 组件                        | 遵循标准                                                                                                                                                                                                                         | 说明                                               |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
+| **UTF-8 / UTF-16 / UTF-32** | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/), [ISO/IEC 10646](https://www.iso.org/standard/76835.html), [RFC 3629](https://www.rfc-editor.org/rfc/rfc3629) / [RFC 2781](https://www.rfc-editor.org/rfc/rfc2781) | Unicode 码点操作、规范化与编码转换，含无效序列检测 |
+| **Unicode 码点处理**        | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/) §2.4, §2.13                                                                                                                                                        | 代理对处理、BOM 检测与替换字符 (U+FFFD) 规则       |
+| **字节大小单位**            | [IEC 80000-13:2008](https://www.iso.org/standard/31898.html), [IEEE 1541-2021](https://standards.ieee.org/ieee/1541/10790/), [BIPM SI Brochure (9th Ed.)](https://www.bipm.org/en/publications/si-brochure)                      | 二进制前缀 (KiB/MiB/GiB) 与十进制前缀 (kB/MB/GB)   |
 
 ### 📐 数据结构与算法
 
-| 组件                      | 遵循标准 / 学术文献                                                                                                                                                                                      | 说明                                                                                          |
-|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| **堆算法**                | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §25.8.6                                                                                                                                    | 复杂度保证与 Floyd 堆调整优化 ([Algorithm 245](https://dl.acm.org/doi/10.1145/512274.512284)) |
-| **红黑树**                | [Guibas & Sedgewick (1978)](https://doi.org/10.1109/SFCS.1978.3)                                                                                                                                         | 自平衡二叉搜索树经典实现，O(log n) 复杂度保证                                                 |
-| **莱昂纳多堆 / 平滑排序** | [Dijkstra (1981) EWD796a](https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html)                                                                                                            | 自适应排序算法，最优时间复杂度 O(n)                                                           |
-| **内省排序**              | [Musser (1997)](https://doi.org/10.1002/(SICI)1097-024X(199708)27:8<983::AID-SPE117>3.0.CO;2-%23)                                                                                                        | 混合快速/堆/插入排序，C++ 标准库 sort 默认算法                                                |
-| **非加密哈希**            | [FNV-1a 草案](https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17), [MurmurHash3](https://github.com/aappleby/smhasher/wiki/MurmurHash3)                                                         | 高性能哈希表与布隆过滤器专用                                                                  |
-| **布隆过滤器**            | [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Broder & Mitzenmacher (2004)](https://doi.org/10.1080/15427951.2004.10129096), [Kirsch & Mitzenmacher (2006)](https://doi.org/10.1002/rsa.20208) | 双哈希优化的概率性集合成员查询结构，O(k) 插入/查询，支持最优参数 (m, k) 推导与误报率估算      |
+| 组件           | 遵循标准 / 学术文献                                                                                                                                                                                      | 说明                                                                                          |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| **堆算法**     | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §25.8.6                                                                                                                                    | 复杂度保证与 Floyd 堆调整优化 ([Algorithm 245](https://dl.acm.org/doi/10.1145/512274.512284)) |
+| **红黑树**     | [Guibas & Sedgewick (1978)](https://doi.org/10.1109/SFCS.1978.3)                                                                                                                                         | 自平衡二叉搜索树经典实现，O(log n) 复杂度保证                                                 |
+| **莱昂纳多堆** | [Dijkstra (1981) EWD796a](https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html)                                                                                                            | 自适应排序算法，最优时间复杂度 O(n)                                                           |
+| **内省排序**   | [Musser (1997)](https://doi.org/10.1002/(SICI)1097-024X(199708)27:8<983::AID-SPE117>3.0.CO;2-%23)                                                                                                        | 混合快速/堆/插入排序，C++ 标准库 sort 默认算法                                                |
+| **非加密哈希** | [FNV-1a 草案](https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17), [MurmurHash3](https://github.com/aappleby/smhasher/wiki/MurmurHash3)                                                         | 高性能哈希表与布隆过滤器专用                                                                  |
+| **布隆过滤器** | [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Broder & Mitzenmacher (2004)](https://doi.org/10.1080/15427951.2004.10129096), [Kirsch & Mitzenmacher (2006)](https://doi.org/10.1002/rsa.20208) | 双哈希优化的概率性集合成员查询结构，O(k) 插入/查询，支持最优参数 (m, k) 推导与误报率估算      |
 
 ### ⚙️ 系统、并发与命令行
 
-| 组件               | 遵循标准                                                                                                                                                                          | 说明                                                       |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
-| **原子内存序**     | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §31.4                                                                                                               | C++ 内存模型，含硬件屏障等价与 Intel TSX HLE 支持          |
-| **命令行解析**     | [POSIX.1-2017 (IEEE 1003.1)](https://pubs.opengroup.org/onlinepubs/9699919799/) 第12章, [GNU getopt_long](https://man7.org/linux/man-pages/man3/getopt.3.html)                    | 支持短选项组合、长选项、`--` 分隔符与可选值                |
-| **日期与时间**     | [ISO 8601-1:2019](https://www.iso.org/standard/70907.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339), [POSIX 时间戳](https://pubs.opengroup.org/onlinepubs/9699919799/) | 公历计算、儒略日转换与 Unix 纪元处理                       |
-| **SQL 语句构建器** | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 及后续版本)                                                                                                       | 生成符合 ANSI SQL 的 SELECT/INSERT/UPDATE/DELETE 语句      |
+| 组件           | 遵循标准                                                                                                                                                                          | 说明                                                       |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
+| **原子内存序** | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §31.4                                                                                                               | C++ 内存模型，含硬件屏障等价与 Intel TSX HLE 支持          |
+| **命令行解析** | [POSIX.1-2017 (IEEE 1003.1)](https://pubs.opengroup.org/onlinepubs/9699919799/) 第12章, [GNU getopt_long](https://man7.org/linux/man-pages/man3/getopt.3.html)                    | 支持短选项组合、长选项、`--` 分隔符与可选值                |
+| **日期与时间** | [ISO 8601-1:2019](https://www.iso.org/standard/70907.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339), [POSIX 时间戳](https://pubs.opengroup.org/onlinepubs/9699919799/) | 公历计算、儒略日转换与 Unix 纪元处理                       |
 
 ### 🎨 图形、色彩与数学
 
@@ -147,7 +148,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 | **数学函数与常量** | [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/), [ISO/IEC 10967 (LIA)](https://www.iso.org/standard/24417.html)        | 三角函数归约、牛顿迭代法与机器精度容差            |
 | **随机数生成**     | [ISO/IEC 18031:2011](https://www.iso.org/standard/54945.html), [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final) | 梅森旋转 (MT19937) 与操作系统熵源真随机数         |
 
-> 📖 **文档完整性**：所有涉及上述标准的类与函数，均在其 API 注释（Doxygen 格式）中标注了具体的标准章节号与官方链接，开发者可随时溯源验证。
+> 📖 **文档完整性**：所有涉及上述标准的组 (group)，均在其 API 注释中标注了具体的标准章节号与官方链接，开发者可随时溯源验证。
 
 ---
 
@@ -354,27 +355,28 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 📋 前置依赖
 
-| 类型               | 依赖                                                                | 版本要求 |
-|--------------------|---------------------------------------------------------------------|----------|
-| 🔨 构建工具        | [CMake](https://cmake.org/)                                         | 3.19+    |
-| 📦 包管理器        | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest   |
-| 🎨 代码格式化      | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19+      |
-| 🔍 静态分析        | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19+      |
-| ⚠️ 必选依赖(vcpkg) | [pcre2](https://www.pcre.org/)                                      | 10.47+   |
-|                    | [icu](https://icu.unicode.org/)                                     | 78.2+    |
-|                    | [OpenSSL](https://www.openssl.org/)                                 | 3.6.1+   |
-| 📦 可选依赖(vcpkg) | [libpq](https://www.postgresql.org/)                                | 16.9+    |
-|                    | [libmysql](https://www.mysql.com/)                                  | 8.0.40+  |
-|                    | [sqlite3](https://sqlite.org/index.html)                            | 3.51.2+  |
-|                    | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+   |
-|                    | [lz4](https://lz4.org/)                                             | 1.10.0+  |
-|                    | [zlib](https://www.zlib.net/)                                       | 1.3.1+   |
-|                    | [GTest](https://google.github.io/googletest/)                       | 1.17.0+  |
-|                    | [benchmark](https://github.com/google/benchmark/)                   | 1.9.5+   |
+| 类型               | 依赖                                                                | 最低版本要求 |
+|--------------------|---------------------------------------------------------------------|--------------|
+| 🔨 构建工具        | [CMake](https://cmake.org/)                                         | 3.21         |
+| 📦 包管理器        | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest       |
+| 🎨 代码格式化      | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19.0         |
+| 🔍 静态分析        | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19.0         |
+| ⚠️ 必选依赖(vcpkg) | [pcre2](https://www.pcre.org/)                                      | 10.0         |
+|                    | [icu](https://icu.unicode.org/)                                     | 78.0         |
+|                    | [OpenSSL](https://www.openssl.org/)                                 | 3.6.0        |
+| 📦 可选依赖(vcpkg) | [libpq](https://www.postgresql.org/)                                | 16.0         |
+|                    | [libmysql](https://www.mysql.com/)                                  | 8.0          |
+|                    | [sqlite3](https://sqlite.org/index.html)                            | 3.0          |
+|                    | [sqlcipher](https://www.zetetic.net/sqlcipher/)                     | 4.0          |
+|                    | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0        |
+|                    | [lz4](https://lz4.org/)                                             | 1.10.0       |
+|                    | [zlib](https://www.zlib.net/)                                       | 1.3.0        |
+|                    | [GTest](https://google.github.io/googletest/)                       | 1.17.0       |
+|                    | [benchmark](https://github.com/google/benchmark/)                   | 1.9.0        |
 
 ### 🏗️ 编译步骤
 
-编译前确保您已经正确安装并配置了 CMake、vcpkg、clang-format、clang-tidy
+编译前确保您已经正确安装并配置了前置依赖。
 
 > 💡 您可以在项目根目录的 `config.json` (编译项配置) 与 `vcpkg.json` (包管理配置) 中更改配置项以进行个性化编译
 >
@@ -458,17 +460,15 @@ nexusforce_reflect_scan(
 )
 ```
 
-函数会在构建时运行 NFRS 扫描指定目录中的 `.hpp` / `.h` 文件，生成 `_nfrs_gen_<target>.cpp` 并自动添加到目标源文件列表。
-
 参数说明：
 
-| 参数        | 必填 | 说明                                                                    |
-|-------------|------|-------------------------------------------------------------------------|
-| `TARGET`    | 是   | 要注入生成代码的目标                                                    |
-| `HEADERS`   | 是   | 要扫描的头文件目录                                                      |
-| `OUTPUT`    | 否   | 生成文件路径，默认 `${CMAKE_CURRENT_BINARY_DIR}/_nfrs_gen_<target>.cpp` |
-| `EXCLUDES`  | 否   | 排除的路径片段（传递给 NFRS 的 `-e` 选项）                              |
-| `DEPENDS`   | 否   | 额外的 CMake 级依赖文件                                                 |
+| 参数       | 必填 | 说明                                                                    |
+|------------|------|-------------------------------------------------------------------------|
+| `TARGET`   | 是   | 要注入生成代码的目标                                                    |
+| `HEADERS`  | 是   | 要扫描的头文件目录                                                      |
+| `OUTPUT`   | 否   | 生成文件路径，默认 `${CMAKE_CURRENT_BINARY_DIR}/_nfrs_gen_<target>.cpp` |
+| `EXCLUDES` | 否   | 排除的路径片段（传递给 NFRS 的 `-e` 选项）                              |
+| `DEPENDS`  | 否   | 额外的 CMake 级依赖文件                                                 |
 
 #### 运行时 DLL 部署
 
@@ -477,8 +477,6 @@ nexusforce_reflect_scan(
 ```cmake
 nexusforce_deploy_runtime(my_app)
 ```
-
-该函数在 Windows 上通过 `POST_BUILD` 将 `NexusForce.dll` 复制到目标输出目录。Linux 上此函数为空操作（由 RPATH 机制处理）。
 
 ---
 
@@ -494,14 +492,13 @@ nexusforce_deploy_runtime(my_app)
 
 ## ❓ 常见问题
 
-关于 NexusForce 的定位、与其他框架（Boost / Qt / POCO / folly）的差异对比、设计理念、功能选型建议等，
-请参见 [Q&A](Q&A.md)。
+关于 NexusForce 的定位、设计理念、功能选型等，参见 [Q&A](Q&A.md)。
 
 ---
 
 ## 📚 文档
 
-完整 API 文档请访问 [NexusForce 文档网站](https://nexusforce.org.cn)
+完整 API 文档参见 [NexusForce API 文档](https://nexusforce.org.cn)。
 
 ---
 
@@ -513,18 +510,18 @@ nexusforce_deploy_runtime(my_app)
 
 ## 📝 更新日志
 
-详细更新记录请参见 [CHANGELOG](CHANGELOG.md)
+详细更新记录参见 [CHANGELOG](CHANGELOG.md)。
 
 ---
 
 ## 👥 贡献者
 
-感谢所有为本项目做出贡献的开发者！查看 [CONTRIBUTORS](CONTRIBUTORS.md) 获取完整名单。
+感谢所有为本项目做出贡献的开发者！参见 [CONTRIBUTORS](CONTRIBUTORS.md)。
 
 ---
 
 ## 📌 TODO
 
-核心 ABI 已固定
+核心 API 已固定
 
 TODO 条例参见代码内的 TODO 注释

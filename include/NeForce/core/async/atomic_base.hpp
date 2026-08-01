@@ -31,6 +31,11 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
+#ifdef NEFORCE_COMPILER_MSVC
+#    pragma warning(push)
+#    pragma warning(disable : 6001)
+#endif
+
 /**
  * @brief 线程内存屏障
  * @param mo 内存顺序
@@ -42,26 +47,32 @@ NEFORCE_ALWAYS_INLINE_INLINE void atomic_thread_fence(const memory_order mo) noe
     if (mo == memory_order_relaxed) {
         return;
     }
-#    if defined(NEFORCE_ARCH_X86)
-    ::_ReadWriteBarrier();
-    if (mo == memory_order_seq_cst) {
-        volatile long guard = 0;
-        ::_InterlockedIncrement(&guard);
-        ::_ReadWriteBarrier();
-    }
-#    elif defined(NEFORCE_ARCH_ARM)
+#    ifdef NEFORCE_ARCH_ARM
     if (mo == memory_order_acquire || mo == memory_order_consume) {
-        ::_Memory_load_acquire_barrier();
+        ::__dmb(::_ARM64_BARRIER_ISHLD);
     } else {
-        ::_ReadWriteBarrier();
+        ::__dmb(::_ARM64_BARRIER_ISH);
     }
 #    else
     ::_ReadWriteBarrier();
+    if (mo == memory_order_seq_cst) {
+        // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+        volatile long guard; // The value of guard is not important, we only use the fence in _InterlockedIncrement
+
+        // According to the MSVC library comments, _mm_mfence is slower on some CPUs.
+        // The memory fence in interlocked operations have some exceptions, but it`s enough for atomic_thread_fence.
+        ::_InterlockedIncrement(&guard);
+        ::_ReadWriteBarrier();
+    }
 #    endif
 #else
     __atomic_thread_fence(static_cast<int32_t>(mo));
 #endif
 }
+
+#ifdef NEFORCE_COMPILER_MSVC
+#    pragma warning(pop)
+#endif
 
 /**
  * @brief 信号内存屏障

@@ -84,9 +84,11 @@ namespace {
 
     void get_cpu_info_internal(sysinfo::CPU_info& cpu_info, const sysinfo::architecture arch) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
+        char brand[49] = {};
+
+#    ifdef NEFORCE_ARCH_X86
         int cpu_info_data[4] = {-1};
         char vendor[13] = {};
-        char brand[49] = {};
 
         // Get CPU manufacturer information
         ::__cpuid(cpu_info_data, 0);
@@ -105,6 +107,29 @@ namespace {
         brand[48] = '\0';
         cpu_info.brand = brand;
         cpu_info.brand.trim_right();
+#    else
+        // read vendor and brand from registry
+        ::HKEY cpu_hkey = nullptr;
+        if (::RegOpenKeyExA(HKEY_LOCAL_MACHINE, R"(HARDWARE\DESCRIPTION\System\CentralProcessor\0)", 0, KEY_READ,
+                            &cpu_hkey) == ERROR_SUCCESS) {
+            char buf[256];
+            ::DWORD size = sizeof(buf);
+
+            if (::RegQueryValueExA(cpu_hkey, "VendorIdentifier", nullptr, nullptr, reinterpret_cast<::LPBYTE>(buf),
+                                   &size) == ERROR_SUCCESS) {
+                cpu_info.vendor = buf;
+            }
+
+            size = sizeof(buf);
+            if (::RegQueryValueExA(cpu_hkey, "ProcessorNameString", nullptr, nullptr, reinterpret_cast<::LPBYTE>(buf),
+                                   &size) == ERROR_SUCCESS) {
+                cpu_info.brand = buf;
+                cpu_info.brand.trim_right();
+            }
+
+            ::RegCloseKey(cpu_hkey);
+        }
+#    endif
 
         // Obtain the relationship between NUMA and processor core
         ::DWORD buffer_size = 0;
@@ -163,6 +188,7 @@ namespace {
             ::RegCloseKey(hkey);
         }
 
+#    ifdef NEFORCE_ARCH_X86
         if (cpu_info.max_MHz == 0) {
             ::__cpuid(cpu_info_data, 0x16);
             if (cpu_info_data[0] != 0) {
@@ -184,6 +210,7 @@ namespace {
                 cpu_info.max_MHz = (crystal_clock / 1000000) * cpu_info_data[1] / cpu_info_data[0];
             }
         }
+#    endif
 
         if (cpu_info.max_MHz == 0) {
             const char* ghz_pos = string_find_pattern(brand, "GHz");

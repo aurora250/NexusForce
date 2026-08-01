@@ -10,6 +10,11 @@
 using namespace neforce;
 using namespace neforce::placeholders;
 
+#ifdef NEFORCE_COMPILER_CLANG_CL
+#    pragma clang diagnostic push
+#    pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 namespace {
     struct test_functor {
         int operator()(int x) const { return x * 2; }
@@ -1791,4 +1796,8 @@ TEST_F(HashTest, All64BitAlgorithmsDeterministic) {
     EXPECT_EQ(XXH3_64(data, len), XXH3_64(data, len));
 }
 
+#endif
+
+#ifdef NEFORCE_COMPILER_CLANG_CL
+#    pragma clang diagnostic pop
 #endif

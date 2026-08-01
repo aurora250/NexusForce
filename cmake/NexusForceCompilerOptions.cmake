@@ -1,5 +1,5 @@
 function(nexusforce_compiler_options target)
-    if(MSVC)
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
         target_compile_options(${target} PRIVATE
                 $<$<COMPILE_LANGUAGE:CXX>:
                 /utf-8 /wd4819

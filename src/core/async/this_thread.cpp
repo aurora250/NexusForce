@@ -1,6 +1,5 @@
 #include <NeForce/core/async/this_thread.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
-#include <NeForce/core/time/clocks.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <windef.h>
 #    include <WinBase.h>
@@ -8,6 +7,7 @@
 #    include <profileapi.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
+#    include <NeForce/core/time/clocks.hpp>
 #    include <ctime>
 #    include <pthread.h>
 #endif
@@ -145,7 +145,7 @@ void sleep_for_ns(uint64_t ns) noexcept {
     if (ns < 1000) {
         for (uint64_t i = 0; i < ns / 10; ++i) {
 #ifdef NEFORCE_COMPILER_MSVC
-            ::_mm_mfence();
+            atomic_thread_fence(memory_order_seq_cst);
 #else
             asm volatile("" ::: "memory");
 #endif

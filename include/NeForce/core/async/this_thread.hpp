@@ -86,14 +86,22 @@ NEFORCE_ALWAYS_INLINE_INLINE void yield() noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE void relax() noexcept {
 #ifdef NEFORCE_COMPILER_MSVC
+#    ifdef NEFORCE_ARCH_X86
     ::_mm_pause();
+#    else
+    ::__yield();
+#    endif
 #else
 #    if defined(NEFORCE_ARCH_X86)
-    __builtin_ia32_pause();
-#    elif defined(NEFORCE_ARCH_ARM)
-    asm volatile("yield");
-#    elif defined(NEFORCE_ARCH_RISCV)
     asm volatile("pause" ::: "memory");
+#    elif defined(NEFORCE_ARCH_ARM)
+    asm volatile("yield" ::: "memory");
+#    elif defined(NEFORCE_ARCH_RISCV)
+#        ifdef __riscv_zihintpause
+    asm volatile("pause" ::: "memory");
+#        else
+    asm volatile("fence" ::: "memory");
+#        endif
 #    elif defined(NEFORCE_ARCH_LOONGARCH)
     asm volatile("dbar 0" ::: "memory");
 #    else

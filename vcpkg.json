@@ -1,7 +1,7 @@
 {
   "name": "nexusforce",
   "version": "1.0.0",
-  "description": "A modern C++ library with zero CodeQL vulnerabilities, zero Clang-Tidy warnings, and zero Valgrind leaks. Strictly follows ISO/RFC standards from networking to cryptography.",
+  "description": "A modern C++ library",
   "homepage": "https://github.com/aurora250/NexusForce",
   "builtin-baseline": "62159a45e18f3a9ac0548628dcaf74fcb60c6ff9",
   "dependencies": [
@@ -16,7 +16,7 @@
     "sqlite3",
     {
       "name": "sqlcipher",
-      "platform": "windows"
+      "platform": "!(windows & arm)"
     },
     "hiredis",
     {
@@ -41,7 +41,7 @@
       "dependencies": ["sqlite3"]
     },
     "sqlcipher": {
-      "description": "Encrypted SQLite3 support (requires --allow-unsupported on Linux)",
+      "description": "Encrypted SQLite3 support",
       "dependencies": ["sqlcipher"]
     },
     "redis": {
