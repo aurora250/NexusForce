@@ -40,6 +40,8 @@
 本项目旨在建立**功能健全、风格统一、可读性强、社区共建、跨平台兼容**的工业级现代 C++ 开发库。通过清晰的架构设计、规范的代码实现、丰富的设计模式应用，
 为项目开发提供实用的工具集，同时也为学习者提供理解底层原理的实践载体，建立从学习到生产的连接点。
 
+v1.0.0 开始承诺：次版本号更新保持 API 兼容，主版本号更新包含不兼容变更
+
 ---
 
 ## 🖥️ 支持环境
@@ -52,7 +54,6 @@
 | 编译器   | MSVC (Windows) / ClangCL (Windows) / Clang (Windows, Linux) / GCC (Linux) |
 | C++ 标准 | 14 / 17 / 20                                                              |
 
-> ℹ️ **兼容性说明**  
 > 本库欢迎开发者进行更多环境的兼容性开发，欢迎您进行贡献。
 
 ---
@@ -69,7 +70,7 @@ NexusForce 严格遵循现代 C++ 工程最佳实践，通过多层次自动化�
 | 🎨 **Clang-Format 代码风格** | **强制统一** | 配置严格，格式统一                            |
 | 💧 **动态内存检查**          | **0 泄漏**   | 全量测试                                      |
 
-> 📋 **关于规则豁免**：[`.clang-tidy`](.clang-tidy) 包含约 60 项显式豁免，[`.clang-format`](.clang-format) 包含多项风格定制。
+> [`.clang-tidy`](.clang-tidy) 包含约 60 项显式豁免，[`.clang-format`](.clang-format) 包含多项风格定制。
 > 每一项均针对底层系统编程的固有需求，遵循"默认严格，按需放开"原则。
 
 ---
@@ -147,7 +148,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 | **数学函数与常量** | [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/), [ISO/IEC 10967 (LIA)](https://www.iso.org/standard/24417.html)        | 三角函数归约、牛顿迭代法与机器精度容差            |
 | **随机数生成**     | [ISO/IEC 18031:2011](https://www.iso.org/standard/54945.html), [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final) | 梅森旋转 (MT19937) 与操作系统熵源真随机数         |
 
-> 📖 **文档完整性**：所有涉及上述标准的组 (group)，均在其 API 注释中标注了具体的标准章节号与官方链接，开发者可随时溯源验证。
+> 所有涉及上述标准的组 (group)，均在其注释中标注了具体的标准章节号与官方链接，开发者可随时溯源验证。
 
 ---
 
@@ -379,7 +380,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 > 💡 您可以在项目根目录的 `config.json` (编译项配置) 与 `vcpkg.json` (包管理配置) 中更改配置项以进行个性化编译
 >
-> **本项目在 linux 系统中额外依赖 liburing-dev，构建前确保您已经安装**
+> **本项目在 linux 系统中静默依赖 liburing-dev，如您需要 io_uring 功能，请在构建前确保您已经安装，否则相关功能将被禁用回退**
 >
 > 实测 linux 系统中，vcpkg 构建 libmysql 需要 libtirpc-dev 库，libpq 需要 bison、flex、autoconf 库，且这些库不会由系统包管理器默认安装。
 > 如果您需要对应依赖，您可以通过系统包管理器提前安装以免 cmake 构建失败
@@ -407,7 +408,7 @@ cmake --install . --config Release
 python ./scripts/install_nexusforce.py --release
 ```
 
-#### 🐧 Linux
+#### 🐧 Ubuntu (Linux)
 
 ```bash
 # 克隆最新发布版
@@ -520,7 +521,5 @@ nexusforce_deploy_runtime(my_app)
 ---
 
 ## 📌 TODO
-
-核心 API 已固定
 
 TODO 条例参见代码内的 TODO 注释
