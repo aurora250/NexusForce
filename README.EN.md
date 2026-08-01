@@ -40,10 +40,9 @@
 This project aims to establish a **feature-complete, stylistically unified, highly readable, community-driven, and cross-platform compatible** modern C++ development library. 
 Through clear architectural design, standardized code implementation, and rich applications of design patterns, 
 it provides a practical toolkit for project development while also serving as a practical learning resource 
-for C++ learners to understand underlying principles, bridging the gap from learning to production.
+for learners to understand underlying principles, bridging the gap from learning to production.
 
-💡 Please feel free to [submit Issues](https://github.com/aurora250/NexusForce/issues) to help improve this project.
-If there are any deficiencies, please don't hesitate to provide feedback.
+Starting from v1.0.0, we commit to: **minor version updates maintain API compatibility, while major version updates may contain incompatible changes.**
 
 ---
 
@@ -57,7 +56,6 @@ If there are any deficiencies, please don't hesitate to provide feedback.
 | Compiler        | MSVC (Windows) / ClangCL (Windows) / Clang (Windows, Linux) / GCC (Linux) |
 | C++ Standard    | 14 / 17 / 20                                                              |
 
-> ℹ️ **Compatibility Note**  
 > This library welcomes developers to contribute compatibility with more environments. Your contributions are greatly appreciated.
 
 ---
@@ -71,20 +69,16 @@ NexusForce strictly adheres to modern C++ engineering best practices, ensuring c
 | 📊 **Codebase Size**              | 180k+ Lines           | Core library source and headers 110k+ lines, test code 60k+ lines |
 | 🔒 **CodeQL Security Analysis**   | **0 Vulnerabilities** | Full ruleset                                                      |
 | 🔍 **Clang-Tidy Static Analysis** | **Zero Warnings**     | Full ruleset                                                      |
-| 🎨 **Clang-Format Code Style**    | **Strictly Enforced** | Configuration strictly enforced, uniform formatting               |
+| 🎨 **Clang-Format Code Style**    | **Strictly Enforced** | Strict configuration, uniform formatting                          |
 | 💧 **Dynamic Memory Check**       | **0 Leaks**           | Full test suite                                                   |
 
-> 📋 **Regarding Rule Exemptions**: [`.clang-tidy`](.clang-tidy) contains approximately 60 explicit exemptions, 
-> and [`.clang-format`](.clang-format) includes several style customizations. 
-> Each exemption addresses inherent requirements of low-level system programming, adhering to the principle of "strict by default, relaxed as needed."
+> [`.clang-tidy`](.clang-tidy) contains approximately 60 explicit exemptions, and [`.clang-format`](.clang-format) includes several style customizations. Each exemption addresses inherent requirements of low-level system programming, adhering to the principle of "strict by default, relaxed as needed."
 
 ---
 
 ## 📡 Standards Compliance
 
-The core components of NexusForce strictly adhere to relevant international standards and industry specifications, 
-ensuring predictable behavior, strong interoperability, and reliable security.
-The following table maps key components to their respective standards:
+The core components of NexusForce strictly adhere to relevant international standards and industry specifications, ensuring predictable behavior, strong interoperability, and reliable security. The following table maps key components to their respective standards:
 
 ### 🌐 Network Protocols & Internet Standards
 
@@ -106,7 +100,7 @@ The following table maps key components to their respective standards:
 | **JSON RFC 8259** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404:2017](https://ecma-international.org/publications-and-standards/standards/ecma-404/)                                                                       | JSON six value types, UTF-8 encoding, IEEE 754-2019 double-precision numbers, and string escape sequences                                  |
 | **TOML 1.0.0**    | [TOML v1.0.0](https://toml.io/en/v1.0.0)                                                                                                                                                                                 | Includes date-time format following [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601                                          |
 | **YAML 1.2**      | [YAML 1.2.2](https://yaml.org/spec/1.2.2/), [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html), [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) | YAML 1.2 is a strict superset of JSON, supporting eight core value types, five string scalar styles, anchors and aliases, and a tag system |
-| **SQL**           | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 and later)                                                                                                                                               | Generates ANSI SQL compliant SELECT/INSERT/UPDATE/DELETE statements                                                                        |
+| **SQL**           | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 and later)                                                                                                                                               | Generates statements compliant with ANSI SQL and supported database dialects                                                               |
 
 ### 🔐 Cryptography & Security Algorithms
 
@@ -155,7 +149,8 @@ The following table maps key components to their respective standards:
 | **Mathematical Functions & Constants** | [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/), [ISO/IEC 10967 (LIA)](https://www.iso.org/standard/24417.html)        | Trigonometric reduction, Newton's method iterations, and machine epsilon tolerances |
 | **Random Number Generation**           | [ISO/IEC 18031:2011](https://www.iso.org/standard/54945.html), [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final) | Mersenne Twister (MT19937) and OS entropy source true random numbers                |
 
-> 📖 **Documentation Completeness**: All classes and functions referencing the above standards include specific standard section numbers and official links in their API comments (Doxygen format), enabling developers to trace and verify at any time.
+> All classes and functions referencing the above standards include specific standard section numbers and official links in their comments, 
+> enabling developers to trace and verify at any time.
 
 ---
 
@@ -200,7 +195,7 @@ The following table maps key components to their respective standards:
 
 ### 📁 File System
 - **Path/File Operations** - Path and file system operations `path` / `path_tree` / `file` / `file_async` / `file_diff` / `file_locker` / `file_mapper`
-- **`file_async`** - `io_context`-driven async file I/O, with offset specification and cancellation slot support
+- **`file_async`** - `io_context`- and `io_uring`-driven async file I/O, with offset specification and cancellation slot support
 - **`file_watcher`** - Real-time file system change monitoring
 - **Config File Parsing** - JSON/TOML/YAML/INI/ENV value system, format parsing and streaming builder
 - **`temp_file`** - Secure temporary file management
@@ -387,10 +382,11 @@ Ensure that you have correctly installed and configured the prerequisites before
 
 > 💡 You can modify the configuration items in `config.json` (build options) and `vcpkg.json` (package management configuration) in the project root directory for personalized builds.
 >
-> **This project additionally relies on liburing-dev on Linux systems; please ensure you have installed it before building**
+> **This project implicitly depends on liburing-dev on Linux systems. If you need `io_uring` functionality,
+> please ensure it is installed before building; otherwise, the related features will be disabled and fall back to alternatives.**
 >
 > In actual testing, on Linux, vcpkg requires libtirpc-dev libraries to build libmysql, libpq requires bison, flex, and autoconf libraries, and these libraries are not installed by default by the package manager.
-> If you need corresponding dependencies, you can install them in advance using the package manager to prevent cmake build failures
+> If you need corresponding dependencies, you can install them in advance using the package manager to prevent cmake build failures.
 
 #### 🪟 Windows
 
@@ -415,7 +411,7 @@ cmake --install . --config Release
 python ./scripts/install_nexusforce.py --release
 ```
 
-#### 🐧 Linux
+#### 🐧 Ubuntu (Linux)
 
 ```bash
 # Clone the latest release
@@ -527,7 +523,5 @@ Thanks to all the developers who have contributed to this project! See [CONTRIBU
 ---
 
 ## 📌 TODO
-
-The core API has been stabilized.
 
 For TODO items, see TODO comments within the code.

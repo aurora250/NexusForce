@@ -219,12 +219,7 @@ jobs:
           for triplet in riscv64 loongarch64; do
             TRIPLET_FILE="$VCPKG_ROOT/triplets/community/${triplet}-linux.cmake"
             if [ ! -f "$TRIPLET_FILE" ]; then
-              sudo tee "$TRIPLET_FILE" > /dev/null <<TRIPLETEOF
-                set(VCPKG_TARGET_ARCHITECTURE ${triplet})
-                set(VCPKG_CRT_LINKAGE dynamic)
-                set(VCPKG_LIBRARY_LINKAGE static)
-                set(VCPKG_CMAKE_SYSTEM_NAME Linux)
-                TRIPLETEOF
+              printf 'set(VCPKG_TARGET_ARCHITECTURE %s)\nset(VCPKG_CRT_LINKAGE dynamic)\nset(VCPKG_LIBRARY_LINKAGE static)\nset(VCPKG_CMAKE_SYSTEM_NAME Linux)\n' "$triplet" | sudo tee "$TRIPLET_FILE" > /dev/null
             fi
           done
 
