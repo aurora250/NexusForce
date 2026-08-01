@@ -40,17 +40,13 @@ public:
     using size_type = size_t;        ///< 大小类型
     using difference_type = ::off_t; ///< 偏移量类型
 #endif
-
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
-
-#ifdef NEFORCE_PLATFORM_LINUX
-    struct uring;
-#endif
 
 private:
     native_handle_type handle_;
     io_context* ctx_{nullptr};
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_USING_IO_URING
+    struct uring;
     unique_ptr<uring> uring_;
 #endif
     function<void(error_code, size_type)> pending_handler_;

@@ -31,6 +31,7 @@ string(JSON CONFIG_ENABLE_LZ4        GET ${JSON_CONTENT} dependency lz4        s
 string(JSON CONFIG_USING_SSO         GET ${JSON_CONTENT} feature sso)
 string(JSON CONFIG_USING_INTEL_TSX   GET ${JSON_CONTENT} feature intel-tsx)
 string(JSON CONFIG_USING_SQLCIPHER   GET ${JSON_CONTENT} feature sqlcipher)
+string(JSON CONFIG_USING_IO_URING    GET ${JSON_CONTENT} feature io_uring)
 
 string(JSON CONFIG_BUILD_TESTS       GET ${JSON_CONTENT} build tests)
 string(JSON CONFIG_BUILD_EXAMPLES    GET ${JSON_CONTENT} build examples)
@@ -143,7 +144,8 @@ option(NEXUSFORCE_ENABLE_LZ4        "Enable lz4 compression support"     ${CONFI
 
 option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"             ${CONFIG_USING_SSO})
 option(NEXUSFORCE_USING_INTEL_TSX   "Using Intel TSX"                    ${CONFIG_USING_INTEL_TSX})
-option(NEXUSFORCE_USING_SQLCIPHER   "Using SQLCipher (encrypted SQLite3)" ${CONFIG_USING_SQLCIPHER})
+option(NEXUSFORCE_USING_SQLCIPHER   "Using SQLCipher"                    ${CONFIG_USING_SQLCIPHER})
+option(NEXUSFORCE_USING_IO_URING    "Using io uring"                     ${CONFIG_USING_IO_URING})
 
 option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFIG_BUILD_TESTS})
 option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
@@ -174,6 +176,7 @@ message(STATUS "")
 message(STATUS "  NEXUSFORCE_USING_SSO:           ${NEXUSFORCE_USING_SSO}")
 message(STATUS "  NEXUSFORCE_USING_INTEL_TSX:     ${NEXUSFORCE_USING_INTEL_TSX}")
 message(STATUS "  NEXUSFORCE_USING_SQLCIPHER:     ${NEXUSFORCE_USING_SQLCIPHER}")
+message(STATUS "  NEXUSFORCE_USING_IO_URING:      ${NEXUSFORCE_USING_IO_URING}")
 message(STATUS "")
 message(STATUS "  NEXUSFORCE_BUILD_TESTS:         ${NEXUSFORCE_BUILD_TESTS}")
 message(STATUS "  NEXUSFORCE_BUILD_EXAMPLES:      ${NEXUSFORCE_BUILD_EXAMPLES}")

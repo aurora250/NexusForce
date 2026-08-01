@@ -1,6 +1,10 @@
 #include <NeForce/core/file/file_async.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <liburing.h>
+#    ifdef NEFORCE_USING_IO_URING
+#        include <liburing.h>
+#    else
+#        include <unistd.h>
+#    endif
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -18,6 +22,7 @@ namespace {
         string write_data;
     };
 #else
+#    ifdef NEFORCE_USING_IO_URING
     struct io_op {
         static constexpr uint64_t MAGIC = 0x4E464F504F5F4F50ULL;
         function<void(error_code, file_async::size_type)> handler;
@@ -25,11 +30,12 @@ namespace {
         shared_ptr<string> write_data;
         uint64_t magic = MAGIC;
     };
+#    endif
 #endif
 } // namespace
 
 
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_USING_IO_URING
 struct file_async::uring {
     ::io_uring ring;
     bool initialized = false;
@@ -62,16 +68,18 @@ file_async::~file_async() {
         ctx_->unregister_file_completion(reinterpret_cast<uintptr_t>(this));
     }
 #else
+#    ifdef NEFORCE_USING_IO_URING
     if (ctx_ != nullptr && uring_) {
         ctx_->remove_fd(uring_->ring_fd());
     }
+#    endif
 #endif
 }
 
 file_async::file_async(file_async&& other) noexcept :
 handle_(other.handle_),
 ctx_(other.ctx_)
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_USING_IO_URING
 ,
 uring_(move(other.uring_))
 #endif
@@ -84,7 +92,7 @@ file_async& file_async::operator=(file_async&& other) noexcept {
     if (this != &other) {
         handle_ = other.handle_;
         ctx_ = other.ctx_;
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_USING_IO_URING
         uring_ = move(other.uring_);
 #endif
         other.handle_ = invalid_handle;
@@ -120,6 +128,7 @@ void file_async::ensure_iocp(io_context& ctx) {
     }
     ctx_ = &ctx;
 
+#    ifdef NEFORCE_USING_IO_URING
     if (!uring_) {
         uring_ = make_unique<uring>();
         if (!uring_->init(256)) {
@@ -152,6 +161,7 @@ void file_async::ensure_iocp(io_context& ctx) {
             ::io_uring_cqe_seen(&uring_->ring, cqe);
         }
     });
+#    endif
 #endif
 }
 
@@ -197,7 +207,9 @@ void file_async::do_async_read(io_context& ctx, string& buffer, size_type size, 
         h(error_code{}, static_cast<size_type>(bytes));
     }
 #else
+#    ifdef NEFORCE_USING_IO_URING
     if (!uring_) {
+#    endif
         // fall back to synchronous pread and dispatch the completion handler via the event loop.
         ctx_->post([this, handler = move(handler), &buffer, size, offset]() mutable {
             const auto off =
@@ -211,6 +223,7 @@ void file_async::do_async_read(io_context& ctx, string& buffer, size_type size, 
                 handler(error_code{}, static_cast<size_type>(n));
             }
         });
+#    ifdef NEFORCE_USING_IO_URING
         return;
     }
 
@@ -225,6 +238,7 @@ void file_async::do_async_read(io_context& ctx, string& buffer, size_type size, 
                          offset >= 0 ? static_cast<uint64_t>(offset) : numeric_traits<uint64_t>::max());
     sqe->user_data = reinterpret_cast<uint64_t>(op);
     ::io_uring_submit(&uring_->ring);
+#    endif
 #endif
 }
 
@@ -278,7 +292,9 @@ void file_async::do_async_write(io_context& ctx, string data, size_type size, di
         size = data.size();
     }
 
+#    ifdef NEFORCE_USING_IO_URING
     if (!uring_) {
+#    endif
         ctx_->post([this, handler = move(handler), write_data = move(data), size, offset]() mutable {
             const auto off =
                     offset >= 0 ? static_cast<off_t>(offset) : static_cast<off_t>(::lseek64(handle_, 0, SEEK_CUR));
@@ -289,6 +305,7 @@ void file_async::do_async_write(io_context& ctx, string data, size_type size, di
                 handler(error_code{}, static_cast<size_type>(n));
             }
         });
+#    ifdef NEFORCE_USING_IO_URING
         return;
     }
 
@@ -304,6 +321,7 @@ void file_async::do_async_write(io_context& ctx, string data, size_type size, di
                           offset >= 0 ? static_cast<uint64_t>(offset) : numeric_traits<uint64_t>::max());
     sqe->user_data = reinterpret_cast<uint64_t>(op);
     ::io_uring_submit(&uring_->ring);
+#    endif
 #endif
 }
 

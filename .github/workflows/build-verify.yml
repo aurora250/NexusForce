@@ -52,6 +52,11 @@ jobs:
             config: sqlcipher
             cppstd: 20
 
+          - os: windows-latest
+            compiler: msvc
+            config: cross-arm64-msvc
+            cppstd: 20
+
           - os: windows-2022
             compiler: clang-cl
             config: full
@@ -87,11 +92,6 @@ jobs:
             config: no-compress
             cppstd: 20
 
-          - os: ubuntu-24.04-arm
-            compiler: gcc
-            config: full
-            cppstd: 20
-
           - os: ubuntu-latest
             compiler: gcc
             config: cross-riscv64
@@ -102,8 +102,8 @@ jobs:
             config: cross-loongarch64
             cppstd: 20
 
-          - os: windows-latest
-            compiler: msvc
+          - os: ubuntu-latest
+            compiler: gcc
             config: cross-arm64
             cppstd: 20
 
@@ -140,10 +140,11 @@ jobs:
           clang++ --version
 
       - name: Install cross-compilation toolchains (Ubuntu)
-        if: startsWith(matrix.config, 'cross-')
+        if: runner.os == 'Linux' && startsWith(matrix.config, 'cross-')
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends \
+            g++-aarch64-linux-gnu        \
             g++-riscv64-linux-gnu        \
             g++-14-loongarch64-linux-gnu \
             qemu-user-static
@@ -212,16 +213,10 @@ jobs:
         run: echo "$VCPKG_ROOT" >> $GITHUB_PATH
 
       - name: Setup MSVC environment (Windows)
-        if: runner.os == 'Windows' && matrix.config != 'cross-arm64'
+        if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
         with:
-          arch: amd64
-
-      - name: Setup MSVC ARM64 cross-compile environment (Windows)
-        if: runner.os == 'Windows' && matrix.config == 'cross-arm64'
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: amd64_arm64
+          arch: ${{ matrix.config == 'cross-arm64-msvc' && 'amd64_arm64' || 'amd64' }}
 
       - name: Install Ninja (Windows)
         if: runner.os == 'Windows'
@@ -302,13 +297,21 @@ jobs:
               ;;
             cross-arm64)
               FLAGS+=(
+                -DVCPKG_TARGET_TRIPLET=arm64-linux
+                -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/aarch64-linux-gnu.cmake
+                -DNEXUSFORCE_BUILD_TESTS=OFF
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
+            cross-arm64-msvc)
+              FLAGS+=(
                 -DVCPKG_TARGET_TRIPLET=arm64-windows
                 -DVCPKG_INSTALL_OPTIONS=--allow-unsupported
                 -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/arm64-windows-msvc.cmake
                 -DNEXUSFORCE_BUILD_TESTS=OFF
                 -DNEXUSFORCE_BUILD_EXAMPLES=OFF
                 -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
-                -DNEXUSFORCE_BUILD_DOCS=OFF
               )
               ;;
           esac

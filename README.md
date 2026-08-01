@@ -37,9 +37,8 @@
 
 ## 📖 项目简介
 
-本项目旨在建立**功能健全、风格统一、可读性强、社区共建、跨平台兼容**的现代 C++ 开发库。通过清晰的架构设计、规范的代码实现、丰富的设计模式应用，为项目开发提供实用的工具集，同时也为 C++ 学习者提供理解底层原理的实践载体，建立从学习到生产的连接点。
-
-💡 有劳各位多多 [提交 Issue](https://github.com/aurora250/NexusForce/issues)，使本项目趋于健全。如有不足，还望斧正。
+本项目旨在建立**功能健全、风格统一、可读性强、社区共建、跨平台兼容**的工业级现代 C++ 开发库。通过清晰的架构设计、规范的代码实现、丰富的设计模式应用，
+为项目开发提供实用的工具集，同时也为学习者提供理解底层原理的实践载体，建立从学习到生产的连接点。
 
 ---
 
@@ -70,8 +69,8 @@ NexusForce 严格遵循现代 C++ 工程最佳实践，通过多层次自动化�
 | 🎨 **Clang-Format 代码风格** | **强制统一** | 配置严格，格式统一                            |
 | 💧 **动态内存检查**          | **0 泄漏**   | 全量测试                                      |
 
-> 📋 **关于规则豁免**：[`.clang-tidy`](.clang-tidy) 包含约 60 项显式豁免，
-> [`.clang-format`](.clang-format) 包含多项风格定制。每一项均针对底层系统编程的固有需求，遵循"默认严格，按需放开"原则。
+> 📋 **关于规则豁免**：[`.clang-tidy`](.clang-tidy) 包含约 60 项显式豁免，[`.clang-format`](.clang-format) 包含多项风格定制。
+> 每一项均针对底层系统编程的固有需求，遵循"默认严格，按需放开"原则。
 
 ---
 
@@ -99,7 +98,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 | **JSON RFC 8259** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404:2017](https://ecma-international.org/publications-and-standards/standards/ecma-404/)                                                                       | JSON 六种值类型、UTF-8 编码、IEEE 754-2019 双精度数字与字符串转义序列                 |
 | **TOML 1.0.0**    | [TOML v1.0.0](https://toml.io/en/v1.0.0)                                                                                                                                                                                 | 包含日期时间格式遵循 [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601    |
 | **YAML 1.2**      | [YAML 1.2.2](https://yaml.org/spec/1.2.2/), [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html), [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) | YAML 1.2 是 JSON 严格超集，支持八种核心值类型、五种字符串标量样式、锚点别名与标签系统 |
-| **SQL**           | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 及后续版本)                                                                                                                                              | 生成符合 ANSI SQL 的 SELECT/INSERT/UPDATE/DELETE 语句                                 |
+| **SQL**           | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 及后续版本)                                                                                                                                              | 生成符合 ANSI SQL 与支持数据库方言的语句                                              |
 
 ### 🔐 密码学与安全算法
 
@@ -193,7 +192,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 📁 文件系统 (File)
 - **路径/文件操作** - 路径/文件系统操作 `path`/`path_tree`/`file`/`file_async`/`file_diff`/`file_locker`/`file_mapper`
-- **`file_async`** - 基于 `io_context` 的异步文件 I/O，支持指定偏移量与取消槽
+- **`file_async`** - 基于 `io_context` 与 `io_uring` 的异步文件 I/O，支持指定偏移量与取消槽
 - **`file_watcher`** - 实时文件系统变更监控
 - **配置文件解析** - JSON/TOML/YAML/INI/ENV 值系统、格式解析与流式构建
 - **`temp_file`** - 安全的临时文件管理
