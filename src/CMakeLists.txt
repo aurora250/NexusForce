@@ -269,13 +269,16 @@ if(WIN32)
             SetupAPI Shell32 synchronization Wbemuuid ws2_32 wsock32
     )
 elseif(UNIX AND NOT APPLE)
-    target_link_libraries(NexusForce PUBLIC atomic pthread)
+    target_link_libraries(NexusForce PUBLIC
+            atomic pthread
+    )
 
     if(NEXUSFORCE_USING_IO_URING)
         find_package(uring QUIET)
         if(TARGET uring::uring)
             target_link_libraries(NexusForce PUBLIC uring::uring)
             target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_IO_URING)
+            set(NEXUSFORCE_URING_LINKED TRUE PARENT_SCOPE)
             message(STATUS "io_uring linked successfully")
         else()
             find_library(LIBURING NAMES uring)
@@ -382,7 +385,7 @@ else()
 endif()
 
 if(NEXUSFORCE_ENABLE_LZ4)
-    find_package(lz4 QUIET)
+    find_package(lz4 CONFIG QUIET)
     if(TARGET lz4::lz4)
         target_link_libraries(NexusForce PUBLIC lz4::lz4)
         target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_LZ4)
