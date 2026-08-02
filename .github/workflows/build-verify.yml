@@ -291,6 +291,7 @@ jobs:
               FLAGS+=(
                 -DVCPKG_TARGET_TRIPLET=riscv64-linux
                 -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/riscv64-linux-gnu.cmake
+                -DNEXUSFORCE_ENABLE_POSTGRESQL=OFF
                 -DNEXUSFORCE_BUILD_TESTS=OFF
                 -DNEXUSFORCE_BUILD_EXAMPLES=OFF
                 -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
@@ -300,6 +301,7 @@ jobs:
               FLAGS+=(
                 -DVCPKG_TARGET_TRIPLET=loongarch64-linux
                 -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/loongarch64-linux-gnu.cmake
+                -DNEXUSFORCE_ENABLE_POSTGRESQL=OFF
                 -DNEXUSFORCE_ENABLE_MYSQL=OFF
                 -DNEXUSFORCE_BUILD_TESTS=OFF
                 -DNEXUSFORCE_BUILD_EXAMPLES=OFF

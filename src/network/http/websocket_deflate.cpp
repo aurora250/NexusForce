@@ -190,7 +190,14 @@ string websocket_deflate::process(const string_view data, bool is_final) {
                     rlen = result.size();
                 }
                 // Strip 4-byte LEN+NLEN trailer
+#    ifdef NEFORCE_COMPILER_GNUC
+#        pragma GCC diagnostic push
+#        pragma GCC diagnostic ignored "-Wstringop-overflow"
+#    endif
                 result.resize(rlen - 4);
+#    ifdef NEFORCE_COMPILER_GNUC
+#        pragma GCC diagnostic pop
+#    endif
                 reset_context();
                 stream_finished_ = true;
             }

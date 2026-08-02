@@ -520,7 +520,7 @@ void io_context::run_pool(size_t n) {
 }
 
 void io_context::stop() {
-    if (stopped_.load(memory_order_release)) {
+    if (stopped_.load(memory_order_acquire)) {
         return;
     }
 
