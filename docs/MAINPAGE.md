@@ -16,24 +16,22 @@
 
 ## 📖 项目简介
 
-本项目旨在建立**功能健全、风格统一、可读性强、社区共建、跨平台兼容**的现代 C++ 开发库。通过清晰的架构设计、规范的代码实现、丰富的设计模式应用，为项目开发提供实用的工具集，同时也为 C++ 学习者提供理解底层原理的实践载体，建立从学习到生产的连接点。
-
-💡 有劳各位多多 [提交 Issue](https://github.com/aurora250/NexusForce/issues)，使本项目趋于健全。如有不足，还望斧正。
+本项目旨在建立**功能健全、风格统一、可读性强、社区共建、跨平台兼容**的工业级现代 C++ 开发库。通过清晰的架构设计、规范的代码实现、丰富的设计模式应用，
+为项目开发提供实用的工具集，同时也为学习者提供理解底层原理的实践载体，建立从学习到生产的连接点。
 
 ---
 
 ## 🖥️ 支持环境
 
-| 项目     | 详情                                                                             |
-|--------|--------------------------------------------------------------------------------|
-| 平台     | 🪟 WINDOWS / 🐧 LINUX                                                          |
-| 指令集    | X86                                                                            |
-| 位宽     | 64位                                                                            |
-| 编译器    | MSVC (Windows) / LLVM-Clang (Windows, Linux) / ClangCL (Windows) / GCC (Linux) |
-| C++ 标准 | 14 / 17 / 20                                                                   |
+| 项目     | 详情                                                                      |
+|----------|---------------------------------------------------------------------------|
+| 操作系统 | 🪟 WINDOWS / 🐧 LINUX                                                     |
+| 架构     | X86 / ARM / RISC-V (LINUX) / LOONGARCH (LINUX)                            |
+| 位宽     | 64位                                                                      |
+| 编译器   | MSVC (Windows) / ClangCL (Windows) / Clang (Windows, Linux) / GCC (Linux) |
+| C++ 标准 | 14 / 17 / 20                                                              |
 
-> ℹ️ **兼容性说明**  
-> 本库欢迎开发者进行更多编译器与操作系统的兼容性开发，欢迎您进行贡献。
+> 本库欢迎开发者进行更多环境的兼容性开发，欢迎您进行贡献。
 
 ---
 
@@ -41,15 +39,16 @@
 
 NexusForce 严格遵循现代 C++ 工程最佳实践，通过多层次自动化检查确保代码健壮性与可读性。
 
-| 指标                       | 状态       | 说明                                                                                                    |
-|--------------------------|----------|-------------------------------------------------------------------------------------------------------|
-| 📊 **代码规模**              | 12万+ 行   | 核心库源码与头文件                                                                                             |
-| 🔒 **CodeQL 安全分析**       | **0 漏洞** | `security-and-quality` 全规则集，零安全告警                                                                     |
-| 🔍 **Clang-Tidy 静态检查**   | **零警告**  | 全量规则集（`bugprone` / `cppcoreguidelines` / `hicpp` / `modernize` / `performance` / `readability`），警告即错误 |
-| 🎨 **Clang-Format 代码风格** | **强制统一** | 120 列、4 空格、K&R 变体大括号、强制大括号插入等                                                                         |
-| 💧 **动态内存检查**            | **0 泄漏** | Valgrind 全量测试，无内存泄漏与越界访问                                                                              |
+| 指标                         | 状态         | 说明                                          |
+|------------------------------|--------------|-----------------------------------------------|
+| 📊 **代码规模**              | 18万+ 行     | 核心库源码与头文件 11万+ 行，测试代码 6万+ 行 |
+| 🔒 **CodeQL 安全分析**       | **0 漏洞**   | 全规则集                                      |
+| 🔍 **Clang-Tidy 静态检查**   | **零警告**   | 全规则集                                      |
+| 🎨 **Clang-Format 代码风格** | **强制统一** | 配置严格，格式统一                            |
+| 💧 **动态内存检查**          | **0 泄漏**   | 全量测试                                      |
 
-> 📋 **关于规则豁免**：[`.clang-tidy`](.clang-tidy) 包含约 60 项显式豁免，[`.clang-format`](.clang-format) 包含多项风格定制。每一项均针对底层系统编程的固有需求，遵循"默认严格，按需放开"原则。
+> [`.clang-tidy`](.clang-tidy) 包含约 60 项显式豁免，[`.clang-format`](.clang-format) 包含多项风格定制。
+> 每一项均针对底层系统编程的固有需求，遵循"默认严格，按需放开"原则。
 
 ---
 
@@ -59,72 +58,74 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 🌐 网络协议与互联网标准
 
-| 组件                   | 遵循标准                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 说明                                                                                                                                   |
-|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| 组件                  | 遵循标准                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 说明                                                                                                                                                                            |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **HTTP 与 WebSocket** | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) / [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP/1.1), [RFC 7540](https://www.rfc-editor.org/rfc/rfc7540.html) / [RFC 7541](https://www.rfc-editor.org/rfc/rfc7541.html) (HTTP/2, HPACK), [RFC 6265](https://www.rfc-editor.org/rfc/rfc6265.html) (Cookie), [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) / [RFC 7692](https://www.rfc-editor.org/rfc/rfc7692.html) (WebSocket, permessage-deflate), [RFC 6066](https://www.rfc-editor.org/rfc/rfc6066.html) (SNI), [W3C Fetch CORS](https://fetch.spec.whatwg.org/#http-cors-protocol) | HTTP/1.1 语义与路由、HTTP/2 帧层与 HPACK 头部压缩、Range 请求、响应压缩、CONNECT 隧道、Cookie 与 CSRF、CORS 跨域策略、WebSocket 升级/帧协议/permessage-deflate 压缩、SNI 多证书 |
-| **DNS 客户端**          | [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034.html), [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035.html), [RFC 2181](https://www.rfc-editor.org/rfc/rfc2181.html), [RFC 6891](https://www.rfc-editor.org/rfc/rfc6891.html), [RFC 3596](https://www.rfc-editor.org/rfc/rfc3596.html), [RFC 2782](https://www.rfc-editor.org/rfc/rfc2782.html)                                                                                                                                                                                                                                                                     | DNS 协议客户端，A/AAAA/MX/SRV/PTR 记录查询、UDP/TCP 传输自动切换与 TTL 缓存管理                                                                            |
-| **ICMP 协议**          | [RFC 792](https://www.rfc-editor.org/rfc/rfc792.html) (STD 5), [RFC 1122](https://www.rfc-editor.org/rfc/rfc1122.html), [RFC 4884](https://www.rfc-editor.org/rfc/rfc4884.html), [IANA ICMP 参数注册表](https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml)                                                                                                                                                                                                                                                                                                                                               | Ping (Echo Request/Reply) 与 Traceroute (Time Exceeded) 网络诊断，含 RFC 1071 校验和算法                                                         |
-| **SMTP 协议**          | [RFC 5321](https://www.rfc-editor.org/rfc/rfc5321.html) (STD 10), [RFC 5322](https://www.rfc-editor.org/rfc/rfc5322.html), [RFC 3207](https://www.rfc-editor.org/rfc/rfc3207.html) (STARTTLS), [RFC 8314](https://www.rfc-editor.org/rfc/rfc8314.html) (隐式 TLS), [RFC 4954](https://www.rfc-editor.org/rfc/rfc4954.html) (AUTH), [RFC 2045–2047](https://www.rfc-editor.org/rfc/rfc2045.html) (MIME)                                                                                                                                                                                                                     | 邮件传输与消息格式，支持 PLAIN/LOGIN 认证、STARTTLS/隐式 TLS 加密及 MIME 多部分消息                                                                           |
-| **MAC 地址**           | [IEEE 802-2014](https://standards.ieee.org/ieee/802/3714/), [IEEE 802.3-2022](https://standards.ieee.org/ieee/802.3/10422/), [RFC 7042](https://www.rfc-editor.org/rfc/rfc7042.html)                                                                                                                                                                                                                                                                                                                                                                                                                                     | 48 位 EUI-48 地址解析与格式化，支持单播/多播/本地管理地址识别与标准十六进制表示                                                                                       |
-| **URL 解析与编码**        | [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), [RFC 3987](https://www.rfc-editor.org/rfc/rfc3987), [WHATWG URL](https://url.spec.whatwg.org/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | URI 通用语法、百分号编码及国际化资源标识符                                                                                                              |
-| **网络端口定义**           | [IANA 端口号注册表](https://www.iana.org/assignments/service-names-port-numbers/), [RFC 6335](https://www.rfc-editor.org/rfc/rfc6335)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 知名端口分配                                                                                                                               |
-| **UUID 生成**          | [RFC 4122](https://www.rfc-editor.org/rfc/rfc4122), [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | UUID v4（随机）与 v7（时间有序）生成规范                                                                                                            |
-| **字节大小单位**           | [IEC 80000-13:2008](https://www.iso.org/standard/31898.html), [IEEE 1541-2021](https://standards.ieee.org/ieee/1541/10790/), [BIPM SI Brochure (9th Ed.)](https://www.bipm.org/en/publications/si-brochure)                                                                                                                                                                                                                                                                                                                                                                                                              | 二进制前缀 (KiB/MiB/GiB) 与十进制前缀 (kB/MB/GB)                                                                                                |
+| **DNS 客户端**        | [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034.html), [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035.html), [RFC 2181](https://www.rfc-editor.org/rfc/rfc2181.html), [RFC 6891](https://www.rfc-editor.org/rfc/rfc6891.html), [RFC 3596](https://www.rfc-editor.org/rfc/rfc3596.html), [RFC 2782](https://www.rfc-editor.org/rfc/rfc2782.html)                                                                                                                                                                                                                                                                     | DNS 协议客户端，A/AAAA/MX/SRV/PTR 记录查询、UDP/TCP 传输自动切换与 TTL 缓存管理                                                                                                 |
+| **ICMP 协议**         | [RFC 792](https://www.rfc-editor.org/rfc/rfc792.html) (STD 5), [RFC 1122](https://www.rfc-editor.org/rfc/rfc1122.html), [RFC 4884](https://www.rfc-editor.org/rfc/rfc4884.html), [IANA ICMP 参数注册表](https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml)                                                                                                                                                                                                                                                                                                                                          | Ping (Echo Request/Reply) 与 Traceroute (Time Exceeded) 网络诊断，含 RFC 1071 校验和算法                                                                                        |
+| **SMTP 协议**         | [RFC 5321](https://www.rfc-editor.org/rfc/rfc5321.html) (STD 10), [RFC 5322](https://www.rfc-editor.org/rfc/rfc5322.html), [RFC 3207](https://www.rfc-editor.org/rfc/rfc3207.html) (STARTTLS), [RFC 8314](https://www.rfc-editor.org/rfc/rfc8314.html) (隐式 TLS), [RFC 4954](https://www.rfc-editor.org/rfc/rfc4954.html) (AUTH), [RFC 2045–2047](https://www.rfc-editor.org/rfc/rfc2045.html) (MIME)                                                                                                                                                                                                                   | 邮件传输与消息格式，支持 PLAIN/LOGIN 认证、STARTTLS/隐式 TLS 加密及 MIME 多部分消息                                                                                             |
+| **MAC 地址**          | [IEEE 802-2014](https://standards.ieee.org/ieee/802/3714/), [IEEE 802.3-2022](https://standards.ieee.org/ieee/802.3/10422/), [RFC 7042](https://www.rfc-editor.org/rfc/rfc7042.html)                                                                                                                                                                                                                                                                                                                                                                                                                                     | 48 位 EUI-48 地址解析与格式化，支持单播/多播/本地管理地址识别与标准十六进制表示                                                                                                 |
+| **URL 解析与编码**    | [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), [RFC 3987](https://www.rfc-editor.org/rfc/rfc3987), [WHATWG URL](https://url.spec.whatwg.org/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | URI 通用语法、百分号编码及国际化资源标识符                                                                                                                                      |
+| **网络端口定义**      | [IANA 端口号注册表](https://www.iana.org/assignments/service-names-port-numbers/), [RFC 6335](https://www.rfc-editor.org/rfc/rfc6335)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 知名端口分配                                                                                                                                                                    |
+| **UUID 生成**         | [RFC 4122](https://www.rfc-editor.org/rfc/rfc4122), [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | UUID v4（随机）与 v7（时间有序）生成规范                                                                                                                                        |
 
 ### 📁 配置文件格式
 
-| 组件                 | 遵循标准                                                                                                                                                                                                                     | 说明                                                                       |
-|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| **JSON RFC 8259**  | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404:2017](https://ecma-international.org/publications-and-standards/standards/ecma-404/)                                                                       | JSON 六种值类型、UTF-8 编码、IEEE 754-2019 双精度数字与字符串转义序列                          |
-| **TOML 1.0.0**     | [TOML v1.0.0](https://toml.io/en/v1.0.0)                                                                                                                                                                                 | 包含日期时间格式遵循 [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601 |
-| **YAML 1.2**       | [YAML 1.2.2](https://yaml.org/spec/1.2.2/), [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html), [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) | YAML 1.2 是 JSON 严格超集，支持八种核心值类型、五种字符串标量样式、锚点别名与标签系统                       |
+| 组件              | 遵循标准                                                                                                                                                                                                                 | 说明                                                                                  |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| **JSON RFC 8259** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404:2017](https://ecma-international.org/publications-and-standards/standards/ecma-404/)                                                                       | JSON 六种值类型、UTF-8 编码、IEEE 754-2019 双精度数字与字符串转义序列                 |
+| **TOML 1.0.0**    | [TOML v1.0.0](https://toml.io/en/v1.0.0)                                                                                                                                                                                 | 包含日期时间格式遵循 [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601    |
+| **YAML 1.2**      | [YAML 1.2.2](https://yaml.org/spec/1.2.2/), [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html), [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) | YAML 1.2 是 JSON 严格超集，支持八种核心值类型、五种字符串标量样式、锚点别名与标签系统 |
+| **SQL**           | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 及后续版本)                                                                                                                                              | 生成符合 ANSI SQL 与支持数据库方言的语句                                              |
 
 ### 🔐 密码学与安全算法
 
-| 组件                         | 遵循标准                                                                                                                                       | 说明                                                                                                                                                     |
-|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **AES-256 加密**             | [NIST FIPS 197](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf), [ISO/IEC 18033-3](https://www.iso.org/standard/54531.html) | 高级加密标准，支持 ECB/CBC/GCM 模式（[NIST SP 800-38A](https://csrc.nist.gov/pubs/sp/800/38/a/final) / [SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final)） |
-| **ChaCha20-Poly1305 AEAD** | [IETF RFC 8439](https://www.rfc-editor.org/rfc/rfc8439.html)                                                                               | ChaCha20 流密码 + Poly1305 认证器，AEAD 认证加密，支持关联数据（AAD）                                                                                                      |
-| **SHA-256 哈希**             | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234)          | 安全哈希算法（SHA-2 家族），256 位输出                                                                                                                               |
-| **SHA-1 哈希**               | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) (历史兼容)                                                       | ⚠️ 已标注安全警告（[SHAttered](https://shattered.io/) 碰撞攻击）                                                                                                    |
-| **MD5 哈希**                 | [RFC 1321](https://www.rfc-editor.org/rfc/rfc1321) (历史兼容)                                                                                  | ⚠️ 已标注安全警告，仅用于非安全校验场景                                                                                                                                  |
-| **Base64 编码**              | [RFC 4648 §4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4), [RFC 4648 §5](https://www.rfc-editor.org/rfc/rfc4648.html#section-5) | 标准与 URL 安全 Base64 编解码，严格填充规则与非法字符检测                                                                                                                    |
+| 组件                       | 遵循标准                                                                                                                                   | 说明                                                                                                                                                                |
+|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **AES-256 加密**           | [NIST FIPS 197](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf), [ISO/IEC 18033-3](https://www.iso.org/standard/54531.html) | 高级加密标准，支持 ECB/CBC/GCM 模式（[NIST SP 800-38A](https://csrc.nist.gov/pubs/sp/800/38/a/final) / [SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final)） |
+| **ChaCha20-Poly1305 AEAD** | [IETF RFC 8439](https://www.rfc-editor.org/rfc/rfc8439.html)                                                                               | ChaCha20 流密码 + Poly1305 认证器，AEAD 认证加密，支持关联数据（AAD）                                                                                               |
+| **SHA-256 哈希**           | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234)          | 安全哈希算法（SHA-2 家族），256 位输出                                                                                                                              |
+| **SHA-1 哈希**             | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) (历史兼容)                                                   | ⚠️ 已标注安全警告（[SHAttered](https://shattered.io/) 碰撞攻击）                                                                                                    |
+| **MD5 哈希**               | [RFC 1321](https://www.rfc-editor.org/rfc/rfc1321) (历史兼容)                                                                              | ⚠️ 已标注安全警告，仅用于非安全校验场景                                                                                                                             |
+| **Base64 编码**            | [RFC 4648 §4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4), [RFC 4648 §5](https://www.rfc-editor.org/rfc/rfc4648.html#section-5) | 标准与 URL 安全 Base64 编解码，严格填充规则与非法字符检测                                                                                                           |
 
 ### 🔤 字符编码与国际化
 
-| 组件                          | 遵循标准                                                                                                                                                                                                                             | 说明                              |
-|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|
-| **UTF-8 / UTF-16 / UTF-32** | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/), [ISO/IEC 10646](https://www.iso.org/standard/76835.html), [RFC 3629](https://www.rfc-editor.org/rfc/rfc3629) / [RFC 2781](https://www.rfc-editor.org/rfc/rfc2781) | Unicode 码点操作、规范化与编码转换，含无效序列检测   |
-| **Unicode 码点处理**            | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/) §2.4, §2.13                                                                                                                                                        | 代理对处理、BOM 检测与替换字符 (U+FFFD) 规则   |
+| 组件                        | 遵循标准                                                                                                                                                                                                                         | 说明                                               |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
+| **UTF-8 / UTF-16 / UTF-32** | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/), [ISO/IEC 10646](https://www.iso.org/standard/76835.html), [RFC 3629](https://www.rfc-editor.org/rfc/rfc3629) / [RFC 2781](https://www.rfc-editor.org/rfc/rfc2781) | Unicode 码点操作、规范化与编码转换，含无效序列检测 |
+| **Unicode 码点处理**        | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/) §2.4, §2.13                                                                                                                                                        | 代理对处理、BOM 检测与替换字符 (U+FFFD) 规则       |
+| **字节大小单位**            | [IEC 80000-13:2008](https://www.iso.org/standard/31898.html), [IEEE 1541-2021](https://standards.ieee.org/ieee/1541/10790/), [BIPM SI Brochure (9th Ed.)](https://www.bipm.org/en/publications/si-brochure)                      | 二进制前缀 (KiB/MiB/GiB) 与十进制前缀 (kB/MB/GB)   |
 
 ### 📐 数据结构与算法
 
-| 组件               | 遵循标准 / 学术文献                                                                                                                                                                                              | 说明                                                                                 |
-|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| **堆算法**          | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §25.8.6                                                                                                                                    | 复杂度保证与 Floyd 堆调整优化 ([Algorithm 245](https://dl.acm.org/doi/10.1145/512274.512284)) |
-| **红黑树**          | [Guibas & Sedgewick (1978)](https://doi.org/10.1109/SFCS.1978.3)                                                                                                                                         | 自平衡二叉搜索树经典实现，O(log n) 复杂度保证                                                        |
-| **莱昂纳多堆 / 平滑排序** | [Dijkstra (1981) EWD796a](https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html)                                                                                                            | 自适应排序算法，最优时间复杂度 O(n)                                                               |
-| **内省排序**         | [Musser (1997)](https://doi.org/10.1002/(SICI)1097-024X(199708)27:8<983::AID-SPE117>3.0.CO;2-%23)                                                                                                        | 混合快速/堆/插入排序，C++ 标准库 sort 默认算法                                                      |
-| **非加密哈希**        | [FNV-1a 草案](https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17), [MurmurHash3](https://github.com/aappleby/smhasher/wiki/MurmurHash3)                                                           | 高性能哈希表与布隆过滤器专用                                                                     |
-| **布隆过滤器**        | [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Broder & Mitzenmacher (2004)](https://doi.org/10.1080/15427951.2004.10129096), [Kirsch & Mitzenmacher (2006)](https://doi.org/10.1002/rsa.20208) | 双哈希优化的概率性集合成员查询结构，O(k) 插入/查询，支持最优参数 (m, k) 推导与误报率估算                                |
+| 组件           | 遵循标准 / 学术文献                                                                                                                                                                                      | 说明                                                                                          |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| **堆算法**     | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §25.8.6                                                                                                                                    | 复杂度保证与 Floyd 堆调整优化 ([Algorithm 245](https://dl.acm.org/doi/10.1145/512274.512284)) |
+| **红黑树**     | [Guibas & Sedgewick (1978)](https://doi.org/10.1109/SFCS.1978.3)                                                                                                                                         | 自平衡二叉搜索树经典实现，O(log n) 复杂度保证                                                 |
+| **莱昂纳多堆** | [Dijkstra (1981) EWD796a](https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html)                                                                                                            | 自适应排序算法，最优时间复杂度 O(n)                                                           |
+| **内省排序**   | [Musser (1997)](https://doi.org/10.1002/(SICI)1097-024X(199708)27:8<983::AID-SPE117>3.0.CO;2-%23)                                                                                                        | 混合快速/堆/插入排序，C++ 标准库 sort 默认算法                                                |
+| **非加密哈希** | [FNV-1a 草案](https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17), [MurmurHash3](https://github.com/aappleby/smhasher/wiki/MurmurHash3)                                                         | 高性能哈希表与布隆过滤器专用                                                                  |
+| **布隆过滤器** | [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Broder & Mitzenmacher (2004)](https://doi.org/10.1080/15427951.2004.10129096), [Kirsch & Mitzenmacher (2006)](https://doi.org/10.1002/rsa.20208) | 双哈希优化的概率性集合成员查询结构，O(k) 插入/查询，支持最优参数 (m, k) 推导与误报率估算      |
 
 ### ⚙️ 系统、并发与命令行
 
-| 组件            | 遵循标准                                                                                                                                                                           | 说明                                             |
-|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------|
-| **原子内存序**     | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §31.4                                                                                                            | C++ 内存模型，含硬件屏障等价与 Intel TSX HLE 支持             |
-| **命令行解析**     | [POSIX.1-2017 (IEEE 1003.1)](https://pubs.opengroup.org/onlinepubs/9699919799/) 第12章, [GNU getopt_long](https://man7.org/linux/man-pages/man3/getopt.3.html)                   | 支持短选项组合、长选项、`--` 分隔符与可选值                       |
-| **日期与时间**     | [ISO 8601-1:2019](https://www.iso.org/standard/70907.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339), [POSIX 时间戳](https://pubs.opengroup.org/onlinepubs/9699919799/) | 公历计算、儒略日转换与 Unix 纪元处理                          |
-| **SQL 语句构建器** | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 及后续版本)                                                                                                         | 生成符合 ANSI SQL 的 SELECT/INSERT/UPDATE/DELETE 语句 |
+| 组件           | 遵循标准                                                                                                                                                                          | 说明                                                       |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
+| **原子内存序** | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §31.4                                                                                                               | C++ 内存模型，含硬件屏障等价与 Intel TSX HLE 支持          |
+| **命令行解析** | [POSIX.1-2017 (IEEE 1003.1)](https://pubs.opengroup.org/onlinepubs/9699919799/) 第12章, [GNU getopt_long](https://man7.org/linux/man-pages/man3/getopt.3.html)                    | 支持短选项组合、长选项、`--` 分隔符与可选值                |
+| **日期与时间** | [ISO 8601-1:2019](https://www.iso.org/standard/70907.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339), [POSIX 时间戳](https://pubs.opengroup.org/onlinepubs/9699919799/) | 公历计算、儒略日转换与 Unix 纪元处理                       |
 
 ### 🎨 图形、色彩与数学
 
-| 组件           | 遵循标准                                                                                                                              | 说明                                |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
-| **RGB 颜色模型** | [W3C CSS Color Level 4](https://www.w3.org/TR/css-color-4/), [Compositing Level 1](https://www.w3.org/TR/compositing-1/)          | 直通 Alpha 合成、十六进制格式与 ANSI 256 色调色板 |
-| **灰度转换**     | [ITU-R BT.709](https://www.itu.int/rec/R-REC-BT.709/) / [IEC 61966-2-1 (sRGB)](https://webstore.iec.ch/publication/6169)          | 人眼感知加权（0.299R + 0.587G + 0.114B）  |
-| **数学函数与常量**  | [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/), [ISO/IEC 10967 (LIA)](https://www.iso.org/standard/24417.html)        | 三角函数归约、牛顿迭代法与机器精度容差               |
-| **随机数生成**    | [ISO/IEC 18031:2011](https://www.iso.org/standard/54945.html), [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final) | 梅森旋转 (MT19937) 与操作系统熵源真随机数        |
+| 组件               | 遵循标准                                                                                                                          | 说明                                              |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
+| **RGB 颜色模型**   | [W3C CSS Color Level 4](https://www.w3.org/TR/css-color-4/), [Compositing Level 1](https://www.w3.org/TR/compositing-1/)          | 直通 Alpha 合成、十六进制格式与 ANSI 256 色调色板 |
+| **灰度转换**       | [ITU-R BT.709](https://www.itu.int/rec/R-REC-BT.709/) / [IEC 61966-2-1 (sRGB)](https://webstore.iec.ch/publication/6169)          | 人眼感知加权（0.299R + 0.587G + 0.114B）          |
+| **数学函数与常量** | [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/), [ISO/IEC 10967 (LIA)](https://www.iso.org/standard/24417.html)        | 三角函数归约、牛顿迭代法与机器精度容差            |
+| **随机数生成**     | [ISO/IEC 18031:2011](https://www.iso.org/standard/54945.html), [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final) | 梅森旋转 (MT19937) 与操作系统熵源真随机数         |
+
+> 所有涉及上述标准的组 (group)，均在其注释中标注了具体的标准章节号与官方链接，开发者可随时溯源验证。
 
 ---
 
@@ -169,7 +170,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 📁 文件系统 (File)
 - **路径/文件操作** - 路径/文件系统操作 `path`/`path_tree`/`file`/`file_async`/`file_diff`/`file_locker`/`file_mapper`
-- **`file_async`** - 基于 `io_context` 的异步文件 I/O，支持指定偏移量与取消槽
+- **`file_async`** - 基于 `io_context` 与 `io_uring` 的异步文件 I/O，支持指定偏移量与取消槽
 - **`file_watcher`** - 实时文件系统变更监控
 - **配置文件解析** - JSON/TOML/YAML/INI/ENV 值系统、格式解析与流式构建
 - **`temp_file`** - 安全的临时文件管理
@@ -327,8 +328,26 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ---
 
+## ❓ 常见问题
+
+关于 NexusForce 的定位、设计理念、功能选型等，参见 [Q&A](https://github.com/aurora250/NexusForce/blob/dev/Q%26A.md)。
+
+---
+
 ## ⚖️ 协议
 
-本项目基于 [MIT 开源协议](LICENSE) 发布。
+本项目基于 [MIT 开源协议](https://github.com/aurora250/NexusForce/blob/dev/LICENSE) 发布。
+
+---
+
+## 📝 更新日志
+
+详细更新记录参见 [CHANGELOG](https://github.com/aurora250/NexusForce/blob/dev/CHANGELOG.md)。
+
+---
+
+## 👥 贡献者
+
+感谢所有为本项目做出贡献的开发者！参见 [CONTRIBUTORS](https://github.com/aurora250/NexusForce/blob/dev/CONTRIBUTORS.md)。
 
 ---
