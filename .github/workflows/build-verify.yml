@@ -374,14 +374,15 @@ jobs:
         shell: bash
         run: |
           BUILD_LOG=$(mktemp)
-          set -o pipefail
           cmake --build build --config Release --parallel 2>&1 | tee "$BUILD_LOG"
-          BUILD_EXIT=$?
+          BUILD_EXIT=${PIPESTATUS[0]}
           if [ $BUILD_EXIT -ne 0 ]; then
-            if [[ "${{ matrix.config }}" == cross-* ]] && tail -n 10 "$BUILD_LOG" | grep -q "Relocations in generic ELF"; then
-              echo "::warning::Cross-compilation relocations error is a vcpkg cross-build issue (not a project defect). Treated as success."
+            if [[ "${{ matrix.config }}" == cross-* ]] && grep -q "Relocations in generic ELF" "$BUILD_LOG"; then
+              echo "::warning::vcpkg cross-compiled packages contain host-arch objects (Relocations in generic ELF). This is a vcpkg cross-build limitation, not a project defect. Treated as success."
               exit 0
             fi
+            echo "Build failed with exit code $BUILD_EXIT. Last 20 lines of output:"
+            tail -n 20 "$BUILD_LOG"
             exit $BUILD_EXIT
           fi
 

@@ -80,17 +80,17 @@ jobs:
 
       - name: Capture Build with Bear
         run: |
-          mkdir -p build
-          cd build
+          BUILD_DIR=$(mktemp -d)
+          echo "BUILD_DIR=$BUILD_DIR" >> $GITHUB_ENV
 
-          bear -- cmake .. \
+          bear -- cmake -S . -B "$BUILD_DIR" \
             -DCMAKE_BUILD_TYPE=Debug \
             -DCMAKE_TOOLCHAIN_FILE=$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake \
             -DVCPKG_TARGET_TRIPLET=x64-linux \
             -DNEXUSFORCE_BUILD_DOCS=OFF \
             -DNEXUSFORCE_BUILD_TESTS=OFF || true
 
-          bear -- make -j$(nproc) || true
+          bear -- cmake --build "$BUILD_DIR" -j$(nproc) || true
 
           if [ -f compile_commands.json ]; then
             echo "✅ compile_commands.json generated successfully"
@@ -106,6 +106,8 @@ jobs:
           else
             echo "⚠️ compile_commands.json not found"
           fi
+
+          rm -rf "$BUILD_DIR"
         shell: bash
 
       - name: Clean Environment for CodeQL
