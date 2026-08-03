@@ -1,4 +1,4 @@
-name: "Build and Release"
+name: "Release"
 
 on:
   push:
@@ -16,18 +16,15 @@ on:
         default: false
 
 jobs:
-  validate:
+  release:
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.get_version.outputs.version }}
-      prerelease: ${{ steps.get_version.outputs.prerelease }}
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Get version from tag or input
-        id: get_version
+      - name: Determine version
+        id: meta
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             VERSION="${{ github.event.inputs.version }}"
@@ -39,256 +36,42 @@ jobs:
               PRERELEASE="true"
             fi
           fi
+
+          if ! [[ $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo "::error::Invalid version format: $VERSION"
+            exit 1
+          fi
+
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "prerelease=$PRERELEASE" >> $GITHUB_OUTPUT
           echo "Release version: $VERSION (prerelease: $PRERELEASE)"
 
-      - name: Validate version format
+      - name: Extract changelog section
         run: |
-          VERSION="${{ steps.get_version.outputs.version }}"
-          if ! [[ $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
-            echo "Invalid version format: $VERSION"
+          VERSION="${{ steps.meta.outputs.version }}"
+          awk -v ver="$VERSION" '
+            BEGIN { found = 0; pattern = "## [" ver "]" }
+            index($0, pattern) == 1 { found = 1 }
+            found && /^## \[/ && index($0, pattern) != 1 { exit }
+            found { print }
+          ' CHANGELOG.md > /tmp/release_body.md
+
+          if [ ! -s /tmp/release_body.md ]; then
+            echo "::error::No changelog section found for version $VERSION"
             exit 1
           fi
 
-  build-linux:
-    needs: validate
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        compiler: [gcc, clang]
-        cpp_std: [14, 17, 20]
-        include:
-          - compiler: gcc
-            c_compiler: gcc
-            cxx_compiler: g++
-          - compiler: clang
-            c_compiler: clang
-            cxx_compiler: clang++
-    env:
-      VCPKG_ROOT: ${{ github.workspace }}/vcpkg
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            build-essential \
-            cmake \
-            ninja-build \
-            pkg-config \
-            curl \
-            zip \
-            tar \
-            gzip \
-            liburing-dev
-
-      - name: Setup GCC (if selected)
-        if: matrix.compiler == 'gcc'
-        run: |
-          sudo apt-get install -y gcc g++
-          gcc --version
-          g++ --version
-
-      - name: Setup Clang (if selected)
-        if: matrix.compiler == 'clang'
-        run: |
-          sudo apt-get install -y clang
-          clang --version
-          clang++ --version
-
-      - name: Setup vcpkg
-        run: |
-          git clone https://github.com/Microsoft/vcpkg.git $VCPKG_ROOT
-          $VCPKG_ROOT/bootstrap-vcpkg.sh
-
-      - name: Configure CMake
-        run: |
-          cmake -B build \
-            -G "Ninja" \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} \
-            -DCMAKE_CXX_COMPILER=${{ matrix.cxx_compiler }} \
-            -DCMAKE_CXX_STANDARD=${{ matrix.cpp_std }} \
-            -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake \
-            -DVCPKG_TARGET_TRIPLET=x64-linux
-
-      - name: Build
-        run: cmake --build build --config Release --parallel $(nproc)
-
-      - name: Prepare artifacts
-        run: |
-          mkdir -p dist
-          VERSION="${{ needs.validate.outputs.version }}"
-          COMPILER="${{ matrix.compiler }}"
-          STD="c++${{ matrix.cpp_std }}"
-
-          cp build/bin/NexusForce* dist/ 2>/dev/null || true
-          cp build/lib/libNexusForce* dist/ 2>/dev/null || true
-
-          cp -r include dist/ 2>/dev/null || true
-          cp config.json.example dist/ 2>/dev/null || true
-          cp README.md dist/ 2>/dev/null || true
-          cp LICENSE dist/ 2>/dev/null || true
-
-          # 创建归档
-          cd dist
-          tar -czf ../NexusForce-${VERSION}-linux-x64-${COMPILER}-${STD}.tar.gz *
-
-          echo "artifact_name=NexusForce-linux-x64-${COMPILER}-${STD}" >> $GITHUB_ENV
-          echo "artifact_file=NexusForce-${VERSION}-linux-x64-${COMPILER}-${STD}.tar.gz" >> $GITHUB_ENV
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.artifact_name }}
-          path: ${{ env.artifact_file }}
-          retention-days: 7
-
-  build-windows:
-    needs: validate
-    runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        compiler: [msvc, clang-cl]
-        cpp_std: [14, 17, 20]
-        include:
-          - compiler: msvc
-            cmake_generator: "Visual Studio 17 2022"
-            cmake_arch: x64
-            vcpkg_triplet: x64-windows-static-md
-          - compiler: clang-cl
-            cmake_generator: "Ninja"
-            cmake_arch: x64
-            vcpkg_triplet: x64-windows-static-md
-            extra_flags: "-DCMAKE_C_COMPILER=clang-cl -DCMAKE_CXX_COMPILER=clang-cl"
-    env:
-      VCPKG_ROOT: ${{ github.workspace }}/vcpkg
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup MSVC
-        if: matrix.compiler == 'msvc'
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x64
-
-      - name: Setup Clang-cl
-        if: matrix.compiler == 'clang-cl'
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x64
-          toolset: clang-cl
-
-      - name: Setup vcpkg
-        run: |
-          git clone https://github.com/Microsoft/vcpkg.git $env:VCPKG_ROOT
-          & "$env:VCPKG_ROOT/bootstrap-vcpkg.bat"
-
-      - name: Configure CMake (MSVC)
-        if: matrix.compiler == 'msvc'
-        run: |
-          cmake -B build `
-            -G "${{ matrix.cmake_generator }}" `
-            -A ${{ matrix.cmake_arch }} `
-            -DCMAKE_BUILD_TYPE=Release `
-            -DCMAKE_CXX_STANDARD=${{ matrix.cpp_std }} `
-            -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" `
-            -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg_triplet }}
-
-      - name: Configure CMake (Clang-cl)
-        if: matrix.compiler == 'clang-cl'
-        run: |
-          cmake -B build `
-            -G "${{ matrix.cmake_generator }}" `
-            -DCMAKE_BUILD_TYPE=Release `
-            -DCMAKE_CXX_STANDARD=${{ matrix.cpp_std }} `
-            -DCMAKE_C_COMPILER=clang-cl `
-            -DCMAKE_CXX_COMPILER=clang-cl `
-            -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" `
-            -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg_triplet }}
-
-      - name: Build
-        run: cmake --build build --config Release --parallel $env:NUMBER_OF_PROCESSORS
-
-      - name: Prepare artifacts
-        run: |
-          New-Item -ItemType Directory -Force -Path dist
-          $VERSION = "${{ needs.validate.outputs.version }}"
-          $COMPILER = "${{ matrix.compiler }}"
-          $STD = "c++${{ matrix.cpp_std }}"
-
-          Copy-Item build/bin/Release/*.dll dist/ -ErrorAction SilentlyContinue
-          Copy-Item build/bin/Release/*.exe dist/ -ErrorAction SilentlyContinue
-          Copy-Item build/lib/Release/*.lib dist/ -ErrorAction SilentlyContinue
-
-          Copy-Item -Recurse include dist/ -ErrorAction SilentlyContinue
-          Copy-Item config.json.example dist/ -ErrorAction SilentlyContinue
-          Copy-Item README.md dist/ -ErrorAction SilentlyContinue
-          Copy-Item LICENSE dist/ -ErrorAction SilentlyContinue
-
-          $ArtifactName = "NexusForce-${VERSION}-windows-x64-${COMPILER}-${STD}.zip"
-          Compress-Archive -Path dist/* -DestinationPath $ArtifactName
-
-          echo "artifact_name=NexusForce-windows-x64-${COMPILER}-${STD}" >> $env:GITHUB_ENV
-          echo "artifact_file=$ArtifactName" >> $env:GITHUB_ENV
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.artifact_name }}
-          path: ${{ env.artifact_file }}
-          retention-days: 7
-
-  create-release:
-    needs: [validate, build-linux, build-windows]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: artifacts
-          merge-multiple: true
-
-      - name: Display artifacts structure
-        run: |
-          echo "=== Downloaded artifacts ==="
-          find artifacts -type f -name "*.tar.gz" -o -name "*.zip" | sort
-          echo ""
-          echo "=== File sizes ==="
-          find artifacts -type f -name "*.tar.gz" -o -name "*.zip" -exec ls -lh {} \;
-
-      - name: Generate checksums
-        run: |
-          cd artifacts
-          find . -type f \( -name "*.tar.gz" -o -name "*.zip" \) -exec sha256sum {} \; > checksums.txt
-          echo "=== Checksums ==="
-          cat checksums.txt
+          echo "=== Release body ==="
+          cat /tmp/release_body.md
+          echo "===================="
 
       - name: Create Release
-        id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ needs.validate.outputs.version }}
-          name: Release v${{ needs.validate.outputs.version }}
-          body_path: CHANGELOG.md
+          tag_name: v${{ steps.meta.outputs.version }}
+          name: Release v${{ steps.meta.outputs.version }}
+          body_path: /tmp/release_body.md
           draft: false
-          prerelease: ${{ needs.validate.outputs.prerelease == 'true' }}
-          files: |
-            artifacts/*.tar.gz
-            artifacts/*.zip
-            artifacts/checksums.txt
+          prerelease: ${{ steps.meta.outputs.prerelease == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Release summary
-        run: |
-          echo "✅ Release v${{ needs.validate.outputs.version }} created successfully"
-          echo "📦 Total artifacts: $(find artifacts -type f \( -name '*.tar.gz' -o -name '*.zip' \) | wc -l)"
-          echo "🎯 Platforms: Linux (GCC, Clang) + Windows (MSVC, Clang-cl)"
-          echo "🎯 Standards: C++14, C++17, C++20"

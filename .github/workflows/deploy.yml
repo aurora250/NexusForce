@@ -3,9 +3,12 @@ name: Deploy Static Docs to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - dev
     paths:
+      - 'docs/MAINPAGE.md'
+      - 'docs/Doxyfile.in'
       - 'docs/html/**'
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 permissions:
